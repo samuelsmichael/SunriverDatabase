@@ -19,9 +19,10 @@
     <div class="page">
         <div class="header">
             <div class="title">
-                <h1>
+                <h1 style="float:left;">
                     Sunriver Database Application
                 </h1>
+                <span style="margin-left:50px; font-size:xx-small; display:block;float:left;color: #f9f9f9; margin-top:22px;">(Version .02)</span>
             </div>
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">

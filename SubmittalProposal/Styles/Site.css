@@ -193,7 +193,7 @@ div.menu ul li a:active
 fieldset
 {
     margin: 1em 0px;
-    padding: 1em;
+    padding: .25em;
     border: 1px solid #ccc;
 }
 
@@ -214,9 +214,18 @@ fieldset label.inline
 
 legend 
 {
-    font-size: 1.1em;
+    font-size: .9em;
     font-weight: 600;
-    padding: 2px 4px 8px 4px;
+    padding: 2px 4px 2px 4px;
+}
+
+.form_field_heading 
+{
+    font-size:.9em;
+}
+.form_field 
+{
+    font-size:.9em;
 }
 
 input.textEntry 
