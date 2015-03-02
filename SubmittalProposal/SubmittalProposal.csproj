@@ -81,6 +81,8 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="BPermit.aspx" />
+    <Content Include="Submittal2.aspx" />
     <Content Include="Images\bg-menu-main.JPG" />
     <Content Include="Images\bg-menu-main.png" />
     <Content Include="Images\collapse_blue.jpg" />
@@ -107,6 +109,9 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AbstractDatabase.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Account\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
@@ -135,6 +140,28 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BPermit.aspx.cs">
+      <DependentUpon>BPermit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BPermit.aspx.designer.cs">
+      <DependentUpon>BPermit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectShredder.cs" />
+    <Compile Include="Submittal2.aspx.cs">
+      <DependentUpon>Submittal2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Submittal2.aspx.designer.cs">
+      <DependentUpon>Submittal2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Database.master.cs">
+      <DependentUpon>Database.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Database.master.designer.cs">
+      <DependentUpon>Database.master</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -177,6 +204,9 @@
       <Project>{F42E57F0-2327-4E3D-B9F6-2403B6C6CC9D}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database.master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
