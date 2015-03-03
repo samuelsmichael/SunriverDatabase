@@ -34,7 +34,10 @@
                     <asp:Label ID="Label23" runat="server" Text="BPermit Id"></asp:Label>
                     <asp:TextBox ID="tbBPermitId" Width="66" runat="server"></asp:TextBox>
                 </td>
-
+                <td>
+                    <asp:Label ID="Label6" runat="server" Text="Delay"></asp:Label>
+                    <asp:TextBox ID="tbDelaySearch" Width="20" runat="server"></asp:TextBox>
+                </td>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
@@ -57,6 +60,7 @@
             <asp:BoundField DataField="BPIssueDate" HeaderText="Issue Date" SortExpression="BPIssueDate" />
             <asp:BoundField DataField="BPExpires" HeaderText="Expires" SortExpression="BPExpires" />
             <asp:BoundField DataField="BPClosed" HeaderText="Closed" SortExpression="BPClosed" />
+            <asp:BoundField DataField="BPDelay" HeaderText="Delay" SortExpression="BPDelay" />
             <asp:BoundField DataField="OwnersName" HeaderText="Owner's Name" 
                 SortExpression="OwnersName" />
             <asp:BoundField DataField="Applicant" HeaderText="Applicant" 

@@ -10,6 +10,9 @@ using System.IO;
 
 namespace Common {
     public class Utils {
+        public static string getDataViewQuery(string searchString, string dataFieldName) {
+            return searchString.ToLower() == "*blank" ? (" " + dataFieldName + " =''") : " "+dataFieldName+" like '*" + searchString + "*'";
+        }
         public static void jsonSerializeStep2(MemoryStream ms, HttpResponse Response) {
             ms.Flush();
             ms.Position = 0;

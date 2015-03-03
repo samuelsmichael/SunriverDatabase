@@ -306,13 +306,13 @@ namespace SubmittalProposal
             if (Utils.isNothingNot(tbOwner.Text)) {
                 sb.Append(prepend+"Owner: " + tbOwner.Text);
                 prepend="  ";
-                sbFilter.Append(and + " OwnersName like '*" + tbOwner.Text +"*'");
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbOwner.Text,"OwnersName"));
                 and = " and ";
             }
             if (Utils.isNothingNot(tbApplicant.Text)) {
                 sb.Append(prepend + "Applicant: " + tbApplicant.Text);
                 prepend = "  ";
-                sbFilter.Append(and + " Applicant like '*" + tbApplicant.Text + "*'");
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbApplicant.Text,"Applicant"));
                 and = " and ";
             }
             if(Utils.isNothingNot(tbLot.Text)) {
