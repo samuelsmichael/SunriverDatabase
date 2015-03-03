@@ -18,9 +18,9 @@ namespace SubmittalProposal {
         protected abstract void childPageLoad(object sender, EventArgs e);
 
         protected void Page_Load(object sender, EventArgs e) {
-            childPageLoad(sender, e);
             Database database = (Database)Master;
             database.SearchButtonPressed += new Database.SearchButtonPressedEventHandler(database_SearchButtonPressed);
+            childPageLoad(sender, e);
         }
         protected void gvResults_SelectedIndexChanged(object sender, EventArgs e) {
             string expandedText = gvResults_DoSelectedIndexChanged(sender, e);

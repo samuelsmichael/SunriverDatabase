@@ -424,8 +424,18 @@ namespace SubmittalProposal {
         }
 
         protected override void childPageLoad(object sender, EventArgs e) {
-            getGridViewResults().DataSource = getGridViewDataTable();
-            getGridViewResults().DataBind();
+            string gotoBPermitId=null;
+            if (!IsPostBack) {
+                gotoBPermitId = Request.QueryString["BPermitId"];
+            }
+            if (Common.Utils.isNothingNot(gotoBPermitId)) {
+                tbBPermitId.Text = Request.QueryString["BPermitId"];
+                ((Database)Master).doGo();
+                gvResults.SelectRow(0);
+            } else {                
+                getGridViewResults().DataSource = getGridViewDataTable();
+                getGridViewResults().DataBind();
+            }
         }
         protected override DataTable getGridViewDataTable() {
             DataTable bPermits = BPermitDataSet().Tables["BPData"];

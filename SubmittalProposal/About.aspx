@@ -41,8 +41,9 @@
                 <li>The submittal on the same tab as the Applicant information</li>
                 <li>Added IsCommercial to Submittals database</li>
                 <li>You can now put *blank into a search textbox, and this means: "items whose value is blank"</li>
+                <li>On the Submittal form, there is now a link to the Permit page</li>
             </ul>
-            <li>Note: Please be aware that all data items are configurable, and that I solicit your input. Ex:</li>
+            
             <ul>
                 <li>Search Criteria fields</li>
                 <li>Search Results fields</li>

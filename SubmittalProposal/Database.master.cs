@@ -22,7 +22,7 @@ namespace SubmittalProposal {
         }
 
         protected void Page_Load(object sender, EventArgs e) {
-
+            
         }
         private void collapseCPESearch() {
             CPESearch.Collapsed=true;
@@ -47,6 +47,9 @@ namespace SubmittalProposal {
             /* this seems to cause sync problems            CPEForm.CollapsedText = "";*/
             /* this seems to cause sync problems        CPEForm.ExpandedText = ""; */
             /* this seems to cause sync problems         pnlForm.Visible = false;*/ 
+        }
+        public void doGo() {
+            btnGo_Click(null, null);
         }
     }
 }

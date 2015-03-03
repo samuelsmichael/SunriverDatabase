@@ -396,8 +396,10 @@ namespace SubmittalProposal
             tbProject.Text = (string)dr["Project"];
             tbSubmittal.Text = (string)dr["Submittal"];
             cbIsCommercial.Checked=((string)dr["IsCommercial"])=="true"?true:false;
+            CurrentBPermitId = getBPermitId(dr);
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(row) + "  BPermitId :" + getBPermitId(dr) + "  Meeting Date: " + getMeetingDate(dr) + " Owner: " + getOwner(dr);
         }
+        string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
                 getGridViewResults().DataSource = buildDataSet();
@@ -406,6 +408,10 @@ namespace SubmittalProposal
         }
         protected override DataTable getGridViewDataTable() {
             return buildDataSet().Tables[0];
+        }
+
+        protected void lbGoToPermit_Click(object sender, EventArgs e) {
+            Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId);
         }
     }
 }

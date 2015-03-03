@@ -202,18 +202,22 @@
                                                 <td>
                                                     <asp:CheckBox ID="cbIsCommercial" runat="server" />
                                                 </td>
+                                                <td>
+                                                    <asp:LinkButton  ID="lbGoToPermit" runat="server" 
+                                                        onclick="lbGoToPermit_Click">Go to Permit</asp:LinkButton>
+                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Project"></asp:Label>
                                                 </td>
-                                                <td colspan="5">
+                                                <td colspan="6">
                                                     <asp:TextBox CssClass="form_field" ID="tbProject" Width="100%" runat="server" TextMode="SingleLine" Rows="1"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Submittal"></asp:Label>
                                                 </td>
-                                                <td colspan="5">
+                                                <td colspan="6">
                                                     <asp:TextBox CssClass="form_field" ID="tbSubmittal" Width="100%" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
                                                 </td>
                                             </tr>
