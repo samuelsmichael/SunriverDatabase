@@ -34,6 +34,7 @@ namespace SubmittalProposal
              dt.Columns.Add(new DataColumn("BPermitId"));
              dt.Columns.Add(new DataColumn("Conditions"));
              dt.Columns.Add(new DataColumn("Submittal"));
+             dt.Columns.Add(new DataColumn("IsCommercial"));
              ds.Tables.Add(dt);
              DataRow dr1 = dt.NewRow();
              dr1["OwnersName"] = "Mike Samuels";
@@ -59,6 +60,7 @@ namespace SubmittalProposal
                                  "3.  The exterior elevation section of the proposed privacy screen or \n" +
                                  "fence should be resubmitted with a wall section.";
              dr1["Submittal"] = "Build a very large water landscape that includes a fountain.";
+             dr1["IsCommercial"] = "false";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Jason Schneider";
@@ -77,6 +79,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "9327";
              dr1["Conditions"] = "All work must be done by the beginning of summer.";
              dr1["Submittal"] = "Build an olympic-sized swimming pool in the backyard.";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Ralph Jones";
@@ -95,6 +98,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3719";
              dr1["Conditions"] = "Must have proper drainage and sprinkler system";
              dr1["Submittal"] = "Build hanging garden";
+             dr1["IsCommercial"] = "false";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Roy Rogers";
@@ -113,6 +117,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3720";
              dr1["Conditions"] = "Colors must be Fall colors";
              dr1["Submittal"] = "Exterior Paint Job";
+             dr1["IsCommercial"] = "false";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Gilbert Sullivan";
@@ -131,6 +136,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3721";
              dr1["Conditions"] = "Colors shall be submitted later for siding and rail system for administrative approval.  New pavers shall match existing.";
              dr1["Submittal"] = "Deck/Wall/Hot tub";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Jerry Halbrought";
@@ -149,6 +155,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3726";
              dr1["Conditions"] = "None";
              dr1["Submittal"] = "Add heater storage";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Fred Flintstone";
@@ -167,6 +174,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3727";
              dr1["Conditions"] = "Waterproofing of 2nd degree";
              dr1["Submittal"] = "Addition of skylights";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Laneita Cox";
@@ -185,6 +193,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3728";
              dr1["Conditions"] = "Must be birch wood color";
              dr1["Submittal"] = "Deck and spa";
+             dr1["IsCommercial"] = "false";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Mickey Mantel";
@@ -203,6 +212,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3729";
              dr1["Conditions"] = "Must have 20' outfield walls";
              dr1["Submittal"] = "Full-sized baseball park";
+             dr1["IsCommercial"] = "false";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Jack Rickstraw";
@@ -221,6 +231,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "3730";
              dr1["Conditions"] = "Lifeguard stand";
              dr1["Submittal"] = "Swimming Pool";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Phil Lewis";
@@ -239,6 +250,7 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "73";
              dr1["Conditions"] = "Must be surrounded by trees";
              dr1["Submittal"] = "Putting green";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Marre mais Marre";
@@ -258,6 +270,7 @@ namespace SubmittalProposal
              dr1["Conditions"] = "Body color approved.  Applicant shall find antoher trim color more in \n" +
                      "keeping with current design committee guidelines.";
              dr1["Submittal"] = "New roof";
+             dr1["IsCommercial"] = "true";
              dt.Rows.Add(dr1);
              dr1 = dt.NewRow();
              dr1["OwnersName"] = "Ktms Enterprises";
@@ -276,7 +289,8 @@ namespace SubmittalProposal
              dr1["BPermitId"] = "40133";
              dr1["Conditions"] = "Trim color (fascia only) is approved. Body color is too light.Sugggest \n" +
                      "one shade darker #5363m country twill.";
-             dr1["Submittal"] = ".";
+             dr1["Submittal"] = "New room addition";
+             dr1["IsCommercial"] = "false";
              dt.Rows.Add(dr1);
              return ds;
          }
@@ -284,7 +298,6 @@ namespace SubmittalProposal
             return SunriverDataSet();
         }
  
-
         protected override string performSubmittalButtonClick() {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
@@ -325,6 +338,11 @@ namespace SubmittalProposal
                 prepend = "  ";
                 sbFilter.Append(and + " BPermitId like '*" + tbBPermitId.Text + "*'");
                 and = " and ";
+            }
+            if (ddlIsCommercial.SelectedValue != "Null") {
+                sb.Append(prepend + " Is Commercial: " + ddlIsCommercial.SelectedValue);
+                prepend = "  ";
+                sbFilter.Append(and + " IsCommercial = " + ddlIsCommercial.SelectedValue);
             }
             DataSet ds = buildDataSet();
             if (sbFilter.Length > 0) {
@@ -377,6 +395,7 @@ namespace SubmittalProposal
             ddlProjectDecision.SelectedValue = (string)dr["Decision"];
             tbProject.Text = (string)dr["Project"];
             tbSubmittal.Text = (string)dr["Submittal"];
+            cbIsCommercial.Checked=((string)dr["IsCommercial"])=="true"?true:false;
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(row) + "  BPermitId :" + getBPermitId(dr) + "  Meeting Date: " + getMeetingDate(dr) + " Owner: " + getOwner(dr);
         }
         protected override void childPageLoad(object sender, EventArgs e) {

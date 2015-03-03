@@ -3,21 +3,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
                 <td>
-                    <asp:Label ID="Label18" runat="server" Text="Owner"></asp:Label>
-                    <asp:TextBox ID="tbOwner" Width="100" runat="server"></asp:TextBox>
+                    <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Owner"></asp:Label>
+                    <asp:TextBox CssClass="form_field" ID="tbOwner" Width="100" runat="server"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Label ID="Label19" runat="server" Text="Applicant"></asp:Label>
-                    <asp:TextBox ID="tbApplicant" Width="100" runat="server"></asp:TextBox>
+                    <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Applicant"></asp:Label>
+                    <asp:TextBox CssClass="form_field" ID="tbApplicant" Width="100" runat="server"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
-                    <asp:TextBox ID="tbLot" Width="30" runat="server"></asp:TextBox>
+                    <asp:Label CssClass="form_field_heading" ID="Label20" runat="server" Text="Lot"></asp:Label>
+                    <asp:TextBox CssClass="form_field" ID="tbLot" Width="20" runat="server"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Label ID="Label21" runat="server" Text="Lane"></asp:Label>
-                    <asp:DropDownList ID="ddlLane" runat="server">
-                        <asp:ListItem>Choose lane</asp:ListItem>
+                    <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="Lane"></asp:Label>
+                    <asp:DropDownList CssClass="form_field" ID="ddlLane" runat="server">
+                        <asp:ListItem Text="" Value="Choose lane"></asp:ListItem>
                         <asp:ListItem>Sage Springs</asp:ListItem>
                         <asp:ListItem>Salishan</asp:ListItem>
                         <asp:ListItem>Sandhill</asp:ListItem>
@@ -26,19 +26,25 @@
                         <asp:ListItem>Sequoia</asp:ListItem>
                         <asp:ListItem>Shadow</asp:ListItem>
                         <asp:ListItem>Shag Bark</asp:ListItem>
+                        <asp:ListItem>Squirrel</asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td>
-                    <asp:Label ID="Label22" runat="server" Text="Submittal Id"></asp:Label>
-                    <asp:TextBox ID="tbSubmittalId" Width="66" runat="server"></asp:TextBox>
+                    <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Submittal Id"></asp:Label>
+                    <asp:TextBox CssClass="form_field" ID="tbSubmittalId" Width="46" runat="server"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:Label ID="Label23" runat="server" Text="BPermit Id"></asp:Label>
-                    <asp:TextBox ID="tbBPermitId" Width="66" runat="server"></asp:TextBox>
+                    <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="BPermit Id"></asp:Label>
+                    <asp:TextBox CssClass="form_field" ID="tbBPermitId" Width="46" runat="server"></asp:TextBox>
                 </td>
-
-    
-        </table>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label1" runat="server" Text="Is Commercial"></asp:Label>
+                    <asp:DropDownList CssClass="form_field" ID="ddlIsCommercial" runat="server">
+                        <asp:ListItem Selected="True" Text="" Value="Null"></asp:ListItem>
+                        <asp:ListItem Text="True" Value="True"></asp:ListItem>
+                        <asp:ListItem Text="False" Value="False"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ResultsContent" runat="server">
@@ -77,6 +83,7 @@
                 SortExpression="SubmittalId" />
             <asp:BoundField DataField="BPermitId" HeaderText="BPermitId" 
                 SortExpression="BPermitId" />
+            <asp:BoundField DataField="IsCommercial" HeaderText="Is Commercial" SortExpression="IsCommercial" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -98,7 +105,7 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3" runat="server">
                     <ContentTemplate>
-                        <table width="100%" cellpadding="0" cellspacing="0">
+                        <table width="100%" cellpadding="1" cellspacing="0">
                             <tr>
                                 <td>
                                     <asp:Panel ID="Panel1" GroupingText="Owner" runat="server">
@@ -190,19 +197,24 @@
                                                         <asp:ListItem Value="DEN">DEN - Denied</asp:ListItem>
                                                     </asp:DropDownList>
                                                 </td>
+                                                <td align="right"><asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="Is Commercial"></asp:Label>
+                                                </td>                                                
+                                                <td>
+                                                    <asp:CheckBox ID="cbIsCommercial" runat="server" />
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Project"></asp:Label>
                                                 </td>
-                                                <td colspan="3">
-                                                    <asp:TextBox CssClass="form_field" ID="tbProject" Width="95%" runat="server" TextMode="SingleLine" Rows="1"></asp:TextBox>
+                                                <td colspan="5">
+                                                    <asp:TextBox CssClass="form_field" ID="tbProject" Width="100%" runat="server" TextMode="SingleLine" Rows="1"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Submittal"></asp:Label>
                                                 </td>
-                                                <td colspan="3">
-                                                    <asp:TextBox CssClass="form_field" ID="tbSubmittal" Width="95%" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                                                <td colspan="5">
+                                                    <asp:TextBox CssClass="form_field" ID="tbSubmittal" Width="100%" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
                                                 </td>
                                             </tr>
 

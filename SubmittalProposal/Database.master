@@ -106,7 +106,7 @@
             <asp:ContentPlaceHolder ID="FormContent" runat="server">
             </asp:ContentPlaceHolder>
             <center>
-                <asp:Button style="margin-bottom:4px;margin-top:4px; " ID="btnUpdate" runat="server" Text="Submit" />
+                <asp:Button style="margin-bottom:14px;margin-top:14px; " ID="btnUpdate" runat="server" Text="Submit" />
             </center>
         </asp:Panel>
     </asp:Panel>

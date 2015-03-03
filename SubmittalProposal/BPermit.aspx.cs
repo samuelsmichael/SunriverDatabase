@@ -29,6 +29,7 @@ namespace SubmittalProposal {
             dr["BPClosed"] = "02/27/2015";
             dr["BPermitReqd"] = "false";
             dr["BPDelay"] = "w";
+
             dtBPData.Rows.Add(dr);
             dr = dtBPData.NewRow();
             dr["BPermitId"] = "9327";
@@ -242,6 +243,7 @@ namespace SubmittalProposal {
             dr["BP1stInspect"] = "04/19/2010";
             dr["BPRActionDate"] = "08/12/2010";
             dr["BPRComments"] = "Hot tub wall";
+            dr["BPRLetterDate"] = "05/19/2010";
             dr["BPRLetterRef"] = "expnot";
             dr["BPRevw"] = "1";
             dtReviews.Rows.Add(dr);
@@ -250,6 +252,7 @@ namespace SubmittalProposal {
             dr["BPermitId"] = "8956";
             dr["BP1stInspect"] = "02/19/2011";
             dr["BPRActionDate"] = "03/12/2010";
+            dr["BPRLetterDate"] = "06/11/2010";
             dr["BPRComments"] = "Screen wall incomplete";
             dr["BPRLetterRef"] = "expnot";
             dr["BPRevw"] = "2";
@@ -261,18 +264,104 @@ namespace SubmittalProposal {
             dr["BPRActionDate"] = "12/30/2014";
             dr["BPRComments"] = "Filter not approved";
             dr["BPRLetterRef"] = "expnot";
+            dr["BPRLetterDate"] = "03/21/2011";
             dr["BPRevw"] = "1";
             dtReviews.Rows.Add(dr);
             return ds;
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            GridViewRow row = gvResults.SelectedRow;
+            Object obj = row.Cells;
+
+            DataTable sourceTable =  getGridViewDataTable();
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "BPermitId=" + getBPermitId(row);
+            DataTable tblFiltered = view.ToTable();
+            DataRow dr = tblFiltered.Rows[0];
+
+            tbDelay.Text = (string)dr["BPDelay"];
+            tbIssued.Text = (string)dr["BPIssueDate"];
+            tbExpired.Text = (string)dr["BPExpires"];
+            tbClosed.Text = (string)dr["BPClosed"];
+            if (((string)dr["BPermitReqd"]).ToLower() == "true") {
+                rbListPermitRequired.SelectedValue = "Yes";
+            } else {
+                rbListPermitRequired.SelectedValue = "No";
+            }
+            tbApplicantName2.Text = (string)dr["Applicant"];
+            tbOwnersName.Text=(string)dr["OwnersName"];
+            tbContractorBB.Text = (string)dr["Contractor"];
+            ddlProjectType.SelectedValue = (string)dr["ProjectType"];
+            tbProject.Text = (string)dr["Project"];
+            tbLotName2.Text = (string)dr["Lot"];
+            ddlLane2.SelectedValue = (string)dr["Lane"];
+
+            DataTable sourceTablePayments = BPermitDataSet().Tables["BPPayment"];
+            DataView viewPayments = new DataView(sourceTablePayments);
+            viewPayments.RowFilter = "BPermitId=" + getBPermitId(row);
+            DataTable tblFilteredPayments = viewPayments.ToTable();
+            feeTotal=0;
+            monthsTotal = 0;
+            foreach (DataRow dr1 in tblFilteredPayments.Rows) {
+                try {
+                    feeTotal += Convert.ToDecimal(((string)dr1["BPFee$"]).Replace("$",""));
+                } catch { };
+                try {
+                    monthsTotal+=Convert.ToInt32(dr1["BPMonths"]);
+                }catch{}
+            }
+            gvPayments.DataSource = tblFilteredPayments;
+            gvPayments.DataBind();
+
+            DataTable sourceTableReviews = BPermitDataSet().Tables["BPReviews"];
+            DataView viewReviews = new DataView(sourceTableReviews);
+            viewReviews.RowFilter = "BPermitId=" + getBPermitId(row);
+            DataTable tblFilteredReviews = viewReviews.ToTable();
+            gvReviews.DataSource = tblFilteredReviews;
+            gvReviews.DataBind();
+            return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(dr) + "  BPermitId :" + getBPermitId(dr) + " Owner: " + getOwner(dr);
+
+        }
+        decimal feeTotal = 0;
+        int monthsTotal = 0;
+        public string getBPMonthsTotal() {
+            return monthsTotal.ToString();
+        }
+        public string getBPFeeTotal() {
+            return feeTotal.ToString("c");
+        }
+        private string getSubmittalId(DataRow dr) {
+            return (string)dr["SubmittalId"];
+        }
+        private string getBPermitId(DataRow dr) {
+            return (string)dr["BPermitId"];
+        }
+        private string getLotLane(DataRow dr) {
+            return ((string)dr["Lot"]) + "\\" + (string)dr["Lane"];
+        }
+        private string getOwner(DataRow dr) {
+            return (string)dr["OwnersName"];
+        }
+        private string getBPermitId(GridViewRow dr) {
+            return dr.Cells[4].Text;
         }
         protected override string performSubmittalButtonClick() {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
             string prepend = "";
             string and = "";
+            if (Utils.isNothingNot(tbOwner.Text)) {
+                sb.Append(prepend + "Owner: " + tbOwner.Text);
+                prepend = "  ";
+                sbFilter.Append(and + " OwnersName like '*" + tbOwner.Text + "*'");
+                and = " and ";
+            }
+            if (Utils.isNothingNot(tbApplicant.Text)) {
+                sb.Append(prepend + "Applicant: " + tbApplicant.Text);
+                prepend = "  ";
+                sbFilter.Append(and + " Applicant like '*" + tbApplicant.Text + "*'");
+                and = " and ";
+            }
             if (Utils.isNothingNot(tbLot.Text)) {
                 sb.Append(prepend + "Lot: " + tbLot.Text);
                 prepend = "  ";
@@ -351,8 +440,16 @@ namespace SubmittalProposal {
                         s.Field<string>("Lot"),
                     Lane =
                         s.Field<string>("Lane"),
-                    BPIssueDate =
-                        p.Field<string>("BPIssueDate")
+                    BPIssueDate = p.Field<string>("BPIssueDate"),
+                    BPExpires = p.Field<string>("BPExpires"),
+                    BPClosed=p.Field<string>("BPClosed"),
+                    OwnersName = s.Field<string>("OwnersName"),
+                    Applicant = s.Field<string>("Applicant"),
+                    Contractor = s.Field<string>("Contractor"),
+                    BPermitReqd = p.Field<string>("BPermitReqd"),
+                    ProjectType=s.Field<string>("ProjectType"),
+                    Project=s.Field<string>("Project"),
+                    BPDelay=p.Field<string>("BPDelay")
                 };
 
             return query.CopyToDataTable() ;

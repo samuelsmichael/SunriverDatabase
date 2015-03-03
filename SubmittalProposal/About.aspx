@@ -8,7 +8,7 @@
         Release notes
     </h2>
     <ul>
-        <li>Version .01 </li>
+        <li style="font-weight:bold;margin-bottom:5px;">Version .01 </li>
         <ul>
             <li>The top panel allows users to make certain selection criteria. The criteria act
                 like the LIKE command in SQL. Thus, if you key in MI for the Owner's Name field,
@@ -31,12 +31,22 @@
             <li>The Form Panel will ressemble your current form. I have just thrown something together
                 here so that we can discuss this "Expandable Panels" paradigm. </li>
         </ul>
-        </li>
+        
     </ul>
     <ul>
-        <li>Version .02 </li>
+        <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .02 </li>
         <ul>
-            <li>The submittal on the same tab as the Applicant information</li>
+            <li>Enhancements</li>
+            <ul>
+                <li>The submittal on the same tab as the Applicant information</li>
+                <li>Added IsCommercial to Submittals database</li>
+            </ul>
+            <li>Note: Please be aware that all data items are configurable, and that I solicit your input. Ex:</li>
+            <ul>
+                <li>Search Criteria fields</li>
+                <li>Search Results fields</li>
+                <li>Form bar verbiage (when an item is selected)</li>
+            </ul>
         </ul>
     </ul>
 </asp:Content>
