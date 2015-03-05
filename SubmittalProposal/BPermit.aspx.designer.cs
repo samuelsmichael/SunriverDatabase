@@ -202,13 +202,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// tbExpired control.
+        /// lblExpired control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbExpired;
+        protected global::System.Web.UI.WebControls.Label lblExpired;
         
         /// <summary>
         /// Label3 control.

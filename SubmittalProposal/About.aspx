@@ -38,17 +38,24 @@
         <ul>
             <li>Enhancements</li>
             <ul>
-                <li>The submittal on the same tab as the Applicant information</li>
+                <li>Building Permit page is coded</li>
+                <li>On the Submittal form, the submittal section is on the same tab as the Applicant information</li>
                 <li>Added IsCommercial to Submittals database</li>
                 <li>You can now put *blank into a search textbox, and this means: "items whose value is blank"</li>
                 <li>On the Submittal form, there is now a link to the Permit page</li>
             </ul>
             
+        </ul>
+    </ul>
+    <ul>
+        <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .03 </li>
+        <ul>
+            <li>Enhancements</li>
             <ul>
-                <li>Search Criteria fields</li>
-                <li>Search Results fields</li>
-                <li>Form bar verbiage (when an item is selected)</li>
+                <li><b>Date Expired</b> is now computed (DateIssued + <i>nbr of months paid</i>).</li>
+                <li><b>Date Expired</b> is shown in red if it's past today.</li>
             </ul>
+            
         </ul>
     </ul>
 </asp:Content>
