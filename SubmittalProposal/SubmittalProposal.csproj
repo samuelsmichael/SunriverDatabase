@@ -83,6 +83,8 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="BPermit.aspx" />
+    <Content Include="ComplianceReview.aspx" />
+    <Content Include="Images\animated_progress.gif" />
     <Content Include="Submittal2.aspx" />
     <Content Include="Images\bg-menu-main.JPG" />
     <Content Include="Images\bg-menu-main.png" />
@@ -148,6 +150,13 @@
     </Compile>
     <Compile Include="BPermit.aspx.designer.cs">
       <DependentUpon>BPermit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComplianceReview.aspx.cs">
+      <DependentUpon>ComplianceReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComplianceReview.aspx.designer.cs">
+      <DependentUpon>ComplianceReview.aspx</DependentUpon>
     </Compile>
     <Compile Include="ObjectShredder.cs" />
     <Compile Include="Submittal2.aspx.cs">

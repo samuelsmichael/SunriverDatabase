@@ -297,8 +297,8 @@ namespace SubmittalProposal
         protected override DataSet buildDataSet() {
             return SunriverDataSet();
         }
- 
-        protected override string performSubmittalButtonClick() {
+
+        protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
             string prepend="";
@@ -344,19 +344,8 @@ namespace SubmittalProposal
                 prepend = "  ";
                 sbFilter.Append(and + " IsCommercial = " + ddlIsCommercial.SelectedValue);
             }
-            DataSet ds = buildDataSet();
-            if (sbFilter.Length > 0) {
-                DataTable sourceTable = ds.Tables[0];
-                DataView view = new DataView(sourceTable);
-                view.RowFilter = sbFilter.ToString();
-                DataTable tblFiltered = view.ToTable();
-                gvResults.DataSource = tblFiltered;
-                gvResults.DataBind();
-            } else {
-                gvResults.DataSource = ds;
-                gvResults.DataBind();
-            }
-            return sb.ToString();
+            searchCriteria = sb.ToString();
+            filterString = sbFilter.ToString();
         }
         private string getSubmittalId(GridViewRow dr) {
             return dr.Cells[13].Text;

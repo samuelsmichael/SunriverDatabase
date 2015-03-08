@@ -1,5 +1,11 @@
 ﻿/* DEFAULTS
 ----------------------------------------------------------*/
+/*
+td,tr
+{ 
+border: thin solid #000000; 
+}
+*/
 
 body   
 {
@@ -9,8 +15,21 @@ body
     margin: 0px;
     padding: 0px;
     color: #696969;
-}
+ }
 
+.loading
+{
+    font-family: Arial;
+    font-size: 10pt;
+    border: 5px solid #67CFF5;
+    width: 200px;
+    height: 100px;
+    display: none;
+    position: fixed;
+    background-color: White;
+    z-index: 999;
+}
+   
 a:link, a:visited
 {
     color: #034af3;

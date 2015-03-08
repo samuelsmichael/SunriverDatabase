@@ -47,4 +47,15 @@
             
         </ul>
     </ul>
+    <ul>
+        <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .03 </li>
+        <ul>
+            <li>Enhancements</li>
+            <ul>
+                <li><b>Date Expired</b> is now computed (DateIssued + <i>nbr of months paid</i>).</li>
+                <li><b>Date Expired</b> is shown in red if it's past today.</li>
+            </ul>
+            
+        </ul>
+    </ul>
 </asp:Content>

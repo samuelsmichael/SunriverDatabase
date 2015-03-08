@@ -4,21 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 namespace SubmittalProposal {
     public partial class Database : System.Web.UI.MasterPage {
         public event SearchButtonPressedEventHandler SearchButtonPressed;
-        public delegate string SearchButtonPressedEventHandler();
+        public delegate void SearchButtonPressedEventHandler(out string searchCriteria, out DataTable filteredData );
         public AjaxControlToolkit.CollapsiblePanelExtender getCPEForm { get { return CPEForm; } }
         public AjaxControlToolkit.CollapsiblePanelExtender getCPEDataGrid { get { return CPEDataGrid; } }
         public Panel getPanelForm { get { return pnlForm; } }
-        protected virtual string OnSearchButtonPressed() {
-            string results="";
+        protected virtual void OnSearchButtonPressed(out string searchCriteria, out DataTable resultTable) {
             SearchButtonPressedEventHandler handler = SearchButtonPressed;
             if (handler != null) {
-                results=handler();
+                handler(out searchCriteria, out resultTable);
+            } else {
+                searchCriteria = null;
+                resultTable = null;
             }
-            return results;
         }
 
         protected void Page_Load(object sender, EventArgs e) {
@@ -38,7 +40,10 @@ namespace SubmittalProposal {
         }
 
         protected void btnGo_Click(object sender, EventArgs e) {
-            String results = OnSearchButtonPressed();
+
+            String results = String.Empty;
+            DataTable dummyDataTable;
+            OnSearchButtonPressed(out results, out dummyDataTable);
             collapseCPESearch();
             CPEDataGrid.CollapsedText = "";
             CPESearch.CollapsedText = results;

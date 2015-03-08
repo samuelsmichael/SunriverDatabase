@@ -58,7 +58,12 @@
             <asp:BoundField DataField="BPermitId" HeaderText="BPermitId" 
                 SortExpression="BPermitId" />
             <asp:BoundField DataField="BPIssueDate" HeaderText="Issue Date" SortExpression="BPIssueDate" />
-            <asp:BoundField DataField="BPExpires" HeaderText="Expires" SortExpression="BPExpires" />
+            <asp:TemplateField HeaderText="Expires" SortExpression="BPExpires">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# getExpires(Eval("BPermitId"),Eval("BPIssueDate")) %>' 
+                        ForeColor='<%# getForeColorForExpireDate(Eval("BPermitId"),Eval("BPIssueDate")) %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="BPClosed" HeaderText="Closed" SortExpression="BPClosed" />
             <asp:BoundField DataField="BPDelay" HeaderText="Delay" SortExpression="BPDelay" />
             <asp:BoundField DataField="OwnersName" HeaderText="Owner's Name" 
@@ -107,7 +112,7 @@
                     <asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="Expired"></asp:Label> 
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbExpired" Width="10em" runat="server"></asp:TextBox>
+                    <asp:Label CssClass="form_field_lbl" ID="lblExpired" runat="server"></asp:Label>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Closed"></asp:Label> 

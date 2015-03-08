@@ -11,7 +11,7 @@ using System.Data;
 namespace SubmittalProposal {
     public abstract class AbstractDatabase : System.Web.UI.Page {
         protected abstract string gvResults_DoSelectedIndexChanged(object sender, EventArgs e);
-        protected abstract string performSubmittalButtonClick();
+        protected abstract void performSubmittalButtonClick(out string searchCriteria, out string filterString);
         protected abstract GridView getGridViewResults();
         protected abstract DataSet buildDataSet();
         protected abstract DataTable getGridViewDataTable();
@@ -33,13 +33,30 @@ namespace SubmittalProposal {
             ((Database)Master).getPanelForm.Visible = true;
         }
 
-        protected string database_SearchButtonPressed() {
+        protected void database_SearchButtonPressed(out string searchCriteria, out DataTable filteredData) {
 /* this seems to cause sync problems            getGridViewResults().SelectedIndex = -1;*/
-            return performSubmittalButtonClick();
-            
+            searchCriteria=String.Empty;
+            string filterString=String.Empty;
+            DataTable tblFiltered = null;
+            performSubmittalButtonClick(out searchCriteria, out filterString);
+            if (Utils.isNothingNot(filterString)) {
+                DataTable sourceTable = getGridViewDataTable();
+                DataView view = new DataView(sourceTable);
+                view.RowFilter = filterString;
+                tblFiltered = view.ToTable();
+                getGridViewResults().DataSource = tblFiltered;
+                getGridViewResults().DataBind();
+            } else {
+                tblFiltered=getGridViewDataTable();
+                getGridViewResults().DataSource = tblFiltered;
+                getGridViewResults().DataBind();
+            }
+            filteredData = tblFiltered;
         }
         protected void gvResults_Sorting(object sender, GridViewSortEventArgs e) {
-            DataTable sourceTable = getGridViewDataTable();
+            DataTable sourceTable=null;
+            string dummySearchCriteria=null;
+            database_SearchButtonPressed(out dummySearchCriteria, out sourceTable);
             DataView view = new DataView(sourceTable);
             if (ViewState["sortExpression"] == null) {
                 ViewState["sortExpression"] = e.SortExpression + " desc";

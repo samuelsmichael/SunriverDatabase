@@ -399,7 +399,7 @@ namespace SubmittalProposal {
         private string getBPermitId(GridViewRow dr) {
             return dr.Cells[4].Text;
         }
-        protected override string performSubmittalButtonClick() {
+        protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
             string prepend = "";
@@ -448,26 +448,8 @@ namespace SubmittalProposal {
                 and = " and ";
             }
 
-            /*
-            if (Utils.isNothingNot(tbApplicant.Text)) {
-                sb.Append(prepend + "Applicant: " + tbApplicant.Text);
-                prepend = "  ";
-                sbFilter.Append(and + " Applicant like '*" + tbApplicant.Text + "*'");
-                and = " and ";
-            }
-            */
-            if (sbFilter.Length > 0) {
-                DataTable sourceTable = getGridViewDataTable();
-                DataView view = new DataView(sourceTable);
-                view.RowFilter = sbFilter.ToString();
-                DataTable tblFiltered = view.ToTable();
-                gvResults.DataSource = tblFiltered;
-                gvResults.DataBind();
-            } else {
-                gvResults.DataSource = getGridViewDataTable();
-                gvResults.DataBind();
-            }
-            return sb.ToString();
+            searchCriteria = sb.ToString();
+            filterString = sbFilter.ToString();
 
         }
         protected override GridView getGridViewResults() {
