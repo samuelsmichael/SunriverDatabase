@@ -28,8 +28,8 @@
                  // Called when async postback begins
                  function prm_InitializeRequest(sender, args) {
                      // get the divImage and set it to visible
-                     debugger;
-                     if ((args._postBackElement.id).indexOf("BtnGo") != -1) {
+                     //debugger;
+                     if ((args._postBackElement.id).indexOf("BtnGo") != -1 || (args._postBackElement.id).indexOf("gvResults") != -1) {
                          var loading = $(".loading");
                          loading.show();
                          var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
@@ -41,7 +41,7 @@
                  // Called when async postback ends
                  function prm_EndRequest(sender, args) {
                      // get the divImage and hide it again
-                     if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1) {
+                     if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1) {
                          var loading = $(".loading");
                          loading.hide();
                      }

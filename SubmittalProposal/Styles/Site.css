@@ -5,7 +5,7 @@ td,tr
 { 
 border: thin solid #000000; 
 }
-*/
+*/  
 
 body   
 {
@@ -240,12 +240,29 @@ legend
 
 .form_field_heading 
 {
-    font-size:.9em;
+    font-size:.9em; white-space:nowrap;
 }
 .form_field 
 {
-    font-size:.9em;
+    font-size:.9em !important;
 }
+.form_field_date 
+{
+    font-size:.9em; width:6em !important;
+}
+.form_field_address 
+{
+    font-size:.9em;width:30em !important;
+}
+.form_field_bigtextbox 
+{
+    font-size:.9em;height:5em !important;
+}
+.form_field_panel_squished 
+{
+    margin-top:-10px;
+}
+
 .form_field_lbl
 {
     padding: 1px 5px 1px 5px;

@@ -20,6 +20,8 @@ namespace SubmittalProposal {
             ds = (DataSet)cache[key];
             if (ds == null) {            
                 ds = Utils.getDataSetFromQuery("Select * from tblComplianceReview;select * from tblComplianceLetterData;", System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["crReviewID"] };
+                ds.Tables[1].PrimaryKey = new DataColumn[] { ds.Tables[1].Columns["crLTID"] };
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, ds, policy);
@@ -32,9 +34,54 @@ namespace SubmittalProposal {
                 ddlLane.DataBind();
             }
         }
-        protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            throw new NotImplementedException();
+        private int getInspectionNumber(GridViewRow row) {
+            return  Convert.ToInt32(row.Cells[9].Text);
         }
+        private string getLotLane(DataRow dr) {
+            return "" + dr["crLOT"] + " \\ " + dr["crLANE"];
+        }
+        private DateTime? getReviewDate(DataRow dr) {
+            return (DateTime?)dr["crDate"];
+        }
+        private DateTime? getClosingDate(DataRow dr) {
+            return Utils.ObjectToDateTimeNullable( dr["crCloseDate"]);
+        }
+        private string getComments(DataRow dr) {
+            return Utils.ObjectToString(dr["crComments"]);
+        }
+        private string getDesignRule(DataRow dr) {
+            return  Utils.ObjectToString(dr["crRule"]);
+        }
+        private string getRequiredAction(DataRow dr) {
+            return  Utils.ObjectToString(dr["crCorrection"]);
+        }
+        private string getFollowUp(DataRow dr) {
+            return  Utils.ObjectToString(dr["crFollowUp"]);
+        }
+        protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
+            GridViewRow row = gvResults.SelectedRow;
+            int inspectionNbr = getInspectionNumber(row);
+            DataRow dr = getGridViewDataTable().Rows.Find(inspectionNbr);
+            DateTime? reviewDate = getReviewDate(dr);
+            DateTime? closeDate = getClosingDate(dr);
+            tbCloseDate.Text=closeDate.HasValue?closeDate.Value.ToString("MM/dd/yyyy"):"";
+            tbReviewDate.Text=reviewDate.HasValue?reviewDate.Value.ToString("MM/dd/yyyy"):"";
+            tbCommentsForm.Text = getComments(dr);
+            tbDesignRule.Text = getDesignRule(dr);
+            tbRequiredAction.Text = getRequiredAction(dr);
+            tbFollowUp.Text = getFollowUp(dr);
+
+            
+            DataView    dvComplianceLetters = CRDataSet().Tables[1].AsDataView();
+            Session["currentfkcrReviewID"] = getInspectionNumber(row);
+            dvComplianceLetters.RowFilter = "fkcrReviewID=" + Session["currentfkcrReviewID"];
+            DataTable dtComplianceLetters = dvComplianceLetters.ToTable();
+            fvComplianceLetter.DataSource = dtComplianceLetters;
+            fvComplianceLetter.DataBind();
+
+            return "Inspection Nbr: " + inspectionNbr + "    Lot\\Lane: " + getLotLane(dr) + "    Date: " + (reviewDate.HasValue?reviewDate.Value.ToString("MM/dd/yyyy"):"");
+        }
+        
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
@@ -81,6 +128,46 @@ namespace SubmittalProposal {
         }
         protected override System.Data.DataTable getGridViewDataTable() {
             return CRDataSet().Tables[0];
+        }
+
+        protected void fvComplianceLetter_OnModeChanging(object sender, EventArgs e) {
+        }
+
+        protected void fvComplianceLetter_OnDataBound(object sender, EventArgs e) {
+            if (fvComplianceLetter.Row != null) {
+                FormView fv = (FormView)sender;
+                Label control = (Label)fv.FindControl("lblcrLTID");
+                DropDownList ddlCRFromSignature = (DropDownList)fv.FindControl("ddlCRFromSignature");
+                DropDownList ddlCRFromTitle = (DropDownList)fv.FindControl("ddlCRFromTitle");
+                if (control != null) {
+                    DataRow dr = CRDataSet().Tables[1].Rows.Find(control.Text);
+                    string signer = Common.Utils.ObjectToString(dr["crLTSigner"]);
+                    string signerTitle = Common.Utils.ObjectToString(dr["crLTSignerTitle"]);
+                    if (Utils.isNothingNot(signer)) {
+                        ddlCRFromSignature.SelectedValue = signer;
+                    } else {
+                        ddlCRFromSignature.SelectedValue = String.Empty;
+                    }
+                    if (Utils.isNothingNot(signerTitle)) {
+                        ddlCRFromTitle.SelectedValue = signerTitle;
+                    } else {
+                        ddlCRFromTitle.SelectedValue = String.Empty;
+                    }
+                }
+            }
+        }
+
+        protected void fvComplianceLetter_PageIndexChanging(Object sender, FormViewPageEventArgs e) {
+            fvComplianceLetter.PageIndex = e.NewPageIndex;
+            DataView dvComplianceLetters = CRDataSet().Tables[1].AsDataView();
+            dvComplianceLetters.RowFilter = "fkcrReviewID=" + Session["currentfkcrReviewID"];
+            DataTable dtComplianceLetters = dvComplianceLetters.ToTable();
+            fvComplianceLetter.DataSource = dtComplianceLetters;
+            fvComplianceLetter.DataBind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e) {
+
         }
     }
 }

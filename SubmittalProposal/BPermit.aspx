@@ -63,7 +63,7 @@
             <asp:BoundField DataField="BPIssueDate" HeaderText="Issue Date" SortExpression="BPIssueDate" />
             <asp:TemplateField HeaderText="Expires" SortExpression="BPExpires">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# getExpires(Eval("BPermitId"),Eval("BPIssueDate")) %>' 
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPExpires") %>' 
                         ForeColor='<%# getForeColorForExpireDate(Eval("BPermitId"),Eval("BPIssueDate")) %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>

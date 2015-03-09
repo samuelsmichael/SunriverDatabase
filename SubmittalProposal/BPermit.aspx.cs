@@ -11,7 +11,7 @@ using System.Runtime.Caching;
 
 namespace SubmittalProposal {
     public partial class BPermit : AbstractDatabase {
-
+        static DataTable dtBPayment = null;
         public static DataSet BPermitDataSet() {
             DataSet ds=null;
             MemoryCache cache=MemoryCache.Default;
@@ -27,6 +27,7 @@ namespace SubmittalProposal {
                 dtBPData.Columns.Add(new DataColumn("BPClosed"));
                 dtBPData.Columns.Add(new DataColumn("BPermitReqd"));
                 dtBPData.Columns.Add(new DataColumn("BPDelay"));
+                dtBPData.Columns.Add(new DataColumn("BPExpires"));
                 ds.Tables.Add(dtBPData);
                 DataRow dr = dtBPData.NewRow();
                 dr["BPermitId"] = "8956";
@@ -135,7 +136,7 @@ namespace SubmittalProposal {
                 dtBPData.Rows.Add(dr);
                 #endregion
                 #region BPPayment
-                DataTable dtBPayment = new DataTable("BPPayment");
+                dtBPayment = new DataTable("BPPayment");
                 dtBPayment.Columns.Add(new DataColumn("BPPaymentId"));
                 dtBPayment.Columns.Add(new DataColumn("BPermitId"));
                 dtBPayment.Columns.Add(new DataColumn("BPMonths"));
@@ -266,6 +267,12 @@ namespace SubmittalProposal {
                 dr["BPRevw"] = "1";
                 dtReviews.Rows.Add(dr);
                 #endregion
+
+                //TODO: computer expires
+                foreach (DataRow dr3 in dtBPData.Rows) {
+                    dr3["BPExpires"] = getExpires(dr3["BPermitId"], dr3["BPIssueDate"]);
+                }
+
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.AbsoluteExpiration =
                     DateTimeOffset.Now.AddHours(1.0);
@@ -274,8 +281,9 @@ namespace SubmittalProposal {
             return ds;
         }
 
-        int getMonthsTotal(string bPermitId) {
-            DataTable sourceTablePayments = BPermitDataSet().Tables["BPPayment"];
+        private static int getMonthsTotal(string bPermitId) {
+            int monthsTotal = 0;
+            DataTable sourceTablePayments = dtBPayment;
             DataView viewPayments = new DataView(sourceTablePayments);
             viewPayments.RowFilter = "BPermitId=" + bPermitId;
             DataTable tblFilteredPayments = viewPayments.ToTable();
@@ -364,7 +372,7 @@ namespace SubmittalProposal {
             } catch {}
             return System.Drawing.Color.FromName(color);
         }
-        public string getExpires(Object bPermitIdObject, Object BPIssueDate) {
+        public static string getExpires(Object bPermitIdObject, Object BPIssueDate) {
             int monthsTotal=getMonthsTotal((string)bPermitIdObject);
             string expires = String.Empty;
             if (monthsTotal > 0) {
@@ -494,6 +502,7 @@ namespace SubmittalProposal {
                     Lane =
                         s.Field<string>("Lane"),
                     BPIssueDate = p.Field<string>("BPIssueDate"),
+                    BPExpires=p.Field<string>("BPExpires"),
                     BPClosed=p.Field<string>("BPClosed"),
                     OwnersName = s.Field<string>("OwnersName"),
                     Applicant = s.Field<string>("Applicant"),
