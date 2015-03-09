@@ -25,7 +25,7 @@
             <tr>
                 <asp:ContentPlaceHolder ID="SearchContent" runat="server">
                 </asp:ContentPlaceHolder>
-                <td align="right" style="width:5%">
+                <td align="right" style="width:100%">
                     <asp:Button ID="BtnGo" runat="server" Text="Go" onclick="btnGo_Click" />
                 </td>
             </tr>
@@ -125,6 +125,7 @@
         SuppressPostBack="True" 
         Enabled="True">
     </ajaxToolkit:CollapsiblePanelExtender>
+
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

@@ -55,6 +55,9 @@
         onsorting="gvResults_Sorting"
     >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <EmptyDataTemplate>
+            <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+        </EmptyDataTemplate>
         <Columns>
             <asp:CommandField ButtonType="Link"
                     SelectText="Select"  ShowSelectButton="true" />

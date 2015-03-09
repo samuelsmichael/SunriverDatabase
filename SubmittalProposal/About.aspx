@@ -66,7 +66,8 @@
                 <li>Notes</li>
                 <ul>
                     <li>All the data in this database is included.</li>
-                </ul>
+                    <li>There are two versions of the Compliance Letter tab.  One uses paging, one uses scrolling.  Which do you like better?</li>
+                </ul>`
             </ul>
         </ul>
     </ul>

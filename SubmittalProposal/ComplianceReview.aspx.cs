@@ -78,6 +78,8 @@ namespace SubmittalProposal {
             DataTable dtComplianceLetters = dvComplianceLetters.ToTable();
             fvComplianceLetter.DataSource = dtComplianceLetters;
             fvComplianceLetter.DataBind();
+            Repeater1.DataSource = dtComplianceLetters;
+            Repeater1.DataBind();
 
             return "Inspection Nbr: " + inspectionNbr + "    Lot\\Lane: " + getLotLane(dr) + "    Date: " + (reviewDate.HasValue?reviewDate.Value.ToString("MM/dd/yyyy"):"");
         }
@@ -167,7 +169,30 @@ namespace SubmittalProposal {
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e) {
+            RepeaterItem o=e.Item;
+            if (o != null) {
+                DropDownList ddlCRFromSignature = (DropDownList)o.FindControl("ddlCRFromSignature");
+                DropDownList ddlCRFromTitle = (DropDownList)o.FindControl("ddlCRFromTitle");
+                Label control = (Label)o.FindControl("lblcrLTID");
+                if (control != null) {
+                    DataRow dr = CRDataSet().Tables[1].Rows.Find(control.Text);
+                    string signer = Common.Utils.ObjectToString(dr["crLTSigner"]);
+                    string signerTitle = Common.Utils.ObjectToString(dr["crLTSignerTitle"]);
+                    if (Utils.isNothingNot(signer)) {
+                        ddlCRFromSignature.SelectedValue = signer;
+                    } else {
+                        ddlCRFromSignature.SelectedValue = String.Empty;
+                    }
+                    if (Utils.isNothingNot(signerTitle)) {
+                        ddlCRFromTitle.SelectedValue = signerTitle;
+                    } else {
+                        ddlCRFromTitle.SelectedValue = String.Empty;
+                    }
+                }
 
+            }
+
+            int x = 3;
         }
     }
 }

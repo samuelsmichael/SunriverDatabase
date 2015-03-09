@@ -11,18 +11,49 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 
 <body>
     <form runat="server">
     <ajaxToolkit:ToolkitScriptManager CombineScripts="false" ID="ToolkitScriptManager1" runat="server">
     </ajaxToolkit:ToolkitScriptManager>
+             <script type="text/javascript">
+                 // Get the instance of PageRequestManager.
+                 var prm = Sys.WebForms.PageRequestManager.getInstance();
+                 // Add initializeRequest and endRequest
+                 prm.add_initializeRequest(prm_InitializeRequest);
+                 prm.add_endRequest(prm_EndRequest);
+
+                 // Called when async postback begins
+                 function prm_InitializeRequest(sender, args) {
+                     // get the divImage and set it to visible
+                     //debugger;
+                     if ((args._postBackElement.id).indexOf("BtnGo") != -1 || (args._postBackElement.id).indexOf("gvResults") != -1) {
+                         var loading = $(".loading");
+                         loading.show();
+                         var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                         var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                         loading.css({ top: top, left: left });
+                     }
+                 }
+
+                 // Called when async postback ends
+                 function prm_EndRequest(sender, args) {
+                     // get the divImage and hide it again
+                     if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1) {
+                         var loading = $(".loading");
+                         loading.hide();
+                     }
+                 }
+         </script>
     <div class="page">
         <div class="header">
             <div class="title">
                 <h1 style="float:left;">
                     Sunriver Database Application
                 </h1>
-                <span style="margin-left:50px; font-size:xx-small; display:block;float:left;color: #f9f9f9; margin-top:22px;">(Version .03)</span>
+                <span style="margin-left:50px; font-size:xx-small; display:block;float:left;color: #f9f9f9; margin-top:22px;">(Version .04)</span>
             </div>
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
@@ -39,14 +70,20 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/Submittal2.aspx" Text="Submittal"/>
                         <asp:MenuItem NavigateUrl="~/BPermit.aspx" Text="BPermits"/>
+                        <asp:MenuItem NavigateUrl="~/Submittal2.aspx" Text="Submittal"/>
+                        <asp:MenuItem NavigateUrl="~/ComplianceReview.aspx" Text="Compliance Reviews"/>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="Release Notes"/>
                     </Items>
                 </asp:Menu>
             </div>
         </div>
         <div class="main">
+            <div class="loading" align="center">
+                Loading. Please wait.<br />
+                <br />
+                <img src="Images/animated_progress.gif" alt="" />
+            </div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
         <div class="clear">
@@ -55,6 +92,14 @@
     <div class="footer">
         
     </div>
+    <asp:SqlDataSource ID="SRLot" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:SRPropertySQLConnectionString %>" 
+        SelectCommand="SELECT DISTINCT [Lot] FROM [tblLotLane] ORDER BY [Lot]">
+    </asp:SqlDataSource>
+        <asp:SqlDataSource ID="SRLane" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:SRPropertySQLConnectionString %>" 
+        SelectCommand="SELECT DISTINCT [Lane] FROM [tblLotLane] ORDER BY [Lane]">
+    </asp:SqlDataSource>
     </form>
 </body>
 </html>

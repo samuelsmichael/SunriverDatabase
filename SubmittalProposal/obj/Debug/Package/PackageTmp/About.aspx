@@ -58,4 +58,17 @@
             
         </ul>
     </ul>
+    <ul>
+        <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .04 </li>
+        <ul>
+            <li>Compliance Review database</li>
+            <ul>
+                <li>Notes</li>
+                <ul>
+                    <li>All the data in this database is included.</li>
+                    <li>There are two versions of the Compliance Letter tab.  One uses paging, one uses scrolling.  Which do you like better?</li>
+                </ul>`
+            </ul>
+        </ul>
+    </ul>
 </asp:Content>

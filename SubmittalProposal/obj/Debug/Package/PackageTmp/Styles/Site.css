@@ -1,5 +1,11 @@
 ﻿/* DEFAULTS
 ----------------------------------------------------------*/
+/*
+td,tr
+{ 
+border: thin solid #000000; 
+}
+*/  
 
 body   
 {
@@ -9,8 +15,21 @@ body
     margin: 0px;
     padding: 0px;
     color: #696969;
-}
+ }
 
+.loading
+{
+    font-family: Arial;
+    font-size: 10pt;
+    border: 5px solid #67CFF5;
+    width: 200px;
+    height: 100px;
+    display: none;
+    position: fixed;
+    background-color: White;
+    z-index: 999;
+}
+   
 a:link, a:visited
 {
     color: #034af3;
@@ -221,12 +240,29 @@ legend
 
 .form_field_heading 
 {
-    font-size:.9em;
+    font-size:.9em; white-space:nowrap;
 }
 .form_field 
 {
-    font-size:.9em;
+    font-size:.9em !important;
 }
+.form_field_date 
+{
+    font-size:.9em; width:6em !important;
+}
+.form_field_address 
+{
+    font-size:.9em;width:30em !important;
+}
+.form_field_bigtextbox 
+{
+    font-size:.9em;height:5em !important;
+}
+.form_field_panel_squished 
+{
+    margin-top:-10px;
+}
+
 .form_field_lbl
 {
     padding: 1px 5px 1px 5px;
