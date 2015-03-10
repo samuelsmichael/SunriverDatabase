@@ -292,13 +292,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.FormView fvComplianceLetter;
         
         /// <summary>
-        /// tabPanel1 control.
+        /// tabPanelComplanceLetterDataScrolling control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel tabPanel1;
+        protected global::AjaxControlToolkit.TabPanel tabPanelComplanceLetterDataScrolling;
         
         /// <summary>
         /// updatePanel1 control.

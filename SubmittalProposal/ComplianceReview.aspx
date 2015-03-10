@@ -70,7 +70,7 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
-    <ajaxToolkit:TabContainer height="346" ActiveTabIndex="0" ID="TabContainer1" runat="server">
+    <ajaxToolkit:TabContainer height="376" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server"  ID="tabPanelComplianceRuleData" HeaderText="Compliance Review">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3aa" runat="server">
@@ -131,21 +131,22 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-            <ajaxToolkit:TabPanel runat="server"  ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter (Paging)">
+            <ajaxToolkit:TabPanel runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter (Paging)">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1aa" runat="server">
                     <ContentTemplate>
                     
                     <asp:FormView Width="100%" ID="fvComplianceLetter" AllowPaging="true"  runat="server" OnDataBound="fvComplianceLetter_OnDataBound" 
         BackColor="White" BorderColor="#3366CC" BorderStyle="Inset" OnModeChanging="fvComplianceLetter_OnModeChanging" BorderWidth="3px" 
-        CellPadding="4" GridLines="Both" onpageindexchanging="fvComplianceLetter_PageIndexChanging" 
+        CellPadding="4" GridLines="Both" onpageindexchanging="fvComplianceLetter_PageIndexChanging"
         DataKeyNames="crLTID">
                              <EditRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
                              <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
                              <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
-                             <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
+                             <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left"  />
                              <RowStyle BackColor="White" ForeColor="#003399" />
                              <ItemTemplate>
+                    <div class="formviewdiv">
                     <asp:Panel CssClass="form_field_panel_squished" ID="Panel1" GroupingText="Dates" runat="server">
                         <table width="100%" cellpadding="4"  cellspacing="4" border="0">
                             <tr valign="middle">
@@ -264,6 +265,7 @@
                                     </asp:Panel>
                         <center><asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" 
                                 CommandName="New" Text="New Letter" /></center>
+                    </div>
                     </ItemTemplate>
             </asp:FormView>
            
@@ -272,7 +274,7 @@
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
 
-            <ajaxToolkit:TabPanel runat="server"  ID="tabPanel1" HeaderText="Compliance Letter (Scrolling)">
+            <ajaxToolkit:TabPanel runat="server"  ID="tabPanelComplanceLetterDataScrolling" HeaderText="Compliance Letter (Scrolling)">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1" runat="server">
                     <ContentTemplate>
