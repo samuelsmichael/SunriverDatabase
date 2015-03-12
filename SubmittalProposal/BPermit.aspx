@@ -56,18 +56,18 @@
                     SelectText="Select"  ShowSelectButton="true" />
             <asp:BoundField DataField="Lot" HeaderText="Lot" SortExpression="Lot" />
             <asp:BoundField DataField="Lane" HeaderText="Lane" SortExpression="Lane" />
-            <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" 
-                SortExpression="SubmittalId" />
+            <asp:BoundField DataField="fkSubmittalID_PD" HeaderText="Submittal Id" 
+                SortExpression="fkSubmittalID_PD" />
             <asp:BoundField DataField="BPermitId" HeaderText="BPermitId" 
                 SortExpression="BPermitId" />
-            <asp:BoundField DataField="BPIssueDate" HeaderText="Issue Date" SortExpression="BPIssueDate" />
+            <asp:BoundField DataField="BPIssueDate" DataFormatString="MM/dd/yyyy" HeaderText="Issue Date" SortExpression="BPIssueDate" />
             <asp:TemplateField HeaderText="Expires" SortExpression="BPExpires">
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPExpires") %>' 
-                        ForeColor='<%# getForeColorForExpireDate(Eval("BPermitId"),Eval("BPIssueDate")) %>'></asp:Label>
+                        ForeColor='<%# getForeColorForExpireDate(Eval("BPExpires")) %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="BPClosed" HeaderText="Closed" SortExpression="BPClosed" />
+            <asp:BoundField DataField="BPClosed" DataFormatString="MM/dd/yyyy" HeaderText="Closed" SortExpression="BPClosed" />
             <asp:BoundField DataField="BPDelay" HeaderText="Delay" SortExpression="BPDelay" />
             <asp:BoundField DataField="OwnersName" HeaderText="Owner's Name" 
                 SortExpression="OwnersName" />
@@ -285,9 +285,9 @@
                         <Columns>
                             <asp:CommandField ButtonType="Link" ShowEditButton="true" />
                             <asp:BoundField DataField="BPRevw" HeaderText="Nbr" />
-                            <asp:BoundField DataField="BP1stInspect" HeaderText="1st Inspect" />
-                            <asp:BoundField DataField="BPRActionDate" HeaderText="Action " />
-                            <asp:BoundField DataField="BPRLetterDate" HeaderText="Letter" />
+                            <asp:BoundField DataField="BPReviewDate" DataFormatString="MM/dd/yyyy" HeaderText="1st Inspect" />
+                            <asp:BoundField DataField="BPRActionDate" DataFormatString="MM/dd/yyyy" HeaderText="Action " />
+                            <asp:BoundField DataField="BPRLetterDate" DataFormatString="MM/dd/yyyy" HeaderText="Letter" />
                             <asp:BoundField DataField="BPRLetterRef" HeaderText="Letter Ref" />
                             <asp:BoundField DataField="BPRComments" HeaderText="Comments" />
                         </Columns>

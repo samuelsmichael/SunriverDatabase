@@ -18,8 +18,9 @@ namespace SubmittalProposal {
             MemoryCache cache=MemoryCache.Default;
             string key = "CRDS";
             ds = (DataSet)cache[key];
-            if (ds == null) {            
-                ds = Utils.getDataSetFromQuery("Select * from tblComplianceReview;select * from tblComplianceLetterData;", System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            if (ds == null) {
+                SqlCommand cmd = new SqlCommand("uspComplianceReviewTablesGet");
+                ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
                 ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["crReviewID"] };
                 ds.Tables[1].PrimaryKey = new DataColumn[] { ds.Tables[1].Columns["crLTID"] };
                 CacheItemPolicy policy = new CacheItemPolicy();

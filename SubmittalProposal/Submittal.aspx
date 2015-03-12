@@ -112,7 +112,7 @@
                 <Columns>
                     <asp:CommandField ButtonType="Link"
                          SelectText="Select"  ShowSelectButton="true" />
-                    <asp:BoundField DataField="OwnersName" HeaderText="Owner's Name" 
+                    <asp:BoundField DataField="Own_Name" HeaderText="Owner's Name" 
                         SortExpression="OwnersName" />
                     <asp:BoundField DataField="Applicant" HeaderText="Applicant" 
                         SortExpression="Applicant" />

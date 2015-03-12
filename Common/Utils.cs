@@ -206,6 +206,17 @@ namespace Common {
             return ObjectToDecimal(obj);
         }
 
+        public static int? ObjectToIntNullable(Object obj) {
+            if (obj == null || obj is DBNull || (obj is string && ((string)obj).Trim().Length == 0)) {
+                return null;
+            } else {
+                try {
+                    return Convert.ToInt32(obj);
+                } catch {
+                    return null;
+                }
+            }
+        }
         public static int ObjectToIntNULLINTIfNull(object obj) {
             if (obj == null || obj is DBNull) {
                 return NULL_INT;

@@ -61,8 +61,8 @@
         <Columns>
             <asp:CommandField ButtonType="Link"
                     SelectText="Select"  ShowSelectButton="true" />
-            <asp:BoundField DataField="OwnersName" HeaderText="Owner's Name" 
-                SortExpression="OwnersName" />
+            <asp:BoundField DataField="Own_Name" HeaderText="Owner's Name" 
+                SortExpression="Own_Name" />
             <asp:BoundField DataField="Applicant" HeaderText="Applicant" 
                 SortExpression="Applicant" />
             <asp:BoundField DataField="Lot" HeaderText="Lot" SortExpression="Lot" />
@@ -72,14 +72,14 @@
                 SortExpression="Village" />
             <asp:BoundField DataField="ProjectType" HeaderText="Project Type" 
                 SortExpression="ProjectType" />
-            <asp:BoundField DataField="MeetingDate" HeaderText="Meeting Date" 
-                SortExpression="MeetingDate" />
-            <asp:BoundField DataField="ExpDate" HeaderText="Exp Date" 
-                SortExpression="ExpDate" />
+            <asp:BoundField DataField="Mtg_Date" DataFormatString="MM/dd/yyyy" HeaderText="Meeting Date" 
+                SortExpression="Mtg_Date" />
+            <asp:BoundField DataField="App_Exp_Dt" DataFormatString="MM/dd/yyyy" HeaderText="Exp Date" 
+                SortExpression="App_Exp_Dt" />
             <asp:BoundField DataField="Project" HeaderText="Project" 
                 SortExpression="Project" />
-            <asp:BoundField DataField="Decision" HeaderText="Descision" 
-                SortExpression="Descision" />
+            <asp:BoundField DataField="ProjectDescision" HeaderText="Descision" 
+                SortExpression="ProjectDescision" />
             <asp:BoundField DataField="Contractor" HeaderText="Contractor" 
                 SortExpression="Contractor" />
             <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" 
