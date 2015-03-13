@@ -2,37 +2,28 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
                 <td>
                     <asp:Label ID="Label18" runat="server" Text="Owner"></asp:Label>
-                    <asp:TextBox ID="tbOwner" Width="100" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbOwner" Width="90" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="Label19" runat="server" Text="Applicant"></asp:Label>
-                    <asp:TextBox ID="tbApplicant" Width="100" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbApplicant" Width="90" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
-                    <asp:TextBox ID="tbLot" Width="30" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbLot" Width="20" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="Label21" runat="server" Text="Lane"></asp:Label>
-                    <asp:DropDownList ID="ddlLane" runat="server">
-                        <asp:ListItem>Choose lane</asp:ListItem>
-                        <asp:ListItem>Sage Springs</asp:ListItem>
-                        <asp:ListItem>Salishan</asp:ListItem>
-                        <asp:ListItem>Sandhill</asp:ListItem>
-                        <asp:ListItem>Sandtrap</asp:ListItem>
-                        <asp:ListItem>Sarazen</asp:ListItem>
-                        <asp:ListItem>Sequoia</asp:ListItem>
-                        <asp:ListItem>Shadow</asp:ListItem>
-                        <asp:ListItem>Shag Bark</asp:ListItem>
+                    <asp:DropDownList ID="ddlLane" runat="server" DataTextField="Lane" DataValueField="Lane">
                     </asp:DropDownList>
                 </td>
                 <td>
                     <asp:Label ID="Label22" runat="server" Text="Submittal Id"></asp:Label>
-                    <asp:TextBox ID="tbSubmittalId" Width="66" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbSubmittalId" Width="46" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="Label23" runat="server" Text="BPermit Id"></asp:Label>
-                    <asp:TextBox ID="tbBPermitId" Width="66" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbBPermitId" Width="46" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="Label6" runat="server" Text="Delay"></asp:Label>
@@ -41,12 +32,16 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
-    <asp:GridView AllowSorting="True" ID="gvResults" 
+    <asp:GridView AllowSorting="True" ID="gvResults"  AllowPaging="true" 
+        onselectedindexchanged="gvResults_SelectedIndexChanged"
         style="width:100%; white-space:nowrap;" runat="server" AutoGenerateColumns="False" 
-        CellPadding="4" ForeColor="#333333" GridLines="None" 
-        onselectedindexchanged="gvResults_SelectedIndexChanged" 
-        onsorting="gvResults_Sorting"
+        CellPadding="4" ForeColor="#333333" GridLines="None"          
+        onsorting="gvResults_Sorting" onpageindexchanging="gvResults_PageIndexChanging" PageSize="15"
     >
+        <pagersettings mode="NumericFirstLast"  FirstPageText="<<" LastPageText=">>"
+          position="Bottom"             
+          pagebuttoncount="15"/>
+
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
             <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
@@ -56,18 +51,18 @@
                     SelectText="Select"  ShowSelectButton="true" />
             <asp:BoundField DataField="Lot" HeaderText="Lot" SortExpression="Lot" />
             <asp:BoundField DataField="Lane" HeaderText="Lane" SortExpression="Lane" />
-            <asp:BoundField DataField="fkSubmittalID_PD" HeaderText="Submittal Id" 
-                SortExpression="fkSubmittalID_PD" />
+            <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" 
+                SortExpression="SubmittalId" />
             <asp:BoundField DataField="BPermitId" HeaderText="BPermitId" 
                 SortExpression="BPermitId" />
-            <asp:BoundField DataField="BPIssueDate" DataFormatString="MM/dd/yyyy" HeaderText="Issue Date" SortExpression="BPIssueDate" />
+            <asp:BoundField DataField="BPIssueDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Issue Date" SortExpression="BPIssueDate" />
             <asp:TemplateField HeaderText="Expires" SortExpression="BPExpires">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPExpires") %>' 
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPExpires","{0:MM/dd/yyyy}") %>' 
                         ForeColor='<%# getForeColorForExpireDate(Eval("BPExpires")) %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="BPClosed" DataFormatString="MM/dd/yyyy" HeaderText="Closed" SortExpression="BPClosed" />
+            <asp:BoundField DataField="BPClosed" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Closed" SortExpression="BPClosed" />
             <asp:BoundField DataField="BPDelay" HeaderText="Delay" SortExpression="BPDelay" />
             <asp:BoundField DataField="OwnersName" HeaderText="Owner's Name" 
                 SortExpression="OwnersName" />
@@ -148,18 +143,7 @@
                     <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Lane"></asp:Label>   
                 </td>
                 <td>
-                    <asp:DropDownList  CssClass="form_field" ID="ddlLane2" runat="server">
-                        <asp:ListItem Value="" Text=""></asp:ListItem>
-                        <asp:ListItem>Sage Springs</asp:ListItem>
-                        <asp:ListItem>Salishan</asp:ListItem>
-                        <asp:ListItem>Sandhill</asp:ListItem>
-                        <asp:ListItem>Sandtrap</asp:ListItem>
-                        <asp:ListItem>Sarazen</asp:ListItem>
-                        <asp:ListItem>Sequoia</asp:ListItem>
-                        <asp:ListItem>Shadow</asp:ListItem>
-                        <asp:ListItem>Shag Bark</asp:ListItem>
-                        <asp:ListItem>Squirrel</asp:ListItem>
-                        <asp:ListItem>Tumalo</asp:ListItem>
+                    <asp:DropDownList  CssClass="form_field" ID="ddlLane2" runat="server"  DataTextField="Lane" DataValueField="Lane">
                     </asp:DropDownList>
                 </td>
                 <td>
@@ -210,9 +194,9 @@
     </asp:Panel>
     <table width="100%">
         <tr>
-            <td>
+            <td width="250px">
                 <asp:Panel runat="server" ID="pnlPayments" GroupingText="Payments">
-                    <asp:GridView ID="gvPayments" runat="server" AutoGenerateColumns="False" 
+                    <asp:GridView Width="100%" ID="gvPayments" runat="server" AutoGenerateColumns="False" 
                         CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <EditRowStyle BackColor="#999999" />
@@ -233,13 +217,13 @@
                             <asp:BoundField DataField="BPPmt" HeaderText="Nbr" />
                             <asp:TemplateField HeaderText="Fee">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("[BPFee$]") %>'></asp:TextBox>
+                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("BPFee$","{0:c}") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("[BPFee$]") %>'></asp:Label>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPFee$","{0:c}") %>'></asp:Label>
                                 </ItemTemplate>
                                 <FooterTemplate>
-                                    <%# getBPFeeTotal() %>
+                                     <asp:Label ID="Label1" runat="server" Text='<%# getBPFeeTotal() %>'></asp:Label>
                                 </FooterTemplate>
                                 <FooterStyle HorizontalAlign="Right" />
                                 <ItemStyle HorizontalAlign="Right" />
@@ -252,7 +236,7 @@
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("BPMonths") %>'></asp:Label>
                                 </ItemTemplate>
                                 <FooterTemplate>
-                                    <%# getBPMonthsTotal() %>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# getBPMonthsTotal() %>'></asp:Label>
                                 </FooterTemplate>
                                 <FooterStyle HorizontalAlign="Right" />
                                 <ItemStyle HorizontalAlign="Right" />
@@ -266,7 +250,7 @@
             </td>
             <td>
                 <asp:Panel runat="server" ID="pnlReviews" GroupingText="Reviews">
-                    <asp:GridView ID="gvReviews" runat="server" AutoGenerateColumns="False" 
+                    <asp:GridView ID="gvReviews" Width="100%" runat="server" AutoGenerateColumns="False" 
                         CellPadding="4" ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <EditRowStyle BackColor="#999999" />
@@ -285,9 +269,9 @@
                         <Columns>
                             <asp:CommandField ButtonType="Link" ShowEditButton="true" />
                             <asp:BoundField DataField="BPRevw" HeaderText="Nbr" />
-                            <asp:BoundField DataField="BPReviewDate" DataFormatString="MM/dd/yyyy" HeaderText="1st Inspect" />
-                            <asp:BoundField DataField="BPRActionDate" DataFormatString="MM/dd/yyyy" HeaderText="Action " />
-                            <asp:BoundField DataField="BPRLetterDate" DataFormatString="MM/dd/yyyy" HeaderText="Letter" />
+                            <asp:BoundField DataField="BPReviewDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="1st Inspect" />
+                            <asp:BoundField DataField="BPRActionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Action " />
+                            <asp:BoundField DataField="BPRLetterDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Letter" />
                             <asp:BoundField DataField="BPRLetterRef" HeaderText="Letter Ref" />
                             <asp:BoundField DataField="BPRComments" HeaderText="Comments" />
                         </Columns>

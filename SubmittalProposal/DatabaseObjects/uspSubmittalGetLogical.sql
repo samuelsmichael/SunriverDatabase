@@ -6,6 +6,9 @@ GO
 -- Author:		Mike Samuels
 -- Create date: 3/11/2015
 -- Description:	Access Logical Submittals (includes SubmittalId)
+/*
+	exec uspSubmittalsGetLogical
+*/
 -- =============================================
 ALTER PROCEDURE uspSubmittalsGetLogical 
 

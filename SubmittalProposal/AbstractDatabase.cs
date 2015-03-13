@@ -53,6 +53,19 @@ namespace SubmittalProposal {
             }
             filteredData = tblFiltered;
         }
+        protected void gvResults_PageIndexChanging(object sender, GridViewPageEventArgs e) {
+            getGridViewResults().PageIndex = e.NewPageIndex;
+            string searchCriteria;
+            DataTable filteredData;
+            database_SearchButtonPressed(out searchCriteria, out filteredData);
+            if (ViewState["sortExpression"] != null) {
+                DataView dv = filteredData.AsDataView();
+                dv.Sort = (string)ViewState["sortExpression"];
+                filteredData = dv.ToTable();
+            }
+            getGridViewResults().DataSource = filteredData;
+            getGridViewResults().DataBind();
+        }
         protected void gvResults_Sorting(object sender, GridViewSortEventArgs e) {
             DataTable sourceTable=null;
             string dummySearchCriteria=null;

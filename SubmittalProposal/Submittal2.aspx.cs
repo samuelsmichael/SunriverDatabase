@@ -89,7 +89,7 @@ namespace SubmittalProposal
             return Convert.ToInt32(dr.Cells[13].Text);
         }
         private string getOwner(DataRow dr) {
-            return (string)dr["Own_Name"];
+            return Utils.ObjectToString(dr["Own_Name"]);
         }
         private DateTime? getMeetingDate(DataRow dr) {
             return Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
@@ -98,7 +98,7 @@ namespace SubmittalProposal
             return Utils.ObjectToIntNullable(dr["BPermitId"]);
         }
         private string getLotLane(DataRow dr) {
-            return ((string)dr["Lot"]) + "\\" + (string)dr["Lane"];
+            return (Utils.ObjectToString(dr["Lot"])) + "\\" + Utils.ObjectToString(dr["Lane"]);
         }
 
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
@@ -111,19 +111,25 @@ namespace SubmittalProposal
             view.RowFilter = "SubmittalId=" + getSubmittalId(row);
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
-            tbConditions.Text = (string)dr["Conditions"];
-            tbOwnersName.Text = (string)dr["Own_Name"];
-            tbLotName2.Text = (string)dr["Lot"];
-            ddlLane2.SelectedValue = (string)dr["Lane"];
-            tbApplicantName2.Text = (string)dr["Applicant"];
-            tbContractorBB.Text = (string)dr["Contractor"];
+            tbConditions.Text = Utils.ObjectToString(dr["Conditions"]);
+            tbOwnersName.Text = Utils.ObjectToString(dr["Own_Name"]);
+            tbLotName2.Text = Utils.ObjectToString(dr["Lot"]);
+            if(ddlLane2.Items.FindByText(Utils.ObjectToString(dr["Lane"]))==null) {
+                ddlLane2.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]),Utils.ObjectToString(dr["Lane"])));
+            }
+            ddlLane2.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            tbApplicantName2.Text = Utils.ObjectToString(dr["Applicant"]);
+            tbContractorBB.Text = Utils.ObjectToString(dr["Contractor"]);
             DateTime? meetingDate = Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
             tbMeetingDate.Text = meetingDate.HasValue?meetingDate.Value.ToString("MM/dd/yyyy"):"";
-            ddlProjectType.SelectedValue = (string)dr["ProjectType"];
-            ddlProjectDecision.SelectedValue = (string)dr["ProjectDecision"];
-            tbProject.Text = (string)dr["Project"];
-            tbSubmittal.Text = (string)dr["Submittal"];
-            cbIsCommercial.Checked=((string)dr["IsCommercial"])=="true"?true:false;
+            ddlProjectType.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
+            if (ddlProjectDecision.Items.FindByText(Utils.ObjectToString(dr["ProjectDecision"])) == null) {
+                ddlProjectDecision.Items.Add(new ListItem(Utils.ObjectToString(dr["ProjectDecision"]), Utils.ObjectToString(dr["ProjectDecision"])));
+            }
+            ddlProjectDecision.SelectedValue = Utils.ObjectToString(dr["ProjectDecision"]);
+            tbProject.Text = Utils.ObjectToString(dr["Project"]);
+            tbSubmittal.Text = Utils.ObjectToString(dr["Submittal"]);
+            cbIsCommercial.Checked=Convert.ToBoolean(dr["IsCommercial"]);
             int? permitid = getBPermitId(dr);
             CurrentBPermitId =permitid.HasValue? Convert.ToString(permitid.Value):"";
             
@@ -132,8 +138,10 @@ namespace SubmittalProposal
         string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
-                getGridViewResults().DataSource = buildDataSet();
-                getGridViewResults().DataBind();
+                ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane.DataBind();
+                ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane2.DataBind();
             }
         }
         protected override DataTable getGridViewDataTable() {
@@ -143,5 +151,7 @@ namespace SubmittalProposal
         protected void lbGoToPermit_Click(object sender, EventArgs e) {
             Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId);
         }
+
+
     }
 }

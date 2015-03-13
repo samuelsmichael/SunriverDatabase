@@ -22,35 +22,24 @@ namespace SubmittalProposal {
                 SqlCommand cmd = new SqlCommand("uspBPermitTablesGet");
                 ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
                 ds.Tables[0].TableName = "BPData";
-                ds.Tables[0].Columns.Add(new DataColumn("BPExpires", typeof(DateTime?)));
                 ds.Tables[1].TableName = "BPPayment";
+                dtBPayment = ds.Tables[1];
                 ds.Tables[2].TableName = "BPReviews";
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, ds, policy);
             }
-            //compute expires
-            foreach (DataRow dr3 in ds.Tables[0].Rows) {
-                dr3["BPExpires"] = getExpires(dr3["BPermitId"], dr3["BPIssueDate"]);
-            }
             return ds;
         }
 
-        private static int getMonthsTotal(int bPermitId) {
-            int monthsTotal = 0;
-            DataTable sourceTablePayments = dtBPayment;
-            DataView viewPayments = new DataView(sourceTablePayments);
-            viewPayments.RowFilter = "fkBPermitID_PP=" + bPermitId;
-            DataTable tblFilteredPayments = viewPayments.ToTable();
-            monthsTotal = 0;
-            foreach (DataRow dr1 in tblFilteredPayments.Rows) {
-                try {
-                    monthsTotal += Utils.ObjectToInt(dr1["BPMonths"]);
-                } catch { }
-            }
+        decimal feeTotal = 0;
+        int monthsTotal = 0;
+        public int getBPMonthsTotal() {
             return monthsTotal;
         }
-
+        public string getBPFeeTotal() {
+            return feeTotal.ToString("c");
+        }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
@@ -58,18 +47,20 @@ namespace SubmittalProposal {
 
             DataTable sourceTablePayments = BPermitDataSet().Tables["BPPayment"];
             DataView viewPayments = new DataView(sourceTablePayments);
-            viewPayments.RowFilter = "fkBPermitID_PP =" + getBPermitId(row);
+            viewPayments.RowFilter = "BPermitID =" + getBPermitId(row);
             DataTable tblFilteredPayments = viewPayments.ToTable();
+
             feeTotal = 0;
             monthsTotal = 0;
             foreach (DataRow dr1 in tblFilteredPayments.Rows) {
                 try {
-                    feeTotal +=  Utils.ObjectToDecimal0IfNull(dr1["BPFee$"]);
+                    feeTotal += Utils.ObjectToDecimal0IfNull(dr1["BPFee$"]);
                 } catch { };
                 try {
                     monthsTotal += Utils.ObjectToInt(dr1["BPMonths"]);
                 } catch { }
             }
+
             gvPayments.DataSource = tblFilteredPayments;
             gvPayments.DataBind();
 
@@ -82,11 +73,15 @@ namespace SubmittalProposal {
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
 
-            tbDelay.Text = (string)dr["BPDelay"];
+            tbDelay.Text = Utils.ObjectToString(dr["BPDelay"]);
             DateTime? issueDate = Utils.ObjectToDateTimeNullable(dr["BPIssueDate"]);
             tbIssued.Text = issueDate.HasValue ? issueDate.Value.ToString("MM/dd/yyyy") : "";
-            DateTime? expires=(DateTime?)dr["BPExpires"];
-            lblExpired.Text = expires.HasValue?expires.Value.ToString("MM/dd/yyyy"):"";
+            Object expires=dr["BPExpires"];
+            if (expires is DBNull) {
+                lblExpired.Text = "";
+            } else {
+                lblExpired.Text = Utils.ObjectToDateTime(expires).ToString("MM/dd/yyyy");
+            }
             lblExpired.BackColor = System.Drawing.Color.FromName("White");
             lblExpired.ForeColor = System.Drawing.Color.FromName("Black");
             try {
@@ -102,13 +97,16 @@ namespace SubmittalProposal {
             } else {
                 rbListPermitRequired.SelectedValue = "No";
             }
-            tbApplicantName2.Text = (string)dr["Applicant"];
-            tbOwnersName.Text=(string)dr["OwnersName"];
-            tbContractorBB.Text = (string)dr["Contractor"];
-            ddlProjectType.SelectedValue = (string)dr["ProjectType"];
-            tbProject.Text = (string)dr["Project"];
-            tbLotName2.Text = (string)dr["Lot"];
-            ddlLane2.SelectedValue = (string)dr["Lane"];
+            tbApplicantName2.Text = Utils.ObjectToString(dr["Applicant"]);
+            tbOwnersName.Text=Utils.ObjectToString(dr["OwnersName"]);
+            tbContractorBB.Text = Utils.ObjectToString(dr["Contractor"]);
+            ddlProjectType.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
+            tbProject.Text = Utils.ObjectToString(dr["Project"]);
+            tbLotName2.Text = Utils.ObjectToString(dr["Lot"]);
+            if (ddlLane2.Items.FindByText(Utils.ObjectToString(dr["Lane"])) == null) {
+                ddlLane2.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
+            } 
+            ddlLane2.SelectedValue = Utils.ObjectToString(dr["Lane"]);
 
             DataTable sourceTableReviews = BPermitDataSet().Tables["BPReviews"];
             DataView viewReviews = new DataView(sourceTableReviews);
@@ -120,8 +118,6 @@ namespace SubmittalProposal {
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + (submittalId.HasValue?Convert.ToString(submittalId.Value):"") + "  BPermitId :" + getBPermitId(dr) + " Owner: " + getOwner(dr);
 
         }
-        decimal feeTotal = 0;
-        int monthsTotal = 0;
         public System.Drawing.Color getForeColorForExpireDate(Object BPExpiresObject) {
             string color="Black";
             try {
@@ -131,26 +127,7 @@ namespace SubmittalProposal {
             } catch {}
             return System.Drawing.Color.FromName(color);
         }
-        public static DateTime? getExpires(Object bPermitIdObject, Object BPIssueDate) {
-            int monthsTotal=getMonthsTotal((int)bPermitIdObject);
-            DateTime? expires = null;
-            if (monthsTotal > 0) {
-                try {
-                    DateTime dtIssueDate = Convert.ToDateTime(BPIssueDate);
 
-                    dtIssueDate = dtIssueDate.AddMonths(monthsTotal);
-                    expires = dtIssueDate;
-                } catch { }
-            }
-            return expires;
-        }
-
-        public int getBPMonthsTotal() {
-            return monthsTotal;
-        }
-        public string getBPFeeTotal() {
-            return feeTotal.ToString("c");
-        }
         private int? getSubmittalId(DataRow dr) {
             return Utils.ObjectToIntNullable(dr["fkSubmittalID_PD"]);
         }
@@ -158,10 +135,10 @@ namespace SubmittalProposal {
             return (int)dr["fkBPermitID_PR"];
         }
         private string getLotLane(DataRow dr) {
-            return ((string)dr["Lot"]) + "\\" + (string)dr["Lane"];
+            return Utils.ObjectToString(dr["Lot"]) + "\\" + Utils.ObjectToString(dr["Lane"]);
         }
         private string getOwner(DataRow dr) {
-            return (string)dr["OwnersName"];
+            return Utils.ObjectToString(dr["OwnersName"]);
         }
         private int getBPermitId(GridViewRow dr) {
             return Convert.ToInt32(dr.Cells[4].Text);
@@ -230,49 +207,30 @@ namespace SubmittalProposal {
             string gotoBPermitId=null;
             if (!IsPostBack) {
                 gotoBPermitId = Request.QueryString["BPermitId"];
+                ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane.DataBind();
+                ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane2.DataBind();
             }
             if (Common.Utils.isNothingNot(gotoBPermitId)) {
                 tbBPermitId.Text = Request.QueryString["BPermitId"];
                 ((Database)Master).doGo();
                 gvResults.SelectRow(0);
-            } else {                
-                getGridViewResults().DataSource = getGridViewDataTable();
-                getGridViewResults().DataBind();
             }
         }
         protected override DataTable getGridViewDataTable() {
-            DataTable bPData = BPermitDataSet().Tables["BPData"];
-            DataTable submittals = Submittal2.SunriverDataSet().Tables["Submittals"];
-
-            var query = 
-                from p in bPData.AsEnumerable()
-                join s in submittals.AsEnumerable()
-                on p.Field<int>("fkSubmittalID_PD") equals
-                    s.Field<int>("SubmittalId")
-                select new {
-                    BPermitId =
-                        p.Field<int>("BPermitId"),
-                    SubmittalId =
-                        p.Field<int>("fkSubmittalID_PD"),
-                    PermitId =
-                        p.Field<int>("BPermitId"),
-                    Lot =
-                        s.Field<string>("Lot"),
-                    Lane =
-                        s.Field<string>("Lane"),
-                    BPIssueDate = p.Field<DateTime>("BPIssueDate"),
-                    BPExpires=p.Field<DateTime?>("BPExpires"),
-                    BPClosed=p.Field<DateTime>("BPClosed"),
-                    OwnersName = s.Field<string>("OwnersName"),
-                    Applicant = s.Field<string>("Applicant"),
-                    Contractor = s.Field<string>("Contractor"),
-                    BPermitReqd = p.Field<bool>("BPermitReqd"),
-                    ProjectType=s.Field<string>("ProjectType"),
-                    Project=s.Field<string>("Project"),
-                    BPDelay=p.Field<string>("BPDelay")
-                };
-
-            return query.CopyToDataTable() ;
+            DataSet ds = null;
+            MemoryCache cache = MemoryCache.Default;
+            string key = "BPermitDSGridView";
+            ds = (DataSet)cache[key];
+            if (ds == null) {
+                SqlCommand cmd = new SqlCommand("uspBPermitDataGridViewDataGet");
+                ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(0, 60, 0);
+                cache.Add(key, ds, policy);
+            }
+            return ds.Tables[0];
         }
     }
     public static class CustomLINQtoDataSetMethods {

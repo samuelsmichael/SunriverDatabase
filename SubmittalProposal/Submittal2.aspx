@@ -4,11 +4,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Owner"></asp:Label>
-                    <asp:TextBox CssClass="form_field" ID="tbOwner" Width="100" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" ID="tbOwner" Width="90" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Applicant"></asp:Label>
-                    <asp:TextBox CssClass="form_field" ID="tbApplicant" Width="100" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" ID="tbApplicant" Width="90" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label20" runat="server" Text="Lot"></asp:Label>
@@ -16,17 +16,8 @@
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="Lane"></asp:Label>
-                    <asp:DropDownList CssClass="form_field" ID="ddlLane" runat="server">
-                        <asp:ListItem Text="" Value="Choose lane"></asp:ListItem>
-                        <asp:ListItem>Sage Springs</asp:ListItem>
-                        <asp:ListItem>Salishan</asp:ListItem>
-                        <asp:ListItem>Sandhill</asp:ListItem>
-                        <asp:ListItem>Sandtrap</asp:ListItem>
-                        <asp:ListItem>Sarazen</asp:ListItem>
-                        <asp:ListItem>Sequoia</asp:ListItem>
-                        <asp:ListItem>Shadow</asp:ListItem>
-                        <asp:ListItem>Shag Bark</asp:ListItem>
-                        <asp:ListItem>Squirrel</asp:ListItem>
+                    <asp:DropDownList ID="ddlLane" CssClass="form_field" runat="server" 
+                        DataTextField="Lane" DataValueField="Lane">
                     </asp:DropDownList>
                 </td>
                 <td>
@@ -48,12 +39,16 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ResultsContent" runat="server">
-    <asp:GridView AllowSorting="True" ID="gvResults" 
+    <asp:GridView AllowSorting="True" ID="gvResults"  PageSize="15"
         style="width:100%; white-space:nowrap;" runat="server" AutoGenerateColumns="False" 
-        CellPadding="4" ForeColor="#333333" GridLines="None" 
+        CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="true"
         onselectedindexchanged="gvResults_SelectedIndexChanged" 
-        onsorting="gvResults_Sorting"
+        onsorting="gvResults_Sorting" onpageindexchanging="gvResults_PageIndexChanging"
     >
+       <pagersettings mode="NumericFirstLast"  FirstPageText="<<" LastPageText=">>"
+          position="Bottom"             
+          pagebuttoncount="10"/>
+
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
             <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
@@ -72,14 +67,14 @@
                 SortExpression="Village" />
             <asp:BoundField DataField="ProjectType" HeaderText="Project Type" 
                 SortExpression="ProjectType" />
-            <asp:BoundField DataField="Mtg_Date" DataFormatString="MM/dd/yyyy" HeaderText="Meeting Date" 
+            <asp:BoundField DataField="Mtg_Date" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Meeting Date" 
                 SortExpression="Mtg_Date" />
-            <asp:BoundField DataField="App_Exp_Dt" DataFormatString="MM/dd/yyyy" HeaderText="Exp Date" 
+            <asp:BoundField DataField="App_Exp_Dt" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Exp Date" 
                 SortExpression="App_Exp_Dt" />
             <asp:BoundField DataField="Project" HeaderText="Project" 
                 SortExpression="Project" />
-            <asp:BoundField DataField="ProjectDescision" HeaderText="Descision" 
-                SortExpression="ProjectDescision" />
+            <asp:BoundField DataField="ProjectDecision" HeaderText="Descision" 
+                SortExpression="ProjectDecision" />
             <asp:BoundField DataField="Contractor" HeaderText="Contractor" 
                 SortExpression="Contractor" />
             <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" 
@@ -121,17 +116,8 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Lot"></asp:Label>   
                                         <asp:TextBox CssClass="form_field" ID="tbLotName2" Width="22" runat="server"></asp:TextBox>
                                         <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Lane"></asp:Label>   
-                                        <asp:DropDownList CssClass="form_field" ID="ddlLane2" runat="server">
-                                            <asp:ListItem>Sage Springs</asp:ListItem>
-                                            <asp:ListItem>Salishan</asp:ListItem>
-                                            <asp:ListItem>Sandhill</asp:ListItem>
-                                            <asp:ListItem>Sandtrap</asp:ListItem>
-                                            <asp:ListItem>Sarazen</asp:ListItem>
-                                            <asp:ListItem>Sequoia</asp:ListItem>
-                                            <asp:ListItem>Shadow</asp:ListItem>
-                                            <asp:ListItem>Shag Bark</asp:ListItem>
-                                            <asp:ListItem>Squirrel</asp:ListItem>
-                                            <asp:ListItem>Tumalo</asp:ListItem>
+                                        <asp:DropDownList ID="ddlLane2"  CssClass="form_field" runat="server" 
+                                            DataTextField="Lane" DataValueField="Lane">
                                         </asp:DropDownList>
 
                                     </asp:Panel>

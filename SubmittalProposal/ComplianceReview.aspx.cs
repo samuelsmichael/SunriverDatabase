@@ -193,7 +193,6 @@ namespace SubmittalProposal {
 
             }
 
-            int x = 3;
         }
     }
 }

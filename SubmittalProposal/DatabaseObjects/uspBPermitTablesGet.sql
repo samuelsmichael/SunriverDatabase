@@ -7,14 +7,42 @@ GO
 -- Author:		Mike Samuels
 -- Create date: 3/11/2015
 -- Description:	Gets all three of the main tables in the BPPermit part of the database
+/*
+	exec uspBPermitTablesGet
+*/
 -- =============================================
 ALTER PROCEDURE uspBPermitTablesGet 
 
 AS
 BEGIN
 	SET NOCOUNT ON;
+	with p as (
 	select * from tblBPData
-	select * from tblBPPayment
-	select * from tblBPReviews
-END
+		where bpermitid in (select b.BPermitID from tblSubmittal s left outer join tblBPData b on s.SubmittalId=b.fkSubmittalID_PD)
+	), e as (
+		SELECT 
+			fkBPermitID_PP as BPermitID, sum(isnull(BPMonths,0)) as Months 
+		FROM 
+			tblBPPayments
+		GROUP BY fkBPermitID_PP
+	)
+	select p.*,e.Months,DATEADD(month,e.Months,BPIssueDate) as BPExpires 
+	from 
+ 		p inner join e on p.BPermitID=e.BPermitID;
+	with pm as (
+		select * from tblBPPayments
+			where fkbpermitid_pp in (select b.BPermitID from tblSubmittal s left outer join tblBPData b on s.SubmittalId=b.fkSubmittalID_PD)
+		),
+	f as (
+		select fkBPermitID_PP as BPermitID, sum(isnull(BPMonths,0)) as monthsTotal, sum(isnull(BPFee$,0)) as feeTotal
+		from tblBPPayments
+		Group BY fkBPermitID_PP
+	)
+	select pm.*,pm.fkBPermitID_PP as BPermitID,monthsTotal,feeTotal 
+	from
+		pm inner join f on pm.fkBPermitID_PP=f.BPermitID;
+
+	select r.*,fkBPermitID_PR as BPermitID,fkSubmittalID_PD from tblBPReviews r inner join tblBPData p on r.fkBPermitID_PR=p.BPermitId
+		where fkbpermitid_pr in (select b.BPermitID from tblSubmittal s left outer join tblBPData b on s.SubmittalId=b.fkSubmittalID_PD);
+end
 GO

@@ -29,8 +29,11 @@
         style="width:100%;" runat="server" AutoGenerateColumns="False" 
         CellPadding="4" ForeColor="#333333" GridLines="None" 
         onselectedindexchanged="gvResults_SelectedIndexChanged" 
-        onsorting="gvResults_Sorting" 
+        onsorting="gvResults_Sorting" onpageindexchanging="gvResults_PageIndexChanging" PageSize="15" AllowPaging="true"
     >
+        <pagersettings mode="NumericFirstLast"  FirstPageText="<<" LastPageText=">>"
+          position="Bottom"             
+          pagebuttoncount="15"/>
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
             <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>

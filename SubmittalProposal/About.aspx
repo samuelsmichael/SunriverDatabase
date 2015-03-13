@@ -4,10 +4,60 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <h2>
+    <h2 style="margin-bottom:8px;">
         Release notes
     </h2>
     <div style="height:350px;overflow:scroll;">
+        <ul>
+            <li style="font-weight:bold;">Version .06 </li>
+            <ul>
+                <li>Now showing data from actual databases.</li>
+            </ul>
+        </ul>
+        <ul>
+            <li style="font-weight:bold;">Version .05 </li>
+            <ul>
+                <li>Fixed a problem happening in Chrome: the Compliance Letter (paging) control was being cut-off at the bottom</li>
+            </ul>
+        </ul>
+        <ul>
+            <li style="font-weight:bold;">Version .04 </li>
+            <ul>
+                <li>Compliance Review database</li>
+                <ul>
+                    <li>Notes</li>
+                    <ul>
+                        <li>All the data in this database is included.</li>
+                        <li>There are two versions of the Compliance Letter tab.  One uses paging, one uses scrolling.  Which do you like better?  (ReviewId 144 is an example of 2 Compliance Letters)</li>
+                    </ul>
+                </ul>
+            </ul>
+        </ul>
+        <ul>
+            <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .03 </li>
+            <ul>
+                <li>Enhancements</li>
+                <ul>
+                    <li><b>Date Expired</b> is now computed (DateIssued + <i>nbr of months paid</i>).</li>
+                    <li><b>Date Expired</b> is shown in red if it's past today.</li>
+                </ul>
+            
+            </ul>
+        </ul>
+        <ul>
+            <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .02 </li>
+            <ul>
+                <li>Enhancements</li>
+                <ul>
+                    <li>Building Permit page is coded</li>
+                    <li>On the Submittal form, the submittal section is on the same tab as the Applicant information</li>
+                    <li>Added IsCommercial to Submittals database</li>
+                    <li>You can now put *blank into a search textbox, and this means: "items whose value is blank"</li>
+                    <li>On the Submittal form, there is now a link to the Permit page</li>
+                </ul>
+            
+            </ul>
+        </ul>
         <ul>
             <li style="font-weight:bold;margin-bottom:5px;">Version .01 </li>
             <ul>
@@ -33,50 +83,5 @@
                     here so that we can discuss this "Expandable Panels" paradigm. </li>
             </ul>
         
-        </ul>
-        <ul>
-            <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .02 </li>
-            <ul>
-                <li>Enhancements</li>
-                <ul>
-                    <li>Building Permit page is coded</li>
-                    <li>On the Submittal form, the submittal section is on the same tab as the Applicant information</li>
-                    <li>Added IsCommercial to Submittals database</li>
-                    <li>You can now put *blank into a search textbox, and this means: "items whose value is blank"</li>
-                    <li>On the Submittal form, there is now a link to the Permit page</li>
-                </ul>
-            
-            </ul>
-        </ul>
-        <ul>
-            <li style="font-weight:bold;margin-bottom:5px;margin-top:5px;">Version .03 </li>
-            <ul>
-                <li>Enhancements</li>
-                <ul>
-                    <li><b>Date Expired</b> is now computed (DateIssued + <i>nbr of months paid</i>).</li>
-                    <li><b>Date Expired</b> is shown in red if it's past today.</li>
-                </ul>
-            
-            </ul>
-        </ul>
-        <ul>
-            <li style="font-weight:bold;">Version .04 </li>
-            <ul>
-                <li>Compliance Review database</li>
-                <ul>
-                    <li>Notes</li>
-                    <ul>
-                        <li>All the data in this database is included.</li>
-                        <li>There are two versions of the Compliance Letter tab.  One uses paging, one uses scrolling.  Which do you like better?  (ReviewId 144 is an example of 2 Compliance Letters)</li>
-                    </ul>
-                </ul>
-            </ul>
-        </ul>
-        <ul>
-            <li style="font-weight:bold;">Version .05 </li>
-            <ul>
-                <li>Fixed a problem happening in Chrome: the Compliance Letter (paging) control was being cut-off at the bottom</li>
-            </ul>
-        </ul>
-    </div>
+        </ul>    </div>
 </asp:Content>
