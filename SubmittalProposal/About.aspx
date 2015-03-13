@@ -11,7 +11,7 @@
         <ul>
             <li style="font-weight:bold;">Version .06 </li>
             <ul>
-                <li>Now showing data from actual databases.</li>
+                <li>Now showing data from actual databases (as of mid-March).</li>
             </ul>
         </ul>
         <ul>

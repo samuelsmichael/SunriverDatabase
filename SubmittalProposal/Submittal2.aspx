@@ -47,7 +47,7 @@
     >
        <pagersettings mode="NumericFirstLast"  FirstPageText="<<" LastPageText=">>"
           position="Bottom"             
-          pagebuttoncount="10"/>
+          pagebuttoncount="15"/>
 
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
@@ -101,8 +101,7 @@
     <ajaxToolkit:TabContainer height="346" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server"  ID="tabPanelApplicantInformation" HeaderText="Applicant Infromation">
             <ContentTemplate>
-                <asp:UpdatePanel ID="updatePanel3" runat="server">
-                    <ContentTemplate>
+                <asp:UpdatePanel ID="updatePanel3" runat="server"><ContentTemplate>
                         <table width="100%" cellpadding="1" cellspacing="0">
                             <tr>
                                 <td>
@@ -216,10 +215,14 @@
                                 </td>
                             </tr>
                         </table>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </ContentTemplate>
-        </ajaxToolkit:TabPanel>
+                    
+</ContentTemplate>
+</asp:UpdatePanel>
+
+            
+</ContentTemplate>
+        
+</ajaxToolkit:TabPanel>
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelProjectConditions" HeaderText="Project Conditions">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel4" runat="server">
@@ -228,8 +231,10 @@
                             TextMode="MultiLine" Height="340px"></asp:TextBox>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </ContentTemplate>
-        </ajaxToolkit:TabPanel>
+            
+</ContentTemplate>
+        
+</ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>
     
 </asp:Content>

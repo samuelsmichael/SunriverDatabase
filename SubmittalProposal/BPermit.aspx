@@ -171,7 +171,7 @@
                     <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Project"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbProject" runat="server" Width="20em" TextMode="SingleLine" Rows="1"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" ID="tbProject" runat="server" Width="20em" TextMode="MultiLine" Rows="4"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Project Type"></asp:Label>
