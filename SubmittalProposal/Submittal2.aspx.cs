@@ -56,7 +56,7 @@ namespace SubmittalProposal
             if(Utils.isNothingNot(tbLot.Text)) {
                 sb.Append(prepend + "Lot: " + tbLot.Text);
                 prepend = "  ";
-                sbFilter.Append(and + " Lot like '*" + tbLot.Text + "*'");
+                sbFilter.Append(and + " Lot = '" + tbLot.Text+"'");
                 and = " and ";
             }
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower()!="choose lane") {
@@ -142,6 +142,18 @@ namespace SubmittalProposal
                 ddlLane.DataBind();
                 ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
                 ddlLane2.DataBind();
+                /*
+                if (!this.ClientScript.IsStartupScriptRegistered("startupBB")) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("<script type='text/javascript'>");
+                    sb.Append("Sys.Application.add_load(modalSetup);");
+                    sb.Append("function modalSetup() {");
+                    sb.Append(String.Format("var modalPopup = $find('{0}');", MPE.BehaviorID));
+                    sb.Append("modalPopup.add_shown(shown); }");
+                    sb.Append("</script>");
+                    Page.ClientScript.RegisterStartupScript(Page.GetType(), "startupBB", sb.ToString());
+                }
+                 */
             }
         }
         protected override DataTable getGridViewDataTable() {
@@ -151,7 +163,5 @@ namespace SubmittalProposal
         protected void lbGoToPermit_Click(object sender, EventArgs e) {
             Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId);
         }
-
-
     }
 }

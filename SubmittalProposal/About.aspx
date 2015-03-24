@@ -9,6 +9,12 @@
     </h2>
     <div style="height:350px;overflow:scroll;">
         <ul>
+            <li style="font-weight:bold;">Version .07 </li>
+            <ul>
+                <li>Search of lot number is no longer a "like"-type search.  Instead, it's an "exact-match"-type search.</li>
+                <li>Fixed a bug: Compliance Review wasn't coming up.</li>
+            </ul>
+        </ul>        <ul>
             <li style="font-weight:bold;">Version .06 </li>
             <ul>
                 <li>Now showing data from actual databases (as of mid-March).</li>
@@ -81,7 +87,7 @@
                 </li>
                 <li>The Form Panel will ressemble your current form. I have just thrown something together
                     here so that we can discuss this "Expandable Panels" paradigm. </li>
-            </ul>
-        
-        </ul>    </div>
+            </ul>        
+        </ul>    
+    </div>
 </asp:Content>

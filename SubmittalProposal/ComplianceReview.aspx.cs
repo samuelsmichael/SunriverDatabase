@@ -93,7 +93,7 @@ namespace SubmittalProposal {
             if (Utils.isNothingNot(tbLot.Text)) {
                 sb.Append(prepend + "Lot: " + tbLot.Text);
                 prepend = "  ";
-                sbFilter.Append(and + " crLot like '*" + tbLot.Text + "*'");
+                sbFilter.Append(and + " crLot = '" + tbLot.Text + "'");
                 and = " and ";
             }
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane") {

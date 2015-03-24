@@ -283,3 +283,7 @@
         </tr>
     </table>
 </asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <asp:LinkButton ID="lbBPermintNew" runat="server">New Building Permit</asp:LinkButton>
+<center></center>
+</asp:Content>

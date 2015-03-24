@@ -7,7 +7,7 @@ GO
 -- Create date: 3/11/2015
 -- Description:	Gets the tables of ComplianceReview
 -- =============================================
-ALTER PROCEDURE uspComplianceReviewTablesGet 
+alter PROCEDURE uspComplianceReviewTablesGet 
 AS
 BEGIN
 	SET NOCOUNT ON;
