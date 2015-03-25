@@ -142,6 +142,8 @@ namespace SubmittalProposal
                 ddlLane.DataBind();
                 ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
                 ddlLane2.DataBind();
+                ddlSubmittalNewLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlSubmittalNewLane.DataBind();
                 /*
                 if (!this.ClientScript.IsStartupScriptRegistered("startupBB")) {
                     StringBuilder sb = new StringBuilder();
@@ -162,6 +164,10 @@ namespace SubmittalProposal
 
         protected void lbGoToPermit_Click(object sender, EventArgs e) {
             Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId);
+        }
+
+        protected void btnNewSubmittalOk_Click(object sender, EventArgs e) {
+            int bkher = 3;
         }
     }
 }

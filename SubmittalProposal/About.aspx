@@ -13,6 +13,7 @@
             <ul>
                 <li>Search of lot number is no longer a "like"-type search.  Instead, it's an "exact-match"-type search.</li>
                 <li>Fixed a bug: Compliance Review wasn't coming up.</li>
+                <li>Just the first glimpse of how I propose to handle the "new item" function ... using "modal popups".  This is available on Submittals, only.</li>
             </ul>
         </ul>        <ul>
             <li style="font-weight:bold;">Version .06 </li>

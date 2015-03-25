@@ -232,6 +232,9 @@ namespace SubmittalProposal {
             }
             return ds.Tables[0];
         }
+        protected void btnNewBPermitOk_Click(object sender, EventArgs e) {
+            int bkher = 3;
+        }
     }
     public static class CustomLINQtoDataSetMethods {
         public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) {

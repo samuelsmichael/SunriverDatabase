@@ -415,3 +415,7 @@
     </ajaxToolkit:TabContainer>
 
  </asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <asp:LinkButton ID="lbComplianceReview" runat="server">New Compliance Review</asp:LinkButton>
+<center></center>
+</asp:Content>

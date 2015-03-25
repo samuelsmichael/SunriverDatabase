@@ -228,60 +228,198 @@
     </ajaxToolkit:TabContainer>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <script language="javascript" type="text/javascript">
+        function onNewSubmittalCancel() {
+            if (confirm("Are you sure that you wish to cancel?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewSubmittalId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewSubmittalTitleId">
             <span>New Submittal</span>
         </asp:Panel>
-        <asp:Panel runat="server" CssClass="newitemcontent">
-            <table>
-                <tr>
-                    <td>
-                        Name
-                    </td>
-                    <td>
-                        <asp:TextBox ID="tbName" TabIndex="1" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Address
-                    </td>
-                    <td>
-                        <asp:TextBox ID="tbAddress" TabIndex="2" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-            </table>
+        <asp:Panel runat="server" style="text-align:center;" ID="pnlNewSubmittalContent" CssClass="newitemcontent">
+            <ajaxToolkit:TabContainer  style="text-align:center;" Height="346" ActiveTabIndex="0" ID="TabContainer2" runat="server">
+                <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Applicant Infromation">
+                    <ContentTemplate>
+                        <asp:UpdatePanel ID="updatePanel1" runat="server">
+                            <ContentTemplate>
+                                <table width="100%" cellpadding="1" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <asp:Panel ID="Panel8" GroupingText="Owner" runat="server">
+                                                <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Name"></asp:Label>
+                                                <asp:TextBox CssClass="form_field" ID="tbSubmittalNewName" Width="30em" runat="server"></asp:TextBox>
+                                            </asp:Panel>
+                                        </td>
+                                        <td>
+                                            <asp:Panel ID="Panel9" GroupingText="Sunriver Property" runat="server">
+                                                <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Lot"></asp:Label>
+                                                <asp:TextBox CssClass="form_field" ID="tbSubmittalNewLot" Width="22" runat="server"></asp:TextBox>
+                                                <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Lane"></asp:Label>
+                                                <asp:DropDownList ID="ddlSubmittalNewLane" CssClass="form_field" runat="server" DataTextField="Lane"
+                                                    DataValueField="Lane">
+                                                </asp:DropDownList>
+                                            </asp:Panel>
+                                        </td>
+                                        <td>
+                                            <asp:Panel ID="Panel10" GroupingText="Applicant" runat="server">
+                                                <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="Name"></asp:Label>
+                                                <asp:TextBox CssClass="form_field" ID="TextBox3" runat="server"></asp:TextBox>
+                                            </asp:Panel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Panel ID="Panel11" GroupingText="Contractor" runat="server">
+                                                <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Name"></asp:Label>
+                                                <asp:TextBox CssClass="form_field" ID="TextBox4" Width="30em" runat="server"></asp:TextBox>
+                                            </asp:Panel>
+                                        </td>
+                                        <td>
+                                            <asp:Panel ID="Panel12" GroupingText="Project Fees" runat="server">
+                                                <table border="0" cellpadding="2" cellspacing="0">
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Review fee"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:TextBox CssClass="form_field" ID="TextBox5" runat="server"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label CssClass="form_field_heading" Style="margin-top: 3px;" ID="Label26" runat="server"
+                                                                Text="Date fee paid"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:TextBox CssClass="form_field" ID="TextBox6" runat="server"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </td>
+                                        <td>
+                                            <asp:Panel ID="Panel13" GroupingText="Meeting Date" runat="server">
+                                                <asp:TextBox CssClass="form_field" ID="TextBox7" runat="server"></asp:TextBox>
+                                            </asp:Panel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <asp:Panel ID="Panel14" GroupingText="Submittal" runat="server">
+                                                <table width="100%" border="0" cellpadding="2" cellspacing="0">
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Project Type"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList CssClass="form_field" ID="DropDownList2" runat="server">
+                                                                <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
+                                                                <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
+                                                                <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
+                                                                <asp:ListItem Value="COM">COM - Commercial Construction</asp:ListItem>
+                                                                <asp:ListItem Value="MA">MA - Minor Addition</asp:ListItem>
+                                                                <asp:ListItem Value="NEW">NEW - New Construction</asp:ListItem>
+                                                                <asp:ListItem Value="PRE">PRE - Preliminary</asp:ListItem>
+                                                                <asp:ListItem Value="RER">RER - ReReview\Revision</asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td align="right">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label28" runat="server" Text="Project Decision"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:DropDownList CssClass="form_field" ID="DropDownList3" runat="server">
+                                                                <asp:ListItem Value="A">A - Approved</asp:ListItem>
+                                                                <asp:ListItem Value="AWC">AWC - Approved with Conditions</asp:ListItem>
+                                                                <asp:ListItem Value="DEF">DEF - Deferred</asp:ListItem>
+                                                                <asp:ListItem Value="DEN">DEN - Denied</asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td align="right">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label29" runat="server" Text="Is Commercial"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:CheckBox ID="CheckBox1" runat="server" />
+                                                        </td>
+                                                        <td width="15%" align="right">
+                                                            &nbsp;
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Project"></asp:Label>
+                                                        </td>
+                                                        <td colspan="6">
+                                                            <asp:TextBox CssClass="form_field" ID="TextBox8" Width="100%" runat="server" TextMode="SingleLine"
+                                                                Rows="1"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Submittal"></asp:Label>
+                                                        </td>
+                                                        <td colspan="6">
+                                                            <asp:TextBox CssClass="form_field" ID="TextBox9" Width="100%" runat="server" TextMode="MultiLine"
+                                                                Rows="4"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+                <ajaxToolkit:TabPanel Width="900px"  runat="server" ID="tabPanel2" HeaderText="Project Conditions">
+                    <ContentTemplate>
+                        <asp:UpdatePanel ID="updatePanel2" runat="server">
+                            <ContentTemplate>
+                                <asp:TextBox ID="TextBox10" Style="width: 100%;" runat="server" TextMode="MultiLine"
+                                    Height="340px"></asp:TextBox>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+            </ajaxToolkit:TabContainer>
         </asp:Panel>
         <table width="100%">
             <tr>
                 <td>
-                    <asp:Button ID="btnNewSubmittalOk" TabIndex="3" runat="server" Text="Okay" />
+                    <asp:Button ID="btnNewSubmittalOk" runat="server" Text="Okay" 
+                        onclick="btnNewSubmittalOk_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="btnNewSubmittalCancel" TabIndex="4" runat="server" Text="Cancel" />
+                    <asp:Button ID="btnNewSubmittalCancel" OnClientClick="return onNewSubmittalCancel()" runat="server" Text="Cancel" />
                 </td>
             </tr>
         </table>
     </asp:Panel>
-    <asp:LinkButton ID="lbSubmittalNew"  runat="server">New Submittal</asp:LinkButton>
-    <ajaxToolkit:ModalPopupExtender ID="MPE" runat="server" TargetControlID="lbSubmittalNew"
-        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground" OkControlID="btnNewSubmittalOk"
-        CancelControlID="btnNewSubmittalCancel" PopupDragHandleControlID="pnlNewSubmittalTitleId"
-        BehaviorID="jdpopup" />
+    <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
+
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewSubmittal" runat="server" TargetControlID="lbSubmittalNew"
+        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground"
+        PopupDragHandleControlID="pnlNewSubmittalTitleId"
+        BehaviorID="jdpopupsubmittal" />
     <script language="javascript" type="text/javascript">
         function shown() {
-            var tb = document.getElementById('<% =tbName.ClientID %>');
+            var tb = document.getElementById('<% =tbSubmittalNewName.ClientID %>');
             tb.focus();
         }
         function pageLoad() {
             $addHandler(document, "keydown", OnKeyPress);
-            var ddd = $find('jdpopup');
+            var ddd = $find('jdpopupsubmittal');
             ddd.add_shown(shown);
         }
 
         function OnKeyPress(args) {
             if (args.keyCode == Sys.UI.Key.esc) {
-                $find("jdpopup").hide();
+// I don't know about this                $find("jdpopup").hide();
             }
         }
     </script>

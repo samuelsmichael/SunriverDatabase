@@ -20,7 +20,9 @@ border: thin solid #000000;
 }
 .newitemtitle 
 {
-    background-color:Gray; color:White; width:100%; text-align:center;
+    color:White; width:100%; text-align:center;
+    margin-bottom:.5em;background-color:#3a4f63;
+    cursor:move;
 }
 .newitemcontent 
 {
