@@ -40,6 +40,12 @@
     <Reference Include="AjaxMin">
       <HintPath>..\packages\AjaxMin.4.97.4951.28483\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -86,6 +92,8 @@
     <Content Include="BPermit.aspx" />
     <Content Include="ComplianceReview.aspx" />
     <Content Include="Images\animated_progress.gif" />
+    <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
+    <Content Include="Reports\SubmittalReports.aspx" />
     <Content Include="Submittal2.aspx" />
     <Content Include="Images\bg-menu-main.JPG" />
     <Content Include="Images\bg-menu-main.png" />
@@ -152,6 +160,36 @@
       <DependentUpon>ComplianceReview.aspx</DependentUpon>
     </Compile>
     <Compile Include="ObjectShredder.cs" />
+    <Compile Include="Reports\AbstractReport.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Reports.Master.cs">
+      <DependentUpon>Reports.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Reports.Master.designer.cs">
+      <DependentUpon>Reports.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.cs">
+      <DependentUpon>SubmittalAdministrativeApprovals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.designer.cs">
+      <DependentUpon>SubmittalAdministrativeApprovals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RptSubmittalAdministrativeApprovals.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSubmittalAdministrativeApprovals.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SubmittalReports.aspx.cs">
+      <DependentUpon>SubmittalReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SubmittalReports.aspx.designer.cs">
+      <DependentUpon>SubmittalReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Submittal2.aspx.cs">
       <DependentUpon>Submittal2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -205,7 +243,18 @@
     <Content Include="Database.master" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CrystalReport1.mht" />
+    <Content Include="Reports\Reports.Master" />
     <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\RptSubmittalAdministrativeApprovals.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSubmittalAdministrativeApprovals.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

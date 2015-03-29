@@ -293,4 +293,50 @@ namespace Common {
             }
         }
     }
+    public class ConnectionStringParser {
+        private string _Server;
+        private string _Database;
+        private string _UserId;
+        private string _Password;
+        public string Server {
+            get { return _Server; }
+        }
+        public string Database {
+            get { return _Database; }
+        }
+        public string UserId {
+            get { return _UserId; }
+        }
+        public string Password {
+            get { return _Password; }
+        }
+        public ConnectionStringParser(string connectionString) {
+            string[] level1 = connectionString.Split(new char[] { ';' });
+            foreach (string str in level1) {
+                if (str.Trim() != "") {
+                    string[] level2 = str.Split(new char[] { '=' });
+                    if (level2[0].Trim().ToLower().Equals("server")) {
+                        _Server = level2[1].Trim();
+                    }
+                    if (level2[0].Trim().ToLower().Equals("uid")) {
+                        _UserId = level2[1].Trim();
+                    }
+                    if (level2[0].Trim().ToLower().Equals("pwd")) {
+                        _Password = level2[1].Trim();
+                    }
+                    if (level2[0].Trim().ToLower().Equals("database")) {
+                        _Database = level2[1].Trim();
+                    }
+                }
+            }
+            if (
+                String.IsNullOrWhiteSpace(_Server) ||
+                String.IsNullOrWhiteSpace(_Database) ||
+                String.IsNullOrWhiteSpace(_UserId) ||
+                String.IsNullOrWhiteSpace(_Password)
+            ) {
+                throw new Exception("Unable to parse: " + connectionString);
+            }
+        }
+    }
 }

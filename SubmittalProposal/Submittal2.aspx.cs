@@ -62,7 +62,7 @@ namespace SubmittalProposal
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower()!="choose lane") {
                 sb.Append(prepend + "Lane: " + ddlLane.SelectedValue);
                 prepend = "  ";
-                sbFilter.Append(and + " Lane like '*" + ddlLane.SelectedValue + "*'");
+                sbFilter.Append(and + " Lane = '" + ddlLane.SelectedValue + "'");
                 and = " and ";
             }
             if (Utils.isNothingNot(tbSubmittalId.Text)) {

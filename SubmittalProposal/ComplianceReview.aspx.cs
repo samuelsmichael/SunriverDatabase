@@ -33,6 +33,8 @@ namespace SubmittalProposal {
             if (!IsPostBack) {
                 ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
                 ddlLane.DataBind();
+                ddlNewComplianceReviewLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlNewComplianceReviewLane.DataBind();
             }
         }
         private int getInspectionNumber(GridViewRow row) {
@@ -99,7 +101,7 @@ namespace SubmittalProposal {
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane") {
                 sb.Append(prepend + "Lane: " + ddlLane.SelectedValue);
                 prepend = "  ";
-                sbFilter.Append(and + " crLane like '*" + ddlLane.SelectedValue + "*'");
+                sbFilter.Append(and + " crLane = '" + ddlLane.SelectedValue + "'");
                 and = " and ";
             }
             if (Utils.isNothingNot(tbComments.Text)) {
@@ -132,10 +134,8 @@ namespace SubmittalProposal {
         protected override System.Data.DataTable getGridViewDataTable() {
             return CRDataSet().Tables[0];
         }
-
         protected void fvComplianceLetter_OnModeChanging(object sender, EventArgs e) {
         }
-
         protected void fvComplianceLetter_OnDataBound(object sender, EventArgs e) {
             if (fvComplianceLetter.Row != null) {
                 FormView fv = (FormView)sender;
@@ -190,8 +190,10 @@ namespace SubmittalProposal {
                         ddlCRFromTitle.SelectedValue = String.Empty;
                     }
                 }
-
             }
+        }
+
+        protected void btnNewComplianceReviewOk_Click(object sender, EventArgs e) {
 
         }
     }

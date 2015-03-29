@@ -9,13 +9,32 @@
     </h2>
     <div style="height:350px;overflow:scroll;">
         <ul>
+            <li style="font-weight:bold;">Version .08 </li>
+            <ul>
+                <li>Search of lane is no longer a "like"-type search.  Instead, it's an "exact-match"-type search.</li>
+                <li>All "new" links (e.g. - New Submittal, New Payment) now function.</li>
+                <li>Payments and Reviews grids (in Building Permit) now demonstrate the editing function.</li>
+            </ul>
+            <p>
+                This completes the "wireframes" construction.  Please note that these wireframes are for purposes
+                of defining the layout and the flow.  They do not perform database updates or changes.
+            </p>
+            <p>The steps that follow before going live are:</p>
+            <ol>                
+                <li>Perform the updating to the database</li>
+                <li>Write the reports</li>
+                <li>Incorporate Authorization/Security</li>
+            </ol>
+        </ul>        
+        <ul>
             <li style="font-weight:bold;">Version .07 </li>
             <ul>
                 <li>Search of lot number is no longer a "like"-type search.  Instead, it's an "exact-match"-type search.</li>
                 <li>Fixed a bug: Compliance Review wasn't coming up.</li>
                 <li>Just the first glimpse of how I propose to handle the "new item" function ... using "modal popups".  This is available on Submittals, only.</li>
             </ul>
-        </ul>        <ul>
+        </ul>        
+        <ul>
             <li style="font-weight:bold;">Version .06 </li>
             <ul>
                 <li>Now showing data from actual databases (as of mid-March).</li>

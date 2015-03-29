@@ -40,14 +40,19 @@ namespace SubmittalProposal {
         public string getBPFeeTotal() {
             return feeTotal.ToString("c");
         }
-        protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            GridViewRow row = gvResults.SelectedRow;
-            Object obj = row.Cells;
+        private void bind_gvReviews(int bPermitId) {
+            DataTable sourceTableReviews = BPermitDataSet().Tables["BPReviews"];
+            DataView viewReviews = new DataView(sourceTableReviews);
+            viewReviews.RowFilter = "fkBPermitID_PR=" + bPermitId;
+            DataTable tblFilteredReviews = viewReviews.ToTable();
+            gvReviews.DataSource = tblFilteredReviews;
+            gvReviews.DataBind();
 
-
+        }
+        private void bind_gvPayments(int bPermitId) {
             DataTable sourceTablePayments = BPermitDataSet().Tables["BPPayment"];
             DataView viewPayments = new DataView(sourceTablePayments);
-            viewPayments.RowFilter = "BPermitID =" + getBPermitId(row);
+            viewPayments.RowFilter = "BPermitID =" + bPermitId;
             DataTable tblFilteredPayments = viewPayments.ToTable();
 
             feeTotal = 0;
@@ -63,7 +68,21 @@ namespace SubmittalProposal {
 
             gvPayments.DataSource = tblFilteredPayments;
             gvPayments.DataBind();
-
+        }
+        private int BPermitIDBeingEdited {
+            get {
+                object obj = ViewState["BPermitIDBeingEdited"];
+                return obj == null ? 0 : (int)obj;
+            }
+            set {
+                ViewState["BPermitIDBeingEdited"] = value;
+            }
+        }
+        protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
+            GridViewRow row = gvResults.SelectedRow;
+            Object obj = row.Cells;
+            BPermitIDBeingEdited = getBPermitId(row);
+            bind_gvPayments(BPermitIDBeingEdited);
 
 
             DataTable sourceTable = getGridViewDataTable();
@@ -108,12 +127,7 @@ namespace SubmittalProposal {
             } 
             ddlLane2.SelectedValue = Utils.ObjectToString(dr["Lane"]);
 
-            DataTable sourceTableReviews = BPermitDataSet().Tables["BPReviews"];
-            DataView viewReviews = new DataView(sourceTableReviews);
-            viewReviews.RowFilter = "fkBPermitID_PR=" + getBPermitId(row);
-            DataTable tblFilteredReviews = viewReviews.ToTable();
-            gvReviews.DataSource = tblFilteredReviews;
-            gvReviews.DataBind();
+            bind_gvReviews(getBPermitId(row));
             int? submittalId = getSubmittalId(dr);
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + (submittalId.HasValue?Convert.ToString(submittalId.Value):"") + "  BPermitId :" + getBPermitId(dr) + " Owner: " + getOwner(dr);
 
@@ -169,7 +183,7 @@ namespace SubmittalProposal {
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane") {
                 sb.Append(prepend + "Lane: " + ddlLane.SelectedValue);
                 prepend = "  ";
-                sbFilter.Append(and + " Lane like '*" + ddlLane.SelectedValue + "*'");
+                sbFilter.Append(and + " Lane = '" + ddlLane.SelectedValue + "'");
                 and = " and ";
             }
             if (Utils.isNothingNot(tbSubmittalId.Text)) {
@@ -211,6 +225,9 @@ namespace SubmittalProposal {
                 ddlLane.DataBind();
                 ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
                 ddlLane2.DataBind();
+                ddlNewBPermitLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlNewBPermitLane.DataBind();
+
             }
             if (Common.Utils.isNothingNot(gotoBPermitId)) {
                 tbBPermitId.Text = Request.QueryString["BPermitId"];
@@ -234,6 +251,69 @@ namespace SubmittalProposal {
         }
         protected void btnNewBPermitOk_Click(object sender, EventArgs e) {
             int bkher = 3;
+        }
+        protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
+            int bkher = 3;
+        }
+        protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {
+        }
+
+        protected void gvPayments_RowEditing(object sender, GridViewEditEventArgs e) {
+            //Set the edit index.
+            gvPayments.EditIndex= e.NewEditIndex;
+            //Bind data to the GridView control.
+            bind_gvPayments(BPermitIDBeingEdited);
+        }
+
+        protected void gvPayments_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            //Reset the edit index.
+            gvPayments.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvPayments(BPermitIDBeingEdited);
+        }
+
+        protected void gvPayments_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+            //Retrieve the table from the session object.
+//            DataTable dt = (DataTable)Session["TaskTable"];
+
+            //Update the values.
+/*
+            GridViewRow row = gvPayments.Rows[e.RowIndex];
+            dt.Rows[row.DataItemIndex]["Id"] = ((TextBox)(row.Cells[1].Controls[0])).Text;
+            dt.Rows[row.DataItemIndex]["Description"] = ((TextBox)(row.Cells[2].Controls[0])).Text;
+            dt.Rows[row.DataItemIndex]["IsComplete"] = ((CheckBox)(row.Cells[3].Controls[0])).Checked;
+*/
+            //Reset the edit index.
+            gvPayments.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvPayments(BPermitIDBeingEdited);
+        }
+
+        protected void gvReviews_RowEditing(object sender, GridViewEditEventArgs e) {
+            gvReviews.EditIndex = e.NewEditIndex;
+            bind_gvReviews(BPermitIDBeingEdited);
+
+        }
+
+        protected void gvReviews_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+/*            //Retrieve the table from the session object.
+            //            DataTable dt = (DataTable)Session["TaskTable"];
+
+            //Update the values.
+                        GridViewRow row = gvPayments.Rows[e.RowIndex];
+                        dt.Rows[row.DataItemIndex]["Id"] = ((TextBox)(row.Cells[1].Controls[0])).Text;
+                        dt.Rows[row.DataItemIndex]["Description"] = ((TextBox)(row.Cells[2].Controls[0])).Text;
+                        dt.Rows[row.DataItemIndex]["IsComplete"] = ((CheckBox)(row.Cells[3].Controls[0])).Checked;
+            */
+            gvReviews.EditIndex = -1;
+            bind_gvReviews(BPermitIDBeingEdited);
+        }
+
+        protected void gvReviews_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            gvReviews.EditIndex = -1;
+            bind_gvReviews(BPermitIDBeingEdited);
         }
     }
     public static class CustomLINQtoDataSetMethods {

@@ -228,6 +228,15 @@
     </ajaxToolkit:TabContainer>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <script language="javascript" type="text/javascript">
+        function onNewSubmittalCancel() {
+            if (confirm("Are you sure that you wish to cancel?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewSubmittalId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewSubmittalTitleId">
             <span>New Submittal</span>
@@ -249,9 +258,9 @@
                                         <td>
                                             <asp:Panel ID="Panel9" GroupingText="Sunriver Property" runat="server">
                                                 <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Lot"></asp:Label>
-                                                <asp:TextBox CssClass="form_field" ID="TextBox2" Width="22" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form_field" ID="tbSubmittalNewLot" Width="22" runat="server"></asp:TextBox>
                                                 <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Lane"></asp:Label>
-                                                <asp:DropDownList ID="DropDownList1" CssClass="form_field" runat="server" DataTextField="Lane"
+                                                <asp:DropDownList ID="ddlSubmittalNewLane" CssClass="form_field" runat="server" DataTextField="Lane"
                                                     DataValueField="Lane">
                                                 </asp:DropDownList>
                                             </asp:Panel>
@@ -382,19 +391,21 @@
         <table width="100%">
             <tr>
                 <td>
-                    <asp:Button ID="btnNewSubmittalOk" TabIndex="3" runat="server" Text="Okay" />
+                    <asp:Button ID="btnNewSubmittalOk" runat="server" Text="Okay" 
+                        onclick="btnNewSubmittalOk_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="btnNewSubmittalCancel" TabIndex="4" runat="server" Text="Cancel" />
+                    <asp:Button ID="btnNewSubmittalCancel" OnClientClick="return onNewSubmittalCancel()" runat="server" Text="Cancel" />
                 </td>
             </tr>
         </table>
     </asp:Panel>
     <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
-    <ajaxToolkit:ModalPopupExtender ID="MPE" runat="server" TargetControlID="lbSubmittalNew"
-        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground" OkControlID="btnNewSubmittalOk"
-        CancelControlID="btnNewSubmittalCancel" PopupDragHandleControlID="pnlNewSubmittalTitleId"
-        BehaviorID="jdpopup" />
+
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewSubmittal" runat="server" TargetControlID="lbSubmittalNew"
+        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground"
+        PopupDragHandleControlID="pnlNewSubmittalTitleId"
+        BehaviorID="jdpopupsubmittal" />
     <script language="javascript" type="text/javascript">
         function shown() {
             var tb = document.getElementById('<% =tbSubmittalNewName.ClientID %>');
@@ -402,7 +413,7 @@
         }
         function pageLoad() {
             $addHandler(document, "keydown", OnKeyPress);
-            var ddd = $find('jdpopup');
+            var ddd = $find('jdpopupsubmittal');
             ddd.add_shown(shown);
         }
 
