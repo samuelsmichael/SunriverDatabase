@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Common;
 using System.Text;
 using System.Data;
+using System.Runtime.Caching;
 
 namespace SubmittalProposal {
     public abstract class AbstractDatabase : System.Web.UI.Page {
@@ -15,13 +16,37 @@ namespace SubmittalProposal {
         protected abstract GridView getGridViewResults();
         protected abstract DataSet buildDataSet();
         protected abstract DataTable getGridViewDataTable();
+        protected abstract Label getUpdateResultsLabel();
         protected abstract void childPageLoad(object sender, EventArgs e);
 
         protected void Page_Load(object sender, EventArgs e) {
             Database database = (Database)Master;
             database.SearchButtonPressed += new Database.SearchButtonPressedEventHandler(database_SearchButtonPressed);
             childPageLoad(sender, e);
+            ((MainMasterPage)Master.Master).PageImOnSinceMenuItemClickDoesntWork = GetType().Name;
+
         }
+
+        protected void performPostUpdateSuccessfulActions(string status, string cacheKey) {
+            MemoryCache.Default.Remove(cacheKey);
+            /* the following statements cause the view to be re-displayed, but with updated data */
+            ((Database)Master).doGo();
+            do_gvResults_SelectedIndexChanged();
+            getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
+            getUpdateResultsLabel().Text = status;
+            ((Database)Master).getCPEForm.Collapsed = false;
+            ((Database)Master).getCPEForm.ClientState = "false";
+            ((Database)Master).getCPEDataGrid.Collapsed = true;
+            ((Database)Master).getCPEDataGrid.ClientState = "true";
+            ((Database)Master).getPanelForm.Visible = true;
+
+        }
+        protected void performPostUpdateFailedActions(string status) {
+            getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
+            getUpdateResultsLabel().Text = status;
+        }
+
+
         protected void gvResults_SelectedIndexChanged(object sender, EventArgs e) {
             string expandedText = gvResults_DoSelectedIndexChanged(sender, e);
             ((Database)Master).getCPEForm.ExpandedText = expandedText;
@@ -31,6 +56,11 @@ namespace SubmittalProposal {
             ((Database)Master).getCPEDataGrid.Collapsed = true;
             ((Database)Master).getCPEDataGrid.ClientState = "true";
             ((Database)Master).getPanelForm.Visible = true;
+            getUpdateResultsLabel().Text = "";
+        }
+
+        public void do_gvResults_SelectedIndexChanged() {
+            gvResults_SelectedIndexChanged(null, null);
         }
 
         protected void database_SearchButtonPressed(out string searchCriteria, out DataTable filteredData) {

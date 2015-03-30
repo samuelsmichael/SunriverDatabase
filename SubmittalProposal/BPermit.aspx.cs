@@ -13,6 +13,14 @@ using System.Data.SqlClient;
 namespace SubmittalProposal {
     public partial class BPermit : AbstractDatabase {
         static DataTable dtBPayment = null;
+
+        protected override Label getUpdateResultsLabel() {
+            return lblBPermitUpdateResults;
+        }
+        protected void btnBPermitUpdate_Click(object sender, EventArgs e) {
+           
+        }
+
         public static DataSet BPermitDataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
@@ -221,11 +229,11 @@ namespace SubmittalProposal {
             string gotoBPermitId=null;
             if (!IsPostBack) {
                 gotoBPermitId = Request.QueryString["BPermitId"];
-                ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane2.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlLane2.DataBind();
-                ddlNewBPermitLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlNewBPermitLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlNewBPermitLane.DataBind();
 
             }

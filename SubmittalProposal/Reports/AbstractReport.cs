@@ -15,6 +15,7 @@ namespace SubmittalProposal.Reports {
         protected abstract void child_Page_Load(object sender, EventArgs args);
         protected abstract ReportDocument getReportDocument();
         protected abstract bool getIgnoreSubreportsWhenBuildingParameters();
+        protected abstract Hashtable getReportParams();
         private string _DatabaseName;
         private string _UserName;
         private string _Password;
@@ -23,6 +24,11 @@ namespace SubmittalProposal.Reports {
 
         protected void Page_Load(object sender, EventArgs e) {
             child_Page_Load(sender, e);
+            ((Reports)Master).getSubmitButton().Click += new EventHandler(AbstractReport_Click);
+        }
+
+        void AbstractReport_Click(object sender, EventArgs e) {
+            buildReport(getReportParams());
         }
 
         public AbstractReport() {
@@ -47,7 +53,7 @@ namespace SubmittalProposal.Reports {
                     ParameterValues currentParameterValues = new ParameterValues();
                     ParameterDiscreteValue parameterDiscreteValue = new ParameterDiscreteValue();
                     try {
-                        if (String.IsNullOrWhiteSpace((string)reportParams[pfd.Name])) {
+                        if (reportParams[pfd.Name]==null) {
                             parameterDiscreteValue.Value = String.Empty;
                         } else {
                             parameterDiscreteValue.Value = reportParams[pfd.Name];

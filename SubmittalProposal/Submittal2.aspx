@@ -81,17 +81,19 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FormContent" runat="server">
+
     <ajaxToolkit:TabContainer Height="346" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Applicant Infromation">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3" runat="server">
                     <ContentTemplate>
+
                         <table width="100%" cellpadding="1" cellspacing="0">
                             <tr>
                                 <td>
                                     <asp:Panel ID="Panel1" GroupingText="Owner" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Name"></asp:Label>
-                                        <asp:TextBox CssClass="form_field" ID="tbOwnersName" Width="30em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbOwnersNameUpdate" Width="30em" runat="server"></asp:TextBox>
                                     </asp:Panel>
                                 </td>
                                 <td>
@@ -128,6 +130,7 @@
                                                 <td>
                                                     <asp:TextBox CssClass="form_field" ID="tbReviewFee" runat="server"></asp:TextBox>
                                                 </td>
+                                                <td>&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -135,15 +138,34 @@
                                                         Text="Date fee paid"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbDateFeePaid" runat="server"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form_field" ID="tbDateFeePaidUpdate" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateFeePaid2" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceDateFeePaid2" runat="server"
+                                            TargetControlID="tbDateFeePaidUpdate"
+                                            Format="MM/dd/yyyy"
+                                            PopupButtonID="ibDateFeePaid2" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revDateFeePaid2"  Display="Dynamic" 
+                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ControlToValidate="tbDateFeePaidUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </asp:Panel>
                                 </td>
                                 <td>
                                     <asp:Panel ID="Panel6" GroupingText="Meeting Date" runat="server">
-                                        <asp:TextBox CssClass="form_field" ID="tbMeetingDate" runat="server"></asp:TextBox>
+                                        <table><tr><td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMeetingDateUpdate" runat="server"></asp:TextBox>
+                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibMeetingDateUpdate" runat="server" /></td></tr></table>
+                                    <ajaxToolkit:CalendarExtender ID="ceMeetingDateUpdate" runat="server"
+                                        TargetControlID="tbMeetingDateUpdate"
+                                        Format="MM/dd/yyyy"
+                                        PopupButtonID="ibMeetingDateUpdate" />
+                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revMeetingDateUpdate"  Display="Dynamic" 
+                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                        ControlToValidate="tbMeetingDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </asp:Panel>
                                 </td>
                             </tr>
@@ -226,6 +248,12 @@
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>
+    <center>
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true" ID="btnSubmitalUpdate" OnClick="btnSubmitalUpdate_Click" runat="server"
+            Text="Submit" />
+        <asp:Label ID="lblSubmitalUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+    </center>
+
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
@@ -289,22 +317,44 @@
                                                         <td>
                                                             <asp:TextBox CssClass="form_field" ID="TextBox5" runat="server"></asp:TextBox>
                                                         </td>
+                                                        <td>&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <asp:Label CssClass="form_field_heading" Style="margin-top: 3px;" ID="Label26" runat="server"
                                                                 Text="Date fee paid"></asp:Label>
+
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="form_field" ID="TextBox6" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="form_field" ID="tbDateFeePaidNew" runat="server"></asp:TextBox>
+
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ImageAlign="Middle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateFeePaid1" runat="server" />
                                                         </td>
                                                     </tr>
                                                 </table>
+                                                <ajaxToolkit:CalendarExtender ID="cexDateFeePaidNew" runat="server"
+                                                    TargetControlID="tbDateFeePaidNew"
+                                                    Format="MM/dd/yyyy"
+                                                    PopupButtonID="ibDateFeePaid1" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revDateFeePaid1" Display="Dynamic" 
+                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                    ControlToValidate="tbDateFeePaidNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </asp:Panel>
                                         </td>
                                         <td>
                                             <asp:Panel ID="Panel13" GroupingText="Meeting Date" runat="server">
-                                                <asp:TextBox CssClass="form_field" ID="TextBox7" runat="server"></asp:TextBox>
+                                                <table><tr><td>
+                                                <asp:TextBox CssClass="form_field" ID="tbMeetingDateAdd" runat="server"></asp:TextBox>
+                                                </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibMeetingDateAdd" runat="server" /></td></tr></table>
+                                                <ajaxToolkit:CalendarExtender ID="cbMeetingDateAdd" runat="server"
+                                                    TargetControlID="tbMeetingDateAdd"
+                                                    Format="MM/dd/yyyy"
+                                                    PopupButtonID="ibMeetingDateAdd" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revMeetingDateAdd"  Display="Dynamic" 
+                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                    ControlToValidate="tbMeetingDateAdd" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </asp:Panel>
                                         </td>
                                     </tr>
@@ -388,17 +438,19 @@
                 </ajaxToolkit:TabPanel>
             </ajaxToolkit:TabContainer>
         </asp:Panel>
-        <table width="100%">
-            <tr>
-                <td>
-                    <asp:Button ID="btnNewSubmittalOk" runat="server" Text="Okay" 
-                        onclick="btnNewSubmittalOk_Click" />
-                </td>
-                <td>
-                    <asp:Button ID="btnNewSubmittalCancel" OnClientClick="return onNewSubmittalCancel()" runat="server" Text="Cancel" />
-                </td>
-            </tr>
-        </table>
+        <center>
+            <table cellpadding="4">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnNewSubmittalOk" CausesValidation="true" runat="server" Text="Okay" 
+                            onclick="btnNewSubmittalOk_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnNewSubmittalCancel" OnClientClick="return onNewSubmittalCancel()" runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+            </table>
+        </center>
     </asp:Panel>
     <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
 

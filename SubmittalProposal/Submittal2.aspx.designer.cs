@@ -193,13 +193,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
-        /// tbOwnersName control.
+        /// tbOwnersNameUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbOwnersName;
+        protected global::System.Web.UI.WebControls.TextBox tbOwnersNameUpdate;
         
         /// <summary>
         /// Panel2 control.
@@ -337,13 +337,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
-        /// tbDateFeePaid control.
+        /// tbDateFeePaidUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbDateFeePaid;
+        protected global::System.Web.UI.WebControls.TextBox tbDateFeePaidUpdate;
+        
+        /// <summary>
+        /// ibDateFeePaid2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibDateFeePaid2;
+        
+        /// <summary>
+        /// ceDateFeePaid2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceDateFeePaid2;
+        
+        /// <summary>
+        /// revDateFeePaid2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDateFeePaid2;
         
         /// <summary>
         /// Panel6 control.
@@ -355,13 +382,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel6;
         
         /// <summary>
-        /// tbMeetingDate control.
+        /// tbMeetingDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbMeetingDate;
+        protected global::System.Web.UI.WebControls.TextBox tbMeetingDateUpdate;
+        
+        /// <summary>
+        /// ibMeetingDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibMeetingDateUpdate;
+        
+        /// <summary>
+        /// ceMeetingDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceMeetingDateUpdate;
+        
+        /// <summary>
+        /// revMeetingDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMeetingDateUpdate;
         
         /// <summary>
         /// Panel7 control.
@@ -497,6 +551,24 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbConditions;
+        
+        /// <summary>
+        /// btnSubmitalUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmitalUpdate;
+        
+        /// <summary>
+        /// lblSubmitalUpdateResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubmitalUpdateResults;
         
         /// <summary>
         /// pnlNewSubmittalId control.
@@ -715,13 +787,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label26;
         
         /// <summary>
-        /// TextBox6 control.
+        /// tbDateFeePaidNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.TextBox tbDateFeePaidNew;
+        
+        /// <summary>
+        /// ibDateFeePaid1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibDateFeePaid1;
+        
+        /// <summary>
+        /// cexDateFeePaidNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cexDateFeePaidNew;
+        
+        /// <summary>
+        /// revDateFeePaid1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDateFeePaid1;
         
         /// <summary>
         /// Panel13 control.
@@ -733,13 +832,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel13;
         
         /// <summary>
-        /// TextBox7 control.
+        /// tbMeetingDateAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.TextBox tbMeetingDateAdd;
+        
+        /// <summary>
+        /// ibMeetingDateAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibMeetingDateAdd;
+        
+        /// <summary>
+        /// cbMeetingDateAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cbMeetingDateAdd;
+        
+        /// <summary>
+        /// revMeetingDateAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMeetingDateAdd;
         
         /// <summary>
         /// Panel14 control.

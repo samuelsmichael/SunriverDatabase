@@ -29,11 +29,18 @@ namespace SubmittalProposal {
             }
             return ds;
         }
+
+        protected override Label getUpdateResultsLabel() {
+            return lblComplianceReviewUpdateResults;
+        }
+        protected void btnComplianceReviewUpdate_Click(object sender, EventArgs e) {
+            
+        }        
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
-                ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlNewComplianceReviewLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlNewComplianceReviewLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlNewComplianceReviewLane.DataBind();
             }
         }

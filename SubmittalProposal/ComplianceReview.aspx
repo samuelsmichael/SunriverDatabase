@@ -638,6 +638,11 @@
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>
+    <center>
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true" ID="btnComplianceUpdate" OnClick="btnComplianceReviewUpdate_Click" runat="server"
+            Text="Submit" />
+        <asp:Label ID="lblComplianceReviewUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+    </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
@@ -667,15 +672,15 @@
                         <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Lane"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList CssClass="form_field" ID="ddlNewComplianceReviewLane" runat="server" DataTextField="Lane"
-                            DataValueField="Lane">
+                        <asp:DropDownList CssClass="form_field" ID="ddlNewComplianceReviewLane" runat="server"
+                            DataTextField="Lane" DataValueField="Lane">
                         </asp:DropDownList>
                     </td>
                 </tr>
             </table>
         </asp:Panel>
-        <asp:Panel runat="server" Style="text-align: center;" GroupingText="Main Information" ID="pnlNewComplianceReviewContent"
-            CssClass="newitemcontent">
+        <asp:Panel runat="server" Style="text-align: center;" GroupingText="Main Information"
+            ID="pnlNewComplianceReviewContent" CssClass="newitemcontent">
             <table width="100%" cellpadding="4" cellspacing="4" border="0">
                 <tr valign="middle">
                     <td align="right">

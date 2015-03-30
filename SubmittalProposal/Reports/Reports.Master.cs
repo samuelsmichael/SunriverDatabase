@@ -13,5 +13,9 @@ namespace SubmittalProposal.Reports {
         public CrystalDecisions.Web.CrystalReportViewer getCrystalReportView() {
             return CrystalReportViewer1;
         }
+
+        public Button getSubmitButton() {
+            return btnSubmitReport;
+        }
     }
 }

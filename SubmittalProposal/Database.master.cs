@@ -22,7 +22,6 @@ namespace SubmittalProposal {
                 resultTable = null;
             }
         }
-
         protected void Page_Load(object sender, EventArgs e) {
             
         }
@@ -55,6 +54,9 @@ namespace SubmittalProposal {
         }
         public void doGo() {
             btnGo_Click(null, null);
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e) {
         }
     }
 }

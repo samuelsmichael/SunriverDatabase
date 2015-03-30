@@ -81,7 +81,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
 
-   <asp:Panel ID="Panel1" GroupingText="Building Permit Data" runat="server">
+    <asp:Panel ID="Panel1" GroupingText="Building Permit Data" runat="server">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
                 <td>

@@ -706,6 +706,24 @@ namespace SubmittalProposal {
         protected global::AjaxControlToolkit.ModalPopupExtender mpeBPermitNewReview;
         
         /// <summary>
+        /// btnBPermitUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBPermitUpdate;
+        
+        /// <summary>
+        /// lblBPermitUpdateResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBPermitUpdateResults;
+        
+        /// <summary>
         /// pnlNewBPermitId control.
         /// </summary>
         /// <remarks>

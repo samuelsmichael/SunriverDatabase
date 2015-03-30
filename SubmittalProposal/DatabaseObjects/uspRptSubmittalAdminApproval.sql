@@ -7,7 +7,7 @@ GO
 -- Create date: 3/11/2015
 -- Description:	Query for Submittal report: Admin Approval
 /*
-	exec uspRptSubmittalAdminApproval '1/1/2015', '4/1/2015', @ReportingHeading='My Report Heading'
+	exec uspRptSubmittalAdminApproval '1/9/2015', '1/9/2015', @ReportingHeading='My Report Heading'
 */
 -- =============================================
 alter PROCEDURE uspRptSubmittalAdminApproval 
@@ -35,7 +35,7 @@ BEGIN
 		qrySubmittal LEFT JOIN [tblProjectDecision{LU}] ON qrySubmittal.ProjectDecision = [tblProjectDecision{LU}].ProjectDecision
 	WHERE 
 		(((qrySubmittal.ProjectType)='AA') AND ((qrySubmittal.Mtg_Date) Between @StartDate And @EndDate))
-	ORDER BY qrySubmittal.ProjectDecision;
+	ORDER BY qrySubmittal.ProjectDecision, qrySubmittal.Lane, cast(qrySubmittal.Lot as int);
 END
 GO
 

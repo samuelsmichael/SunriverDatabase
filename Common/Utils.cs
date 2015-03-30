@@ -315,16 +315,16 @@ namespace Common {
             foreach (string str in level1) {
                 if (str.Trim() != "") {
                     string[] level2 = str.Split(new char[] { '=' });
-                    if (level2[0].Trim().ToLower().Equals("server")) {
+                    if (level2[0].Trim().Equals("Data Source")) {
                         _Server = level2[1].Trim();
                     }
-                    if (level2[0].Trim().ToLower().Equals("uid")) {
+                    if (level2[0].Trim().Equals("User ID")) {
                         _UserId = level2[1].Trim();
                     }
-                    if (level2[0].Trim().ToLower().Equals("pwd")) {
+                    if (level2[0].Trim().Equals("Password")) {
                         _Password = level2[1].Trim();
                     }
-                    if (level2[0].Trim().ToLower().Equals("database")) {
+                    if (level2[0].Trim().Equals("Initial Catalog")) {
                         _Database = level2[1].Trim();
                     }
                 }

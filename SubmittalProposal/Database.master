@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Database.master.cs"
+﻿<%@ Master Language="C#" MasterPageFile="~/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="Database.master.cs"
     Inherits="SubmittalProposal.Database" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+
             <asp:Panel ID="PnlSearchBar" runat="server" CssClass="collapsePanelHeader" Height="30px">
                 <div style="padding: 5px; cursor: pointer; vertical-align: middle;">
                     <div style="float: left;">
@@ -97,14 +98,10 @@
                     </div>
                 </div>
             </asp:Panel>
-            <asp:Panel ID="PnlFormContent" BorderWidth="0" DefaultButton="btnUpdate" runat="server">
+            <asp:Panel ID="PnlFormContent" BorderWidth="0" runat="server">
                 <asp:Panel Visible="false" runat="server" ID="pnlForm" Width="100%">
                     <asp:ContentPlaceHolder ID="FormContent" runat="server">
                     </asp:ContentPlaceHolder>
-                    <center>
-                        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" ID="btnUpdate" runat="server"
-                            Text="Submit" />
-                    </center>
                 </asp:Panel>
             </asp:Panel>
             <ajaxToolkit:CollapsiblePanelExtender ID="CPEForm" runat="server" TargetControlID="PnlFormContent"

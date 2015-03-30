@@ -7,54 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SubmittalProposal.Reports {
+namespace SubmittalProposal {
     
     
-    public partial class Reports {
+    public partial class MainMasterPage {
         
         /// <summary>
-        /// Heading control.
+        /// HeadContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Heading;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
         
         /// <summary>
-        /// pnlReport control.
+        /// NavigationMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlReport;
+        protected global::System.Web.UI.WebControls.Menu NavigationMenu;
         
         /// <summary>
-        /// ContentPlaceHolderReportParms control.
+        /// lbReports control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderReportParms;
+        protected global::System.Web.UI.WebControls.LinkButton lbReports;
         
         /// <summary>
-        /// btnSubmitReport control.
+        /// SRLot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmitReport;
+        protected global::System.Web.UI.WebControls.SqlDataSource SRLot;
         
         /// <summary>
-        /// CrystalReportViewer1 control.
+        /// SRLane control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SRLane;
+        
+        /// <summary>
+        /// MainContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }
 }

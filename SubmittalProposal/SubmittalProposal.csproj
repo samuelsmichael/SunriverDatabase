@@ -92,8 +92,8 @@
     <Content Include="BPermit.aspx" />
     <Content Include="ComplianceReview.aspx" />
     <Content Include="Images\animated_progress.gif" />
+    <Content Include="Images\Calendar_scheduleHS.png" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
-    <Content Include="Reports\SubmittalReports.aspx" />
     <Content Include="Submittal2.aspx" />
     <Content Include="Images\bg-menu-main.JPG" />
     <Content Include="Images\bg-menu-main.png" />
@@ -105,6 +105,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -159,6 +160,13 @@
     <Compile Include="ComplianceReview.aspx.designer.cs">
       <DependentUpon>ComplianceReview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MainMasterPage.master.cs">
+      <DependentUpon>MainMasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainMasterPage.master.designer.cs">
+      <DependentUpon>MainMasterPage.master</DependentUpon>
+    </Compile>
     <Compile Include="ObjectShredder.cs" />
     <Compile Include="Reports\AbstractReport.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -177,18 +185,11 @@
     <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.designer.cs">
       <DependentUpon>SubmittalAdministrativeApprovals.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\RptSubmittalAdministrativeApprovals.cs">
+    <Compile Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptSubmittalAdministrativeApprovals.rpt</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\SubmittalReports.aspx.cs">
-      <DependentUpon>SubmittalReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\SubmittalReports.aspx.designer.cs">
-      <DependentUpon>SubmittalReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Submittal2.aspx.cs">
       <DependentUpon>Submittal2.aspx</DependentUpon>
@@ -222,6 +223,13 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="SubmittalReportsMain.aspx.cs">
+      <DependentUpon>SubmittalReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubmittalReportsMain.aspx.designer.cs">
+      <DependentUpon>SubmittalReportsMain.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,10 +253,11 @@
   <ItemGroup>
     <None Include="CrystalReport1.mht" />
     <Content Include="Reports\Reports.Master" />
-    <Content Include="Web.config" />
+    <Content Include="SubmittalReportsMain.aspx" />
+    <Content Include="MainMasterPage.master" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\RptSubmittalAdministrativeApprovals.rpt">
+    <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptSubmittalAdministrativeApprovals.cs</LastGenOutput>
     </EmbeddedResource>

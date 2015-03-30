@@ -1,4 +1,4 @@
-﻿<%@ Page Title="About Us" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="About Us" Language="C#" MasterPageFile="~/MainMasterPage.master" AutoEventWireup="true"
     CodeBehind="About.aspx.cs" Inherits="SubmittalProposal.About" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -9,6 +9,8 @@
     </h2>
     <div style="height:350px;overflow:scroll;">
         <ul>
+            <li style="font-weight:bold;">Version .09 </li>
+                <ul>First Crystal Report</ul>
             <li style="font-weight:bold;">Version .08 </li>
             <ul>
                 <li>Search of lane is no longer a "like"-type search.  Instead, it's an "exact-match"-type search.</li>

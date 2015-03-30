@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Database.master.cs"
+﻿<%@ Master Language="C#" MasterPageFile="~/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="Database.master.cs"
     Inherits="SubmittalProposal.Database" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">

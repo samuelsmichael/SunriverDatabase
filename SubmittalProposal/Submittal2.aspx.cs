@@ -14,13 +14,14 @@ namespace SubmittalProposal
 {
     public partial class Submittal2 : AbstractDatabase
     {
+        private static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
          protected override GridView getGridViewResults() {
             return gvResults;
         }
          public static DataSet SunriverDataSet() {
              DataSet ds = null;
              MemoryCache cache = MemoryCache.Default;
-             string key = "SubmittalDS";
+             string key = SUBMITTAL_CACHE_KEY;
              ds = (DataSet)cache[key];
              if (ds == null) {
                  SqlCommand cmd = new SqlCommand("uspSubmittalsGetLogical");
@@ -36,6 +37,34 @@ namespace SubmittalProposal
             return SunriverDataSet();
         }
 
+        protected override Label getUpdateResultsLabel() {
+            return lblSubmitalUpdateResults;
+        }
+
+        protected void btnSubmitalUpdate_Click(object sender, EventArgs args) {
+            lblSubmitalUpdateResults.Text = "";
+            try {
+                SqlCommand cmd = new SqlCommand(
+                    "uspSubmittalUpdate"
+                );
+                cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = CurrentSubmittalId;
+                cmd.Parameters.Add("@Own_Name", SqlDbType.VarChar).Value = tbOwnersNameUpdate.Text.Trim();
+                Utils.executeNonQuery(cmd,
+                    System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Update successful", SUBMITTAL_CACHE_KEY);
+            } catch (Exception e) {
+                performPostUpdateFailedActions("Update failed. Msg: " + e.Message);
+            }
+        }
+        private int? CurrentSubmittalId {
+            get {
+                object obj = ViewState["CurrentSubmittalId"];
+                return obj == null ? null : (int?)obj;
+            }
+            set {
+                ViewState["CurrentSubmittalId"] = value;
+            }
+        }
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
@@ -86,7 +115,8 @@ namespace SubmittalProposal
             filterString = sbFilter.ToString();
         }
         private int getSubmittalId(GridViewRow dr) {
-            return Convert.ToInt32(dr.Cells[13].Text);
+            CurrentSubmittalId = Convert.ToInt32(dr.Cells[13].Text);
+            return CurrentSubmittalId.Value;
         }
         private string getOwner(DataRow dr) {
             return Utils.ObjectToString(dr["Own_Name"]);
@@ -112,7 +142,7 @@ namespace SubmittalProposal
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
             tbConditions.Text = Utils.ObjectToString(dr["Conditions"]);
-            tbOwnersName.Text = Utils.ObjectToString(dr["Own_Name"]);
+            tbOwnersNameUpdate.Text = Utils.ObjectToString(dr["Own_Name"]);
             tbLotName2.Text = Utils.ObjectToString(dr["Lot"]);
             if(ddlLane2.Items.FindByText(Utils.ObjectToString(dr["Lane"]))==null) {
                 ddlLane2.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]),Utils.ObjectToString(dr["Lane"])));
@@ -121,7 +151,7 @@ namespace SubmittalProposal
             tbApplicantName2.Text = Utils.ObjectToString(dr["Applicant"]);
             tbContractorBB.Text = Utils.ObjectToString(dr["Contractor"]);
             DateTime? meetingDate = Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
-            tbMeetingDate.Text = meetingDate.HasValue?meetingDate.Value.ToString("MM/dd/yyyy"):"";
+            tbMeetingDateUpdate.Text = meetingDate.HasValue?meetingDate.Value.ToString("MM/dd/yyyy"):"";
             ddlProjectType.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
             if (ddlProjectDecision.Items.FindByText(Utils.ObjectToString(dr["ProjectDecision"])) == null) {
                 ddlProjectDecision.Items.Add(new ListItem(Utils.ObjectToString(dr["ProjectDecision"]), Utils.ObjectToString(dr["ProjectDecision"])));
@@ -138,11 +168,11 @@ namespace SubmittalProposal
         string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
-                ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlLane2.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane2.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlLane2.DataBind();
-                ddlSubmittalNewLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlSubmittalNewLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlSubmittalNewLane.DataBind();
                 /*
                 if (!this.ClientScript.IsStartupScriptRegistered("startupBB")) {

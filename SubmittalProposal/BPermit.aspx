@@ -80,8 +80,7 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
-
-   <asp:Panel ID="Panel1" GroupingText="Building Permit Data" runat="server">
+    <asp:Panel ID="Panel1" GroupingText="Building Permit Data" runat="server">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
                 <td>
@@ -190,9 +189,8 @@
             <td width="250px">
                 <asp:Panel runat="server" ID="pnlPayments" GroupingText="Payments">
                     <asp:GridView Width="100%" ID="gvPayments" runat="server" AutoGenerateColumns="False"
-                        CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" 
-                        onrowcancelingedit="gvPayments_RowCancelingEdit" 
-                        onrowediting="gvPayments_RowEditing" onrowupdating="gvPayments_RowUpdating">
+                        CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" OnRowCancelingEdit="gvPayments_RowCancelingEdit"
+                        OnRowEditing="gvPayments_RowEditing" OnRowUpdating="gvPayments_RowUpdating">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -301,9 +299,8 @@
             <td>
                 <asp:Panel runat="server" ID="pnlReviews" GroupingText="Reviews">
                     <asp:GridView ID="gvReviews" Width="100%" runat="server" AutoGenerateColumns="False"
-                        CellPadding="4" ForeColor="#333333" GridLines="None" 
-                        onrowcancelingedit="gvReviews_RowCancelingEdit" 
-                        onrowediting="gvReviews_RowEditing" onrowupdating="gvReviews_RowUpdating">
+                        CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCancelingEdit="gvReviews_RowCancelingEdit"
+                        OnRowEditing="gvReviews_RowEditing" OnRowUpdating="gvReviews_RowUpdating">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -345,19 +342,19 @@
                                         <asp:TextBox CssClass="form_field" ID="tbBPermitNewReviewNumber" Width="3em" runat="server"></asp:TextBox>
                                     </td>
                                     <td class="form_field_heading">
-                                        <asp:Label CssClass="form_field_heading" ID="Label36"  runat="server" Text="Inspection Date"></asp:Label>
+                                        <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Inspection Date"></asp:Label>
                                     </td>
                                     <td class="form_field">
                                         <asp:TextBox CssClass="form_field" ID="TextBox14" Width="8em" runat="server"></asp:TextBox>
                                     </td>
                                     <td class="form_field_heading">
-                                        <asp:Label CssClass="form_field_heading" ID="Label38"  runat="server" Text="Action Date"></asp:Label>
+                                        <asp:Label CssClass="form_field_heading" ID="Label38" runat="server" Text="Action Date"></asp:Label>
                                     </td>
                                     <td class="form_field">
                                         <asp:TextBox CssClass="form_field" ID="TextBox13" Width="8em" runat="server"></asp:TextBox>
                                     </td>
                                     <td class="form_field_heading">
-                                        <asp:Label CssClass="form_field_heading" ID="Label39"  runat="server" Text="Letter Date"></asp:Label>
+                                        <asp:Label CssClass="form_field_heading" ID="Label39" runat="server" Text="Letter Date"></asp:Label>
                                     </td>
                                     <td class="form_field">
                                         <asp:TextBox CssClass="form_field" ID="TextBox16" Width="8em" runat="server"></asp:TextBox>
@@ -374,7 +371,8 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label40" runat="server" Text="Comments"></asp:Label>
                                     </td>
                                     <td align="left" class="form_field" colspan="9">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox17" Width="99%" runat="server" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="TextBox17" Width="99%" runat="server" TextMode="MultiLine"
+                                            Rows="3"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
@@ -403,15 +401,20 @@
 
                         }
                         function pageLoadNewReview() {
-                        alert('bubba')
+                            alert('bubba')
                             var dddp = $find('jdpopupbpermitnewreview');
                             dddp.add_shown(shownnr);
                         }
-                    </script>                
+                    </script>
                 </asp:Panel>
             </td>
         </tr>
     </table>
+    <center>
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true" ID="btnBPermitUpdate" OnClick="btnBPermitUpdate_Click" runat="server"
+            Text="Submit" />
+        <asp:Label ID="lblBPermitUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+    </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
