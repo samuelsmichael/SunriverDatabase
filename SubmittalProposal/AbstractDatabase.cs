@@ -17,6 +17,9 @@ namespace SubmittalProposal {
         protected abstract DataSet buildDataSet();
         protected abstract DataTable getGridViewDataTable();
         protected abstract Label getUpdateResultsLabel();
+        protected abstract Label getNewResultsLabel();
+        protected abstract void clearAllSelectionInputFields();
+        
         protected abstract void childPageLoad(object sender, EventArgs e);
 
         protected void Page_Load(object sender, EventArgs e) {
@@ -45,7 +48,26 @@ namespace SubmittalProposal {
             getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
             getUpdateResultsLabel().Text = status;
         }
-
+        protected void performPostNewFailedActions(string status) {
+            getNewResultsLabel().ForeColor = System.Drawing.Color.Red;
+            getNewResultsLabel().Text = status;
+        }
+        protected void performPostNewSuccessfulActions(string status, string cacheKey, TextBox tbHavingKeyField, int key) {
+            MemoryCache.Default.Remove(cacheKey);
+            /* the following statements cause the view to be re-displayed, but with updated data */
+            clearAllSelectionInputFields();
+            tbHavingKeyField.Text = "" + key;
+            ((Database)Master).doGo();
+            getGridViewResults().SelectedIndex = 0;
+            do_gvResults_SelectedIndexChanged();
+            getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
+            getUpdateResultsLabel().Text = status;
+            ((Database)Master).getCPEForm.Collapsed = false;
+            ((Database)Master).getCPEForm.ClientState = "false";
+            ((Database)Master).getCPEDataGrid.Collapsed = true;
+            ((Database)Master).getCPEDataGrid.ClientState = "true";
+            ((Database)Master).getPanelForm.Visible = true;
+        }
 
         protected void gvResults_SelectedIndexChanged(object sender, EventArgs e) {
             string expandedText = gvResults_DoSelectedIndexChanged(sender, e);

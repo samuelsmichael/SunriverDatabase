@@ -545,6 +545,11 @@
                             runat="server" Text="Cancel" />
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblBPermitNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+                    </td>
+                </tr>
             </table>
         </asp:Panel>
     </asp:Panel>

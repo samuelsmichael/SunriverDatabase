@@ -33,6 +33,9 @@ namespace SubmittalProposal {
         protected override Label getUpdateResultsLabel() {
             return lblComplianceReviewUpdateResults;
         }
+        protected override Label getNewResultsLabel() {
+            return lblComplianceReviewNewResults;
+        }
         protected void btnComplianceReviewUpdate_Click(object sender, EventArgs e) {
             
         }        
@@ -202,6 +205,9 @@ namespace SubmittalProposal {
 
         protected void btnNewComplianceReviewOk_Click(object sender, EventArgs e) {
 
+        }
+        protected override void clearAllSelectionInputFields() {
+            throw new NotImplementedException();
         }
     }
 }

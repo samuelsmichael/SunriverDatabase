@@ -736,11 +736,16 @@
                 <table cellpadding="2" cellspacing="2">
                     <tr>
                         <td>
-                            <asp:Button ID="btnNewComplianceReviewOk" runat="server" Text="Okay" OnClick="btnNewComplianceReviewOk_Click" />
+                            <asp:Button ID="btnNewComplianceReviewOk" CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewComplianceReviewOk_Click" />
                         </td>
                         <td>
                             <asp:Button ID="btnNewComplianceReviewCancel" OnClientClick="return onNewComplianceReviewCancel()"
                                 runat="server" Text="Cancel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblComplianceReviewNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
                 </table>

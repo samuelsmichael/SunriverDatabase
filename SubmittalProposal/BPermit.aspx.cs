@@ -21,6 +21,10 @@ namespace SubmittalProposal {
            
         }
 
+        protected override Label getNewResultsLabel() {
+            return lblBPermitNewResults;
+        }
+
         public static DataSet BPermitDataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
@@ -323,6 +327,10 @@ namespace SubmittalProposal {
             gvReviews.EditIndex = -1;
             bind_gvReviews(BPermitIDBeingEdited);
         }
+        
+        protected override void clearAllSelectionInputFields() {
+            throw new NotImplementedException();
+        }
     }
     public static class CustomLINQtoDataSetMethods {
         public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) {
@@ -333,6 +341,5 @@ namespace SubmittalProposal {
                                                     DataTable table, LoadOption? options) {
             return new ObjectShredder<T>().Shred(source, table, options);
         }
-
     }
 }

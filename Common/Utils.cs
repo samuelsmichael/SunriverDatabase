@@ -42,8 +42,6 @@ namespace Common {
                 command.Connection = connection;
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
-            } catch (Exception e) {
-                int x = 3;
             } finally {
                 try { command.Dispose(); } catch { }
                 try { connection.Close(); } catch { };
