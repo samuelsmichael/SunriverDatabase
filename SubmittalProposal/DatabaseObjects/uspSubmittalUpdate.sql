@@ -17,8 +17,6 @@ ALTER PROCEDURE uspSubmittalUpdate
 	@Lane nvarchar(28),
 	@Applicant nvarchar(25),
 	@Contractor nvarchar(30),
-	@ProjectFee decimal(8,2)=null,
-	@FeeDate datetime=null,
 	@Mtg_Date datetime=null,
 	@ProjectType nvarchar(3),
 	@ProjectDecision nvarchar(3),
@@ -39,8 +37,6 @@ BEGIN
 			Lane=@Lane,
 			Applicant=@Applicant,
 			Contractor=@Contractor,
-			ProjectFee = @ProjectFee,
-			FeeDate=@FeeDate,
 			Mtg_Date=@Mtg_Date,
 			ProjectType=@Projecttype,
 			ProjectDecision=@ProjectDecision,
@@ -61,8 +57,6 @@ BEGIN
            ,[Project]
            ,[ProjectDecision]
            ,[Conditions]
-           ,[ProjectFee]
-           ,[FeeDate]
            ,[Contractor]
            ,[IsCommercial])
 		VALUES
@@ -76,8 +70,6 @@ BEGIN
            ,@Project
            ,@ProjectDecision
            ,@Conditions
-           ,@ProjectFee
-           ,@FeeDate
            ,@Contractor
            ,@IsCommercial)
 		set @NewSubmittalId=scope_identity()

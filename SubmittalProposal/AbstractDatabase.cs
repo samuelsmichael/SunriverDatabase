@@ -18,6 +18,8 @@ namespace SubmittalProposal {
         protected abstract DataTable getGridViewDataTable();
         protected abstract Label getUpdateResultsLabel();
         protected abstract Label getNewResultsLabel();
+        protected abstract void unlockYourUpdateFields();
+        protected abstract void lockYourUpdateFields();
         protected abstract void clearAllSelectionInputFields();
         
         protected abstract void childPageLoad(object sender, EventArgs e);
@@ -25,9 +27,18 @@ namespace SubmittalProposal {
         protected void Page_Load(object sender, EventArgs e) {
             Database database = (Database)Master;
             database.SearchButtonPressed += new Database.SearchButtonPressedEventHandler(database_SearchButtonPressed);
+            database.UnlockCheckboxChecked += new Database.UnlockCheckboxCheckedHandler(database_UnlockCheckboxChecked);
             childPageLoad(sender, e);
             ((MainMasterPage)Master.Master).PageImOnSinceMenuItemClickDoesntWork = GetType().Name;
 
+        }
+
+        void database_UnlockCheckboxChecked(bool isUnlocked) {
+            if (isUnlocked) {
+                unlockYourUpdateFields();
+            } else {
+                lockYourUpdateFields();
+            }
         }
 
         protected void performPostUpdateSuccessfulActions(string status, string cacheKey) {
@@ -70,6 +81,7 @@ namespace SubmittalProposal {
         }
 
         protected void gvResults_SelectedIndexChanged(object sender, EventArgs e) {
+            ((Database)Master).clearUnlockRecordCheckbox();
             string expandedText = gvResults_DoSelectedIndexChanged(sender, e);
             ((Database)Master).getCPEForm.ExpandedText = expandedText;
             ((Database)Master).getCPEForm.CollapsedText = expandedText;

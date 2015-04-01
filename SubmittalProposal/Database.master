@@ -32,7 +32,7 @@
                         <asp:ContentPlaceHolder ID="SearchContent" runat="server">
                         </asp:ContentPlaceHolder>
                         <td align="right" style="width: 100%">
-                            <asp:Button ID="BtnGo" runat="server" Text="Go" OnClick="btnGo_Click" />
+                            <asp:Button ID="BtnGo" OnClientClick="javascript: return true;" runat="server" Text="Go" OnClick="btnGo_Click" />
                         </td>
                     </tr>
                 </table>
@@ -99,6 +99,10 @@
             </asp:Panel>
             <asp:Panel ID="PnlFormContent" BorderWidth="0" runat="server">
                 <asp:Panel Visible="false" runat="server" ID="pnlForm" Width="100%">
+                    <asp:CheckBox ID="cbUnlockRecord" AutoPostBack="true"  Text="Unlock record" 
+                        TextAlign="Left" runat="server" 
+                        oncheckedchanged="cbUnlockRecord_CheckedChanged" />
+
                     <asp:ContentPlaceHolder ID="FormContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </asp:Panel>

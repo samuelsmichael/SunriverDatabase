@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td width="40">
         <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
-        <asp:TextBox ID="tbLot" Width="30" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbLot" Width="40" MaxLength="5" runat="server"></asp:TextBox>
     </td>
     <td width="100">
         <asp:Label ID="Label21" runat="server" Text="Lane"></asp:Label>

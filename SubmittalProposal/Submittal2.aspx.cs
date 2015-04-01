@@ -56,9 +56,6 @@ namespace SubmittalProposal
                 cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneUpdate.SelectedValue;
                 cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text.Trim();
                 cmd.Parameters.Add("@Contractor",SqlDbType.NVarChar).Value=tbContractorUpdate.Text.Trim();
-                decimal? reviewFee=(tbReviewFeeUpdate.Text.Trim()=="")?(decimal?)null:Convert.ToDecimal(tbReviewFeeUpdate.Text.Trim());
-                cmd.Parameters.Add("@ProjectFee",SqlDbType.Decimal).Value=reviewFee;
-                cmd.Parameters.Add("@FeeDate",SqlDbType.DateTime).Value=(tbDateFeePaidUpdate.Text.Trim()=="")?(DateTime?)null:Convert.ToDateTime(tbDateFeePaidUpdate.Text.Trim());
                 cmd.Parameters.Add("@Mtg_Date",SqlDbType.DateTime).Value=(tbMeetingDateUpdate.Text.Trim()=="")?(DateTime?)null:Convert.ToDateTime(tbMeetingDateUpdate.Text.Trim());
                 cmd.Parameters.Add("@ProjectType",SqlDbType.NVarChar).Value=ddlProjectTypeUpdate.SelectedValue;
                 cmd.Parameters.Add("@ProjectDecision",SqlDbType.NVarChar).Value=ddlProjectDecisionUpdate.SelectedValue;
@@ -135,7 +132,7 @@ namespace SubmittalProposal
             filterString = sbFilter.ToString();
         }
         private int getSubmittalId(GridViewRow dr) {
-            CurrentSubmittalId = Convert.ToInt32(dr.Cells[13].Text);
+            CurrentSubmittalId = Convert.ToInt32(dr.Cells[6].Text);
             return CurrentSubmittalId.Value;
         }
         private string getOwner(DataRow dr) {
@@ -149,6 +146,37 @@ namespace SubmittalProposal
         }
         private string getLotLane(DataRow dr) {
             return (Utils.ObjectToString(dr["Lot"])) + "\\" + Utils.ObjectToString(dr["Lane"]);
+        }
+
+        protected override void lockYourUpdateFields() {
+            btnSubmitalUpdate.Enabled = false;
+            tbOwnersNameUpdate.Enabled = false;
+            tbLotNameUpdate.Enabled = false;
+            tbApplicantNameUpdate.Enabled = false;
+            tbContractorUpdate.Enabled = false;
+            tbMeetingDateUpdate.Enabled = false;
+            ddlProjectTypeUpdate.Enabled = false;
+            ddlProjectDecisionUpdate.Enabled = false;
+            cbIsCommercialUpdate.Enabled = false;
+            tbProjectUpdate.Enabled = false;
+            tbSubmittalUpdate.Enabled = false;
+            tbConditionsUpdate.Enabled = false;
+            ddlLaneUpdate.Enabled = false;
+        }
+        protected override void unlockYourUpdateFields() {
+            btnSubmitalUpdate.Enabled = true;
+            tbOwnersNameUpdate.Enabled = true;
+            tbLotNameUpdate.Enabled = true;
+            tbApplicantNameUpdate.Enabled = true;
+            tbContractorUpdate.Enabled = true;
+            tbMeetingDateUpdate.Enabled = true;
+            ddlProjectTypeUpdate.Enabled = true;
+            ddlProjectDecisionUpdate.Enabled = true;
+            cbIsCommercialUpdate.Enabled = true;
+            tbProjectUpdate.Enabled = true;
+            tbSubmittalUpdate.Enabled = true;
+            tbConditionsUpdate.Enabled = true;
+            ddlLaneUpdate.Enabled = true;
         }
 
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
@@ -173,18 +201,16 @@ namespace SubmittalProposal
             DateTime? meetingDate = Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
             tbMeetingDateUpdate.Text = meetingDate.HasValue?meetingDate.Value.ToString("MM/dd/yyyy"):"";
             DateTime? feePaidDate = Utils.ObjectToDateTimeNullable(dr["FeeDate"]);
-            tbDateFeePaidUpdate.Text = feePaidDate.HasValue ? feePaidDate.Value.ToString("MM/dd/yyyy") : "";
-            decimal reviewFee = 0;
-            try {
-                reviewFee=Convert.ToDecimal(dr["ProjectFee"]);
-            } catch {
-            }
-            tbReviewFeeUpdate.Text = reviewFee==0?"":reviewFee.ToString("0.00");
             ddlProjectTypeUpdate.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
             if (ddlProjectDecisionUpdate.Items.FindByText(Utils.ObjectToString(dr["ProjectDecision"])) == null) {
                 ddlProjectDecisionUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["ProjectDecision"]), Utils.ObjectToString(dr["ProjectDecision"])));
             }
             ddlProjectDecisionUpdate.SelectedValue = Utils.ObjectToString(dr["ProjectDecision"]);
+            if (ddlProjectDecisionUpdate.SelectedValue == "A" || ddlProjectDecisionUpdate.SelectedValue == "AWC") {
+                lbGoToPermit.Visible = true;
+            } else {
+                lbGoToPermit.Visible = false;
+            }
             tbProjectUpdate.Text = Utils.ObjectToString(dr["Project"]);
             tbSubmittalUpdate.Text = Utils.ObjectToString(dr["Submittal"]);
             cbIsCommercialUpdate.Checked=Convert.ToBoolean(dr["IsCommercial"]);
@@ -220,41 +246,60 @@ namespace SubmittalProposal
             return buildDataSet().Tables[0];
         }
 
+        protected void lbSubmittalNew_OnClick(object sender, EventArgs args) {
+            SqlCommand cmd = new SqlCommand("uspFindHighestSubmittalId");
+            DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            int maxSubmittalId = Convert.ToInt32(ds.Tables[0].Rows[0]["SubmittalId"]);
+            maxSubmittalId++;
+            lblAutoSubmittalId.Text = "" + maxSubmittalId;
+            mpeNewSubmittal.Show();
+
+        }
+
+
         protected void lbGoToPermit_Click(object sender, EventArgs args) {
-            Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId);
+            Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId+"&SubmittalId="+CurrentSubmittalId);
+        }
+
+        protected void btnNewSubmittalCancel_Click(object sender, EventArgs args) {
+            clearAllSelectionInputFields();
         }
 
         protected void btnNewSubmittalOk_Click(object sender, EventArgs args) {
-            lblSubmitalUpdateResults.Text = "";
-            try {
-                SqlCommand cmd = new SqlCommand(
-                    "uspSubmittalUpdate"
-                );
-                cmd.Parameters.Add("@Own_Name", SqlDbType.VarChar).Value = tbOwnersNameNew.Text.Trim();
-                cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameNew.Text.Trim();
-                cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneNew.SelectedValue;
-                cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameNew.Text.Trim();
-                cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorNew.Text.Trim();
-                decimal? reviewFee = (tbReviewFeeNew.Text.Trim() == "") ? (decimal?)null : Convert.ToDecimal(tbReviewFeeNew.Text.Trim());
-                cmd.Parameters.Add("@ProjectFee", SqlDbType.Decimal).Value = reviewFee;
-                cmd.Parameters.Add("@FeeDate", SqlDbType.DateTime).Value = (tbDateFeePaidNew.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(tbDateFeePaidNew.Text.Trim());
-                cmd.Parameters.Add("@Mtg_Date", SqlDbType.DateTime).Value = (tbMeetingDateNew.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(tbMeetingDateNew.Text.Trim());
-                cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeNew.SelectedValue;
-                cmd.Parameters.Add("@ProjectDecision", SqlDbType.NVarChar).Value = ddlProjectDecisionNew.SelectedValue;
-                cmd.Parameters.Add("@IsCommercial", SqlDbType.Bit).Value = cbIsCommercialNew.Checked;
-                cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectNew.Text.Trim();
-                cmd.Parameters.Add("@Submittal", SqlDbType.NVarChar).Value = tbSubmittalNew.Text.Trim();
-                cmd.Parameters.Add("@Conditions", SqlDbType.NVarChar).Value = tbConditionsNew.Text.Trim();
-                SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalId", SqlDbType.Int);
-                newSubmittalId.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(newSubmittalId);
-                Utils.executeNonQuery(cmd,
-                    System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY,tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
-                mpeNewSubmittal.Hide();
-            } catch (Exception e) {
-                performPostNewFailedActions("Submittal not added. Msg: " + e.Message);
-            }            
+
+            lblRequiredMeetingDate.Text = "";
+            if (tbMeetingDateNew.Text.Trim() == "") {
+                lblRequiredMeetingDate.Text = "Meeting Date is a required field.";
+                mpeNewSubmittal.Show();
+            } else {
+                lblSubmitalUpdateResults.Text = "";
+                try {
+                    SqlCommand cmd = new SqlCommand(
+                        "uspSubmittalUpdate"
+                    );
+                    cmd.Parameters.Add("@Own_Name", SqlDbType.VarChar).Value = tbOwnersNameNew.Text.Trim();
+                    cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameNew.Text.Trim();
+                    cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneNew.SelectedValue;
+                    cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameNew.Text.Trim();
+                    cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorNew.Text.Trim();
+                    cmd.Parameters.Add("@Mtg_Date", SqlDbType.DateTime).Value = (tbMeetingDateNew.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(tbMeetingDateNew.Text.Trim());
+                    cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeNew.SelectedValue;
+                    cmd.Parameters.Add("@ProjectDecision", SqlDbType.NVarChar).Value = ddlProjectDecisionNew.SelectedValue;
+                    cmd.Parameters.Add("@IsCommercial", SqlDbType.Bit).Value = cbIsCommercialNew.Checked;
+                    cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectNew.Text.Trim();
+                    cmd.Parameters.Add("@Submittal", SqlDbType.NVarChar).Value = tbSubmittalNew.Text.Trim();
+                    cmd.Parameters.Add("@Conditions", SqlDbType.NVarChar).Value = tbConditionsNew.Text.Trim();
+                    SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalId", SqlDbType.Int);
+                    newSubmittalId.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newSubmittalId);
+                    Utils.executeNonQuery(cmd,
+                        System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                    performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY, tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
+                    mpeNewSubmittal.Hide();
+                } catch (Exception e) {
+                    performPostNewFailedActions("Submittal not added. Msg: " + e.Message);
+                }
+            }
         }
         protected override void clearAllSelectionInputFields() {
             tbOwner.Text = "";
@@ -269,15 +314,12 @@ namespace SubmittalProposal
             ddlLaneNew.SelectedIndex = 0;
             tbApplicantNameNew.Text = "";
             tbContractorNew.Text = "";
-            tbReviewFeeNew.Text = "";
-            tbDateFeePaidNew.Text = "";
-            tbMeetingDateNew.Text = "";
-            ddlProjectTypeNew.SelectedIndex = 0;
             ddlProjectDecisionNew.SelectedIndex = 0;
             cbIsCommercialNew.Checked = false;
             tbProjectNew.Text = "";
             tbSubmittalNew.Text = "";
             tbConditionsNew.Text = "";
+            tbMeetingDateNew.Text = "";
         }
     }
 }

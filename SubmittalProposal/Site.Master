@@ -56,7 +56,7 @@
                     Sunriver Database Application
                 </h1>
                 <span style="margin-left: 50px; font-size: xx-small; display: block; float: left;
-                    color: #f9f9f9; margin-top: 22px;">(Version .10)</span>
+                    color: #f9f9f9; margin-top: 22px;">(Version .11)</span>
             </div>
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">

@@ -13,6 +13,12 @@ using System.Configuration;
 
 namespace SubmittalProposal {
     public partial class ComplianceReview : AbstractDatabase {
+
+        protected override void lockYourUpdateFields() {
+        }
+        protected override void unlockYourUpdateFields() {
+        }
+
         public static DataSet CRDataSet() {
             DataSet ds = null;
             MemoryCache cache=MemoryCache.Default;

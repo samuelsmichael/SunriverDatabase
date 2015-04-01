@@ -9,6 +9,15 @@
     </h2>
     <div style="height:350px;overflow:scroll;">
         <ul>
+            <li  style="font-weight:bold;">Version .11</li>
+                <ul>
+                    <li>Modifications to the Search Results in Submittal</li>
+                    <li>Meeting Date is mandatory</li>
+                    <li>Incorporated "keep record locked" function.  Note, currently this function is only working with the Submittals page, since the other two pages don't yet actually perform updates or adds.</li>
+                    <li>Hide the Go To Permit link if the Project Decision is anything other than A or AWC.</li>
+                    <li>Project Fees section removed.</li>
+                    <li>New Submittal panel now shows the new SubmittalId at the top of the page.</li>
+                </ul>
             <li  style="font-weight:bold;">Version .10</li>
                 <ul>
                     <li>Update and add functions work in Submittal</li>

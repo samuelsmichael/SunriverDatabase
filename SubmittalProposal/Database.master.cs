@@ -9,7 +9,9 @@ using System.Data;
 namespace SubmittalProposal {
     public partial class Database : System.Web.UI.MasterPage {
         public event SearchButtonPressedEventHandler SearchButtonPressed;
+        public event UnlockCheckboxCheckedHandler UnlockCheckboxChecked;
         public delegate void SearchButtonPressedEventHandler(out string searchCriteria, out DataTable filteredData );
+        public delegate void UnlockCheckboxCheckedHandler(bool isUnlocked);
         public AjaxControlToolkit.CollapsiblePanelExtender getCPEForm { get { return CPEForm; } }
         public AjaxControlToolkit.CollapsiblePanelExtender getCPEDataGrid { get { return CPEDataGrid; } }
         public Panel getPanelForm { get { return pnlForm; } }
@@ -20,6 +22,12 @@ namespace SubmittalProposal {
             } else {
                 searchCriteria = null;
                 resultTable = null;
+            }
+        }
+        protected virtual void OnUnlockCheckboxChecked(bool isUnlocked) {
+            UnlockCheckboxCheckedHandler handler = UnlockCheckboxChecked;
+            if (handler != null) {
+                handler(isUnlocked);
             }
         }
         protected void Page_Load(object sender, EventArgs e) {
@@ -56,7 +64,17 @@ namespace SubmittalProposal {
             btnGo_Click(null, null);
         }
 
-        protected void btnUpdate_Click(object sender, EventArgs e) {
+        public void clearUnlockRecordCheckbox() {
+            cbUnlockRecord.Checked = false;
+            OnUnlockCheckboxChecked(false);
+        }
+
+        protected void cbUnlockRecord_CheckedChanged(object sender, EventArgs e) {
+            if (cbUnlockRecord.Checked) {
+                OnUnlockCheckboxChecked(true);
+            } else {
+                OnUnlockCheckboxChecked(false);
+            }
         }
     }
 }

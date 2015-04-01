@@ -12,7 +12,7 @@
     </td>
     <td>
         <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
-        <asp:TextBox ID="tbLot" Width="20" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbLot" Width="40" MaxLength="5" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label21" runat="server" Text="Lane"></asp:Label>
@@ -411,20 +411,14 @@
         </tr>
     </table>
     <center>
-        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true" ID="btnBPermitUpdate" OnClick="btnBPermitUpdate_Click" runat="server"
-            Text="Submit" />
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
+            ID="btnBPermitUpdate" OnClick="btnBPermitUpdate_Click" runat="server" Text="Submit" />
         <asp:Label ID="lblBPermitUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
-        function onNewBPermitCancel() {
-            if (confirm("Are you sure that you wish to cancel?")) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+
     </script>
     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewBPermitId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewBPermitTitleId">
@@ -444,13 +438,13 @@
                             <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Issued"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox4" Width="10em" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbIssuedNew" Width="10em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="SubmittalID"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox11" Width="10em" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbSubmittalIdNew" Width="10em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Closed"></asp:Label>
@@ -477,7 +471,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label26" runat="server" Text="Lot"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox6" Width="22" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbLotNameNew" Width="22" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Lane"></asp:Label>
@@ -491,13 +485,13 @@
                             <asp:Label CssClass="form_field_heading" ID="Label28" runat="server" Text="Owner"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox7" Width="20em" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbOwnersNameNew" Width="20em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label29" runat="server" Text="Applicant"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox8" Width="20em" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbApplicantNameNew" Width="20em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -505,20 +499,20 @@
                             <asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Contractor"></asp:Label>
                         </td>
                         <td colspan="2">
-                            <asp:TextBox CssClass="form_field" ID="TextBox9" Width="20em" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbContractorNew" Width="20em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Project"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox10" runat="server" Width="20em" TextMode="MultiLine"
+                            <asp:TextBox CssClass="form_field" ID="tbProjectNew" runat="server" Width="20em" TextMode="MultiLine"
                                 Rows="4"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label32" runat="server" Text="Project Type"></asp:Label>
                         </td>
                         <td>
-                            <asp:DropDownList CssClass="form_field" ID="DropDownList2" runat="server">
+                            <asp:DropDownList CssClass="form_field" ID="ddlProjectTypeNew" runat="server">
                                 <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                                 <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                                 <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
@@ -535,38 +529,45 @@
                     </tr>
                 </table>
             </asp:Panel>
-            <table width="100%">
-                <tr>
-                    <td>
-                        <asp:Button ID="btnNewBPermitOk" runat="server" Text="Okay" OnClick="btnNewBPermitOk_Click" />
-                    </td>
-                    <td>
-                        <asp:Button ID="btnNewBPermitCancel" OnClientClick="return onNewBPermitCancel()"
-                            runat="server" Text="Cancel" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <asp:Label ID="lblBPermitNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
-                    </td>
-                </tr>
-            </table>
+            <center>
+                <table cellpadding="4">
+                    <tr>
+                        <td>
+                            <asp:Button ID="btnNewBPermitOk" runat="server" Text="Okay" OnClick="btnNewBPermitOk_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnNewBPermitCancel" OnClick="btnNewBPermitCancel_Click" OnClientClick="javacript: return confirm('Are you sure that you wish to cancel?')"
+                                runat="server" Text="Cancel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblBPermitNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </center>
         </asp:Panel>
     </asp:Panel>
     <asp:LinkButton ID="lbBPermintNew" runat="server">New Building Permit</asp:LinkButton>
+    <asp:HiddenField ID="hfAutoShowPopupNew" Value="n" runat="server" />
     <ajaxToolkit:ModalPopupExtender ID="mpeNewBPermit" runat="server" TargetControlID="lbBPermintNew"
         PopupControlID="pnlNewBPermitId" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewBPermitTitleId"
         BehaviorID="jdpopupbpermit" />
     <script language="javascript" type="text/javascript">
+        Sys.Application.add_load(pageLoadPopupNewBPermit);
         function shown() {
             var tb = document.getElementById('<% =tbNewBPermitDelay.ClientID %>');
             tb.focus();
-
         }
-        function pageLoad() {
+        function pageLoadPopupNewBPermit() {
             var dddp = $find('jdpopupbpermit');
             dddp.add_shown(shown);
-
+            var showauto = document.getElementById('<%=hfAutoShowPopupNew.ClientID %>');
+            if (showauto && showauto.value == 'y') {
+                showauto.value='n'
+                dddp.show();
+            }
         }
 
         function OnKeyPress(args) {

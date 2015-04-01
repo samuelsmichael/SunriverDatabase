@@ -230,6 +230,7 @@ namespace SubmittalProposal {
         }
 
         protected override void childPageLoad(object sender, EventArgs e) {
+            hfAutoShowPopupNew.Value = "n";
             string gotoBPermitId=null;
             if (!IsPostBack) {
                 gotoBPermitId = Request.QueryString["BPermitId"];
@@ -242,11 +243,52 @@ namespace SubmittalProposal {
 
             }
             if (Common.Utils.isNothingNot(gotoBPermitId)) {
+                tbOwner.Text = "";
+                tbApplicant.Text = "";
+                tbLot.Text = "";
+                tbSubmittalId.Text = "";
+                ddlLane.SelectedIndex = 0;
+                tbDelaySearch.Text = "";
                 tbBPermitId.Text = Request.QueryString["BPermitId"];
                 ((Database)Master).doGo();
                 gvResults.SelectRow(0);
+            } else {
+                String gotoSubmittalId = Request.QueryString["SubmittalId"];
+                if (Common.Utils.isNothingNot(gotoSubmittalId)) {
+                    hfAutoShowPopupNew.Value = "y";
+                    DataSet ds = Submittal2.SunriverDataSet();
+                    DataTable sourceTable = ds.Tables[0];
+                    DataView view = new DataView(sourceTable);
+                    view.RowFilter = "SubmittalId=" + gotoSubmittalId;
+                    DataTable tblFiltered = view.ToTable();
+                    DataRow dr = tblFiltered.Rows[0];
+                    clearAllSelectionInputFields();
+                    tbSubmittalIdNew.Text = Utils.ObjectToString(dr["SubmittalId"]);
+                    tbSubmittalIdNew.Enabled = false;
+                    tbLotNameNew.Text = Utils.ObjectToString(dr["Lot"]);
+                    ddlNewBPermitLane.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+                    tbOwnersNameNew.Text = Utils.ObjectToString(dr["Own_Name"]);
+                    tbApplicantNameNew.Text = Utils.ObjectToString(dr["Applicant"]);
+
+                    tbContractorNew.Text = Utils.ObjectToString(dr["Contractor"]);
+                    ddlProjectTypeNew.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
+                    tbProjectNew.Text = Utils.ObjectToString(dr["Project"]);
+                    
+                }
             }
         }
+        protected override void clearAllSelectionInputFields() {
+            tbProjectNew.Text = "";
+            tbContractorNew.Text = "";
+            tbNewBPermitDelay.Text = "";
+            tbIssuedNew.Text = "";
+            tbSubmittalIdNew.Text = "";
+            tbLotNameNew.Text = "";
+            ddlNewBPermitLane.SelectedIndex = 0;
+            tbOwnersNameNew.Text = "";
+            tbApplicantNameNew.Text = "";
+        }
+
         protected override DataTable getGridViewDataTable() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
@@ -262,7 +304,14 @@ namespace SubmittalProposal {
             return ds.Tables[0];
         }
         protected void btnNewBPermitOk_Click(object sender, EventArgs e) {
-            int bkher = 3;
+            hfAutoShowPopupNew.Value = "n";
+            mpeBPermitNewPayment.Hide();
+            clearAllSelectionInputFields();
+        }
+        protected void btnNewBPermitCancel_Click(object sender, EventArgs e) {
+            hfAutoShowPopupNew.Value = "n";
+            mpeBPermitNewPayment.Hide();
+            clearAllSelectionInputFields();
         }
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
             int bkher = 3;
@@ -328,9 +377,11 @@ namespace SubmittalProposal {
             bind_gvReviews(BPermitIDBeingEdited);
         }
         
-        protected override void clearAllSelectionInputFields() {
-            throw new NotImplementedException();
+        protected override void lockYourUpdateFields() {
         }
+        protected override void unlockYourUpdateFields() {
+        }
+    
     }
     public static class CustomLINQtoDataSetMethods {
         public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) {
