@@ -1,5 +1,5 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="Database.master.cs"
-    Inherits="SubmittalProposal.Database" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/MainMasterPage.Master" AutoEventWireup="true"
+    CodeBehind="Database.master.cs" Inherits="SubmittalProposal.Database" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -97,14 +97,10 @@
                     </div>
                 </div>
             </asp:Panel>
-            <asp:Panel ID="PnlFormContent" BorderWidth="0" DefaultButton="btnUpdate" runat="server">
+            <asp:Panel ID="PnlFormContent" BorderWidth="0" runat="server">
                 <asp:Panel Visible="false" runat="server" ID="pnlForm" Width="100%">
                     <asp:ContentPlaceHolder ID="FormContent" runat="server">
                     </asp:ContentPlaceHolder>
-                    <center>
-                        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" ID="btnUpdate" runat="server"
-                            Text="Submit" />
-                    </center>
                 </asp:Panel>
             </asp:Panel>
             <ajaxToolkit:CollapsiblePanelExtender ID="CPEForm" runat="server" TargetControlID="PnlFormContent"

@@ -81,25 +81,27 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FormContent" runat="server">
+
     <ajaxToolkit:TabContainer Height="346" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Applicant Infromation">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3" runat="server">
                     <ContentTemplate>
+
                         <table width="100%" cellpadding="1" cellspacing="0">
                             <tr>
                                 <td>
                                     <asp:Panel ID="Panel1" GroupingText="Owner" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Name"></asp:Label>
-                                        <asp:TextBox CssClass="form_field" ID="tbOwnersName" Width="30em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbOwnersNameUpdate" Width="30em" MaxLength="40" runat="server"></asp:TextBox>
                                     </asp:Panel>
                                 </td>
                                 <td>
                                     <asp:Panel ID="Panel2" GroupingText="Sunriver Property" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Lot"></asp:Label>
-                                        <asp:TextBox CssClass="form_field" ID="tbLotName2" Width="22" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbLotNameUpdate" Width="22" MaxLength="5" runat="server"></asp:TextBox>
                                         <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Lane"></asp:Label>
-                                        <asp:DropDownList ID="ddlLane2" CssClass="form_field" runat="server" DataTextField="Lane"
+                                        <asp:DropDownList ID="ddlLaneUpdate" CssClass="form_field" runat="server" DataTextField="Lane"
                                             DataValueField="Lane">
                                         </asp:DropDownList>
                                     </asp:Panel>
@@ -107,7 +109,7 @@
                                 <td>
                                     <asp:Panel ID="Panel3" GroupingText="Applicant" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Name"></asp:Label>
-                                        <asp:TextBox CssClass="form_field" ID="tbApplicantName2" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbApplicantNameUpdate" MaxLength="25" runat="server"></asp:TextBox>
                                     </asp:Panel>
                                 </td>
                             </tr>
@@ -115,7 +117,7 @@
                                 <td>
                                     <asp:Panel ID="Panel4" GroupingText="Contractor" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="Name"></asp:Label>
-                                        <asp:TextBox CssClass="form_field" ID="tbContractorBB" Width="30em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbContractorUpdate" MaxLength="30" Width="30em" runat="server"></asp:TextBox>
                                     </asp:Panel>
                                 </td>
                                 <td>
@@ -126,24 +128,51 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Review fee"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbReviewFee" runat="server"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form_field" ID="tbReviewFeeUpdate" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ID="revEReviewFeeUpdate" runat="server" 
+                                                        ErrorMessage="Please enter numbers and optionally a decimal point"
+                                                         ValidationExpression="^\d+(\.\d\d)?$" ControlToValidate="tbReviewFeeUpdate" Display="Dynamic" ForeColor="Red"
+                                                        ></asp:RegularExpressionValidator>
                                                 </td>
+                                                <td>&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <asp:Label CssClass="form_field_heading" Style="margin-top: 3px;" ID="Label13" runat="server"
                                                         Text="Date fee paid"></asp:Label>
-                                                </td>
+                                               </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbDateFeePaid" runat="server"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form_field" ID="tbDateFeePaidUpdate" runat="server"></asp:TextBox>
+                                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revDateFeePaidUpdate"  Display="Dynamic" 
+                                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                        ControlToValidate="tbDateFeePaidUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                 </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateFeePaidUpdate" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceDateFeePaidUpdate" runat="server"
+                                            TargetControlID="tbDateFeePaidUpdate"
+                                            Format="MM/dd/yyyy"
+                                            PopupButtonID="ibDateFeePaidUpate" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revDateFeePaid2"  Display="Dynamic" 
+                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ControlToValidate="tbDateFeePaidUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </asp:Panel>
                                 </td>
                                 <td>
                                     <asp:Panel ID="Panel6" GroupingText="Meeting Date" runat="server">
-                                        <asp:TextBox CssClass="form_field" ID="tbMeetingDate" runat="server"></asp:TextBox>
+                                        <table><tr><td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMeetingDateUpdate" runat="server"></asp:TextBox>
+                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibMeetingDateUpdate" runat="server" /></td></tr></table>
+                                    <ajaxToolkit:CalendarExtender ID="ceMeetingDateUpdate" runat="server"
+                                        TargetControlID="tbMeetingDateUpdate"
+                                        Format="MM/dd/yyyy"
+                                        PopupButtonID="ibMeetingDateUpdate" />
+                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revMeetingDateUpdate"  Display="Dynamic" 
+                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                        ControlToValidate="tbMeetingDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </asp:Panel>
                                 </td>
                             </tr>
@@ -156,7 +185,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Project Type"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList CssClass="form_field" ID="ddlProjectType" runat="server">
+                                                    <asp:DropDownList CssClass="form_field" ID="ddlProjectTypeUpdate" runat="server">
                                                         <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                                                         <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                                                         <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
@@ -171,7 +200,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Project Decision"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList CssClass="form_field" ID="ddlProjectDecision" runat="server">
+                                                    <asp:DropDownList CssClass="form_field" ID="ddlProjectDecisionUpdate" runat="server">
                                                         <asp:ListItem Value="A">A - Approved</asp:ListItem>
                                                         <asp:ListItem Value="AWC">AWC - Approved with Conditions</asp:ListItem>
                                                         <asp:ListItem Value="DEF">DEF - Deferred</asp:ListItem>
@@ -182,7 +211,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="Is Commercial"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:CheckBox ID="cbIsCommercial" runat="server" />
+                                                    <asp:CheckBox ID="cbIsCommercialUpdate" runat="server" />
                                                 </td>
                                                 <td width="15%" align="right">
                                                     <asp:LinkButton ID="lbGoToPermit" runat="server" OnClick="lbGoToPermit_Click">Go to Permit</asp:LinkButton>
@@ -193,7 +222,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Project"></asp:Label>
                                                 </td>
                                                 <td colspan="6">
-                                                    <asp:TextBox CssClass="form_field" ID="tbProject" Width="100%" runat="server" TextMode="SingleLine"
+                                                    <asp:TextBox CssClass="form_field" ID="tbProjectUpdate" MaxLength="100" Width="100%" runat="server" TextMode="SingleLine"
                                                         Rows="1"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -202,7 +231,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Submittal"></asp:Label>
                                                 </td>
                                                 <td colspan="6">
-                                                    <asp:TextBox CssClass="form_field" ID="tbSubmittal" Width="100%" runat="server" TextMode="MultiLine"
+                                                    <asp:TextBox CssClass="form_field" ID="tbSubmittalUpdate" Width="100%" runat="server" TextMode="MultiLine"
                                                         Rows="4"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -219,13 +248,19 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel4" runat="server">
                     <ContentTemplate>
-                        <asp:TextBox ID="tbConditions" Style="width: 100%;" runat="server" TextMode="MultiLine"
+                        <asp:TextBox ID="tbConditionsUpdate" Style="width: 100%;" runat="server" TextMode="MultiLine"
                             Height="340px"></asp:TextBox>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>
+    <center>
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true" ID="btnSubmitalUpdate" OnClick="btnSubmitalUpdate_Click" runat="server"
+            Text="Submit" />
+        <asp:Label ID="lblSubmitalUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+    </center>
+
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
@@ -252,15 +287,15 @@
                                         <td>
                                             <asp:Panel ID="Panel8" GroupingText="Owner" runat="server">
                                                 <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Name"></asp:Label>
-                                                <asp:TextBox CssClass="form_field" ID="tbSubmittalNewName" Width="30em" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form_field" ID="tbOwnersNameNew" MaxLength="40" Width="30em" runat="server"></asp:TextBox>
                                             </asp:Panel>
                                         </td>
                                         <td>
                                             <asp:Panel ID="Panel9" GroupingText="Sunriver Property" runat="server">
                                                 <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Lot"></asp:Label>
-                                                <asp:TextBox CssClass="form_field" ID="tbSubmittalNewLot" Width="22" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form_field" ID="tbLotNameNew" Width="22" MaxLength="5" runat="server"></asp:TextBox>
                                                 <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Lane"></asp:Label>
-                                                <asp:DropDownList ID="ddlSubmittalNewLane" CssClass="form_field" runat="server" DataTextField="Lane"
+                                                <asp:DropDownList ID="ddlLaneNew" CssClass="form_field" runat="server" DataTextField="Lane"
                                                     DataValueField="Lane">
                                                 </asp:DropDownList>
                                             </asp:Panel>
@@ -268,7 +303,7 @@
                                         <td>
                                             <asp:Panel ID="Panel10" GroupingText="Applicant" runat="server">
                                                 <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="Name"></asp:Label>
-                                                <asp:TextBox CssClass="form_field" ID="TextBox3" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form_field" ID="tbApplicantNameNew" MaxLength="25" runat="server"></asp:TextBox>
                                             </asp:Panel>
                                         </td>
                                     </tr>
@@ -276,7 +311,7 @@
                                         <td>
                                             <asp:Panel ID="Panel11" GroupingText="Contractor" runat="server">
                                                 <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Name"></asp:Label>
-                                                <asp:TextBox CssClass="form_field" ID="TextBox4" Width="30em" runat="server"></asp:TextBox>
+                                                <asp:TextBox CssClass="form_field" ID="tbContractorNew" MaxLength="30" Width="30em" runat="server"></asp:TextBox>
                                             </asp:Panel>
                                         </td>
                                         <td>
@@ -287,24 +322,50 @@
                                                             <asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Review fee"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="form_field" ID="TextBox5" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="form_field" ID="tbReviewFeeNew" runat="server"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="revReviewFeeNew" runat="server" 
+                                                                ErrorMessage="Please enter numbers and optionally a decimal point"
+                                                                 ValidationExpression="^\d+(\.\d\d)?$" ControlToValidate="tbReviewFeeNew" Display="Dynamic" ForeColor="Red"
+                                                                ></asp:RegularExpressionValidator>
                                                         </td>
+                                                        <td>&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <asp:Label CssClass="form_field_heading" Style="margin-top: 3px;" ID="Label26" runat="server"
                                                                 Text="Date fee paid"></asp:Label>
+
                                                         </td>
                                                         <td>
-                                                            <asp:TextBox CssClass="form_field" ID="TextBox6" runat="server"></asp:TextBox>
+                                                            <asp:TextBox CssClass="form_field" ID="tbDateFeePaidNew" runat="server"></asp:TextBox>
+
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ImageAlign="Middle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateFeePaidNew" runat="server" />
                                                         </td>
                                                     </tr>
                                                 </table>
+                                                <ajaxToolkit:CalendarExtender ID="cexDateFeePaidNew" runat="server"
+                                                    TargetControlID="tbDateFeePaidNew"
+                                                    Format="MM/dd/yyyy"
+                                                    PopupButtonID="ibDateFeePaidNew" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revDateFeePaid1" Display="Dynamic" 
+                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                    ControlToValidate="tbDateFeePaidNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </asp:Panel>
                                         </td>
                                         <td>
                                             <asp:Panel ID="Panel13" GroupingText="Meeting Date" runat="server">
-                                                <asp:TextBox CssClass="form_field" ID="TextBox7" runat="server"></asp:TextBox>
+                                                <table><tr><td>
+                                                <asp:TextBox CssClass="form_field" ID="tbMeetingDateNew" runat="server"></asp:TextBox>
+                                                </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibMeetingDateNew" runat="server" /></td></tr></table>
+                                                <ajaxToolkit:CalendarExtender ID="ceMeetingDateNew" runat="server"
+                                                    TargetControlID="tbMeetingDateNew"
+                                                    Format="MM/dd/yyyy"
+                                                    PopupButtonID="ibMeetingDateNew" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revMeetingDateNew"  Display="Dynamic" 
+                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                    ControlToValidate="tbMeetingDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </asp:Panel>
                                         </td>
                                     </tr>
@@ -317,7 +378,7 @@
                                                             <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Project Type"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList CssClass="form_field" ID="DropDownList2" runat="server">
+                                                            <asp:DropDownList CssClass="form_field" ID="ddlProjectTypeNew" runat="server">
                                                                 <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                                                                 <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                                                                 <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
@@ -332,7 +393,7 @@
                                                             <asp:Label CssClass="form_field_heading" ID="Label28" runat="server" Text="Project Decision"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:DropDownList CssClass="form_field" ID="DropDownList3" runat="server">
+                                                            <asp:DropDownList CssClass="form_field" ID="ddlProjectDecisionNew" runat="server">
                                                                 <asp:ListItem Value="A">A - Approved</asp:ListItem>
                                                                 <asp:ListItem Value="AWC">AWC - Approved with Conditions</asp:ListItem>
                                                                 <asp:ListItem Value="DEF">DEF - Deferred</asp:ListItem>
@@ -343,7 +404,7 @@
                                                             <asp:Label CssClass="form_field_heading" ID="Label29" runat="server" Text="Is Commercial"></asp:Label>
                                                         </td>
                                                         <td>
-                                                            <asp:CheckBox ID="CheckBox1" runat="server" />
+                                                            <asp:CheckBox ID="cbIsCommercialNew" runat="server" />
                                                         </td>
                                                         <td width="15%" align="right">
                                                             &nbsp;
@@ -354,7 +415,7 @@
                                                             <asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Project"></asp:Label>
                                                         </td>
                                                         <td colspan="6">
-                                                            <asp:TextBox CssClass="form_field" ID="TextBox8" Width="100%" runat="server" TextMode="SingleLine"
+                                                            <asp:TextBox CssClass="form_field" ID="tbProjectNew" MaxLength="100" Width="100%" runat="server" TextMode="SingleLine"
                                                                 Rows="1"></asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -363,7 +424,7 @@
                                                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Submittal"></asp:Label>
                                                         </td>
                                                         <td colspan="6">
-                                                            <asp:TextBox CssClass="form_field" ID="TextBox9" Width="100%" runat="server" TextMode="MultiLine"
+                                                            <asp:TextBox CssClass="form_field" ID="tbSubmittalNew" Width="100%" runat="server" TextMode="MultiLine"
                                                                 Rows="4"></asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -380,7 +441,7 @@
                     <ContentTemplate>
                         <asp:UpdatePanel ID="updatePanel2" runat="server">
                             <ContentTemplate>
-                                <asp:TextBox ID="TextBox10" Style="width: 100%;" runat="server" TextMode="MultiLine"
+                                <asp:TextBox ID="tbConditionsNew" Style="width: 100%;" runat="server" TextMode="MultiLine"
                                     Height="340px"></asp:TextBox>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -388,27 +449,66 @@
                 </ajaxToolkit:TabPanel>
             </ajaxToolkit:TabContainer>
         </asp:Panel>
-        <table width="100%">
-            <tr>
-                <td>
-                    <asp:Button ID="btnNewSubmittalOk" runat="server" Text="Okay" 
-                        onclick="btnNewSubmittalOk_Click" />
-                </td>
-                <td>
-                    <asp:Button ID="btnNewSubmittalCancel" OnClientClick="return onNewSubmittalCancel()" runat="server" Text="Cancel" />
-                </td>
-            </tr>
-        </table>
-    </asp:Panel>
-    <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
+        <script  language="javascript" type="text/javascript" >
+        function doOk() {
+        
+            var loading = $(".loadingdb");
+            loading.show();
+            var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+            var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+            loading.css({ top: top, left: left });
+        }
 
+        // Called when async postback ends
+        function prm_EndRequest(sender, args) {
+            // get the divImage and hide it again
+            //debugger
+            if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1
+                || (sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 && sender._postBackSettings.sourceElement.id.indexOf("Ok" )!=-1)) {
+                var loading = $(".loading");
+                loading.hide();
+            }
+        }
+
+        </script>
+        <center>
+            <table cellpadding="4">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnNewSubmittalOk"  OnClientClick="javascript: return doOk();" CausesValidation="true" runat="server" Text="Okay" 
+                            onclick="btnNewSubmittalOk_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnNewSubmittalCancel" OnClientClick="return onNewSubmittalCancel()" runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblSubmitalNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="loadingdb" align="center">
+                Processing. Please wait.<br />
+                <br />
+                <img src="Images/animated_progress.gif" alt="" />
+            </div>
+
+
+
+        </center>
+    </asp:Panel>
+
+    <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
     <ajaxToolkit:ModalPopupExtender ID="mpeNewSubmittal" runat="server" TargetControlID="lbSubmittalNew"
-        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground"
+        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground" 
         PopupDragHandleControlID="pnlNewSubmittalTitleId"
         BehaviorID="jdpopupsubmittal" />
     <script language="javascript" type="text/javascript">
+
         function shown() {
-            var tb = document.getElementById('<% =tbSubmittalNewName.ClientID %>');
+            var tb = document.getElementById('<% =tbOwnersNameNew.ClientID %>');
             tb.focus();
         }
         function pageLoad() {

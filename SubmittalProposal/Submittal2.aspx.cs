@@ -251,6 +251,7 @@ namespace SubmittalProposal
                 Utils.executeNonQuery(cmd,
                     System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
                 performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY,tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
+                mpeNewSubmittal.Hide();
             } catch (Exception e) {
                 performPostNewFailedActions("Submittal not added. Msg: " + e.Message);
             }            

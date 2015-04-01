@@ -1,12 +1,11 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/MainMasterPage.Master" AutoEventWireup="true" CodeBehind="Database.master.cs"
-    Inherits="SubmittalProposal.Database" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/MainMasterPage.Master" AutoEventWireup="true"
+    CodeBehind="Database.master.cs" Inherits="SubmittalProposal.Database" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-
             <asp:Panel ID="PnlSearchBar" runat="server" CssClass="collapsePanelHeader" Height="30px">
                 <div style="padding: 5px; cursor: pointer; vertical-align: middle;">
                     <div style="float: left;">

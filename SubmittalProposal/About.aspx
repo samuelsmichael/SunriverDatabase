@@ -9,6 +9,10 @@
     </h2>
     <div style="height:350px;overflow:scroll;">
         <ul>
+            <li  style="font-weight:bold;">Version .10</li>
+                <ul>
+                    <li>Update and add functions work in Submittal</li>
+                </ul>
             <li style="font-weight:bold;">Version .09 </li>
                 <ul>First Crystal Report</ul>
             <li style="font-weight:bold;">Version .08 </li>

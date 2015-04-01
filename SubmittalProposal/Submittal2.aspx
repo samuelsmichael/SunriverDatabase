@@ -449,11 +449,33 @@
                 </ajaxToolkit:TabPanel>
             </ajaxToolkit:TabContainer>
         </asp:Panel>
+        <script  language="javascript" type="text/javascript" >
+        function doOk() {
+        
+            var loading = $(".loadingdb");
+            loading.show();
+            var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+            var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+            loading.css({ top: top, left: left });
+        }
+
+        // Called when async postback ends
+        function prm_EndRequest(sender, args) {
+            // get the divImage and hide it again
+            //debugger
+            if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1
+                || (sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 && sender._postBackSettings.sourceElement.id.indexOf("Ok" )!=-1)) {
+                var loading = $(".loading");
+                loading.hide();
+            }
+        }
+
+        </script>
         <center>
             <table cellpadding="4">
                 <tr>
                     <td>
-                        <asp:Button ID="btnNewSubmittalOk" CausesValidation="true" runat="server" Text="Okay" 
+                        <asp:Button ID="btnNewSubmittalOk"  OnClientClick="javascript: return doOk();" CausesValidation="true" runat="server" Text="Okay" 
                             onclick="btnNewSubmittalOk_Click" />
                     </td>
                     <td>
@@ -466,15 +488,25 @@
                     </td>
                 </tr>
             </table>
+
+            <div class="loadingdb" align="center">
+                Processing. Please wait.<br />
+                <br />
+                <img src="Images/animated_progress.gif" alt="" />
+            </div>
+
+
+
         </center>
     </asp:Panel>
-    <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
 
+    <asp:LinkButton ID="lbSubmittalNew" runat="server">New Submittal</asp:LinkButton>
     <ajaxToolkit:ModalPopupExtender ID="mpeNewSubmittal" runat="server" TargetControlID="lbSubmittalNew"
-        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground"
+        PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground" 
         PopupDragHandleControlID="pnlNewSubmittalTitleId"
         BehaviorID="jdpopupsubmittal" />
     <script language="javascript" type="text/javascript">
+
         function shown() {
             var tb = document.getElementById('<% =tbOwnersNameNew.ClientID %>');
             tb.focus();
