@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MainMasterPage.master.cs"
+    Inherits="SubmittalProposal.MainMasterPage" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="clear hideSkiplink">
+        <table width="100%">
+            <tr>
+                <td>
+                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                        IncludeStyleBlock="false" Orientation="Horizontal">
+                        <Items>
+                            <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home" />
+                            <asp:MenuItem NavigateUrl="~/BPermit.aspx" Text="BPermits" />
+                            <asp:MenuItem NavigateUrl="~/Submittal2.aspx" Text="Submittal" />
+                            <asp:MenuItem NavigateUrl="~/ComplianceReview.aspx" Text="Compliance Reviews" />
+                            <asp:MenuItem NavigateUrl="~/About.aspx" Text="Release Notes" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+                <td align="right" style="padding-right: 25px;">
+                    <asp:LinkButton Font-Size="9pt" ForeColor="#DDE4EC" CssClass="menu" ID="lbReports"
+                        runat="server" onclick="lbReports_Click">Reports</asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <asp:SqlDataSource ID="SRLot" runat="server" ConnectionString="<%$ ConnectionStrings:SRPropertySQLConnectionString %>"
+        SelectCommand="SELECT DISTINCT [Lot] FROM [tblLotLane] ORDER BY [Lot]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SRLane" runat="server" ConnectionString="<%$ ConnectionStrings:SRPropertySQLConnectionString %>"
+        SelectCommand="SELECT DISTINCT [Lane] FROM [tblLotLane] ORDER BY [Lane]"></asp:SqlDataSource>
+
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</asp:Content>

@@ -27,23 +27,42 @@
         // Called when async postback begins
         function prm_InitializeRequest(sender, args) {
             // get the divImage and set it to visible
-            if ( (args._postBackElement.id).indexOf("BtnGo") != -1 || (args._postBackElement.id).indexOf("gvResults") != -1
-                    || ((args._postBackElement.id).indexOf("btnNew") != -1 && (args._postBackElement.id).indexOf("Ok") != -1)) {
+            if (
+                (args._postBackElement.id).indexOf("BtnGo") != -1 ||
+                (args._postBackElement.id).indexOf("gvResults") != -1 ||
+                (
+                    (args._postBackElement.id).indexOf("btnNew") != -1 &&
+                    (args._postBackElement.id).indexOf("Ok") != -1
+                )                                                         ||
+                (
+                    (args._postBackElement.id).indexOf("btn") != -1 &&
+                    (args._postBackElement.id).indexOf("Update") != -1)
+               )                
+                {
                    // debugger
-                var loading = $(".loading");
-                loading.show();
-                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                loading.css({ top: top, left: left });
-            }
+                    var loading = $(".loading");
+                    loading.show();
+                    var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                    var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                    loading.css({ top: top, left: left });
+                }
         }
 
         // Called when async postback ends
         function prm_EndRequest(sender, args) {
             // get the divImage and hide it again
             //debugger
-            if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1
-                || (sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 && sender._postBackSettings.sourceElement.id.indexOf("Ok" )!=-1)) {
+            if (
+                sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 ||
+                sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1 ||
+                (
+                    sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 &&
+                    sender._postBackSettings.sourceElement.id.indexOf("Ok") != -1
+                )                                                               ||
+                (
+                    sender._postBackSettings.sourceElement.id.indexOf("btn") != -1 &&
+                    sender._postBackSettings.sourceElement.id.indexOf("Update") != -1)
+                )                {
                 var loading = $(".loading");
                 loading.hide();
             }
