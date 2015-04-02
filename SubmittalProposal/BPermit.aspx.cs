@@ -14,11 +14,43 @@ namespace SubmittalProposal {
     public partial class BPermit : AbstractDatabase {
         static DataTable dtBPayment = null;
 
+        private static string BPERMIT_CACHE_KEY = "BPermitDS";
+        private static string BPERMIT_CACHE_GRID_KEY = "BPermitDSGridView";
         protected override Label getUpdateResultsLabel() {
             return lblBPermitUpdateResults;
         }
         protected void btnBPermitUpdate_Click(object sender, EventArgs e) {
-           
+            try {
+                SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
+                cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text;
+                cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameUpdate.Text;
+                cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneUpdate.SelectedValue;
+                cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text;
+                cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorUpdate.Text;
+                cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeUpdate.SelectedValue;
+                cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectUpdate.Text;
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
+                cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredUpdate.SelectedValue == "Yes" ? true : false;
+                DateTime? issuedDate =
+                    tbIssuedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedUpdate.Text);
+                cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
+                DateTime? closeDate =
+                    tbClosedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedUpdate.Text);
+                cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
+                cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayUpdate.Text;
+                cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = SubmittalIDBeingEdited;
+                SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
+                newBPermitId.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newBPermitId);
+                SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
+                newSubmittalId.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newSubmittalId);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                
+                performPostUpdateSuccessfulActions("Update successful", BPERMIT_CACHE_KEY,BPERMIT_CACHE_GRID_KEY);
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
+            }
         }
 
         protected override Label getNewResultsLabel() {
@@ -28,7 +60,7 @@ namespace SubmittalProposal {
         public static DataSet BPermitDataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
-            string key = "BPermitDS";
+            string key = BPERMIT_CACHE_KEY;
             ds = (DataSet)cache[key];
             if (ds == null) {
                 SqlCommand cmd = new SqlCommand("uspBPermitTablesGet");
@@ -90,6 +122,15 @@ namespace SubmittalProposal {
                 ViewState["BPermitIDBeingEdited"] = value;
             }
         }
+        private int? SubmittalIDBeingEdited {
+            get {
+                object obj = ViewState["SubmittalIDBeingEdited"];
+                return obj == null ? (int?)null : (int)obj;
+            }
+            set {
+                ViewState["SubmittalIDBeingEdited"] = value;
+            }
+        }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
@@ -100,13 +141,14 @@ namespace SubmittalProposal {
             DataTable sourceTable = getGridViewDataTable();
             
             DataView view = new DataView(sourceTable);
+
             view.RowFilter = "BPermitId=" + getBPermitId(row);
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
 
-            tbDelay.Text = Utils.ObjectToString(dr["BPDelay"]);
+            tbDelayUpdate.Text = Utils.ObjectToString(dr["BPDelay"]);
             DateTime? issueDate = Utils.ObjectToDateTimeNullable(dr["BPIssueDate"]);
-            tbIssued.Text = issueDate.HasValue ? issueDate.Value.ToString("MM/dd/yyyy") : "";
+            tbIssuedUpdate.Text = issueDate.HasValue ? issueDate.Value.ToString("MM/dd/yyyy") : "";
             Object expires=dr["BPExpires"];
             if (expires is DBNull) {
                 lblExpired.Text = "";
@@ -122,25 +164,26 @@ namespace SubmittalProposal {
                 }
             } catch { }
             DateTime? closed = Utils.ObjectToDateTimeNullable(dr["BPClosed"]);
-            tbClosed.Text = closed.HasValue?closed.Value.ToString("MM/dd/yyyy"):"";
+            tbClosedUpdate.Text = closed.HasValue?closed.Value.ToString("MM/dd/yyyy"):"";
             if (Utils.ObjectToBool(dr["BPermitReqd"])) {
-                rbListPermitRequired.SelectedValue = "Yes";
+                rbListPermitRequiredUpdate.SelectedValue = "Yes";
             } else {
-                rbListPermitRequired.SelectedValue = "No";
+                rbListPermitRequiredUpdate.SelectedValue = "No";
             }
-            tbApplicantName2.Text = Utils.ObjectToString(dr["Applicant"]);
-            tbOwnersName.Text=Utils.ObjectToString(dr["OwnersName"]);
-            tbContractorBB.Text = Utils.ObjectToString(dr["Contractor"]);
-            ddlProjectType.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
-            tbProject.Text = Utils.ObjectToString(dr["Project"]);
-            tbLotName2.Text = Utils.ObjectToString(dr["Lot"]);
-            if (ddlLane2.Items.FindByText(Utils.ObjectToString(dr["Lane"])) == null) {
-                ddlLane2.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
-            } 
-            ddlLane2.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            tbApplicantNameUpdate.Text = Utils.ObjectToString(dr["Applicant"]);
+            tbOwnersNameUpdate.Text = Utils.ObjectToString(dr["OwnersName"]);
+            tbContractorUpdate.Text = Utils.ObjectToString(dr["Contractor"]);
+            ddlProjectTypeUpdate.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
+            tbProjectUpdate.Text = Utils.ObjectToString(dr["Project"]);
+            tbLotNameUpdate.Text = Utils.ObjectToString(dr["Lot"]);
+            if (ddlLaneUpdate.Items.FindByText(Utils.ObjectToString(dr["Lane"])) == null) {
+                ddlLaneUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
+            }
+            ddlLaneUpdate.SelectedValue = Utils.ObjectToString(dr["Lane"]);
 
             bind_gvReviews(getBPermitId(row));
             int? submittalId = getSubmittalId(dr);
+            SubmittalIDBeingEdited = submittalId;
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + (submittalId.HasValue?Convert.ToString(submittalId.Value):"") + "  BPermitId :" + getBPermitId(dr) + " Owner: " + getOwner(dr);
 
         }
@@ -236,10 +279,10 @@ namespace SubmittalProposal {
                 gotoBPermitId = Request.QueryString["BPermitId"];
                 ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlLane2.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
-                ddlLane2.DataBind();
-                ddlNewBPermitLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
-                ddlNewBPermitLane.DataBind();
+                ddlLaneUpdate.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLaneUpdate.DataBind();
+                ddlLaneNew.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLaneNew.DataBind();
 
             }
             if (Common.Utils.isNothingNot(gotoBPermitId)) {
@@ -266,7 +309,7 @@ namespace SubmittalProposal {
                     tbSubmittalIdNew.Text = Utils.ObjectToString(dr["SubmittalId"]);
                     tbSubmittalIdNew.Enabled = false;
                     tbLotNameNew.Text = Utils.ObjectToString(dr["Lot"]);
-                    ddlNewBPermitLane.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+                    ddlLaneNew.SelectedValue = Utils.ObjectToString(dr["Lane"]);
                     tbOwnersNameNew.Text = Utils.ObjectToString(dr["Own_Name"]);
                     tbApplicantNameNew.Text = Utils.ObjectToString(dr["Applicant"]);
 
@@ -280,11 +323,11 @@ namespace SubmittalProposal {
         protected override void clearAllSelectionInputFields() {
             tbProjectNew.Text = "";
             tbContractorNew.Text = "";
-            tbNewBPermitDelay.Text = "";
+            tbDelayNew.Text = "";
             tbIssuedNew.Text = "";
             tbSubmittalIdNew.Text = "";
             tbLotNameNew.Text = "";
-            ddlNewBPermitLane.SelectedIndex = 0;
+            ddlLaneNew.SelectedIndex = 0;
             tbOwnersNameNew.Text = "";
             tbApplicantNameNew.Text = "";
         }
@@ -292,7 +335,7 @@ namespace SubmittalProposal {
         protected override DataTable getGridViewDataTable() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
-            string key = "BPermitDSGridView";
+            string key = BPERMIT_CACHE_GRID_KEY;
             ds = (DataSet)cache[key];
             if (ds == null) {
                 SqlCommand cmd = new SqlCommand("uspBPermitDataGridViewDataGet");
@@ -378,8 +421,44 @@ namespace SubmittalProposal {
         }
         
         protected override void lockYourUpdateFields() {
+            tbDelayUpdate.Enabled = false;
+            tbIssuedUpdate.Enabled = false;
+            tbClosedUpdate.Enabled = false;
+            rbListPermitRequiredUpdate.Enabled = false;
+            tbLotNameUpdate.Enabled = false;
+            ddlLaneUpdate.Enabled = false;
+            tbOwnersNameUpdate.Enabled = false;
+            tbApplicantNameUpdate.Enabled = false;
+            tbContractorUpdate.Enabled = false;
+            tbProjectUpdate.Enabled = false;
+            ddlProjectTypeUpdate.Enabled = false;
+            btnBPermitUpdate.Enabled = false;
+            gvPayments.Enabled = false;
+            gvReviews.Enabled = false;
+            ibIssuedUpdate.Enabled = false;
+            ibClosedUpdate.Enabled = false;
+            lbBPermitNewPayment.Enabled = false;
+            lbBPermitNewReview.Enabled = false;
         }
         protected override void unlockYourUpdateFields() {
+            tbDelayUpdate.Enabled = true;
+            tbIssuedUpdate.Enabled = true;
+            tbClosedUpdate.Enabled = true;
+            rbListPermitRequiredUpdate.Enabled = true;
+            tbLotNameUpdate.Enabled = true;
+            ddlLaneUpdate.Enabled = true;
+            tbOwnersNameUpdate.Enabled = true;
+            tbApplicantNameUpdate.Enabled = true;
+            tbContractorUpdate.Enabled = true;
+            tbProjectUpdate.Enabled = true;
+            ddlProjectTypeUpdate.Enabled = true;
+            btnBPermitUpdate.Enabled = true;
+            gvPayments.Enabled = true;
+            gvReviews.Enabled = true;
+            ibIssuedUpdate.Enabled = true;
+            ibClosedUpdate.Enabled = true;
+            lbBPermitNewPayment.Enabled = true;
+            lbBPermitNewReview.Enabled = true;
         }
     
     }

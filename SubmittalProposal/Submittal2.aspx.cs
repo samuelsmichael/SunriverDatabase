@@ -51,7 +51,7 @@ namespace SubmittalProposal
                     "uspSubmittalUpdate"
                 );
                 cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = CurrentSubmittalId;
-                cmd.Parameters.Add("@Own_Name", SqlDbType.VarChar).Value = tbOwnersNameUpdate.Text.Trim();
+                cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text.Trim();
                 cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameUpdate.Text.Trim();
                 cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneUpdate.SelectedValue;
                 cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text.Trim();
@@ -68,7 +68,7 @@ namespace SubmittalProposal
                 cmd.Parameters.Add(dummy);
                 Utils.executeNonQuery(cmd,
                     System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                performPostUpdateSuccessfulActions("Update successful", SUBMITTAL_CACHE_KEY);
+                performPostUpdateSuccessfulActions("Update successful", SUBMITTAL_CACHE_KEY,null);
             } catch (Exception e) {
                 performPostUpdateFailedActions("Update failed. Msg: " + e.Message);
             }

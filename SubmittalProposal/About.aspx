@@ -11,6 +11,10 @@
         <ul>
             <li  style="font-weight:bold;">Version .11</li>
                 <ul>
+                    <li>BPermit now updates and adds.</li>
+                </ul>
+            <li  style="font-weight:bold;">Version .11</li>
+                <ul>
                     <li>Modifications to the Search Results in Submittal</li>
                     <li>Meeting Date is mandatory</li>
                     <li>Incorporated "keep record locked" function.  Note, currently this function is only working with the Submittals page, since the other two pages don't yet actually perform updates or adds.</li>

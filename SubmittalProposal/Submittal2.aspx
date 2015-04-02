@@ -131,14 +131,14 @@
                                         <table><tr><td>
                                         <asp:TextBox CssClass="form_field" Enabled="false" ID="tbMeetingDateUpdate" runat="server"></asp:TextBox>
                                         </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibMeetingDateUpdate" runat="server" /></td></tr></table>
-                                    <ajaxToolkit:CalendarExtender ID="ceMeetingDateUpdate" runat="server"
-                                        TargetControlID="tbMeetingDateUpdate"
-                                        Format="MM/dd/yyyy"
-                                        PopupButtonID="ibMeetingDateUpdate" />
-                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revMeetingDateUpdate"  Display="Dynamic" 
-                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                        ControlToValidate="tbMeetingDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="rfvMeedtingDateUpdate" ForeColor="Red" ControlToValidate="tbMeetingDateUpdate" runat="server" ErrorMessage="Meeting Date is required"></asp:RequiredFieldValidator>
+                                        <ajaxToolkit:CalendarExtender ID="ceMeetingDateUpdate" runat="server"
+                                            TargetControlID="tbMeetingDateUpdate"
+                                            Format="MM/dd/yyyy"
+                                            PopupButtonID="ibMeetingDateUpdate" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revMeetingDateUpdate"  Display="Dynamic" 
+                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ControlToValidate="tbMeetingDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator ID="rfvMeedtingDateUpdate" ForeColor="Red" ControlToValidate="tbMeetingDateUpdate" runat="server" ErrorMessage="Meeting Date is required"></asp:RequiredFieldValidator>
                                     </asp:Panel>
                                 </td>
                                 <td>&nbsp;</td>

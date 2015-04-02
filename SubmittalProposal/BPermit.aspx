@@ -87,13 +87,29 @@
                     <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Delay"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbDelay" Width="3em" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" MaxLength="255" ID="tbDelayUpdate" Width="3em"
+                        runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label1" runat="server" Text="Issued"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbIssued" Width="10em" runat="server"></asp:TextBox>
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:TextBox CssClass="form_field" ID="tbIssuedUpdate" Width="10em" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    ID="ibIssuedUpdate" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                    <ajaxToolkit:CalendarExtender ID="ceIssuedUpdate" runat="server" TargetControlID="tbIssuedUpdate"
+                        Format="MM/dd/yyyy" PopupButtonID="ibIssuedUpdate" />
+                    <asp:RegularExpressionValidator ForeColor="Red" ID="revIssuedUpdate" Display="Dynamic"
+                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                        ControlToValidate="tbIssuedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="Expired"></asp:Label>
@@ -105,13 +121,29 @@
                     <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Closed"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbClosed" Width="10em" runat="server"></asp:TextBox>
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:TextBox CssClass="form_field" ID="tbClosedUpdate" Width="10em" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    ID="ibClosedUpdate" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                    <ajaxToolkit:CalendarExtender ID="ceClosedUpdate" runat="server" TargetControlID="tbClosedUpdate"
+                        Format="MM/dd/yyyy" PopupButtonID="ibClosedUpdate" />
+                    <asp:RegularExpressionValidator ForeColor="Red" ID="revClosedUpdate" Display="Dynamic"
+                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                        ControlToValidate="tbClosedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Permit Required"></asp:Label>
                 </td>
                 <td>
-                    <asp:RadioButtonList ID="rbListPermitRequired" RepeatDirection="Horizontal" runat="server">
+                    <asp:RadioButtonList ID="rbListPermitRequiredUpdate" RepeatDirection="Horizontal"
+                        runat="server">
                         <asp:ListItem>Yes</asp:ListItem>
                         <asp:ListItem>No</asp:ListItem>
                     </asp:RadioButtonList>
@@ -126,13 +158,14 @@
                     <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Lot"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbLotName2" Width="22" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" ID="tbLotNameUpdate" MaxLength="5" Width="35"
+                        runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Lane"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList CssClass="form_field" ID="ddlLane2" runat="server" DataTextField="Lane"
+                    <asp:DropDownList CssClass="form_field" ID="ddlLaneUpdate" runat="server" DataTextField="Lane"
                         DataValueField="Lane">
                     </asp:DropDownList>
                 </td>
@@ -140,13 +173,15 @@
                     <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Owner"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbOwnersName" Width="20em" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" ID="tbOwnersNameUpdate" MaxLength="40" Width="20em"
+                        runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Applicant"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbApplicantName2" Width="20em" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" MaxLength="25" ID="tbApplicantNameUpdate" Width="20em"
+                        runat="server"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -154,20 +189,21 @@
                     <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="Contractor"></asp:Label>
                 </td>
                 <td colspan="2">
-                    <asp:TextBox CssClass="form_field" ID="tbContractorBB" Width="20em" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" MaxLength="30" ID="tbContractorUpdate" Width="20em"
+                        runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Project"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox CssClass="form_field" ID="tbProject" runat="server" Width="20em" TextMode="MultiLine"
-                        Rows="4"></asp:TextBox>
+                    <asp:TextBox CssClass="form_field" MaxLength="100" ID="tbProjectUpdate" runat="server"
+                        Width="20em" TextMode="MultiLine" Rows="4"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Project Type"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList CssClass="form_field" ID="ddlProjectType" runat="server">
+                    <asp:DropDownList CssClass="form_field" ID="ddlProjectTypeUpdate" runat="server">
                         <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                         <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                         <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
@@ -207,29 +243,38 @@
                         </EmptyDataTemplate>
                         <Columns>
                             <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowCancelButton="true" />
-                            <asp:BoundField DataField="BPPmt" HeaderText="Nbr" />
+                            <asp:TemplateField HeaderText="Nbr">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("BPPmt") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("BPPmt") %>'></asp:Label>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Fee">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("BPFee$","{0:c}") %>'></asp:TextBox>
+                                    <asp:TextBox ID="tbBPPaymentFeeUpdate" runat="server" 
+                                        Text='<%# Eval("BPFee$","{0:0.00}") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPFee$","{0:c}") %>'></asp:Label>
                                 </ItemTemplate>
                                 <FooterTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# getBPFeeTotal() %>'></asp:Label>
+                                    <asp:Label ID="Label1" runat="server" Text="<%# getBPFeeTotal() %>"></asp:Label>
                                 </FooterTemplate>
                                 <FooterStyle HorizontalAlign="Right" />
                                 <ItemStyle HorizontalAlign="Right" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Months">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("BPMonths") %>'></asp:TextBox>
+                                    <asp:TextBox ID="tbBPPaymentMonthsUpdate" runat="server" 
+                                        Text='<%# Bind("BPMonths") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("BPMonths") %>'></asp:Label>
                                 </ItemTemplate>
                                 <FooterTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# getBPMonthsTotal() %>'></asp:Label>
+                                    <asp:Label ID="Label1" runat="server" Text="<%# getBPMonthsTotal() %>"></asp:Label>
                                 </FooterTemplate>
                                 <FooterStyle HorizontalAlign="Right" />
                                 <ItemStyle HorizontalAlign="Right" />
@@ -250,41 +295,43 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label34" runat="server" Text="Payment Number"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="tbBPermitNewPaymentNumber" Width="3em" runat="server"></asp:TextBox>
+                                        <asp:Label CssClass="form_field" ID="lblBPermitNewPaymentNumber" Width="3em" runat="server"></asp:Label>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Fee"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox3" Width="8em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbBPPaymentFeeNew" Width="8em" runat="server"></asp:TextBox>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label33" runat="server" Text="Months"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox12" Width="4em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbBPPaymentMonthsNew" Width="4em" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <table width="100%">
-                            <tr>
-                                <td>
-                                    <asp:Button ID="btnNewBPermitPaymentOk" runat="server" Text="Okay" OnClick="btnNewBPermitPaymentOk_Click" />
-                                </td>
-                                <td>
-                                    <asp:Button ID="btnNewBPermitPaymentCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                        runat="server" Text="Cancel" />
-                                </td>
-                            </tr>
-                        </table>
+                        <center>
+                            <table cellpadding="3">
+                                <tr>
+                                    <td>
+                                        <asp:Button ID="btnNewBPermitPaymentOk" runat="server" Text="Okay" OnClick="btnNewBPermitPaymentOk_Click" />
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="btnNewBPermitPaymentCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                            runat="server" Text="Cancel" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
                     </asp:Panel>
                     <ajaxToolkit:ModalPopupExtender ID="mpeBPermitNewPayment" runat="server" TargetControlID="lbBPermitNewPayment"
                         PopupControlID="pnlBPermitNewPayment" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlBPermitNewPaymentTitle"
                         BehaviorID="jdpopupbpermitnewpayment" />
                     <script language="javascript" type="text/javascript">
                         function shownnp() {
-                            var tb = document.getElementById('<% =tbBPermitNewPaymentNumber.ClientID %>');
+                            var tb = document.getElementById('<% =tbBPPaymentFeeNew.ClientID %>');
                             tb.focus();
 
                         }
@@ -317,12 +364,107 @@
                         </EmptyDataTemplate>
                         <Columns>
                             <asp:CommandField ButtonType="Link" ShowEditButton="true" />
-                            <asp:BoundField DataField="BPRevw" HeaderText="Nbr" />
-                            <asp:BoundField DataField="BPReviewDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="1st Inspect" />
-                            <asp:BoundField DataField="BPRActionDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Action " />
-                            <asp:BoundField DataField="BPRLetterDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Letter" />
-                            <asp:BoundField DataField="BPRLetterRef" HeaderText="Letter Ref" />
-                            <asp:BoundField DataField="BPRComments" HeaderText="Comments" />
+                            <asp:TemplateField HeaderText="Nbr">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("BPRevw") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("BPRevw") %>'></asp:Label>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="1st Inspect">
+                                <EditItemTemplate>
+                                    <table><tr><td>
+                                    <asp:TextBox ID="tbBPermitReviewDateUpdate" runat="server" 
+                                            Text='<%# Bind("BPReviewDate") %>'></asp:TextBox>
+                                    </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                                ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitReviewDateUpdate" 
+                                                runat="server" /></td></tr></table>
+                                    <ajaxToolkit:CalendarExtender ID="ceBPermitReviewDateUpdate" runat="server"
+                                        TargetControlID="tbBPermitReviewDateUpdate"
+                                        Format="MM/dd/yyyy"
+                                        PopupButtonID="ibBPermitReviewDateUpdate" />
+                                    <asp:RegularExpressionValidator ForeColor="Red" 
+                                        ID="revBPermitReviewDateUpdate"  Display="Dynamic" 
+                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                        ControlToValidate="tbBPermitReviewDateUpdate" runat="server" 
+                                        ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Action ">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" 
+                                        Text='<%# Bind("BPReviewDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <table><tr><td>
+                                    <asp:TextBox ID="tbBPermitActionDateUpdate" runat="server" 
+                                            Text='<%# Bind("BPRActionDate") %>'></asp:TextBox>
+                                    </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                                ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitActionDateUpdate" 
+                                                runat="server" /></td></tr></table>
+                                    <ajaxToolkit:CalendarExtender ID="ceBPermitActionDateUpdate" runat="server"
+                                        TargetControlID="tbBPermitActionDateUpdate"
+                                        Format="MM/dd/yyyy"
+                                        PopupButtonID="ibBPermitActionDateUpdate" />
+                                    <asp:RegularExpressionValidator ForeColor="Red" 
+                                        ID="revBPermitActionDateUpdate"  Display="Dynamic" 
+                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                        ControlToValidate="tbBPermitActionDateUpdate" runat="server" 
+                                        ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Letter">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" 
+                                        Text='<%# Bind("BPRActionDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <asp:TextBox ID="tbBPermitLetterDateUpdate" runat="server" 
+                                                    Text='<%# Bind("BPRLetterDate") %>'></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton ID="ibBPermitLetterDateUpdate" runat="server" 
+                                                    ImageAlign="AbsMiddle" ImageUrl="~/Images/Calendar_scheduleHS.png" 
+                                                    ToolTip="Click to show date selector" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <ajaxToolkit:CalendarExtender ID="ceBPermitLetterDateUpdate" runat="server" 
+                                        Format="MM/dd/yyyy" PopupButtonID="ibBPermitLetterDateUpdate" 
+                                        TargetControlID="tbBPermitLetterDateUpdate" />
+                                    <asp:RegularExpressionValidator ID="revBPermitLetterDateUpdate" runat="server" 
+                                        ControlToValidate="tbBPermitLetterDateUpdate" Display="Dynamic" 
+                                        ErrorMessage="Please enter a valid date" ForeColor="Red" 
+                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"></asp:RegularExpressionValidator>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Letter Ref">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label3" runat="server" 
+                                        Text='<%# Bind("BPRLetterDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="tbBPRLetterRefUpdate" runat="server" 
+                                        Text='<%# Bind("BPRLetterRef") %>' MaxLength="25"></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Comments">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("BPRLetterRef") %>'></asp:Label>
+                                </ItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("BPRComments") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="tbBPRCommentsUpdate" runat="server" 
+                                        Text='<%# Bind("BPRComments") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                     <center style="margin-top: 5px;">
@@ -339,31 +481,58 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label35" runat="server" Text="Review Number"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="tbBPermitNewReviewNumber" Width="3em" runat="server"></asp:TextBox>
+                                        <asp:Label CssClass="form_field" ID="lblBPermitNewReviewNumber" Width="3em" runat="server"></asp:Label>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Inspection Date"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox14" Width="8em" runat="server"></asp:TextBox>
+                                        <table><tr><td>
+                                        <asp:TextBox CssClass="form_field" ID="tbBPermitReviewDateNew" Width="8em" runat="server"></asp:TextBox>
+                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitReviewDateNew" runat="server" /></td></tr></table>
+                                        <ajaxToolkit:CalendarExtender ID="ceBPermitReviewDateNew" runat="server"
+                                            TargetControlID="tbBPermitReviewDateNew"
+                                            Format="MM/dd/yyyy"
+                                            PopupButtonID="ibBPermitReviewDateNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitReviewDateNew"  Display="Dynamic" 
+                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ControlToValidate="tbBPermitReviewDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label38" runat="server" Text="Action Date"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox13" Width="8em" runat="server"></asp:TextBox>
+                                        <table><tr><td>
+                                        <asp:TextBox CssClass="form_field" ID="tbBPermitActionDateNew" Width="8em" runat="server"></asp:TextBox>
+                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitActionDateNew" runat="server" /></td></tr></table>
+                                        <ajaxToolkit:CalendarExtender ID="ceBPermitActionDateNew" runat="server"
+                                            TargetControlID="tbBPermitActionDateNew"
+                                            Format="MM/dd/yyyy"
+                                            PopupButtonID="ibBPermitActionDateNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitActionDateNew"  Display="Dynamic" 
+                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ControlToValidate="tbBPermitActionDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label39" runat="server" Text="Letter Date"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox16" Width="8em" runat="server"></asp:TextBox>
+                                        <table><tr><td>
+                                        <asp:TextBox CssClass="form_field" ID="tbBPermitLetterDateNew" Width="8em" runat="server"></asp:TextBox>
+                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitLetterDateNew" runat="server" /></td></tr></table>
+                                        <ajaxToolkit:CalendarExtender ID="ceBPermitLetterDateNew" runat="server"
+                                            TargetControlID="tbBPermitLetterDateNew"
+                                            Format="MM/dd/yyyy"
+                                            PopupButtonID="ibBPermitLetterDateNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitLetterDateNew"  Display="Dynamic" 
+                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ControlToValidate="tbBPermitLetterDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label37" runat="server" Text="Letter Reference"></asp:Label>
                                     </td>
                                     <td class="form_field">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox15" Width="8em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbBPRLetterRefNew" MaxLength="25" Width="8em" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -371,7 +540,7 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label40" runat="server" Text="Comments"></asp:Label>
                                     </td>
                                     <td align="left" class="form_field" colspan="9">
-                                        <asp:TextBox CssClass="form_field" ID="TextBox17" Width="99%" runat="server" TextMode="MultiLine"
+                                        <asp:TextBox CssClass="form_field" ID="tbBPRCommentsNew" Width="99%" runat="server" TextMode="MultiLine"
                                             Rows="3"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -381,10 +550,10 @@
                             <table cellpadding="2" cellspacing="2">
                                 <tr>
                                     <td>
-                                        <asp:Button ID="Button1" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
+                                        <asp:Button ID="btnNewBPermitReviewOk" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="Button2" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                        <asp:Button ID="btnNewBPermitReviewCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
                                             runat="server" Text="Cancel" />
                                     </td>
                                 </tr>
@@ -396,7 +565,7 @@
                         BehaviorID="jdpopupbpermitnewreview" />
                     <script language="javascript" type="text/javascript">
                         function shownnr() {
-                            var tb = document.getElementById('<% =tbBPermitNewReviewNumber.ClientID %>');
+                            var tb = document.getElementById('<% =tbBPermitReviewDateNew.ClientID %>');
                             tb.focus();
 
                         }
@@ -412,7 +581,7 @@
     </table>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
-            ID="btnBPermitUpdate" OnClick="btnBPermitUpdate_Click" runat="server" Text="Submit" />
+            ID="btnBPermitUpdate" OnClick="btnBPermitUpdate_Click" OnClientClick="javascript: return true;" runat="server" Text="Submit" />
         <asp:Label ID="lblBPermitUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
     </center>
 </asp:Content>
@@ -432,31 +601,50 @@
                             <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Delay"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="tbNewBPermitDelay" Width="3em" runat="server"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbDelayNew" Width="3em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Issued"></asp:Label>
                         </td>
                         <td>
+                            <table><tr><td>
                             <asp:TextBox CssClass="form_field" ID="tbIssuedNew" Width="10em" runat="server"></asp:TextBox>
+                            </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibIssuedNew" runat="server" /></td></tr></table>
+                            <ajaxToolkit:CalendarExtender ID="ceIssuedNew" runat="server"
+                                TargetControlID="tbIssuedNew"
+                                Format="MM/dd/yyyy"
+                                PopupButtonID="ibIssuedNew" />
+                            <asp:RegularExpressionValidator ForeColor="Red" ID="revIssuedNew"  Display="Dynamic" 
+                                ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                ControlToValidate="tbIssuedNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="SubmittalID"></asp:Label>
                         </td>
                         <td>
                             <asp:TextBox CssClass="form_field" ID="tbSubmittalIdNew" Width="10em" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvSubmittalIdNew" ForeColor="Red" Display="Dynamic" ControlToValidate="tbSubmittalIdNew" runat="server" ErrorMessage="SubmittalId is Required"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Closed"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="TextBox5" Width="10em" runat="server"></asp:TextBox>
+                            <table><tr><td>
+                            <asp:TextBox CssClass="form_field" ID="tbClosedNew" Width="10em" runat="server"></asp:TextBox>
+                            </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibClosedNew" runat="server" /></td></tr></table>
+                            <ajaxToolkit:CalendarExtender ID="ceClosedNew" runat="server"
+                                TargetControlID="tbClosedNew"
+                                Format="MM/dd/yyyy"
+                                PopupButtonID="ibClosedNew" />
+                            <asp:RegularExpressionValidator ForeColor="Red" ID="revClosedNew"  Display="Dynamic" 
+                                ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                ControlToValidate="tbClosedNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Permit Required"></asp:Label>
                         </td>
                         <td>
-                            <asp:RadioButtonList ID="RadioButtonList1" RepeatDirection="Horizontal" runat="server">
+                            <asp:RadioButtonList ID="rbListPermitRequiredNew" RepeatDirection="Horizontal" runat="server">
                                 <asp:ListItem>Yes</asp:ListItem>
                                 <asp:ListItem>No</asp:ListItem>
                             </asp:RadioButtonList>
@@ -477,7 +665,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Lane"></asp:Label>
                         </td>
                         <td>
-                            <asp:DropDownList CssClass="form_field" ID="ddlNewBPermitLane" runat="server" DataTextField="Lane"
+                            <asp:DropDownList CssClass="form_field" ID="ddlLaneNew" runat="server" DataTextField="Lane"
                                 DataValueField="Lane">
                             </asp:DropDownList>
                         </td>
@@ -505,8 +693,8 @@
                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Project"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field" ID="tbProjectNew" runat="server" Width="20em" TextMode="MultiLine"
-                                Rows="4"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field" ID="tbProjectNew" runat="server" Width="20em"
+                                TextMode="MultiLine" Rows="4"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label32" runat="server" Text="Project Type"></asp:Label>
@@ -557,7 +745,7 @@
     <script language="javascript" type="text/javascript">
         Sys.Application.add_load(pageLoadPopupNewBPermit);
         function shown() {
-            var tb = document.getElementById('<% =tbNewBPermitDelay.ClientID %>');
+            var tb = document.getElementById('<% =tbDelayNew.ClientID %>');
             tb.focus();
         }
         function pageLoadPopupNewBPermit() {
@@ -565,7 +753,7 @@
             dddp.add_shown(shown);
             var showauto = document.getElementById('<%=hfAutoShowPopupNew.ClientID %>');
             if (showauto && showauto.value == 'y') {
-                showauto.value='n'
+                showauto.value = 'n'
                 dddp.show();
             }
         }

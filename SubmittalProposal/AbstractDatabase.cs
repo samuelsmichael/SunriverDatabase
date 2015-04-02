@@ -41,8 +41,11 @@ namespace SubmittalProposal {
             }
         }
 
-        protected void performPostUpdateSuccessfulActions(string status, string cacheKey) {
+        protected void performPostUpdateSuccessfulActions(string status, string cacheKey, string cacheKey2) {
             MemoryCache.Default.Remove(cacheKey);
+            if (cacheKey2 != null) {
+                MemoryCache.Default.Remove(cacheKey2);
+            }
             /* the following statements cause the view to be re-displayed, but with updated data */
             ((Database)Master).doGo();
             do_gvResults_SelectedIndexChanged();
