@@ -369,7 +369,8 @@
                 <asp:Panel runat="server" ID="pnlReviews" GroupingText="Reviews">
                     <asp:GridView ID="gvReviews" Width="100%" runat="server" AutoGenerateColumns="False"
                         CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCancelingEdit="gvReviews_RowCancelingEdit"
-                        OnRowEditing="gvReviews_RowEditing" OnRowUpdating="gvReviews_RowUpdating">
+                        OnRowEditing="gvReviews_RowEditing" OnRowUpdating="gvReviews_RowUpdating" 
+                        DataKeyNames="BPReviewID">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -385,7 +386,7 @@
                             <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
                         </EmptyDataTemplate>
                         <Columns>
-                            <asp:CommandField ButtonType="Link" ShowEditButton="true" />
+                            <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true" />
                             <asp:TemplateField HeaderText="Nbr">
                                 <ItemTemplate>
                                     <asp:Label ID="Label6" runat="server" Text='<%# Bind("BPRevw") %>'></asp:Label>
@@ -398,7 +399,7 @@
                                 <EditItemTemplate>
                                     <table><tr><td>
                                     <asp:TextBox ID="tbBPermitReviewDateUpdate" runat="server" 
-                                            Text='<%# Bind("BPReviewDate") %>'></asp:TextBox>
+                                            Text='<%# Bind("BPReviewDate", "{0:MM/dd/yyyy}") %>'></asp:TextBox>
                                     </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
                                                 ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitReviewDateUpdate" 
                                                 runat="server" /></td></tr></table>
@@ -411,18 +412,22 @@
                                         ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
                                         ControlToValidate="tbBPermitReviewDateUpdate" runat="server" 
                                         ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-
                                 </EditItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Action ">
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" 
                                         Text='<%# Bind("BPReviewDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
                                 </ItemTemplate>
+
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Action ">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" 
+                                        Text='<%# Bind("BPRActionDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                </ItemTemplate>
                                 <EditItemTemplate>
                                     <table><tr><td>
                                     <asp:TextBox ID="tbBPermitActionDateUpdate" runat="server" 
-                                            Text='<%# Bind("BPRActionDate") %>'></asp:TextBox>
+                                            Text='<%# Bind("BPRActionDate", "{0:MM/dd/yyyy}") %>'></asp:TextBox>
                                     </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
                                                 ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitActionDateUpdate" 
                                                 runat="server" /></td></tr></table>
@@ -440,35 +445,36 @@
                             <asp:TemplateField HeaderText="Letter">
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" 
-                                        Text='<%# Bind("BPRActionDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                        Text='<%# Bind("BPRLetterDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <table>
                                         <tr>
                                             <td>
+                                                <table><tr><td>
                                                 <asp:TextBox ID="tbBPermitLetterDateUpdate" runat="server" 
-                                                    Text='<%# Bind("BPRLetterDate") %>'></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:ImageButton ID="ibBPermitLetterDateUpdate" runat="server" 
-                                                    ImageAlign="AbsMiddle" ImageUrl="~/Images/Calendar_scheduleHS.png" 
-                                                    ToolTip="Click to show date selector" />
+                                                    Text='<%# Bind("BPRLetterDate", "{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                                                </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                                    ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibBPermitLetterDateUpdate" 
+                                                    runat="server" /></td></tr></table>
+                                                <ajaxToolkit:CalendarExtender ID="ceBPermitLetterDateUpdate" runat="server"
+                                                    TargetControlID="tbBPermitLetterDateUpdate"
+                                                    Format="MM/dd/yyyy"
+                                                    PopupButtonID="ibBPermitLetterDateUpdate" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" 
+                                                    ID="revBPermitLetterDateUpdate"  Display="Dynamic" 
+                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                    ControlToValidate="tbBPermitLetterDateUpdate" runat="server" 
+                                                    ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </td>
                                         </tr>
                                     </table>
-                                    <ajaxToolkit:CalendarExtender ID="ceBPermitLetterDateUpdate" runat="server" 
-                                        Format="MM/dd/yyyy" PopupButtonID="ibBPermitLetterDateUpdate" 
-                                        TargetControlID="tbBPermitLetterDateUpdate" />
-                                    <asp:RegularExpressionValidator ID="revBPermitLetterDateUpdate" runat="server" 
-                                        ControlToValidate="tbBPermitLetterDateUpdate" Display="Dynamic" 
-                                        ErrorMessage="Please enter a valid date" ForeColor="Red" 
-                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"></asp:RegularExpressionValidator>
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Letter Ref">
                                 <ItemTemplate>
                                     <asp:Label ID="Label3" runat="server" 
-                                        Text='<%# Bind("BPRLetterDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                        Text='<%# Bind("BPRLetterRef", "{0:MM/dd/yyyy}") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:TextBox ID="tbBPRLetterRefUpdate" runat="server" 
@@ -476,9 +482,6 @@
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Comments">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("BPRLetterRef") %>'></asp:Label>
-                                </ItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label5" runat="server" Text='<%# Bind("BPRComments") %>'></asp:Label>
                                 </ItemTemplate>
@@ -499,12 +502,6 @@
                         <asp:Panel runat="server" Style="text-align: center;" ID="Panel8" CssClass="newitemcontent">
                             <table>
                                 <tr>
-                                    <td class="form_field_heading">
-                                        <asp:Label CssClass="form_field_heading" ID="Label35" runat="server" Text="Review Number"></asp:Label>
-                                    </td>
-                                    <td class="form_field">
-                                        <asp:Label CssClass="form_field" ID="lblBPermitNewReviewNumber" Width="3em" runat="server"></asp:Label>
-                                    </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Inspection Date"></asp:Label>
                                     </td>
@@ -569,7 +566,7 @@
                             </table>
                         </asp:Panel>
                         <script  language="javascript" type="text/javascript" >
-                            function doOk() {
+                            function doOkNewReview() {
                             
                                 var loading = $(".loadingdb");
                                 loading.show();
@@ -584,7 +581,7 @@
                             <table cellpadding="2" cellspacing="2">
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btnNewBPermitReviewOk" OnClientClick="javascript: alert('is page valid?'); if(Page_IsValid) { alert('page is valid');return doOk();}" CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
+                                        <asp:Button ID="btnNewBPermitReviewOk" OnClientClick="javascript: return doOkNewReview();}" CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
                                     </td>
                                     <td>
                                         <asp:Button ID="btnNewBPermitReviewCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"

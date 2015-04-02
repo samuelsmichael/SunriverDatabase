@@ -410,6 +410,26 @@ namespace SubmittalProposal {
             }
         }
         protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
+                DateTime? review = tbBPermitReviewDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNew.Text.Trim());
+                cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
+                DateTime? action = tbBPermitActionDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitActionDateNew.Text.Trim());
+                cmd.Parameters.Add("@BPRActionDate", SqlDbType.DateTime).Value = action;
+                DateTime? letter = tbBPermitLetterDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitLetterDateNew.Text.Trim());
+                cmd.Parameters.Add("@BPRLetterDate", SqlDbType.DateTime).Value = letter;
+                cmd.Parameters.Add("@BPRLetterRef", SqlDbType.NVarChar).Value = tbBPRLetterRefNew.Text.Trim();
+                cmd.Parameters.Add("@BPRComments", SqlDbType.NVarChar).Value = tbBPRCommentsNew.Text.Trim();
+
+                SqlParameter newid = new SqlParameter("@NewBPReviewID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Review added", "BPermitDS", "BPermitDSGridView");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Review not added. Error msg: " + ee.Message);
+            }
         }
 
         protected void gvPayments_RowEditing(object sender, GridViewEditEventArgs e) {
@@ -465,15 +485,33 @@ namespace SubmittalProposal {
         }
 
         protected void gvReviews_RowUpdating(object sender, GridViewUpdateEventArgs e) {
-/*            //Retrieve the table from the session object.
-            //            DataTable dt = (DataTable)Session["TaskTable"];
 
-            //Update the values.
-                        GridViewRow row = gvPayments.Rows[e.RowIndex];
-                        dt.Rows[row.DataItemIndex]["Id"] = ((TextBox)(row.Cells[1].Controls[0])).Text;
-                        dt.Rows[row.DataItemIndex]["Description"] = ((TextBox)(row.Cells[2].Controls[0])).Text;
-                        dt.Rows[row.DataItemIndex]["IsComplete"] = ((CheckBox)(row.Cells[3].Controls[0])).Checked;
-            */
+            GridViewRow row = gvReviews.Rows[e.RowIndex];
+            try {
+                string strreview = ((TextBox)row.Cells[2].Controls[1]).Text.Trim();
+                DateTime? review = strreview == "" ? (DateTime?)null : Utils.ObjectToDateTime(strreview);
+                string straction = ((TextBox)row.Cells[3].Controls[1]).Text.Trim();
+                DateTime? action = straction == "" ? (DateTime?)null : Utils.ObjectToDateTime(straction);
+                string strletter = ((TextBox)row.Cells[4].Controls[1]).Text.Trim();
+                DateTime? letter = strletter == "" ? (DateTime?)null : Utils.ObjectToDateTime(strletter);
+
+                    SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
+                    cmd.Parameters.Add("@BPReviewID", SqlDbType.Int).Value = gvReviews.DataKeys[e.RowIndex].Value;
+                    cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
+                    cmd.Parameters.Add("@BPRActionDate", SqlDbType.DateTime).Value = action;
+                    cmd.Parameters.Add("@BPRLetterDate", SqlDbType.DateTime).Value = letter;
+                    cmd.Parameters.Add("@BPRLetterRef", SqlDbType.NVarChar).Value = ((TextBox)row.Cells[5].Controls[1]).Text.Trim(); ;
+                    cmd.Parameters.Add("@BPRComments", SqlDbType.NVarChar).Value = ((TextBox)row.Cells[6].Controls[1]).Text.Trim();
+
+                    SqlParameter newid = new SqlParameter("@NewBPReviewID", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                    performPostUpdateSuccessfulActions("Review updated", "BPermitDS", "BPermitDSGridView");
+                } catch (Exception ee) {
+                    performPostUpdateFailedActions("Review not updated. Error msg: " + ee.Message);
+                }
+
             gvReviews.EditIndex = -1;
             bind_gvReviews(BPermitIDBeingEdited);
         }
