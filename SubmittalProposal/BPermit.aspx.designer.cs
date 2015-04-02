@@ -490,24 +490,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel6;
         
         /// <summary>
-        /// Label34 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label34;
-        
-        /// <summary>
-        /// lblBPermitNewPaymentNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBPermitNewPaymentNumber;
-        
-        /// <summary>
         /// Label17 control.
         /// </summary>
         /// <remarks>
@@ -526,6 +508,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbBPPaymentFeeNew;
         
         /// <summary>
+        /// revtbBPPaymentFeeNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbBPPaymentFeeNew;
+        
+        /// <summary>
         /// Label33 control.
         /// </summary>
         /// <remarks>
@@ -542,6 +533,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbBPPaymentMonthsNew;
+        
+        /// <summary>
+        /// revBPPaymentMonthsNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBPPaymentMonthsNew;
         
         /// <summary>
         /// btnNewBPermitPaymentOk control.
@@ -1217,6 +1217,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbBPermintNew;
+        
+        /// <summary>
+        /// dummyNewBPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button dummyNewBPermit;
         
         /// <summary>
         /// hfAutoShowPopupNew control.

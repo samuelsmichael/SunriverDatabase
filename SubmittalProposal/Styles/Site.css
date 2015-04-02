@@ -61,6 +61,19 @@ body
     background-color: White;
     z-index: 999;
 }
+
+.loadingnewbpermit
+{
+    font-family: Arial;
+    font-size: 10pt;
+    border: 5px solid #67CFF5;
+    width: 200px;
+    height: 100px;
+    display: none;
+    position: fixed;
+    background-color: White;
+    z-index: 999;
+}
    
 a:link, a:visited
 {

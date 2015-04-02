@@ -66,8 +66,11 @@ namespace SubmittalProposal {
             getNewResultsLabel().ForeColor = System.Drawing.Color.Red;
             getNewResultsLabel().Text = status;
         }
-        protected void performPostNewSuccessfulActions(string status, string cacheKey, TextBox tbHavingKeyField, int key) {
+        protected void performPostNewSuccessfulActions(string status, string cacheKey, string cacheKey2, TextBox tbHavingKeyField, int key) {
             MemoryCache.Default.Remove(cacheKey);
+            if (cacheKey2 != null) {
+                MemoryCache.Default.Remove(cacheKey2);
+            }
             /* the following statements cause the view to be re-displayed, but with updated data */
             clearAllSelectionInputFields();
             tbHavingKeyField.Text = "" + key;

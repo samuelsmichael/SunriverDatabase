@@ -27,6 +27,7 @@
         // Called when async postback begins
         function prm_InitializeRequest(sender, args) {
             // get the divImage and set it to visible
+            
             if (
                 (args._postBackElement.id).indexOf("BtnGo") != -1 ||
                 (args._postBackElement.id).indexOf("gvResults") != -1 ||

@@ -285,19 +285,21 @@ namespace SubmittalProposal {
                 ddlLaneNew.DataBind();
 
             }
-            if (Common.Utils.isNothingNot(gotoBPermitId)) {
+            if (Common.Utils.isNothingNot(Session["ShowBPermitID"])) {
                 tbOwner.Text = "";
                 tbApplicant.Text = "";
                 tbLot.Text = "";
                 tbSubmittalId.Text = "";
                 ddlLane.SelectedIndex = 0;
                 tbDelaySearch.Text = "";
-                tbBPermitId.Text = Request.QueryString["BPermitId"];
+                tbBPermitId.Text = Utils.ObjectToString(Session["ShowBPermitID"]);
+                Session["ShowBPermitID"] = null;
                 ((Database)Master).doGo();
                 gvResults.SelectRow(0);
             } else {
-                String gotoSubmittalId = Request.QueryString["SubmittalId"];
+                String gotoSubmittalId = Utils.ObjectToString(Session["ShowSubmittalID"]);
                 if (Common.Utils.isNothingNot(gotoSubmittalId)) {
+                    Session["ShowSubmittalID"] = null;
                     hfAutoShowPopupNew.Value = "y";
                     DataSet ds = Submittal2.SunriverDataSet();
                     DataTable sourceTable = ds.Tables[0];
@@ -330,6 +332,13 @@ namespace SubmittalProposal {
             ddlLaneNew.SelectedIndex = 0;
             tbOwnersNameNew.Text = "";
             tbApplicantNameNew.Text = "";
+            tbOwner.Text = "";
+            tbApplicant.Text = "";
+            tbLot.Text = "";
+            ddlLane.SelectedIndex = 0;
+            tbSubmittalId.Text = "";
+            tbBPermitId.Text = "";
+            tbDelaySearch.Text = "";
         }
 
         protected override DataTable getGridViewDataTable() {
@@ -347,9 +356,36 @@ namespace SubmittalProposal {
             return ds.Tables[0];
         }
         protected void btnNewBPermitOk_Click(object sender, EventArgs e) {
-            hfAutoShowPopupNew.Value = "n";
-            mpeBPermitNewPayment.Hide();
-            clearAllSelectionInputFields();
+            try {
+                SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
+                cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameNew.Text;
+                cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameNew.Text;
+                cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneNew.SelectedValue;
+                cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameNew.Text;
+                cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorNew.Text;
+                cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeNew.SelectedValue;
+                cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectNew.Text;
+                cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredNew.SelectedValue == "Yes" ? true : false;
+                DateTime? issuedDate =
+                    tbIssuedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedNew.Text);
+                cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
+                DateTime? closeDate =
+                    tbClosedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedNew.Text);
+                cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
+                cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayNew.Text;
+                cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = tbSubmittalIdNew.Text;
+                SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
+                newBPermitId.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newBPermitId);
+                SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
+                newSubmittalId.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newSubmittalId);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostNewSuccessfulActions("BPermit added successfully", BPERMIT_CACHE_KEY, BPERMIT_CACHE_GRID_KEY, tbBPermitId, Convert.ToInt32(newBPermitId.Value));
+                mpeNewBPermit.Hide();
+            } catch (Exception e2) {
+                performPostNewFailedActions("BPermit not added. Msg: " + e2.Message);
+            }
         }
         protected void btnNewBPermitCancel_Click(object sender, EventArgs e) {
             hfAutoShowPopupNew.Value = "n";
@@ -357,7 +393,21 @@ namespace SubmittalProposal {
             clearAllSelectionInputFields();
         }
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
-            int bkher = 3;
+            try {
+                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
+                int? months = tbBPPaymentMonthsNew.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNew.Text.Trim().Replace("$", "").Replace(",", ""));
+                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                decimal? fee = tbBPPaymentFeeNew.Text.Trim() == "" ? (decimal?)null : Utils.ObjectToDecimal(tbBPPaymentFeeNew.Text.Trim().Replace("$", "").Replace(",", ""));
+                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Payment added","BPermitDS","BPermitDSGridView");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Payment not added. Error msg: " + ee.Message);
+            }
         }
         protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {
         }
@@ -378,16 +428,29 @@ namespace SubmittalProposal {
         }
 
         protected void gvPayments_RowUpdating(object sender, GridViewUpdateEventArgs e) {
-            //Retrieve the table from the session object.
-//            DataTable dt = (DataTable)Session["TaskTable"];
 
-            //Update the values.
-/*
             GridViewRow row = gvPayments.Rows[e.RowIndex];
-            dt.Rows[row.DataItemIndex]["Id"] = ((TextBox)(row.Cells[1].Controls[0])).Text;
-            dt.Rows[row.DataItemIndex]["Description"] = ((TextBox)(row.Cells[2].Controls[0])).Text;
-            dt.Rows[row.DataItemIndex]["IsComplete"] = ((CheckBox)(row.Cells[3].Controls[0])).Checked;
-*/
+            try {
+                string strfee = ((TextBox)row.Cells[2].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
+                string strmonths = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                int? months = strmonths == "" ? (int?)null : Utils.ObjectToInt(strmonths);
+                int paymentid = Utils.ObjectToInt(gvPayments.DataKeys[e.RowIndex].Value);
+
+                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
+                cmd.Parameters.Add("@BPPaymentId", SqlDbType.Int).Value = paymentid;
+                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+
+
+                performPostUpdateSuccessfulActions("Payment updated", "BPermitDS", "BPermitDSGridView");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Payment not updated. Error msg: " + ee.Message);
+            }
             //Reset the edit index.
             gvPayments.EditIndex = -1;
 

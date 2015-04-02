@@ -41,8 +41,8 @@ BEGIN
 			tblBPPayments
 		GROUP BY fkBPermitID_PP
 	)
-	select p.*,e.Months,DATEADD(month,e.Months,BPIssueDate) as BPExpires 
+	select p.*,isnull(e.Months,0),DATEADD(month,e.Months,BPIssueDate) as BPExpires 
 	from 
- 		p inner join e on p.BPermitID=e.BPermitID
+ 		p left outer join e on p.BPermitID=e.BPermitID
 END
 GO

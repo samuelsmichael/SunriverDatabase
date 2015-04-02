@@ -21,8 +21,8 @@ alter PROCEDURE uspProjectAndSubmittalUpdate
 	@Project nvarchar(100),
 	@BPermitId int = null,
 	@BPermitReqd bit,
-	@BPIssueDate datetime,
-	@BPClosed datetime,
+	@BPIssueDate datetime=null,
+	@BPClosed datetime=null,
 	@BPDelay nvarchar(255),
 	@NewBPermitID int out,
 	@NewSubmittalID int out

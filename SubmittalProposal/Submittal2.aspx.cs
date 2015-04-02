@@ -258,7 +258,9 @@ namespace SubmittalProposal
 
 
         protected void lbGoToPermit_Click(object sender, EventArgs args) {
-            Response.Redirect("~/BPermit.aspx?BPermitId="+CurrentBPermitId+"&SubmittalId="+CurrentSubmittalId);
+            Session["ShowBPermitID"] = CurrentBPermitId;
+            Session["ShowSubmittalID"] = CurrentSubmittalId;
+            Response.Redirect("~/BPermit.aspx");
         }
 
         protected void btnNewSubmittalCancel_Click(object sender, EventArgs args) {
@@ -294,7 +296,7 @@ namespace SubmittalProposal
                     cmd.Parameters.Add(newSubmittalId);
                     Utils.executeNonQuery(cmd,
                         System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                    performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY, tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
+                    performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY, null, tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
                     mpeNewSubmittal.Hide();
                 } catch (Exception e) {
                     performPostNewFailedActions("Submittal not added. Msg: " + e.Message);

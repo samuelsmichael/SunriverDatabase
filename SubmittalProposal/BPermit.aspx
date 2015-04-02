@@ -226,7 +226,8 @@
                 <asp:Panel runat="server" ID="pnlPayments" GroupingText="Payments">
                     <asp:GridView Width="100%" ID="gvPayments" runat="server" AutoGenerateColumns="False"
                         CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" OnRowCancelingEdit="gvPayments_RowCancelingEdit"
-                        OnRowEditing="gvPayments_RowEditing" OnRowUpdating="gvPayments_RowUpdating">
+                        OnRowEditing="gvPayments_RowEditing" 
+                        OnRowUpdating="gvPayments_RowUpdating" DataKeyNames="BPPaymentId">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -242,7 +243,7 @@
                             <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
                         </EmptyDataTemplate>
                         <Columns>
-                            <asp:CommandField ButtonType="Link" ShowEditButton="true" ShowCancelButton="true" />
+                            <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true" ShowCancelButton="true" />
                             <asp:TemplateField HeaderText="Nbr">
                                 <ItemTemplate>
                                     <asp:Label ID="Label3" runat="server" Text='<%# Bind("BPPmt") %>'></asp:Label>
@@ -255,6 +256,9 @@
                                 <EditItemTemplate>
                                     <asp:TextBox ID="tbBPPaymentFeeUpdate" runat="server" 
                                         Text='<%# Eval("BPFee$","{0:0.00}") %>'></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revtbBPPaymentFeeUpdate" ForeColor="Red" Display="Dynamic" ControlToValidate="tbBPPaymentFeeUpdate"
+                                             ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server" ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
+
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%# Eval("BPFee$","{0:c}") %>'></asp:Label>
@@ -269,6 +273,7 @@
                                 <EditItemTemplate>
                                     <asp:TextBox ID="tbBPPaymentMonthsUpdate" runat="server" 
                                         Text='<%# Bind("BPMonths") %>'></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="revtbBPPaymentMonthsUpdate" ForeColor="Red" Display="Dynamic" ControlToValidate="tbBPPaymentMonthsUpdate" ValidationExpression="^[0-9]+$" runat="server" ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("BPMonths") %>'></asp:Label>
@@ -279,7 +284,15 @@
                                 <FooterStyle HorizontalAlign="Right" />
                                 <ItemStyle HorizontalAlign="Right" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="BPPayType" HeaderText="Pay Type" />
+                            <asp:TemplateField HeaderText="ID">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("BPPaymentId") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("BPPaymentId") %>'></asp:Label>
+                                </EditItemTemplate>
+                                <ItemStyle HorizontalAlign="Right" />
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                     <center style="margin-top: 5px;">
@@ -292,31 +305,40 @@
                             <table>
                                 <tr>
                                     <td class="form_field_heading">
-                                        <asp:Label CssClass="form_field_heading" ID="Label34" runat="server" Text="Payment Number"></asp:Label>
-                                    </td>
-                                    <td class="form_field">
-                                        <asp:Label CssClass="form_field" ID="lblBPermitNewPaymentNumber" Width="3em" runat="server"></asp:Label>
-                                    </td>
-                                    <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Fee"></asp:Label>
                                     </td>
                                     <td class="form_field">
                                         <asp:TextBox CssClass="form_field" ID="tbBPPaymentFeeNew" Width="8em" runat="server"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revtbBPPaymentFeeNew" ForeColor="Red" Display="Dynamic" ControlToValidate="tbBPPaymentFeeNew"
+                                             ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server" ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
                                         <asp:Label CssClass="form_field_heading" ID="Label33" runat="server" Text="Months"></asp:Label>
                                     </td>
                                     <td class="form_field">
                                         <asp:TextBox CssClass="form_field" ID="tbBPPaymentMonthsNew" Width="4em" runat="server"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="revBPPaymentMonthsNew" ForeColor="Red" Display="Dynamic" ControlToValidate="tbBPPaymentMonthsNew" ValidationExpression="^[0-9]+$" runat="server" ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                             </table>
                         </asp:Panel>
+                        <script  language="javascript" type="text/javascript" >
+                            function donewpaymentjedisok() {
+                                alert('merde!');
+                                var loading = $(".loadingnewbpermit");
+                                loading.show();
+                                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                loading.css({ top: top, left: left });
+                                return true;
+                            }
+                        </script>
+
                         <center>
                             <table cellpadding="3">
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btnNewBPermitPaymentOk" runat="server" Text="Okay" OnClick="btnNewBPermitPaymentOk_Click" />
+                                        <asp:Button  OnClientClick="javascript: return donewpaymentjedisok();" ID="btnNewBPermitPaymentOk" runat="server" Text="Okay" OnClick="btnNewBPermitPaymentOk_Click" />
                                     </td>
                                     <td>
                                         <asp:Button ID="btnNewBPermitPaymentCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
@@ -546,11 +568,23 @@
                                 </tr>
                             </table>
                         </asp:Panel>
+                        <script  language="javascript" type="text/javascript" >
+                            function doOk() {
+                            
+                                var loading = $(".loadingdb");
+                                loading.show();
+                                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                loading.css({ top: top, left: left });
+                                return true;
+                            }
+
+                        </script>
                         <center>
                             <table cellpadding="2" cellspacing="2">
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btnNewBPermitReviewOk" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
+                                        <asp:Button ID="btnNewBPermitReviewOk" OnClientClick="javascript: alert('is page valid?'); if(Page_IsValid) { alert('page is valid');return doOk();}" CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
                                     </td>
                                     <td>
                                         <asp:Button ID="btnNewBPermitReviewCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
@@ -558,6 +592,11 @@
                                     </td>
                                 </tr>
                             </table>
+                            <div class="loadingdb" align="center">
+                                Processing. Please wait.<br />
+                                <br />
+                                <img src="Images/animated_progress.gif" alt="" />
+                            </div>
                         </center>
                     </asp:Panel>
                     <ajaxToolkit:ModalPopupExtender ID="mpeBPermitNewReview" runat="server" TargetControlID="lbBPermitNewReview"
@@ -718,10 +757,25 @@
                 </table>
             </asp:Panel>
             <center>
+
+                        <script  language="javascript" type="text/javascript" >
+                            function doOkNewBPermit() {
+                                
+                                var loading = $(".loadingnewbpermit");
+                                loading.show();
+                                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                loading.css({ top: top, left: left });
+                                return true;
+                            }
+
+
+                        </script>
+
                 <table cellpadding="4">
                     <tr>
                         <td>
-                            <asp:Button ID="btnNewBPermitOk" runat="server" Text="Okay" OnClick="btnNewBPermitOk_Click" />
+                            <asp:Button  OnClientClick="javascript: return doOkNewBPermit();"  ID="btnNewBPermitOk"  runat="server" Text="Okay" OnClick="btnNewBPermitOk_Click" />
                         </td>
                         <td>
                             <asp:Button ID="btnNewBPermitCancel" OnClick="btnNewBPermitCancel_Click" OnClientClick="javacript: return confirm('Are you sure that you wish to cancel?')"
@@ -734,12 +788,18 @@
                         </td>
                     </tr>
                 </table>
+                <div class="loadingnewbpermit" align="center">
+                    Processing. Please wait.<br />
+                    <br />
+                    <img src="Images/animated_progress.gif" alt="" />
+                </div>
             </center>
         </asp:Panel>
     </asp:Panel>
-    <asp:LinkButton ID="lbBPermintNew" runat="server">New Building Permit</asp:LinkButton>
+    <asp:LinkButton ID="lbBPermintNew" Visible="false" runat="server">New Building Permit</asp:LinkButton>
+    <asp:Button runat="server" ID="dummyNewBPermit" style="display:none" />
     <asp:HiddenField ID="hfAutoShowPopupNew" Value="n" runat="server" />
-    <ajaxToolkit:ModalPopupExtender ID="mpeNewBPermit" runat="server" TargetControlID="lbBPermintNew"
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewBPermit" runat="server" TargetControlID="dummyNewBPermit"
         PopupControlID="pnlNewBPermitId" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewBPermitTitleId"
         BehaviorID="jdpopupbpermit" />
     <script language="javascript" type="text/javascript">
@@ -752,8 +812,9 @@
             var dddp = $find('jdpopupbpermit');
             dddp.add_shown(shown);
             var showauto = document.getElementById('<%=hfAutoShowPopupNew.ClientID %>');
-            if (showauto && showauto.value == 'y') {
-                showauto.value = 'n'
+            //alert("showauto.value=" + showauto.value);
+            if (showauto && showauto.value == "y") {
+                showauto.value = "n"
                 dddp.show();
             }
         }
