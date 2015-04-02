@@ -367,10 +367,10 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectNew.Text;
                 cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredNew.SelectedValue == "Yes" ? true : false;
                 DateTime? issuedDate =
-                    tbIssuedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedNew.Text);
+                    tbIssuedNew.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedNew.Text);
                 cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
                 DateTime? closeDate =
-                    tbClosedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedNew.Text);
+                    tbClosedNew.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedNew.Text);
                 cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
                 cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayNew.Text;
                 cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = tbSubmittalIdNew.Text;
