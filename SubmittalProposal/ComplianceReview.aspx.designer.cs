@@ -139,6 +139,51 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.UpdatePanel updatePanel3aa;
         
         /// <summary>
+        /// crPropertyUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel crPropertyUpdate;
+        
+        /// <summary>
+        /// Label18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label18;
+        
+        /// <summary>
+        /// tbCRLotNameUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbCRLotNameUpdate;
+        
+        /// <summary>
+        /// Label9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9;
+        
+        /// <summary>
+        /// ddlCRLaneUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCRLaneUpdate;
+        
+        /// <summary>
         /// Panel1 control.
         /// </summary>
         /// <remarks>
@@ -157,13 +202,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
-        /// tbReviewDate control.
+        /// tbReviewDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbReviewDate;
+        protected global::System.Web.UI.WebControls.TextBox tbReviewDateUpdate;
+        
+        /// <summary>
+        /// ibReviewDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibReviewDateUpdate;
+        
+        /// <summary>
+        /// ceReviewDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceReviewDateUpdate;
+        
+        /// <summary>
+        /// revReviewDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revReviewDateUpdate;
         
         /// <summary>
         /// Label3 control.
@@ -175,13 +247,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// tbCloseDate control.
+        /// tbCloseDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbCloseDate;
+        protected global::System.Web.UI.WebControls.TextBox tbCloseDateUpdate;
+        
+        /// <summary>
+        /// ibCloseDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibCloseDateUpdate;
+        
+        /// <summary>
+        /// CalendarExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+        
+        /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
         /// Label4 control.
@@ -193,13 +292,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// tbCommentsForm control.
+        /// tbCommentsFormUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbCommentsForm;
+        protected global::System.Web.UI.WebControls.TextBox tbCommentsFormUpdate;
         
         /// <summary>
         /// Panel2 control.
@@ -220,13 +319,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// tbDesignRule control.
+        /// tbDesignRuleUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbDesignRule;
+        protected global::System.Web.UI.WebControls.TextBox tbDesignRuleUpdate;
         
         /// <summary>
         /// Label6 control.
@@ -238,13 +337,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
-        /// tbRequiredAction control.
+        /// tbRequiredActionUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbRequiredAction;
+        protected global::System.Web.UI.WebControls.TextBox tbRequiredActionUpdate;
         
         /// <summary>
         /// Label8 control.
@@ -256,13 +355,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
-        /// tbFollowUp control.
+        /// tbFollowUpUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbFollowUp;
+        protected global::System.Web.UI.WebControls.TextBox tbFollowUpUpdate;
         
         /// <summary>
         /// tabPanelComplianceLetterData control.
@@ -346,13 +445,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label16;
         
         /// <summary>
-        /// tbNewComplianceReviewLetterLetterDate control.
+        /// tbcrLtDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbNewComplianceReviewLetterLetterDate;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLtDateNew;
+        
+        /// <summary>
+        /// ibcrLtDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibcrLtDateNew;
+        
+        /// <summary>
+        /// cecrLtDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cecrLtDateNew;
+        
+        /// <summary>
+        /// revcrLtDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revcrLtDateNew;
         
         /// <summary>
         /// Label17 control.
@@ -364,22 +490,49 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label17;
         
         /// <summary>
-        /// TextBox7 control.
+        /// crLTActionDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.TextBox crLTActionDateNew;
         
         /// <summary>
-        /// Label19 control.
+        /// ibcrLTActionDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label19;
+        protected global::System.Web.UI.WebControls.ImageButton ibcrLTActionDateNew;
+        
+        /// <summary>
+        /// cecrLTActionDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cecrLTActionDateNew;
+        
+        /// <summary>
+        /// revcrLTActionDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revcrLTActionDateNew;
+        
+        /// <summary>
+        /// lblcrLTIDNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblcrLTIDNew;
         
         /// <summary>
         /// Panel7 control.
@@ -391,67 +544,67 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel7;
         
         /// <summary>
-        /// TextBox8 control.
+        /// tbcrLTRecipientNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTRecipientNew;
         
         /// <summary>
-        /// TextBox9 control.
+        /// tbcrLTMailAddrNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox9;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTMailAddrNew;
         
         /// <summary>
-        /// TextBox10 control.
+        /// tbcrLTMailAddr2New control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox10;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTMailAddr2New;
         
         /// <summary>
-        /// TextBox11 control.
+        /// tbcrLTCityStateZipNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox11;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTCityStateZipNew;
         
         /// <summary>
-        /// TextBox12 control.
+        /// tbcrLTCCopy1New control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox12;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTCCopy1New;
         
         /// <summary>
-        /// TextBox13 control.
+        /// tbcrLTCCopy2New control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox13;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTCCopy2New;
         
         /// <summary>
-        /// TextBox14 control.
+        /// tbcrLTCCopy3New control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox14;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTCCopy3New;
         
         /// <summary>
         /// Panel8 control.
@@ -463,22 +616,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel8;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// ddlCRFromSignatureNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCRFromSignatureNew;
         
         /// <summary>
-        /// DropDownList2 control.
+        /// ddlCRFromTitleNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCRFromTitleNew;
         
         /// <summary>
         /// Panel9 control.
@@ -490,22 +643,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel9;
         
         /// <summary>
-        /// TextBox15 control.
+        /// crLTAttachTypeNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox15;
+        protected global::System.Web.UI.WebControls.TextBox crLTAttachTypeNew;
         
         /// <summary>
-        /// TextBox16 control.
+        /// tbcrLTAttachDescriptionNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox16;
+        protected global::System.Web.UI.WebControls.TextBox tbcrLTAttachDescriptionNew;
         
         /// <summary>
         /// btnNewComplianceReviewLetterOk control.
@@ -553,13 +706,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.UpdatePanel updatePanel1;
         
         /// <summary>
-        /// Repeater1 control.
+        /// pnlComplianceLetterRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.WebControls.Panel pnlComplianceLetterRepeater;
+        
+        /// <summary>
+        /// rptrComplianceLetter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptrComplianceLetter;
         
         /// <summary>
         /// NewButton control.
@@ -625,13 +787,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label26;
         
         /// <summary>
-        /// TextBox1 control.
+        /// tbComplianceReviewLotNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tbComplianceReviewLotNew;
         
         /// <summary>
         /// Label27 control.
@@ -643,13 +805,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label27;
         
         /// <summary>
-        /// ddlNewComplianceReviewLane control.
+        /// ddlNewComplianceReviewLaneNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlNewComplianceReviewLane;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNewComplianceReviewLaneNew;
         
         /// <summary>
         /// pnlNewComplianceReviewContent control.
@@ -670,13 +832,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label10;
         
         /// <summary>
-        /// tbNewComplianceReviewReviewDate control.
+        /// tbReviewDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbNewComplianceReviewReviewDate;
+        protected global::System.Web.UI.WebControls.TextBox tbReviewDateNew;
+        
+        /// <summary>
+        /// ibReviewDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibReviewDateNew;
+        
+        /// <summary>
+        /// CalendarExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
+        
+        /// <summary>
+        /// RegularExpressionValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
         /// Label11 control.
@@ -688,13 +877,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
-        /// TextBox2 control.
+        /// tbCloseDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox tbCloseDateNew;
+        
+        /// <summary>
+        /// ibCloseDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibCloseDateNew;
+        
+        /// <summary>
+        /// CalendarExtender3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender3;
+        
+        /// <summary>
+        /// RegularExpressionValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
         /// Label12 control.
@@ -706,13 +922,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
-        /// TextBox3 control.
+        /// tbCommentsFormNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox tbCommentsFormNew;
         
         /// <summary>
         /// Panel5 control.
@@ -733,13 +949,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
-        /// TextBox4 control.
+        /// tbDesignRuleNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox tbDesignRuleNew;
         
         /// <summary>
         /// Label14 control.
@@ -751,13 +967,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label14;
         
         /// <summary>
-        /// TextBox5 control.
+        /// tbRequiredActionNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox tbRequiredActionNew;
         
         /// <summary>
         /// Label15 control.
@@ -778,22 +994,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox TextBox6;
         
         /// <summary>
-        /// btnNewComplianceReviewOk control.
+        /// btnComplianceOkayNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewComplianceReviewOk;
+        protected global::System.Web.UI.WebControls.Button btnComplianceOkayNew;
         
         /// <summary>
-        /// btnNewComplianceReviewCancel control.
+        /// btnComplianceOkayUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewComplianceReviewCancel;
+        protected global::System.Web.UI.WebControls.Button btnComplianceOkayUpdate;
         
         /// <summary>
         /// lblComplianceReviewNewResults control.
