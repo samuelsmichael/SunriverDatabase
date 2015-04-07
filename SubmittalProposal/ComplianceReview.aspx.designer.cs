@@ -526,15 +526,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revcrLTActionDateNew;
         
         /// <summary>
-        /// lblcrLTIDNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblcrLTIDNew;
-        
-        /// <summary>
         /// Panel7 control.
         /// </summary>
         /// <remarks>
@@ -985,13 +976,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label15;
         
         /// <summary>
-        /// TextBox6 control.
+        /// tbFollowUpNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.TextBox tbFollowUpNew;
         
         /// <summary>
         /// btnComplianceOkayNew control.

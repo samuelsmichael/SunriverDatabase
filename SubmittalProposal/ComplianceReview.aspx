@@ -165,7 +165,7 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter (Paging)">
+        <ajaxToolkit:TabPanel  runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter (Paging)">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1aa" runat="server">
                     <ContentTemplate>
@@ -378,7 +378,7 @@
                                                 <ajaxToolkit:CalendarExtender ID="cecrLtDateNew" runat="server"
                                                     TargetControlID="tbcrLtDateNew"
                                                     Format="MM/dd/yyyy"
-                                                    PopupButtonID="ibComplianceReviewLetterLetterDateUpdate" />
+                                                    PopupButtonID="ibcrLtDateNew" />
                                                 <asp:RegularExpressionValidator ForeColor="Red" 
                                                     ID="revcrLtDateNew"  Display="Dynamic" 
                                                     ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
@@ -409,7 +409,7 @@
                                                 &nbsp;
                                             </td>
                                             <td class="form_field">
-                                                <asp:Label CssClass="form_field" ID="lblcrLTIDNew" runat="server" Text='<%# Eval("crLTID") %>'></asp:Label>
+                                                &nbsp;
                                             </td>
                                         </tr>
                                     </table>
@@ -532,7 +532,7 @@
                                 <table cellpadding="3">
                                     <tr>
                                         <td>
-                                            <asp:Button ID="btnNewComplianceReviewLetterOk" runat="server" Text="Okay" />
+                                            <asp:Button ID="btnNewComplianceReviewLetterOk"  OnClick="btnNewComplianceReviewLetterOk_Click" CausesValidation="true" runat="server" Text="Okay" />
                                         </td>
                                         <td>
                                             <asp:Button ID="btnNewComplianceReviewLetterCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
@@ -567,7 +567,7 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel runat="server" ID="tabPanelComplanceLetterDataScrolling" HeaderText="Compliance Letter (Scrolling)">
+        <ajaxToolkit:TabPanel Visible="false" runat="server" ID="tabPanelComplanceLetterDataScrolling" HeaderText="Compliance Letter (Scrolling)">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1" runat="server">
                     <ContentTemplate>
@@ -871,7 +871,7 @@
                         <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Follow up:"></asp:Label>
                     </td>
                     <td width="40%">
-                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="TextBox6" runat="server"
+                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbFollowUpNew" runat="server"
                             TextMode="MultiLine"></asp:TextBox>
                     </td>
                 </tr>
@@ -902,7 +902,7 @@
         PopupDragHandleControlID="pnlNewComplianceReviewTitleId" BehaviorID="jdpopupnewcompliancereview" />
     <script language="javascript" type="text/javascript">
         function shown() {
-            var tb = document.getElementById('<% =tbReviewDateUpdate.ClientID %>');
+            var tb = document.getElementById('<% =tbComplianceReviewLotNew.ClientID %>');
             tb.focus();
 
         }

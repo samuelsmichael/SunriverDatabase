@@ -76,7 +76,7 @@ namespace SubmittalProposal {
         protected void btnComplianceReviewUpdate_Click(object sender, EventArgs e) {
             SqlCommand cmd = new SqlCommand("uspComplianceReviewUpdate");
             cmd.Parameters.Add("@crReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
-            cmd.Parameters.Add("@crDate", SqlDbType.DateTime).Value = tbReviewDateUpdate.Text.Trim()==""?(DateTime?)null:Convert.ToDateTime(tbReviewDateUpdate.Text);
+            cmd.Parameters.Add("@crDate", SqlDbType.DateTime).Value = tbReviewDateUpdate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbReviewDateUpdate.Text);
             cmd.Parameters.Add("@crLot", SqlDbType.NVarChar).Value = tbCRLotNameUpdate.Text.Trim();
             cmd.Parameters.Add("@crLane", SqlDbType.NVarChar).Value = ddlCRLaneUpdate.SelectedValue;
             cmd.Parameters.Add("@crComments", SqlDbType.NVarChar).Value = tbCommentsFormUpdate.Text.Trim(); ;
@@ -90,86 +90,103 @@ namespace SubmittalProposal {
             Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
 
             // this gets the one being displayed
-
-            SaveComplianceLetterPageData ltrData = new SaveComplianceLetterPageData();
-            Dictionary<int, SaveComplianceLetterPageData> theDictionary = dicSaveComplianceLetterPageData;
-            Label crLTID = (Label)fvComplianceLetter.FindControl("lblcrLTIDUpdate");
-            int icrLTID = Convert.ToInt32(crLTID.Text);
+            bool continueOn = true;
+            Label crLTID = null;
+            int icrLTID = 0;
             try {
-                ltrData = theDictionary[icrLTID];
-            } catch { }
-            ltrData.crLTID = icrLTID;
-            ltrData.fkcrReviewID = ReviewIDBeingUpdated;
-            TextBox letterDate = (TextBox)fvComplianceLetter.FindControl("tbcrLtDateUpdate");
-            ltrData.crLTDate = (letterDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(letterDate.Text.Trim());
-            TextBox actionDate = (TextBox)fvComplianceLetter.FindControl("tbcrLTActionDateUpdate");
-            ltrData.crLTActionDate = (actionDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(actionDate.Text.Trim());
-            ltrData.crLTRecipient = ((TextBox)fvComplianceLetter.FindControl("tbcrLTRecipientUpdate")).Text;
-            ltrData.crLTMailAddr = ((TextBox)fvComplianceLetter.FindControl("tbcrLTMailAddrUpdate")).Text;
-            ltrData.crLTMailAddr2 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTMailAddr2Update")).Text;
-            ltrData.crLTCityStateZip = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCityStateZipUpdate")).Text;
-            ltrData.crLTCopy1 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCCopy1Update")).Text;
-            ltrData.crLTCopy2 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCCopy2Update")).Text;
-            ltrData.crLTCopy3 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCCopy3Update")).Text;
-            ltrData.crLTSigner = ((DropDownList)fvComplianceLetter.FindControl("ddlCRFromSignatureUpdate")).SelectedValue;
-            ltrData.crLTSignerTitle = ((DropDownList)fvComplianceLetter.FindControl("ddlCRFromTitleUpdate")).SelectedValue;
-            ltrData.crLTAttachType = ((TextBox)fvComplianceLetter.FindControl("crLTAttachTypeUpdate")).Text;
-            ltrData.crLTAttachDescription = ((TextBox)fvComplianceLetter.FindControl("tbcrLTAttachDescriptionUpdate")).Text;
-            theDictionary[icrLTID] = ltrData;
-            dicSaveComplianceLetterPageData = theDictionary;
-            DataRow dr = CRDataSet().Tables[1].Rows.Find(icrLTID);
-            updateCorrespondingRow(dr, ltrData);
-
-
-            foreach(SaveComplianceLetterPageData pageData in dicSaveComplianceLetterPageData.Values) {
-                cmd = new SqlCommand("uspComplianceLetterUpdate");
-                cmd.Parameters.Add("@crLTID", SqlDbType.Int).Value =
-                    pageData.crLTID;
-                cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = pageData.fkcrReviewID;
-                cmd.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = pageData.crLTDate;
-                cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = pageData.crLTActionDate;
-                cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = pageData.crLTRecipient;
-                cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = pageData.crLTMailAddr;
-                cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = pageData.crLTMailAddr2;
-                cmd.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = pageData.crLTCityStateZip;
-                cmd.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = pageData.crLTCopy1;
-                cmd.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = pageData.crLTCopy2;
-                cmd.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = pageData.crLTCopy3;
-                cmd.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = pageData.crLTSigner;
-                cmd.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = pageData.crLTSignerTitle;
-                cmd.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = pageData.crLTAttachType;
-                cmd.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = pageData.crLTAttachDescription;
-
-                SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
-                crLTIDOut.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(crLTIDOut);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                crLTID = (Label)fvComplianceLetter.FindControl("lblcrLTIDUpdate");
+            } catch { // no letters exist
+                continueOn = false;
             }
-            foreach (RepeaterItem item in rptrComplianceLetter.Items) {
-                cmd = new SqlCommand("uspComplianceLetterUpdate");
-                cmd.Parameters.Add("@crLTID", SqlDbType.Int).Value =
-                    Convert.ToInt32(((Label)item.FindControl("lblcrLTIDUpdate")).Text);
-                cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
-                letterDate = (TextBox)item.FindControl("tbcrLtDateUpdate");
-                cmd.Parameters.Add("@crLTDate",SqlDbType.DateTime).Value=(letterDate.Text.Trim()=="")?(DateTime?)null:Convert.ToDateTime(letterDate.Text.Trim());
-                actionDate = (TextBox)item.FindControl("tbcrLTActionDateUpdate");
-                cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = (actionDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(actionDate.Text.Trim());
-                cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTRecipientUpdate")).Text;
-                cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTMailAddrUpdate")).Text;
-                cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTMailAddr2Update")).Text;
-                cmd.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCityStateZipUpdate")).Text;
-                cmd.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("crLTAttachTypeUpdate")).Text;
-                cmd.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTAttachDescriptionUpdate")).Text;
-                cmd.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCCopy1Update")).Text;
-                cmd.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCCopy2Update")).Text;
-                cmd.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCCopy3Update")).Text;
-                cmd.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = ((DropDownList)item.FindControl("ddlCRFromSignatureUpdate")).SelectedValue;
-                cmd.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = ((DropDownList)item.FindControl("ddlCRFromTitleUpdate")).SelectedValue;
-                SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
-                crLTIDOut.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(crLTIDOut);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            try {
+                icrLTID = Convert.ToInt32(crLTID.Text);
+            } catch {
+                continueOn = false;
             }
+
+            if (continueOn) {
+                SaveComplianceLetterPageData ltrData = new SaveComplianceLetterPageData();
+                Dictionary<int, SaveComplianceLetterPageData> theDictionary = dicSaveComplianceLetterPageData;
+                icrLTID = Convert.ToInt32(crLTID.Text);
+                try {
+                    ltrData = theDictionary[icrLTID];
+                } catch { }
+                ltrData.crLTID = icrLTID;
+                ltrData.fkcrReviewID = ReviewIDBeingUpdated;
+                TextBox letterDate = (TextBox)fvComplianceLetter.FindControl("tbcrLtDateUpdate");
+                ltrData.crLTDate = (letterDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(letterDate.Text.Trim());
+                TextBox actionDate = (TextBox)fvComplianceLetter.FindControl("tbcrLTActionDateUpdate");
+                ltrData.crLTActionDate = (actionDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(actionDate.Text.Trim());
+                ltrData.crLTRecipient = ((TextBox)fvComplianceLetter.FindControl("tbcrLTRecipientUpdate")).Text;
+                ltrData.crLTMailAddr = ((TextBox)fvComplianceLetter.FindControl("tbcrLTMailAddrUpdate")).Text;
+                ltrData.crLTMailAddr2 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTMailAddr2Update")).Text;
+                ltrData.crLTCityStateZip = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCityStateZipUpdate")).Text;
+                ltrData.crLTCopy1 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCCopy1Update")).Text;
+                ltrData.crLTCopy2 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCCopy2Update")).Text;
+                ltrData.crLTCopy3 = ((TextBox)fvComplianceLetter.FindControl("tbcrLTCCopy3Update")).Text;
+                ltrData.crLTSigner = ((DropDownList)fvComplianceLetter.FindControl("ddlCRFromSignatureUpdate")).SelectedValue;
+                ltrData.crLTSignerTitle = ((DropDownList)fvComplianceLetter.FindControl("ddlCRFromTitleUpdate")).SelectedValue;
+                ltrData.crLTAttachType = ((TextBox)fvComplianceLetter.FindControl("crLTAttachTypeUpdate")).Text;
+                ltrData.crLTAttachDescription = ((TextBox)fvComplianceLetter.FindControl("tbcrLTAttachDescriptionUpdate")).Text;
+                theDictionary[icrLTID] = ltrData;
+                dicSaveComplianceLetterPageData = theDictionary;
+                DataRow dr = CRDataSet().Tables[1].Rows.Find(icrLTID);
+                updateCorrespondingRow(dr, ltrData);
+
+
+                foreach (SaveComplianceLetterPageData pageData in dicSaveComplianceLetterPageData.Values) {
+                    cmd = new SqlCommand("uspComplianceLetterUpdate");
+                    cmd.Parameters.Add("@crLTID", SqlDbType.Int).Value =
+                        pageData.crLTID;
+                    cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = pageData.fkcrReviewID;
+                    cmd.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = pageData.crLTDate;
+                    cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = pageData.crLTActionDate;
+                    cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = pageData.crLTRecipient;
+                    cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = pageData.crLTMailAddr;
+                    cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = pageData.crLTMailAddr2;
+                    cmd.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = pageData.crLTCityStateZip;
+                    cmd.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = pageData.crLTCopy1;
+                    cmd.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = pageData.crLTCopy2;
+                    cmd.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = pageData.crLTCopy3;
+                    cmd.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = pageData.crLTSigner;
+                    cmd.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = pageData.crLTSignerTitle;
+                    cmd.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = pageData.crLTAttachType;
+                    cmd.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = pageData.crLTAttachDescription;
+
+                    SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
+                    crLTIDOut.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(crLTIDOut);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                }
+                /*
+                foreach (RepeaterItem item in rptrComplianceLetter.Items) {
+                    cmd = new SqlCommand("uspComplianceLetterUpdate");
+                    cmd.Parameters.Add("@crLTID", SqlDbType.Int).Value =
+                        Convert.ToInt32(((Label)item.FindControl("lblcrLTIDUpdate")).Text);
+                    cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
+                    letterDate = (TextBox)item.FindControl("tbcrLtDateUpdate");
+                    cmd.Parameters.Add("@crLTDate",SqlDbType.DateTime).Value=(letterDate.Text.Trim()=="")?(DateTime?)null:Convert.ToDateTime(letterDate.Text.Trim());
+                    actionDate = (TextBox)item.FindControl("tbcrLTActionDateUpdate");
+                    cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = (actionDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(actionDate.Text.Trim());
+                    cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTRecipientUpdate")).Text;
+                    cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTMailAddrUpdate")).Text;
+                    cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTMailAddr2Update")).Text;
+                    cmd.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCityStateZipUpdate")).Text;
+                    cmd.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("crLTAttachTypeUpdate")).Text;
+                    cmd.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTAttachDescriptionUpdate")).Text;
+                    cmd.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCCopy1Update")).Text;
+                    cmd.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCCopy2Update")).Text;
+                    cmd.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = ((TextBox)item.FindControl("tbcrLTCCopy3Update")).Text;
+                    cmd.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = ((DropDownList)item.FindControl("ddlCRFromSignatureUpdate")).SelectedValue;
+                    cmd.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = ((DropDownList)item.FindControl("ddlCRFromTitleUpdate")).SelectedValue;
+                    SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
+                    crLTIDOut.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(crLTIDOut);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                }
+                 * */
+            }
+            performPostUpdateSuccessfulActions("Update successful", "CRDS", null);
         }
         private int CurrentFormViewPageIndex {
             get {
@@ -292,10 +309,18 @@ namespace SubmittalProposal {
             return "" + dr["crLOT"] + " \\ " + dr["crLANE"];
         }
         private DateTime? getReviewDate(DataRow dr) {
-            return (DateTime?)dr["crDate"];
+            try {
+                return (DateTime?)dr["crDate"];
+            } catch {
+                return (DateTime?)null;
+            }
         }
         private DateTime? getClosingDate(DataRow dr) {
-            return Utils.ObjectToDateTimeNullable( dr["crCloseDate"]);
+            try {
+                return Utils.ObjectToDateTimeNullable(dr["crCloseDate"]);
+            } catch {
+                return (DateTime?)null;
+            }
         }
         private string getComments(DataRow dr) {
             return Utils.ObjectToString(dr["crComments"]);
@@ -450,10 +475,71 @@ namespace SubmittalProposal {
         }
 
         protected void btnNewComplianceReviewOk_Click(object sender, EventArgs e) {
+            SqlCommand cmd = new SqlCommand("uspComplianceReviewUpdate");
+            cmd.Parameters.Add("@crDate", SqlDbType.DateTime).Value = tbReviewDateNew.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbReviewDateNew.Text);
+            cmd.Parameters.Add("@crLot", SqlDbType.NVarChar).Value = tbComplianceReviewLotNew.Text.Trim();
+            cmd.Parameters.Add("@crLane", SqlDbType.NVarChar).Value = ddlNewComplianceReviewLaneNew.SelectedValue;
+            cmd.Parameters.Add("@crComments", SqlDbType.NVarChar).Value = tbCommentsFormNew.Text.Trim(); ;
+            cmd.Parameters.Add("@crRule", SqlDbType.NVarChar).Value = tbDesignRuleNew.Text.Trim();
+            cmd.Parameters.Add("@crCorrection", SqlDbType.NVarChar).Value = tbRequiredActionNew.Text.Trim();
+            cmd.Parameters.Add("@CrFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text.Trim();
+            cmd.Parameters.Add("@crCloseDate", SqlDbType.DateTime).Value = tbCloseDateNew.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbCloseDateNew.Text);
+            SqlParameter crReviewIDOut = new SqlParameter("@crReviewIDOut", SqlDbType.Int);
+            crReviewIDOut.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(crReviewIDOut);
+            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            tbComplianceReviewLotNew.Text = "";
+            ddlNewComplianceReviewLaneNew.SelectedIndex = 0;
+            tbReviewDateNew.Text = "";
+            tbCloseDateNew.Text = "";
+            tbCommentsFormNew.Text = "";
+            tbDesignRuleNew.Text = "";
+            tbRequiredActionNew.Text = "";
+            tbFollowUpNew.Text = "";
+            performPostNewSuccessfulActions("Review added", "CRDS", null, tbReviewId,(int)crReviewIDOut.Value);
 
         }
+        protected void btnNewComplianceReviewLetterOk_Click(object sender, EventArgs e) {
+            SqlCommand cmd = new SqlCommand("uspComplianceLetterUpdate");
+            cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
+            cmd.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = tbcrLtDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text);
+            cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = crLTActionDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(crLTActionDateNew.Text);
+            cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = tbcrLTRecipientNew.Text;
+            cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = tbcrLTMailAddrNew.Text;
+            cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = tbcrLTMailAddr2New.Text;
+            cmd.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = tbcrLTCityStateZipNew.Text;
+            cmd.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = tbcrLTCCopy1New.Text;
+            cmd.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = tbcrLTCCopy2New.Text;
+            cmd.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = tbcrLTCCopy3New.Text;
+            cmd.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = ddlCRFromSignatureNew.SelectedValue;
+            cmd.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = ddlCRFromTitleNew.SelectedValue;
+            cmd.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = crLTAttachTypeNew.Text;
+            cmd.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = tbcrLTAttachDescriptionNew.Text;
+
+            SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
+            crLTIDOut.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(crLTIDOut);
+            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+
+            tbcrLtDateNew.Text = "";
+            crLTActionDateNew.Text = "";
+            tbcrLTRecipientNew.Text = "";
+            tbcrLTMailAddrNew.Text = "";
+            tbcrLTMailAddr2New.Text = "";
+            tbcrLTCityStateZipNew.Text = "";
+            tbcrLTCCopy1New.Text = "";
+            tbcrLTCCopy2New.Text = "";
+            tbcrLTCCopy3New.Text = "";
+            crLTAttachTypeNew.Text = "";
+            tbcrLTAttachDescriptionNew.Text = "";
+
+            performPostUpdateSuccessfulActions("Letter added", "CRDS", null);
+        }
         protected override void clearAllSelectionInputFields() {
-            throw new NotImplementedException();
+            tbLot.Text = "";
+            ddlLane.SelectedIndex = 0;
+            tbComments.Text = "";
+            tbRule.Text = "";
         }
     }
 }
