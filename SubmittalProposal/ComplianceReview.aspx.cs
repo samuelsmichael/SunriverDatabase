@@ -76,14 +76,14 @@ namespace SubmittalProposal {
         protected void btnComplianceReviewUpdate_Click(object sender, EventArgs e) {
             SqlCommand cmd = new SqlCommand("uspComplianceReviewUpdate");
             cmd.Parameters.Add("@crReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
-            cmd.Parameters.Add("@crDate", SqlDbType.DateTime).Value = tbReviewDateUpdate;
-            cmd.Parameters.Add("@crLot", SqlDbType.NVarChar).Value = tbCRLotNameUpdate;
-            cmd.Parameters.Add("@crLane", SqlDbType.NVarChar).Value = ddlCRLaneUpdate;
-            cmd.Parameters.Add("@crComments", SqlDbType.NVarChar).Value = tbCommentsFormUpdate;
-            cmd.Parameters.Add("@crRule", SqlDbType.NVarChar).Value = tbDesignRuleUpdate;
-            cmd.Parameters.Add("@crCorrection", SqlDbType.NVarChar).Value = tbRequiredActionUpdate;
-            cmd.Parameters.Add("@CrFollowUp", SqlDbType.NVarChar).Value = tbFollowUpUpdate;
-            cmd.Parameters.Add("@crCloseDate", SqlDbType.DateTime).Value = tbCloseDateUpdate;
+            cmd.Parameters.Add("@crDate", SqlDbType.DateTime).Value = tbReviewDateUpdate.Text.Trim()==""?(DateTime?)null:Convert.ToDateTime(tbReviewDateUpdate.Text);
+            cmd.Parameters.Add("@crLot", SqlDbType.NVarChar).Value = tbCRLotNameUpdate.Text.Trim();
+            cmd.Parameters.Add("@crLane", SqlDbType.NVarChar).Value = ddlCRLaneUpdate.SelectedValue;
+            cmd.Parameters.Add("@crComments", SqlDbType.NVarChar).Value = tbCommentsFormUpdate.Text.Trim(); ;
+            cmd.Parameters.Add("@crRule", SqlDbType.NVarChar).Value = tbDesignRuleUpdate.Text.Trim();
+            cmd.Parameters.Add("@crCorrection", SqlDbType.NVarChar).Value = tbRequiredActionUpdate.Text.Trim();
+            cmd.Parameters.Add("@CrFollowUp", SqlDbType.NVarChar).Value = tbFollowUpUpdate.Text.Trim();
+            cmd.Parameters.Add("@crCloseDate", SqlDbType.DateTime).Value = tbCloseDateUpdate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbCloseDateUpdate.Text);
             SqlParameter crReviewIDOut = new SqlParameter("@crReviewIDOut", SqlDbType.Int);
             crReviewIDOut.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(crReviewIDOut);
@@ -92,14 +92,15 @@ namespace SubmittalProposal {
             // this gets the one being displayed
 
             SaveComplianceLetterPageData ltrData = new SaveComplianceLetterPageData();
+            Dictionary<int, SaveComplianceLetterPageData> theDictionary = dicSaveComplianceLetterPageData;
             Label crLTID = (Label)fvComplianceLetter.FindControl("lblcrLTIDUpdate");
             int icrLTID = Convert.ToInt32(crLTID.Text);
-            if (dicSaveComplianceLetterPageData[icrLTID] != null) {
-                ltrData = dicSaveComplianceLetterPageData[icrLTID];
-            }
+            try {
+                ltrData = theDictionary[icrLTID];
+            } catch { }
             ltrData.crLTID = icrLTID;
             ltrData.fkcrReviewID = ReviewIDBeingUpdated;
-            TextBox letterDate = (TextBox)fvComplianceLetter.FindControl("tbcrLTActionDateUpdate");
+            TextBox letterDate = (TextBox)fvComplianceLetter.FindControl("tbcrLtDateUpdate");
             ltrData.crLTDate = (letterDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(letterDate.Text.Trim());
             TextBox actionDate = (TextBox)fvComplianceLetter.FindControl("tbcrLTActionDateUpdate");
             ltrData.crLTActionDate = (actionDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(actionDate.Text.Trim());
@@ -114,6 +115,11 @@ namespace SubmittalProposal {
             ltrData.crLTSignerTitle = ((DropDownList)fvComplianceLetter.FindControl("ddlCRFromTitleUpdate")).SelectedValue;
             ltrData.crLTAttachType = ((TextBox)fvComplianceLetter.FindControl("crLTAttachTypeUpdate")).Text;
             ltrData.crLTAttachDescription = ((TextBox)fvComplianceLetter.FindControl("tbcrLTAttachDescriptionUpdate")).Text;
+            theDictionary[icrLTID] = ltrData;
+            dicSaveComplianceLetterPageData = theDictionary;
+            DataRow dr = CRDataSet().Tables[1].Rows.Find(icrLTID);
+            updateCorrespondingRow(dr, ltrData);
+
 
             foreach(SaveComplianceLetterPageData pageData in dicSaveComplianceLetterPageData.Values) {
                 cmd = new SqlCommand("uspComplianceLetterUpdate");
@@ -200,11 +206,35 @@ namespace SubmittalProposal {
                 Session["SaveComplianceLetterPageData"] = value;
             }
         }
+        private void updateCorrespondingRow(DataRow dr, SaveComplianceLetterPageData s) {
+            if (s.crLTDate.HasValue) {
+                dr["crLTDate"] = s.crLTDate.Value;
+            } else {
+                dr["crLTDate"] = DBNull.Value;
+            }
+            if (s.crLTActionDate.HasValue) {
+                dr["crLTActionDate"] = s.crLTActionDate.Value;
+            } else {
+                dr["crLTActionDate"] = DBNull.Value;
+            }
+            dr["crLTRecipient"] = s.crLTRecipient;
+            dr["crLTMailAddr"] = s.crLTMailAddr;
+            dr["crLTMailAddr2"] = s.crLTMailAddr2;
+            dr["crLTCity+State+Zip"] = s.crLTCityStateZip;
+            dr["crLTCCopy1"] = s.crLTCopy1;
+            dr["crLTCCopy2"] = s.crLTCopy2;
+            dr["crLTCCopy3"] = s.crLTCopy3;
+            dr["crLTSigner"] = s.crLTSigner;
+            dr["crLTSignerTitle"] = s.crLTSignerTitle;
+            dr["crLTAttachType"] = s.crLTAttachType;
+            dr["crLTAttachDescription"] = s.crLTAttachDescription;
+        }
         protected void fvComplianceLetter_PageIndexChanging(Object sender, FormViewPageEventArgs e) {
             // save this page's data
             SaveComplianceLetterPageData ltrData = new SaveComplianceLetterPageData();
             Label crLTID = (Label)fvComplianceLetter.FindControl("lblcrLTIDUpdate");
             int icrLTID=Convert.ToInt32(crLTID.Text);
+            DataRow dr = CRDataSet().Tables[1].Rows.Find(icrLTID);
             Dictionary<int, SaveComplianceLetterPageData> theDictionary = dicSaveComplianceLetterPageData;
             try {
                 ltrData = theDictionary[icrLTID];
@@ -212,8 +242,9 @@ namespace SubmittalProposal {
             ltrData.crLTID = icrLTID;
             ltrData.fkcrReviewID = ReviewIDBeingUpdated;
             TextBox letterDate = (TextBox)fvComplianceLetter.FindControl("tbcrLtDateUpdate");
-            ltrData.crLTDate = (letterDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(letterDate.Text.Trim());
             TextBox actionDate = (TextBox)fvComplianceLetter.FindControl("tbcrLTActionDateUpdate");
+
+            ltrData.crLTDate = (letterDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(letterDate.Text.Trim());
             ltrData.crLTActionDate=(actionDate.Text.Trim() == "") ? (DateTime?)null : Convert.ToDateTime(actionDate.Text.Trim());
             ltrData.crLTRecipient = ((TextBox)fvComplianceLetter.FindControl("tbcrLTRecipientUpdate")).Text;
             ltrData.crLTMailAddr= ((TextBox)fvComplianceLetter.FindControl("tbcrLTMailAddrUpdate")).Text;
@@ -227,25 +258,15 @@ namespace SubmittalProposal {
             ltrData.crLTAttachType = ((TextBox)fvComplianceLetter.FindControl("crLTAttachTypeUpdate")).Text;
             ltrData.crLTAttachDescription = ((TextBox)fvComplianceLetter.FindControl("tbcrLTAttachDescriptionUpdate")).Text;
             theDictionary[icrLTID] = ltrData;
+            updateCorrespondingRow(dr, ltrData);
             dicSaveComplianceLetterPageData = theDictionary;
 
             CurrentFormViewPageIndex = e.NewPageIndex;
 
-            Label control = (Label)fvComplianceLetter.FindControl("lblcrLTIDUpdate");
-            string val = null;
-            if (control != null) {
-                val = control.Text;
-            }
-            string ddlval = null;
-            DropDownList ddl = (DropDownList)fvComplianceLetter.FindControl("ddlCRFromSignatureUpdate");
-            if (ddl != null) {
-                ddlval = ddl.SelectedValue;
-            }
-
-
             fvComplianceLetter.PageIndex = e.NewPageIndex;
             DataView dvComplianceLetters = CRDataSet().Tables[1].AsDataView();
-            dvComplianceLetters.RowFilter = "fkcrReviewID=" + Session["currentfkcrReviewID"];
+            int currentReviewId = Convert.ToInt32(Session["currentfkcrReviewID"]);
+            dvComplianceLetters.RowFilter = "fkcrReviewID=" + currentReviewId;
             DataTable dtComplianceLetters = dvComplianceLetters.ToTable();
             fvComplianceLetter.DataSource = dtComplianceLetters;
             fvComplianceLetter.DataBind();
