@@ -16,19 +16,7 @@ ALTER PROCEDURE uspBPermitTablesGet
 AS
 BEGIN
 	SET NOCOUNT ON;
-	with p as (
-	select * from tblBPData
-		where bpermitid in (select b.BPermitID from tblSubmittal s left outer join tblBPData b on s.SubmittalId=b.fkSubmittalID_PD)
-	), e as (
-		SELECT 
-			fkBPermitID_PP as BPermitID, sum(isnull(BPMonths,0)) as Months 
-		FROM 
-			tblBPPayments
-		GROUP BY fkBPermitID_PP
-	)
-	select p.*,e.Months,DATEADD(month,e.Months,BPIssueDate) as BPExpires 
-	from 
- 		p inner join e on p.BPermitID=e.BPermitID;
+	select * from tblBPData;
 	with pm as (
 		select * from tblBPPayments
 			where fkbpermitid_pp in (select b.BPermitID from tblSubmittal s left outer join tblBPData b on s.SubmittalId=b.fkSubmittalID_PD)

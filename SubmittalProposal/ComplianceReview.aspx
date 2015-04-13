@@ -165,7 +165,7 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel  runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter (Paging)">
+        <ajaxToolkit:TabPanel  runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1aa" runat="server">
                     <ContentTemplate>

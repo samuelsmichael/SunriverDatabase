@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -293,11 +292,11 @@ namespace SubmittalProposal {
 
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
-                ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlNewComplianceReviewLaneNew.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlNewComplianceReviewLaneNew.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlNewComplianceReviewLaneNew.DataBind();
-                ddlCRLaneUpdate.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlCRLaneUpdate.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlCRLaneUpdate.DataBind();
                 dicSaveComplianceLetterPageData = null;
             }

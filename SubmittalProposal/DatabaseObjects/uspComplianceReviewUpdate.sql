@@ -7,7 +7,17 @@ GO
 -- Create date: 4/05/2015
 -- Description:	Updates Submittal
 /*
+	declare @crrdtout int
 	exec uspComplianceReviewUpdate
+		@crReviewId=
+		@CrDate=
+		@crLot=
+		@crlane=
+		@crcomments,
+		@crrule
+		@crfollowup
+		@crClosedate,
+		@crReviewidout =@crrdtout out
 */
 -- =============================================
 alter PROCEDURE uspComplianceReviewUpdate 

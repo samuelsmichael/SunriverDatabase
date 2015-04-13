@@ -324,7 +324,6 @@
                         </asp:Panel>
                         <script  language="javascript" type="text/javascript" >
                             function donewpaymentjedisok() {
-                                alert('merde!');
                                 var loading = $(".loadingnewbpermit");
                                 loading.show();
                                 var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);

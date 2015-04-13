@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -142,7 +142,7 @@ namespace SubmittalProposal
             return Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
         }
         private int? getBPermitId(DataRow dr) {
-            return Utils.ObjectToIntNullable(dr["BPermitId"]);
+            return Utils.ObjectToIntNullable(dr["BPermitID"]);
         }
         private string getLotLane(DataRow dr) {
             return (Utils.ObjectToString(dr["Lot"])) + "\\" + Utils.ObjectToString(dr["Lane"]);
@@ -222,11 +222,11 @@ namespace SubmittalProposal
         string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
-                ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlLaneUpdate.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLaneUpdate.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneUpdate.DataBind();
-                ddlLaneNew.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLaneNew.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneNew.DataBind();
                 /*
                 if (!this.ClientScript.IsStartupScriptRegistered("startupBB")) {

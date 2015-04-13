@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -276,15 +276,16 @@ namespace SubmittalProposal {
             hfAutoShowPopupNew.Value = "n";
             string gotoBPermitId=null;
             if (!IsPostBack) {
-                gotoBPermitId = Request.QueryString["BPermitId"];
-                ddlLane.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                ddlLaneUpdate.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLaneUpdate.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneUpdate.DataBind();
-                ddlLaneNew.DataSource = ((MainMasterPage)Master.Master).dsLotLane;
+                ddlLaneNew.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneNew.DataBind();
 
             }
+ //           Response.Write("Session[\"ShowBPermitID\"]" + "\n");
+   //         Response.Write(Session["ShowBPermitID"] + "\n");
             if (Common.Utils.isNothingNot(Session["ShowBPermitID"])) {
                 tbOwner.Text = "";
                 tbApplicant.Text = "";

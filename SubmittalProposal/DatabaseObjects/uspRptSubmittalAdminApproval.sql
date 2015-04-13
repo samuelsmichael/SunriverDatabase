@@ -7,7 +7,7 @@ GO
 -- Create date: 3/11/2015
 -- Description:	Query for Submittal report: Admin Approval
 /*
-	exec uspRptSubmittalAdminApproval '1/9/2015', '1/9/2015', @ReportingHeading='My Report Heading'
+	exec uspRptSubmittalAdminApproval '1/9/2014', '1/9/2015', @ReportingHeading='My Report Heading'
 */
 -- =============================================
 alter PROCEDURE uspRptSubmittalAdminApproval 
@@ -24,7 +24,7 @@ BEGIN
 			tblSubmittal.Own_Add, tblSubmittal.Own_City, tblSubmittal.Own_State, tblSubmittal.Own_ZIP, tblSubmittal.Applicant, 
 			tblSubmittal.Block, tblSubmittal.Village, tblSubmittal.Mtg_Date, tblSubmittal.App_Exp_Dt, tblSubmittal.ProjectType, 
 			tblSubmittal.Submittal, tblSubmittal.Project, tblSubmittal.ProjectDecision, tblSubmittal.Conditions, tblSubmittal.ProjectFee, 
-			tblSubmittal.[Fee Date], tblSubmittal.Contractor, tblSubmittal.Reg_Number, [Lot] + ' ' + [Lane] AS LotLane, tblSubmittal.Lot, tblSubmittal.Lane
+			tblSubmittal.[FeeDate], tblSubmittal.Contractor, tblSubmittal.Reg_Number, [Lot] + ' ' + [Lane] AS LotLane, tblSubmittal.Lot, tblSubmittal.Lane
 		FROM tblBPData RIGHT JOIN tblSubmittal ON tblBPData.fkSubmittalID_PD = tblSubmittal.SubmittalID
 	)
 
@@ -35,7 +35,7 @@ BEGIN
 		qrySubmittal LEFT JOIN [tblProjectDecision{LU}] ON qrySubmittal.ProjectDecision = [tblProjectDecision{LU}].ProjectDecision
 	WHERE 
 		(((qrySubmittal.ProjectType)='AA') AND ((qrySubmittal.Mtg_Date) Between @StartDate And @EndDate))
-	ORDER BY qrySubmittal.ProjectDecision, qrySubmittal.Lane, cast(qrySubmittal.Lot as int);
+	ORDER BY qrySubmittal.ProjectDecision, qrySubmittal.Lane;
 END
 GO
 

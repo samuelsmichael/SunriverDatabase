@@ -29,7 +29,7 @@ namespace SubmittalProposal {
             database.SearchButtonPressed += new Database.SearchButtonPressedEventHandler(database_SearchButtonPressed);
             database.UnlockCheckboxChecked += new Database.UnlockCheckboxCheckedHandler(database_UnlockCheckboxChecked);
             childPageLoad(sender, e);
-            ((MainMasterPage)Master.Master).PageImOnSinceMenuItemClickDoesntWork = GetType().Name;
+            ((SiteMaster)Master.Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
 
         }
 

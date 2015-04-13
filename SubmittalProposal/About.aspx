@@ -9,6 +9,18 @@
     </h2>
     <div style="height: 350px; overflow: scroll;">
         <ul>
+            <li  style="font-weight: bold;">Version .14</li>
+                <ul>
+                    <li>New Reports</li>
+                        <ul>
+                            <li>Building Permits Issued</li>
+                            <li>Compliance Review</li>
+                                <ul>Notes
+                                    <li>For your convenience, the Lane Column is a dropdown containing only those lanes that have a Compliance Review</li>
+                                </ul>
+
+                        </ul>
+                </ul>
             <li style="font-weight: bold;">Version .13</li>
             <ul>
                 <li>Added Lot, Lane to ComplianceReview</li>

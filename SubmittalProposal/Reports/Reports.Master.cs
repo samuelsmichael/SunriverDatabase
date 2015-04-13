@@ -17,5 +17,21 @@ namespace SubmittalProposal.Reports {
         public Button getSubmitButton() {
             return btnSubmitReport;
         }
+
+        protected void lbHome_Click(object sender, EventArgs e) {
+            if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
+                Response.Redirect("~/Submittal2.aspx");
+            } else {
+                if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("bpermit")) {
+                    Response.Redirect("~/BPermit.aspx");
+                } else {
+                    if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliancereview")) {
+                        Response.Redirect("~/ComplianceReview.aspx");
+                    }
+                }
+            }
+
+            Response.Redirect("~/Submittal2.aspx");
+        }
     }
 }

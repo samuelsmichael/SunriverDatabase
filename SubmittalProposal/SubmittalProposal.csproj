@@ -91,9 +91,15 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="BPermit.aspx" />
     <Content Include="ComplianceReview.aspx" />
+    <Content Include="BPermitReportsMain.aspx" />
+    <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="Images\animated_progress.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
+    <Content Include="Reports\BPermitsBuildingPermitsIssued.aspx" />
+    <Content Include="Reports\ComplianceReviewHistory.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
+    <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
+    <Content Include="Reports\SubmittalStatus.aspx" />
     <Content Include="Submittal2.aspx" />
     <Content Include="Images\bg-menu-main.JPG" />
     <Content Include="Images\bg-menu-main.png" />
@@ -160,6 +166,20 @@
     <Compile Include="ComplianceReview.aspx.designer.cs">
       <DependentUpon>ComplianceReview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BPermitReportsMain.aspx.cs">
+      <DependentUpon>BPermitReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BPermitReportsMain.aspx.designer.cs">
+      <DependentUpon>BPermitReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComplianceReviewReportsMain.aspx.cs">
+      <DependentUpon>ComplianceReviewReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComplianceReviewReportsMain.aspx.designer.cs">
+      <DependentUpon>ComplianceReviewReportsMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MainMasterPage.master.cs">
       <DependentUpon>MainMasterPage.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,6 +190,32 @@
     <Compile Include="ObjectShredder.cs" />
     <Compile Include="Reports\AbstractReport.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermits\BPermitsIssued.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BPermitsIssued.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsBuildingPermitsIssued.aspx.cs">
+      <DependentUpon>BPermitsBuildingPermitsIssued.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsBuildingPermitsIssued.aspx.designer.cs">
+      <DependentUpon>BPermitsBuildingPermitsIssued.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComplianceReviewHistory.aspx.cs">
+      <DependentUpon>ComplianceReviewHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComplianceReviewHistory.aspx.designer.cs">
+      <DependentUpon>ComplianceReviewHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComplianceReview\ComplianceHistory1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceHistory.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
@@ -185,10 +231,42 @@
     <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.designer.cs">
       <DependentUpon>SubmittalAdministrativeApprovals.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\SubmittalHistoryLotLane.aspx.cs">
+      <DependentUpon>SubmittalHistoryLotLane.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SubmittalHistoryLotLane.aspx.designer.cs">
+      <DependentUpon>SubmittalHistoryLotLane.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SubmittalStatus.aspx.cs">
+      <DependentUpon>SubmittalStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SubmittalStatus.aspx.designer.cs">
+      <DependentUpon>SubmittalStatus.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptSubmittalAdministrativeApprovals.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Submittal\RptSubmittalHistoryLotLane.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSubmittalHistoryLotLane.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Submittal\RptSubmittalStatus.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSubmittalStatus.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Submittal\SubmittalLotLane.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubmittalLotLane.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Submittal2.aspx.cs">
@@ -257,9 +335,29 @@
     <Content Include="MainMasterPage.master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\BPermits\BPermitsIssued.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BPermitsIssued.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComplianceHistory1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptSubmittalAdministrativeApprovals.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Submittal\RptSubmittalHistoryLotLane.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSubmittalHistoryLotLane.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Submittal\RptSubmittalStatus.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSubmittalStatus.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Submittal\SubmittalLotLane.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SubmittalLotLane.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -273,7 +371,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55774</DevelopmentServerPort>
+          <DevelopmentServerPort>54677</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
