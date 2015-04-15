@@ -91,6 +91,9 @@
                         <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
                             LogoutPageUrl="~/" />
                         ]
+                        &nbsp;[
+                            <a href="~/Account/ChangePassword.aspx" id="A2" runat="server">Chg Password</a>
+                        ]
                     </LoggedInTemplate>
                 </asp:LoginView>
             </div>

@@ -48,7 +48,9 @@ namespace SubmittalProposal {
             tbCRLotNameUpdate.Enabled = true;
             ddlCRLaneUpdate.Enabled = true;
         }
-
+        protected override string UpdateRoleName {
+            get { return "canupdatecompliancereviews"; }
+        }
         public static DataSet CRDataSet() {
             DataSet ds = null;
             MemoryCache cache=MemoryCache.Default;

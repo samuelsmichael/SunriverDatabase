@@ -15,6 +15,9 @@ namespace SubmittalProposal
     public partial class Submittal2 : AbstractDatabase
     {
         private static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
+        protected override string UpdateRoleName {
+            get { return "canupdatesubmittals"; }
+        }
          protected override GridView getGridViewResults() {
             return gvResults;
         }

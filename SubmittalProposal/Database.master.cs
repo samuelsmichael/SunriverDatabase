@@ -64,6 +64,10 @@ namespace SubmittalProposal {
             btnGo_Click(null, null);
         }
 
+        public void enableUnlockRecordCheckbox(bool enable) {
+            cbUnlockRecord.Enabled = enable;
+        }
+
         public void clearUnlockRecordCheckbox() {
             cbUnlockRecord.Checked = false;
             OnUnlockCheckboxChecked(false);

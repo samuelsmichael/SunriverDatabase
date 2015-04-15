@@ -21,6 +21,7 @@ namespace SubmittalProposal {
         protected abstract void unlockYourUpdateFields();
         protected abstract void lockYourUpdateFields();
         protected abstract void clearAllSelectionInputFields();
+        protected abstract string UpdateRoleName { get; }
         
         protected abstract void childPageLoad(object sender, EventArgs e);
 
@@ -30,7 +31,11 @@ namespace SubmittalProposal {
             database.UnlockCheckboxChecked += new Database.UnlockCheckboxCheckedHandler(database_UnlockCheckboxChecked);
             childPageLoad(sender, e);
             ((SiteMaster)Master.Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
-
+            if (HttpContext.Current.User.IsInRole(UpdateRoleName)) {
+                ((Database)Master).enableUnlockRecordCheckbox(true);
+            } else {
+                ((Database)Master).enableUnlockRecordCheckbox(false);
+            }
         }
 
         void database_UnlockCheckboxChecked(bool isUnlocked) {

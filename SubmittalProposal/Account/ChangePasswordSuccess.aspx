@@ -10,4 +10,7 @@
     <p>
         Your password has been changed successfully.
     </p>
+    <p class="submitButton" style="text-align:center;">
+        <asp:LinkButton ID="LinkButton1" PostBackUrl="~/Default.aspx" runat="server">Continue</asp:LinkButton>
+    </p>
 </asp:Content>

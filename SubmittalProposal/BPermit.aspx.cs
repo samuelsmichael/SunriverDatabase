@@ -16,6 +16,9 @@ namespace SubmittalProposal {
 
         private static string BPERMIT_CACHE_KEY = "BPermitDS";
         private static string BPERMIT_CACHE_GRID_KEY = "BPermitDSGridView";
+        protected override string UpdateRoleName {
+            get { return "canupdatebpermits"; }
+        }
         protected override Label getUpdateResultsLabel() {
             return lblBPermitUpdateResults;
         }

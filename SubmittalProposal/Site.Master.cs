@@ -45,7 +45,7 @@ namespace SubmittalProposal
         public string HomePageImOnSinceMenuItemClickDoesntWork {
             get {
                 object item = Session["HomePageImOnSinceMenuItemClickDoesntWork"];
-                return item == null ? "Submittal" : (string)item;
+                return item == null ? "About" : (string)item;
             }
             set {
                 Session["HomePageImOnSinceMenuItemClickDoesntWork"] = value;
