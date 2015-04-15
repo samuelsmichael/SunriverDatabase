@@ -16,5 +16,9 @@ namespace SubmittalProposal {
         protected void lbComplianceReviewsOpen_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ComplianceReviewOpen.aspx");
         }
+        protected void lbComplianceReviewsSummary_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ComplianceReviewSummary.aspx");
+        }
+        
     }
 }

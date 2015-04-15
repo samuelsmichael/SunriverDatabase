@@ -15,4 +15,8 @@
         <asp:LinkButton ID="lbComplianceReviewsOpen" runat="server" 
             onclick="lbComplianceReviewsOpen_Click">Compliance Reviews Open</asp:LinkButton>
     </p>
+    <p>
+        <asp:LinkButton ID="lbComplianceReviewsSummary" runat="server" 
+            onclick="lbComplianceReviewsSummary_Click">Compliance Reviews Summary</asp:LinkButton>
+    </p>
 </asp:Content>
