@@ -96,7 +96,11 @@
     <Content Include="Images\animated_progress.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
     <Content Include="Reports\BPermitsBuildingPermitsIssued.aspx" />
+    <Content Include="Reports\BPermitsClosed.aspx" />
     <Content Include="Reports\ComplianceReviewHistory.aspx" />
+    <Content Include="Reports\ComplianceReviewOpen.aspx" />
+    <Content Include="Reports\BPermitsOpen.aspx" />
+    <Content Include="Reports\BPermitsExpired.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
@@ -191,6 +195,24 @@
     <Compile Include="Reports\AbstractReport.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Reports\BPermitsClosed.aspx.cs">
+      <DependentUpon>BPermitsClosed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsClosed.aspx.designer.cs">
+      <DependentUpon>BPermitsClosed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\BPermits\BPermitsClosed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BPermitsClosed.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermits\BPermitsExpired.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BPermitsExpired.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\BPermits\BPermitsIssued.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -204,6 +226,12 @@
     <Compile Include="Reports\BPermitsBuildingPermitsIssued.aspx.designer.cs">
       <DependentUpon>BPermitsBuildingPermitsIssued.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\BPermits\BPermitsOpen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BPermitsOpen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ComplianceReviewHistory.aspx.cs">
       <DependentUpon>ComplianceReviewHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -211,11 +239,38 @@
     <Compile Include="Reports\ComplianceReviewHistory.aspx.designer.cs">
       <DependentUpon>ComplianceReviewHistory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ComplianceReviewOpen.aspx.cs">
+      <DependentUpon>ComplianceReviewOpen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComplianceReviewOpen.aspx.designer.cs">
+      <DependentUpon>ComplianceReviewOpen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ComplianceReview\ComplianceHistory1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ComplianceHistory.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ComplianceReview\ComplianceReviewsOpen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceReviewsOpen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsOpen.aspx.cs">
+      <DependentUpon>BPermitsOpen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsOpen.aspx.designer.cs">
+      <DependentUpon>BPermitsOpen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\BPermitsExpired.aspx.cs">
+      <DependentUpon>BPermitsExpired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsExpired.aspx.designer.cs">
+      <DependentUpon>BPermitsExpired.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
@@ -335,13 +390,29 @@
     <Content Include="MainMasterPage.master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\BPermits\BPermitsClosed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BPermitsClosed.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BPermits\BPermitsExpired.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BPermitsExpired.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\BPermits\BPermitsIssued.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BPermitsIssued.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BPermits\BPermitsOpen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BPermitsOpen.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceHistory1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComplianceReview\ComplianceReviewsOpen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComplianceReviewsOpen.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

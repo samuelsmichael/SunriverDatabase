@@ -13,5 +13,14 @@ namespace SubmittalProposal {
         protected void lbBPermitsIssued_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/BPermitsBuildingPermitsIssued.aspx");
         }
+        protected void lbBPermitsClosed_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/BPermitsClosed.aspx");
+        }
+        protected void lbBPermitsOpen_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/BPermitsOpen.aspx");
+        }
+        protected void lbBPermitsExpired_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/BPermitsExpired.aspx");
+        }
     }
 }

@@ -13,5 +13,8 @@ namespace SubmittalProposal {
         protected void lbComplianceHistory_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/ComplianceReviewHistory.aspx");
         }
+        protected void lbComplianceReviewsOpen_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ComplianceReviewOpen.aspx");
+        }
     }
 }

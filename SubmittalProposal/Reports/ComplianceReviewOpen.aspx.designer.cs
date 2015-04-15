@@ -10,25 +10,7 @@
 namespace SubmittalProposal.Reports {
     
     
-    public partial class BPermitsBuildingPermitsIssued {
-        
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// tbReportHeading control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbReportHeading;
+    public partial class ComplianceReviewOpen {
         
         /// <summary>
         /// Label2 control.
@@ -67,13 +49,13 @@ namespace SubmittalProposal.Reports {
         protected global::AjaxControlToolkit.CalendarExtender cetbFromDate;
         
         /// <summary>
-        /// revtbFromDate control.
+        /// revReviewDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbFromDate;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revReviewDateUpdate;
         
         /// <summary>
         /// Label3 control.

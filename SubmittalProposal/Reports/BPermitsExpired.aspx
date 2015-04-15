@@ -1,11 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Reports/Reports.Master" AutoEventWireup="true" CodeBehind="BPermitsBuildingPermitsIssued.aspx.cs" Inherits="SubmittalProposal.Reports.BPermitsBuildingPermitsIssued" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Reports/Reports.Master" AutoEventWireup="true" CodeBehind="BPermitsExpired.aspx.cs" Inherits="SubmittalProposal.Reports.BPermitsExpired" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Heading" runat="server">
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderReportParms" runat="server">
     <table>
         <tr>
-            <td>
-                <asp:Label CssClass="form_field_heading" ID="Label1" runat="server" Text="Report heading:"></asp:Label>
-                <asp:TextBox CssClass="form_field" ID="tbReportHeading" runat="server" Text="Building Permits - Issued"></asp:TextBox>
-            </td>
             <td>
                 <table><tr><td>
                 <asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="From date:"></asp:Label>
