@@ -20,6 +20,10 @@ namespace SubmittalProposal {
                 MenuItem miSubmittals = new MenuItem("Submittal", "Submittal",null, "~/Submittal2.aspx");
                 MenuItem miBPermit = new MenuItem("BPermits", "BPermits", null, "~/BPermit.aspx");
                 MenuItem miComplianceReview = new MenuItem("Compliance Reviews", "Compliance Reviews", null, "~/ComplianceReview.aspx");
+                MenuItem miContractors = new MenuItem("Contractors", "Contractors", null, "~/Contractor.aspx");
+                if (HttpContext.Current.User.IsInRole("canviewcontractors")) {
+                    NavigationMenu.Items.AddAt(1, miContractors);
+                }
                 if (HttpContext.Current.User.IsInRole("canviewcompliancereviews")) {
                     NavigationMenu.Items.AddAt(1, miComplianceReview);
                 }
@@ -45,6 +49,12 @@ namespace SubmittalProposal {
                         if (HttpContext.Current.User.IsInRole("candoreportscompliancereviews")) {
                             lbReports.Visible = true;
                         }
+                    } else {
+                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
+                            if (HttpContext.Current.User.IsInRole("candoreportscontractors")) {
+                                lbReports.Visible = true;
+                            }
+                        }
                     }
                 }
             }
@@ -60,6 +70,10 @@ namespace SubmittalProposal {
                 } else {
                     if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliancereview")) {
                         Response.Redirect("~/ComplianceReviewReportsMain.aspx");
+                    } else {
+                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
+                            Response.Redirect("~/ContractorReportsMain.aspx");
+                        }
                     }
                 }
             }

@@ -9,6 +9,17 @@
     </h2>
     <div style="height: 350px; overflow: scroll;">
         <ul>
+            <li  style="font-weight: bold;">Version 1.01</li>
+                <ul>
+                    <li>Contractors Database</li>
+                    <ul>Questions/Notes</ul>
+                        <li>Search Panel - Category is an "any part of field" type match; and it searches for a match to any of the four Categories</li>
+                </ul>
+            <li  style="font-weight: bold;">Version 1.00β</li>
+                <ul>
+                    <li>All Reports</li>
+                    <li>Security Piece</li>
+                </ul>
             <li  style="font-weight: bold;">Version .14</li>
                 <ul>
                     <li>New Reports</li>

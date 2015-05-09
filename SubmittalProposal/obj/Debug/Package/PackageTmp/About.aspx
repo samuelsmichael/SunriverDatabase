@@ -9,6 +9,11 @@
     </h2>
     <div style="height: 350px; overflow: scroll;">
         <ul>
+            <li  style="font-weight: bold;">Version 1.00β</li>
+                <ul>
+                    <li>All Reports</li>
+                    <li>Security Piece</li>
+                </ul>
             <li  style="font-weight: bold;">Version .14</li>
                 <ul>
                     <li>New Reports</li>
