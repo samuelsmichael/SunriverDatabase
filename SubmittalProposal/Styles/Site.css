@@ -411,6 +411,10 @@ div.accountInfo
     color: #FFFFFF;
     margin-left:2em;    
 }
+.updatepanel 
+{
+    height:444px;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 /* .formviewdiv{height:300px; overflow:scroll;} */

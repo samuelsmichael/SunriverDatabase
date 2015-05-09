@@ -57,215 +57,199 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
-    <ajaxToolkit:TabContainer Height="376" ActiveTabIndex="0" ID="TabContainer1" runat="server">
-        <ajaxToolkit:TabPanel runat="server" ID="tabPanelContractorData" HeaderText="Contractor data">
-            <ContentTemplate>
-                <asp:UpdatePanel ID="updatePanel3aa" runat="server">
-                    <ContentTemplate>
-                        <asp:Panel ID="Panel1" CssClass="form_field_panel_squished" GroupingText="Contractor data"
-                            runat="server">
-                            <table cellpadding="2" cellspacing="2" border="0">
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Company"></asp:Label>
-                                    </td>
-                                    <td colspan="5">
-                                        <asp:TextBox CssClass="form_field" ID="tbCompanyUpdate" MaxLength="70" Width="355"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Contact name"></asp:Label>
-                                    </td>
-                                    <td colspan="5">
-                                        <asp:TextBox CssClass="form_field" ID="tbContactUpdate" MaxLength="50" Width="355"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Addr1"></asp:Label>
-                                    </td>
-                                    <td colspan="5">
-                                        <asp:TextBox CssClass="form_field" ID="tbMailAddr1Update" MaxLength="40" Width="355"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Addr2"></asp:Label>
-                                    </td>
-                                    <td colspan="5">
-                                        <asp:TextBox CssClass="form_field" ID="tbMailAddr2Update" MaxLength="40" Width="355"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="City"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbCityUpdate" MaxLength="20" Width="135" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="State"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbStateUpdate" MaxLength="2" Width="35" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Zip"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbZipUpdate" MaxLength="10" Width="75" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="License #"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbLic_NumberUpdate" MaxLength="8" Width="60"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Expires"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbLic_X_DateUpdate" runat="server"></asp:TextBox>
-                                                </td>
-                                                <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibLic_X_DateUpdate" runat="server" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="tbLic_X_DateUpdate"
-                                            Format="MM/dd/yyyy" PopupButtonID="ibLic_X_DateUpdate" />
-                                        <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator1"
-                                            Display="Dynamic" ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                            ControlToValidate="tbLic_X_DateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Active"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbActiveUpdate" MaxLength="5" Width="41" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Phone 1"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbPhone1Update" MaxLength="14" Width="100"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Phone 2"></asp:Label>
-                                    </td>
-                                    <td colspan="3">
-                                        <asp:TextBox CssClass="form_field" ID="tbPhone2Update" MaxLength="14" Width="100"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Fax"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbFaxUpdate" MaxLength="14" Width="100" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Email"></asp:Label>
-                                    </td>
-                                    <td colspan="3">
-                                        <asp:TextBox CssClass="form_field" ID="tbEmailUpdate" MaxLength="40" Width="205"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
-                        </asp:Panel>
-                        <asp:Panel ID="Panel2" CssClass="form_field_panel_squished" GroupingText="Registration data"
-                            runat="server">
-                            <table cellpadding="2" cellspacing="2" border="0">
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Category 1"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList CssClass="form_field" ID="ddlCategory1Update" runat="server" DataTextField="Category"
-                                            DataValueField="Category">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="Category 2"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList CssClass="form_field" ID="ddlCategory2Update" runat="server" DataTextField="Category"
-                                            DataValueField="Category">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Registration date"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReg_DateUpdate" runat="server"></asp:TextBox>
-                                                </td>
-                                                <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibReg_DateUpdate" runat="server" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="tbReg_DateUpdate"
-                                            Format="MM/dd/yyyy" PopupButtonID="ibReg_DateUpdate" />
-                                        <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator2"
-                                            Display="Dynamic" ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                            ControlToValidate="tbReg_DateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Category 3"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList CssClass="form_field" ID="ddlCategory3Update" runat="server" DataTextField="Category"
-                                            DataValueField="Category">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="Category 4"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList CssClass="form_field" ID="ddlCategory4Update" runat="server" DataTextField="Category"
-                                            DataValueField="Category">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                            </table>
-                        </asp:Panel>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </ContentTemplate>
-        </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel runat="server" ID="tabPanelContractorComment" HeaderText="Comment">
-            <ContentTemplate>
-                <asp:UpdatePanel ID="updatePanel1aa" runat="server">
-                    <ContentTemplate>
-                        <asp:Panel ID="Panelx" runat="server" GroupingText="Comment">
-                            <asp:TextBox CssClass="form_field" ID="tbCommentUpdate" Width="600"
-                                runat="server" TextMode="MultiLine" Height="100"></asp:TextBox>
-                        </asp:Panel>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </ContentTemplate>
-        </ajaxToolkit:TabPanel>
-    </ajaxToolkit:TabContainer>
+    <div class="updatepanel">
+    <asp:Panel ID="Panel1" CssClass="form_field_panel_squished" GroupingText="Contractor data"
+        runat="server">
+        <table cellpadding="2" cellspacing="2" border="0">
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Company"></asp:Label>
+                </td>
+                <td colspan="5">
+                    <asp:TextBox CssClass="form_field" ID="tbCompanyUpdate" MaxLength="70" Width="355"
+                        runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Contact name"></asp:Label>
+                </td>
+                <td colspan="5">
+                    <asp:TextBox CssClass="form_field" ID="tbContactUpdate" MaxLength="50" Width="355"
+                        runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Addr1"></asp:Label>
+                </td>
+                <td colspan="5">
+                    <asp:TextBox CssClass="form_field" ID="tbMailAddr1Update" MaxLength="40" Width="355"
+                        runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Addr2"></asp:Label>
+                </td>
+                <td colspan="5">
+                    <asp:TextBox CssClass="form_field" ID="tbMailAddr2Update" MaxLength="40" Width="355"
+                        runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="City"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbCityUpdate" MaxLength="20" Width="135" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="State"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbStateUpdate" MaxLength="2" Width="35" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Zip"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbZipUpdate" MaxLength="10" Width="75" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="License #"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbLic_NumberUpdate" MaxLength="8" Width="60"
+                        runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Expires"></asp:Label>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbLic_X_DateUpdate" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    ID="ibLic_X_DateUpdate" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="tbLic_X_DateUpdate"
+                        Format="MM/dd/yyyy" PopupButtonID="ibLic_X_DateUpdate" />
+                    <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator1"
+                        Display="Dynamic" ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                        ControlToValidate="tbLic_X_DateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Active"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbActiveUpdate" MaxLength="5" Width="41" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Phone 1"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbPhone1Update" MaxLength="14" Width="100"
+                        runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Phone 2"></asp:Label>
+                </td>
+                <td colspan="3">
+                    <asp:TextBox CssClass="form_field" ID="tbPhone2Update" MaxLength="14" Width="100"
+                        runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Fax"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" ID="tbFaxUpdate" MaxLength="14" Width="100" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Email"></asp:Label>
+                </td>
+                <td colspan="3">
+                    <asp:TextBox CssClass="form_field" ID="tbEmailUpdate" MaxLength="40" Width="205"
+                        runat="server"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <asp:Panel ID="Panel2" CssClass="form_field_panel_squished" GroupingText="Registration data"
+        runat="server">
+        <table cellpadding="2" cellspacing="2" border="0">
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Category 1"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList CssClass="form_field" ID="ddlCategory1Update" runat="server" DataTextField="Category"
+                        DataValueField="Category">
+                    </asp:DropDownList>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="Category 2"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList CssClass="form_field" ID="ddlCategory2Update" runat="server" DataTextField="Category"
+                        DataValueField="Category">
+                    </asp:DropDownList>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Registration date"></asp:Label>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReg_DateUpdate" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    ID="ibReg_DateUpdate" runat="server" />
+                            </td>
+                        </tr>
+                    </table>
+                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="tbReg_DateUpdate"
+                        Format="MM/dd/yyyy" PopupButtonID="ibReg_DateUpdate" />
+                    <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator2"
+                        Display="Dynamic" ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                        ControlToValidate="tbReg_DateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Category 3"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList CssClass="form_field" ID="ddlCategory3Update" runat="server" DataTextField="Category"
+                        DataValueField="Category">
+                    </asp:DropDownList>
+                </td>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="Category 4"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList CssClass="form_field" ID="ddlCategory4Update" runat="server" DataTextField="Category"
+                        DataValueField="Category">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <asp:Panel ID="Panelx" runat="server" GroupingText="Comment">
+        <asp:TextBox CssClass="form_field" ID="tbCommentUpdate" Width="855" runat="server"
+            TextMode="MultiLine" Height="100"></asp:TextBox>
+    </asp:Panel>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
             ID="btnContactUpdate" OnClick="btnContractorUpdate_Click" runat="server" Text="Submit" />
         <asp:Label ID="lblContactUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
     </center>
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
 </asp:Content>
