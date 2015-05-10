@@ -70,6 +70,12 @@ namespace SubmittalProposal {
                 sbFilter.Append(")");
                 and = " and ";
             }
+            if (Utils.isNothingNot(tbSRContrRegID.Text)) {
+                sb.Append(prepend + "SRContrRegID Id: " + tbSRContrRegID.Text);
+                prepend = "  ";
+                sbFilter.Append(and + " SRContrRegID = " + tbSRContrRegID.Text);
+                and = " and ";
+            }
             searchCriteria = sb.ToString();
             filterString = sbFilter.ToString();
         }
@@ -92,6 +98,15 @@ namespace SubmittalProposal {
                 ddlCategory3Update.DataBind();
                 ddlCategory4Update.DataSource = dt;
                 ddlCategory4Update.DataBind();
+                ddlCategory1New.DataSource = dt;
+                ddlCategory1New.DataBind();
+                ddlCategory2New.DataSource = dt;
+                ddlCategory2New.DataBind();
+                ddlCategory3New.DataSource = dt;
+                ddlCategory3New.DataBind();
+                ddlCategory4New.DataSource = dt;
+                ddlCategory4New.DataBind();
+
             }
         }
         protected override GridView getGridViewResults() {
@@ -223,6 +238,82 @@ namespace SubmittalProposal {
             return "SRContrRegID: " + SRContrRegID + "     Company: " + getCompany(dr) + "     Contact: " + getContact(dr);
         }
         protected void btnContractorUpdate_Click(object sender, EventArgs e) {
+            SqlCommand cmd = new SqlCommand("uspContractorUpdate");
+	        cmd.Parameters.Add("@SRContrRegID", SqlDbType.Int).Value=SRContrRegID;
+	        cmd.Parameters.Add("@Reg_Date", SqlDbType.DateTime).Value= tbReg_DateUpdate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbReg_DateUpdate.Text);
+            cmd.Parameters.Add("@Company",SqlDbType.NVarChar).Value=tbCompanyUpdate.Text;
+            cmd.Parameters.Add("@Contact",SqlDbType.NVarChar).Value=tbContactUpdate.Text;
+            cmd.Parameters.Add("@MailAddr1",SqlDbType.NVarChar).Value=tbMailAddr1Update.Text;
+            cmd.Parameters.Add("@MailAddr2",SqlDbType.NVarChar).Value=tbMailAddr2Update.Text;
+            cmd.Parameters.Add("@City",SqlDbType.NVarChar).Value=tbCityUpdate.Text;
+            cmd.Parameters.Add("@State",SqlDbType.NVarChar).Value=tbStateUpdate.Text;
+            cmd.Parameters.Add("@ZIP",SqlDbType.NVarChar).Value=tbZipUpdate.Text;
+            cmd.Parameters.Add("@Phone_1",SqlDbType.NVarChar).Value=tbPhone1Update.Text;
+            cmd.Parameters.Add("@Phone_2",SqlDbType.NVarChar).Value=tbPhone2Update.Text;
+            cmd.Parameters.Add("@Fax",SqlDbType.NVarChar).Value=tbFaxUpdate.Text;
+            cmd.Parameters.Add("@Email",SqlDbType.NVarChar).Value=tbEmailUpdate.Text;
+            cmd.Parameters.Add("@Active",SqlDbType.NVarChar).Value=tbActiveUpdate.Text;
+            cmd.Parameters.Add("@Lic_Number", SqlDbType.NVarChar).Value = tbLic_NumberUpdate.Text;
+            cmd.Parameters.Add("@Lic_X_Date",SqlDbType.NVarChar).Value= tbLic_X_DateUpdate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbLic_X_DateUpdate.Text);;
+            cmd.Parameters.Add("@CAT_1",SqlDbType.NVarChar).Value=ddlCategory1Update.SelectedValue;
+            cmd.Parameters.Add("@CAT_2",SqlDbType.NVarChar).Value=ddlCategory2Update.SelectedValue;
+            cmd.Parameters.Add("@CAT_3",SqlDbType.NVarChar).Value=ddlCategory3Update.SelectedValue;
+            cmd.Parameters.Add("@CAT_4",SqlDbType.NVarChar).Value=ddlCategory4Update.SelectedValue;
+            cmd.Parameters.Add("@Comment",SqlDbType.NVarChar).Value=tbCommentUpdate.Text;
+            SqlParameter prmSRContrRegIDOut=new SqlParameter("@SRContrRegIDOut",SqlDbType.Int);
+            prmSRContrRegIDOut.Direction=ParameterDirection.Output;
+            cmd.Parameters.Add(prmSRContrRegIDOut);
+            Utils.executeNonQuery(cmd, ConnectionString);
+            performPostUpdateSuccessfulActions("Update successful", "CONDS", null);
+        }
+        protected void btnNewContractorOk_Click(object sender, EventArgs e) {
+            SqlCommand cmd = new SqlCommand("uspContractorUpdate");
+            cmd.Parameters.Add("@Reg_Date", SqlDbType.DateTime).Value = tbReg_DateNew.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbReg_DateNew.Text);
+            cmd.Parameters.Add("@Company", SqlDbType.NVarChar).Value = tbCompanyNew.Text;
+            cmd.Parameters.Add("@Contact", SqlDbType.NVarChar).Value = tbContactNew.Text;
+            cmd.Parameters.Add("@MailAddr1", SqlDbType.NVarChar).Value = tbMailAddr1New.Text;
+            cmd.Parameters.Add("@MailAddr2", SqlDbType.NVarChar).Value = tbMailAddr2New.Text;
+            cmd.Parameters.Add("@City", SqlDbType.NVarChar).Value = tbCityNew.Text;
+            cmd.Parameters.Add("@State", SqlDbType.NVarChar).Value = tbStateNew.Text;
+            cmd.Parameters.Add("@ZIP", SqlDbType.NVarChar).Value = tbZipNew.Text;
+            cmd.Parameters.Add("@Phone_1", SqlDbType.NVarChar).Value = tbPhone1New.Text;
+            cmd.Parameters.Add("@Phone_2", SqlDbType.NVarChar).Value = tbPhone2New.Text;
+            cmd.Parameters.Add("@Fax", SqlDbType.NVarChar).Value = tbFaxNew.Text;
+            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = tbEmailNew.Text;
+            cmd.Parameters.Add("@Active", SqlDbType.NVarChar).Value = tbActiveNew.Text;
+            cmd.Parameters.Add("@Lic_Number", SqlDbType.NVarChar).Value = tbLic_NumberNew.Text;
+            cmd.Parameters.Add("@Lic_X_Date", SqlDbType.NVarChar).Value = tbLic_X_DateNew.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbLic_X_DateNew.Text); ;
+            cmd.Parameters.Add("@CAT_1", SqlDbType.NVarChar).Value = ddlCategory1New.SelectedValue;
+            cmd.Parameters.Add("@CAT_2", SqlDbType.NVarChar).Value = ddlCategory2New.SelectedValue;
+            cmd.Parameters.Add("@CAT_3", SqlDbType.NVarChar).Value = ddlCategory3New.SelectedValue;
+            cmd.Parameters.Add("@CAT_4", SqlDbType.NVarChar).Value = ddlCategory4New.SelectedValue;
+            cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = tbCommentNew.Text;
+            SqlParameter prmSRContrRegIDOut = new SqlParameter("@SRContrRegIDOut", SqlDbType.Int);
+            prmSRContrRegIDOut.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(prmSRContrRegIDOut);
+            Utils.executeNonQuery(cmd, ConnectionString);
+            performPostNewSuccessfulActions("Contractor added", "CONDS", null, tbSRContrRegID, (int)prmSRContrRegIDOut.Value);
+        }
+        protected override void clearAllNewFormInputFields() {
+            tbReg_DateNew.Text = "";
+            tbCompanyNew.Text = "";
+            tbContactNew.Text = "";
+            tbMailAddr1New.Text = "";
+            tbMailAddr2New.Text = "";
+            tbCityNew.Text = "";
+            tbStateNew.Text = "";
+            tbZipNew.Text = "";
+            tbPhone1New.Text = "";
+            tbPhone2New.Text = "";
+            tbFaxNew.Text = "";
+            tbEmailNew.Text = "";
+            tbActiveNew.Text = "";
+            tbLic_NumberNew.Text = "";
+            ddlCategory1New.SelectedIndex = 0;
+            ddlCategory2New.SelectedIndex = 0;
+            ddlCategory3New.SelectedIndex = 0;
+            ddlCategory4New.SelectedIndex = 0;
+            tbCommentNew.Text = "";
         }
         protected override Label getNewResultsLabel() {
             throw new NotImplementedException();
@@ -234,11 +325,51 @@ namespace SubmittalProposal {
             tbCompanyUpdate.Enabled = false;
             tbContactUpdate.Enabled = false;
             btnContactUpdate.Enabled = false;
+            tbMailAddr1Update.Enabled = false;
+            tbMailAddr2Update.Enabled = false;
+            tbCityUpdate.Enabled = false;
+            tbStateUpdate.Enabled = false;
+            tbZipUpdate.Enabled = false;
+            tbLic_NumberUpdate.Enabled = false;
+            tbLic_X_DateUpdate.Enabled = false;
+            tbLic_X_DateUpdate.Enabled = false;
+            tbActiveUpdate.Enabled = false;
+            tbPhone1Update.Enabled = false;
+            tbPhone2Update.Enabled = false;
+            tbFaxUpdate.Enabled = false;
+            tbEmailUpdate.Enabled = false;
+            ddlCategory1Update.Enabled = false;
+            ddlCategory2Update.Enabled = false;
+            ddlCategory3Update.Enabled = false;
+            ddlCategory4Update.Enabled = false;
+            tbReg_DateUpdate.Enabled = false;
+            tbCommentUpdate.Enabled = false;
+            lbNewContractor.Enabled = false;
         }
         protected override void unlockYourUpdateFields() {
             tbCompanyUpdate.Enabled = true;
             tbContactUpdate.Enabled = true;
             btnContactUpdate.Enabled = true;
+            tbMailAddr1Update.Enabled = true;
+            tbMailAddr2Update.Enabled = true;
+            tbCityUpdate.Enabled = true;
+            tbStateUpdate.Enabled = true;
+            tbZipUpdate.Enabled = true;
+            tbLic_NumberUpdate.Enabled = true;
+            tbLic_X_DateUpdate.Enabled = true;
+            tbLic_X_DateUpdate.Enabled = true;
+            tbActiveUpdate.Enabled = true;
+            tbPhone1Update.Enabled = true;
+            tbPhone2Update.Enabled = true;
+            tbFaxUpdate.Enabled = true;
+            tbEmailUpdate.Enabled = true;
+            ddlCategory1Update.Enabled = true;
+            ddlCategory2Update.Enabled = true;
+            ddlCategory3Update.Enabled = true;
+            ddlCategory4Update.Enabled = true;
+            tbReg_DateUpdate.Enabled = true;
+            tbCommentUpdate.Enabled = true;
+            lbNewContractor.Enabled = true;
         }
         protected override string UpdateRoleName {
             get { return "canupdatecontractors"; }

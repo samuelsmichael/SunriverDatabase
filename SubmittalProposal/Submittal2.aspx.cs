@@ -314,6 +314,8 @@ namespace SubmittalProposal
             tbSubmittalId.Text = "";
             tbBPermitId.Text = "";
             ddlIsCommercial.SelectedIndex = 0;
+        }
+        protected override void clearAllNewFormInputFields() {
             tbOwnersNameNew.Text = "";
             tbLotNameNew.Text = "";
             ddlLaneNew.SelectedIndex = 0;

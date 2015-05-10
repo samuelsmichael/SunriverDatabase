@@ -24,6 +24,7 @@ alter PROCEDURE uspProjectAndSubmittalUpdate
 	@BPIssueDate datetime=null,
 	@BPClosed datetime=null,
 	@BPDelay nvarchar(255),
+	@fkSRContrRegID int=null, -- for backward compatibility
 	@NewBPermitID int out,
 	@NewSubmittalID int out
 AS
@@ -67,7 +68,8 @@ BEGIN
 			BPermitReqd=@BPermitReqd,
 			BPIssueDate=@BPIssueDate,
 			BPClosed=@BPClosed,
-			BPDelay=@BPDelay
+			BPDelay=@BPDelay,
+			fkSRContrRegID=@fkSRContrRegID
 		WHERE BPermitID = @BPermitId
 	end else begin
 		INSERT INTO [dbo].[tblBPData]
@@ -76,7 +78,8 @@ BEGIN
            ,[BPermitReqd]
            ,[BPIssueDate]
            ,[BPClosed]
-           ,[BPDelay])
+           ,[BPDelay]
+		   ,[fkSRContrRegID])
 		VALUES
            (
 		    @SubmittalId
@@ -84,6 +87,7 @@ BEGIN
            ,@BPIssueDate
            ,@BPClosed
            ,@BPDelay
+		   ,@fkSRContrRegID
 		   )
 		set @NewBPermitID=scope_identity()
 	end

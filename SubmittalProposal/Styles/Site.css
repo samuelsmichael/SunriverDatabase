@@ -283,6 +283,11 @@ legend
     padding: 2px 4px 2px 4px;
 }
 
+.newitemcontent td 
+{
+    text-align:left;
+}
+
 .form_field_heading 
 {
     font-size:.9em; white-space:nowrap;

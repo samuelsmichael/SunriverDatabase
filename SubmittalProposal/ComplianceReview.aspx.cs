@@ -489,6 +489,10 @@ namespace SubmittalProposal {
             crReviewIDOut.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(crReviewIDOut);
             Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            performPostNewSuccessfulActions("Review added", "CRDS", null, tbReviewId,(int)crReviewIDOut.Value);
+
+        }
+        protected override void clearAllNewFormInputFields() {
             tbComplianceReviewLotNew.Text = "";
             ddlNewComplianceReviewLaneNew.SelectedIndex = 0;
             tbReviewDateNew.Text = "";
@@ -497,8 +501,6 @@ namespace SubmittalProposal {
             tbDesignRuleNew.Text = "";
             tbRequiredActionNew.Text = "";
             tbFollowUpNew.Text = "";
-            performPostNewSuccessfulActions("Review added", "CRDS", null, tbReviewId,(int)crReviewIDOut.Value);
-
         }
         protected void btnNewComplianceReviewLetterOk_Click(object sender, EventArgs e) {
             SqlCommand cmd = new SqlCommand("uspComplianceLetterUpdate");

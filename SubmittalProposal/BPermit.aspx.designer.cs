@@ -301,6 +301,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.RadioButtonList rbListPermitRequiredUpdate;
         
         /// <summary>
+        /// Label34 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label34;
+        
+        /// <summary>
+        /// ddlContractorUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlContractorUpdate;
+        
+        /// <summary>
         /// Panel2 control.
         /// </summary>
         /// <remarks>
@@ -1028,6 +1046,24 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rbListPermitRequiredNew;
+        
+        /// <summary>
+        /// Label35 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label35;
+        
+        /// <summary>
+        /// ddlContractorNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlContractorNew;
         
         /// <summary>
         /// Panel4 control.

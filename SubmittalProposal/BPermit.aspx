@@ -108,7 +108,7 @@
                     <ajaxToolkit:CalendarExtender ID="ceIssuedUpdate" runat="server" TargetControlID="tbIssuedUpdate"
                         Format="MM/dd/yyyy" PopupButtonID="ibIssuedUpdate" />
                     <asp:RegularExpressionValidator ForeColor="Red" ID="revIssuedUpdate" Display="Dynamic"
-                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                         ControlToValidate="tbIssuedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                 </td>
                 <td>
@@ -135,7 +135,7 @@
                     <ajaxToolkit:CalendarExtender ID="ceClosedUpdate" runat="server" TargetControlID="tbClosedUpdate"
                         Format="MM/dd/yyyy" PopupButtonID="ibClosedUpdate" />
                     <asp:RegularExpressionValidator ForeColor="Red" ID="revClosedUpdate" Display="Dynamic"
-                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                         ControlToValidate="tbClosedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                 </td>
                 <td>
@@ -147,6 +147,14 @@
                         <asp:ListItem>Yes</asp:ListItem>
                         <asp:ListItem>No</asp:ListItem>
                     </asp:RadioButtonList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label34" runat="server" Text="Contractor"></asp:Label>
+                </td>
+                <td colspan="9">
+                    <asp:DropDownList CssClass="form_field" runat="server" ID="ddlContractorUpdate" DataTextField="Company" DataValueField="SRContrRegID"></asp:DropDownList>
                 </td>
             </tr>
         </table>
@@ -408,7 +416,7 @@
                                         PopupButtonID="ibBPermitReviewDateUpdate" />
                                     <asp:RegularExpressionValidator ForeColor="Red" 
                                         ID="revBPermitReviewDateUpdate"  Display="Dynamic" 
-                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                         ControlToValidate="tbBPermitReviewDateUpdate" runat="server" 
                                         ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                 </EditItemTemplate>
@@ -436,7 +444,7 @@
                                         PopupButtonID="ibBPermitActionDateUpdate" />
                                     <asp:RegularExpressionValidator ForeColor="Red" 
                                         ID="revBPermitActionDateUpdate"  Display="Dynamic" 
-                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                         ControlToValidate="tbBPermitActionDateUpdate" runat="server" 
                                         ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                 </EditItemTemplate>
@@ -462,7 +470,7 @@
                                                     PopupButtonID="ibBPermitLetterDateUpdate" />
                                                 <asp:RegularExpressionValidator ForeColor="Red" 
                                                     ID="revBPermitLetterDateUpdate"  Display="Dynamic" 
-                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                                     ControlToValidate="tbBPermitLetterDateUpdate" runat="server" 
                                                     ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </td>
@@ -513,7 +521,7 @@
                                             Format="MM/dd/yyyy"
                                             PopupButtonID="ibBPermitReviewDateNew" />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitReviewDateNew"  Display="Dynamic" 
-                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbBPermitReviewDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
@@ -528,7 +536,7 @@
                                             Format="MM/dd/yyyy"
                                             PopupButtonID="ibBPermitActionDateNew" />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitActionDateNew"  Display="Dynamic" 
-                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbBPermitActionDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
@@ -543,7 +551,7 @@
                                             Format="MM/dd/yyyy"
                                             PopupButtonID="ibBPermitLetterDateNew" />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitLetterDateNew"  Display="Dynamic" 
-                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbBPermitLetterDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td class="form_field_heading">
@@ -650,7 +658,7 @@
                                 Format="MM/dd/yyyy"
                                 PopupButtonID="ibIssuedNew" />
                             <asp:RegularExpressionValidator ForeColor="Red" ID="revIssuedNew"  Display="Dynamic" 
-                                ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                 ControlToValidate="tbIssuedNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
                         <td>
@@ -672,7 +680,7 @@
                                 Format="MM/dd/yyyy"
                                 PopupButtonID="ibClosedNew" />
                             <asp:RegularExpressionValidator ForeColor="Red" ID="revClosedNew"  Display="Dynamic" 
-                                ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
+                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                 ControlToValidate="tbClosedNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
                         <td>
@@ -683,6 +691,14 @@
                                 <asp:ListItem>Yes</asp:ListItem>
                                 <asp:ListItem>No</asp:ListItem>
                             </asp:RadioButtonList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label35" runat="server" Text="Contractor"></asp:Label>
+                        </td>
+                        <td colspan="9">
+                            <asp:DropDownList CssClass="form_field" runat="server" ID="ddlContractorNew" DataTextField="Company" DataValueField="SRContrRegID"></asp:DropDownList>
                         </td>
                     </tr>
                 </table>

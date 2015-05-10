@@ -31,6 +31,8 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text;
                 cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorUpdate.Text;
                 cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeUpdate.SelectedValue;
+                int? contractorId = ddlContractorUpdate.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlContractorUpdate.SelectedValue);
+                cmd.Parameters.Add("@fkSRContrRegID", SqlDbType.Int).Value =contractorId;
                 cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectUpdate.Text;
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
                 cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredUpdate.SelectedValue == "Yes" ? true : false;
@@ -183,6 +185,7 @@ namespace SubmittalProposal {
                 ddlLaneUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
             }
             ddlLaneUpdate.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            ddlContractorUpdate.SelectedValue = Utils.ObjectToString(Utils.ObjectToInt(dr["fkSRContrRegID"]));
 
             bind_gvReviews(getBPermitId(row));
             int? submittalId = getSubmittalId(dr);
@@ -285,7 +288,17 @@ namespace SubmittalProposal {
                 ddlLaneUpdate.DataBind();
                 ddlLaneNew.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneNew.DataBind();
-
+                DataTable contractor = Contractor.CRDataSet().Tables[1];
+                DataRow dr = contractor.NewRow();
+                dr["Contact"] = "";
+                dr["SRContrRegID"] = 0;
+                try { // it might already be there
+                    contractor.Rows.InsertAt(dr, 0);
+                } catch { }
+                ddlContractorUpdate.DataSource = contractor;
+                ddlContractorUpdate.DataBind();
+                ddlContractorNew.DataSource = contractor;
+                ddlContractorNew.DataBind();
             }
  //           Response.Write("Session[\"ShowBPermitID\"]" + "\n");
    //         Response.Write(Session["ShowBPermitID"] + "\n");
@@ -327,6 +340,15 @@ namespace SubmittalProposal {
             }
         }
         protected override void clearAllSelectionInputFields() {
+            tbOwner.Text = "";
+            tbApplicant.Text = "";
+            tbLot.Text = "";
+            ddlLane.SelectedIndex = 0;
+            tbSubmittalId.Text = "";
+            tbBPermitId.Text = "";
+            tbDelaySearch.Text = "";
+        }
+        protected override void clearAllNewFormInputFields() {
             tbProjectNew.Text = "";
             tbContractorNew.Text = "";
             tbDelayNew.Text = "";
@@ -336,13 +358,6 @@ namespace SubmittalProposal {
             ddlLaneNew.SelectedIndex = 0;
             tbOwnersNameNew.Text = "";
             tbApplicantNameNew.Text = "";
-            tbOwner.Text = "";
-            tbApplicant.Text = "";
-            tbLot.Text = "";
-            ddlLane.SelectedIndex = 0;
-            tbSubmittalId.Text = "";
-            tbBPermitId.Text = "";
-            tbDelaySearch.Text = "";
         }
 
         protected override DataTable getGridViewDataTable() {
@@ -381,6 +396,8 @@ namespace SubmittalProposal {
                 SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
                 newBPermitId.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newBPermitId);
+                int? contractorId = ddlContractorNew.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlContractorNew.SelectedValue);
+                cmd.Parameters.Add("@fkSRContrRegID", SqlDbType.Int).Value = contractorId;
                 SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
                 newSubmittalId.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newSubmittalId);
@@ -544,6 +561,7 @@ namespace SubmittalProposal {
             ibClosedUpdate.Enabled = false;
             lbBPermitNewPayment.Enabled = false;
             lbBPermitNewReview.Enabled = false;
+            ddlContractorUpdate.Enabled = false;
         }
         protected override void unlockYourUpdateFields() {
             tbDelayUpdate.Enabled = true;
@@ -564,6 +582,7 @@ namespace SubmittalProposal {
             ibClosedUpdate.Enabled = true;
             lbBPermitNewPayment.Enabled = true;
             lbBPermitNewReview.Enabled = true;
+            ddlContractorUpdate.Enabled = true;
         }
     
     }

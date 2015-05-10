@@ -21,6 +21,7 @@ namespace SubmittalProposal {
         protected abstract void unlockYourUpdateFields();
         protected abstract void lockYourUpdateFields();
         protected abstract void clearAllSelectionInputFields();
+        protected abstract void clearAllNewFormInputFields();
         protected abstract string UpdateRoleName { get; }
         
         protected abstract void childPageLoad(object sender, EventArgs e);
@@ -78,6 +79,7 @@ namespace SubmittalProposal {
             }
             /* the following statements cause the view to be re-displayed, but with updated data */
             clearAllSelectionInputFields();
+            clearAllNewFormInputFields();
             tbHavingKeyField.Text = "" + key;
             ((Database)Master).doGo();
             getGridViewResults().SelectedIndex = 0;

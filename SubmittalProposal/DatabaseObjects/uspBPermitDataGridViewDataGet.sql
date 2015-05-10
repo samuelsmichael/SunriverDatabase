@@ -27,13 +27,17 @@ BEGIN
 			s.Own_Name as OwnersName,
 			s.Applicant,
 			s.Contractor,
+			c.Company as ContractorFromBPermit,
 			b.BPermitReqd,
 			s.ProjectType,
 			s.Project,
-			b.BPDelay
+			b.BPDelay,
+			b.fkSRContrRegID
 		FROM
 			tblBPData b inner JOIN
-			tblSubmittal s on s.SubmittalId=b.fkSubmittalID_PD),
+			tblSubmittal s on s.SubmittalId=b.fkSubmittalID_PD left outer join
+			ContractorRegSQL.dbo.tblContractors c on b.fkSRContrRegID=c.SRContrRegID
+	),
 	e as (
 		SELECT 
 			fkBPermitID_PP as BPermitID, sum(isnull(BPMonths,0)) as Months 
