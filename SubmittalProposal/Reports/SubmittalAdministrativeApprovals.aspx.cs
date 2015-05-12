@@ -9,6 +9,9 @@ using System.Data.SqlClient;
 
 namespace SubmittalProposal.Reports {
     public partial class SubmittalAdministrativeApprovals : AbstractReport  {
+        protected override string ConnectionString {
+            get { return System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString; }
+        }
         protected override void child_Page_Load(object sender, EventArgs args) {
             if (!IsPostBack) {
             }

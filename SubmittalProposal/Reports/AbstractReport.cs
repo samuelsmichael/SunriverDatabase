@@ -16,6 +16,7 @@ namespace SubmittalProposal.Reports {
         protected abstract ReportDocument getReportDocument();
         protected abstract bool getIgnoreSubreportsWhenBuildingParameters();
         protected abstract Hashtable getReportParams();
+        protected abstract string ConnectionString { get; }
         private string _DatabaseName;
         private string _UserName;
         private string _Password;
@@ -32,7 +33,7 @@ namespace SubmittalProposal.Reports {
         }
 
         public AbstractReport() {
-            ConnectionStringParser csp = new ConnectionStringParser(System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            ConnectionStringParser csp = new ConnectionStringParser(ConnectionString);
             _DatabaseName = csp.Database;
             _UserName = csp.UserId;
             _Password = csp.Password;

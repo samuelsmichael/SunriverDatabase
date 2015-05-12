@@ -9,6 +9,25 @@
     </h2>
     <div style="height: 350px; overflow: scroll;">
         <ul>
+            <li  style="font-weight: bold;">Version 1.01</li>
+                <ul>
+                    <li>Contractors Database
+                        <ul>
+                            <li>Questions/Notes
+                                                <ul>
+                        <li>Search Panel - Category is an "any part of field" type match.  Also, it searches for a match to any of the four Categories</li>
+                        </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Bugs fixed
+                        <ul>
+                            <li>Dates beyond 12/31/2019 weren't allowed on any form ... both Update and New.  Now they are.</li>
+                        </ul>
+                    </li>
+                    <li>BPermit database now has a Contractor field that links to the Contractor database, and hence only allows picking a contractor from that database.</li>
+                </ul>
+                
             <li  style="font-weight: bold;">Version 1.00β</li>
                 <ul>
                     <li>All Reports</li>

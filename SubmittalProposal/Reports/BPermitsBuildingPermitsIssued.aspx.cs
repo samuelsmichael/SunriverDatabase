@@ -13,6 +13,9 @@ namespace SubmittalProposal.Reports {
             if (!IsPostBack) {
             }
         }
+        protected override string ConnectionString {
+            get { return System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString; }
+        }
         protected override CrystalDecisions.CrystalReports.Engine.ReportDocument getReportDocument() {
             return new BPermits.BPermitsIssued();
         }

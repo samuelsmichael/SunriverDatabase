@@ -76,10 +76,21 @@
                         <asp:Panel ID="crPropertyUpdate" GroupingText="Property" runat="server">
                             <table cellpadding="4" cellspacing="4" border="0">
                                 <tr>
-                                    <td><asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Lot"></asp:Label></td>
-                                    <td><asp:TextBox CssClass="form_field" ID="tbCRLotNameUpdate" MaxLength="5" Width="35" runat="server"></asp:TextBox></td>
-                                    <td><asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Lane"></asp:Label></td>
-                                    <td><asp:DropDownList CssClass="form_field" ID="ddlCRLaneUpdate" runat="server" DataTextField="Lane" DataValueField="Lane"></asp:DropDownList></td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Lot"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbCRLotNameUpdate" MaxLength="5" Width="35"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Lane"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList CssClass="form_field" ID="ddlCRLaneUpdate" runat="server" DataTextField="Lane"
+                                            DataValueField="Lane">
+                                        </asp:DropDownList>
+                                    </td>
                                 </tr>
                             </table>
                         </asp:Panel>
@@ -90,46 +101,50 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Review date:"></asp:Label>
                                     </td>
                                     <td>
-                                        <table><tr><td>
-                                            <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReviewDateUpdate" runat="server"></asp:TextBox>
-                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibReviewDateUpdate" 
-                                                runat="server" /></td></tr></table>
-                                        <ajaxToolkit:CalendarExtender ID="ceReviewDateUpdate" runat="server"
-                                            TargetControlID="tbReviewDateUpdate"
-                                            Format="MM/dd/yyyy"
-                                            PopupButtonID="ibReviewDateUpdate" />
-                                        <asp:RegularExpressionValidator ForeColor="Red" 
-                                            ID="revReviewDateUpdate"  Display="Dynamic" 
-                                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                            ControlToValidate="tbReviewDateUpdate" runat="server" 
-                                            ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReviewDateUpdate" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibReviewDateUpdate" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceReviewDateUpdate" runat="server" TargetControlID="tbReviewDateUpdate"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibReviewDateUpdate" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revReviewDateUpdate" Display="Dynamic"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbReviewDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td align="right">
                                         <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Close date:"></asp:Label>
                                     </td>
                                     <td>
-                                        <table><tr><td>
-                                        <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbCloseDateUpdate" runat="server"></asp:TextBox>
-                                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibCloseDateUpdate" 
-                                                runat="server" /></td></tr></table>
-                                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
-                                        TargetControlID="tbCloseDateUpdate"
-                                        Format="MM/dd/yyyy"
-                                        PopupButtonID="ibCloseDateUpdate" />
-                                    <asp:RegularExpressionValidator ForeColor="Red" 
-                                        ID="RegularExpressionValidator1"  Display="Dynamic" 
-                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                        ControlToValidate="tbCloseDateUpdate" runat="server" 
-                                        ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbCloseDateUpdate" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibCloseDateUpdate" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="tbCloseDateUpdate"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibCloseDateUpdate" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator1"
+                                            Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbCloseDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Comments:"></asp:Label>
                                     </td>
                                     <td width="100%">
-                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbCommentsFormUpdate" runat="server"
-                                            TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbCommentsFormUpdate"
+                                            runat="server" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
@@ -155,8 +170,8 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Follow up:"></asp:Label>
                                     </td>
                                     <td width="40%">
-                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbFollowUpUpdate" runat="server"
-                                            TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbFollowUpUpdate"
+                                            runat="server" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
@@ -165,12 +180,11 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel  runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter">
+        <ajaxToolkit:TabPanel runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1aa" runat="server">
                     <ContentTemplate>
                         <asp:FormView Width="100%" ID="fvComplianceLetter" AllowPaging="true" runat="server"
-                         
                             OnDataBound="fvComplianceLetter_OnDataBound" BackColor="White" BorderColor="#3366CC"
                             BorderStyle="Inset" OnModeChanging="fvComplianceLetter_OnModeChanging" BorderWidth="3px"
                             CellPadding="4" GridLines="Both" OnPageIndexChanging="fvComplianceLetter_PageIndexChanging"
@@ -190,41 +204,45 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Letter date:"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <table><tr><td>
-                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateUpdate" runat="server"
-                                                        Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
-                                                    </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                            ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibLtDateUpdate" 
-                                                            runat="server" /></td></tr></table>
-                                                <ajaxToolkit:CalendarExtender ID="cecrLtDateUpdate" runat="server"
-                                                    TargetControlID="tbcrLtDateUpdate"
-                                                    Format="MM/dd/yyyy"
-                                                    PopupButtonID="ibLtDateUpdate" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" 
-                                                    ID="revcrLtDateUpdate"  Display="Dynamic" 
-                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                                    ControlToValidate="tbcrLtDateUpdate" runat="server" 
-                                                    ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateUpdate" runat="server"
+                                                                    Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                    ID="ibLtDateUpdate" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <ajaxToolkit:CalendarExtender ID="cecrLtDateUpdate" runat="server" TargetControlID="tbcrLtDateUpdate"
+                                                        Format="MM/dd/yyyy" PopupButtonID="ibLtDateUpdate" />
+                                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLtDateUpdate" Display="Dynamic"
+                                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                        ControlToValidate="tbcrLtDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                                 </td>
                                                 <td class="form_field_heading" align="right">
                                                     <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Action deadline:"></asp:Label>
                                                 </td>
                                                 <td class="form_field">
-                                                    <table><tr><td>
-                                                    <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
-                                                        Width="9em" ID="tbcrLTActionDateUpdate" runat="server"></asp:TextBox>
-                                                </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibtbcrLTActionDateUpdate" 
-                                                        runat="server" /></td></tr></table>
-                                                <ajaxToolkit:CalendarExtender ID="cetbcrLTActionDateUpdate" runat="server"
-                                                    TargetControlID="tbcrLTActionDateUpdate"
-                                                    Format="MM/dd/yyyy"
-                                                    PopupButtonID="ibtbcrLTActionDateUpdate" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" 
-                                                    ID="revtbcrLTActionDateUpdate"  Display="Dynamic" 
-                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                                    ControlToValidate="tbcrLTActionDateUpdate" runat="server" 
-                                                    ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
+                                                                    Width="9em" ID="tbcrLTActionDateUpdate" runat="server"></asp:TextBox>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                    ID="ibtbcrLTActionDateUpdate" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <ajaxToolkit:CalendarExtender ID="cetbcrLTActionDateUpdate" runat="server" TargetControlID="tbcrLTActionDateUpdate"
+                                                        Format="MM/dd/yyyy" PopupButtonID="ibtbcrLTActionDateUpdate" />
+                                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revtbcrLTActionDateUpdate" Display="Dynamic"
+                                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                        ControlToValidate="tbcrLTActionDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                                 </td>
                                                 <td class="form_field_heading" align="right">
                                                     <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Letter Id:"></asp:Label>
@@ -246,7 +264,8 @@
                                                                 Owner name:
                                                             </td>
                                                             <td class="form_field_address">
-                                                                <asp:TextBox runat="server" ID="tbcrLTRecipientUpdate" CssClass="form_field_address" Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
+                                                                <asp:TextBox runat="server" ID="tbcrLTRecipientUpdate" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -254,14 +273,16 @@
                                                                 Address:
                                                             </td>
                                                             <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTMailAddrUpdate" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
+                                                                <asp:TextBox ID="tbcrLTMailAddrUpdate" runat="server" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                             </td>
                                                             <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTMailAddr2Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
+                                                                <asp:TextBox ID="tbcrLTMailAddr2Update" runat="server" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -281,7 +302,8 @@
                                                                 cc:
                                                             </td>
                                                             <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTCCopy1Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy1") %>'></asp:TextBox>
+                                                                <asp:TextBox ID="tbcrLTCCopy1Update" runat="server" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTCCopy1") %>'></asp:TextBox>
                                                             </td>
                                                 </td>
                                             </tr>
@@ -289,7 +311,8 @@
                                                 <td>
                                                 </td>
                                                 <td class="form_field_address">
-                                                    <asp:TextBox ID="tbcrLTCCopy2Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy2") %>'></asp:TextBox>
+                                                    <asp:TextBox ID="tbcrLTCCopy2Update" runat="server" CssClass="form_field_address"
+                                                        Text='<%# Eval("crLTCCopy2") %>'></asp:TextBox>
                                                 </td>
                                                 </td>
                                             </tr>
@@ -297,7 +320,8 @@
                                                 <td>
                                                 </td>
                                                 <td class="form_field_address">
-                                                    <asp:TextBox ID="tbcrLTCCopy3Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy3") %>'></asp:TextBox>
+                                                    <asp:TextBox ID="tbcrLTCCopy3Update" runat="server" CssClass="form_field_address"
+                                                        Text='<%# Eval("crLTCCopy3") %>'></asp:TextBox>
                                                 </td>
                                                 </td>
                                             </tr>
@@ -338,7 +362,8 @@
                                                     Type:
                                                 </td>
                                                 <td class="form_field_address">
-                                                    <asp:TextBox ID="crLTAttachTypeUpdate" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
+                                                    <asp:TextBox ID="crLTAttachTypeUpdate" runat="server" CssClass="form_field_address"
+                                                        Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
                                                 </td>
                                                 <td class="form_field_heading" align="right">
                                                     Description:
@@ -369,41 +394,45 @@
                                                 <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Letter date:"></asp:Label>
                                             </td>
                                             <td>
-                                                <table><tr><td>
-                                                <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateNew"
-                                                    runat="server" Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
-                                                </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibcrLtDateNew" 
-                                                        runat="server" /></td></tr></table>
-                                                <ajaxToolkit:CalendarExtender ID="cecrLtDateNew" runat="server"
-                                                    TargetControlID="tbcrLtDateNew"
-                                                    Format="MM/dd/yyyy"
-                                                    PopupButtonID="ibcrLtDateNew" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" 
-                                                    ID="revcrLtDateNew"  Display="Dynamic" 
-                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                                    ControlToValidate="tbcrLtDateNew" runat="server" 
-                                                    ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateNew" runat="server"
+                                                                Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                ID="ibcrLtDateNew" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <ajaxToolkit:CalendarExtender ID="cecrLtDateNew" runat="server" TargetControlID="tbcrLtDateNew"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibcrLtDateNew" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLtDateNew" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbcrLtDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </td>
                                             <td class="form_field_heading" align="right">
                                                 <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Action deadline:"></asp:Label>
                                             </td>
                                             <td class="form_field">
-                                                <table><tr><td>
-                                                <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
-                                                    Width="9em" ID="crLTActionDateNew" runat="server"></asp:TextBox>
-                                                    </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibcrLTActionDateNew" 
-                                                        runat="server" /></td></tr></table>
-                                                <ajaxToolkit:CalendarExtender ID="cecrLTActionDateNew" runat="server"
-                                                    TargetControlID="crLTActionDateNew"
-                                                    Format="MM/dd/yyyy"
-                                                    PopupButtonID="ibcrLTActionDateNew" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" 
-                                                    ID="revcrLTActionDateNew"  Display="Dynamic" 
-                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                                    ControlToValidate="crLTActionDateNew" runat="server" 
-                                                    ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
+                                                                Width="9em" ID="crLTActionDateNew" runat="server"></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                ID="ibcrLTActionDateNew" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <ajaxToolkit:CalendarExtender ID="cecrLTActionDateNew" runat="server" TargetControlID="crLTActionDateNew"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibcrLTActionDateNew" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLTActionDateNew" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="crLTActionDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </td>
                                             <td class="form_field_heading" align="right">
                                                 &nbsp;
@@ -425,7 +454,8 @@
                                                             Owner name:
                                                         </td>
                                                         <td class="form_field_address">
-                                                            <asp:TextBox runat="server" ID="tbcrLTRecipientNew" CssClass="form_field_address" Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
+                                                            <asp:TextBox runat="server" ID="tbcrLTRecipientNew" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -433,21 +463,24 @@
                                                             Address:
                                                         </td>
                                                         <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTMailAddrNew" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
+                                                            <asp:TextBox ID="tbcrLTMailAddrNew" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                         </td>
                                                         <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTMailAddr2New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
+                                                            <asp:TextBox ID="tbcrLTMailAddr2New" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                         </td>
                                                         <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTCityStateZipNew" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCity+State+Zip") %>'></asp:TextBox>
+                                                            <asp:TextBox ID="tbcrLTCityStateZipNew" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTCity+State+Zip") %>'></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -516,13 +549,15 @@
                                                 Type:
                                             </td>
                                             <td class="form_field_address">
-                                                <asp:TextBox ID="crLTAttachTypeNew" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
+                                                <asp:TextBox ID="crLTAttachTypeNew" runat="server" CssClass="form_field_address"
+                                                    Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
                                             </td>
                                             <td class="form_field_heading" align="right">
                                                 Description:
                                             </td>
                                             <td class="form_field_address">
-                                                <asp:TextBox ID="tbcrLTAttachDescriptionNew" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTAttachDescription") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbcrLTAttachDescriptionNew" runat="server" CssClass="form_field_address"
+                                                    Text='<%# Eval("crLTAttachDescription") %>'></asp:TextBox>
                                             </td>
                                         </tr>
                                     </table>
@@ -532,7 +567,8 @@
                                 <table cellpadding="3">
                                     <tr>
                                         <td>
-                                            <asp:Button ID="btnNewComplianceReviewLetterOk"  OnClick="btnNewComplianceReviewLetterOk_Click" CausesValidation="true" runat="server" Text="Okay" />
+                                            <asp:Button ID="btnNewComplianceReviewLetterOk" OnClick="btnNewComplianceReviewLetterOk_Click"
+                                                CausesValidation="true" runat="server" Text="Okay" />
                                         </td>
                                         <td>
                                             <asp:Button ID="btnNewComplianceReviewLetterCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
@@ -567,186 +603,198 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel Visible="false" runat="server" ID="tabPanelComplanceLetterDataScrolling" HeaderText="Compliance Letter (Scrolling)">
+        <ajaxToolkit:TabPanel Visible="false" runat="server" ID="tabPanelComplanceLetterDataScrolling"
+            HeaderText="Compliance Letter (Scrolling)">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1" runat="server">
                     <ContentTemplate>
                         <div style="overflow: scroll; height: 350px;">
                             <asp:Panel runat="server" ID="pnlComplianceLetterRepeater">
-                            <asp:Repeater ID="rptrComplianceLetter" runat="server" OnItemDataBound="Repeater1_ItemDataBound">
-                                <ItemTemplate>
-                                    <div style="border: 1px solid #0000FF;padding-bottom:4px;">
-                                    <asp:Panel CssClass="form_field_panel_squished" ID="Panel1" GroupingText="Dates"
-                                        runat="server">
-                                        <table width="100%" cellpadding="4" cellspacing="4" border="0">
-                                            <tr valign="middle">
-                                                <td class="form_field_heading" align="right">
-                                                    <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Letter date:"></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <table><tr><td>
-                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateUpdate" runat="server"
-                                                        Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
-                                                    </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                                ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibcrLtDateUpdate" 
-                                                                runat="server" /></td></tr></table>
-                                                    <ajaxToolkit:CalendarExtender ID="cecrLtDateUpdate" runat="server"
-                                                        TargetControlID="tbcrLtDateUpdate"
-                                                        Format="MM/dd/yyyy"
-                                                        PopupButtonID="ibcrLtDateUpdate" />
-                                                    <asp:RegularExpressionValidator ForeColor="Red" 
-                                                        ID="revcrLtDateUpdate"  Display="Dynamic" 
-                                                        ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                                        ControlToValidate="tbcrLtDateUpdate" runat="server" 
-                                                        ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                                </td>
-                                                <td class="form_field_heading" align="right">
-                                                    <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Action deadline:"></asp:Label>
-                                                </td>
-                                                <td class="form_field">
-                                                    <table><tr><td>
-                                                    <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
-                                                        Width="9em" ID="tbcrLTActionDateUpdate" runat="server"></asp:TextBox>
-                                                </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                            ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibcrLTActionDateUpdate" 
-                                                            runat="server" /></td></tr></table>
-                                                <ajaxToolkit:CalendarExtender ID="cecrLTActionDateUpdate" runat="server"
-                                                    TargetControlID="tbcrLTActionDateUpdate"
-                                                    Format="MM/dd/yyyy"
-                                                    PopupButtonID="ibcrLTActionDateUpdate" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" 
-                                                    ID="revcrLTActionDateUpdate"  Display="Dynamic" 
-                                                    ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                                                    ControlToValidate="tbcrLTActionDateUpdate" runat="server" 
-                                                    ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                                </td>
-                                                <td class="form_field_heading" align="right">
-                                                    <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Letter Id:"></asp:Label>
-                                                </td>
-                                                <td class="form_field">
-                                                    <asp:Label CssClass="form_field" ID="lblcrLTIDUpdate" runat="server" Text='<%# Eval("crLTID") %>'></asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="To"
-                                        ID="pnlComplianceLetterTo">
-                                        <table width="100%">
-                                            <tr>
-                                                <td valign="top">
-                                                    <table width="100%">
-                                                        <tr>
-                                                            <td class="form_field_heading" align="right">
-                                                                Owner name:
-                                                            </td>
-                                                            <td class="form_field_address">
-                                                                <asp:TextBox runat="server" ID="tbcrLTRecipientUpdate" CssClass="form_field_address" Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="form_field_heading" align="right">
-                                                                Address:
-                                                            </td>
-                                                            <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTMailAddrUpdate" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                            </td>
-                                                            <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTMailAddr2Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                            </td>
-                                                            <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTCityStateZipUpdate" runat="server" CssClass="form_field_address"
-                                                                    Text='<%# Eval("crLTCity+State+Zip") %>'></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td valign="top">
-                                                    <table>
-                                                        <tr>
-                                                            <td class="form_field_heading" align="right">
-                                                                cc:
-                                                            </td>
-                                                            <td class="form_field_address">
-                                                                <asp:TextBox ID="tbcrLTCCopy1Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy1") %>'></asp:TextBox>
-                                                            </td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                </td>
-                                                <td class="form_field_address">
-                                                    <asp:TextBox ID="tbcrLTCCopy2Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy2") %>'></asp:TextBox>
-                                                </td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                </td>
-                                                <td class="form_field_address">
-                                                    <asp:TextBox ID="tbcrLTCCopy3Update" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy3") %>'></asp:TextBox>
-                                                </td>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        </td> </tr> </table>
-                                    </asp:Panel>
-                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="From"
-                                        ID="pnlFromCompliance">
-                                        <table cellpadding="4" cellspacing="4">
-                                            <tr>
-                                                <td class="form_field_heading" align="right">
-                                                    Signature:
-                                                </td>
-                                                <td class="form_field">
-                                                    <asp:DropDownList ID="ddlCRFromSignatureUpdate" runat="server">
-                                                        <asp:ListItem Value="" Text=""></asp:ListItem>
-                                                        <asp:ListItem Value="Hugh Palcic" Text="Hugh Palcic"></asp:ListItem>
-                                                        <asp:ListItem Value="Bill Peck" Text="Bill Peck"></asp:ListItem>
-                                                        <asp:ListItem Value="Shane Hostbjor" Text="Shane Hostbjor"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                </td>
-                                                <td class="form_field_heading" align="right">
-                                                    Title:
-                                                    <asp:DropDownList ID="ddlCRFromTitleUpdate" runat="server">
-                                                        <asp:ListItem Value="" Text=""></asp:ListItem>
-                                                        <asp:ListItem Value="Director of Community Development" Text="Director of Community Development"></asp:ListItem>
-                                                        <asp:ListItem Value="Compliance Inspector" Text="Compliance Inspector"></asp:ListItem>
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="Letter Attachment"
-                                        ID="Panel3">
-                                        <table>
-                                            <tr>
-                                                <td class="form_field_heading" align="right">
-                                                    Type:
-                                                </td>
-                                                <td class="form_field_address">
-                                                    <asp:TextBox ID="crLTAttachTypeUpdate" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
-                                                </td>
-                                                <td class="form_field_heading" align="right">
-                                                    Description:
-                                                </td>
-                                                <td class="form_field_address">
-                                                    <asp:TextBox ID="tbcrLTAttachDescriptionUpdate" runat="server" CssClass="form_field_address"
-                                                        Text='<%# Eval("crLTAttachDescription") %>'></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                                <asp:Repeater ID="rptrComplianceLetter" runat="server" OnItemDataBound="Repeater1_ItemDataBound">
+                                    <ItemTemplate>
+                                        <div style="border: 1px solid #0000FF; padding-bottom: 4px;">
+                                            <asp:Panel CssClass="form_field_panel_squished" ID="Panel1" GroupingText="Dates"
+                                                runat="server">
+                                                <table width="100%" cellpadding="4" cellspacing="4" border="0">
+                                                    <tr valign="middle">
+                                                        <td class="form_field_heading" align="right">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Letter date:"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateUpdate" runat="server"
+                                                                            Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                            ID="ibcrLtDateUpdate" runat="server" />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <ajaxToolkit:CalendarExtender ID="cecrLtDateUpdate" runat="server" TargetControlID="tbcrLtDateUpdate"
+                                                                Format="MM/dd/yyyy" PopupButtonID="ibcrLtDateUpdate" />
+                                                            <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLtDateUpdate" Display="Dynamic"
+                                                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                                ControlToValidate="tbcrLtDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td class="form_field_heading" align="right">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Action deadline:"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
+                                                                            Width="9em" ID="tbcrLTActionDateUpdate" runat="server"></asp:TextBox>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                            ID="ibcrLTActionDateUpdate" runat="server" />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <ajaxToolkit:CalendarExtender ID="cecrLTActionDateUpdate" runat="server" TargetControlID="tbcrLTActionDateUpdate"
+                                                                Format="MM/dd/yyyy" PopupButtonID="ibcrLTActionDateUpdate" />
+                                                            <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLTActionDateUpdate" Display="Dynamic"
+                                                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                                ControlToValidate="tbcrLTActionDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td class="form_field_heading" align="right">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Letter Id:"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <asp:Label CssClass="form_field" ID="lblcrLTIDUpdate" runat="server" Text='<%# Eval("crLTID") %>'></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="To"
+                                                ID="pnlComplianceLetterTo">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <table width="100%">
+                                                                <tr>
+                                                                    <td class="form_field_heading" align="right">
+                                                                        Owner name:
+                                                                    </td>
+                                                                    <td class="form_field_address">
+                                                                        <asp:TextBox runat="server" ID="tbcrLTRecipientUpdate" CssClass="form_field_address"
+                                                                            Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form_field_heading" align="right">
+                                                                        Address:
+                                                                    </td>
+                                                                    <td class="form_field_address">
+                                                                        <asp:TextBox ID="tbcrLTMailAddrUpdate" runat="server" CssClass="form_field_address"
+                                                                            Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                    </td>
+                                                                    <td class="form_field_address">
+                                                                        <asp:TextBox ID="tbcrLTMailAddr2Update" runat="server" CssClass="form_field_address"
+                                                                            Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                    </td>
+                                                                    <td class="form_field_address">
+                                                                        <asp:TextBox ID="tbcrLTCityStateZipUpdate" runat="server" CssClass="form_field_address"
+                                                                            Text='<%# Eval("crLTCity+State+Zip") %>'></asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td valign="top">
+                                                            <table>
+                                                                <tr>
+                                                                    <td class="form_field_heading" align="right">
+                                                                        cc:
+                                                                    </td>
+                                                                    <td class="form_field_address">
+                                                                        <asp:TextBox ID="tbcrLTCCopy1Update" runat="server" CssClass="form_field_address"
+                                                                            Text='<%# Eval("crLTCCopy1") %>'></asp:TextBox>
+                                                                    </td>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                        </td>
+                                                        <td class="form_field_address">
+                                                            <asp:TextBox ID="tbcrLTCCopy2Update" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTCCopy2") %>'></asp:TextBox>
+                                                        </td>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                        </td>
+                                                        <td class="form_field_address">
+                                                            <asp:TextBox ID="tbcrLTCCopy3Update" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTCCopy3") %>'></asp:TextBox>
+                                                        </td>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                </td> </tr> </table>
+                                            </asp:Panel>
+                                            <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="From"
+                                                ID="pnlFromCompliance">
+                                                <table cellpadding="4" cellspacing="4">
+                                                    <tr>
+                                                        <td class="form_field_heading" align="right">
+                                                            Signature:
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <asp:DropDownList ID="ddlCRFromSignatureUpdate" runat="server">
+                                                                <asp:ListItem Value="" Text=""></asp:ListItem>
+                                                                <asp:ListItem Value="Hugh Palcic" Text="Hugh Palcic"></asp:ListItem>
+                                                                <asp:ListItem Value="Bill Peck" Text="Bill Peck"></asp:ListItem>
+                                                                <asp:ListItem Value="Shane Hostbjor" Text="Shane Hostbjor"></asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td class="form_field_heading" align="right">
+                                                            Title:
+                                                            <asp:DropDownList ID="ddlCRFromTitleUpdate" runat="server">
+                                                                <asp:ListItem Value="" Text=""></asp:ListItem>
+                                                                <asp:ListItem Value="Director of Community Development" Text="Director of Community Development"></asp:ListItem>
+                                                                <asp:ListItem Value="Compliance Inspector" Text="Compliance Inspector"></asp:ListItem>
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="Letter Attachment"
+                                                ID="Panel3">
+                                                <table>
+                                                    <tr>
+                                                        <td class="form_field_heading" align="right">
+                                                            Type:
+                                                        </td>
+                                                        <td class="form_field_address">
+                                                            <asp:TextBox ID="crLTAttachTypeUpdate" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
+                                                        </td>
+                                                        <td class="form_field_heading" align="right">
+                                                            Description:
+                                                        </td>
+                                                        <td class="form_field_address">
+                                                            <asp:TextBox ID="tbcrLTAttachDescriptionUpdate" runat="server" CssClass="form_field_address"
+                                                                Text='<%# Eval("crLTAttachDescription") %>'></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </asp:Panel>
                         </div>
                         <center>
@@ -758,9 +806,11 @@
         </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>
     <center>
-        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true" ID="btnComplianceUpdate" OnClick="btnComplianceReviewUpdate_Click" runat="server"
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
+            ID="btnComplianceUpdate" OnClick="btnComplianceReviewUpdate_Click" runat="server"
             Text="Submit" />
-        <asp:Label ID="lblComplianceReviewUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lblComplianceReviewUpdateResults" Font-Bold="true" runat="server"
+            Text=""></asp:Label>
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
@@ -806,46 +856,50 @@
                         <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Review date:"></asp:Label>
                     </td>
                     <td>
-                        <table><tr><td>
-                        <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReviewDateNew" runat="server"></asp:TextBox>
-                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                    ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibReviewDateNew" 
-                                    runat="server" /></td></tr></table>
-                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
-                            TargetControlID="tbReviewDateNew"
-                            Format="MM/dd/yyyy"
-                            PopupButtonID="ibReviewDateNew" />
-                        <asp:RegularExpressionValidator ForeColor="Red" 
-                            ID="RegularExpressionValidator2"  Display="Dynamic" 
-                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                            ControlToValidate="tbReviewDateNew" runat="server" 
-                            ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReviewDateNew" runat="server"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                        ID="ibReviewDateNew" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="tbReviewDateNew"
+                            Format="MM/dd/yyyy" PopupButtonID="ibReviewDateNew" />
+                        <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator2"
+                            Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                            ControlToValidate="tbReviewDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                     </td>
                     <td align="right">
                         <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="Close date:"></asp:Label>
                     </td>
                     <td>
-                        <table><tr><td>
-                        <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbCloseDateNew" runat="server"></asp:TextBox>
-                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibCloseDateNew" 
-                                runat="server" /></td></tr></table>
-                        <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server"
-                            TargetControlID="tbCloseDateNew"
-                            Format="MM/dd/yyyy"
-                            PopupButtonID="ibCloseDateNew" />
-                        <asp:RegularExpressionValidator ForeColor="Red" 
-                            ID="RegularExpressionValidator3"  Display="Dynamic" 
-                            ValidationExpression="^((0?[13578]|10|12)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[01]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1}))|(0?[2469]|11)(-|\/|.)(([1-9])|(0[1-9])|([12])([0-9]?)|(3[0]?))(-|\/|.)((19)([2-9])(\d{1})|(20)([01])(\d{1})|([8901])(\d{1})))$"
-                            ControlToValidate="tbCloseDateNew" runat="server" 
-                            ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbCloseDateNew" runat="server"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                        ID="ibCloseDateNew" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="tbCloseDateNew"
+                            Format="MM/dd/yyyy" PopupButtonID="ibCloseDateNew" />
+                        <asp:RegularExpressionValidator ForeColor="Red" ID="RegularExpressionValidator3"
+                            Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                            ControlToValidate="tbCloseDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                     </td>
                     <td>
                         <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Comments:"></asp:Label>
                     </td>
                     <td width="100%">
-                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbCommentsFormNew" runat="server"
-                            TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbCommentsFormNew"
+                            runat="server" TextMode="MultiLine"></asp:TextBox>
                     </td>
                 </tr>
             </table>
@@ -864,8 +918,8 @@
                         <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Req'd Action:"></asp:Label>
                     </td>
                     <td width="60%">
-                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbRequiredActionNew" runat="server"
-                            TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbRequiredActionNew"
+                            runat="server" TextMode="MultiLine"></asp:TextBox>
                     </td>
                     <td>
                         <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Follow up:"></asp:Label>
@@ -880,7 +934,8 @@
                 <table cellpadding="2" cellspacing="2">
                     <tr>
                         <td>
-                            <asp:Button ID="btnComplianceOkayNew" CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewComplianceReviewOk_Click" />
+                            <asp:Button ID="btnComplianceOkayNew" CausesValidation="true" runat="server" Text="Okay"
+                                OnClick="btnNewComplianceReviewOk_Click" />
                         </td>
                         <td>
                             <asp:Button ID="btnComplianceOkayUpdate" OnClientClick="return onNewComplianceReviewCancel()"

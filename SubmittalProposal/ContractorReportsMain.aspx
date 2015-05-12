@@ -7,4 +7,8 @@
             <h2>Contractor Reports</h2>
         </center>
     </p>
+    <p>
+        <asp:LinkButton ID="lbContractorsByCategory" runat="server" 
+            onclick="lbContractorsByCategory_Click">Contractors by Category</asp:LinkButton>
+    </p>
 </asp:Content>

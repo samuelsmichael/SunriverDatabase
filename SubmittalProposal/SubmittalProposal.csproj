@@ -108,6 +108,7 @@
     <Content Include="Reports\BPermitsOpen.aspx" />
     <Content Include="Reports\BPermitsExpired.aspx" />
     <Content Include="Reports\ComplianceReviewSummary.aspx" />
+    <Content Include="Reports\ContractorByCategory.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
@@ -309,6 +310,19 @@
     <Compile Include="Reports\ComplianceReviewSummary.aspx.designer.cs">
       <DependentUpon>ComplianceReviewSummary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Contractor\ContractorByCategory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContractorByCategory.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ContractorByCategory.aspx.cs">
+      <DependentUpon>ContractorByCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ContractorByCategory.aspx.designer.cs">
+      <DependentUpon>ContractorByCategory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -452,6 +466,10 @@
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceReviewsSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceReviewsSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Contractor\ContractorByCategory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ContractorByCategory.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

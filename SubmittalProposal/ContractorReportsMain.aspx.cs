@@ -10,5 +10,8 @@ namespace SubmittalProposal {
         protected void Page_Load(object sender, EventArgs e) {
             ((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork = GetType().Name;
         }
+        protected void lbContractorsByCategory_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ContractorByCategory.aspx");
+        }
     }
 }

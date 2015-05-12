@@ -283,6 +283,11 @@ legend
     padding: 2px 4px 2px 4px;
 }
 
+.newitemcontent td 
+{
+    text-align:left;
+}
+
 .form_field_heading 
 {
     font-size:.9em; white-space:nowrap;
@@ -410,6 +415,10 @@ div.accountInfo
     font-size: x-small;
     color: #FFFFFF;
     margin-left:2em;    
+}
+.updatepanel 
+{
+    height:444px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
