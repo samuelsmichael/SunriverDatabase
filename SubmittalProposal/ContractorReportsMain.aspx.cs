@@ -13,5 +13,8 @@ namespace SubmittalProposal {
         protected void lbContractorsByCategory_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ContractorByCategory.aspx");
         }
+        protected void lbContractorsAllData_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ContractorAllData.aspx");
+        }
     }
 }

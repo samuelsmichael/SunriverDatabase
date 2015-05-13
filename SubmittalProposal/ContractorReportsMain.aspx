@@ -11,4 +11,8 @@
         <asp:LinkButton ID="lbContractorsByCategory" runat="server" 
             onclick="lbContractorsByCategory_Click">Contractors by Category</asp:LinkButton>
     </p>
+    <p>
+        <asp:LinkButton ID="lbContractorsAllData" runat="server" 
+            onclick="lbContractorsAllData_Click">Contractors All Data</asp:LinkButton>
+    </p>
 </asp:Content>
