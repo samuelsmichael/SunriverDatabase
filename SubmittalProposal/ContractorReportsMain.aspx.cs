@@ -19,5 +19,11 @@ namespace SubmittalProposal {
         protected void lbContractorsList_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ContractorList.aspx");
         }
+        protected void lbCategoryList_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CategoryList.aspx");
+        }
+        protected void lbContractorEnvelope_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ContractorEnvelope.aspx");
+        }
     }
 }

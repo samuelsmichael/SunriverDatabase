@@ -111,6 +111,8 @@
     <Content Include="Reports\ContractorByCategory.aspx" />
     <Content Include="Reports\ContractorAllData.aspx" />
     <Content Include="Reports\ContractorList.aspx" />
+    <Content Include="Reports\CategoryList.aspx" />
+    <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
@@ -312,6 +314,12 @@
     <Compile Include="Reports\ComplianceReviewSummary.aspx.designer.cs">
       <DependentUpon>ComplianceReviewSummary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Contractor\CategoryList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoryList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Contractor\ContractorByCategory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -324,6 +332,12 @@
     </Compile>
     <Compile Include="Reports\ContractorByCategory.aspx.designer.cs">
       <DependentUpon>ContractorByCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Contractor\ContractorEnvelope.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContractorEnvelope.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Contractor\ContractorList.cs">
       <AutoGen>True</AutoGen>
@@ -350,6 +364,20 @@
     </Compile>
     <Compile Include="Reports\ContractorList.aspx.designer.cs">
       <DependentUpon>ContractorList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CategoryList.aspx.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CategoryList.aspx.designer.cs">
+      <DependentUpon>CategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ContractorEnvelope.aspx.cs">
+      <DependentUpon>ContractorEnvelope.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ContractorEnvelope.aspx.designer.cs">
+      <DependentUpon>ContractorEnvelope.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
@@ -495,9 +523,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceReviewsSummary.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Contractor\CategoryList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CategoryList.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\ContractorByCategory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorByCategory.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Contractor\ContractorEnvelope.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ContractorEnvelope.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\ContractorList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
