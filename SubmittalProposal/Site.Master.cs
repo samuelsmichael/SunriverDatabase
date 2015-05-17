@@ -25,10 +25,15 @@ namespace SubmittalProposal
                 string key = "LLDS";
                 DataSet ds = (DataSet)cache[key];
                 if (ds == null) {
-                    ds = Utils.getDataSetFromQuery("SELECT distinct SRLane Lane FROM [SRAddConvert] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SROAddConvertConnectionString"].ConnectionString);
                     CacheItemPolicy policy = new CacheItemPolicy();
                     policy.SlidingExpiration = new TimeSpan(0, 60, 0);
-                    cache.Add(key, ds, policy);
+                    try {
+                        ds = Utils.getDataSetFromQuery("SELECT distinct SRLane Lane FROM [SRAddConvert] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SROAddConvertConnectionString"].ConnectionString);
+                        cache.Add(key, ds, policy);
+                    } catch {
+                        ds = Utils.getDataSetFromQuery("SELECT distinct Lane FROM [tblLotLane] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                        cache.Add(key, ds, policy);
+                    }
                 }
                 return ds;
             }

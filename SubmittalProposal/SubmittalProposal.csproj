@@ -110,6 +110,7 @@
     <Content Include="Reports\ComplianceReviewSummary.aspx" />
     <Content Include="Reports\ContractorByCategory.aspx" />
     <Content Include="Reports\ContractorAllData.aspx" />
+    <Content Include="Reports\ContractorList.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
@@ -324,6 +325,12 @@
     <Compile Include="Reports\ContractorByCategory.aspx.designer.cs">
       <DependentUpon>ContractorByCategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Contractor\ContractorList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContractorList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Contractor\ContractorsAllData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -336,6 +343,13 @@
     </Compile>
     <Compile Include="Reports\ContractorAllData.aspx.designer.cs">
       <DependentUpon>ContractorAllData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ContractorList.aspx.cs">
+      <DependentUpon>ContractorList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ContractorList.aspx.designer.cs">
+      <DependentUpon>ContractorList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
@@ -484,6 +498,10 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorByCategory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorByCategory.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Contractor\ContractorList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ContractorList.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

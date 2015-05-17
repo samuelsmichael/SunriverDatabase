@@ -15,4 +15,8 @@
         <asp:LinkButton ID="lbContractorsAllData" runat="server" 
             onclick="lbContractorsAllData_Click">Contractors All Data</asp:LinkButton>
     </p>
+    <p>
+        <asp:LinkButton ID="lbContractorsList" runat="server" 
+            onclick="lbContractorsList_Click">Contractors List</asp:LinkButton>
+    </p>
 </asp:Content>
