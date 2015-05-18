@@ -25,5 +25,8 @@ namespace SubmittalProposal {
         protected void lbContractorEnvelope_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ContractorEnvelope.aspx");
         }
+        protected void ContractorMailingLabels_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ContractorMailingLabels.aspx");
+        }
     }
 }

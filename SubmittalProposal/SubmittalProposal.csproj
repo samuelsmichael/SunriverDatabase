@@ -113,6 +113,7 @@
     <Content Include="Reports\ContractorList.aspx" />
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
+    <Content Include="Reports\ContractorMailingLabels.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
@@ -345,6 +346,12 @@
       <DependentUpon>ContractorList.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Contractor\ContractorMailingLabels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContractorMailingLabels.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Contractor\ContractorsAllData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -378,6 +385,13 @@
     </Compile>
     <Compile Include="Reports\ContractorEnvelope.aspx.designer.cs">
       <DependentUpon>ContractorEnvelope.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ContractorMailingLabels.aspx.cs">
+      <DependentUpon>ContractorMailingLabels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ContractorMailingLabels.aspx.designer.cs">
+      <DependentUpon>ContractorMailingLabels.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
@@ -538,6 +552,10 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorList.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Contractor\ContractorMailingLabels.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ContractorMailingLabels.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

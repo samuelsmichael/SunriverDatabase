@@ -27,4 +27,7 @@
         <asp:LinkButton ID="lbContractorEnvelope" runat="server" 
             onclick="lbContractorEnvelope_Click">Contractor Envelope</asp:LinkButton>
     </p>
-</asp:Content>
+    <p>
+        <asp:LinkButton ID="lbContractorMailingLabels" runat="server" 
+            onclick="ContractorMailingLabels_Click">Contractor Mailing Labels</asp:LinkButton>
+    </p></asp:Content>
