@@ -328,5 +328,8 @@ namespace SubmittalProposal
             tbConditionsNew.Text = "";
             tbMeetingDateNew.Text = "";
         }
+        protected override void weveComeHereForTheFirstTimeThisSession() {
+            throw new NotImplementedException();
+        }
     }
 }

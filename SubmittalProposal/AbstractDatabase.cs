@@ -23,6 +23,7 @@ namespace SubmittalProposal {
         protected abstract void clearAllSelectionInputFields();
         protected abstract void clearAllNewFormInputFields();
         protected abstract string UpdateRoleName { get; }
+        protected abstract void weveComeHereForTheFirstTimeThisSession();
         
         protected abstract void childPageLoad(object sender, EventArgs e);
 
@@ -30,6 +31,10 @@ namespace SubmittalProposal {
             Database database = (Database)Master;
             database.SearchButtonPressed += new Database.SearchButtonPressedEventHandler(database_SearchButtonPressed);
             database.UnlockCheckboxChecked += new Database.UnlockCheckboxCheckedHandler(database_UnlockCheckboxChecked);
+            if (Session[GetType().Name] == null) {
+                Session[GetType().Name] = "didit";
+                weveComeHereForTheFirstTimeThisSession();
+            }
             childPageLoad(sender, e);
             ((SiteMaster)Master.Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
             if (HttpContext.Current.User.IsInRole(UpdateRoleName)) {

@@ -374,5 +374,7 @@ namespace SubmittalProposal {
         protected override string UpdateRoleName {
             get { return "canupdatecontractors"; }
         }
+        protected override void weveComeHereForTheFirstTimeThisSession() {
+        }
     }
 }

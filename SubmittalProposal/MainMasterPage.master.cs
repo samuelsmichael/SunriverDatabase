@@ -21,6 +21,7 @@ namespace SubmittalProposal {
                 MenuItem miBPermit = new MenuItem("BPermits", "BPermits", null, "~/BPermit.aspx");
                 MenuItem miComplianceReview = new MenuItem("Compliance Reviews", "Compliance Reviews", null, "~/ComplianceReview.aspx");
                 MenuItem miContractors = new MenuItem("Contractors", "Contractors", null, "~/Contractor.aspx");
+                MenuItem miCardManagement = new MenuItem("ID Card", "IDCardManagement", null, "~/IDCardManagement.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewcontractors")) {
                     NavigationMenu.Items.AddAt(1, miContractors);
                 }
@@ -32,6 +33,9 @@ namespace SubmittalProposal {
                 }
                 if (HttpContext.Current.User.IsInRole("canviewsubmittals")) {
                     NavigationMenu.Items.AddAt(1, miSubmittals);
+                }
+                if (HttpContext.Current.User.IsInRole("canviewidcard")) {
+                    NavigationMenu.Items.AddAt(1, miCardManagement);
                 }
             }
             lbReports.Visible = false;

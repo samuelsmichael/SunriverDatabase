@@ -584,7 +584,8 @@ namespace SubmittalProposal {
             lbBPermitNewReview.Enabled = true;
             ddlContractorUpdate.Enabled = true;
         }
-    
+        protected override void weveComeHereForTheFirstTimeThisSession() {            
+        }
     }
     public static class CustomLINQtoDataSetMethods {
         public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) {

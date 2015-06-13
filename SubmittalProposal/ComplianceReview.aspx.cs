@@ -544,5 +544,7 @@ namespace SubmittalProposal {
             tbComments.Text = "";
             tbRule.Text = "";
         }
+        protected override void weveComeHereForTheFirstTimeThisSession() {
+        }
     }
 }

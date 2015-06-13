@@ -99,6 +99,7 @@
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
+    <Content Include="IDCardManagement.aspx" />
     <Content Include="Images\animated_progress.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
     <Content Include="Reports\BPermitsBuildingPermitsIssued.aspx" />
@@ -117,6 +118,81 @@
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
+    <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.gif" />
+    <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.png" />
+    <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer.gif" />
+    <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer.png" />
+    <Content Include="Styles\black_glass\images\drop-down-horizontal.gif" />
+    <Content Include="Styles\black_glass\images\drop-down-horizontal.png" />
+    <Content Include="Styles\black_glass\images\drop-down-vertical.gif" />
+    <Content Include="Styles\black_glass\images\drop-down-vertical.png" />
+    <Content Include="Styles\black_glass\images\footer-middle.png" />
+    <Content Include="Styles\black_glass\images\header-footer.png" />
+    <Content Include="Styles\black_glass\images\horizontal-textbox.gif" />
+    <Content Include="Styles\black_glass\images\horizontal-textbox.png" />
+    <Content Include="Styles\black_glass\images\horizontal.gif" />
+    <Content Include="Styles\black_glass\images\horizontal.png" />
+    <Content Include="Styles\black_glass\images\lighted.gif" />
+    <Content Include="Styles\black_glass\images\lighted.png" />
+    <Content Include="Styles\black_glass\images\loading.gif" />
+    <Content Include="Styles\black_glass\images\loading.png" />
+    <Content Include="Styles\black_glass\images\vertical.gif" />
+    <Content Include="Styles\black_glass\images\vertical.png" />
+    <Content Include="Styles\black_glass\style.css" />
+    <Content Include="Styles\grand_gray\images\drop-down-horizontal-header-footer.gif" />
+    <Content Include="Styles\grand_gray\images\drop-down-horizontal-header-footer.png" />
+    <Content Include="Styles\grand_gray\images\drop-down-horizontal.gif" />
+    <Content Include="Styles\grand_gray\images\drop-down-horizontal.png" />
+    <Content Include="Styles\grand_gray\images\drop-down-vertical.gif" />
+    <Content Include="Styles\grand_gray\images\drop-down-vertical.png" />
+    <Content Include="Styles\grand_gray\images\header-footer.png" />
+    <Content Include="Styles\grand_gray\images\horizontal-textbox.gif" />
+    <Content Include="Styles\grand_gray\images\horizontal-textbox.png" />
+    <Content Include="Styles\grand_gray\images\horizontal.gif" />
+    <Content Include="Styles\grand_gray\images\horizontal.png" />
+    <Content Include="Styles\grand_gray\images\lighted.gif" />
+    <Content Include="Styles\grand_gray\images\lighted.png" />
+    <Content Include="Styles\grand_gray\images\loading.gif" />
+    <Content Include="Styles\grand_gray\images\loading.png" />
+    <Content Include="Styles\grand_gray\images\vertical.gif" />
+    <Content Include="Styles\grand_gray\images\vertical.png" />
+    <Content Include="Styles\grand_gray\style.css" />
+    <Content Include="Styles\plain\images\drop-down-horizontal-header-footer.gif" />
+    <Content Include="Styles\plain\images\drop-down-horizontal-header-footer.png" />
+    <Content Include="Styles\plain\images\drop-down-horizontal.gif" />
+    <Content Include="Styles\plain\images\drop-down-horizontal.png" />
+    <Content Include="Styles\plain\images\drop-down-vertical.gif" />
+    <Content Include="Styles\plain\images\drop-down-vertical.png" />
+    <Content Include="Styles\plain\images\footer-middle.png" />
+    <Content Include="Styles\plain\images\header-footer.png" />
+    <Content Include="Styles\plain\images\horizontal-textbox.gif" />
+    <Content Include="Styles\plain\images\horizontal-textbox.png" />
+    <Content Include="Styles\plain\images\horizontal.gif" />
+    <Content Include="Styles\plain\images\horizontal.png" />
+    <Content Include="Styles\plain\images\lighted.gif" />
+    <Content Include="Styles\plain\images\lighted.png" />
+    <Content Include="Styles\plain\images\loading.gif" />
+    <Content Include="Styles\plain\images\loading.png" />
+    <Content Include="Styles\plain\images\vertical.gif" />
+    <Content Include="Styles\plain\images\vertical.png" />
+    <Content Include="Styles\plain\style.css" />
+    <Content Include="Styles\premiere_blue\images\drop-down-horizontal-header-footer.gif" />
+    <Content Include="Styles\premiere_blue\images\drop-down-horizontal-header-footer.png" />
+    <Content Include="Styles\premiere_blue\images\drop-down-horizontal.gif" />
+    <Content Include="Styles\premiere_blue\images\drop-down-horizontal.png" />
+    <Content Include="Styles\premiere_blue\images\drop-down-vertical.gif" />
+    <Content Include="Styles\premiere_blue\images\drop-down-vertical.png" />
+    <Content Include="Styles\premiere_blue\images\horizontal-textbox.gif" />
+    <Content Include="Styles\premiere_blue\images\horizontal-textbox.png" />
+    <Content Include="Styles\premiere_blue\images\horizontal.gif" />
+    <Content Include="Styles\premiere_blue\images\horizontal.png" />
+    <Content Include="Styles\premiere_blue\images\lighted.gif" />
+    <Content Include="Styles\premiere_blue\images\lighted.png" />
+    <Content Include="Styles\premiere_blue\images\loading.gif" />
+    <Content Include="Styles\premiere_blue\images\loading.png" />
+    <Content Include="Styles\premiere_blue\images\vertical.gif" />
+    <Content Include="Styles\premiere_blue\images\vertical.png" />
+    <Content Include="Styles\premiere_blue\style.css" />
     <Content Include="Submittal2.aspx" />
     <Content Include="Images\bg-menu-main.JPG" />
     <Content Include="Images\bg-menu-main.png" />
@@ -212,6 +288,13 @@
     </Compile>
     <Compile Include="ContractorReportsMain.aspx.designer.cs">
       <DependentUpon>ContractorReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IDCardManagement.aspx.cs">
+      <DependentUpon>IDCardManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IDCardManagement.aspx.designer.cs">
+      <DependentUpon>IDCardManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="MainMasterPage.master.cs">
       <DependentUpon>MainMasterPage.master</DependentUpon>
