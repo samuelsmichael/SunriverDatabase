@@ -33,7 +33,7 @@ namespace SubmittalProposal {
         protected void Page_Load(object sender, EventArgs e) {
             
         }
-        private void collapseCPESearch() {
+        public void collapseCPESearch() {
             CPESearch.Collapsed=true;
             CPESearch.ClientState="true";
         }
@@ -44,6 +44,10 @@ namespace SubmittalProposal {
         private void expandCPEGrid() {
             CPEDataGrid.Collapsed = false;
             CPEDataGrid.ClientState = "false";
+        }
+
+        public Button getBtnGo() {
+            return BtnGo;
         }
 
         protected void btnGo_Click(object sender, EventArgs e) {

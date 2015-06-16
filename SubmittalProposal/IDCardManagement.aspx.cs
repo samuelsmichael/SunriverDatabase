@@ -74,14 +74,12 @@ namespace SubmittalProposal {
                 DataRow dr3 = dt2.NewRow();
                 dr3["SRLotLane"] = "";
                 dr3["Name"] = "";
-                dr3["CardID"] = 0;
-                dr3["PropIDBarCustId"] = "";
+                dr3["propIdBarCustId"] = "";
                 dr3["NameSRLotLane"] = "";
                 dt2.Rows.InsertAt(dr3, 0);
 
 
                 dt2.TableName = "CRDSBottomDropdownFindByNameOrder";
-                String fordebugging = dt2.Rows[0]["PropIDBarCustId"].ToString();
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, dt2, policy);
@@ -89,9 +87,58 @@ namespace SubmittalProposal {
             dt2.DataSet.Tables.Remove(dt2);
             dsTii.Tables.Add(dt2);
 
-            /*
-             * We're going to have a DataSet that has each of our important queries in separate cached DataTables
-             * */
+            /* Card Class values */
+            key = "CRDSCardClass";
+            DataTable dt3 = (DataTable)cache[key];
+            if (dt3 == null) {
+                cmd = new SqlCommand("uspCardClassGet");
+                DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                dt3 = ds.Tables[0];
+                dt3.TableName = "CRDSCardClass";
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(0, 60, 0);
+                cache.Add(key, dt3, policy);
+            }
+            dt3.DataSet.Tables.Remove(dt3);
+            dsTii.Tables.Add(dt3);
+
+            key = "CRDSCardStatus";
+            DataTable dt4 = (DataTable)cache[key];
+            if (dt4 == null) {
+                cmd = new SqlCommand("uspCardStatusGet");
+                DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                dt4 = ds.Tables[0];
+                dt4.TableName = "CRDSCardStatus";
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(0, 60, 0);
+                cache.Add(key, dt4, policy);
+            }
+            dt4.DataSet.Tables.Remove(dt4);
+            dsTii.Tables.Add(dt4);
+
+            key = "CRDSYesNo";
+            DataTable dtYesNo = (DataTable)cache[key];
+            if(dtYesNo==null) {
+                DataSet dsYesNo=new DataSet("dsYesNo");
+                dtYesNo = new DataTable("CRDSYesNo");
+                dsYesNo.Tables.Add(dtYesNo);
+                dtYesNo.Columns.Add(new DataColumn("cdYesNo"));
+                DataRow drYesNo_Blank=dtYesNo.NewRow();
+                drYesNo_Blank["cdYesNo"]="";
+                DataRow drYesNo_Yes=dtYesNo.NewRow();
+                drYesNo_Yes["cdYesNo"]="Yes";
+                DataRow drYesNo_No=dtYesNo.NewRow();
+                drYesNo_No["cdYesNo"]="No";
+                dtYesNo.Rows.Add(drYesNo_Blank);
+                dtYesNo.Rows.Add(drYesNo_Yes);
+                dtYesNo.Rows.Add(drYesNo_No);
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(1, 60, 0);
+                cache.Add(key, dtYesNo, policy);
+            }
+            dtYesNo.DataSet.Tables.Remove(dtYesNo);
+            dsTii.Tables.Add(dtYesNo);
+            
 
             return dsTii;
         }
@@ -103,10 +150,12 @@ namespace SubmittalProposal {
         }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
-                ddlLotLaneOrder.DataSource = CRDataSet().Tables[0];
-                ddlLotLaneOrder.DataBind();
-                ddlNameOrder.DataSource = CRDataSet().Tables[1];
-                ddlNameOrder.DataBind();
+                ((Database)Master).getBtnGo().Visible = false;
+                if (imUnlockedForEdit) {
+                    unlockYourUpdateFields();
+                } else {
+                    lockYourUpdateFields();
+                }
             }
         }
         private void setResultsContent(String propId, String custId) {
@@ -133,7 +182,9 @@ namespace SubmittalProposal {
             ((Database)Master).getCPEDataGrid.Collapsed = false;
             ((Database)Master).getCPEDataGrid.ClientState = "false";
             ((Database)Master).getPanelForm.Visible = true;
-
+            ((Database)Master).collapseCPESearch();
+            txtContactsSearch.Text = "";
+            txtLotLaneSearch.Text = "";
         }
         private void bindGvCardholders(string propId) {
             SqlCommand cmd = new SqlCommand("uspCardGet");
@@ -167,13 +218,55 @@ namespace SubmittalProposal {
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             throw new NotImplementedException();
         }
-        protected override void lockYourUpdateFields() {
-            throw new NotImplementedException();
+        
+        private bool imUnlockedForEdit {
+            get {
+                object imunlocked = Session["ImUnlockedForEditIDCardManagement"];
+                return imunlocked == null ? false : (bool)imunlocked;
+            }
+            set {
+                Session["ImUnlockedForEditIDCardManagement"] = value;
+            }
         }
-        protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
-            throw new NotImplementedException();
+        public object FormatCardIssued(object value) {
+            if (Utils.isNothing(value)) {
+                return "";
+            }
+            string jdValue = value.ToString().ToLower();
+            if (jdValue == "yes" || jdValue == "1") {
+                return "Yes";
+            }
+            if (jdValue == "no" || jdValue == "0") {
+                return "No";
+            }
+            return "";
+        }
+        public object FormatAge(object value) {
+            if (Utils.isNothing(value)) {
+                return "";
+            }
+            try {
+                DateTime zeroTime = new DateTime(1, 1, 1);
+
+                DateTime b = DateTime.Today;
+                DateTime a = Utils.ObjectToDateTime(value);
+
+                TimeSpan span = b - a;
+                // because we start at year 1 for the Gregorian 
+                // calendar, we must subtract a year here.
+                int years = (zeroTime + span).Year - 1;
+                return years.ToString();
+            } catch {
+                return "";
+            }
         }
         protected override void unlockYourUpdateFields() {
+            gvCardholders.Columns[0].Visible = true;
+        }
+        protected override void lockYourUpdateFields() {
+            gvCardholders.Columns[0].Visible = false;
+        }
+        protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             throw new NotImplementedException();
         }
         protected override string UpdateRoleName {
@@ -191,6 +284,30 @@ namespace SubmittalProposal {
             gvCardholders.EditIndex = e.NewEditIndex;
             //Bind data to the GridView control.
             bindGvCardholders((string)Session["PropdIdBeingEdited"]);
+        }
+        protected void gv_RowDataBound(object sender, GridViewRowEventArgs e) {
+            if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
+                DropDownList ddList = (DropDownList)e.Row.FindControl("ddlcdClassUpdate");
+                //bind dropdownlist
+                DataTable dt = CRDataSet().Tables["CRDSCardClass"];
+                ddList.DataSource = dt;
+                ddList.DataBind();
+                DataRowView dr = e.Row.DataItem as DataRowView;
+                ddList.SelectedValue = dr["cdClass"].ToString();
+
+                DropDownList ddList2 = (DropDownList)e.Row.FindControl("ddlcdCardStatusUpdate");
+                //bind dropdownlist
+                DataTable dt2 = CRDataSet().Tables["CRDSCardStatus"];
+                ddList2.DataSource = dt2;
+                ddList2.DataBind();
+                ddList2.SelectedValue = dr["cdStatus"].ToString();
+
+                DropDownList ddList3 = (DropDownList)e.Row.FindControl("ddlcdIdCardIssuedUpdate");
+                DataTable dt3 = CRDataSet().Tables["CRDSYesNo"];
+                ddList3.DataSource = dt3;
+                ddList3.DataBind();
+                ddList3.SelectedValue = (String)FormatCardIssued(dr["cdIDCardIssued"]);
+            }
         }
         protected void gvCardholders_RowUpdating(object sender, GridViewUpdateEventArgs e) {
 
@@ -224,20 +341,58 @@ namespace SubmittalProposal {
             bindGvCardholders((string)Session["PropdIdBeingEdited"]);
         }
 
-        protected void ddlLotLaneOrder_SelectedIndexChanged(object sender, EventArgs e) {
-            String propIdBarCustId = ((DropDownList)sender).SelectedValue;
-            String[] sa = propIdBarCustId.Split(new char[] { '|' });
-            string propId = sa[0];
-            String custId = sa[1];
-            setResultsContent(propId, custId);
+        [System.Web.Script.Services.ScriptMethod()]
+        [System.Web.Services.WebMethod]
+        public static List<string> SearchByLotLane(string prefixText, int count) {
+            DataView dv = new DataView(CRDataSet().Tables["CRDSTopDropdownFindByLotNumberOrder"]);
+            dv.RowFilter = "SRLotLane like '*" + prefixText + "*'";
+            __ListForAutoComplete = new List<FindByListItem>();
+            List<string> zList = new List<string>();
+            DataTable dt = dv.ToTable();
+            foreach (DataRow dr in dt.Rows) {
+                __ListForAutoComplete.Add(new FindByListItem((string)dr["SrLotLaneOwner"], (string)dr["PropIdBarCustId"]));
+                zList.Add((string)dr["SrLotLaneOwner"]);
+            }
+            return zList;
         }
 
-        protected void ddlNameOrder_SelectedIndexChanged(object sender, EventArgs e) {
-            String propIdBarCustId = ((DropDownList)sender).SelectedValue;
-            String[] sa = propIdBarCustId.Split(new char[] { '|' });
-            string propId = sa[0];
-            String custId = sa[1];
-            setResultsContent(propId, custId);
-        }       
+        protected void txtSearch_TextChanged(object sender, EventArgs e) {
+            string zText = ((TextBox)sender).Text;
+            foreach (FindByListItem item in __ListForAutoComplete) {
+                if (item._Name == zText) {
+                    String[] sa = item._Key.Split(new char[] { '|' });
+                    string propId = sa[0];
+                    String custId = sa[1];
+                    setResultsContent(propId, custId);
+                }
+            }
+        }
+        private static List<FindByListItem> __ListForAutoComplete;
+        [System.Web.Script.Services.ScriptMethod()]
+        [System.Web.Services.WebMethod]
+        public static List<string> SearchByName(string prefixText, int count) {
+            DataView dv = new DataView(CRDataSet().Tables["CRDSBottomDropdownFindByNameOrder"]);
+            dv.RowFilter = "Name like '*" + prefixText + "*'";
+            __ListForAutoComplete=new List<FindByListItem>();
+            List<string> zList = new List<string>();
+            DataTable dt = dv.ToTable();
+            foreach (DataRow dr in dt.Rows) {
+                __ListForAutoComplete.Add(new FindByListItem((string)dr["NameSRLotLane"],(string)dr["PropIdBarCustId"]));
+                zList.Add((string)dr["NameSRLotLane"]);
+            }
+            return zList;
+        }
+
+        class FindByListItem {
+            public string _Name;
+            public string _Key;
+            public FindByListItem(String name, string key) {
+                _Name = name;
+                _Key = key;
+            }
+            public override string ToString() {
+                return _Name;
+            }
+        }
     }
 }

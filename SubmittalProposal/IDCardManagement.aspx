@@ -2,21 +2,58 @@
     CodeBehind="IDCardManagement.aspx.cs" Inherits="SubmittalProposal.IDCardManagement" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
-    <td width="300">
-        <asp:Label ID="Label21" runat="server" Text="Find by Lot Number Order"></asp:Label>
-        <asp:DropDownList Font-Names="Courier New" AutoPostBack="true"
-            ID="ddlLotLaneOrder" runat="server" DataTextField="SrLotLaneOwner" 
-            DataValueField="PropIdBarCustId" 
-            onselectedindexchanged="ddlLotLaneOrder_SelectedIndexChanged" >
-        </asp:DropDownList>
-    </td>
-    <td width="300">
-        <asp:Label ID="Label1" runat="server" Text="Find by Name Order"></asp:Label>
-        <asp:DropDownList Font-Names="Courier New" AutoPostBack="true"
-            ID="ddlNameOrder" runat="server" DataTextField="NameSRLotLane" 
-            DataValueField="PropIdBarCustId" 
-            onselectedindexchanged="ddlNameOrder_SelectedIndexChanged" >
-        </asp:DropDownList>
+    <td>
+        <table>
+            <tr>
+                <td>
+                    <asp:Label ID="Label21" runat="server" Text="Find by Lot Number"></asp:Label>
+                </td>
+                <td>
+                     <asp:TextBox ID="txtLotLaneSearch" Width="640px" runat="server" 
+                                            ontextchanged="txtSearch_TextChanged"></asp:TextBox>
+
+                     <ajaxToolkit:TextBoxWatermarkExtender WatermarkCssClass="watermarkclass" runat="server" TargetControlID="txtLotLaneSearch" WatermarkText="Key in any part of the SR Address (2 char minimum)"></ajaxToolkit:TextBoxWatermarkExtender>
+
+
+                     <script type="text/javascript" language="javascript">
+                         function AutoCompleteEx_OnClientItemSelected(sender, args) {
+                             __doPostBack(sender.get_element().name, '');
+                         }
+                     </script>
+                    <ajaxToolkit:autocompleteextender ServiceMethod="SearchByLotLane"
+                        MinimumPrefixLength="2"
+                        CompletionInterval="100" EnableCaching="false" CompletionSetCount="10"
+                        TargetControlID="txtLotLaneSearch"
+                         CompletionListCssClass="completionlistcssclass"
+                          CompletionListItemCssClass="completionlistitemscssclass"
+                          OnClientItemSelected="AutoCompleteEx_OnClientItemSelected"
+                        ID="AutoCompleteExtender2" runat="server" CompletionListHighlightedItemCssClass="completionlisthighlighteditemcssclass">
+                    </ajaxToolkit:autocompleteextender>
+
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>Find by name</td>
+                <td>
+                     <asp:TextBox ID="txtContactsSearch" Width="640px" runat="server" 
+                                            ontextchanged="txtSearch_TextChanged"></asp:TextBox>
+                     <ajaxToolkit:TextBoxWatermarkExtender WatermarkCssClass="watermarkclass" ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtContactsSearch" WatermarkText="Key in any part of the owner's name (2 char minimum)"></ajaxToolkit:TextBoxWatermarkExtender>
+
+
+                    <ajaxToolkit:autocompleteextender ServiceMethod="SearchByName"
+                        MinimumPrefixLength="2"
+                        CompletionInterval="100" EnableCaching="false" CompletionSetCount="10"
+                        TargetControlID="txtContactsSearch"
+                         CompletionListCssClass="completionlistcssclass"
+                          CompletionListItemCssClass="completionlistitemscssclass"
+                          OnClientItemSelected="AutoCompleteEx_OnClientItemSelected"
+                        ID="AutoCompleteExtender1" runat="server" CompletionListHighlightedItemCssClass="completionlisthighlighteditemcssclass">
+                    </ajaxToolkit:autocompleteextender>
+                </td>
+            </tr>
+         </table>
     </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
@@ -100,7 +137,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
     <asp:GridView Width="100%" ID="gvCardholders" runat="server" AutoGenerateColumns="False"
         CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" OnRowCancelingEdit="gvCardholders_RowCancelingEdit"
-        OnRowEditing="gvCardholders_RowEditing" OnRowUpdating="gvCardholders_RowUpdating" DataKeyNames="CardID">
+        OnRowEditing="gvCardholders_RowEditing" OnRowDataBound="gv_RowDataBound" OnRowUpdating="gvCardholders_RowUpdating"
+        DataKeyNames="CardID">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -125,12 +163,106 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="First Name">
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbBPPaymentFeeUpdate" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbcdFirstNameUPdate" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:Label>
                 </ItemTemplate>
-                <ItemStyle HorizontalAlign="Right" />
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Last Name">
+                <EditItemTemplate>
+                    <asp:TextBox ID="tbcdLastNameUpdate" runat="server" Text='<%# Bind("cdLastName") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdLastName") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Card Class">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlcdClassUpdate" DataTextField="cdClass" DataValueField="cdClass"
+                        runat="server">
+                    </asp:DropDownList>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdClass") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Birth Date">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("cdDOB","{0:MM/dd/yyyy}") %>'
+                        ></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <td >
+                        <table><tr><td>
+                        <asp:TextBox Text='<%# Eval("cdDOB","{0:MM/dd/yyyy}") %>' CssClass="form_field" ID="tbcdDateOfBirthUpdate" Width="8em" runat="server"></asp:TextBox>
+                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibtbcdDateOfBirthUpdate" runat="server" /></td></tr></table>
+                        <ajaxToolkit:CalendarExtender ID="cetbcdDateOfBirthUpdate" runat="server"
+                            TargetControlID="tbcdDateOfBirthUpdate"
+                            Format="MM/dd/yyyy"
+                            PopupButtonID="ibtbcdDateOfBirthUpdate" />
+                        <asp:RegularExpressionValidator ForeColor="Red" ID="revtbcdDateOfBirthUpdate"  Display="Dynamic" 
+                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                            ControlToValidate="tbcdDateOfBirthUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                    </td>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Age">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# FormatAge(Eval("cdDOB")) %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Card Status">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlcdCardStatusUpdate" DataTextField="cdStatus" DataValueField="cdStatus"
+                        runat="server">
+                    </asp:DropDownList>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdStatus") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Issue Date">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("cdIssueDate","{0:MM/dd/yyyy}") %>'
+                        ></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <td >
+                        <table><tr><td>
+                        <asp:TextBox Text='<%# Eval("cdIssueDate","{0:MM/dd/yyyy}") %>' CssClass="form_field" ID="tbcdIssueDateUpdate" Width="8em" runat="server"></asp:TextBox>
+                        </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibtbcdIssueDateUpdate" runat="server" /></td></tr></table>
+                        <ajaxToolkit:CalendarExtender ID="cetbcdIssueDateUpdate" runat="server"
+                            TargetControlID="tbcdIssueDateUpdate"
+                            Format="MM/dd/yyyy"
+                            PopupButtonID="ibtbcdIssueDateUpdate" />
+                        <asp:RegularExpressionValidator ForeColor="Red" ID="revtbcdIssueDateUpdate"  Display="Dynamic" 
+                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                            ControlToValidate="tbcdIssueDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                    </td>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Fee Paid">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("cdFeePaid","{0:c}") %>'
+                        ></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox Text='<%# Eval("cdFeePaid","{0:c}") %>' CssClass="form_field" ID="tbcdFeePaidUpdate" Width="8em" runat="server"></asp:TextBox>
+                </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="ID Card">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# FormatCardIssued(Eval("cdIDCardIssued")) %>'
+                        ></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlcdIDCardIssuedUpdate" DataTextField="cdYesNo" DataValueField="cdYesNo"
+                        runat="server">
+                    </asp:DropDownList>
+                </EditItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>

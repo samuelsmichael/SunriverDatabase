@@ -12,13 +12,11 @@ alter PROCEDURE uspCustomerInfoByLotLaneGet
 AS
 BEGIN
 	SET NOCOUNT ON;
-	select ll.SRLotLane, a.CustName,
-	case when IsNumeric(ll.SRLot)=1 then Cast(ll.SRLot as int) else 0 end as LotSortValue, SRPropID+'|'+isnull(CustID,'') as PropIDBarCustId	
-	from 
-		[tblInput-SROA] s  inner join
-		[tblArCust] a on s.fkISCustID=a.CustID inner join
-		[tbllotlane_master] ll on s.fkISPropId=ll.SRPropId 
-	Order by 
-		LotSortValue, SRLane
+
+	SELECT case when IsNumeric(SRLot)=1 then Cast(SRLot as int) else 0 end as LotSortValue, qryLotLaneWithOwners_Master.LotLane as SRLotLane, qryLotLaneWithOwners_Master.PrimaryOwner as CustName,SRPropID+'|'+isnull(CustID,'') as PropIDBarCustId
+	FROM qryLotLaneWithOwners_Master
+	WHERE LotLane is not null
+	ORDER BY LotSortValue, qryLotLaneWithOwners_Master.SRLane, qryLotLaneWithOwners_Master.SRLot
+
 end
 GO

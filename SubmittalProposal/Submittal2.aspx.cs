@@ -329,7 +329,7 @@ namespace SubmittalProposal
             tbMeetingDateNew.Text = "";
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
-            throw new NotImplementedException();
+           
         }
     }
 }

@@ -11,14 +11,14 @@ GO
 alter PROCEDURE uspCustomerInfoByCardholderNameGet
 AS
 BEGIN
+
 	SET NOCOUNT ON;
-	select  isnull(c.cdLastName,'') + ' ' +  isnull(c.cdFirstName,'') as [Name], ll.SRLotLane, c.CardID, SRPropID+'|'+isnull(CustID,'') as PropIDBarCustId
-	from 
-		[tblinput-idcard] c inner join 
-		[tblInput-SROA] s on c.fkISInputID=s.ISInputID inner join
-		[tblArCust] a on s.fkISCustID=a.CustID inner join
-		[tbllotlane_master] ll on s.fkISPropId=ll.SRPropId
-	where not (isNumeric(cdLastName) = 1 and cdFirstName='card')
-	Order by cdLastName, cdFirstName
+	SELECT 
+		p.fkISPropID + '|' + o.CustID as propIdBarCustId,
+		p.[Name], p.[ISAddress] as SRLotLane
+	FROM [luPropertyByCardholderName] p INNER JOIN
+		 qryLotToOwnersLink o ON o.fkSRPropID=p.fkISPropID
+	ORDER BY [Name]
 end
+
 GO
