@@ -307,28 +307,74 @@ namespace SubmittalProposal {
                 ddList3.DataSource = dt3;
                 ddList3.DataBind();
                 ddList3.SelectedValue = (String)FormatCardIssued(dr["cdIDCardIssued"]);
+                DropDownList ddList4 = (DropDownList)e.Row.FindControl("ddlcdRecPassIssuedUpdate");
+                DataTable dt4 = CRDataSet().Tables["CRDSYesNo"];
+                ddList4.DataSource = dt4;
+                ddList4.DataBind();
+                ddList4.SelectedValue = (String)FormatCardIssued(dr["cdRecPassIssued"]);
             }
         }
         protected void gvCardholders_RowUpdating(object sender, GridViewUpdateEventArgs e) {
 
             GridViewRow row = gvCardholders.Rows[e.RowIndex];
             try {
-                /*
-                string strfee = ((TextBox)row.Cells[2].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
-                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
-                string strmonths = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
-                int? months = strmonths == "" ? (int?)null : Utils.ObjectToInt(strmonths);
-                int paymentid = Utils.ObjectToInt(gvPayments.DataKeys[e.RowIndex].Value);
-
-                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
-                cmd.Parameters.Add("@BPPaymentId", SqlDbType.Int).Value = paymentid;
-                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
-                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
-                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                SqlCommand cmd = new SqlCommand("uspCardPut");
+                int cardId = Utils.ObjectToInt(((Label)row.Cells[1].Controls[1]).Text);
+                cmd.Parameters.Add("@CardId",SqlDbType.Int).Value=cardId;
+                string firstName = ((TextBox)row.Cells[2].Controls[1]).Text;
+                cmd.Parameters.Add("@FirstName",SqlDbType.NVarChar).Value=firstName;
+                string lastName = ((TextBox)row.Cells[3].Controls[1]).Text;
+                cmd.Parameters.Add("@LastName",SqlDbType.NVarChar).Value=lastName;
+                string cardClass = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue;
+                cmd.Parameters.Add("@Class",SqlDbType.NVarChar).Value=cardClass;
+                DateTime? birthDate = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[5].Controls[1]).Text);
+                if (birthDate.HasValue) {
+                    cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
+                }
+                string status = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
+                cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = status;
+                DateTime? issueDate = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
+                if (issueDate.HasValue) {
+                    cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
+                }
+                decimal? feePaid=null;
+                try {
+                    feePaid = Utils.ObjectToDecimal0IfNull(((TextBox)row.Cells[9].Controls[1]).Text.Replace("$", ""));
+                } catch {}
+                if (feePaid.HasValue) {
+                    cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
+                }
+                string idCardIssued = ((DropDownList)row.Cells[10].Controls[1]).SelectedValue;
+                cmd.Parameters.Add("@IDCardIssued", SqlDbType.NVarChar).Value = idCardIssued;
+                string recPassIssued = ((DropDownList)row.Cells[11].Controls[1]).SelectedValue;
+                cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
+                string comments = ((TextBox)row.Cells[12].Controls[1]).Text;
+                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
+                SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                /*
+                 * alter PROCEDURE uspCardPut (
+	@CardId int = null,
+	@fkISInputID int = null,
+	@FirstName nvarchar(20) = null,
+	@LastName nvarchar(20) = null,
+	@Class nvarchar(20)=null,
+	@DOB datetime=null,
+	@Status nvarchar(15)=null,
+	@IssueDate datetime=null,
+	@FeePaid money=null,
+	@IDCardIssued nvarchar(3)=null,
+	@RecPassIssued nvarchar(3)=null,
+	@Comments ntext=null,
+	@Photo1 nvarchar(80)=null,
+	@ISAddress nvarchar(50)=null,
+	@ISSort nvarchar(50)=null,
+	@fkISPropID nvarchar(50)=null,
+	@RenewalDate datetime=null,
+	@ExpirationDate datetime=null
+                 * 
                 */
                 performPostUpdateSuccessfulActions("ID Card updated", null, null);
             } catch (Exception ee) {

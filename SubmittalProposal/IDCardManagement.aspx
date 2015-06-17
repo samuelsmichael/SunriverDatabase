@@ -163,7 +163,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="First Name">
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbcdFirstNameUPdate" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbcdFirstNameUpdate" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:Label>
@@ -188,6 +188,7 @@
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdClass") %>'></asp:Label>
                 </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Birth Date">
                 <ItemTemplate>
@@ -195,7 +196,6 @@
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <td >
                         <table><tr><td>
                         <asp:TextBox Text='<%# Eval("cdDOB","{0:MM/dd/yyyy}") %>' CssClass="form_field" ID="tbcdDateOfBirthUpdate" Width="8em" runat="server"></asp:TextBox>
                         </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibtbcdDateOfBirthUpdate" runat="server" /></td></tr></table>
@@ -206,13 +206,14 @@
                         <asp:RegularExpressionValidator ForeColor="Red" ID="revtbcdDateOfBirthUpdate"  Display="Dynamic" 
                             ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                             ControlToValidate="tbcdDateOfBirthUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                    </td>
                 </EditItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Age">
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# FormatAge(Eval("cdDOB")) %>'></asp:Label>
                 </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Card Status">
                 <EditItemTemplate>
@@ -223,6 +224,7 @@
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdStatus") %>'></asp:Label>
                 </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Issue Date">
                 <ItemTemplate>
@@ -230,7 +232,6 @@
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <td >
                         <table><tr><td>
                         <asp:TextBox Text='<%# Eval("cdIssueDate","{0:MM/dd/yyyy}") %>' CssClass="form_field" ID="tbcdIssueDateUpdate" Width="8em" runat="server"></asp:TextBox>
                         </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibtbcdIssueDateUpdate" runat="server" /></td></tr></table>
@@ -241,8 +242,8 @@
                         <asp:RegularExpressionValidator ForeColor="Red" ID="revtbcdIssueDateUpdate"  Display="Dynamic" 
                             ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                             ControlToValidate="tbcdIssueDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                    </td>
                 </EditItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Fee Paid">
                 <ItemTemplate>
@@ -252,6 +253,7 @@
                 <EditItemTemplate>
                     <asp:TextBox Text='<%# Eval("cdFeePaid","{0:c}") %>' CssClass="form_field" ID="tbcdFeePaidUpdate" Width="8em" runat="server"></asp:TextBox>
                 </EditItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="ID Card">
                 <ItemTemplate>
@@ -263,6 +265,28 @@
                         runat="server">
                     </asp:DropDownList>
                 </EditItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Rec Pass">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# FormatCardIssued(Eval("cdRecPassIssued")) %>'
+                        ></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlcdRecPassIssuedUpdate" DataTextField="cdYesNo" DataValueField="cdYesNo"
+                        runat="server">
+                    </asp:DropDownList>
+                </EditItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Comments">
+                <EditItemTemplate>
+                    <asp:TextBox ID="tbcdCommentsUpdate" runat="server" Text='<%# Bind("cdComments") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdComments") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
