@@ -44,8 +44,6 @@ namespace SubmittalProposal {
                 dt.Rows.InsertAt(dr3, 0);
  
                 dt.TableName = "CRDSTopDropdownFindByLotNumberOrder";
-                dt.PrimaryKey = new DataColumn[]{ dt.Columns["SRLotLane"]};
-                String fordebugging = dt.Rows[0]["PropIDBarCustId"].ToString();
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, dt, policy);
@@ -213,7 +211,7 @@ namespace SubmittalProposal {
             throw new NotImplementedException();
         }
         protected override Label getUpdateResultsLabel() {
-            throw new NotImplementedException();
+            return lblIDCardManagementUpdateResults;
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             throw new NotImplementedException();
@@ -312,6 +310,19 @@ namespace SubmittalProposal {
                 ddList4.DataSource = dt4;
                 ddList4.DataBind();
                 ddList4.SelectedValue = (String)FormatCardIssued(dr["cdRecPassIssued"]);
+            } else {
+                if (e.Row.RowType.Equals(DataControlRowType.DataRow)) {
+                    Label lblRecPassIssued = (Label)e.Row.FindControl("lblRecPassIssued");
+                    lblRecPassIssued.BackColor = System.Drawing.Color.White;
+                    if (lblRecPassIssued != null && lblRecPassIssued.Text == "Yes") {
+                        lblRecPassIssued.BackColor = System.Drawing.Color.FromArgb(153, 204, 255);
+                    }
+                    Label lblCardIssued = (Label)e.Row.FindControl("lblCardIssued");
+                    lblCardIssued.BackColor = System.Drawing.Color.White;
+                    if (lblCardIssued != null && lblCardIssued.Text == "Yes") {
+                        lblCardIssued.BackColor = System.Drawing.Color.Red;
+                    }
+                }
             }
         }
         protected void gvCardholders_RowUpdating(object sender, GridViewUpdateEventArgs e) {
@@ -376,9 +387,14 @@ namespace SubmittalProposal {
 	@ExpirationDate datetime=null
                  * 
                 */
-                performPostUpdateSuccessfulActions("ID Card updated", null, null);
+                getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
+                getUpdateResultsLabel().Text = "ID Card updated";
+
+                //setResultsContent(propId, custId);
+//                performPostUpdateSuccessfulActions("ID Card updated", null, null);
             } catch (Exception ee) {
-                performPostUpdateFailedActions("ID Card not updated. Error msg: " + ee.Message);
+                getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
+                getUpdateResultsLabel().Text = ee.Message;
             }
             //Reset the edit index.
             gvCardholders.EditIndex = -1;

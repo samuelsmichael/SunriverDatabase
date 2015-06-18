@@ -166,7 +166,7 @@
                     <asp:TextBox ID="tbcdFirstNameUpdate" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:Label>
+                    <asp:Label ID="Label1i" runat="server" Text='<%# Bind("cdFirstName") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
@@ -175,7 +175,7 @@
                     <asp:TextBox ID="tbcdLastNameUpdate" runat="server" Text='<%# Bind("cdLastName") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdLastName") %>'></asp:Label>
+                    <asp:Label ID="Label1a" runat="server" Text='<%# Bind("cdLastName") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
@@ -186,13 +186,13 @@
                     </asp:DropDownList>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdClass") %>'></asp:Label>
+                    <asp:Label ID="Label1b" runat="server" Text='<%# Bind("cdClass") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Birth Date">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("cdDOB","{0:MM/dd/yyyy}") %>'
+                    <asp:Label ID="Label1c" runat="server" Text='<%# Eval("cdDOB","{0:MM/dd/yyyy}") %>'
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
@@ -211,7 +211,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Age">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# FormatAge(Eval("cdDOB")) %>'></asp:Label>
+                    <asp:Label ID="Label1d" runat="server" Text='<%# FormatAge(Eval("cdDOB")) %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
@@ -222,13 +222,13 @@
                     </asp:DropDownList>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdStatus") %>'></asp:Label>
+                    <asp:Label ID="Label1e" runat="server" Text='<%# Bind("cdStatus") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Issue Date">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("cdIssueDate","{0:MM/dd/yyyy}") %>'
+                    <asp:Label ID="Label1f" runat="server" Text='<%# Eval("cdIssueDate","{0:MM/dd/yyyy}") %>'
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
@@ -247,7 +247,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Fee Paid">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("cdFeePaid","{0:c}") %>'
+                    <asp:Label ID="Label1g" runat="server" Text='<%# Eval("cdFeePaid","{0:c}") %>'
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
@@ -257,7 +257,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="ID Card">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# FormatCardIssued(Eval("cdIDCardIssued")) %>'
+                    <asp:Label ID="lblCardIssued" runat="server" Text='<%# FormatCardIssued(Eval("cdIDCardIssued")) %>'
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
@@ -269,7 +269,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Rec Pass">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# FormatCardIssued(Eval("cdRecPassIssued")) %>'
+                    <asp:Label ID="lblRecPassIssued" runat="server" Text='<%# FormatCardIssued(Eval("cdRecPassIssued")) %>'
                         ></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
@@ -284,12 +284,13 @@
                     <asp:TextBox ID="tbcdCommentsUpdate" runat="server" Text='<%# Bind("cdComments") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("cdComments") %>'></asp:Label>
+                    <asp:Label ID="Label1h" runat="server" Text='<%# Bind("cdComments") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <asp:Label ID="lblIDCardManagementUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
 </asp:Content>
