@@ -28,8 +28,11 @@
         function prm_InitializeRequest(sender, args) {
             // get the divImage and set it to visible
             
+            
             if (
                 (args._postBackElement.id).indexOf("BtnGo") != -1 ||
+                (args._postBackElement.id).indexOf("ddlLotLaneOrder") != -1 ||
+                (args._postBackElement.id).indexOf("ddlNameOrder") != -1 ||
                 (args._postBackElement.id).indexOf("gvResults") != -1 ||
                 (
                     (args._postBackElement.id).indexOf("btnNew") != -1 &&
@@ -55,6 +58,8 @@
             //debugger
             if (
                 sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 ||
+                sender._postBackSettings.sourceElement.id.indexOf("ddlLotLaneOrder") != -1 ||
+                sender._postBackSettings.sourceElement.id.indexOf("ddlNameOrder") != -1 ||
                 sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1 ||
                 (
                     sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 &&

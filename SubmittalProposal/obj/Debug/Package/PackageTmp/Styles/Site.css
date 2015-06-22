@@ -6,6 +6,34 @@ td,tr
 border: thin solid #000000; 
 }
 */  
+.watermarkclass 
+{
+     color:#c0c0c0;
+}
+.completionlisthighlighteditemcssclass
+{
+    background: #DDDEAB;
+    font-family: 'Courier New' , Courier, monospace;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.completionlistcssclass
+{
+    border: thin solid #000000;
+    white-space: nowrap;
+    background-color: #FFFFFF;
+    display: inline-block;
+    cursor:pointer;
+    overflow: scroll;
+    height:250px;
+}
+.completionlistitemscssclass
+{
+    font-family: 'Courier New' , Courier, monospace;
+    white-space:nowrap;
+    cursor:pointer;
+}
+
 .modalBackground 
 {
   background-color: Gray;

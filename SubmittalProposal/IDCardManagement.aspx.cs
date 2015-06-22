@@ -25,24 +25,24 @@ namespace SubmittalProposal {
                 DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
                 dt = ds.Tables[0];
                 dt.Columns.Add(new DataColumn("SrLotLaneOwner"));
-                int maxLenLotLane=0;
-                foreach(DataRow dr in dt.Rows) {
-                    int len=((string)dr["SRLotLane"]).Length;
-                    if(len>maxLenLotLane) {
-                        maxLenLotLane=len;
+                int maxLenLotLane = 0;
+                foreach (DataRow dr in dt.Rows) {
+                    int len = ((string)dr["SRLotLane"]).Length;
+                    if (len > maxLenLotLane) {
+                        maxLenLotLane = len;
                     }
                 }
-                foreach(DataRow dr2 in dt.Rows) {
-                    dr2["SrLotLaneOwner"]=Utils.PadString((string)dr2["SRLotLane"],Utils.PAD_DIRECTION.RIGHT,maxLenLotLane+2,'\xA0')+dr2["CustName"];
+                foreach (DataRow dr2 in dt.Rows) {
+                    dr2["SrLotLaneOwner"] = Utils.PadString((string)dr2["SRLotLane"], Utils.PAD_DIRECTION.RIGHT, maxLenLotLane + 2, '\xA0') + dr2["CustName"];
                 }
                 DataRow dr3 = dt.NewRow();
                 dr3["SRLotLane"] = "";
                 dr3["CustName"] = "";
                 dr3["LotSortValue"] = 0;
                 dr3["PropIDBarCustId"] = "";
-                dr3["SrLotLaneOwner"]="";
+                dr3["SrLotLaneOwner"] = "";
                 dt.Rows.InsertAt(dr3, 0);
- 
+
                 dt.TableName = "CRDSTopDropdownFindByLotNumberOrder";
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
@@ -116,17 +116,17 @@ namespace SubmittalProposal {
 
             key = "CRDSYesNo";
             DataTable dtYesNo = (DataTable)cache[key];
-            if(dtYesNo==null) {
-                DataSet dsYesNo=new DataSet("dsYesNo");
+            if (dtYesNo == null) {
+                DataSet dsYesNo = new DataSet("dsYesNo");
                 dtYesNo = new DataTable("CRDSYesNo");
                 dsYesNo.Tables.Add(dtYesNo);
                 dtYesNo.Columns.Add(new DataColumn("cdYesNo"));
-                DataRow drYesNo_Blank=dtYesNo.NewRow();
-                drYesNo_Blank["cdYesNo"]="";
-                DataRow drYesNo_Yes=dtYesNo.NewRow();
-                drYesNo_Yes["cdYesNo"]="Yes";
-                DataRow drYesNo_No=dtYesNo.NewRow();
-                drYesNo_No["cdYesNo"]="No";
+                DataRow drYesNo_Blank = dtYesNo.NewRow();
+                drYesNo_Blank["cdYesNo"] = "";
+                DataRow drYesNo_Yes = dtYesNo.NewRow();
+                drYesNo_Yes["cdYesNo"] = "Yes";
+                DataRow drYesNo_No = dtYesNo.NewRow();
+                drYesNo_No["cdYesNo"] = "No";
                 dtYesNo.Rows.Add(drYesNo_Blank);
                 dtYesNo.Rows.Add(drYesNo_Yes);
                 dtYesNo.Rows.Add(drYesNo_No);
@@ -136,7 +136,7 @@ namespace SubmittalProposal {
             }
             dtYesNo.DataSet.Tables.Remove(dtYesNo);
             dsTii.Tables.Add(dtYesNo);
-            
+
 
             return dsTii;
         }
@@ -158,6 +158,7 @@ namespace SubmittalProposal {
         }
         private void setResultsContent(String propId, String custId) {
             Session["PropdIdBeingEdited"] = propId;
+            Session["CustIdBeingEdited"] = custId;
             SqlCommand cmd = new SqlCommand("uspOwnerGet");
             cmd.Parameters.Add("@CustId", SqlDbType.NVarChar).Value = custId;
             DataSet dsOwner = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
@@ -196,10 +197,87 @@ namespace SubmittalProposal {
             throw new NotImplementedException();
         }
         protected override void clearAllNewFormInputFields() {
-            throw new NotImplementedException();
+            tbcdFirstNameNew.Text = "";
+            tbcdLastNameNew.Text = "";
+            ddlcdCardStatusNew.SelectedIndex = 0;
+            tbcdDateOfBirthNew.Text = "";
+            tbIssueDateNew.Text = ""; ;
+            tbFeePaidNew.Text = "";
+            ddlIssuedIdCardNew.SelectedIndex = 0;
+            ddlIssuedRecPassNew.SelectedIndex = 0;
+            tbCommentsNew.Text = "";
         }
+        protected void lbIDCardNew_OnClick(object sender, EventArgs args) {
+            DataTable dt = CRDataSet().Tables["CRDSCardClass"];
+            ddlcdClassNew.DataSource = dt;
+            ddlcdClassNew.DataBind();
+            DataTable dt2 = CRDataSet().Tables["CRDSCardStatus"];
+            ddlcdCardStatusNew.DataSource = dt2;
+            ddlcdCardStatusNew.DataBind();
+
+            DataTable dt3 = CRDataSet().Tables["CRDSYesNo"];
+            ddlIssuedIdCardNew.DataSource = dt3;
+            ddlIssuedIdCardNew.DataBind();
+            DataTable dt4 = CRDataSet().Tables["CRDSYesNo"];
+            ddlIssuedRecPassNew.DataSource = dt4;
+            ddlIssuedRecPassNew.DataBind();
+
+
+            mpeNewIDCard.Show();
+
+        }
+        protected void btnNewIDCardOk_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspCardPut");
+                string firstName = tbcdFirstNameNew.Text;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = firstName;
+                string lastName = tbcdLastNameNew.Text;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = lastName;
+                string cardClass = ddlcdClassNew.SelectedValue;
+                cmd.Parameters.Add("@Class", SqlDbType.NVarChar).Value = cardClass;
+                DateTime? birthDate = Utils.ObjectToDateTimeNullable(tbcdDateOfBirthNew.Text);
+                if (birthDate.HasValue) {
+                    cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
+                }
+                string status = ddlcdCardStatusNew.SelectedValue;
+                DateTime? issueDate = Utils.ObjectToDateTimeNullable(tbIssueDateNew.Text);
+                if (issueDate.HasValue) {
+                    cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
+                }
+                decimal? feePaid = null;
+                try {
+                    feePaid = Utils.ObjectToDecimal0IfNull(tbFeePaidNew.Text.Replace("$", ""));
+                } catch { }
+                if (feePaid.HasValue) {
+                    cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
+                }
+                string idCardIssued = ddlIssuedIdCardNew.SelectedValue;
+                cmd.Parameters.Add("@IDCardIssued", SqlDbType.NVarChar).Value = idCardIssued;
+                string recPassIssued = ddlIssuedRecPassNew.SelectedValue;
+                cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
+                string comments = (tbCommentsNew).Text;
+                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
+                cmd.Parameters.Add("@fkISPropID", SqlDbType.NVarChar).Value = Session["PropdIdBeingEdited"];
+                SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
+                getUpdateResultsLabel().Text = "ID Card created";
+                setResultsContent((string)Session["PropdIdBeingEdited"], (string)Session["CustIdBeingEdited"]);
+
+            } catch (Exception ee) {
+                getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
+                getUpdateResultsLabel().Text = ee.Message;
+            }
+            clearAllSelectionInputFields();
+        }
+        protected void btnNewIDCardCancel_Click(object sender, EventArgs args) {
+            clearAllSelectionInputFields();
+        }
+
         protected override void clearAllSelectionInputFields() {
-            throw new NotImplementedException();
+
         }
         protected override DataTable getGridViewDataTable() {
             throw new NotImplementedException();
@@ -216,7 +294,7 @@ namespace SubmittalProposal {
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             throw new NotImplementedException();
         }
-        
+
         private bool imUnlockedForEdit {
             get {
                 object imunlocked = Session["ImUnlockedForEditIDCardManagement"];
@@ -331,13 +409,13 @@ namespace SubmittalProposal {
             try {
                 SqlCommand cmd = new SqlCommand("uspCardPut");
                 int cardId = Utils.ObjectToInt(((Label)row.Cells[1].Controls[1]).Text);
-                cmd.Parameters.Add("@CardId",SqlDbType.Int).Value=cardId;
+                cmd.Parameters.Add("@CardId", SqlDbType.Int).Value = cardId;
                 string firstName = ((TextBox)row.Cells[2].Controls[1]).Text;
-                cmd.Parameters.Add("@FirstName",SqlDbType.NVarChar).Value=firstName;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = firstName;
                 string lastName = ((TextBox)row.Cells[3].Controls[1]).Text;
-                cmd.Parameters.Add("@LastName",SqlDbType.NVarChar).Value=lastName;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = lastName;
                 string cardClass = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue;
-                cmd.Parameters.Add("@Class",SqlDbType.NVarChar).Value=cardClass;
+                cmd.Parameters.Add("@Class", SqlDbType.NVarChar).Value = cardClass;
                 DateTime? birthDate = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[5].Controls[1]).Text);
                 if (birthDate.HasValue) {
                     cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
@@ -348,10 +426,10 @@ namespace SubmittalProposal {
                 if (issueDate.HasValue) {
                     cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
                 }
-                decimal? feePaid=null;
+                decimal? feePaid = null;
                 try {
                     feePaid = Utils.ObjectToDecimal0IfNull(((TextBox)row.Cells[9].Controls[1]).Text.Replace("$", ""));
-                } catch {}
+                } catch { }
                 if (feePaid.HasValue) {
                     cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
                 }
@@ -391,7 +469,7 @@ namespace SubmittalProposal {
                 getUpdateResultsLabel().Text = "ID Card updated";
 
                 //setResultsContent(propId, custId);
-//                performPostUpdateSuccessfulActions("ID Card updated", null, null);
+                //                performPostUpdateSuccessfulActions("ID Card updated", null, null);
             } catch (Exception ee) {
                 getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
                 getUpdateResultsLabel().Text = ee.Message;
@@ -435,11 +513,11 @@ namespace SubmittalProposal {
         public static List<string> SearchByName(string prefixText, int count) {
             DataView dv = new DataView(CRDataSet().Tables["CRDSBottomDropdownFindByNameOrder"]);
             dv.RowFilter = "Name like '*" + prefixText + "*'";
-            __ListForAutoComplete=new List<FindByListItem>();
+            __ListForAutoComplete = new List<FindByListItem>();
             List<string> zList = new List<string>();
             DataTable dt = dv.ToTable();
             foreach (DataRow dr in dt.Rows) {
-                __ListForAutoComplete.Add(new FindByListItem((string)dr["NameSRLotLane"],(string)dr["PropIdBarCustId"]));
+                __ListForAutoComplete.Add(new FindByListItem((string)dr["NameSRLotLane"], (string)dr["PropIdBarCustId"]));
                 zList.Add((string)dr["NameSRLotLane"]);
             }
             return zList;
