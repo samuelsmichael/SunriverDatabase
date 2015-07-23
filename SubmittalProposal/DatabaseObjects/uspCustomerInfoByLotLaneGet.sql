@@ -13,7 +13,11 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT case when IsNumeric(SRLot)=1 then Cast(SRLot as int) else 0 end as LotSortValue, qryLotLaneWithOwners_Master.LotLane as SRLotLane, qryLotLaneWithOwners_Master.PrimaryOwner as CustName,SRPropID+'|'+isnull(CustID,'') as PropIDBarCustId
+	SELECT 
+		case when IsNumeric(SRLot)=1 then Cast(SRLot as int) else 0 end as LotSortValue, 
+		qryLotLaneWithOwners_Master.LotLane as SRLotLane, 
+		qryLotLaneWithOwners_Master.PrimaryOwner as CustName,
+		SRPropID+'|'+isnull(CustID,'') as PropIDBarCustId
 	FROM qryLotLaneWithOwners_Master
 	WHERE LotLane is not null
 	ORDER BY LotSortValue, qryLotLaneWithOwners_Master.SRLane, qryLotLaneWithOwners_Master.SRLot
