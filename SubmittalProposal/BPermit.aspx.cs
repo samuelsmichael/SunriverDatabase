@@ -280,7 +280,6 @@ namespace SubmittalProposal {
 
         protected override void childPageLoad(object sender, EventArgs e) {
             hfAutoShowPopupNew.Value = "n";
-            string gotoBPermitId=null;
             if (!IsPostBack) {
                 ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();

@@ -118,6 +118,7 @@
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
+    <Content Include="SellCheck.aspx" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.gif" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.png" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer.gif" />
@@ -527,6 +528,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SubmittalLotLane.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SellCheck.aspx.cs">
+      <DependentUpon>SellCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SellCheck.aspx.designer.cs">
+      <DependentUpon>SellCheck.aspx</DependentUpon>
     </Compile>
     <Compile Include="Submittal2.aspx.cs">
       <DependentUpon>Submittal2.aspx</DependentUpon>
