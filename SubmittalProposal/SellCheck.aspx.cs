@@ -77,6 +77,12 @@ namespace SubmittalProposal {
                 sbFilter.Append(and + Common.Utils.getDataViewQuery(tbRecipient.Text, "scLTRecipient"));
                 and = " and ";
             }
+            if (Utils.isNothingNot(tbscLTCCopy1.Text)) {
+                sb.Append(prepend + "Recipient: " + tbscLTCCopy1.Text);
+                prepend = "  ";
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbscLTCCopy1.Text, "scLTCCopy1"));
+                and = " and ";
+            }
             if (Utils.isNothingNot(tbLot.Text)) {
                 sb.Append(prepend + "Lot: " + tbLot.Text);
                 prepend = "  ";
@@ -101,7 +107,9 @@ namespace SubmittalProposal {
                 int inspectionId = -999;
                 try {
                     inspectionId=Convert.ToInt32(tbInspectionID.Text);} catch {}
-                sbFilter.Append(and + " exists (select scInspectionID from tblSellCheck where scInspectionID = " + inspectionId +")" );
+
+                sbFilter.Append(and + Common.Utils.getDataViewQuery("," + inspectionId + ",", "inspectionIDs")) 
+                    ;           
                 and = " and ";
             }
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane") {

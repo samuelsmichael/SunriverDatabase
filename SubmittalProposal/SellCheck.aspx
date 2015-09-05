@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>
         <asp:Label ID="Label18" runat="server" Text="Recipient"></asp:Label>
-        <asp:TextBox ID="tbRecipient" Width="90" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbRecipient" Width="80" runat="server"></asp:TextBox>
     </td>
 
     <td>
@@ -11,8 +11,12 @@
     </td>
     <td>
         <asp:Label ID="Label21" runat="server" Text="Lane"></asp:Label>
-        <asp:DropDownList ID="ddlLane" runat="server" DataTextField="Lane" DataValueField="Lane">
+        <asp:DropDownList ID="ddlLane" Width="100" runat="server" DataTextField="Lane" DataValueField="Lane">
         </asp:DropDownList>
+    </td>
+    <td>
+        <asp:Label ID="Label3" runat="server" Text="Copy 1"></asp:Label>
+        <asp:TextBox ID="tbscLTCCopy1" Width="80" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label23" runat="server" Text="Request ID"></asp:Label>
@@ -40,9 +44,11 @@
         </EmptyDataTemplate>
         <Columns>
             <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
+            <asp:BoundField DataField="scLTDate" HeaderText="Date" SortExpression="dateYYYYMMDD" DataFormatString="{0:d}" />
             <asp:BoundField DataField="scLot" HeaderText="Lot" SortExpression="scLot" />
             <asp:BoundField DataField="scLane" HeaderText="Lane" SortExpression="scLane" />
             <asp:BoundField DataField="scLTRecipient" HeaderText="Recipient" SortExpression="scLTRecipient" />
+            <asp:BoundField DataField="scLTCCopy1" HeaderText="CCopy1" SortExpression="scLTCCopy1" />
             <asp:BoundField DataField="scRequestID" HeaderText="Request ID" SortExpression="scRequestID" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
