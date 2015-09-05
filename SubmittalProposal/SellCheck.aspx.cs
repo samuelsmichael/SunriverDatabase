@@ -12,6 +12,15 @@ using System.Text;
 
 namespace SubmittalProposal {
     public partial class SellCheck : AbstractDatabase {
+        private int scRequestIDBeingEdited {
+            get {
+                object obj = ViewState["scRequestIDBeingEdited"];
+                return obj == null ? 0 : (int)obj;
+            }
+            set {
+                ViewState["scRequestIDBeingEdited"] = value;
+            }
+        }
         public static DataSet SCDataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
@@ -47,6 +56,11 @@ namespace SubmittalProposal {
         protected override void clearAllSelectionInputFields() {
             tbLot.Text = "";
             ddlLane.SelectedIndex = 0;
+            tbRecipient.Text = "";
+            tbscLTCCopy1.Text = "";
+            tbRequestId.Text = "";
+            tbPropertyID.Text = "";
+            tbInspectionID.Text = "";
         }
         protected override System.Data.DataTable getGridViewDataTable() {
             return SCDataSet().Tables[0];
@@ -58,13 +72,43 @@ namespace SubmittalProposal {
             throw new NotImplementedException();
         }
         protected override Label getUpdateResultsLabel() {
-            throw new NotImplementedException();
+            return lblSellRequestUpdateResults;
+        }
+        private int getscRequestID(GridViewRow dr) {
+            return Convert.ToInt32(dr.Cells[6].Text);
+        }
+        private string getLotLane(DataRow dr) {
+            return Utils.ObjectToString(dr["scLot"]) + "\\" + Utils.ObjectToString(dr["scLane"]);
+        }
+        private string getPropertyId(DataRow dr) {
+            return Utils.ObjectToString(dr["fkscPropID"]);
+        }
+        private string getRecipient(DataRow dr) {
+            return Utils.ObjectToString(dr["scLTRecipient"]);
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            GridViewRow row = gvResults.SelectedRow;
+            Object obj = row.Cells;
+            scRequestIDBeingEdited = getscRequestID(row);
+            DataTable sourceTable = getGridViewDataTable();
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "scRequestID=" + getscRequestID(row);
+            DataTable tblFiltered = view.ToTable();
+            DataRow dr = tblFiltered.Rows[0];
+            lblLot.Text = Utils.ObjectToString(dr["scLot"]);
+            lblLane.Text = Utils.ObjectToString(dr["scLane"]);
+            lblPropertyID.Text = getPropertyId(dr);
+            lblRequestID.Text = Utils.ObjectToString(dr["scRequestID"]);
+            lblPropertyID.Text = "";
+            object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
+            if (Utils.isNothingNot(dateFormPrinted)) {
+                lblDatePrinted.Text = ((DateTime)dateFormPrinted).ToString();
+            }
+
+            return "Lot\\Lane: " + getLotLane(dr) + "  Request ID: " + scRequestIDBeingEdited + "  Property ID:" + getPropertyId(dr) + " Requestor: " + getRecipient(dr);
         }
         protected override void lockYourUpdateFields() {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
@@ -129,5 +173,8 @@ namespace SubmittalProposal {
             get { return "canupdatesellcheck"; }
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {}
+        protected void btnSellRequest_Click(object sender, EventArgs args) {
+            throw new NotImplementedException();
+        }
     }
 }
