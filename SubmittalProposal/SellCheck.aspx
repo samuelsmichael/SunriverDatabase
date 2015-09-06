@@ -65,62 +65,306 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
-    <asp:Panel ID="Panelx103" GroupingText="Property For Sale" runat="server">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-                <td>
-                    <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Sunriver Address"></asp:Label>
-                    <asp:Label CssClass="form_field" ID="lblLot" runat="server"></asp:Label>
-                    <asp:Label CssClass="form_field" ID="lblLane" runat="server"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label CssClass="form_field_Heading" ID="Label8a" runat="server" Text="Property ID"></asp:Label>
-                    <asp:Label CssClass="form_field" ID="lblPropertyID" runat="server"></asp:Label>
-                </td>
-                <td>
-                    <asp:Label CssClass="form_field_Heading" ID="Label9" runat="server" Text="Request ID"></asp:Label>
-                    <asp:Label CssClass="form_field" ID="lblRequestID" runat="server"></asp:Label>
-                </td>
-                <td align="right">
-                    <asp:Label ID="Label9a" runat="server" Text="Printed: "></asp:Label>
-                    <asp:Label ID="lblDatePrinted" runat="server" ></asp:Label>
-                    <asp:Button ID="btnPrintForm" runat="server" CausesValidation="false" Text="Print Form" OnClientClick="javascript:alert('Not yet implemented');" /> 
-                </td>
-            </tr>
-        </table>
-    </asp:Panel>
+
     <asp:Panel ID="Panel1" GroupingText="Notification Letter Data" runat="server">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-                <td>
-                    <asp:Label CssClass="form_field_heading" ID="Label7x" runat="server" Text="Date"></asp:Label>
-                </td>
-                <td>
-                    <table>
+            <tr valign="top">
+                <td valign="top" colspan="2">
+                    <table border="0" cellpadding="1" cellspacing="1">
                         <tr>
-                            <td>
-                                <asp:TextBox CssClass="form_field" ID="tbLTDateUpdate" Width="10em" runat="server"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                    ID="ibtbLTDateUpdate" runat="server" />
+                            <td><asp:Label CssClass="form_field_heading" ID="Label7x" runat="server" Text="Date "></asp:Label></td>
+                            <td>                    
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:TextBox CssClass="form_field" ID="tbLTDateUpdate" Width="10em" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                ID="ibtbLTDateUpdate" runat="server" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <ajaxToolkit:CalendarExtender ID="ceLTDateUpdate" runat="server" TargetControlID="tbLTDateUpdate"
+                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLTDateUpdate" />
+                                <asp:RegularExpressionValidator ForeColor="Red" ID="revLTDateUpdate" Display="Dynamic"
+                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                    ControlToValidate="tbLTDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
-                    <ajaxToolkit:CalendarExtender ID="ceLTDateUpdate" runat="server" TargetControlID="tbV"
-                        Format="MM/dd/yyyy" PopupButtonID="ibIssuedUpdate" />
-                    <asp:RegularExpressionValidator ForeColor="Red" ID="revLTDateUpdate" Display="Dynamic"
-                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                        ControlToValidate="tbLTDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                </td>
+                <td valign="top">
+                    <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Recipient "></asp:Label>
+                </td>
+                <td valign="top">
+                     <asp:TextBox CssClass="form_field" ID="tbscLTRecipientUpdate" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                </td>
+                <td valign="top">
+                    <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="CC1 "></asp:Label>
+                </td>
+                <td valign="top">
+                     <asp:TextBox CssClass="form_field" ID="tbscLTCCopy1Update" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td valign="top"><asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Realtor "></asp:Label></td>
+                <td valign="top">
+                    <asp:DropDownList ID="ddlscRealtorUpdate" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>
+                </td>
+                <td valign="top">
+                        <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Address "></asp:Label>
+                </td>
+                <td valign="top">
+                    <table border="0" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <td>
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr1Update" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr2Update" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTCityUpdate" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTStateUpdate" Width="3em" MaxLength="3" runat="server"></asp:TextBox>
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTZipUpdate" Width="7em" MaxLength="10" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="2" valign="top">
+                    <table border="0" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <td valign="top">
+                                    <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="CC2 "></asp:Label>
+                            </td>
+                            <td valign="top">
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTCCopy2Update" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                    <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="CC3"></asp:Label>
+                            </td>
+                            <td valign="top">
+                                 <asp:TextBox CssClass="form_field" ID="tbscLTCCopy3Update" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
+    </asp:Panel>   
+    <asp:Panel ID="Panel2" GroupingText="Inspection Data" runat="server">
     </asp:Panel>
-        <center>
+    <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
-            ID="btnSellRequestUpdate" OnClick="btnSellRequest_Click" OnClientClick="javascript: return true;" runat="server" Text="Submit" />
+            ID="btnSellRequestUpdate" OnClick="btnSellRequestUpdateOkay_Click" OnClientClick="javascript: return true;" runat="server" Text="Submit" />
         <asp:Label ID="lblSellRequestUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lblDatePrintedHeading" runat="server" Text="Printed: "></asp:Label>
+        <asp:Label ID="lblDatePrinted" runat="server" ></asp:Label>
+        <asp:Button style="margin-left:1em;" ID="btnPrintForm" runat="server" CausesValidation="false" Text="Print Form" OnClientClick="javascript:alert('Not yet implemented');" /> 
+
     </center>
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewRequestId">
+        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewRequestTitleId">
+            <span>New Request</span>
+        </asp:Panel>
+        <asp:Panel runat="server" style="text-align:center;" ID="pnlNewSubmittalContent" CssClass="newitemcontent">
+            <p style="text-align:left;"> 
+                RequestId  <asp:Label ID="lblAutoRequestId" runat="server"></asp:Label>
+            </p>
+
+         <asp:Panel ID="Panelbb1" GroupingText="Property Data" runat="server">
+            <table border="0" cellpadding="2" cellspacing="2">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label17" runat="server" Text="Lot"></asp:Label>
+                        <asp:TextBox ID="tbscLotNew" Width="40" MaxLength="5" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvscLotNew" runat="server" ControlToValidate="tbscLotNew" Display="Dynamic" ForeColor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label19" runat="server" Text="Lane"></asp:Label>
+                        <asp:DropDownList ID="ddlscLaneNew" Width="100" runat="server" DataTextField="Lane" DataValueField="Lane"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvddsscLaneNew" runat="server"  ForeColor="Red" ControlToValidate="ddlscLaneNew" Display="Dynamic" ErrorMessage="Required"></asp:RequiredFieldValidator>
+
+                    </td>
+                </tr>
+            </table>
+         </asp:Panel>
+         <asp:Panel ID="Panel3" GroupingText="Notification Letter Data" runat="server">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr valign="top">
+                        <td valign="top" colspan="2">
+                            <table border="0" cellpadding="1" cellspacing="1">
+                                <tr>
+                                    <td><asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Date "></asp:Label></td>
+                                    <td>                    
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbLTDateNew" Width="10em" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbLTDateNew" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceLTDateNew" runat="server" TargetControlID="tbLTDateNew"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibtbLTDateNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revLTDateNew" Display="Dynamic"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbLTDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td valign="top">
+                            <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Recipient "></asp:Label>
+                        </td>
+                        <td valign="top">
+                             <asp:TextBox CssClass="form_field" ID="tbscLTRecipientNew" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                        </td>
+                        <td valign="top">
+                            <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="CC1 "></asp:Label>
+                        </td>
+                        <td valign="top">
+                             <asp:TextBox CssClass="form_field" ID="tbscLTCCopy1New" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td valign="top"><asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Realtor "></asp:Label></td>
+                        <td valign="top">
+                            <asp:DropDownList ID="ddlscRealtorNew" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>
+                        </td>
+                        <td valign="top">
+                                <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Address "></asp:Label>
+                        </td>
+                        <td valign="top">
+                            <table border="0" cellpadding="1" cellspacing="1">
+                                <tr>
+                                    <td>
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr1New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr2New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTCityNew" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTStateNew" Width="3em" MaxLength="3" runat="server"></asp:TextBox>
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTZipNew" Width="7em" MaxLength="10" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td colspan="2" valign="top">
+                            <table border="0" cellpadding="1" cellspacing="1">
+                                <tr>
+                                    <td valign="top">
+                                            <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="CC2 "></asp:Label>
+                                    </td>
+                                    <td valign="top">
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTCCopy2New" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                            <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="CC3"></asp:Label>
+                                    </td>
+                                    <td valign="top">
+                                         <asp:TextBox CssClass="form_field" ID="tbscLTCCopy3New" Width="15em" MaxLength="35" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>   
+
+        </asp:Panel>
+        <script  language="javascript" type="text/javascript" >
+            function doOk() {
+
+                var loading = $(".loadingdb");
+                loading.show();
+                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                loading.css({ top: top, left: left });
+                return true;
+            }
+
+            // Called when async postback ends
+            function prm_EndRequest(sender, args) {
+                // get the divImage and hide it again
+                //debugger
+                if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1
+                || (sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 && sender._postBackSettings.sourceElement.id.indexOf("Ok") != -1)) {
+                    var loading = $(".loading");
+                    loading.hide();
+                }
+            }
+
+        </script>
+        <center>
+            <table cellpadding="4">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnNewRequestOk"  OnClientClick="javascript: if(Page_IsValid) { return doOk();}" CausesValidation="true" runat="server" Text="Okay" 
+                            onclick="btnNewRequestOk_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnNewRequestCancel" onclick="btnNewRequestCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblRequestNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="loadingdb" align="center">
+                Processing. Please wait.<br />
+                <br />
+                <img src="Images/animated_progress.gif" alt="" />
+            </div>
+        </center>
+    </asp:Panel>
+    <asp:LinkButton ID="lbRequestNew" OnClick="lbRequestNewCmon_OnClick"  runat="server">New Request</asp:LinkButton>
+    <asp:Button style="display:none;" ID="btnhidden1" runat="server" />
+
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewRequest" runat="server" TargetControlID="btnhidden1"
+        PopupControlID="pnlNewRequestId" BackgroundCssClass="modalBackground" 
+        PopupDragHandleControlID="pnlNewSubmittalTitleId"
+        BehaviorID="jdpopupsubmittal" />
+    <script language="javascript" type="text/javascript">
+
+        function shown() {
+            var tb = document.getElementById('<% =tbscLTRecipientNew.ClientID %>');
+            tb.focus();
+        }
+        function pageLoad() {
+            $addHandler(document, "keydown", OnKeyPress);
+            var ddd = $find('jdpopupsubmittal');
+            ddd.add_shown(shown);
+        }
+
+        function OnKeyPress(args) {
+            if (args.keyCode == Sys.UI.Key.esc) {
+                // I don't know about this                $find("jdpopup").hide();
+            }
+        }
+    </script>
 </asp:Content>

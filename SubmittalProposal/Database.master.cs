@@ -41,6 +41,10 @@ namespace SubmittalProposal {
             CPEForm.Collapsed = true;
             CPEForm.ClientState = "true";
         }
+        public void expandCPESearch() {
+            CPEForm.Collapsed = false;
+            CPEForm.ClientState = "false";
+        }
         private void expandCPEGrid() {
             CPEDataGrid.Collapsed = false;
             CPEDataGrid.ClientState = "false";

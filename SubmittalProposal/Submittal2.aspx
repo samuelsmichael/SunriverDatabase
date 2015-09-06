@@ -241,7 +241,7 @@
                 SubmittalId  <asp:Label ID="lblAutoSubmittalId" runat="server"></asp:Label>
             </p>
             <ajaxToolkit:TabContainer  style="text-align:center;" Height="346" ActiveTabIndex="0" ID="TabContainer2" runat="server">
-                <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Applicant Infromation">
+                <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Applicant Information">
                     <ContentTemplate>
                         <asp:UpdatePanel ID="updatePanel1" runat="server">
                             <ContentTemplate>

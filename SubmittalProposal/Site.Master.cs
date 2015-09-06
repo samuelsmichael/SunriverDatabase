@@ -19,6 +19,14 @@ namespace SubmittalProposal
             if (!IsPostBack) {
             }
         }
+        public string getPropIDForLotLane(string lot, string lane) {
+            try {
+                DataSet ds = Utils.getDataSetFromQuery("SELECT SRPropID FROM [tblLotLane_Master] WHERE SRLot='" + lot + "' AND SRLane='" + lane + "'", System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                return (string)ds.Tables[0].Rows[0]["SRPropID"];
+            } catch {
+                return null;
+            }
+        }
         public DataSet dsLotLane {
             get {
                 MemoryCache cache = MemoryCache.Default;
@@ -28,11 +36,16 @@ namespace SubmittalProposal
                     CacheItemPolicy policy = new CacheItemPolicy();
                     policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                     try {
-                        ds = Utils.getDataSetFromQuery("SELECT distinct SRLane Lane FROM [SRAddConvert] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SROAddConvertConnectionString"].ConnectionString);
+                        ds = Utils.getDataSetFromQuery("SELECT distinct SRLane Lane FROM [tblLotLane_Master] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
                         cache.Add(key, ds, policy);
                     } catch {
-                        ds = Utils.getDataSetFromQuery("SELECT distinct Lane FROM [tblLotLane] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                        cache.Add(key, ds, policy);
+                        try {
+                            ds = Utils.getDataSetFromQuery("SELECT distinct SRLane Lane FROM [SRAddConvert] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SROAddConvertConnectionString"].ConnectionString);
+                            cache.Add(key, ds, policy);
+                        } catch {
+                            ds = Utils.getDataSetFromQuery("SELECT distinct Lane FROM [tblLotLane] ORDER BY [Lane]", System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                            cache.Add(key, ds, policy);
+                        }
                     }
                 }
                 return ds;

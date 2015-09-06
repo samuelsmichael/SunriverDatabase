@@ -69,6 +69,10 @@ namespace SubmittalProposal {
             ((Database)Master).getPanelForm.Visible = true;
 
         }
+        protected void expandCPESearch() {
+            ((Database)Master).expandCPESearch();
+        }
+
         protected void performPostUpdateFailedActions(string status) {
             getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
             getUpdateResultsLabel().Text = status;
