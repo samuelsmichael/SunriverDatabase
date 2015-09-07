@@ -25,7 +25,7 @@
     </p>
      <p>
         <asp:LinkButton ID="lbSellCheck" runat="server" 
-            onclick="lbSellCheck_Click">Sell Check</asp:LinkButton>
+            onclick="lbSellCheck_Click">Sell Check Summary</asp:LinkButton>
     </p>
 
 </asp:Content>

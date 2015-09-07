@@ -20,7 +20,7 @@ namespace SubmittalProposal {
             Response.Redirect("~/Reports/SellCheckHistory.aspx");
         }
         protected void lbSellCheck_Click(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            Response.Redirect("~/Reports/SellCheckSummary.aspx");
         }
         protected void lbSellCheckList_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/SellCheckList.aspx");
