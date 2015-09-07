@@ -63,6 +63,12 @@ namespace SubmittalProposal {
                             if (HttpContext.Current.User.IsInRole("candoreportscontractors")) {
                                 lbReports.Visible = true;
                             }
+                        } else {
+                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
+                                if (HttpContext.Current.User.IsInRole("candoreportssellcheck")) {
+                                    lbReports.Visible = true;
+                                }
+                            }
                         }
                     }
                 }
@@ -82,6 +88,10 @@ namespace SubmittalProposal {
                     } else {
                         if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
                             Response.Redirect("~/ContractorReportsMain.aspx");
+                        } else {
+                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
+                                Response.Redirect("~/SellCheckReportsMain.aspx");
+                            }
                         }
                     }
                 }

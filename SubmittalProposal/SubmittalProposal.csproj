@@ -115,10 +115,12 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\SellCheckUnPaidFees.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
     <Content Include="SellCheck.aspx" />
+    <Content Include="SellCheckReportsMain.aspx" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.gif" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.png" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer.gif" />
@@ -484,6 +486,19 @@
     <Compile Include="Reports\Reports.Master.designer.cs">
       <DependentUpon>Reports.Master</DependentUpon>
     </Compile>
+    <Compile Include="Reports\SellCheckUnPaidFees.aspx.cs">
+      <DependentUpon>SellCheckUnPaidFees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SellCheckUnPaidFees.aspx.designer.cs">
+      <DependentUpon>SellCheckUnPaidFees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SellCheck\RptSellCheckFeesDue.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSellCheckFeesDue.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.cs">
       <DependentUpon>SubmittalAdministrativeApprovals.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -535,6 +550,13 @@
     </Compile>
     <Compile Include="SellCheck.aspx.designer.cs">
       <DependentUpon>SellCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SellCheckReportsMain.aspx.cs">
+      <DependentUpon>SellCheckReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SellCheckReportsMain.aspx.designer.cs">
+      <DependentUpon>SellCheckReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Submittal2.aspx.cs">
       <DependentUpon>Submittal2.aspx</DependentUpon>
@@ -651,6 +673,10 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorsAllData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SellCheck\RptSellCheckFeesDue.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSellCheckFeesDue.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
