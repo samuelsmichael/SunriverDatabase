@@ -160,6 +160,77 @@
         </table>
     </asp:Panel>   
     <asp:Panel ID="Panel2" GroupingText="Inspection Data" runat="server">
+
+    <!--bubba2.txt -->
+
+        <center style="margin-top: 5px;">
+            <asp:LinkButton ID="lblNewInspection" CausesValidation="false" OnClick="lblNewInspection_OnClick" runat="server">New Inspection</asp:LinkButton>
+        </center>
+        <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewInspection">
+            <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewInspectionTitle">
+                <span>New Inspection</span>
+            </asp:Panel>
+            <asp:Panel runat="server" Style="text-align: center;" ID="Panel6" CssClass="newitemcontent">
+                <table>
+                    <tr>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Date"></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <table><tr><td>
+                            <asp:TextBox CssClass="form_field_date" ID="tbscDateNew" runat="server" width="60"></asp:TextBox>
+                            </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibscDateNew" 
+                                        runat="server" /></td></tr></table>
+                            <ajaxToolkit:CalendarExtender ID="cescDateNew" runat="server"
+                                TargetControlID="tbscDateNew"
+                                Format="MM/dd/yyyy"
+                                PopupButtonID="ibscDateNew" />
+                            <asp:RegularExpressionValidator ForeColor="Red" 
+                                ID="revscDateNew"  Display="Dynamic" 
+                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                ControlToValidate="tbscDateNew" runat="server" 
+                                ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                </table>
+
+                <center>
+                    <table cellpadding="3">
+                        <tr>
+                            <td>
+                                <asp:Button  OnClientClick="javascript: return donewinspectionjedisok();" ID="btnNewInspectionOk" 
+                                    runat="server" Text="Okay" OnClick="btnNewInspectionOk_Click" />
+                            </td>
+                            <td>
+                                <asp:Button ID="btnNewInspectionCancel" runat="server" Text="Cancel" CausesValidation="false" 
+                                    OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                    OnClick="btnNewInspectionCancel_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+
+            </asp:Panel>
+            <script  language="javascript" type="text/javascript" >
+                function donewinspectionjedisok() {
+                    var loading = $(".loadingnewbpermit");
+                    loading.show();
+                    var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                    var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                    loading.css({ top: top, left: left });
+                    return true;
+                }
+            </script>
+
+        </asp:Panel>
+        <asp:Button runat="server" ID="dummyNewInspection" style="display:none" />
+        <ajaxToolkit:ModalPopupExtender ID="mpeNewInspection" runat="server" TargetControlID="dummyNewInspection"
+            PopupControlID="pnlNewInspection" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewInspectionTitle"
+            />
+
+
+
     </asp:Panel>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
@@ -173,7 +244,7 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
-    <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewRequestId">
+    <asp:Panel runat="server" CssClass="newitempopup" Width="800" ID="pnlNewRequestId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewRequestTitleId">
             <span>New Request</span>
         </asp:Panel>
@@ -187,14 +258,13 @@
                 <tr>
                     <td>
                         <asp:Label ID="Label17" runat="server" Text="Lot"></asp:Label>
-                        <asp:TextBox ID="tbscLotNew" Width="40" MaxLength="5" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvscLotNew" runat="server" ControlToValidate="tbscLotNew" Display="Dynamic" ForeColor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="tbscLotNew" Width="40"  MaxLength="5" runat="server"></asp:TextBox>
+                        <asp:Label runat="server" ForeColor="Red" ID="lblscLotNewErrorMsg"></asp:Label>
                     </td>
                     <td>
                         <asp:Label ID="Label19" runat="server" Text="Lane"></asp:Label>
-                        <asp:DropDownList ID="ddlscLaneNew" Width="100" runat="server" DataTextField="Lane" DataValueField="Lane"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="rfvddsscLaneNew" runat="server"  ForeColor="Red" ControlToValidate="ddlscLaneNew" Display="Dynamic" ErrorMessage="Required"></asp:RequiredFieldValidator>
-
+                        <asp:DropDownList EnableViewState="true" ID="ddlscLaneNew" Width="100" runat="server" DataTextField="Lane" DataValueField="Lane"></asp:DropDownList>
+                        <asp:Label runat="server" ForeColor="Red" ID="lblddlscLaneNewErrorMsg"></asp:Label>
                     </td>
                 </tr>
             </table>
@@ -213,7 +283,7 @@
                                                     <asp:TextBox CssClass="form_field" ID="tbLTDateNew" Width="10em" runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" CausesValidation="false" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                                         ID="ibtbLTDateNew" runat="server" />
                                                 </td>
                                             </tr>
@@ -243,7 +313,7 @@
                     <tr valign="top">
                         <td valign="top"><asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Realtor "></asp:Label></td>
                         <td valign="top">
-                            <asp:DropDownList ID="ddlscRealtorNew" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlscRealtorNew"  Width="10em" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>
                         </td>
                         <td valign="top">
                                 <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Address "></asp:Label>
@@ -252,19 +322,19 @@
                             <table border="0" cellpadding="1" cellspacing="1">
                                 <tr>
                                     <td>
-                                         <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr1New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                         1: <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr1New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                         <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr2New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                         2: <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr2New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                         <asp:TextBox CssClass="form_field" ID="tbscLTCityNew" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
-                                         <asp:TextBox CssClass="form_field" ID="tbscLTStateNew" Width="3em" MaxLength="3" runat="server"></asp:TextBox>
-                                         <asp:TextBox CssClass="form_field" ID="tbscLTZipNew" Width="7em" MaxLength="10" runat="server"></asp:TextBox>
+                                         C: <asp:TextBox CssClass="form_field" ID="tbscLTCityNew" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
+                                         S: <asp:TextBox CssClass="form_field" ID="tbscLTStateNew" Width="3em" MaxLength="3" runat="server"></asp:TextBox>
+                                         Z: <asp:TextBox CssClass="form_field" ID="tbscLTZipNew" Width="7em" MaxLength="10" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
@@ -292,7 +362,6 @@
                     </tr>
                 </table>
             </asp:Panel>   
-
         </asp:Panel>
         <script  language="javascript" type="text/javascript" >
             function doOk() {
@@ -321,7 +390,7 @@
             <table cellpadding="4">
                 <tr>
                     <td>
-                        <asp:Button ID="btnNewRequestOk"  OnClientClick="javascript: if(Page_IsValid) { return doOk();}" CausesValidation="true" runat="server" Text="Okay" 
+                        <asp:Button ID="btnNewRequestOk" CausesValidation="true" OnClientClick="javascript: if(Page_IsValid) { return doOk();} " runat="server" Text="Okay" 
                             onclick="btnNewRequestOk_Click" />
                     </td>
                     <td>
@@ -341,8 +410,9 @@
                 <img src="Images/animated_progress.gif" alt="" />
             </div>
         </center>
+
     </asp:Panel>
-    <asp:LinkButton ID="lbRequestNew" OnClick="lbRequestNewCmon_OnClick"  runat="server">New Request</asp:LinkButton>
+    <asp:LinkButton ID="lbRequestNew" OnClick="lbRequestNewCmon_OnClick" CausesValidation="false" runat="server">New Request</asp:LinkButton>
     <asp:Button style="display:none;" ID="btnhidden1" runat="server" />
 
     <ajaxToolkit:ModalPopupExtender ID="mpeNewRequest" runat="server" TargetControlID="btnhidden1"
@@ -368,3 +438,5 @@
         }
     </script>
 </asp:Content>
+
+

@@ -355,6 +355,123 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel Panel2;
         
         /// <summary>
+        /// lblNewInspection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lblNewInspection;
+        
+        /// <summary>
+        /// pnlNewInspection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNewInspection;
+        
+        /// <summary>
+        /// pnlNewInspectionTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNewInspectionTitle;
+        
+        /// <summary>
+        /// Panel6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel6;
+        
+        /// <summary>
+        /// Label22 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label22;
+        
+        /// <summary>
+        /// tbscDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbscDateNew;
+        
+        /// <summary>
+        /// ibscDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibscDateNew;
+        
+        /// <summary>
+        /// cescDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cescDateNew;
+        
+        /// <summary>
+        /// revscDateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revscDateNew;
+        
+        /// <summary>
+        /// btnNewInspectionOk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewInspectionOk;
+        
+        /// <summary>
+        /// btnNewInspectionCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewInspectionCancel;
+        
+        /// <summary>
+        /// dummyNewInspection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button dummyNewInspection;
+        
+        /// <summary>
+        /// mpeNewInspection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeNewInspection;
+        
+        /// <summary>
         /// btnSellRequestUpdate control.
         /// </summary>
         /// <remarks>
@@ -463,13 +580,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbscLotNew;
         
         /// <summary>
-        /// rfvscLotNew control.
+        /// lblscLotNewErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvscLotNew;
+        protected global::System.Web.UI.WebControls.Label lblscLotNewErrorMsg;
         
         /// <summary>
         /// Label19 control.
@@ -490,13 +607,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.DropDownList ddlscLaneNew;
         
         /// <summary>
-        /// rfvddsscLaneNew control.
+        /// lblddlscLaneNewErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvddsscLaneNew;
+        protected global::System.Web.UI.WebControls.Label lblddlscLaneNewErrorMsg;
         
         /// <summary>
         /// Panel3 control.

@@ -86,12 +86,15 @@ namespace SubmittalProposal {
             if (!IsPostBack) {
                 ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
-                DataSet realtor=dsRealtor;
-                DataRow dr=realtor.Tables[0].NewRow();
-                dr["RealtyCo"]="";
-                realtor.Tables[0].Rows.InsertAt(dr,0);
+                DataSet realtor = dsRealtor;
+                DataRow dr = realtor.Tables[0].NewRow();
+                dr["RealtyCo"] = "";
+                realtor.Tables[0].Rows.InsertAt(dr, 0);
                 ddlscRealtorUpdate.DataSource = realtor;
                 ddlscRealtorUpdate.DataBind();
+                ddlscRealtorNew.DataSource = realtor;
+                ddlscRealtorNew.DataBind();
+
             }
         }
         protected override void clearAllNewFormInputFields() {
@@ -145,6 +148,7 @@ namespace SubmittalProposal {
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
             scRequestIDBeingEdited = getscRequestID(row);
+            bind_gvInspections(scRequestIDBeingEdited);
             DataTable sourceTable = getGridViewDataTable();
             DataView view = new DataView(sourceTable);
             view.RowFilter = "scRequestID=" + getscRequestID(row);
@@ -169,7 +173,8 @@ namespace SubmittalProposal {
             tbscLTZipUpdate.Text = Utils.ObjectToString(dr["scLTZip"]);
             tbscLTCCopy1Update.Text = Utils.ObjectToString(dr["scLTCCopy1"]);
             tbscLTCCopy2Update.Text = Utils.ObjectToString(dr["scLTCCopy2"]);
-            string realtor=Utils.ObjectToString(dr["scRealtor"]);
+            tbscLTCCopy3Update.Text = Utils.ObjectToString(dr["scLTCCopy3"]);
+            string realtor = Utils.ObjectToString(dr["scRealtor"]);
             if (Utils.isNothingNot(realtor)) {
                 ddlscRealtorUpdate.SelectedValue = realtor;
             } else {
@@ -316,36 +321,64 @@ namespace SubmittalProposal {
         }
         protected void btnNewRequestCancel_Click(object sender, EventArgs args) {
             clearAllSelectionInputFields();
+            clearAllNewFormInputFields();
         }
         protected void btnNewRequestOk_Click(object sender, EventArgs args) {
             try {
+                bool gotErrorBecauseValidatorsDontWorkHereForSomeReason=false;
+                lblddlscLaneNewErrorMsg.Text = "";
+                if (Utils.isNothing(tbscLotNew.Text)) {
+                    lblscLotNewErrorMsg.Text = "required";
+                    gotErrorBecauseValidatorsDontWorkHereForSomeReason = true;
+                } else {
+                    lblscLotNewErrorMsg.Text = "";
+                }
+                if (ddlscLaneNew.SelectedIndex == 0) {
+                    lblddlscLaneNewErrorMsg.Text = "required";
+                    gotErrorBecauseValidatorsDontWorkHereForSomeReason = true;
+                } else {
+                  lblddlscLaneNewErrorMsg.Text = "";
+                }
+                string propid = null;
+                if (!gotErrorBecauseValidatorsDontWorkHereForSomeReason) {
+                    propid = ((SiteMaster)Master.Master.Master).getPropIDForLotLane(tbscLotNew.Text, ddlscLaneNew.SelectedValue);
+                }
+                if (!gotErrorBecauseValidatorsDontWorkHereForSomeReason && Utils.isNothing(propid)) {
+                    lblddlscLaneNewErrorMsg.Text = "Property doesn't exist";
+                    gotErrorBecauseValidatorsDontWorkHereForSomeReason = true;
+                }
+                if (gotErrorBecauseValidatorsDontWorkHereForSomeReason) {
+                    mpeNewRequest.Show();
+                    return;
+                }
+
                 SqlCommand cmd = new SqlCommand("uspSellCheckRequestUpdate");
 
-                cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ddlscRealtorUpdate.SelectedValue;
-                DateTime? date = Utils.ObjectToDateTimeNullable(tbLTDateUpdate.Text);
+                cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ddlscRealtorNew.SelectedValue;
+                DateTime? date = Utils.ObjectToDateTimeNullable(tbLTDateNew.Text);
                 if (date.HasValue) {
                     cmd.Parameters.Add("@scLTDate", SqlDbType.DateTime).Value = date;
                 }
-                cmd.Parameters.Add("@scLTRecipient", SqlDbType.NVarChar).Value = tbscLTRecipientUpdate.Text;
-                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = tbscLTMailAddr1Update.Text;
-                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = tbscLTMailAddr2Update.Text;
-                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = tbscLTCityUpdate.Text;
-                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = tbscLTStateUpdate.Text;
-                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = tbscLTZipUpdate.Text;
-                cmd.Parameters.Add("@scLTCCopy1", SqlDbType.NVarChar).Value = tbscLTCCopy1Update.Text;
-                cmd.Parameters.Add("@scLTCCopy2", SqlDbType.NVarChar).Value = tbscLTCCopy2Update.Text;
-                cmd.Parameters.Add("@scLTCCopy3", SqlDbType.NVarChar).Value = tbscLTCCopy3Update.Text;
+                cmd.Parameters.Add("@scLTRecipient", SqlDbType.NVarChar).Value = tbscLTRecipientNew.Text;
+                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = tbscLTMailAddr1New.Text;
+                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = tbscLTMailAddr2New.Text;
+                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = tbscLTCityNew.Text;
+                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = tbscLTStateNew.Text;
+                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = tbscLTZipNew.Text;
+                cmd.Parameters.Add("@scLTCCopy1", SqlDbType.NVarChar).Value = tbscLTCCopy1New.Text;
+                cmd.Parameters.Add("@scLTCCopy2", SqlDbType.NVarChar).Value = tbscLTCCopy2New.Text;
+                cmd.Parameters.Add("@scLTCCopy3", SqlDbType.NVarChar).Value = tbscLTCCopy3New.Text;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@scLot", SqlDbType.NVarChar).Value = tbscLotNew.Text;
                 cmd.Parameters.Add("@scLane", SqlDbType.NVarChar).Value = ddlscLaneNew.SelectedValue;
-                ((SiteMaster)Master.Master).getPropIDForLotLane( tbscLotNew.Text, ddlscLaneNew.SelectedValue);
+                cmd.Parameters.Add("@fkscPropID", SqlDbType.NVarChar).Value = propid;
 
-            SqlParameter newscRequestID = new SqlParameter("@NewscRequestID", SqlDbType.Int);
-            newscRequestID.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(newscRequestID);
-            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+                SqlParameter newscRequestID = new SqlParameter("@NewscRequestID", SqlDbType.Int);
+                newscRequestID.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newscRequestID);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
 
-            performPostNewSuccessfulActions("SellCheck Request added", DataSetCacheKey, null, tbRequestId, (int)newscRequestID.Value);
+                performPostNewSuccessfulActions("SellCheck Request added", DataSetCacheKey, null, tbRequestId, (int)newscRequestID.Value);
             } catch (Exception e2) {
                 performPostNewFailedActions("BPermit not added. Msg: " + e2.Message);
             }
@@ -357,10 +390,73 @@ namespace SubmittalProposal {
             maxRequestId++;
             ddlscLaneNew.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
             ddlscLaneNew.DataBind();
-
+            lblddlscLaneNewErrorMsg.Text = "";
+            lblscLotNewErrorMsg.Text = "";
             lblAutoRequestId.Text = "" + maxRequestId;
+            ddlscRealtorNew.SelectedIndex = 0;
             mpeNewRequest.Show();
+        }
+        protected void gvInspections_RowEditing(object sender, GridViewEditEventArgs e) {
+            //Set the edit index.
+            //gvInspections.EditIndex = e.NewEditIndex;
+            //Bind data to the GridView control.
+            bind_gvInspections(scRequestIDBeingEdited);
+        }
 
+        protected void gvInspections_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            //Reset the edit index.
+      //      gvInspections.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvInspections(scRequestIDBeingEdited);
+        }
+
+        protected void gvInspections_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+
+ //           GridViewRow row = gvInspections.Rows[e.RowIndex];
+            try {
+ /*               string strfee = ((TextBox)row.Cells[2].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
+                string strmonths = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                int? months = strmonths == "" ? (int?)null : Utils.ObjectToInt(strmonths);
+                int paymentid = Utils.ObjectToInt(gvInspections.DataKeys[e.RowIndex].Value);
+
+                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
+                cmd.Parameters.Add("@BPPaymentId", SqlDbType.Int).Value = paymentid;
+                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+*/
+
+                performPostUpdateSuccessfulActions("Inspection updated", DataSetCacheKey, null);
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
+            }
+            //Reset the edit index.
+  //          gvInspections.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvInspections(scRequestIDBeingEdited);
+        }
+        private void bind_gvInspections(int scRequestID) {
+            DataTable sourceTableInspections = SCDataSet().Tables[1];
+            DataView viewInspections = new DataView(sourceTableInspections);
+            viewInspections.RowFilter = "fkscRequestID=" + scRequestID;
+            DataTable tblFilteredReviews = viewInspections.ToTable();
+//            gvInspections.DataSource = tblFilteredReviews;
+  //          gvInspections.DataBind();
+        }
+        protected void btnNewInspectionOk_Click(object sender, EventArgs args) {
+            mpeNewInspection.Hide();
+        }
+        protected void btnNewInspectionCancel_Click(object sender, EventArgs args) {
+            mpeNewInspection.Hide();
+        }
+        protected void lblNewInspection_OnClick(object sender, EventArgs args) {
+            mpeNewInspection.Show();
         }
     }
 }
