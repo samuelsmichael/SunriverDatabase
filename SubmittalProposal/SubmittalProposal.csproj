@@ -115,6 +115,8 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\SellCheckHistory.aspx" />
+    <Content Include="Reports\SellCheckList.aspx" />
     <Content Include="Reports\SellCheckUnPaidFees.aspx" />
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
@@ -486,6 +488,20 @@
     <Compile Include="Reports\Reports.Master.designer.cs">
       <DependentUpon>Reports.Master</DependentUpon>
     </Compile>
+    <Compile Include="Reports\SellCheckHistory.aspx.cs">
+      <DependentUpon>SellCheckHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SellCheckHistory.aspx.designer.cs">
+      <DependentUpon>SellCheckHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SellCheckList.aspx.cs">
+      <DependentUpon>SellCheckList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SellCheckList.aspx.designer.cs">
+      <DependentUpon>SellCheckList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\SellCheckUnPaidFees.aspx.cs">
       <DependentUpon>SellCheckUnPaidFees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -497,6 +513,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptSellCheckFeesDue.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SellCheck\RptSellCheckList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSellCheckList.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SellCheck\SellCheckHistory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SellCheckHistory.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.cs">
@@ -677,6 +705,14 @@
     <EmbeddedResource Include="Reports\SellCheck\RptSellCheckFeesDue.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptSellCheckFeesDue.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SellCheck\RptSellCheckList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSellCheckList.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SellCheck\SellCheckHistory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SellCheckHistory.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

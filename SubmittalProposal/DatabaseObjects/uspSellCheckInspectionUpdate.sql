@@ -9,7 +9,7 @@ GO
 
 --	uspSellCheckRequestUpdate
 -- =============================================
-create PROCEDURE uspSellCheckInspectionUpdate 
+alter PROCEDURE uspSellCheckInspectionUpdate 
 	@scInspectionID int=null,
 	@fkscRequestID int,
 	@scDate DateTime=null,

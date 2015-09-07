@@ -17,13 +17,13 @@ namespace SubmittalProposal {
             throw new NotImplementedException();
         }
         protected void lbSellCheckHistory_Click(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            Response.Redirect("~/Reports/SellCheckHistory.aspx");
         }
         protected void lbSellCheck_Click(object sender, EventArgs e) {
             throw new NotImplementedException();
         }
         protected void lbSellCheckList_Click(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            Response.Redirect("~/Reports/SellCheckList.aspx");
         }
     }
 }
