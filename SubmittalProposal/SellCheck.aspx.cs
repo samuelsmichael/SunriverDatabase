@@ -92,6 +92,24 @@ namespace SubmittalProposal {
             }
             return ds;
         }
+        public DataSet getFeesDataSet() {
+            DataSet ds = null;
+            MemoryCache cache = MemoryCache.Default;
+            string key = "FEDSt";
+            ds = (DataSet)cache[key];
+            if (ds == null) {
+                SqlCommand cmd = new SqlCommand("uspFeesGet");
+                ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+                DataRow dr = ds.Tables[0].NewRow();
+                dr["InspectionFee"] = DBNull.Value;
+                dr["InspectionType"] = null;
+                ds.Tables[0].Rows.InsertAt(dr, 0);
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(0, 60, 0);
+                cache.Add(key, ds, policy);
+            }
+            return ds;
+        }
 
         protected static string DataSetCacheKey {
             get { return "SCDS"; }
@@ -435,13 +453,13 @@ namespace SubmittalProposal {
             try {
                 int inspectionId = Convert.ToInt32(((Label)row.Cells[1].Controls[1]).Text);
                 DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
-                string strfee = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
-                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
+                string strfee = ((DropDownList)row.Cells[3].Controls[1]).SelectedValue;
+                decimal? fee = Utils.isNothing(strfee) ? (decimal?)null : Utils.ObjectToDecimal(strfee);
                 bool paid = ((CheckBox)row.Cells[4].Controls[1]).Checked;
                 string paidMemo = ((TextBox)row.Cells[5].Controls[1]).Text;
                 DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[6].Controls[1]).Text);
                 string ladderFuel = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
-                string noxWeeds = ((TextBox)row.Cells[8].Controls[1]).Text;
+                string noxWeeds = ((DropDownList)row.Cells[8].Controls[1]).SelectedValue;
                 string comments = ((TextBox)row.Cells[9].Controls[1]).Text;
                 string followUp = ((TextBox)row.Cells[10].Controls[1]).Text;
 
@@ -488,15 +506,14 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
                 DateTime? date = Utils.ObjectToDateTimeNullable(tbDateNew.Text);
                 cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
-                string strfee = tbFeeNew.Text.Replace("$", "").Replace(",", "");
-                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
+                decimal? fee = Utils.isNothing(ddlFeeNew.SelectedValue) ? (decimal?)null : Utils.ObjectToDecimal(ddlFeeNew.SelectedValue);
                 cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
                 cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = cbPaidNew.Checked;
                 cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = tbPaidMemoNew.Text;
                 DateTime? dateClosed = Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
                 cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
                 cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNew.SelectedValue;
-                cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = tbNoxWeedsNew.Text;
+                cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNew.SelectedValue;
                 cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNew.Text;
                 cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text;
                 SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
@@ -516,14 +533,21 @@ namespace SubmittalProposal {
         }
         protected void lblNewInspection_OnClick(object sender, EventArgs args) {
             tbDateNew.Text = "";
-            tbFeeNew.Text = "";
             cbPaidNew.Checked = false;
             tbPaidMemoNew.Text = "";
             tbDateClosedNew.Text = "";
             ddlLadderFuelNew.DataSource = getLadderFuelDataSet();
             ddlLadderFuelNew.DataBind();
             ddlLadderFuelNew.SelectedIndex = -1;
-            tbNoxWeedsNew.Text = "";
+            ddlNoxWeedsNew.DataSource = getLadderFuelDataSet();
+            ddlNoxWeedsNew.DataBind();
+            ddlNoxWeedsNew.SelectedIndex = -1;
+
+            ddlFeeNew.DataSource = getFeesDataSet();
+            ddlFeeNew.DataBind();
+            ddlFeeNew.SelectedIndex = -1;
+
+            
             tbCommentsNew.Text = "";
             tbFollowUpNew.Text = "";
             mpeNewInspection.Show();
@@ -550,6 +574,45 @@ namespace SubmittalProposal {
                         DataRowView dr = e.Row.DataItem as DataRowView;
                         ddList.SelectedValue = dr["scLadderFuel"].ToString();
                     }
+                    DropDownList ddList2 = (DropDownList)e.Row.FindControl("ddlNoxWeedsUpdate");
+                    if (ddList2 != null) {
+                        //bind dropdownlist
+                        DataTable dt = getLadderFuelDataSet().Tables[0];
+                        ddList2.DataSource = dt;
+                        ddList2.DataTextField = "LadderFuel";
+                        ddList2.DataValueField = "LadderFuel";
+                        ddList2.DataBind();
+                        DataRowView dr = e.Row.DataItem as DataRowView;
+                        ddList2.SelectedValue = dr["scNoxWeeds"].ToString();
+                    }
+                    DropDownList ddList3 = (DropDownList)e.Row.FindControl("ddlFeeUpdate");
+                    if (ddList3 != null) {
+                        //bind dropdownlist
+                        DataTable dt = getFeesDataSet().Tables[0];
+                        ddList3.DataSource = dt;
+                        ddList3.DataTextField = "InspectionFee";
+                        ddList3.DataValueField = "InspectionFee";
+                        ddList3.DataBind();
+                        DataRowView dr = e.Row.DataItem as DataRowView;
+                        ddList3.SelectedValue = dr["scFee"].ToString();
+                    }
+                }
+            }
+        }
+
+        protected void ddlFeeNew_DataBound(object sender, EventArgs e) {
+            foreach (ListItem Item in ((DropDownList)sender).Items) {
+                decimal? fee = Utils.isNothing(Item.Text) ? (decimal?)null : Convert.ToDecimal(Item.Text);
+                if (fee.HasValue) {
+                    Item.Text = fee.Value.ToString("c");
+                }
+            }
+        }
+        protected void ddlFeeUpdate_DataBound(object sender, EventArgs e) {
+            foreach (ListItem Item in ((DropDownList)sender).Items) {
+                decimal? fee = Utils.isNothing(Item.Text) ? (decimal?)null : Convert.ToDecimal(Item.Text);
+                if (fee.HasValue) {
+                    Item.Text = fee.Value.ToString("c");
                 }
             }
         }

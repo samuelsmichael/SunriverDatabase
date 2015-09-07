@@ -454,22 +454,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label24;
         
         /// <summary>
-        /// tbFeeNew control.
+        /// ddlFeeNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbFeeNew;
-        
-        /// <summary>
-        /// revtbscFeeUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbscFeeUpdate;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFeeNew;
         
         /// <summary>
         /// Label25 control.
@@ -580,13 +571,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label29;
         
         /// <summary>
-        /// tbNoxWeedsNew control.
+        /// ddlNoxWeedsNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbNoxWeedsNew;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNoxWeedsNew;
         
         /// <summary>
         /// Label30 control.

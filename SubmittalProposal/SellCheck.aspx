@@ -224,11 +224,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Fee">
                     <EditItemTemplate>
-                        <asp:TextBox ID="tbscFeeUpdate" runat="server" Width="4em" Text='<%# Eval("scFee","{0:0.00}") %>'></asp:TextBox>
-                        <asp:RegularExpressionValidator ID="revtbscFeeUpdate" ForeColor="Red" Display="Dynamic" ControlToValidate="tbscFeeUpdate"
-                                    ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server" 
-                                    ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
-
+                        <asp:DropDownList ID="ddlFeeUpdate" Width="8em" runat="server" OnDataBound="ddlFeeUpdate_DataBound" DataTextField="InspectionFee" DataValueField="InspectionFee"></asp:DropDownList>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label1b" runat="server" Text='<%# Eval("scFee","{0:c}") %>'></asp:Label>
@@ -249,7 +245,7 @@
                         <asp:Label ID="Label4t" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="cbscPaidMemoUpdate" Width="8em" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:TextBox>
+                        <asp:TextBox ID="cbscPaidMemoUpdate" Width="8em" runat="server" MaxLength="10" Text='<%# Bind("scPaidMemo") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
@@ -299,7 +295,7 @@
                         <asp:Label ID="Label4r" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="tbscNoxWeedsUpdate" Width="8em" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:TextBox>
+                        <asp:DropDownList ID="ddlNoxWeedsUpdate" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
@@ -359,11 +355,9 @@
                             <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Fee "></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbFeeNew" runat="server" Width="4em" Text='<%# Eval("scFee","{0:0.00}") %>'></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="revtbscFeeUpdate" ForeColor="Red" Display="Dynamic" ControlToValidate="tbFeeNew"
-                                        ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server" 
-                                        ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
-
+                            <asp:DropDownList ID="ddlFeeNew"  Width="8em" runat="server" 
+                                DataTextField="InspectionFee" DataValueField="InspectionFee"                                  
+                                OnDataBound="ddlFeeNew_DataBound"></asp:DropDownList>
                         </td>
                         <td></td>
                         <td></td>
@@ -408,7 +402,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label29" runat="server" Text="Nox Weeds "></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox CssClass="form_field_date" ID="tbNoxWeedsNew" runat="server" width="60"></asp:TextBox>
+                            <asp:DropDownList ID="ddlNoxWeedsNew" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
                         </td>
                         <td></td>
                         <td></td>
