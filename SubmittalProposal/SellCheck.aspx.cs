@@ -75,6 +75,23 @@ namespace SubmittalProposal {
                 return ds;
             }
         }
+        public DataSet getLadderFuelDataSet() {
+            DataSet ds = null;
+            MemoryCache cache = MemoryCache.Default;
+            string key = "LFDSt";
+            ds = (DataSet)cache[key];
+            if (ds == null) {
+                SqlCommand cmd = new SqlCommand("uspLadderFuelGet");
+                ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+                DataRow dr = ds.Tables[0].NewRow();
+                dr["LadderFuel"] = null;
+                ds.Tables[0].Rows.InsertAt(dr, 0);
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(0, 60, 0);
+                cache.Add(key, ds, policy);
+            }
+            return ds;
+        }
 
         protected static string DataSetCacheKey {
             get { return "SCDS"; }
@@ -165,7 +182,7 @@ namespace SubmittalProposal {
             if (date.HasValue) {
                 tbLTDateUpdate.Text = date.Value.ToShortDateString();
             }
-            tbscLTRecipientUpdate.Text=Utils.ObjectToString(dr["scLTRecipient"]);
+            tbscLTRecipientUpdate.Text = Utils.ObjectToString(dr["scLTRecipient"]);
             tbscLTMailAddr1Update.Text = Utils.ObjectToString(dr["scLTMailAddr1"]);
             tbscLTMailAddr2Update.Text = Utils.ObjectToString(dr["scLTMailAddr2"]);
             tbscLTCityUpdate.Text = Utils.ObjectToString(dr["scLTCity"]);
@@ -262,10 +279,11 @@ namespace SubmittalProposal {
                 prepend = "  ";
                 int inspectionId = -999;
                 try {
-                    inspectionId=Convert.ToInt32(tbInspectionID.Text);} catch {}
+                    inspectionId = Convert.ToInt32(tbInspectionID.Text);
+                } catch { }
 
-                sbFilter.Append(and + Common.Utils.getDataViewQuery("," + inspectionId + ",", "inspectionIDs")) 
-                    ;           
+                sbFilter.Append(and + Common.Utils.getDataViewQuery("," + inspectionId + ",", "inspectionIDs"))
+                    ;
                 and = " and ";
             }
             if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane") {
@@ -325,7 +343,7 @@ namespace SubmittalProposal {
         }
         protected void btnNewRequestOk_Click(object sender, EventArgs args) {
             try {
-                bool gotErrorBecauseValidatorsDontWorkHereForSomeReason=false;
+                bool gotErrorBecauseValidatorsDontWorkHereForSomeReason = false;
                 lblddlscLaneNewErrorMsg.Text = "";
                 if (Utils.isNothing(tbscLotNew.Text)) {
                     lblscLotNewErrorMsg.Text = "required";
@@ -337,7 +355,7 @@ namespace SubmittalProposal {
                     lblddlscLaneNewErrorMsg.Text = "required";
                     gotErrorBecauseValidatorsDontWorkHereForSomeReason = true;
                 } else {
-                  lblddlscLaneNewErrorMsg.Text = "";
+                    lblddlscLaneNewErrorMsg.Text = "";
                 }
                 string propid = null;
                 if (!gotErrorBecauseValidatorsDontWorkHereForSomeReason) {
@@ -398,14 +416,14 @@ namespace SubmittalProposal {
         }
         protected void gvInspections_RowEditing(object sender, GridViewEditEventArgs e) {
             //Set the edit index.
-            //gvInspections.EditIndex = e.NewEditIndex;
+            gvInspections.EditIndex = e.NewEditIndex;
             //Bind data to the GridView control.
             bind_gvInspections(scRequestIDBeingEdited);
         }
 
         protected void gvInspections_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
             //Reset the edit index.
-      //      gvInspections.EditIndex = -1;
+            gvInspections.EditIndex = -1;
 
             //Bind data to the GridView control.
             bind_gvInspections(scRequestIDBeingEdited);
@@ -413,30 +431,44 @@ namespace SubmittalProposal {
 
         protected void gvInspections_RowUpdating(object sender, GridViewUpdateEventArgs e) {
 
- //           GridViewRow row = gvInspections.Rows[e.RowIndex];
+            GridViewRow row = gvInspections.Rows[e.RowIndex];
             try {
- /*               string strfee = ((TextBox)row.Cells[2].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                int inspectionId = Convert.ToInt32(((Label)row.Cells[1].Controls[1]).Text);
+                DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
+                string strfee = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
                 decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
-                string strmonths = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
-                int? months = strmonths == "" ? (int?)null : Utils.ObjectToInt(strmonths);
-                int paymentid = Utils.ObjectToInt(gvInspections.DataKeys[e.RowIndex].Value);
+                bool paid = ((CheckBox)row.Cells[4].Controls[1]).Checked;
+                string paidMemo = ((TextBox)row.Cells[5].Controls[1]).Text;
+                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[6].Controls[1]).Text);
+                string ladderFuel = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
+                string noxWeeds = ((TextBox)row.Cells[8].Controls[1]).Text;
+                string comments = ((TextBox)row.Cells[9].Controls[1]).Text;
+                string followUp = ((TextBox)row.Cells[10].Controls[1]).Text;
 
-                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
-                cmd.Parameters.Add("@BPPaymentId", SqlDbType.Int).Value = paymentid;
-                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
-                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
-                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
+
+                cmd.Parameters.Add("@scInspectionID", SqlDbType.Int).Value = inspectionId;
+                cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
+                cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
+                cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
+                cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = paid;
+                cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = paidMemo;
+                cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
+                cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ladderFuel;
+                cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = noxWeeds;
+                cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = comments;
+                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = followUp;
+                SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-*/
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
 
                 performPostUpdateSuccessfulActions("Inspection updated", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
             }
             //Reset the edit index.
-  //          gvInspections.EditIndex = -1;
+            gvInspections.EditIndex = -1;
 
             //Bind data to the GridView control.
             bind_gvInspections(scRequestIDBeingEdited);
@@ -446,17 +478,80 @@ namespace SubmittalProposal {
             DataView viewInspections = new DataView(sourceTableInspections);
             viewInspections.RowFilter = "fkscRequestID=" + scRequestID;
             DataTable tblFilteredReviews = viewInspections.ToTable();
-//            gvInspections.DataSource = tblFilteredReviews;
-  //          gvInspections.DataBind();
+            gvInspections.DataSource = tblFilteredReviews;
+            gvInspections.DataBind();
         }
         protected void btnNewInspectionOk_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
+
+                cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
+                DateTime? date = Utils.ObjectToDateTimeNullable(tbDateNew.Text);
+                cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
+                string strfee = tbFeeNew.Text.Replace("$", "").Replace(",", "");
+                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
+                cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
+                cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = cbPaidNew.Checked;
+                cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = tbPaidMemoNew.Text;
+                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
+                cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
+                cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNew.SelectedValue;
+                cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = tbNoxWeedsNew.Text;
+                cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNew.Text;
+                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text;
+                SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+
+                performPostUpdateSuccessfulActions("Inspection added", DataSetCacheKey, null);
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
+            }
             mpeNewInspection.Hide();
         }
         protected void btnNewInspectionCancel_Click(object sender, EventArgs args) {
             mpeNewInspection.Hide();
+
         }
         protected void lblNewInspection_OnClick(object sender, EventArgs args) {
+            tbDateNew.Text = "";
+            tbFeeNew.Text = "";
+            cbPaidNew.Checked = false;
+            tbPaidMemoNew.Text = "";
+            tbDateClosedNew.Text = "";
+            ddlLadderFuelNew.DataSource = getLadderFuelDataSet();
+            ddlLadderFuelNew.DataBind();
+            ddlLadderFuelNew.SelectedIndex = -1;
+            tbNoxWeedsNew.Text = "";
+            tbCommentsNew.Text = "";
+            tbFollowUpNew.Text = "";
             mpeNewInspection.Show();
+        }
+        public string getBRsInsteadOfCRLFs(object str) {
+            if (Utils.isNothing(str)) {
+                return "";
+            }
+            string strOfstr = (string)str;
+            return strOfstr.Replace("\r\n", "<br />").Replace("\n", "<br />").Replace("\r", "<br />");
+        }
+
+        protected void gvInspections_RowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
+                    DropDownList ddList = (DropDownList)e.Row.FindControl("dllscLadderFuelUpdate");
+                    if (ddList != null) {
+                        //bind dropdownlist
+                        DataTable dt = getLadderFuelDataSet().Tables[0];
+                        ddList.DataSource = dt;
+                        ddList.DataTextField = "LadderFuel";
+                        ddList.DataValueField = "LadderFuel";
+                        ddList.DataBind();
+                        DataRowView dr = e.Row.DataItem as DataRowView;
+                        ddList.SelectedValue = dr["scLadderFuel"].ToString();
+                    }
+                }
+            }
         }
     }
 }

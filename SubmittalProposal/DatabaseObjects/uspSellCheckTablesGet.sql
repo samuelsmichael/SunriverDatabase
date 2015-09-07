@@ -13,5 +13,6 @@ BEGIN
 	SET NOCOUNT ON;
 	select *, dbo.udfCommaDelimitedRepresentationOfInspectionIDs(scRequestID) inspectionIDs, CONVERT(VARCHAR(10), scLTDate, 112) as DateYYYYMMDD from tblRequest 
 	Select * from tblSellCheck;
+
 END
 GO

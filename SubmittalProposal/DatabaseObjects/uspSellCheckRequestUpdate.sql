@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Author:		Mike Samuels
 -- Create date: 9/06/2015
--- Description:	Updates SRSellCheck.tblRequest
+-- Description:	Updates tblRequest
 /*
 	exec uspSellCheckRequestUpdate
 */

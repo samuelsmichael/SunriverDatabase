@@ -161,7 +161,170 @@
     </asp:Panel>   
     <asp:Panel ID="Panel2" GroupingText="Inspection Data" runat="server">
 
-    <!--bubba2.txt -->
+           <asp:GridView Width="100%" ID="gvInspections" runat="server" AutoGenerateColumns="False"
+            CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" OnRowCancelingEdit="gvInspections_RowCancelingEdit"
+            OnRowEditing="gvInspections_RowEditing" 
+            OnRowUpdating="gvInspections_RowUpdating" DataKeyNames="scInspectionId" 
+            onrowdatabound="gvInspections_RowDataBound">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+            <EditRowStyle BackColor="#999999" />
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            <EmptyDataTemplate>
+                <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+            </EmptyDataTemplate>
+            <Columns>
+                <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true" ShowCancelButton="true" />
+                <asp:TemplateField HeaderText="Insp ID">
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("scInspectionID") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:Label ID="fts" runat="server" Width="5em" Text='<%# Bind("scInspectionID") %>'></asp:Label>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Date">
+                    <EditItemTemplate>
+                        <table border="0" cellpadding="1" cellspacing="1">
+                            <tr>
+                                <td>                    
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <asp:TextBox Width="8em" Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>' CssClass="form_field" 
+                                                    ID="tbDateUpdate" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                                    ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                    ID="ibtbDateUpdate" runat="server" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <ajaxToolkit:CalendarExtender ID="cetbDateUpdate" runat="server" TargetControlID="tbDateUpdate"
+                                        Format="MM/dd/yyyy" PopupButtonID="ibtbDateUpdate" />
+                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revtbDateUpdate" Display="Dynamic"
+                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                        ControlToValidate="tbDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                </td>
+                            </tr>
+                        </table>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1a" runat="server" Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Right" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Fee">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbscFeeUpdate" runat="server" Width="4em" Text='<%# Eval("scFee","{0:0.00}") %>'></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="revtbscFeeUpdate" ForeColor="Red" Display="Dynamic" ControlToValidate="tbscFeeUpdate"
+                                    ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server" 
+                                    ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
+
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1b" runat="server" Text='<%# Eval("scFee","{0:c}") %>'></asp:Label>
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Right" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Paid">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4s" runat="server" Enabled="false" Text='<%# Bind("scPaid") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:CheckBox ID="cbscPaidUpdate" runat="server" Checked='<%#Eval("scPaid").ToString().Equals("True") %>' />
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Paid Memo">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4t" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="cbscPaidMemoUpdate" Width="8em" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Date Closed">
+                    <EditItemTemplate>
+                        <table border="0" cellpadding="1" cellspacing="1">
+                            <tr>
+                                <td>                    
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <asp:TextBox Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>' CssClass="form_field" ID="tbDateClosedUpdate" 
+                                                Width="8em" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td>
+                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                    ID="ibDateClosedUpdate" runat="server" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <ajaxToolkit:CalendarExtender ID="ceDateClosedUpdate" runat="server" TargetControlID="tbDateClosedUpdate"
+                                        Format="MM/dd/yyyy" PopupButtonID="ibDateClosedUpdate" />
+                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revtbDateClosedUpdate" Display="Dynamic"
+                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                        ControlToValidate="tbDateClosedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1c" runat="server" Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Right" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Ladder Fuel">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scLadderFuel") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Nox Weeds">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4r" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbscNoxWeedsUpdate" Width="8em" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Comments">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4x3a" runat="server" Enabled="false" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" TextMode="MultiLine" Height="10em" Text='<%# Bind("scComments") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Follow-up">
+                    <ItemTemplate>
+                        <asp:Label ID="Label5aa" Enabled="false" runat="server" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scFollowUp")) %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbscFollowUpUpdate" runat="server" TextMode="MultiLine" Height="10em" Width="35em" Text='<%# Bind("scFollowUp") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+
+
+            </Columns>
+        </asp:GridView>
 
         <center style="margin-top: 5px;">
             <asp:LinkButton ID="lblNewInspection" CausesValidation="false" OnClick="lblNewInspection_OnClick" runat="server">New Inspection</asp:LinkButton>
@@ -171,26 +334,99 @@
                 <span>New Inspection</span>
             </asp:Panel>
             <asp:Panel runat="server" Style="text-align: center;" ID="Panel6" CssClass="newitemcontent">
-                <table>
+                <table border="0" cellpadding="3" cellspacing="3">
                     <tr>
                         <td class="form_field_heading">
-                            <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Date"></asp:Label>
+                            <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Date "></asp:Label>
                         </td>
                         <td class="form_field">
                             <table><tr><td>
-                            <asp:TextBox CssClass="form_field_date" ID="tbscDateNew" runat="server" width="60"></asp:TextBox>
+                            <asp:TextBox CssClass="form_field_date" ID="tbDateNew" runat="server" width="60"></asp:TextBox>
                             </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibscDateNew" 
+                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateNew" 
                                         runat="server" /></td></tr></table>
                             <ajaxToolkit:CalendarExtender ID="cescDateNew" runat="server"
-                                TargetControlID="tbscDateNew"
+                                TargetControlID="tbDateNew"
                                 Format="MM/dd/yyyy"
-                                PopupButtonID="ibscDateNew" />
+                                PopupButtonID="ibDateNew" />
                             <asp:RegularExpressionValidator ForeColor="Red" 
-                                ID="revscDateNew"  Display="Dynamic" 
+                                ID="revDateNew"  Display="Dynamic" 
                                 ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                                ControlToValidate="tbscDateNew" runat="server" 
+                                ControlToValidate="tbDateNew" runat="server" 
                                 ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Fee "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbFeeNew" runat="server" Width="4em" Text='<%# Eval("scFee","{0:0.00}") %>'></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="revtbscFeeUpdate" ForeColor="Red" Display="Dynamic" ControlToValidate="tbFeeNew"
+                                        ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server" 
+                                        ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
+
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Paid "></asp:Label></td>
+                        <td>
+                            <asp:CheckBox runat="server" ID="cbPaidNew" />
+                        </td>
+                        <td><asp:Label CssClass="form_field_heading" ID="Label26" runat="server" Text="Paid Memo "></asp:Label></td>
+                        <td>
+                            <asp:TextBox CssClass="form_field_date" ID="tbPaidMemoNew" runat="server" width="60">
+                            </asp:TextBox>
+                        </td>
+                        <td><asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Date Closed "></asp:Label></td>
+                        <td>
+                            <table><tr><td>
+                            <asp:TextBox CssClass="form_field_date" ID="tbDateClosedNew" runat="server" width="60"></asp:TextBox>
+                            </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateClosedNew" 
+                                        runat="server" /></td></tr></table>
+                            <ajaxToolkit:CalendarExtender ID="ceDatePaidNew" runat="server"
+                                TargetControlID="tbDateClosedNew"
+                                Format="MM/dd/yyyy"
+                                PopupButtonID="ibDateClosedNew" />
+                            <asp:RegularExpressionValidator ForeColor="Red" 
+                                ID="retbDateClosedNew"  Display="Dynamic" 
+                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                ControlToValidate="tbDateClosedNew" runat="server" 
+                                ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label28" runat="server" Text="Ladder Fuel "></asp:Label>
+                        </td>
+                        <td>
+                           <asp:DropDownList ID="ddlLadderFuelNew" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label29" runat="server" Text="Nox Weeds "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox CssClass="form_field_date" ID="tbNoxWeedsNew" runat="server" width="60"></asp:TextBox>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Comments "></asp:Label>
+                        </td>
+                        <td colspan="5">
+                            <asp:TextBox Height="8em" TextMode="MultiLine"  Font-Size="Medium" ID="tbCommentsNew" runat="server" width="40em"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Follow Up "></asp:Label>
+                        </td>
+                        <td colspan="5">
+                            <asp:TextBox Height="8em" TextMode="MultiLine"  Font-Size="Medium" ID="tbFollowUpNew" runat="server" width="40em"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -275,7 +511,7 @@
                         <td valign="top" colspan="2">
                             <table border="0" cellpadding="1" cellspacing="1">
                                 <tr>
-                                    <td><asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Date "></asp:Label></td>
+                                    <td><asp:Label CssClass="form_field_heading" ID="Label4s" runat="server" Text="Date "></asp:Label></td>
                                     <td>                    
                                         <table>
                                             <tr>
