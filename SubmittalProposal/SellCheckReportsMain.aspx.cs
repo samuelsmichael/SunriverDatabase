@@ -14,7 +14,7 @@ namespace SubmittalProposal {
             Response.Redirect("~/Reports/SellCheckUnPaidFees.aspx");
         }
         protected void lbSellCheckLetter_Click(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            Response.Redirect("~/Reports/SellCheckLetter.aspx");
         }
         protected void lbSellCheckHistory_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/SellCheckHistory.aspx");

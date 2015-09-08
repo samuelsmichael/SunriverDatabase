@@ -116,6 +116,7 @@
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
     <Content Include="Reports\SellCheckHistory.aspx" />
+    <Content Include="Reports\SellCheckLetter.aspx" />
     <Content Include="Reports\SellCheckList.aspx" />
     <Content Include="Reports\SellCheckSummary.aspx" />
     <Content Include="Reports\SellCheckUnPaidFees.aspx" />
@@ -496,6 +497,13 @@
     <Compile Include="Reports\SellCheckHistory.aspx.designer.cs">
       <DependentUpon>SellCheckHistory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\SellCheckLetter.aspx.cs">
+      <DependentUpon>SellCheckLetter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SellCheckLetter.aspx.designer.cs">
+      <DependentUpon>SellCheckLetter.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\SellCheckList.aspx.cs">
       <DependentUpon>SellCheckList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -545,6 +553,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SellCheckLetter.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\SubmittalAdministrativeApprovals.aspx.cs">
       <DependentUpon>SubmittalAdministrativeApprovals.aspx</DependentUpon>
