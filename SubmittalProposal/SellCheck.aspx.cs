@@ -194,7 +194,7 @@ namespace SubmittalProposal {
             scfkPropIDBeingEdited = (string)dr["fkscPropID"];
             object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
             if (Utils.isNothingNot(dateFormPrinted)) {
-                lblDatePrinted.Text = ((DateTime)dateFormPrinted).ToString();
+                lblDatePrinted.Text = dateFormPrinted.ToString();
             }
             DateTime? date = Utils.ObjectToDateTimeNullable(dr["scLTDate"]);
             if (date.HasValue) {
@@ -236,8 +236,12 @@ namespace SubmittalProposal {
             lblDatePrintedHeading.Visible = true;
             ddlscRealtorUpdate.Enabled = false;
             lblSellRequestUpdateResults.Visible = false;
+            lblNewInspection.Visible = false;
+            lbRequestNew.Visible = false;
+            gvInspections.Enabled = false;
         }
         protected override void unlockYourUpdateFields() {
+            gvInspections.Enabled = true;
             lblSellRequestUpdateResults.Visible = true;
             btnPrintForm.Visible = false;
             lblDatePrinted.Visible = false;
@@ -255,6 +259,8 @@ namespace SubmittalProposal {
             tbscLTCCopy3Update.Enabled = true;
             btnSellRequestUpdate.Visible = true;
             ddlscRealtorUpdate.Enabled = true;
+            lblNewInspection.Visible = true;
+            lbRequestNew.Visible = true;
         }
 
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
@@ -355,6 +361,14 @@ namespace SubmittalProposal {
             }
 
         }
+        protected void btnPrintForm_OnClick(object sender, EventArgs args) {
+            SqlCommand cmd = new SqlCommand("uspSellCheckRequestDateFormPrintedUpdate");
+            cmd.Parameters.Add("@scRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
+            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+            MemoryCache cache = MemoryCache.Default;
+            cache.Remove(DataSetCacheKey);
+            lblDatePrinted.Text = DateTime.Now.ToString();
+        }
         protected void btnNewRequestCancel_Click(object sender, EventArgs args) {
             clearAllSelectionInputFields();
             clearAllNewFormInputFields();
@@ -453,14 +467,14 @@ namespace SubmittalProposal {
             try {
                 int inspectionId = Convert.ToInt32(((Label)row.Cells[1].Controls[1]).Text);
                 DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
-                string strfee = ((DropDownList)row.Cells[3].Controls[1]).SelectedValue;
+                string comments = ((TextBox)row.Cells[3].Controls[1]).Text;
+                string strfee = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue;
                 decimal? fee = Utils.isNothing(strfee) ? (decimal?)null : Utils.ObjectToDecimal(strfee);
-                bool paid = ((CheckBox)row.Cells[4].Controls[1]).Checked;
-                string paidMemo = ((TextBox)row.Cells[5].Controls[1]).Text;
-                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[6].Controls[1]).Text);
-                string ladderFuel = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
-                string noxWeeds = ((DropDownList)row.Cells[8].Controls[1]).SelectedValue;
-                string comments = ((TextBox)row.Cells[9].Controls[1]).Text;
+                bool paid = ((CheckBox)row.Cells[5].Controls[1]).Checked;
+                string paidMemo = ((TextBox)row.Cells[6].Controls[1]).Text;
+                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[7].Controls[1]).Text);
+                string ladderFuel = ((DropDownList)row.Cells[8].Controls[1]).SelectedValue;
+                string noxWeeds = ((DropDownList)row.Cells[9].Controls[1]).SelectedValue;
                 string followUp = ((TextBox)row.Cells[10].Controls[1]).Text;
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");

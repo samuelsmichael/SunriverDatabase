@@ -222,6 +222,16 @@
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Comments">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4x3a" runat="server" Enabled="false" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" TextMode="MultiLine" Height="10em" Text='<%# Bind("scComments") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+
                 <asp:TemplateField HeaderText="Fee">
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddlFeeUpdate" Width="8em" runat="server" OnDataBound="ddlFeeUpdate_DataBound" DataTextField="InspectionFee" DataValueField="InspectionFee"></asp:DropDownList>
@@ -296,15 +306,6 @@
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddlNoxWeedsUpdate" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Comments">
-                    <ItemTemplate>
-                        <asp:Label ID="Label4x3a" runat="server" Enabled="false" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" TextMode="MultiLine" Height="10em" Text='<%# Bind("scComments") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
@@ -468,7 +469,7 @@
         <asp:Label ID="lblSellRequestUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
         <asp:Label ID="lblDatePrintedHeading" runat="server" Text="Printed: "></asp:Label>
         <asp:Label ID="lblDatePrinted" runat="server" ></asp:Label>
-        <asp:Button style="margin-left:1em;" ID="btnPrintForm" runat="server" CausesValidation="false" Text="Print Form" OnClientClick="javascript:alert('Not yet implemented');" /> 
+        <asp:Button style="margin-left:1em;" ID="btnPrintForm" runat="server" OnClick="btnPrintForm_OnClick" CausesValidation="false" Text="Print Form" OnClientClick="javascript:window.print(); return true;" /> 
 
     </center>
 </asp:Content>
