@@ -3,7 +3,6 @@
   <publishProfile publishUrl="\\rnsers\SunriverDatabase" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="False">
     <file relUrl="Styles/grand_gray/images/drop-down-vertical.png" publishTime="05/14/2011 06:01:04" />
     <file relUrl="bin/SubmittalProposal.dll" publishTime="06/22/2015 05:24:20" />
-    <file relUrl="bin/fr/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/black_glass/style.css" publishTime="05/14/2011 06:00:49" />
     <file relUrl="Reports/Reports.Master" publishTime="04/11/2015 05:45:04" />
     <file relUrl="Reports/ComplianceReviewSummary.aspx" publishTime="05/10/2015 04:36:16" />
@@ -12,9 +11,11 @@
     <file relUrl="bin/zh-Hans/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Account/Register.aspx" publishTime="02/25/2015 05:15:05" />
     <file relUrl="ContractorReportsMain.aspx" publishTime="05/18/2015 03:02:37" />
+    <file relUrl="bin/it/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/ar/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/plain/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:14" />
     <file relUrl="bin/Common.pdb" publishTime="04/15/2015 02:42:40" />
+    <file relUrl="bin/it/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/black_glass/images/header-footer.png" publishTime="05/14/2011 06:00:57" />
     <file relUrl="Styles/black_glass/images/vertical.png" publishTime="05/14/2011 06:01:01" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:00:54" />
@@ -24,11 +25,13 @@
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:00:54" />
     <file relUrl="Styles/grand_gray/images/lighted.png" publishTime="05/14/2011 06:01:08" />
     <file relUrl="bin/Microsoft.WindowsAzure.Configuration.dll" publishTime="02/25/2015 05:37:26" />
+    <file relUrl="bin/ru/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:01:19" />
     <file relUrl="Styles/grand_gray/images/header-footer.png" publishTime="05/14/2011 06:01:05" />
     <file relUrl="Account/Web.config" publishTime="04/15/2015 02:12:20" />
     <file relUrl="bin/Microsoft.WindowsAzure.Storage.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/black_glass/images/loading.png" publishTime="05/14/2011 06:01:01" />
+    <file relUrl="Site.Master" publishTime="06/15/2015 00:05:52" />
     <file relUrl="bin/AjaxControlToolkit.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="bin/de/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/plain/images/horizontal.gif" publishTime="05/14/2011 06:01:15" />
@@ -37,8 +40,7 @@
     <file relUrl="bin/zh-Hant/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal.png" publishTime="05/14/2011 06:01:20" />
     <file relUrl="bin/fr/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Reports/ContractorEnvelope.aspx" publishTime="05/17/2015 11:51:49" />
-    <file relUrl="Styles/premiere_blue/images/loading.png" publishTime="05/14/2011 06:01:24" />
+    <file relUrl="Styles/plain/images/drop-down-vertical.gif" publishTime="05/14/2011 06:01:12" />
     <file relUrl="Reports/BPermitsOpen.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="Styles/premiere_blue/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:22" />
     <file relUrl="Styles/black_glass/images/horizontal-textbox.gif" publishTime="05/14/2011 06:00:57" />
@@ -52,18 +54,16 @@
     <file relUrl="bin/HtmlAgilityPack.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/grand_gray/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:05" />
     <file relUrl="bin/es/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/Site.css" publishTime="06/16/2015 04:49:54" />
+    <file relUrl="Reports/ContractorEnvelope.aspx" publishTime="05/17/2015 11:51:49" />
     <file relUrl="Contractor.aspx" publishTime="05/10/2015 06:09:30" />
     <file relUrl="Reports/SubmittalStatus.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="Styles/black_glass/images/drop-down-vertical.png" publishTime="05/14/2011 06:00:56" />
     <file relUrl="bin/ru/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/pt/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/plain/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:14" />
     <file relUrl="Styles/plain/images/loading.png" publishTime="05/14/2011 06:01:17" />
     <file relUrl="bin/fr/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Global.asax" publishTime="02/25/2015 05:15:05" />
     <file relUrl="Styles/grand_gray/images/horizontal.gif" publishTime="05/14/2011 06:01:06" />
-    <file relUrl="Styles/black_glass/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:00:55" />
     <file relUrl="Account/Login.aspx" publishTime="04/15/2015 01:58:08" />
     <file relUrl="bin/hi/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/vertical.png" publishTime="05/14/2011 06:01:25" />
@@ -74,7 +74,6 @@
     <file relUrl="Styles/grand_gray/images/loading.png" publishTime="05/14/2011 06:01:09" />
     <file relUrl="Images/animated_progress.gif" publishTime="03/07/2015 22:50:16" />
     <file relUrl="Styles/plain/images/drop-down-vertical.png" publishTime="05/14/2011 06:01:12" />
-    <file relUrl="Styles/plain/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Images/Calendar_scheduleHS.png" publishTime="03/30/2015 01:54:38" />
     <file relUrl="Reports/BPermitsClosed.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="packages.config" publishTime="02/25/2015 05:37:32" />
@@ -84,7 +83,6 @@
     <file relUrl="bin/Microsoft.Data.Edm.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/Microsoft.Data.OData.xml" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/de/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/premiere_blue/images/lighted.png" publishTime="05/14/2011 06:01:23" />
     <file relUrl="Styles/plain/images/drop-down-horizontal.png" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Images/bg-menu-main.JPG" publishTime="12/15/2010 04:54:04" />
     <file relUrl="bin/zh-CHS/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
@@ -93,6 +91,7 @@
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:01:19" />
     <file relUrl="bin/ja/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/grand_gray/images/lighted.gif" publishTime="05/14/2011 06:01:07" />
+    <file relUrl="Styles/premiere_blue/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:22" />
     <file relUrl="Styles/plain/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:01:11" />
     <file relUrl="bin/it/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/fr/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
@@ -102,6 +101,7 @@
     <file relUrl="Reports/ContractorMailingLabels.aspx" publishTime="05/18/2015 03:08:45" />
     <file relUrl="bin/Microsoft.Data.OData.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/black_glass/images/loading.gif" publishTime="05/14/2011 06:01:00" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="02/25/2015 05:15:05" />
     <file relUrl="bin/HtmlAgilityPack.xml" publishTime="02/25/2015 05:37:25" />
     <file relUrl="ComplianceReviewReportsMain.aspx" publishTime="04/15/2015 00:42:33" />
     <file relUrl="Styles/plain/images/vertical.png" publishTime="05/14/2011 06:01:17" />
@@ -119,9 +119,9 @@
     <file relUrl="App_Data/ASPNETDB.MDF" publishTime="06/22/2015 05:28:36" />
     <file relUrl="BPermit.aspx" publishTime="05/10/2015 05:30:31" />
     <file relUrl="bin/ko/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/black_glass/images/horizontal-textbox.png" publishTime="05/14/2011 06:00:57" />
     <file relUrl="Styles/plain/style.css" publishTime="05/14/2011 06:00:51" />
     <file relUrl="Reports/ContractorAllData.aspx" publishTime="05/13/2015 03:00:23" />
-    <file relUrl="bin/zh-Hant/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/zh-CHT/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/lighted.gif" publishTime="05/14/2011 06:01:23" />
     <file relUrl="bin/it/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
@@ -133,30 +133,29 @@
     <file relUrl="Styles/black_glass/images/drop-down-vertical.gif" publishTime="05/14/2011 06:00:56" />
     <file relUrl="Styles/black_glass/images/footer-middle.png" publishTime="05/14/2011 06:00:57" />
     <file relUrl="Styles/premiere_blue/images/drop-down-vertical.gif" publishTime="05/14/2011 06:01:21" />
-    <file relUrl="bin/pl/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="About.aspx" publishTime="05/10/2015 06:21:18" />
     <file relUrl="Styles/grand_gray/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:04" />
-    <file relUrl="App_Data/aspnetdb_log.ldf" publishTime="06/22/2015 05:28:36" />
+    <file relUrl="Submittal2.aspx" publishTime="06/21/2015 03:34:48" />
     <file relUrl="Styles/grand_gray/style.css" publishTime="05/14/2011 06:00:49" />
     <file relUrl="Styles/premiere_blue/images/horizontal.gif" publishTime="05/14/2011 06:01:22" />
     <file relUrl="bin/he/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Account/ChangePassword.aspx" publishTime="02/25/2015 05:15:05" />
     <file relUrl="bin/ja/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Reports/ComplianceReviewHistory.aspx" publishTime="04/11/2015 04:43:47" />
+    <file relUrl="bin/zh-Hant/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="02/25/2015 05:15:05" />
     <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="04/15/2015 02:48:38" />
+    <file relUrl="Reports/ComplianceReviewHistory.aspx" publishTime="04/11/2015 04:43:47" />
     <file relUrl="bin/de/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Submittal2.aspx" publishTime="06/21/2015 03:34:48" />
+    <file relUrl="Styles/plain/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Images/expand_blue.jpg" publishTime="12/15/2010 04:54:04" />
     <file relUrl="Database.master" publishTime="05/10/2015 04:30:00" />
     <file relUrl="bin/ja/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/ko/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/vertical.gif" publishTime="05/14/2011 06:01:25" />
-    <file relUrl="bin/AjaxMin.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="bin/ru/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
+    <file relUrl="Styles/black_glass/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:00:55" />
+    <file relUrl="App_Data/aspnetdb_log.ldf" publishTime="06/22/2015 05:28:36" />
     <file relUrl="bin/ru/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/premiere_blue/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:22" />
-    <file relUrl="Styles/grand_gray/images/loading.gif" publishTime="05/14/2011 06:01:08" />
+    <file relUrl="Styles/premiere_blue/images/loading.png" publishTime="05/14/2011 06:01:24" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer-2.gif" publishTime="05/14/2011 06:00:53" />
     <file relUrl="bin/es/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/grand_gray/images/vertical.gif" publishTime="05/14/2011 06:01:09" />
@@ -164,27 +163,28 @@
     <file relUrl="bin/es/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer-2.png" publishTime="05/14/2011 06:00:53" />
     <file relUrl="Styles/black_glass/images/lighted.png" publishTime="05/14/2011 06:01:00" />
-    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="02/25/2015 05:15:05" />
-    <file relUrl="bin/it/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/plain/images/drop-down-vertical.gif" publishTime="05/14/2011 06:01:12" />
-    <file relUrl="Site.Master" publishTime="06/15/2015 00:05:52" />
+    <file relUrl="Styles/Site.css" publishTime="06/16/2015 04:49:54" />
+    <file relUrl="bin/fr/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/premiere_blue/images/lighted.png" publishTime="05/14/2011 06:01:23" />
+    <file relUrl="Styles/plain/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:14" />
     <file relUrl="Reports/ComplianceReviewOpen.aspx" publishTime="05/10/2015 04:36:16" />
-    <file relUrl="Styles/black_glass/images/horizontal-textbox.png" publishTime="05/14/2011 06:00:57" />
+    <file relUrl="bin/AjaxMin.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/premiere_blue/images/loading.gif" publishTime="05/14/2011 06:01:24" />
     <file relUrl="Styles/plain/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Reports/SubmittalAdministrativeApprovals.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="bin/Microsoft.Data.Edm.xml" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="BPermitReportsMain.aspx" publishTime="04/14/2015 23:14:58" />
     <file relUrl="bin/zh-Hant/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/System.Spatial.xml" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Images/bg-menu-main.png" publishTime="12/15/2010 04:54:04" />
     <file relUrl="Reports/BPermitsBuildingPermitsIssued.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="bin/zh-Hans/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="BPermitReportsMain.aspx" publishTime="04/14/2015 23:14:58" />
+    <file relUrl="Styles/grand_gray/images/loading.gif" publishTime="05/14/2011 06:01:08" />
     <file relUrl="bin/HtmlAgilityPack.pdb" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/Microsoft.WindowsAzure.Storage.xml" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/black_glass/images/horizontal.png" publishTime="05/14/2011 06:00:59" />
     <file relUrl="Styles/plain/images/header-footer.png" publishTime="05/14/2011 06:01:13" />
-    <file relUrl="bin/it/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="bin/pl/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="bin/ru/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Reports/ContractorList.aspx" publishTime="05/16/2015 22:13:12" />
     <file relUrl="bin/ko/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
@@ -193,30 +193,30 @@
   </publishProfile>
   <publishProfile publishUrl="C:\Temp\Sunriver\SunriverWebApp2015_07_20" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="C:\Temp\Sunriver\sunriverwebapp2015_07_20" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="False" msdeployMarkAsApp="False" profileName="Publish Local" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="Styles/grand_gray/images/drop-down-vertical.png" publishTime="05/14/2011 06:01:04" />
-    <file relUrl="bin/SubmittalProposal.dll" publishTime="06/22/2015 05:24:20" />
-    <file relUrl="Styles/premiere_blue/images/vertical.png" publishTime="05/14/2011 06:01:25" />
+    <file relUrl="Reports/SellCheckSummary.aspx" publishTime="09/07/2015 12:23:51" />
+    <file relUrl="bin/SubmittalProposal.dll" publishTime="09/08/2015 07:06:05" />
     <file relUrl="Styles/black_glass/style.css" publishTime="05/14/2011 06:00:49" />
     <file relUrl="Reports/Reports.Master" publishTime="04/11/2015 05:45:04" />
     <file relUrl="Reports/ComplianceReviewSummary.aspx" publishTime="05/10/2015 04:36:16" />
-    <file relUrl="Styles/grand_gray/images/loading.png" publishTime="05/14/2011 06:01:09" />
+    <file relUrl="SubmittalReportsMain.aspx" publishTime="04/12/2015 14:32:42" />
     <file relUrl="bin/cs/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="bin/zh-Hans/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Account/Register.aspx" publishTime="02/25/2015 05:15:05" />
     <file relUrl="ContractorReportsMain.aspx" publishTime="05/18/2015 03:02:37" />
+    <file relUrl="bin/it/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/ar/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/plain/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:14" />
-    <file relUrl="bin/Common.pdb" publishTime="04/15/2015 02:42:40" />
+    <file relUrl="bin/Common.pdb" publishTime="09/06/2015 06:59:06" />
+    <file relUrl="bin/it/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/black_glass/images/header-footer.png" publishTime="05/14/2011 06:00:57" />
     <file relUrl="Styles/black_glass/images/vertical.png" publishTime="05/14/2011 06:01:01" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:00:54" />
     <file relUrl="Styles/black_glass/images/horizontal.gif" publishTime="05/14/2011 06:00:58" />
     <file relUrl="Reports/ContractorByCategory.aspx" publishTime="05/11/2015 21:02:28" />
-    <file relUrl="Reports/BPermitsBuildingPermitsIssued.aspx" publishTime="05/10/2015 04:36:16" />
-    <file relUrl="bin/fr/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
+    <file relUrl="Styles/black_glass/images/vertical.gif" publishTime="05/14/2011 06:01:01" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:00:54" />
     <file relUrl="Styles/grand_gray/images/lighted.png" publishTime="05/14/2011 06:01:08" />
     <file relUrl="bin/Microsoft.WindowsAzure.Configuration.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="bin/ru/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:01:19" />
     <file relUrl="Styles/grand_gray/images/header-footer.png" publishTime="05/14/2011 06:01:05" />
     <file relUrl="Account/Web.config" publishTime="04/15/2015 02:12:20" />
@@ -227,10 +227,10 @@
     <file relUrl="Styles/plain/images/horizontal.gif" publishTime="05/14/2011 06:01:15" />
     <file relUrl="bin/zh-Hans/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/premiere_blue/images/drop-down-vertical.png" publishTime="05/14/2011 06:01:21" />
+    <file relUrl="bin/zh-Hant/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal.png" publishTime="05/14/2011 06:01:20" />
     <file relUrl="bin/fr/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Reports/ContractorEnvelope.aspx" publishTime="05/17/2015 11:51:49" />
-    <file relUrl="Styles/premiere_blue/images/loading.png" publishTime="05/14/2011 06:01:24" />
+    <file relUrl="Styles/plain/images/drop-down-vertical.gif" publishTime="05/14/2011 06:01:12" />
     <file relUrl="Reports/BPermitsOpen.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="Reports/ComplianceReviewHistory.aspx" publishTime="04/11/2015 04:43:47" />
     <file relUrl="Styles/black_glass/images/horizontal-textbox.gif" publishTime="05/14/2011 06:00:57" />
@@ -243,64 +243,65 @@
     <file relUrl="MainMasterPage.master" publishTime="04/15/2015 04:16:41" />
     <file relUrl="bin/HtmlAgilityPack.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/grand_gray/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:05" />
-    <file relUrl="Styles/grand_gray/images/horizontal.png" publishTime="05/14/2011 06:01:07" />
     <file relUrl="bin/es/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/Site.css" publishTime="06/16/2015 04:49:54" />
+    <file relUrl="Reports/ContractorEnvelope.aspx" publishTime="05/17/2015 11:51:49" />
     <file relUrl="Contractor.aspx" publishTime="05/10/2015 06:09:30" />
     <file relUrl="Reports/SubmittalStatus.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="Styles/black_glass/images/drop-down-vertical.png" publishTime="05/14/2011 06:00:56" />
     <file relUrl="bin/ru/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/pt/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/plain/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:14" />
-    <file relUrl="Styles/grand_gray/images/lighted.gif" publishTime="05/14/2011 06:01:07" />
-    <file relUrl="bin/zh-Hant/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/premiere_blue/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:22" />
+    <file relUrl="Reports/SellCheckHistory.aspx" publishTime="09/07/2015 11:39:11" />
+    <file relUrl="Styles/plain/images/loading.png" publishTime="05/14/2011 06:01:17" />
     <file relUrl="bin/fr/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="04/15/2015 02:48:38" />
     <file relUrl="Global.asax" publishTime="02/25/2015 05:15:05" />
     <file relUrl="Styles/grand_gray/images/horizontal.gif" publishTime="05/14/2011 06:01:06" />
-    <file relUrl="Styles/premiere_blue/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:22" />
     <file relUrl="Account/Login.aspx" publishTime="04/15/2015 01:58:08" />
     <file relUrl="bin/hi/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="bin/zh-Hant/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/black_glass/images/vertical.gif" publishTime="05/14/2011 06:01:01" />
-    <file relUrl="Web.config" publishTime="06/18/2015 05:38:44" />
+    <file relUrl="Styles/premiere_blue/images/vertical.png" publishTime="05/14/2011 06:01:25" />
+    <file relUrl="SellCheck.aspx" publishTime="09/08/2015 06:54:10" />
+    <file relUrl="Web.config" publishTime="09/08/2015 07:35:34" />
     <file relUrl="Styles/grand_gray/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:01:03" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal.png" publishTime="05/14/2011 06:00:55" />
     <file relUrl="bin/ko/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/plain/images/horizontal.png" publishTime="05/14/2011 06:01:15" />
-    <file relUrl="Styles/grand_gray/images/loading.gif" publishTime="05/14/2011 06:01:08" />
+    <file relUrl="Styles/grand_gray/images/loading.png" publishTime="05/14/2011 06:01:09" />
     <file relUrl="Images/animated_progress.gif" publishTime="03/07/2015 22:50:16" />
     <file relUrl="Styles/plain/images/drop-down-vertical.png" publishTime="05/14/2011 06:01:12" />
-    <file relUrl="Styles/plain/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Images/Calendar_scheduleHS.png" publishTime="03/30/2015 01:54:38" />
     <file relUrl="Reports/BPermitsClosed.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="packages.config" publishTime="02/25/2015 05:37:32" />
+    <file relUrl="Styles/black_glass/images/lighted.gif" publishTime="05/14/2011 06:00:59" />
     <file relUrl="IDCardManagement.aspx" publishTime="06/22/2015 05:27:22" />
     <file relUrl="Styles/premiere_blue/images/horizontal.png" publishTime="05/14/2011 06:01:22" />
     <file relUrl="bin/Microsoft.Data.Edm.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/Microsoft.Data.OData.xml" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/de/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/premiere_blue/images/lighted.png" publishTime="05/14/2011 06:01:23" />
     <file relUrl="Styles/plain/images/drop-down-horizontal.png" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Images/bg-menu-main.JPG" publishTime="12/15/2010 04:54:04" />
     <file relUrl="bin/zh-CHS/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Images/collapse_blue.jpg" publishTime="12/15/2010 04:54:04" />
     <file relUrl="bin/ja/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:01:19" />
-    <file relUrl="Styles/plain/images/vertical.gif" publishTime="05/14/2011 06:01:17" />
-    <file relUrl="Styles/premiere_blue/images/lighted.gif" publishTime="05/14/2011 06:01:23" />
+    <file relUrl="SellCheckReportsMain.aspx" publishTime="09/07/2015 12:06:26" />
     <file relUrl="bin/ja/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="bin/ja/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/grand_gray/images/lighted.gif" publishTime="05/14/2011 06:01:07" />
+    <file relUrl="Styles/premiere_blue/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:22" />
     <file relUrl="Styles/plain/images/drop-down-horizontal-header-footer.gif" publishTime="05/14/2011 06:01:11" />
     <file relUrl="bin/it/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/black_glass/images/horizontal-textbox.png" publishTime="05/14/2011 06:00:57" />
+    <file relUrl="bin/fr/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/plain/images/footer-middle.png" publishTime="05/14/2011 06:01:13" />
     <file relUrl="bin/de/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Default.aspx" publishTime="04/15/2015 02:36:19" />
     <file relUrl="Reports/ContractorMailingLabels.aspx" publishTime="05/18/2015 03:08:45" />
+    <file relUrl="bin/AjaxMin.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/Microsoft.Data.OData.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/black_glass/images/loading.gif" publishTime="05/14/2011 06:01:00" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="02/25/2015 05:15:05" />
     <file relUrl="bin/HtmlAgilityPack.xml" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Reports/SellCheckLetter.aspx" publishTime="09/08/2015 05:51:30" />
     <file relUrl="ComplianceReviewReportsMain.aspx" publishTime="04/15/2015 00:42:33" />
+    <file relUrl="Reports/SellCheckList.aspx" publishTime="09/07/2015 10:32:51" />
     <file relUrl="Styles/plain/images/vertical.png" publishTime="05/14/2011 06:01:17" />
     <file relUrl="bin/tr-TR/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="bin/System.Spatial.dll" publishTime="02/25/2015 05:37:25" />
@@ -308,78 +309,84 @@
     <file relUrl="Styles/grand_gray/images/drop-down-horizontal.png" publishTime="05/14/2011 06:01:04" />
     <file relUrl="ComplianceReview.aspx" publishTime="05/10/2015 04:36:17" />
     <file relUrl="Styles/premiere_blue/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:20" />
-    <file relUrl="Styles/plain/style.css" publishTime="05/14/2011 06:00:51" />
+    <file relUrl="Styles/plain/images/vertical.gif" publishTime="05/14/2011 06:01:17" />
     <file relUrl="bin/zh-CHT/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/grand_gray/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:01:03" />
     <file relUrl="Styles/grand_gray/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:06" />
-    <file relUrl="bin/Common.dll" publishTime="04/15/2015 02:42:40" />
-    <file relUrl="App_Data/ASPNETDB.MDF" publishTime="06/22/2015 05:28:36" />
+    <file relUrl="bin/Common.dll" publishTime="09/06/2015 06:59:07" />
+    <file relUrl="App_Data/ASPNETDB.MDF" publishTime="09/08/2015 07:07:01" />
     <file relUrl="BPermit.aspx" publishTime="05/10/2015 05:30:31" />
     <file relUrl="bin/ko/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/plain/style.css" publishTime="05/14/2011 06:00:51" />
     <file relUrl="Reports/ContractorAllData.aspx" publishTime="05/13/2015 03:00:23" />
-    <file relUrl="bin/zh-Hant/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Site.Master" publishTime="06/15/2015 00:05:52" />
-    <file relUrl="Styles/black_glass/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:00:55" />
+    <file relUrl="Styles/premiere_blue/images/lighted.gif" publishTime="05/14/2011 06:01:23" />
     <file relUrl="bin/it/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/Microsoft.WindowsAzure.Storage.pdb" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer-2.png" publishTime="05/14/2011 06:00:53" />
-    <file relUrl="bin/SubmittalProposal.pdb" publishTime="06/22/2015 05:24:20" />
+    <file relUrl="Styles/grand_gray/images/horizontal.png" publishTime="05/14/2011 06:01:07" />
+    <file relUrl="bin/SubmittalProposal.pdb" publishTime="09/08/2015 07:06:04" />
     <file relUrl="Reports/CategoryList.aspx" publishTime="05/17/2015 11:13:14" />
-    <file relUrl="SubmittalReportsMain.aspx" publishTime="04/12/2015 14:32:42" />
+    <file relUrl="Styles/plain/images/horizontal.png" publishTime="05/14/2011 06:01:15" />
     <file relUrl="Styles/black_glass/images/drop-down-vertical.gif" publishTime="05/14/2011 06:00:56" />
+    <file relUrl="bin/ru/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/black_glass/images/footer-middle.png" publishTime="05/14/2011 06:00:57" />
     <file relUrl="Styles/premiere_blue/images/drop-down-vertical.gif" publishTime="05/14/2011 06:01:21" />
-    <file relUrl="Styles/plain/images/loading.png" publishTime="05/14/2011 06:01:17" />
-    <file relUrl="bin/pl/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="About.aspx" publishTime="05/10/2015 06:21:18" />
     <file relUrl="Styles/grand_gray/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:04" />
-    <file relUrl="bin/ja/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="App_Data/aspnetdb_log.ldf" publishTime="06/22/2015 05:28:36" />
+    <file relUrl="Submittal2.aspx" publishTime="09/06/2015 13:51:10" />
     <file relUrl="Database.master" publishTime="05/10/2015 04:30:00" />
     <file relUrl="Styles/premiere_blue/images/horizontal.gif" publishTime="05/14/2011 06:01:22" />
     <file relUrl="bin/he/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Account/ChangePassword.aspx" publishTime="02/25/2015 05:15:05" />
-    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="02/25/2015 05:15:05" />
-    <file relUrl="bin/fr/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="bin/ja/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="bin/zh-Hant/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="02/25/2015 05:15:05" />
-    <file relUrl="Account/ChangePasswordSuccess.aspx" publishTime="04/15/2015 02:48:38" />
+    <file relUrl="App_Data/aspnetdb_log.ldf" publishTime="09/08/2015 07:07:01" />
     <file relUrl="bin/de/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Submittal2.aspx" publishTime="06/21/2015 03:34:48" />
+    <file relUrl="Styles/plain/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Images/expand_blue.jpg" publishTime="12/15/2010 04:54:04" />
-    <file relUrl="Styles/plain/images/header-footer.png" publishTime="05/14/2011 06:01:13" />
+    <file relUrl="bin/ja/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/ko/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="Styles/premiere_blue/images/vertical.gif" publishTime="05/14/2011 06:01:25" />
-    <file relUrl="Styles/black_glass/images/horizontal.png" publishTime="05/14/2011 06:00:59" />
+    <file relUrl="Styles/black_glass/images/drop-down-horizontal.gif" publishTime="05/14/2011 06:00:55" />
     <file relUrl="Styles/plain/images/lighted.gif" publishTime="05/14/2011 06:01:15" />
-    <file relUrl="Reports/ComplianceReviewOpen.aspx" publishTime="05/10/2015 04:36:16" />
-    <file relUrl="bin/ru/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="Styles/premiere_blue/images/horizontal-textbox.png" publishTime="05/14/2011 06:01:22" />
+    <file relUrl="bin/ru/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
+    <file relUrl="Reports/SellCheckUnPaidFees.aspx" publishTime="09/07/2015 09:48:04" />
+    <file relUrl="bin/zh-Hant/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/premiere_blue/images/loading.png" publishTime="05/14/2011 06:01:24" />
     <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer-2.gif" publishTime="05/14/2011 06:00:53" />
     <file relUrl="bin/es/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/grand_gray/images/vertical.gif" publishTime="05/14/2011 06:01:09" />
     <file relUrl="bin/nl/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="bin/es/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/black_glass/images/drop-down-horizontal-header-footer-2.png" publishTime="05/14/2011 06:00:53" />
     <file relUrl="Styles/black_glass/images/lighted.png" publishTime="05/14/2011 06:01:00" />
+    <file relUrl="Styles/Site.css" publishTime="06/16/2015 04:49:54" />
     <file relUrl="Styles/grand_gray/style.css" publishTime="05/14/2011 06:00:49" />
-    <file relUrl="bin/it/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="Styles/plain/images/drop-down-vertical.gif" publishTime="05/14/2011 06:01:12" />
-    <file relUrl="Styles/black_glass/images/lighted.gif" publishTime="05/14/2011 06:00:59" />
-    <file relUrl="bin/AjaxMin.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="bin/fr/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/premiere_blue/images/lighted.png" publishTime="05/14/2011 06:01:23" />
+    <file relUrl="Styles/plain/images/horizontal-textbox.gif" publishTime="05/14/2011 06:01:14" />
+    <file relUrl="Reports/ComplianceReviewOpen.aspx" publishTime="05/10/2015 04:36:16" />
+    <file relUrl="Styles/black_glass/images/horizontal-textbox.png" publishTime="05/14/2011 06:00:57" />
     <file relUrl="Styles/premiere_blue/images/loading.gif" publishTime="05/14/2011 06:01:24" />
     <file relUrl="Styles/plain/images/drop-down-horizontal-header-footer.png" publishTime="05/14/2011 06:01:11" />
     <file relUrl="Reports/SubmittalAdministrativeApprovals.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="bin/Microsoft.Data.Edm.xml" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="BPermitReportsMain.aspx" publishTime="04/14/2015 23:14:58" />
     <file relUrl="bin/System.Spatial.xml" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Images/bg-menu-main.png" publishTime="12/15/2010 04:54:04" />
+    <file relUrl="Reports/BPermitsBuildingPermitsIssued.aspx" publishTime="05/10/2015 04:36:16" />
     <file relUrl="bin/zh-Hans/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="BPermitReportsMain.aspx" publishTime="04/14/2015 23:14:58" />
+    <file relUrl="Styles/grand_gray/images/loading.gif" publishTime="05/14/2011 06:01:08" />
     <file relUrl="bin/HtmlAgilityPack.pdb" publishTime="02/25/2015 05:37:25" />
     <file relUrl="bin/Microsoft.WindowsAzure.Storage.xml" publishTime="02/25/2015 05:37:26" />
-    <file relUrl="bin/es/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
-    <file relUrl="bin/it/System.Spatial.resources.dll" publishTime="02/25/2015 05:37:25" />
+    <file relUrl="Styles/black_glass/images/horizontal.png" publishTime="05/14/2011 06:00:59" />
+    <file relUrl="Styles/plain/images/header-footer.png" publishTime="05/14/2011 06:01:13" />
+    <file relUrl="bin/pl/AjaxControlToolkit.resources.dll" publishTime="02/25/2015 05:37:26" />
     <file relUrl="bin/ru/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Reports/ContractorList.aspx" publishTime="05/16/2015 22:13:12" />
     <file relUrl="bin/ko/Microsoft.Data.Edm.resources.dll" publishTime="02/25/2015 05:37:25" />
     <file relUrl="Styles/plain/images/lighted.png" publishTime="05/14/2011 06:01:16" />
+    <file relUrl="bin/es/Microsoft.Data.OData.resources.dll" publishTime="02/25/2015 05:37:25" />
   </publishProfile>
 </publishData>

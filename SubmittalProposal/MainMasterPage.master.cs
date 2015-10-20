@@ -17,12 +17,13 @@ namespace SubmittalProposal {
 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
-                MenuItem miSubmittals = new MenuItem("Submittal", "Submittal",null, "~/Submittal2.aspx");
+                MenuItem miSubmittals = new MenuItem("Submittal", "Submittal", null, "~/Submittal2.aspx");
                 MenuItem miBPermit = new MenuItem("BPermits", "BPermits", null, "~/BPermit.aspx");
                 MenuItem miComplianceReview = new MenuItem("Compliance Reviews", "Compliance Reviews", null, "~/ComplianceReview.aspx");
                 MenuItem miContractors = new MenuItem("Contractors", "Contractors", null, "~/Contractor.aspx");
                 MenuItem miCardManagement = new MenuItem("ID Card", "IDCardManagement", null, "~/IDCardManagement.aspx");
                 MenuItem miSellCheck = new MenuItem("Sell Check", "SellCheck", null, "~/SellCheck.aspx");
+                MenuItem miRVStorage = new MenuItem("RV Storage", "RVStorage", null, "~/RVStorage.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewcontractors")) {
                     NavigationMenu.Items.AddAt(1, miContractors);
                 }
@@ -41,39 +42,48 @@ namespace SubmittalProposal {
                 if (HttpContext.Current.User.IsInRole("canviewsellcheck")) {
                     NavigationMenu.Items.AddAt(1, miSellCheck);
                 }
-                
-            }
-            lbReports.Visible = false;
-            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
-                if (HttpContext.Current.User.IsInRole("candoreportssubmittals")) {
-                    lbReports.Visible = true;
+                if (HttpContext.Current.User.IsInRole("canviewrvstorage")) {
+                    NavigationMenu.Items.AddAt(1, miRVStorage);
                 }
-            } else {
-                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("bpermit")) {
-                    if (HttpContext.Current.User.IsInRole("candoreportsbpermits")) {
+
+
+                lbReports.Visible = false;
+                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
+                    if (HttpContext.Current.User.IsInRole("candoreportssubmittals")) {
                         lbReports.Visible = true;
                     }
                 } else {
-                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliance")) {
-                        if (HttpContext.Current.User.IsInRole("candoreportscompliancereviews")) {
+                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("bpermit")) {
+                        if (HttpContext.Current.User.IsInRole("candoreportsbpermits")) {
                             lbReports.Visible = true;
                         }
                     } else {
-                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
-                            if (HttpContext.Current.User.IsInRole("candoreportscontractors")) {
+                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliance")) {
+                            if (HttpContext.Current.User.IsInRole("candoreportscompliancereviews")) {
                                 lbReports.Visible = true;
                             }
                         } else {
-                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
-                                if (HttpContext.Current.User.IsInRole("candoreportssellcheck")) {
+                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
+                                if (HttpContext.Current.User.IsInRole("candoreportscontractors")) {
                                     lbReports.Visible = true;
+                                }
+                            } else {
+                                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
+                                    if (HttpContext.Current.User.IsInRole("candoreportssellcheck")) {
+                                        lbReports.Visible = true;
+                                    }
+                                } else {
+                                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rvstorage")) {
+                                        if (HttpContext.Current.User.IsInRole("candoreportsrvstorage")) {
+                                            lbReports.Visible = true;
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-
         }
 
         protected void lbReports_Click(object sender, EventArgs e) {

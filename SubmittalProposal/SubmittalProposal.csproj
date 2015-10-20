@@ -123,6 +123,7 @@
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
+    <Content Include="RVStorage.aspx" />
     <Content Include="SellCheck.aspx" />
     <Content Include="SellCheckReportsMain.aspx" />
     <Content Include="Styles\black_glass\images\drop-down-horizontal-header-footer-2.gif" />
@@ -599,6 +600,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SubmittalLotLane.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RVStorage.aspx.cs">
+      <DependentUpon>RVStorage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RVStorage.aspx.designer.cs">
+      <DependentUpon>RVStorage.aspx</DependentUpon>
     </Compile>
     <Compile Include="SellCheck.aspx.cs">
       <DependentUpon>SellCheck.aspx</DependentUpon>

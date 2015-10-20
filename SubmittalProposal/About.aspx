@@ -9,6 +9,11 @@
     </h2>
     <div style="height: 350px; overflow: scroll;">
         <ul>
+            <li style="font-weight: bold;">Version 1.02</li>
+                <ul>
+                    <li>SellCheck database</li>
+                    <li>RV Storage database</li>
+                </ul>
             <li  style="font-weight: bold;">Version 1.01</li>
                 <ul>
                     <li>Contractors Database
