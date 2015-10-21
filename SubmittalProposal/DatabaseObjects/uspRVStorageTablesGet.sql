@@ -11,9 +11,11 @@ ALTER PROCEDURE uspRVStorageTablesGet
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT * FROM tblRVData r LEFT OUTER JOIN
+	SELECT r.*,c.* FROM tblRVData r LEFT OUTER JOIN
 		[ID-Card_Split_FE]..tblArCust c ON r.CustomerID = c.CustId
+	order by RVLeaseID
 	SELECT * FROM [tblSpaceInfo{LU}] order by tSISpace
 	SELECT * FROM [tblSpaceRent{LU}]
+	exec uspAvailableSpaces
 END
 GO
