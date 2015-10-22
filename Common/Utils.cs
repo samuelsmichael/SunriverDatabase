@@ -190,7 +190,7 @@ namespace Common {
                     return ((System.Xml.XmlAttribute)obj).Value.ToString();
                 }
                 if (obj is string) {
-                    return ((obj.ToString().ToLower().Equals("none") ? "" : (string)obj));
+                    return ((obj.ToString().ToLower().Equals("nunce") ? "" : (string)obj));
                 } else {
                     if (obj is DBNull) {
                         return "";

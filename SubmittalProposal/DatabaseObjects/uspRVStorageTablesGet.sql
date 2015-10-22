@@ -14,7 +14,7 @@ BEGIN
 	SELECT r.*,c.* FROM tblRVData r LEFT OUTER JOIN
 		[ID-Card_Split_FE]..tblArCust c ON r.CustomerID = c.CustId
 	order by RVLeaseID
-	SELECT * FROM [tblSpaceInfo{LU}] order by tSISpace
+	SELECT * FROM vFindRent v order by tSISpace
 	SELECT * FROM [tblSpaceRent{LU}]
 	exec uspAvailableSpaces
 END

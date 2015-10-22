@@ -107,6 +107,16 @@ namespace SubmittalProposal {
             #region RV & Space Into tab
             ddlRVSpaceInfoSpaceSizeReqdUpdate.SelectedValue = Utils.ObjectToString(dr["SpaceSizeReqt"]);
             ddlRVSpaceInfoElectricalReqdYesNoUpdate.SelectedValue = Utils.ObjectToBool(dr["ElectricReqt"]) ? "Yes" : "No";
+            tbVehicleLengthUpdate.Text = Utils.ObjectToString(dr["VehicleLength"]);
+            tbRVTypeUpdate.Text= Utils.ObjectToString(dr["RVType"]);
+            tbRVMakeUpdate.Text= Utils.ObjectToString(dr["RVMake"]);
+            tbRVModelUpdate.Text= Utils.ObjectToString(dr["RVModel"]);
+            tbVehicleLicenseUpdate.Text=Utils.ObjectToString(dr["VehLics#"]);
+            tbVehicleLicenseStateUpdate.Text=Utils.ObjectToString(dr["VehLicsState"]);
+            string lien=Utils.ObjectToString(dr["Lien"]);
+            tbLienUpdate.Text = lien;
+            ddlSpaceTypeUpdate.SelectedValue = Utils.ObjectToString(dr["SpaceType"]);
+            ddlPermanentAssignmentUpdate.SelectedValue = Utils.ObjectToBool(dr["PermanantAssign"]) ? "Yes" : "No";
             #endregion
 
             return "RVLease ID: " + rvLeastIDBeingEdited + "  First Name:" + dr["FirstName"] + " Last Name: " + dr["LastName"] + (Common.Utils.ObjectToBool(dr["LeaseCancelled"])?"<span style='margin-left:3em;color:Red'>CANCELLED</span>":"");
@@ -250,9 +260,23 @@ namespace SubmittalProposal {
             tbSunriverPhoneUpdate.Enabled = true;
             tbOtherPhoneUpdate.Enabled = true;
             tbStateUpdate.Enabled = true;
+            btnRVUpdate.Visible = true;
+            tbVehicleLengthUpdate.Enabled = true;
+            tbRVTypeUpdate.Enabled = true;
+            tbRVMakeUpdate.Enabled = true;
+            tbRVModelUpdate.Enabled = true;
+            tbVehicleLicenseUpdate.Enabled = true;
+            tbVehicleLicenseStateUpdate.Enabled = true;
+            tbLienUpdate.Enabled = true;
+            ddlRVSpaceInfoElectricalReqdYesNoUpdate.Enabled = true;
+            ddlRVSpaceInfoSpaceSizeReqdUpdate.Enabled = true;
+            ddlSpaceTypeUpdate.Enabled = true;
+            ddlPermanentAssignmentUpdate.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
+            ddlPermanentAssignmentUpdate.Enabled = false;
+            ddlSpaceTypeUpdate.Enabled = false;
             tbRVOwnerFirstNameUpdate.Enabled = false;
             tbRVOwnerLastNameUpdate.Enabled = false;
             tbDriversLicenseUpdate.Enabled = false;
@@ -260,6 +284,16 @@ namespace SubmittalProposal {
             tbSunriverPhoneUpdate.Enabled = false;
             tbOtherPhoneUpdate.Enabled = false;
             tbStateUpdate.Enabled = false;
+            btnRVUpdate.Visible = false;
+            tbVehicleLengthUpdate.Enabled = false;
+            tbRVTypeUpdate.Enabled = false;
+            tbRVMakeUpdate.Enabled = false;
+            tbRVModelUpdate.Enabled = false;
+            tbVehicleLicenseUpdate.Enabled = false;
+            tbVehicleLicenseStateUpdate.Enabled = false;
+            tbLienUpdate.Enabled = false;
+            ddlRVSpaceInfoElectricalReqdYesNoUpdate.Enabled = false;
+            ddlRVSpaceInfoSpaceSizeReqdUpdate.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -309,7 +343,11 @@ namespace SubmittalProposal {
                     string space = PendingSpace;
                     tbRVSpaceInfoSpaceProtectedUpdate.Text = space;
                     DataRow drSpaceInfo = buildDataSet().Tables[1].Rows.Find(space);
+                    tbSpaceSizeRVTabUpdate.Text = Utils.ObjectToString(drSpaceInfo["tSISpace"]);
+                    tbElectricalServiceRVTabUpdate.Text = Utils.ObjectToBool(drSpaceInfo["tSIElectServ"]) ? "Yes" : "No";
                     tbRVSpaceInfoSpaceLeasedProtectedUpdate.Text = Utils.ObjectToBool(drSpaceInfo["SpaceLeased"]) ? "Yes" : "No";
+                    string fmtAnnualRent = String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
+                    tbAnnualRentRVTabUpdate.Text = fmtAnnualRent;
                     #endregion
                     break;
                 default:
