@@ -18,7 +18,7 @@
     </td>
     <td>
         <asp:Label ID="Label12" runat="server" Text="Cancelled"></asp:Label>
-        <asp:DropDownList runat="server" ID="ddlYesNo">
+        <asp:DropDownList runat="server" ID="ddlYesNoSearch">
             <asp:ListItem Selected="True"></asp:ListItem>
             <asp:ListItem>Yes</asp:ListItem>
             <asp:ListItem>No</asp:ListItem>
@@ -63,7 +63,65 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
-    <ajaxToolkit:TabContainer Height="316" ActiveTabIndex="0" ID="TabContainer1" runat="server">
+
+                    <asp:Panel runat="server" CssClass="newitempopup" ID="pnlAvailableSpaces">
+                        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlAvailableSpacesTitle">
+
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td width="10%"></td>
+                                    <td align="center"><asp:Label id="lbl" runat="server" Text="Available Spaces" ></asp:Label>
+                                    </td>
+                                    <td width="10%"><asp:HyperLink id="closePopup" runat="server" CssClass="ClosePopupCls">Close [x]</asp:HyperLink>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            
+                        </asp:Panel>
+                        <asp:Panel runat="server" Style="height:200px;overflow:auto; text-align: center;" ID="Panel6">
+
+
+
+    <asp:GridView ID="gvRVStorageAvailableSpaces" OnSelectedIndexChanged="gvRVStorageAvailableSpaces_SelectedIndexChanged"
+        runat="server" AutoGenerateColumns="False"
+        CellPadding="4" ForeColor="#333333" GridLines="None" 
+        
+        Style="width: 100%; white-space: nowrap;" >
+
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <EmptyDataTemplate>
+            <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+        </EmptyDataTemplate>
+        <Columns>
+            <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
+            <asp:BoundField DataField="tSISpace" HeaderText="Space" />
+            <asp:BoundField DataField="tSISpaceSize" HeaderText="Size" />
+            <asp:BoundField DataField="tSIElectServ" HeaderText="Electricity" />
+            <asp:BoundField DataField="AnnualRent" HeaderText="Annual Rent" DataFormatString="{0:c}" />
+        </Columns>
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+    </asp:GridView>
+
+
+
+                        </asp:Panel>
+                    </asp:Panel>
+
+
+
+
+    <ajaxToolkit:TabContainer Height="316" ActiveTabIndex="0" ID="tcRVStorageUpdate" AutoPostBack="true"
+                        runat="server"  onactivetabchanged="tcRVStorageUpdate_ActiveTabChanged">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelOwnerInformation" HeaderText="Owner Information">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3aa" runat="server">
@@ -131,12 +189,17 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Available spaces"></asp:Label>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Current space"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList runat="server" ID="ddlAvailableSpacesUpdate" DataTextField="tSISpace"
-                                                        DataValueField="tSISpace">
-                                                    </asp:DropDownList>
+                                                        <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCurrentSpaceProtectedUpdate" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                        <asp:Button ID="btnShowAvailableSpacesUpdate" OnClick="btnShowAvailableSpaces_OnClick" runat="server" Text="Available Spaces" CausesValidation="false" />
+                                                        <asp:Button runat="server" ID="dummyAvailableSpaces" style="display:none" />
+                                                        <ajaxToolkit:ModalPopupExtender ID="mpeAvailableSpaces" runat="server" TargetControlID="dummyAvailableSpaces"
+                                                            PopupControlID="pnlAvailableSpaces" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlAvailableSpacesTitle"
+                                                            CancelControlID="closePopup"
+                                                            BehaviorID="bipopupAvailableSpaces" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -211,6 +274,56 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1" runat="server">
                     <ContentTemplate>
+                        <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                            <tr valign="top">
+                                <td  width="50%" valign="top">
+                                    <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel2" GroupingText="Input Info">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Electrical Req'd"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlRVSpaceInfoElectricalReqdYesNoUpdate" runat="server">
+                                                        <asp:ListItem>Yes</asp:ListItem>
+                                                        <asp:ListItem Selected="True">No</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Space Size Req'd"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlRVSpaceInfoSpaceSizeReqdUpdate" runat="server" DataValueField="tSRSpaceSize" DataTextField="tSRSpaceSize">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                                <td  width="50%" valign="top">
+                                    <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel3" GroupingText="Leased Space Info">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Space"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="55" MaxLength="5"
+                                                        ID="tbRVSpaceInfoSpaceProtectedUpdate"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Leased?"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="55" MaxLength="5"
+                                                        ID="tbRVSpaceInfoSpaceLeasedProtectedUpdate"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>

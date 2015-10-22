@@ -21,7 +21,35 @@ namespace SubmittalProposal {
                 ViewState["rvLeastIDBeingEdited"] = value;
             }
         }
+        protected void gvRVStorageAvailableSpaces_SelectedIndexChanged(object sender, EventArgs e) {
+            GridViewRow row = gvRVStorageAvailableSpaces.SelectedRow;
+            Object obj = row.Cells;
+            tbCurrentSpaceProtectedUpdate.Text = row.Cells[1].Text;
+            PendingSpace=row.Cells[1].Text;
+            mpeAvailableSpaces.Hide();
+        }
+
+        private string SpaceBeforeUpdate {
+            get {
+                DataTable sourceTable = getGridViewDataTable();
+                DataView view = new DataView(sourceTable);
+                view.RowFilter = "RVLeaseID=" + rvLeastIDBeingEdited;
+                DataTable tblFiltered = view.ToTable();
+                DataRow dr = tblFiltered.Rows[0];
+                return Utils.ObjectToString(dr["tRVDSpace"]);
+            }
+        }
+        private string PendingSpace {
+            get {
+                return Utils.ObjectToString(Session["rvstoragePendingSpace"]);
+            }
+            set {
+                Session["rvstoragePendingSpace"] = Utils.ObjectToString(value);
+            }
+        }
+
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
+            tcRVStorageUpdate.ActiveTabIndex = 0;
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
             rvLeastIDBeingEdited = Convert.ToInt32(row.Cells[7].Text);
@@ -31,7 +59,7 @@ namespace SubmittalProposal {
             view.RowFilter = "RVLeaseID=" + rvLeastIDBeingEdited;
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
-
+            #region Owner Information
             tbRVOwnerFirstNameUpdate.Text = Common.Utils.ObjectToString(dr["FirstName"]);
             tbRVOwnerLastNameUpdate.Text = Common.Utils.ObjectToString(dr["LastName"]);
             tbDriversLicenseUpdate.Text = Common.Utils.ObjectToString(dr["DrivLics#"]);
@@ -73,17 +101,13 @@ namespace SubmittalProposal {
             //    tbRegionUpdate.Text = Common.Utils.ObjectToString(dr["NO-State"]);
             //    tbPostalCodeUpdate.Text = Common.Utils.ObjectToString(dr["NO-Zip"]);
             //    tbSunriverAddressUpdate.Text = Common.Utils.ObjectToString(dr["NO-SunriverAddr"]);
-            DataTable dt = buildDataSet().Tables[3].Copy();
-            DataRow drMySpace = dt.NewRow();
-            drMySpace["tSISpace"]=dr["tRVDSpace"];
-            DataRow drFind=dt.Rows.Find(dr["tRVDSpace"]);
-            if (drFind != null) {
-                dt.Rows.Remove(drFind);
-            }
-            dt.Rows.InsertAt(drMySpace,0);
-            ddlAvailableSpacesUpdate.DataSource = dt;
-            ddlAvailableSpacesUpdate.DataBind();
-            ddlAvailableSpacesUpdate.SelectedIndex = 0;
+            tbCurrentSpaceProtectedUpdate.Text = Utils.ObjectToString(dr["tRVDSpace"]);
+            PendingSpace = Utils.ObjectToString(dr["tRVDSpace"]);
+            #endregion
+            #region RV & Space Into tab
+            ddlRVSpaceInfoSpaceSizeReqdUpdate.SelectedValue = Utils.ObjectToString(dr["SpaceSizeReqt"]);
+            ddlRVSpaceInfoElectricalReqdYesNoUpdate.SelectedValue = Utils.ObjectToBool(dr["ElectricReqt"]) ? "Yes" : "No";
+            #endregion
 
             return "RVLease ID: " + rvLeastIDBeingEdited + "  First Name:" + dr["FirstName"] + " Last Name: " + dr["LastName"] + (Common.Utils.ObjectToBool(dr["LeaseCancelled"])?"<span style='margin-left:3em;color:Red'>CANCELLED</span>":"");
 
@@ -118,14 +142,20 @@ namespace SubmittalProposal {
                 } catch { 
                 }
             }
-            if (Utils.isNothingNot(ddlYesNo.SelectedValue)) {
-                sb.Append(prepend + "Cancelled: " + ddlYesNo.SelectedValue);
+            if (Utils.isNothingNot(ddlYesNoSearch.SelectedValue)) {
+                sb.Append(prepend + "Cancelled: " + ddlYesNoSearch.SelectedValue);
                 prepend = "  ";
-                sbFilter.Append(and + " LeaseCancelled = " + (ddlYesNo.SelectedValue=="Yes" ? "1":"0"));
+                sbFilter.Append(and + " LeaseCancelled = " + (ddlYesNoSearch.SelectedValue=="Yes" ? "1":"0"));
                 and = " and ";
             }
             searchCriteria = sb.ToString();
             filterString = sbFilter.ToString();
+        }
+
+        protected void btnShowAvailableSpaces_OnClick(object sender, EventArgs args) {
+            gvRVStorageAvailableSpaces.DataSource = buildDataSet().Tables[3];
+            gvRVStorageAvailableSpaces.DataBind();
+            mpeAvailableSpaces.Show();
         }
 
         protected override GridView getGridViewResults() {
@@ -171,7 +201,7 @@ namespace SubmittalProposal {
                 SqlCommand cmd = new SqlCommand("uspRVUpdate");
 
                 cmd.Parameters.Add("@RvLeaseID", SqlDbType.Int).Value = rvLeastIDBeingEdited;
-                return;
+                
                 //cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ddlscRealtorUpdate.SelectedValue;
                 //DateTime? date = Utils.ObjectToDateTimeNullable(tbLTDateUpdate.Text);
                 //if (date.HasValue) {
@@ -195,8 +225,9 @@ namespace SubmittalProposal {
                 //newscRequestID.Direction = ParameterDirection.Output;
                 //cmd.Parameters.Add(newscRequestID);
 
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
+               ////// Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 performPostUpdateSuccessfulActions("Update successful", DataSetCacheKey, null);
+                PendingSpace = null;
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
             }
@@ -219,7 +250,6 @@ namespace SubmittalProposal {
             tbSunriverPhoneUpdate.Enabled = true;
             tbOtherPhoneUpdate.Enabled = true;
             tbStateUpdate.Enabled = true;
-            ddlAvailableSpacesUpdate.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
@@ -230,7 +260,6 @@ namespace SubmittalProposal {
             tbSunriverPhoneUpdate.Enabled = false;
             tbOtherPhoneUpdate.Enabled = false;
             tbStateUpdate.Enabled = false;
-            ddlAvailableSpacesUpdate.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -252,7 +281,6 @@ namespace SubmittalProposal {
             cache.Remove("RVDataSet");
             expandCPESearch();
         }
-
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
                 DataView dv = new DataView(buildDataSet().Tables[1]);
@@ -262,6 +290,30 @@ namespace SubmittalProposal {
                 dt.Rows.InsertAt(dr, 0);
                 ddlSpaceInfoSearch.DataSource = dt;
                 ddlSpaceInfoSearch.DataBind();
+
+                ddlRVSpaceInfoSpaceSizeReqdUpdate.DataSource = buildDataSet().Tables[2];
+                ddlRVSpaceInfoSpaceSizeReqdUpdate.DataBind();
+            }
+        }
+
+        /// <summary>
+        /// The form hasn't been updated yet; so this is a place where inter-tab communication can take place.
+        ///   -- PendingSpace has the Space from the Owner Info tab; so use that value on the RV & Space information tab.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void tcRVStorageUpdate_ActiveTabChanged(object sender, EventArgs e) {
+            switch (tcRVStorageUpdate.ActiveTabIndex) {
+                case 1:
+                    #region RV & Space Into tab
+                    string space = PendingSpace;
+                    tbRVSpaceInfoSpaceProtectedUpdate.Text = space;
+                    DataRow drSpaceInfo = buildDataSet().Tables[1].Rows.Find(space);
+                    tbRVSpaceInfoSpaceLeasedProtectedUpdate.Text = Utils.ObjectToBool(drSpaceInfo["SpaceLeased"]) ? "Yes" : "No";
+                    #endregion
+                    break;
+                default:
+                    break;
             }
         }
     }

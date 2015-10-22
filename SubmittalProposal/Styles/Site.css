@@ -52,6 +52,15 @@ border: thin solid #000000;
     margin-bottom:.5em;background-color:#3a4f63;
     cursor:move;
 }
+
+.ClosePopupCls { color:White; float:right; height:12px; font-size:10px; cursor:pointer; text-decoration:none; }
+.ClosePopupCls a:link  { color:White; text-decoration:none;  }
+.ClosePopupCls a:visited { color:White; text-decoration:none; }
+.ClosePopupCls a:hover  { color:White; text-decoration:none; }
+.FixedHeader {
+    position: absolute;
+    font-weight: bold;
+}
 .newitemcontent 
 {
 }
