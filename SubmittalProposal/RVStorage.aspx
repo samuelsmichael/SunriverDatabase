@@ -328,6 +328,7 @@
                                                         <asp:ListItem Selected="True">Primary</asp:ListItem>
                                                         <asp:ListItem>Multiple</asp:ListItem>
                                                         <asp:ListItem>Owner</asp:ListItem>
+                                                        <asp:ListItem>Non-Owner</asp:ListItem>
                                                     </asp:DropDownList>
 
                                                 </td>
@@ -387,6 +388,112 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel2" runat="server">
                     <ContentTemplate>
+
+                        <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                            <tr valign="top">
+                                <td  width="25%" valign="top">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Payment This Year"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlPaymentThisYearUpdate" runat="server">
+                                                        <asp:ListItem>Yes</asp:ListItem>
+                                                        <asp:ListItem Selected="True">No</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label32" runat="server" Text="Least Start Date"></asp:Label>
+                                                </td>
+                                                <td style="white-space:nowrap">
+                                                    <asp:TextBox CssClass="form_field" ID="tbLeaseStartDateUpdate" MaxLength="10" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbLeaseStartDateUpdate" runat="server" />
+                                                </td>
+                                                <ajaxToolkit:CalendarExtender ID="cetbLeaseStartDateUpdate" runat="server" TargetControlID="tbLeaseStartDateUpdate"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLeaseStartDateUpdate" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revtbLeaseStartDateUpdate" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbLeaseStartDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Lease Cancelled"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlLeaseCancelledUpdate" runat="server">
+                                                        <asp:ListItem>Yes</asp:ListItem>
+                                                        <asp:ListItem Selected="True">No</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label33" runat="server" Text="Wait List Date"></asp:Label>
+                                                </td>
+                                                <td style="white-space:nowrap">
+                                                    <asp:TextBox CssClass="form_field" ID="tbWaitListDateUpdate" MaxLength="10" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbWaitListDateUpdate" runat="server" />
+                                                </td>
+                                                <ajaxToolkit:CalendarExtender ID="cetbWaitListDateUpdate" runat="server" TargetControlID="tbWaitListDateUpdate"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbWaitListDateUpdate" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvtbWaitListDateUpdate" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbWaitListDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Lease Cancelled Date"></asp:Label>
+                                                </td>
+                                                <td style="white-space:nowrap">
+                                                    <asp:TextBox CssClass="form_field" ID="tbLeaseCancelledDate" MaxLength="10" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbLeaseCancelledDate" runat="server" />
+                                                </td>
+                                                <ajaxToolkit:CalendarExtender ID="cbtbLeaseCancelledDate" runat="server" TargetControlID="tbLeaseCancelledDate"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLeaseCancelledDate" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvtbLeaseCancelledDate" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbLeaseCancelledDate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label35" runat="server" Text="RV Space #"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="50" MaxLength="5"
+                                                        ID="tbRVSpaceLeaseInformationProtectedUpdate"></asp:TextBox>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label34" runat="server" Text="Annual Rent"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="75" MaxLength="10"
+                                                        ID="tbLeaseInformationAnnualRentProtectedUpdate"></asp:TextBox>
+
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+
+                                </td>
+                                <td valign="top">
+                                    <asp:Panel ID="pnlNotes" BorderWidth="0" BorderColor="White" BorderStyle="None" runat="server" Width="39em" GroupingText="Notes">
+                                        <center><asp:TextBox runat="server" ID="tbNotesUpdate" Height="8em" TextMode="MultiLine" Width="40em"></asp:TextBox></center>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>
@@ -395,6 +502,58 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3" runat="server">
                     <ContentTemplate>
+                        <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                            <tr valign="top">
+                                <td  width="50%" valign="top">
+                                    <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel4" GroupingText="Non-Owner Input">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label37" runat="server" Text="First Name"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbNonOwnerFirstNameUpdate" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                                <td>
+                                    <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel5" GroupingText="Mailing Address">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox ID="tbAddr1NonOwnerInfoUpdate" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox  ID="tbAddr2NonOwnerInfoUpdate" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox ID="tbCityNonOwnerInfoUpdate" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="tbRegionNonOwnerInfoUpdate" MaxLength="3" Width="25"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="tbPostalCodeNonOwnerInfoUpdate" MaxLength="10" Width="66"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                                <td>
+                                    <asp:Panel CssClass="form_field_panel_squished" style="background-color:rgb(249,253,173);"  runat="server" ID="Panel7" GroupingText="Is SROA Owner">
+                                        <asp:Label ID="lblIsSROAOwnerUpdate" runat="server"></asp:Label>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>

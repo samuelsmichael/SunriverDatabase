@@ -118,7 +118,27 @@ namespace SubmittalProposal {
             ddlSpaceTypeUpdate.SelectedValue = Utils.ObjectToString(dr["SpaceType"]);
             ddlPermanentAssignmentUpdate.SelectedValue = Utils.ObjectToBool(dr["PermanantAssign"]) ? "Yes" : "No";
             #endregion
+            #region Lease Information
+            ddlPaymentThisYearUpdate.SelectedValue = Utils.ObjectToBool(dr["LeasePaid"]) ? "Yes" : "No";
+            DateTime? leaseStartDate = Utils.ObjectToDateTimeNullable(dr["LeaseStartDate"]);
+            tbLeaseStartDateUpdate.Text=leaseStartDate.HasValue?leaseStartDate.Value.ToString("d"):"";
+            ddlLeaseCancelledUpdate.SelectedValue = Utils.ObjectToBool(dr["LeaseCancelled"]) ? "Yes" : "No";
+            DateTime? waitListDateUpdate = Utils.ObjectToDateTimeNullable(dr["WaitListDate"]);
+            tbWaitListDateUpdate.Text = waitListDateUpdate.HasValue ? waitListDateUpdate.Value.ToString("d") : "";
+            DateTime? leaseCancelledDate = Utils.ObjectToDateTimeNullable(dr["LeaseCancelDate"]);
+            tbLeaseCancelledDate.Text = leaseCancelledDate.HasValue ? leaseCancelledDate.Value.ToString("d") : "";
+            tbNotesUpdate.Text = Utils.ObjectToString(dr["Notes"]);
+            #endregion
+            #region Non-Owner Info
+            int? clientid = Utils.ObjectToIntNullable(dr["CustomerID"]);
+            string isOwner = "No";
+            string firstName = Utils.ObjectToString(dr["FirstName"]).ToLower();
+            if ((clientid.HasValue && firstName != "police") || firstName == "publicworks") {
+                isOwner = "Yes";
+            }
 
+            lblIsSROAOwnerUpdate.Text = isOwner;
+            #endregion
             return "RVLease ID: " + rvLeastIDBeingEdited + "  First Name:" + dr["FirstName"] + " Last Name: " + dr["LastName"] + (Common.Utils.ObjectToBool(dr["LeaseCancelled"])?"<span style='margin-left:3em;color:Red'>CANCELLED</span>":"");
 
         }
@@ -171,6 +191,7 @@ namespace SubmittalProposal {
         protected override GridView getGridViewResults() {
             return gvResults;
         }
+ 
         protected string getLeaseCancelled(object value) {
             string retValue = "";
             try {
@@ -272,6 +293,18 @@ namespace SubmittalProposal {
             ddlRVSpaceInfoSpaceSizeReqdUpdate.Enabled = true;
             ddlSpaceTypeUpdate.Enabled = true;
             ddlPermanentAssignmentUpdate.Enabled = true;
+            ddlPaymentThisYearUpdate.Enabled = true;
+            tbLeaseStartDateUpdate.Enabled = true;
+            ibtbLeaseStartDateUpdate.Enabled = true;
+            cetbLeaseStartDateUpdate.Enabled = true;
+            ddlLeaseCancelledUpdate.Enabled = true;
+            tbWaitListDateUpdate.Enabled = true;
+            ibtbWaitListDateUpdate.Enabled = true;
+            cetbWaitListDateUpdate.Enabled = true;
+            tbLeaseCancelledDate.Enabled = true;
+            ibtbLeaseCancelledDate.Enabled = true;
+            cbtbLeaseCancelledDate.Enabled = true;
+            tbNotesUpdate.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
@@ -294,6 +327,18 @@ namespace SubmittalProposal {
             tbLienUpdate.Enabled = false;
             ddlRVSpaceInfoElectricalReqdYesNoUpdate.Enabled = false;
             ddlRVSpaceInfoSpaceSizeReqdUpdate.Enabled = false;
+            ddlPaymentThisYearUpdate.Enabled = false;
+            tbLeaseStartDateUpdate.Enabled = false;
+            ibtbLeaseStartDateUpdate.Enabled = false;
+            cetbLeaseStartDateUpdate.Enabled = false;
+            ddlLeaseCancelledUpdate.Enabled = false;
+            tbWaitListDateUpdate.Enabled = false;
+            ibtbWaitListDateUpdate.Enabled = false;
+            cetbWaitListDateUpdate.Enabled = false;
+            tbLeaseCancelledDate.Enabled = false;
+            ibtbLeaseCancelledDate.Enabled = false;
+            cbtbLeaseCancelledDate.Enabled = false;
+            tbNotesUpdate.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -337,18 +382,25 @@ namespace SubmittalProposal {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void tcRVStorageUpdate_ActiveTabChanged(object sender, EventArgs e) {
+            string space = PendingSpace;
+            tbRVSpaceInfoSpaceProtectedUpdate.Text = space;
+            DataRow drSpaceInfo = buildDataSet().Tables[1].Rows.Find(space);
+            string fmtAnnualRent = String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
             switch (tcRVStorageUpdate.ActiveTabIndex) {
                 case 1:
                     #region RV & Space Into tab
-                    string space = PendingSpace;
-                    tbRVSpaceInfoSpaceProtectedUpdate.Text = space;
-                    DataRow drSpaceInfo = buildDataSet().Tables[1].Rows.Find(space);
-                    tbSpaceSizeRVTabUpdate.Text = Utils.ObjectToString(drSpaceInfo["tSISpace"]);
+                    tbSpaceSizeRVTabUpdate.Text = Utils.ObjectToString(drSpaceInfo["tSISpaceSize"]);
                     tbElectricalServiceRVTabUpdate.Text = Utils.ObjectToBool(drSpaceInfo["tSIElectServ"]) ? "Yes" : "No";
                     tbRVSpaceInfoSpaceLeasedProtectedUpdate.Text = Utils.ObjectToBool(drSpaceInfo["SpaceLeased"]) ? "Yes" : "No";
-                    string fmtAnnualRent = String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
                     tbAnnualRentRVTabUpdate.Text = fmtAnnualRent;
                     #endregion
+                    break;
+                case 2:
+                #region Lease Information
+                    tbRVSpaceLeaseInformationProtectedUpdate.Text = PendingSpace;
+                    tbLeaseInformationAnnualRentProtectedUpdate.Text = fmtAnnualRent;
+
+                #endregion
                     break;
                 default:
                     break;

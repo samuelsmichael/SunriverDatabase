@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Author:		Mike Samuels
 -- Create date: 10/20/2015
--- Description:	Main table access for RV Storage Page
+-- Description:	Main table access for RV Storage Page  
 -- =============================================
 ALTER PROCEDURE uspRVStorageTablesGet 
 AS
