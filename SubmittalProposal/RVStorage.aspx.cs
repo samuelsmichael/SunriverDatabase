@@ -55,8 +55,11 @@ namespace SubmittalProposal {
             }
         }
 
+
+        
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             lblLeasedCancelledErrorMessage.Text = "";
+            DataSet ds = null;
             tcRVStorageUpdate.ActiveTabIndex = 0;
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
@@ -220,6 +223,26 @@ namespace SubmittalProposal {
             return retValue;
         }
 
+        protected void Timer1_Tick(object sender, EventArgs e) {
+            Button1X.Text= DateTime.Now.ToString();
+            if (Session["merci"] != null) {
+                Button1X.Text = Utils.ObjectToString(Session["merci"]);
+                Session["merci"] = null;
+
+            }
+            
+            if(winhidden.Value=="y" || (Session["byebye"] !=null && ((string)Session["byebye"])=="yes")) {
+                Button1X.Text = Utils.ObjectToString("Push Me");
+                Session["byebye"] = null;
+                Timer1.Enabled = false;
+            }
+        }
+
+        protected void button1click(object sender, EventArgs args) {
+            Session["byebye"] = null;
+            Session["merci"] = null;
+            Timer1.Enabled = true;
+        }
         private static string DataSetCacheKey = "RVDataSet";
         protected override System.Data.DataSet buildDataSet() {
             DataSet ds = null;

@@ -13,6 +13,15 @@ namespace SubmittalProposal {
     public partial class RVStorage {
         
         /// <summary>
+        /// winhidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField winhidden;
+        
+        /// <summary>
         /// Label18 control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,15 @@ namespace SubmittalProposal {
         protected global::AjaxControlToolkit.TabPanel tabPanelOwnerInformation;
         
         /// <summary>
+        /// Timer1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer Timer1;
+        
+        /// <summary>
         /// updatePanel3aa control.
         /// </summary>
         /// <remarks>
@@ -146,6 +164,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbRVOwnerFirstNameUpdate;
+        
+        /// <summary>
+        /// Button1X control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1X;
         
         /// <summary>
         /// Label9 control.

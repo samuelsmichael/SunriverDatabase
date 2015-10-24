@@ -23,8 +23,7 @@ namespace SubmittalProposal {
         protected abstract void clearAllSelectionInputFields();
         protected abstract void clearAllNewFormInputFields();
         protected abstract string UpdateRoleName { get; }
-        protected abstract void weveComeHereForTheFirstTimeThisSession();
-        
+        protected abstract void weveComeHereForTheFirstTimeThisSession();        
         protected abstract void childPageLoad(object sender, EventArgs e);
 
         protected void Page_Load(object sender, EventArgs e) {

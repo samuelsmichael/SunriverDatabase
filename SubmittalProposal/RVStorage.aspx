@@ -1,7 +1,22 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true"
-    CodeBehind="RVStorage.aspx.cs" Inherits="SubmittalProposal.RVStorage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true" CodeBehind="RVStorage.aspx.cs" Inherits="SubmittalProposal.RVStorage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
+        <asp:HiddenField ID="winhidden" Value="n" runat="server" />
+        <script language="javascript" type="text/javascript">
+            function chkwinclosed() {
+                if (win2.closed) {
+                    document.getElementById("<%=winhidden.ClientID %>").value = "y";
+                    return;
+                }
+                setTimeout("chkwinclosed()", 1000)
+            }
+            function openwindow() {
+                document.getElementById("<%=winhidden.ClientID %>").value = "n";                
+                win2 = window.open('WebForm1.aspx', '_blank', 'width=300,height=100,left=100,top=100'); 
+                setTimeout('chkwinclosed()', 2000);
+            }
+        </script>
+
     <td>
         <asp:Label ID="Label18" runat="server" Text="Last name"></asp:Label>
         <asp:TextBox ID="tbLastNameSearch" Width="125" MaxLength="25" runat="server"></asp:TextBox>
@@ -68,6 +83,7 @@
                         runat="server"  onactivetabchanged="tcRVStorageUpdate_ActiveTabChanged">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelOwnerInformation" HeaderText="Owner Information">
             <ContentTemplate>
+                <asp:Timer ID="Timer1" Enabled="false" OnTick="Timer1_Tick" runat="server" Interval="1000" />
                 <asp:UpdatePanel ID="updatePanel3aa" runat="server">
                     <ContentTemplate>
                         <table cellpadding="4" width="100%" cellspacing="4" border="0">
@@ -82,6 +98,10 @@
                                                 <td>
                                                     <asp:TextBox CssClass="form_field" ID="tbRVOwnerFirstNameUpdate" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
                                                         runat="server"></asp:TextBox>
+                                                    <asp:Button ID="Button1X" Text="Push Me" runat="server" 
+                                                        OnClick="button1click" 
+                                                        OnClientClick="javascript:openwindow();return true;" />
+                                      
                                                 </td>
                                             </tr>
                                             <tr>
@@ -657,13 +677,8 @@
                                     </td>
                                 </tr>
                             </table>
-
-                            
                         </asp:Panel>
                         <asp:Panel runat="server" Style="height:200px;overflow:auto; text-align: center;" ID="Panel6">
-
-
-
     <asp:GridView ID="gvRVStorageAvailableSpaces" OnSelectedIndexChanged="gvRVStorageAvailableSpaces_SelectedIndexChanged"
         runat="server" AutoGenerateColumns="False"
         CellPadding="4" ForeColor="#333333" GridLines="None" 
@@ -702,7 +717,9 @@
             ID="btnRVUpdate" OnClick="btnRVUpdateOkay_Click" OnClientClick="javascript: return true;"
             runat="server" Text="Submit" />
         <asp:Label ID="lblRVUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+      
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
 </asp:Content>
+  

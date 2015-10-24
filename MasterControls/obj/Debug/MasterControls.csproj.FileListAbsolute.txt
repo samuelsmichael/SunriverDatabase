@@ -1,0 +1,4 @@
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\MasterControls\bin\Debug\MasterControls.dll
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\MasterControls\bin\Debug\MasterControls.pdb
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\MasterControls\obj\Debug\MasterControls.dll
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\MasterControls\obj\Debug\MasterControls.pdb
