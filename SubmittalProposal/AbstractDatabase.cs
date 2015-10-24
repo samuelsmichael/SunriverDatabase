@@ -36,7 +36,7 @@ namespace SubmittalProposal {
             }
             childPageLoad(sender, e);
             ((SiteMaster)Master.Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
-            if (HttpContext.Current.User.IsInRole(UpdateRoleName)) {
+            if (UpdateRoleName=="all"||HttpContext.Current.User.IsInRole(UpdateRoleName)) {
                 ((Database)Master).enableUnlockRecordCheckbox(true);
             } else {
                 ((Database)Master).enableUnlockRecordCheckbox(false);

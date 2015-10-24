@@ -105,6 +105,7 @@
     <Content Include="IDCardManagement.aspx" />
     <Content Include="Images\animated_progress.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
+    <Content Include="OwnerPropertyFinder.aspx" />
     <Content Include="Reports\BPermitsBuildingPermitsIssued.aspx" />
     <Content Include="Reports\BPermitsClosed.aspx" />
     <Content Include="Reports\ComplianceReviewHistory.aspx" />
@@ -329,6 +330,13 @@
       <DependentUpon>MainMasterPage.master</DependentUpon>
     </Compile>
     <Compile Include="ObjectShredder.cs" />
+    <Compile Include="OwnerPropertyFinder.aspx.cs">
+      <DependentUpon>OwnerPropertyFinder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OwnerPropertyFinder.aspx.designer.cs">
+      <DependentUpon>OwnerPropertyFinder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

@@ -11,8 +11,15 @@
                 setTimeout("chkwinclosed()", 1000)
             }
             function openwindow() {
-                document.getElementById("<%=winhidden.ClientID %>").value = "n";                
-                win2 = window.open('WebForm1.aspx', '_blank', 'width=300,height=100,left=100,top=100'); 
+                //Allow for borders.
+                width = 1000;
+                height = 600;
+                leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+                //Allow for title and status bars.
+                topPosition = (window.screen.height / 2) - ((height / 2) + 50);
+                document.getElementById("<%=winhidden.ClientID %>").value = "n";
+                vars = 'status=no,width='+width+',height='+height+',left='+leftPosition+',top='+topPosition+',toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,directories=no';
+                win2 = window.open('OwnerPropertyFinder.aspx', '_blank', vars); 
                 setTimeout('chkwinclosed()', 2000);
             }
         </script>
@@ -98,7 +105,7 @@
                                                 <td>
                                                     <asp:TextBox CssClass="form_field" ID="tbRVOwnerFirstNameUpdate" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
                                                         runat="server"></asp:TextBox>
-                                                    <asp:Button ID="Button1X" Text="Push Me" runat="server" 
+                                                    <asp:Button ID="Button1X" Text="Find Owner/Property" runat="server" 
                                                         OnClick="button1click" 
                                                         OnClientClick="javascript:openwindow();return true;" />
                                       

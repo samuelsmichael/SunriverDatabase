@@ -20,10 +20,8 @@ namespace SubmittalProposal {
         public void HeresYourData(List<string> data) {
             foreach (string datum in data) {
                 string datumx = datum;
-                Session["merci"] = datumx;
-                if (datumx == "jones") {
-                    Session["byebye"] = "yes";
-                }
+                Session["valueselectedbyfind"] = datumx;
+                Session["byebye"] = "yes";
             }
         }
     }

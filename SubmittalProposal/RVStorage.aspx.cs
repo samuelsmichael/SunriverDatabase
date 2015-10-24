@@ -225,22 +225,26 @@ namespace SubmittalProposal {
 
         protected void Timer1_Tick(object sender, EventArgs e) {
             Button1X.Text= DateTime.Now.ToString();
-            if (Session["merci"] != null) {
-                Button1X.Text = Utils.ObjectToString(Session["merci"]);
-                Session["merci"] = null;
+            if (Session["valueselectedbyfind"] != null) {
+                Button1X.Text = "Find Owner/Property";
+                Session["valueselectedbyfind"] = null;
 
             }
             
+            /*
+             *  winhidden -> user closed the window with the red X, or Alt-F1 (4?)
+             *  Session["byebye"] is set when user clicks the Choose button
+            */
             if(winhidden.Value=="y" || (Session["byebye"] !=null && ((string)Session["byebye"])=="yes")) {
-                Button1X.Text = Utils.ObjectToString("Push Me");
                 Session["byebye"] = null;
                 Timer1.Enabled = false;
+                Button1X.Text = "Find Owner/Property";
             }
         }
 
         protected void button1click(object sender, EventArgs args) {
             Session["byebye"] = null;
-            Session["merci"] = null;
+            Session["valueselectedbyfind"] = null;
             Timer1.Enabled = true;
         }
         private static string DataSetCacheKey = "RVDataSet";
