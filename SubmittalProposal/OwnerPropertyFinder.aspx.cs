@@ -110,6 +110,11 @@ namespace SubmittalProposal {
         protected override Label getUpdateResultsLabel() {
             return lblDumbo;
         }
+        /// <summary>
+        /// I'm a web service
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSelect_Click(object sender, EventArgs e) {
             GetPageInfo gpi = new GetPageInfo();
             List<string> ls = new List<string>();
@@ -124,11 +129,17 @@ namespace SubmittalProposal {
         }
 
         protected override void unlockYourUpdateFields() {
-           
+           // Ne touchez rien ici dans ce method!
+            btnSelect.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
-            
+            tbContact.Enabled = false;
+            tbEmail.Enabled = false;
+            tbName.Enabled = false;
+            tbSunriverPhone.Enabled = false;
+            tbOwnerId.Enabled = false;
+            btnSelect.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {

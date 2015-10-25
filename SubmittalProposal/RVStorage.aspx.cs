@@ -224,27 +224,60 @@ namespace SubmittalProposal {
         }
 
         protected void Timer1_Tick(object sender, EventArgs e) {
-            Button1X.Text= DateTime.Now.ToString();
-            if (Session["valueselectedbyfind"] != null) {
-                Button1X.Text = "Find Owner/Property";
-                Session["valueselectedbyfind"] = null;
+            if (TimerTickerEnabled) {
+                Button1X.Text = "search window is open ... please wait";
+                if (Session["valueselectedbyfind"] != null) {
+                    Button1X.Text = "Find Owner/Property";
+                    Session["valueselectedbyfind"] = null;
+                }
 
-            }
-            
-            /*
-             *  winhidden -> user closed the window with the red X, or Alt-F1 (4?)
-             *  Session["byebye"] is set when user clicks the Choose button
-            */
-            if(winhidden.Value=="y" || (Session["byebye"] !=null && ((string)Session["byebye"])=="yes")) {
-                Session["byebye"] = null;
-                Timer1.Enabled = false;
-                Button1X.Text = "Find Owner/Property";
+                /*
+                 *  winhidden -> user closed the window with the red X, or Alt-F1 (4?)
+                 *  Session["byebye"] is set when user clicks the Choose button
+                */
+                if (winhidden.Value == "y" || (Session["byebye"] != null && ((string)Session["byebye"]) == "yes")) {
+                    Session["byebye"] = null;
+                    TimerTickerEnabled = false;
+                    TimerTickerEnabled = false;
+                    Button1X.Text = "Find Owner/Property";
+                }
+                if (Session["HereCommaHaveAPropertyID"] != null) {
+                    tbPropertyIdOwnerInfo.Text = (string)Session["HereCommaHaveAPropertyID"];
+                    Session["HereCommaHaveAPropertyID"] = null;
+                    btnRVUpdateOkay_Click(null, null);
+                }
+                if (Session["HereCommaHaveAClientID"] != null) {
+                    zCustomerID = (string)Session["HereCommaHaveAClientID"];
+                    tbOwnerIdOwnerInfo.Text = zCustomerID;
+                    Session["HereCommaHaveAClientID"] = null;
+                    btnRVUpdateOkay_Click(null, null);
+                }
             }
         }
-
+        private bool TimerTickerEnabled {
+            get {
+                object obj=Session["TimerTickerEnableBB"];
+                return !(obj==null); 
+            }
+            set {
+                Session["TimerTickerEnableBB"] = value;
+                if (value) {
+                    if (!Timer1.Enabled) {
+                        Timer1.Enabled = true;
+                        TimerTickerEnabled=true;
+                    }
+                } else {
+                    if(Timer1.Enabled) {
+                        Timer1.Enabled=false;
+                        TimerTickerEnabled=false;
+                    }
+                }
+            }
+        }
         protected void button1click(object sender, EventArgs args) {
             Session["byebye"] = null;
             Session["valueselectedbyfind"] = null;
+            TimerTickerEnabled = true;
             Timer1.Enabled = true;
         }
         private static string DataSetCacheKey = "RVDataSet";
@@ -462,6 +495,9 @@ namespace SubmittalProposal {
         }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
+                
+                Session["HereCommaHaveAPropertyID"] = null;
+                
                 DataView dv = new DataView(buildDataSet().Tables[1]);
                 DataTable dt = dv.Table.Copy();
                 DataRow dr = dt.NewRow();
@@ -472,6 +508,8 @@ namespace SubmittalProposal {
 
                 ddlRVSpaceInfoSpaceSizeReqdUpdate.DataSource = buildDataSet().Tables[2];
                 ddlRVSpaceInfoSpaceSizeReqdUpdate.DataBind();
+                Timer1.Enabled = false;
+                TimerTickerEnabled = false;
             }
         }
 
