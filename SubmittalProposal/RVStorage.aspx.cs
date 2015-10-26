@@ -58,7 +58,7 @@ namespace SubmittalProposal {
 
         
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            lblLeasedCancelledErrorMessage.Text = "";
+            lblLeasedCancelledErrorMessageUpdate.Text = "";
             DataSet ds = null;
             tcRVStorageUpdate.ActiveTabIndex = 0;
             GridViewRow row = gvResults.SelectedRow;
@@ -134,7 +134,7 @@ namespace SubmittalProposal {
             DateTime? waitListDateUpdate = Utils.ObjectToDateTimeNullable(dr["WaitListDate"]);
             tbWaitListDateUpdate.Text = waitListDateUpdate.HasValue ? waitListDateUpdate.Value.ToString("d") : "";
             DateTime? leaseCancelledDate = Utils.ObjectToDateTimeNullable(dr["LeaseCancelDate"]);
-            tbLeaseCancelledDate.Text = leaseCancelledDate.HasValue ? leaseCancelledDate.Value.ToString("d") : "";
+            tbLeaseCancelledDateUpdate.Text = leaseCancelledDate.HasValue ? leaseCancelledDate.Value.ToString("d") : "";
             tbNotesUpdate.Text = Utils.ObjectToString(dr["Notes"]);
             #endregion
             #region Non-Owner Info
@@ -412,7 +412,7 @@ namespace SubmittalProposal {
     if (leaseStartDate.HasValue) {
         cmd.Parameters.Add("@LeaseStartDate", SqlDbType.DateTime).Value = leaseStartDate;
     }
-    DateTime? leaseCancelDate = Utils.ObjectToDateTimeNullable(tbLeaseCancelledDate.Text);
+    DateTime? leaseCancelDate = Utils.ObjectToDateTimeNullable(tbLeaseCancelledDateUpdate.Text);
     if (leaseCancelDate.HasValue) {
         cmd.Parameters.Add("@LeaseCancelDate", SqlDbType.DateTime).Value = leaseCancelDate;
     }
@@ -423,7 +423,7 @@ namespace SubmittalProposal {
 //    @CreditPaid bit,
 //    @FinalRent real,
     cmd.Parameters.Add("@PropOwnerName", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerNameUpdate.Text;
-    cmd.Parameters.Add("@PropOwnerID", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerId.Text;
+    cmd.Parameters.Add("@PropOwnerID", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerIdUpdate.Text;
 
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 clearAllSelectionInputFields();
@@ -471,9 +471,9 @@ namespace SubmittalProposal {
             tbWaitListDateUpdate.Enabled = true;
             ibtbWaitListDateUpdate.Enabled = true;
             cetbWaitListDateUpdate.Enabled = true;
-            tbLeaseCancelledDate.Enabled = true;
-            ibtbLeaseCancelledDate.Enabled = true;
-            cbtbLeaseCancelledDate.Enabled = true;
+            tbLeaseCancelledDateUpdate.Enabled = true;
+            ibtbLeaseCancelledDateUpdate.Enabled = true;
+            cbtbLeaseCancelledDateUpdate.Enabled = true;
             tbNotesUpdate.Enabled = true;
 
             tbNonOwnerFirstNameUpdate.Enabled = true;
@@ -520,9 +520,9 @@ namespace SubmittalProposal {
             tbWaitListDateUpdate.Enabled = false;
             ibtbWaitListDateUpdate.Enabled = false;
             cetbWaitListDateUpdate.Enabled = false;
-            tbLeaseCancelledDate.Enabled = false;
-            ibtbLeaseCancelledDate.Enabled = false;
-            cbtbLeaseCancelledDate.Enabled = false;
+            tbLeaseCancelledDateUpdate.Enabled = false;
+            ibtbLeaseCancelledDateUpdate.Enabled = false;
+            cbtbLeaseCancelledDateUpdate.Enabled = false;
             tbNotesUpdate.Enabled = false;
             tbNonOwnerFirstNameUpdate.Enabled = false;
             tbRVNonOwnerLastNameUpdate.Enabled = false;
@@ -582,6 +582,7 @@ namespace SubmittalProposal {
             }
         }
 
+
         /// <summary>
         /// The form hasn't been updated yet; so this is a place where inter-tab communication can take place.
         ///   -- PendingSpace has the Space from the Owner Info tab; so use that value on the RV & Space information tab.
@@ -620,8 +621,7 @@ namespace SubmittalProposal {
                     break;
             }
         }
-        protected void btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick(object sender, EventArgs args) {
-        }
+
         protected void aNonOwnerFieldChanged_TextChanged(object sender, EventArgs args) {
             tbOtherPhoneUpdate.Text = tbNonOwnerOtherPhoneUpdate.Text;
             tbRVOwnerFirstNameUpdate.Text = tbNonOwnerFirstNameUpdate.Text;
@@ -652,10 +652,22 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add(name);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 if (Utils.isNothingNot(rvLeaseID.Value)) {
-                    lblLeasedCancelledErrorMessage.Text = "This space is already leased by "+name.Value+ " (RVLeaseID "+rvLeaseID.Value+").";
+                    lblLeasedCancelledErrorMessageUpdate.Text = "This space is already leased by "+name.Value+ " (RVLeaseID "+rvLeaseID.Value+").";
                     ((DropDownList)sender).SelectedValue = "Yes";
                 }
             }
         }
-    }
+        protected void btnNewRVLeaseOk_Click(object sender, EventArgs args) {
+            if (CPERVNewRVLease != null) {
+                CPERVNewRVLease.Collapsed = false;
+                CPERVNewRVLease.ClientState = "false";
+            } else {
+                 CPERVNewRVLease.Collapsed = true;
+            }
+        }
+        protected void btnNonOwnerLookupSunriverPropertyOwnerInformationupdate_onclick(Object sender, EventArgs args) {
+        }
+        protected void tcRVStorageNew_ActiveTabChanged(Object sende, EventArgs args) {
+        }
+      }
 }

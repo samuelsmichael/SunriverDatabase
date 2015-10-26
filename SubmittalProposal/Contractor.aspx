@@ -473,7 +473,7 @@
     <asp:LinkButton ID="lbNewContractor" runat="server">New Contractor</asp:LinkButton>
     <ajaxToolkit:ModalPopupExtender ID="mpeNewContractor" runat="server" TargetControlID="lbNewContractor"
         PopupControlID="pnlNewContractorId" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewContractorTitleId"
-        BehaviorID="jdpopupnewContractor" />
+        BehaviorID="lbNewContractor" />
     <script language="javascript" type="text/javascript">
         function shown() {
             var tb = document.getElementById('<% =tbCompanyNew.ClientID %>');

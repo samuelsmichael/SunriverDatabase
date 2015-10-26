@@ -895,13 +895,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.DropDownList ddlLeaseCancelledUpdate;
         
         /// <summary>
-        /// lblLeasedCancelledErrorMessage control.
+        /// lblLeasedCancelledErrorMessageUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLeasedCancelledErrorMessage;
+        protected global::System.Web.UI.WebControls.Label lblLeasedCancelledErrorMessageUpdate;
         
         /// <summary>
         /// Label33 control.
@@ -958,40 +958,40 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label36;
         
         /// <summary>
-        /// tbLeaseCancelledDate control.
+        /// tbLeaseCancelledDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLeaseCancelledDate;
+        protected global::System.Web.UI.WebControls.TextBox tbLeaseCancelledDateUpdate;
         
         /// <summary>
-        /// ibtbLeaseCancelledDate control.
+        /// ibtbLeaseCancelledDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibtbLeaseCancelledDate;
+        protected global::System.Web.UI.WebControls.ImageButton ibtbLeaseCancelledDateUpdate;
         
         /// <summary>
-        /// cbtbLeaseCancelledDate control.
+        /// cbtbLeaseCancelledDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender cbtbLeaseCancelledDate;
+        protected global::AjaxControlToolkit.CalendarExtender cbtbLeaseCancelledDateUpdate;
         
         /// <summary>
-        /// rvtbLeaseCancelledDate control.
+        /// rvtbLeaseCancelledDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator rvtbLeaseCancelledDate;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rvtbLeaseCancelledDateUpdate;
         
         /// <summary>
         /// Label35 control.
@@ -1030,13 +1030,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbLeaseInformationAnnualRentProtectedUpdate;
         
         /// <summary>
-        /// pnlNotes control.
+        /// pnlNotesUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlNotes;
+        protected global::System.Web.UI.WebControls.Panel pnlNotesUpdate;
         
         /// <summary>
         /// tbNotesUpdate control.
@@ -1057,13 +1057,13 @@ namespace SubmittalProposal {
         protected global::AjaxControlToolkit.TabPanel tabPanel3;
         
         /// <summary>
-        /// updatePanel3 control.
+        /// updatePanel3x3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanel3;
+        protected global::System.Web.UI.UpdatePanel updatePanel3x3;
         
         /// <summary>
         /// Panel4 control.
@@ -1345,31 +1345,31 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label46;
         
         /// <summary>
-        /// tbNonOwnerPropertyOwnerId control.
+        /// tbNonOwnerPropertyOwnerIdUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbNonOwnerPropertyOwnerId;
+        protected global::System.Web.UI.WebControls.TextBox tbNonOwnerPropertyOwnerIdUpdate;
         
         /// <summary>
-        /// btnNonOwnerLookupSunriverPropertyOwnerInformation control.
+        /// btnNonOwnerLookupSunriverPropertyOwnerInformationUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNonOwnerLookupSunriverPropertyOwnerInformation;
+        protected global::System.Web.UI.WebControls.Button btnNonOwnerLookupSunriverPropertyOwnerInformationUpdate;
         
         /// <summary>
-        /// pnlAvailableSpaces control.
+        /// pnlAvailableSpaces2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAvailableSpaces;
+        protected global::System.Web.UI.WebControls.Panel pnlAvailableSpaces2;
         
         /// <summary>
         /// pnlAvailableSpacesTitle control.
@@ -1390,13 +1390,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label lbl;
         
         /// <summary>
-        /// closePopup control.
+        /// closePopup2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink closePopup;
+        protected global::System.Web.UI.WebControls.HyperLink closePopup2;
         
         /// <summary>
         /// Panel6 control.
@@ -1433,5 +1433,149 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRVUpdateResults;
+        
+        /// <summary>
+        /// pnlNewRVLease control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNewRVLease;
+        
+        /// <summary>
+        /// pnlNewRVTitleId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNewRVTitleId;
+        
+        /// <summary>
+        /// tcRVStoragenew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabContainer tcRVStoragenew;
+        
+        /// <summary>
+        /// tabPanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tabPanel4;
+        
+        /// <summary>
+        /// Timer2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer Timer2;
+        
+        /// <summary>
+        /// updatePanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel4;
+        
+        /// <summary>
+        /// tabPanel5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tabPanel5;
+        
+        /// <summary>
+        /// updatePanel5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel5;
+        
+        /// <summary>
+        /// tabPanel6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tabPanel6;
+        
+        /// <summary>
+        /// updatePanel6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel6;
+        
+        /// <summary>
+        /// tabPanel7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tabPanel7;
+        
+        /// <summary>
+        /// updatePanel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel3;
+        
+        /// <summary>
+        /// btnNewRVLeaseOk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewRVLeaseOk;
+        
+        /// <summary>
+        /// btnCancelNewRVLease control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelNewRVLease;
+        
+        /// <summary>
+        /// lbNewRVLease control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbNewRVLease;
+        
+        /// <summary>
+        /// CPERVNewRVLease control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CollapsiblePanelExtender CPERVNewRVLease;
     }
 }

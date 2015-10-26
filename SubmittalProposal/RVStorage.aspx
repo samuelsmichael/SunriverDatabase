@@ -470,7 +470,7 @@
                                                         <asp:ListItem>Yes</asp:ListItem>
                                                         <asp:ListItem Selected="True">No</asp:ListItem>
                                                     </asp:DropDownList>
-                                                    <asp:Label runat="server" ID="lblLeasedCancelledErrorMessage" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                    <asp:Label runat="server" ID="lblLeasedCancelledErrorMessageUpdate" Font-Bold="true" ForeColor="Red"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -494,16 +494,16 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Lease Cancelled Date"></asp:Label>
                                                 </td>
                                                 <td style="white-space:nowrap">
-                                                    <asp:TextBox CssClass="form_field" ID="tbLeaseCancelledDate" MaxLength="10" Width="75"
+                                                    <asp:TextBox CssClass="form_field" ID="tbLeaseCancelledDateUpdate" MaxLength="10" Width="75"
                                                         runat="server"></asp:TextBox>
                                                     <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibtbLeaseCancelledDate" runat="server" />
+                                                        ID="ibtbLeaseCancelledDateUpdate" runat="server" />
                                                 </td>
-                                                <ajaxToolkit:CalendarExtender ID="cbtbLeaseCancelledDate" runat="server" TargetControlID="tbLeaseCancelledDate"
-                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLeaseCancelledDate" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvtbLeaseCancelledDate" Display="Dynamic"
+                                                <ajaxToolkit:CalendarExtender ID="cbtbLeaseCancelledDateUpdate" runat="server" TargetControlID="tbLeaseCancelledDateUpdate"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLeaseCancelledDateUpdate" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvtbLeaseCancelledDateUpdate" Display="Dynamic"
                                                     ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                                                    ControlToValidate="tbLeaseCancelledDate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                    ControlToValidate="tbLeaseCancelledDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -530,7 +530,7 @@
 
                                 </td>
                                 <td valign="top">
-                                    <asp:Panel ID="pnlNotes" BorderWidth="0" BorderColor="White" BorderStyle="None" runat="server" Width="39em" GroupingText="Notes">
+                                    <asp:Panel ID="pnlNotesUpdate" BorderWidth="0" BorderColor="White" BorderStyle="None" runat="server" Width="39em" GroupingText="Notes">
                                         <center><asp:TextBox runat="server" ID="tbNotesUpdate" Height="8em" TextMode="MultiLine" Width="40em"></asp:TextBox></center>
                                     </asp:Panel>
                                 </td>
@@ -542,7 +542,7 @@
         </ajaxToolkit:TabPanel>
         <ajaxToolkit:TabPanel runat="server" ID="tabPanel3" HeaderText="NonOwner Information">
             <ContentTemplate>
-                <asp:UpdatePanel ID="updatePanel3" runat="server">
+                <asp:UpdatePanel ID="updatePanel3x3" runat="server">
                     <ContentTemplate>
                         <table cellpadding="1" width="100%" cellspacing="1" border="0">
                             <tr valign="top">
@@ -671,12 +671,12 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label46" runat="server" Text="Prop Owner ID#"></asp:Label>
                                     </td>
                                     <td   valign="top">
-                                        <asp:TextBox ID="tbNonOwnerPropertyOwnerId" MaxLength="25" Width="155"
+                                        <asp:TextBox ID="tbNonOwnerPropertyOwnerIdUpdate" MaxLength="25" Width="155"
                                             runat="server"></asp:TextBox>
                                     </td>
                                     <td>
-                                        <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformation" runat="server" Text="Lookup Sunriver Property Owner Information"
-                                                 OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick" />
+                                        <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformationUpdate" runat="server" Text="Lookup Sunriver Property Owner Information"
+                                                 OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformationupdate_onclick" />
                                     </td>
                                 </tr>
                             </table>
@@ -686,7 +686,7 @@
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
     </ajaxToolkit:TabContainer>
-                        <asp:Panel runat="server" CssClass="newitempopup" ID="pnlAvailableSpaces">
+                        <asp:Panel runat="server" CssClass="newitempopup" ID="pnlAvailableSpaces2">
                         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlAvailableSpacesTitle">
 
                             <table style="width: 100%;">
@@ -694,7 +694,7 @@
                                     <td width="10%"></td>
                                     <td align="center"><asp:Label id="lbl" runat="server" Text="Available Spaces" ></asp:Label>
                                     </td>
-                                    <td width="10%"><asp:HyperLink id="closePopup" runat="server" CssClass="ClosePopupCls">Close [x]</asp:HyperLink>
+                                    <td width="10%"><asp:HyperLink id="closePopup2" runat="server" CssClass="ClosePopupCls">Close [x]</asp:HyperLink>
                                     </td>
                                 </tr>
                             </table>
@@ -742,5 +742,90 @@
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
-</asp:Content>
+    <script language="javascript" type="text/javascript">
+        function onRewRVCancel() {
+            if (confirm("Are you sure that you wish to cancel?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+ <asp:Panel runat="server" Width="900px" CssClass="newitempopup" ID="pnlNewRVLease">
+        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewRVTitleId">
+            <span>New RV Space</span>
+        </asp:Panel>   
+        <script language="javascript" type="text/javascript">
+            function onNewRVLeaseCancel() {
+                 if (confirm("Are you sure that you wish to cancel?")) {
+                     return true;
+                 } else {
+                     return false;
+                 }
+             }
+        </script>
+        <ajaxToolkit:TabContainer Height="316" ActiveTabIndex="0" ID="tcRVStoragenew" AutoPostBack="true"
+                            runat="server"  onactivetabchanged="tcRVStorageNew_ActiveTabChanged">
+            <ajaxToolkit:TabPanel runat="server" ID="tabPanel4" HeaderText="Owner Information">
+                <ContentTemplate>
+                    <asp:Timer ID="Timer2" Enabled="false" OnTick="Timer1_Tick" runat="server" Interval="1000" />
+                    <asp:UpdatePanel ID="updatePanel4" runat="server">
+                        <ContentTemplate>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </ContentTemplate>
+            </ajaxToolkit:TabPanel>
+            <ajaxToolkit:TabPanel runat="server" ID="tabPanel5" HeaderText="RV & Space Information">
+                <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel5" runat="server">
+                        <ContentTemplate>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </ContentTemplate>
+            </ajaxToolkit:TabPanel>
+            <ajaxToolkit:TabPanel runat="server" ID="tabPanel6" HeaderText="Lease Information">
+                <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel6" runat="server">
+                        <ContentTemplate>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </ContentTemplate>
+            </ajaxToolkit:TabPanel>
+            <ajaxToolkit:TabPanel runat="server" ID="tabPanel7" HeaderText="Non Owner Information">
+                <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel3" runat="server">
+                        <ContentTemplate>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </ContentTemplate>
+            </ajaxToolkit:TabPanel>
   
+       </ajaxToolkit:TabContainer>
+
+
+
+         <center>
+            <table cellpadding="2" cellspacing="2">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnNewRVLeaseOk" CausesValidation="true" runat="server" Text="Okay"
+                            OnClick="btnNewRVLeaseOk_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnCancelNewRVLease" OnClientClick="return onNewRVLeaseCancel()"
+                            runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </asp:Panel> 
+
+     <asp:LinkButton ID="lbNewRVLease" runat="server">New RV Lease</asp:LinkButton>     
+     <ajaxToolkit:CollapsiblePanelExtender ID="CPERVNewRVLease" runat="server" TargetControlID="pnlNewRVLease"
+                Collapsed="true" SuppressPostBack="False" ExpandControlID = "lbNewRVLease" CollapseControlID="btnCancelNewRVLease"
+                Enabled="True" > 
+                </ajaxToolkit:CollapsiblePanelExtender>
+
+</asp:Content>
+
+

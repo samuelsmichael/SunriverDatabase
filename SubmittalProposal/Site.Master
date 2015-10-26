@@ -43,7 +43,7 @@
                     (args._postBackElement.id).indexOf("Update") != -1)
                )                
                 {
-                   // debugger
+                    debugger
                     var loading = $(".loading");
                     loading.show();
                     var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
