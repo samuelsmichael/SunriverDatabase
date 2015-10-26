@@ -113,7 +113,7 @@
                                 </table>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
-            ID="btnSelect" OnClick="btnSelect_Click" OnClientClick="javascript: return true;"
+            ID="btnSelect" OnClick="btnSelect_Click" OnClientClick="return true;" 
             runat="server" Text="Select" />
         <asp:Label ID="lblDumbo" Font-Bold="true" runat="server" Text=""></asp:Label>
       

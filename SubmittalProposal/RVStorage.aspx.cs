@@ -181,6 +181,9 @@ namespace SubmittalProposal {
                 sbFilter.Append(and + " tRVDSpace = '" + ddlSpaceInfoSearch.SelectedValue + "'");
                 and = " and ";
             }
+
+
+
             if (Utils.isNothingNot(tbRVLeaseIdSearch.Text)) {
                 int rvLeaseId = -999;
                 try {
@@ -191,6 +194,18 @@ namespace SubmittalProposal {
                         ;
                     and = " and ";
                 } catch { 
+                }
+            }
+            if (Utils.isNothingNot(tbCustomerIDSearch.Text)) {
+                int rvCustomerID = -999;
+                try {
+                    rvCustomerID = Convert.ToInt32(tbCustomerIDSearch.Text);
+                    sb.Append(prepend + "Customer ID: " + tbCustomerIDSearch.Text);
+                    prepend = "  ";
+                    sbFilter.Append(and + " CustomerID = '" + tbCustomerIDSearch.Text + "'");
+                    ;
+                    and = " and ";
+                } catch {
                 }
             }
             if (Utils.isNothingNot(ddlYesNoSearch.SelectedValue)) {
@@ -223,53 +238,102 @@ namespace SubmittalProposal {
             return retValue;
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e) {
-            if (TimerTickerEnabled) {
-                Button1X.Text = "search window is open ... please wait";
-                if (Session["valueselectedbyfind"] != null) {
-                    Button1X.Text = "Find Owner/Property";
-                    Session["valueselectedbyfind"] = null;
-                }
+        protected bool ImInTimerTick {
+            get {
+                object obj = Session["ImInTimerTicks"];
+                return obj==null?false:(bool)obj;
+            }
+            set {
+                Session["ImInTimerTicks"] = value;
+            }
+        }
 
-                /*
-                 *  winhidden -> user closed the window with the red X, or Alt-F1 (4?)
-                 *  Session["byebye"] is set when user clicks the Choose button
-                */
-                if (winhidden.Value == "y" || (Session["byebye"] != null && ((string)Session["byebye"]) == "yes")) {
-                    Session["byebye"] = null;
-                    TimerTickerEnabled = false;
-                    TimerTickerEnabled = false;
-                    Button1X.Text = "Find Owner/Property";
+        protected void Timer1_Tick(object sender, EventArgs e) {
+            if (!ImInTimerTick) {
+                ImInTimerTick = true;
+                if (TimerTickerEnabled) {
+                    if (Session["valueselectedbyfind"] != null) {
+                        Button1X.Text = "Find Owner/Property";
+                        Session["valueselectedbyfind"] = null;
+                    }
+
+                    /*
+                     *  winhidden -> user closed the window with the red X, or Alt-F1 (4?)
+                     *  Session["byebye"] is set when user clicks the Choose button
+                    */
+                    if (winhidden.Value == "y" || (Session["byebye"] != null && ((string)Session["byebye"]) == "yes")) {
+                        Session["byebye"] = null;
+                        TimerTickerEnabled = false;
+                        Button1X.Text = "Find Owner/Property";
+                    }
+                    /*           if (Session["HereCommaHaveAPropertyId"] != null) {
+                                   if (!(Session["HereCommaHaveAPropertyID"]==(Session["PriorPropertIDRVStorage"]))) {
+                                       if (!(tbPropertyIdOwnerInfo.Text.Equals((string)Session["HereCommaHaveAPropertyID"]))) {
+                                           Session["PriorPropertIDRVStorage"] = Session["HereCommaHaveAPropertyID"];
+                                           Session["HereCommaHaveAPropertyID"] = null;
+                                           btnRVUpdateOkay_Click(null, null);
+                                           timetoclosewindowhidden.Value = "y";
+                                       }
+                                   }
+                               } */
+                    if (Session["HereCommaHaveAClientID"] != null) {
+
+                        if (Session["PriorClientIDRVStorage"] == null || !((Session["HereCommaHaveAClientID"] == (Session["PriorClientIDRVStorage"])))) {
+                            if (!(tbRVOwnerFirstNameUpdate.Text.Equals((string)Session["HereCommaHaveAClientyID"]))) {
+
+                                SqlCommand cmd = new SqlCommand("uspClientInfoGet");
+                                cmd.Parameters.Add("ClientID", SqlDbType.NVarChar).Value = Session["HereCommaHaveAClientID"];
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                // Update as many fields as I can be sure of
+
+                                DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
+                                if (ds != null && ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count > 0) {
+                                    DataRow dr = ds.Tables[0].Rows[0];
+                                    tbRVOwnerFirstNameUpdate.Text = Utils.ObjectToString(dr["PrimaryOwner"]);
+                                    tbRVOwnerLastNameUpdate.Text = "";
+                                    tbOtherPhoneUpdate.Text = "";
+                                    tbEmailUpdate.Text = "";
+                                    tbDriversLicenseUpdate.Text = "";
+                                    tbNonOwnerSunriverPhoneUpdate.Text = Utils.ObjectToString(dr["Addr1"]);
+                                    tbAddr1OwnerInfoUpdate.Text = Utils.ObjectToString(dr["Addr1"]);
+                                    tbAddr2OwnerInfo.Text = Utils.ObjectToString(dr["Addr2"]); ;
+                                    tbSunriverPhoneUpdate.Text = Utils.ObjectToString(dr["Phone"]); ;
+                                    tbCityOwnerInfo.Text = Utils.ObjectToString(dr["City"]); ;
+                                    tbRegionOwnerInfo.Text = Utils.ObjectToString(dr["Region"]); ;
+                                    tbPostalCodeOwnerInfo.Text = Utils.ObjectToString(dr["PostalCode"]); ;
+                                    tbSunriverAddressOwnerInfo.Text = Utils.ObjectToString(dr["SRAddress"]);
+
+                                    btnRVUpdateOkay_Click(null, null);
+                                    timetoclosewindowhidden.Value = "y";
+                                }
+
+                                Session["PriorClientIDRVStorage"] = Session["HereCommaHaveAClientyID"];
+                                zCustomerID = Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
+                                Session["HereCommaHaveAClientID"] = null;
+
+
+
+                            }
+                        }
+                    }
                 }
-                if (Session["HereCommaHaveAPropertyID"] != null) {
-                    tbPropertyIdOwnerInfo.Text = (string)Session["HereCommaHaveAPropertyID"];
-                    Session["HereCommaHaveAPropertyID"] = null;
-                    btnRVUpdateOkay_Click(null, null);
-                }
-                if (Session["HereCommaHaveAClientID"] != null) {
-                    zCustomerID = (string)Session["HereCommaHaveAClientID"];
-                    tbOwnerIdOwnerInfo.Text = zCustomerID;
-                    Session["HereCommaHaveAClientID"] = null;
-                    btnRVUpdateOkay_Click(null, null);
-                }
+                ImInTimerTick = false;
             }
         }
         private bool TimerTickerEnabled {
             get {
                 object obj=Session["TimerTickerEnableBB"];
-                return !(obj==null); 
+                return obj!=null; 
             }
             set {
                 Session["TimerTickerEnableBB"] = value;
                 if (value) {
                     if (!Timer1.Enabled) {
                         Timer1.Enabled = true;
-                        TimerTickerEnabled=true;
                     }
                 } else {
                     if(Timer1.Enabled) {
                         Timer1.Enabled=false;
-                        TimerTickerEnabled=false;
                     }
                 }
             }
@@ -362,7 +426,8 @@ namespace SubmittalProposal {
     cmd.Parameters.Add("@PropOwnerID", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerId.Text;
 
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
-                PendingSpace = null;
+                clearAllSelectionInputFields();
+                tbCustomerIDSearch.Text = zCustomerID;
                 performPostUpdateSuccessfulActions("Update successful", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
@@ -478,6 +543,7 @@ namespace SubmittalProposal {
             tbLastNameSearch.Text = "";
             tbRVLeaseIdSearch.Text = "";
             ddlSpaceInfoSearch.SelectedIndex = 0;
+            tbCustomerIDSearch.Text = "";
         }
 
         protected override void clearAllNewFormInputFields() {
@@ -497,6 +563,9 @@ namespace SubmittalProposal {
             if (!IsPostBack) {
                 
                 Session["HereCommaHaveAPropertyID"] = null;
+                Session["PriorPropertIDRVStorage"]=null;
+                Session["HereCommaHaveAClientID"] = null;
+
                 
                 DataView dv = new DataView(buildDataSet().Tables[1]);
                 DataTable dt = dv.Table.Copy();
@@ -523,7 +592,10 @@ namespace SubmittalProposal {
             string space = PendingSpace;
             tbRVSpaceInfoSpaceProtectedUpdate.Text = space;
             DataRow drSpaceInfo = buildDataSet().Tables[1].Rows.Find(space);
-            string fmtAnnualRent = String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
+            string fmtAnnualRent = "";
+            try {
+                String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
+            } catch { }
             switch (tcRVStorageUpdate.ActiveTabIndex) {
                 case 1:
                     #region RV & Space Into tab

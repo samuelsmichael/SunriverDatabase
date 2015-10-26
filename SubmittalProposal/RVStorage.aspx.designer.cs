@@ -22,6 +22,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.HiddenField winhidden;
         
         /// <summary>
+        /// timetoclosewindowhidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField timetoclosewindowhidden;
+        
+        /// <summary>
         /// Label18 control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,24 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbRVLeaseIdSearch;
+        
+        /// <summary>
+        /// Label47 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label47;
+        
+        /// <summary>
+        /// tbCustomerIDSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbCustomerIDSearch;
         
         /// <summary>
         /// Label12 control.

@@ -1,9 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true" CodeBehind="RVStorage.aspx.cs" Inherits="SubmittalProposal.RVStorage" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
+        
         <asp:HiddenField ID="winhidden" Value="n" runat="server" />
+        <asp:HiddenField ID="timetoclosewindowhidden" runat="server" Value="n" />
         <script language="javascript" type="text/javascript">
             function chkwinclosed() {
+                if (document.getElementById("<%=timetoclosewindowhidden.ClientID %>").value == "y") {
+                    document.getElementById("<%=timetoclosewindowhidden.ClientID %>").value = "n";
+                    document.getElementById("<%=winhidden.ClientID %>").value = "y";
+                        win2.close();
+                    return
+                }
+
                 if (win2.closed) {
                     document.getElementById("<%=winhidden.ClientID %>").value = "y";
                     return;
@@ -18,7 +28,7 @@
                 //Allow for title and status bars.
                 topPosition = (window.screen.height / 2) - ((height / 2) + 50);
                 document.getElementById("<%=winhidden.ClientID %>").value = "n";
-                vars = 'status=no,width='+width+',height='+height+',left='+leftPosition+',top='+topPosition+',toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,directories=no';
+                vars = 'status=no,width=' + width + ',height=' + height + ',left=' + leftPosition + ',top=' + topPosition + ',toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,directories=no';
                 win2 = window.open('OwnerPropertyFinder.aspx', '_blank', vars); 
                 setTimeout('chkwinclosed()', 2000);
             }
@@ -37,6 +47,10 @@
     <td>
         <asp:Label ID="Label1" runat="server" Text="RV Lease Id"></asp:Label>
         <asp:TextBox ID="tbRVLeaseIdSearch" Width="46" MaxLength="6" runat="server"></asp:TextBox>
+    </td>
+    <td>
+        <asp:Label ID="Label47" runat="server" Text="Customer ID"></asp:Label>
+        <asp:TextBox ID="tbCustomerIDSearch" Width="46" MaxLength="6" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label12" runat="server" Text="Cancelled"></asp:Label>
@@ -181,19 +195,19 @@
                                         <table cellpadding="4" cellspacing="4" border="0">
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbAddr1OwnerInfoUpdate" MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbAddr1OwnerInfoUpdate" MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbAddr2OwnerInfo" MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbAddr2OwnerInfo" MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCityOwnerInfo" MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCityOwnerInfo" MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                     <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbRegionOwnerInfo" MaxLength="3" Width="25"
                                                         runat="server"></asp:TextBox>
@@ -721,7 +735,7 @@
                     </asp:Panel>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
-            ID="btnRVUpdate" OnClick="btnRVUpdateOkay_Click" OnClientClick="javascript: return true;"
+            ID="btnRVUpdate" OnClick="btnRVUpdateOkay_Click" 
             runat="server" Text="Submit" />
         <asp:Label ID="lblRVUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
       

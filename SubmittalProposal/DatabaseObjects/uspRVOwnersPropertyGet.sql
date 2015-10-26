@@ -5,15 +5,13 @@ GO
 -- =============================================
 -- Author:		Mike Samuels
 -- Create date: 10/20/2015
--- Description:	Main table access for Property/Owner Search Page  
+-- Description:	Get Client Info  
 -- =============================================
-ALTER PROCEDURE uspRVOwnersPropertyGet 
+ALTER PROCEDURE uspClentInfoGet {
+	@ClientID nvarchar(1)
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT q.SRPropID,q.LotLane,q.SRAddress,q.SRLot,q.SRLane,q.CustId as OwnerID,q.PrimaryOwner,
-			c.* 
-	FROM [ID-Card_Split_FE].[dbo].[qryLotLaneWithOwners_Master] q LEFT OUTER JOIN
-		[ID-Card_Split_FE]..tblArCust c ON c.CustId = q.CustId
+	SELECT * FROM  FROM [ID-Card_Split_FE].[dbo].[qryLotLaneWithOwners_Master] WHERE CustId=@ClientID;
 END
 GO

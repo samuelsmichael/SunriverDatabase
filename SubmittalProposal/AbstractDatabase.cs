@@ -57,8 +57,18 @@ namespace SubmittalProposal {
                 MemoryCache.Default.Remove(cacheKey2);
             }
             /* the following statements cause the view to be re-displayed, but with updated data */
-            ((Database)Master).doGo();
-            do_gvResults_SelectedIndexChanged();
+            try {
+                ((Database)Master).doGo();
+            } catch {
+                int x = 3;
+                int u = x;
+            }
+            try {
+                do_gvResults_SelectedIndexChanged();
+            } catch {
+                int u = 7;
+                int l = 8;
+            }
             getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
             getUpdateResultsLabel().Text = status;
             ((Database)Master).getCPEForm.Collapsed = false;

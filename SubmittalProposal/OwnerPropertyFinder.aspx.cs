@@ -116,14 +116,55 @@ namespace SubmittalProposal {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void btnSelect_Click(object sender, EventArgs e) {
+/*
+            ClientScriptManager cs = Page.ClientScript;
+
+            string marreMaisMarre1 = "alert('1 worked');";
+            string marreMaisMarre2 = "alert('2 worked');";
+            string marreMaisMarre3 = "alert('3 worked');";
+*/
             GetPageInfo gpi = new GetPageInfo();
             List<string> ls = new List<string>();
-            ls.Add("PropertyID:"+rvSRPropIDBeingEdited);
-            ls.Add("ClientID:"+CustomerIDBeingEdited);
+            ls.Add("PropertyID:" + rvSRPropIDBeingEdited);
+            ls.Add("ClientID:" + CustomerIDBeingEdited);
             gpi.HeresYourData(ls);
-            ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close();", true);
+            
 
+            // var marreMaisMarre2="";
+            /* way 1
+            String csname1 = "PopupScript";
+            String csname2 = "ButtonClickScript";
+            Type cstype = this.GetType();
+            
+            // Check to see if the startup script is already registered.
+            if (!cs.IsStartupScriptRegistered(cstype, csname1)) {
+                cs.RegisterStartupScript(cstype, csname1, marreMaisMarre1, true);
+            }
+    // Check to see if the client script is already registered.
+    if (!cs.IsClientScriptBlockRegistered(cstype, csname2))
+    {            
+      
+      StringBuilder cstext2 = new StringBuilder();
+      cstext2.Append("<script type=\"text/javascript\">; function DoClick() {");
+      cstext2.Append("alert('about to define function');Form1.Message.value='" + marreMaisMarre1 + "'} </");
+      cstext2.Append("script>");
+      cs.RegisterClientScriptBlock(cstype, csname2, cstext2.ToString(), false);            
+      
+    } */
+
+            /*way  2 
+
+            String csname2 = "PopupScript";
+            Type dothistype = typeof(SubmittalProposal.OwnerPropertyFinder);
+            object x = cs;
+            cs.RegisterStartupScript(dothistype, csname2, marreMaisMarre2);
+            */
+            /* way 3
+            String PopUp = "<script type='text/javascript'>" + marreMaisMarre3 + "</script>";
+            Page.RegisterStartupScript("PopScript",PopUp);
+             }*/
         }
+       
         protected override Label getNewResultsLabel() {
             throw new NotImplementedException();
         }
