@@ -1660,6 +1660,78 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Button btnShowAvailableSpacesAdd;
         
         /// <summary>
+        /// pnlAvailableSpaces_Add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAvailableSpaces_Add;
+        
+        /// <summary>
+        /// pnlAvailableSpacesTitle_Add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAvailableSpacesTitle_Add;
+        
+        /// <summary>
+        /// lblx3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblx3;
+        
+        /// <summary>
+        /// closePopup_Add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink closePopup_Add;
+        
+        /// <summary>
+        /// Panel6x44 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel6x44;
+        
+        /// <summary>
+        /// gvRVStorageAvailableSpaces_Add control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvRVStorageAvailableSpaces_Add;
+        
+        /// <summary>
+        /// Button1Dumbo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1Dumbo1;
+        
+        /// <summary>
+        /// mpeAvailableSpacesAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpeAvailableSpacesAdd;
+        
+        /// <summary>
         /// tabPanel4a1 control.
         /// </summary>
         /// <remarks>

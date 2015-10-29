@@ -25,7 +25,6 @@ namespace SubmittalProposal {
             GridViewRow row = gvRVStorageAvailableSpaces.SelectedRow;
             Object obj = row.Cells;
             tbCurrentSpaceProtectedUpdate.Text = row.Cells[1].Text;
-            tbCurrentSpaceProtectedAdd.Text = row.Cells[1].Text;
             PendingSpace=row.Cells[1].Text;
             mpeAvailableSpaces.Hide();
         }
@@ -704,11 +703,17 @@ namespace SubmittalProposal {
             mpeNewRVStorage.Show();
         }
         protected void btnShowAvailableSpacesAdd_OnClick(object sender, EventArgs args) {
-            gvRVStorageAvailableSpaces.DataSource = buildDataSet().Tables[3];
-            gvRVStorageAvailableSpaces.DataBind();
-            mpeNewRVStorage.Hide();
-            mpeAvailableSpaces.Show();
+            gvRVStorageAvailableSpaces_Add.DataSource = buildDataSet().Tables[3];
+            gvRVStorageAvailableSpaces_Add.DataBind();
+            mpeNewRVStorage.Show();
+            mpeAvailableSpacesAdd.Show();
         }
-
+        protected void gvRVStorageAvailableSpaces_SelectedIndexChanged_Add(object sender, EventArgs args) {
+            GridViewRow row = gvRVStorageAvailableSpaces_Add.SelectedRow;
+            Object obj = row.Cells;
+            tbCurrentSpaceProtectedAdd.Text = row.Cells[1].Text;
+            mpeAvailableSpacesAdd.Hide();
+            mpeNewRVStorage.Show();
+        }
     }
 }

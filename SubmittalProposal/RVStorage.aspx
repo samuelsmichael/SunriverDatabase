@@ -832,10 +832,71 @@
                                             <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCurrentSpaceProtectedAdd" MaxLength="25" Width="125"
                                             runat="server"></asp:TextBox>
                                             <asp:Button ID="btnShowAvailableSpacesAdd" OnClick="btnShowAvailableSpacesAdd_OnClick" runat="server" Text="Available Spaces" CausesValidation="false" />
+
                                     </td>
                                 </tr>
 
                             </table>
+
+
+                        <asp:Panel runat="server" CssClass="newitempopup" ID="pnlAvailableSpaces_Add" style="width:380">
+                        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlAvailableSpacesTitle_Add">
+
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td width="10%"></td>
+                                    <td align="center"><asp:Label id="lblx3" runat="server" Text="Available Spaces" ></asp:Label>
+                                    </td>
+                                    <td width="10%"><asp:HyperLink id="closePopup_Add" runat="server" CssClass="ClosePopupCls">Close [x]</asp:HyperLink>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
+                        <asp:Panel runat="server" Style="height:200px;overflow:auto; text-align: center;" ID="Panel6x44">
+                            <asp:GridView ID="gvRVStorageAvailableSpaces_Add" OnSelectedIndexChanged="gvRVStorageAvailableSpaces_SelectedIndexChanged_Add"
+                                runat="server" AutoGenerateColumns="False"
+                                CellPadding="4" ForeColor="#333333" GridLines="None" 
+        
+                                Style="width: 100%; white-space: nowrap;" >
+
+                                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                <EmptyDataTemplate>
+                                    <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                </EmptyDataTemplate>
+                                <Columns>
+                                    <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
+                                    <asp:BoundField DataField="tSISpace" HeaderText="Space" />
+                                    <asp:BoundField DataField="tSISpaceSize" HeaderText="Size" />
+                                    <asp:BoundField DataField="tSIElectServ" HeaderText="Electricity" />
+                                    <asp:BoundField DataField="AnnualRent" HeaderText="Annual Rent" DataFormatString="{0:c}" />
+                                </Columns>
+                                <EditRowStyle BackColor="#999999" />
+                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                            </asp:GridView>
+
+
+
+                        </asp:Panel>
+                    </asp:Panel>
+
+
+                            <asp:Button runat="server" ID="Button1Dumbo1" style="display:none" />
+                            <ajaxToolkit:ModalPopupExtender ID="mpeAvailableSpacesAdd" runat="server" TargetControlID="Button1Dumbo1"
+                                PopupControlID="pnlAvailableSpaces_Add" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlAvailableSpacesTitle_Add"
+                                CancelControlID="closePopup_Add"
+                                 X="100"
+                                 Y="100"
+                                BehaviorID="bipopupAvailableSpacesAdd" />
+
+
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     </ContentTemplate>
