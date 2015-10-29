@@ -279,7 +279,7 @@ namespace SubmittalProposal {
                     if (Session["HereCommaHaveAClientID"] != null) {
 
                         if (Session["PriorClientIDRVStorage"] == null || !((Session["HereCommaHaveAClientID"] == (Session["PriorClientIDRVStorage"])))) {
-                            if (!(tbRVOwnerFirstNameUpdate.Text.Equals((string)Session["HereCommaHaveAClientyID"]))) {
+                            if (!(tbRVOwnerFirstNameUpdate.Text.Equals((string)Session["HereCommaHaveAClientID"]))) {
 
                                 SqlCommand cmd = new SqlCommand("uspClientInfoGet");
                                 cmd.Parameters.Add("ClientID", SqlDbType.NVarChar).Value = Session["HereCommaHaveAClientID"];
@@ -307,7 +307,7 @@ namespace SubmittalProposal {
                                     timetoclosewindowhidden.Value = "y";
                                 }
 
-                                Session["PriorClientIDRVStorage"] = Session["HereCommaHaveAClientyID"];
+                                Session["PriorClientIDRVStorage"] = Session["HereCommaHaveAClientID"];
                                 zCustomerID = Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
                                 Session["HereCommaHaveAClientID"] = null;
 
@@ -565,6 +565,9 @@ namespace SubmittalProposal {
                 Session["HereCommaHaveAPropertyID"] = null;
                 Session["PriorPropertIDRVStorage"]=null;
                 Session["HereCommaHaveAClientID"] = null;
+                Session["HereCommaHaveAPropertyID_Add"] = null;
+                Session["PriorPropertIDRVStorage_Add"] = null;
+                Session["HereCommaHaveAClientID_Add"] = null;
 
                 
                 DataView dv = new DataView(buildDataSet().Tables[1]);
@@ -579,6 +582,8 @@ namespace SubmittalProposal {
                 ddlRVSpaceInfoSpaceSizeReqdUpdate.DataBind();
                 Timer1.Enabled = false;
                 TimerTickerEnabled = false;
+                Timer2.Enabled = false;
+                TimerTickerEnabled_Add = false;
             }
         }
 
@@ -631,14 +636,26 @@ namespace SubmittalProposal {
             tbDriversLicenseUpdate.Text = tbNonOwnerDriversLicenseUpdate.Text;
             tbStateUpdate.Text = tbNonOwnerStateUpdate.Text;
         }
+        protected void aNonOwnerAddFieldChanged_TextChanged(object sender, EventArgs args) {
+            tbOtherPhoneUpdate.Text = tbNonOwnerOtherPhoneAdd.Text;
+            tbRVOwnerFirstNameUpdate.Text = tbNonOwnerFirstNameAdd.Text;
+            tbRVOwnerLastNameUpdate.Text = tbRVNonOwnerLastNameAdd.Text;
+            tbSunriverPhoneUpdate.Text = tbNonOwnerSunriverPhoneAdd.Text;
+            tbEmailUpdate.Text = tbNonOwnerEmailAdd.Text;
+            tbDriversLicenseUpdate.Text = tbNonOwnerDriversLicenseAdd.Text;
+            tbStateUpdate.Text = tbNonOwnerStateAdd.Text;
+        }
+        protected void btnNonOwnerLookupSunriverPropertyOwnerInformationAdd_onclick(object sender, EventArgs args) {
+        }
+
         protected void anOwnerAddFieldChanged_TextChanged(object sender, EventArgs args) {
-  //          tbNonOwnerOtherPhoneUpdate.Text = tbOtherPhoneUpdate.Text;
-    //        tbNonOwnerFirstNameUpdate.Text = tbRVOwnerFirstNameUpdate.Text;
-      //      tbRVNonOwnerLastNameUpdate.Text = tbRVOwnerLastNameUpdate.Text;
-        //    tbNonOwnerSunriverPhoneUpdate.Text = tbSunriverPhoneUpdate.Text;
-          //  tbNonOwnerEmailUpdate.Text = tbEmailUpdate.Text;
-            //tbNonOwnerDriversLicenseUpdate.Text = tbDriversLicenseUpdate.Text;
-            //tbNonOwnerStateUpdate.Text = tbStateUpdate.Text;
+            tbNonOwnerOtherPhoneAdd.Text = tbOtherPhoneAdd.Text;
+            tbNonOwnerFirstNameAdd.Text = tbRVOwnerFirstNameAdd.Text;
+            tbRVNonOwnerLastNameAdd.Text = tbRVOwnerLastNameAdd.Text;
+            tbNonOwnerSunriverPhoneAdd.Text = tbSunriverPhoneAdd.Text;
+            tbNonOwnerEmailAdd.Text = tbEmailAdd.Text;
+            tbNonOwnerDriversLicenseAdd.Text = tbDriversLicenseAdd.Text;
+            tbNonOwnerStateAdd.Text = tbStateAdd.Text;
         }
         protected void anOwnerFieldChanged_TextChanged(object sender, EventArgs args) {
             tbNonOwnerOtherPhoneUpdate.Text = tbOtherPhoneUpdate.Text;
@@ -686,13 +703,6 @@ namespace SubmittalProposal {
                 performPostNewFailedActions("RVStorage not added. Msg: " + e2.Message);
             }
         }
-        protected void btnFindOwnerProperty_OnClick(object sender, EventArgs args) {
-            Session["byebyeAdd"] = null;
-            Session["valueselectedbyfindAdd"] = null;
-          //  TimerTickerEnabled = true;
-          //  Timer1.Enabled = true;
-            mpeNewRVStorage.Show();
-        }
          /// <summary>
         /// The form hasn't been updated yet; so this is a place where inter-tab communication can take place.
         ///   -- PendingSpace has the Space from the Owner Info tab; so use that value on the RV & Space information tab.
@@ -714,6 +724,109 @@ namespace SubmittalProposal {
             tbCurrentSpaceProtectedAdd.Text = row.Cells[1].Text;
             mpeAvailableSpacesAdd.Hide();
             mpeNewRVStorage.Show();
+        }
+        protected void Button1X_Add_OnClick(object sender, EventArgs args) {
+            Session["byebye_add"] = null;
+            Session["valueselectedbyfind_add"] = null;
+            TimerTickerEnabled_Add = true;
+            Timer2.Enabled = true;
+            mpeNewRVStorage.Show();
+        }
+        protected bool ImInTimerTick_Add {
+            get {
+                object obj = Session["ImInTimerTick_Add"];
+                return obj == null ? false : (bool)obj;
+            }
+            set {
+                Session["ImInTimerTick_Add"] = value;
+            }
+        }
+
+        protected void Timer2_Tick(object sender, EventArgs e) {
+            if (!ImInTimerTick_Add) {
+                ImInTimerTick_Add = true;
+                if (TimerTickerEnabled_Add) {
+                    if (Session["valueselectedbyfind_add"] != null) {
+                        Button1X_Add.Text = "Find Owner/Property";
+                        Session["valueselectedbyfind_add"] = null;
+                    }
+
+                    /*
+                     *  winhidden_add -> user closed the window with the red X, or Alt-F1 (4?)
+                     *  Session["byebye"] is set when user clicks the Choose button
+                    */
+                    if (winhidden_add.Value == "y" || (Session["byebye_add"] != null && ((string)Session["byebye_add"]) == "yes")) {
+                        Session["byebye_add"] = null;
+                        TimerTickerEnabled_Add = false;
+                        Button1X_Add.Text = "Find Owner/Property";
+                    }
+                    /*           if (Session["HereCommaHaveAPropertyId"] != null) {
+                                   if (!(Session["HereCommaHaveAPropertyID"]==(Session["PriorPropertIDRVStorage"]))) {
+                                       if (!(tbPropertyIdOwnerInfo.Text.Equals((string)Session["HereCommaHaveAPropertyID"]))) {
+                                           Session["PriorPropertIDRVStorage"] = Session["HereCommaHaveAPropertyID"];
+                                           Session["HereCommaHaveAPropertyID"] = null;
+                                           btnRVUpdateOkay_Click(null, null);
+                                           timetoclosewindowhidden.Value = "y";
+                                       }
+                                   }
+                               } */
+                    if (Session["HereCommaHaveAClientID_Add"] != null) {
+
+                        if (Session["PriorClientIDRVStorage_Add"] == null || !((Session["HereCommaHaveAClientID_Add"] == (Session["PriorClientIDRVStorage_Add"])))) {
+                            if (!(tbRVOwnerFirstNameUpdate.Text.Equals((string)Session["HereCommaHaveAClientID_Add"]))) {
+
+                                SqlCommand cmd = new SqlCommand("uspClientInfoGet");
+                                cmd.Parameters.Add("ClientID", SqlDbType.NVarChar).Value = Session["HereCommaHaveAClientID_Add"];
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                // Update as many fields as I can be sure of
+
+                                DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
+                                if (ds != null && ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count > 0) {
+                                    DataRow dr = ds.Tables[0].Rows[0];
+                                    tbRVOwnerFirstNameAdd.Text = Utils.ObjectToString(dr["PrimaryOwner"]);
+                                    tbRVOwnerLastNameAdd.Text = "";
+                                    tbOtherPhoneAdd.Text = "";
+                                    tbEmailAdd.Text = "";
+                                    tbDriversLicenseAdd.Text = "";
+                                    tbNonOwnerSunriverPhoneAdd.Text = Utils.ObjectToString(dr["Addr1"]);
+                                    tbAddr1OwnerInfoAdd.Text = Utils.ObjectToString(dr["Addr1"]);
+                                    tbAddr2OwnerInfoAdd.Text = Utils.ObjectToString(dr["Addr2"]); ;
+                                    tbSunriverPhoneAdd.Text = Utils.ObjectToString(dr["Phone"]); ;
+                                    tbCityOwnerInfoAdd.Text = Utils.ObjectToString(dr["City"]); ;
+                                    tbRegionOwnerInfoAdd.Text = Utils.ObjectToString(dr["Region"]); ;
+                                    tbPostalCodeOwnerInfoAdd.Text = Utils.ObjectToString(dr["PostalCode"]); ;
+                                    tbSunriverAddressOwnerInfoAdd.Text = Utils.ObjectToString(dr["SRAddress"]);
+
+                                    timetoclosewindowhidden_add.Value = "y";
+                                }
+
+                                Session["PriorClientIDRVStorage_Add"] = Session["HereCommaHaveAClientID_Add"];
+                                zCustomerID = Utils.ObjectToString(Session["HereCommaHaveAClientID_Add"]);
+                                Session["HereCommaHaveAClientID_Add"] = null;
+                            }
+                        }
+                    }
+                }
+                ImInTimerTick_Add = false;
+            }
+        }
+        private bool TimerTickerEnabled_Add {
+            get {
+                object obj = Session["TimerTickerEnableBB_Add"];
+                return obj != null;
+            }
+            set {
+                Session["TimerTickerEnableBB_Add"] = value;
+                if (value) {
+                    if (!Timer2.Enabled) {
+                        Timer2.Enabled = true;
+                    }
+                } else {
+                    if (Timer2.Enabled) {
+                        Timer2.Enabled = false;
+                    }
+                }
+            }
         }
     }
 }

@@ -742,7 +742,38 @@
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
-    <asp:Panel runat="server" CssClass="newitempopup" Width="800" ID="pnlNewRVStorageId">
+    <asp:HiddenField ID="winhidden_add" Value="n" runat="server" />
+    <asp:HiddenField ID="timetoclosewindowhidden_add" runat="server" Value="n" />
+    <script language="javascript" type="text/javascript">
+        function chkwinclosed_add() {
+            if (document.getElementById("<%=timetoclosewindowhidden_add.ClientID %>").value == "y") {
+                document.getElementById("<%=timetoclosewindowhidden_add.ClientID %>").value = "n";
+                document.getElementById("<%=winhidden_add.ClientID %>").value = "y";
+                win2_add.close();
+                return
+            }
+
+            if (win2_add.closed) {
+                document.getElementById("<%=winhidden_add.ClientID %>").value = "y";
+                return;
+            }
+            setTimeout("chkwinclosed_add()", 1000)
+        }
+        function openwindow_add() {
+            //Allow for borders.
+            width = 1000;
+            height = 600;
+            leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+            //Allow for title and status bars.
+            topPosition = (window.screen.height / 2) - ((height / 2) + 50);
+            document.getElementById("<%=winhidden_add.ClientID %>").value = "n";
+            vars = 'status=no,width=' + width + ',height=' + height + ',left=' + leftPosition + ',top=' + topPosition + ',toolbar=no,menubar=no,scrollbars=no,resizable=yes,location=no,directories=no';
+            win2_add = window.open('OwnerPropertyFinder.aspx', '_blank', vars);
+            setTimeout('chkwinclosed_add()', 2000);
+        }
+    </script>
+
+    <asp:Panel runat="server" CssClass="newitempopup" Width="900" ID="pnlNewRVStorageId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewRVStorageTitleId">
             <span>New RV Storage</span>
         </asp:Panel>
@@ -753,11 +784,12 @@
                     <ContentTemplate>
                     <asp:UpdatePanel ID="updatePanel4" runat="server">
                         <ContentTemplate>
+                            <asp:Timer ID="Timer2" Enabled="false" OnTick="Timer2_Tick" runat="server" Interval="1000" />
 
                             <table cellpadding="4" width="100%" cellspacing="4" border="0">
                                 <tr valign="top">
                                     <td  width="50%" valign="top">
-                                        <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel10" GroupingText="Input Info">
+                                        <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="Panel10" GroupingText="Input Info">
                                             <table cellpadding="4" cellspacing="4" border="0">
                                                 <tr>
                                                     <td>
@@ -766,73 +798,140 @@
                                                     <td>
                                                         <asp:TextBox CssClass="form_field" ID="tbRVOwnerFirstNameAdd" OnTextChanged="anOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
                                                             runat="server"></asp:TextBox>
-                                                        <asp:Button ID="btnFindOwnerProperty" Text="Find Owner/Property" runat="server" 
-                                                            OnClick="btnFindOwnerProperty_OnClick" 
-                                                            OnClientClick="javascript:openwindow();return true;" />
+                                                        <asp:Button ID="Button1X_Add" Text="Find Owner/Property" runat="server" 
+                                                            OnClick="Button1X_Add_OnClick" 
+                                                            OnClientClick="javascript:openwindow_add();return true;" />
                                       
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label9xa" runat="server" Text="Last Name"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbRVOwnerLastNameAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label3xa" runat="server" Text="Sunriver phone"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbSunriverPhoneAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label4xa" runat="server" Text="Other phone"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbOtherPhoneAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label5xa" runat="server" Text="Email"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbEmailAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label6xa" runat="server" Text="Driver's license"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbDriversLicenseAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="20" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label7xa" runat="server" Text="State"></asp:Label>                                                
+                                                        <asp:TextBox CssClass="form_field" ID="tbStateAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="5" Width="25" runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label8xa" runat="server" Text="Current space"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCurrentSpaceProtectedAdd" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                        <asp:Button ID="btnShowAvailableSpacesAdd" OnClick="btnShowAvailableSpacesAdd_OnClick" runat="server" Text="Available Spaces" CausesValidation="false" />
+
                                                     </td>
                                                 </tr>
                                             </table>
                                         </asp:Panel>
                                     </td>
-                                </tr>
+                                    <td valign="top">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td valign="top">
+                                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="pnlRVStorageDerivedUpdateMailingAddressAdd" GroupingText="Mailing Address">
+                                                        <table cellpadding="4" cellspacing="4" border="0">
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbAddr1OwnerInfoAdd" MaxLength="25" Width="165"
+                                                                        runat="server"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbAddr2OwnerInfoAdd" MaxLength="25" Width="165"
+                                                                        runat="server"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCityOwnerInfoAdd" MaxLength="25" Width="165"
+                                                                        runat="server"></asp:TextBox>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbRegionOwnerInfoAdd" MaxLength="3" Width="25"
+                                                                        runat="server"></asp:TextBox>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbPostalCodeOwnerInfoAdd" MaxLength="10" Width="66"
+                                                                        runat="server"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="pnlRVStorageDerivedUpdateSunriverAddressAdd" GroupingText="Sunriver Address">
+                                                        <table cellpadding="4" cellspacing="4" border="0">
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbSunriverAddressOwnerInfoAdd" MaxLength="25" Width="125"
+                                                                        runat="server"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="Panel1Addbb" GroupingText="IDs">
+                                                        <table cellpadding="4" cellspacing="4" border="0">
+                                                            <td>
+                                                                <asp:Label CssClass="form_field_heading" ID="Label10add" runat="server" Text="Property ID"></asp:Label>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox CssClass="form_field_alwaysprotected" ID="tbPropertyIdOwnerInfoAdd" MaxLength="25" Width="125"
+                                                                    runat="server"></asp:TextBox>
+                                                            </td>
 
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label9xa" runat="server" Text="Last Name"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbRVOwnerLastNameAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label3xa" runat="server" Text="Sunriver phone"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbSunriverPhoneAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label4xa" runat="server" Text="Other phone"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbOtherPhoneAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label5xa" runat="server" Text="Email"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbEmailAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
-                                            runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label6xa" runat="server" Text="Driver's license"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbDriversLicenseAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="20" Width="125"
-                                            runat="server"></asp:TextBox>
-                                        <asp:Label CssClass="form_field_heading" ID="Label7xa" runat="server" Text="State"></asp:Label>                                                
-                                        <asp:TextBox CssClass="form_field" ID="tbStateAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="5" Width="25" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label8xa" runat="server" Text="Current space"></asp:Label>
-                                    </td>
-                                    <td>
-                                            <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCurrentSpaceProtectedAdd" MaxLength="25" Width="125"
-                                            runat="server"></asp:TextBox>
-                                            <asp:Button ID="btnShowAvailableSpacesAdd" OnClick="btnShowAvailableSpacesAdd_OnClick" runat="server" Text="Available Spaces" CausesValidation="false" />
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:Label CssClass="form_field_heading" ID="Label11add" runat="server" Text="Owner ID"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox CssClass="form_field_alwaysprotected" ID="tbOwnerIdOwnerInfoAdd" MaxLength="25" Width="125"
+                                                                        runat="server"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                </td>
 
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
 
@@ -924,6 +1023,145 @@
                     <ContentTemplate>
                     <asp:UpdatePanel ID="updatePanel4ca" runat="server">
                         <ContentTemplate>
+
+                            <table cellpadding="1" width="100%" cellspacing="1" border="0">
+                                <tr valign="top">
+                                    <td  width="50%" valign="top">
+                                        <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel4x354" GroupingText="Non-Owner Input">
+                                            <table cellpadding="2" cellspacing="2" border="0">
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label37x3331" runat="server" Text="First Name"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbNonOwnerFirstNameAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label38x331" runat="server" Text="Last Name"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbRVNonOwnerLastNameAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label39x333" runat="server" Text="Sunriver phone"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbNonOwnerSunriverPhoneAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label40x3" runat="server" Text="Other phone"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" AutoPostBack="true" ID="tbNonOwnerOtherPhoneAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label41x3" runat="server" Text="Email"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbNonOwnerEmailAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label4xx2" runat="server" Text="Driver's license"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbNonOwnerDriversLicenseAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="20" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label43xx" runat="server" Text="State"></asp:Label>                                                
+                                                        <asp:TextBox CssClass="form_field" ID="tbNonOwnerStateAdd" OnTextChanged="aNonOwnerAddFieldChanged_TextChanged" MaxLength="5" Width="25" runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label44xxx" runat="server" Text="Current space"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                            <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbNonOwnerCurrentSpaceProtectedAdd" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                    </td>
+                                    <td>
+                                        <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel5x3f" GroupingText="Mailing Address">
+                                            <table cellpadding="2" cellspacing="2" border="0">
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox ID="tbAddr1NonOwnerInfoAdd" MaxLength="25" Width="155"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox  ID="tbAddr2NonOwnerInfoAdd" MaxLength="25" Width="155"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:TextBox ID="tbCityNonOwnerInfoAdd" MaxLength="25" Width="155"
+                                                            runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="tbRegionNonOwnerInfoAdd" MaxLength="3" Width="25"
+                                                            runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="tbPostalCodeNonOwnerInfoAdd" MaxLength="10" Width="66"
+                                                            runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="Panel833x" GroupingText="Sunriver Address">
+                                                        <asp:TextBox ID="tbNonOwnerSunriverAddressAdd" MaxLength="10" Width="155"
+                                                            runat="server"></asp:TextBox>
+                                        </asp:Panel>
+
+                                    </td>
+                                    <td>
+                                        <asp:Panel CssClass="form_field_panel_squished" style="background-color:rgb(249,253,173);"  runat="server" ID="Panxel7" GroupingText="SROA Owner">
+                                            <center><asp:Label ID="lblIsSROAOwnerAdd" runat="server"></asp:Label></center>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
+                            </table>
+                            <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panelx39" GroupingText="Property Owner Information">
+                                <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                                    <tr valign="top">
+                                        <td>
+                                            <asp:Label CssClass="form_field_heading" ID="Label45x33" runat="server" Text="Property Owner Name"></asp:Label>
+                                        </td>
+                                        <td   valign="top">
+                                            <asp:TextBox ID="tbNonOwnerPropertyOwnerNameAdd" MaxLength="25" Width="155"
+                                                runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:Label CssClass="form_field_heading" ID="Label4xxx6" runat="server" Text="Prop Owner ID#"></asp:Label>
+                                        </td>
+                                        <td   valign="top">
+                                            <asp:TextBox ID="tbNonOwnerPropertyOwnerIdAdd" MaxLength="25" Width="155"
+                                                runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformationAdd" runat="server" Text="Lookup Sunriver Property Owner Information"
+                                                     OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformationAdd_onclick" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+
 
                         </ContentTemplate>
                     </asp:UpdatePanel>
