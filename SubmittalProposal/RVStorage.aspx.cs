@@ -25,6 +25,7 @@ namespace SubmittalProposal {
             GridViewRow row = gvRVStorageAvailableSpaces.SelectedRow;
             Object obj = row.Cells;
             tbCurrentSpaceProtectedUpdate.Text = row.Cells[1].Text;
+            tbCurrentSpaceProtectedAdd.Text = row.Cells[1].Text;
             PendingSpace=row.Cells[1].Text;
             mpeAvailableSpaces.Hide();
         }
@@ -631,6 +632,15 @@ namespace SubmittalProposal {
             tbDriversLicenseUpdate.Text = tbNonOwnerDriversLicenseUpdate.Text;
             tbStateUpdate.Text = tbNonOwnerStateUpdate.Text;
         }
+        protected void anOwnerAddFieldChanged_TextChanged(object sender, EventArgs args) {
+  //          tbNonOwnerOtherPhoneUpdate.Text = tbOtherPhoneUpdate.Text;
+    //        tbNonOwnerFirstNameUpdate.Text = tbRVOwnerFirstNameUpdate.Text;
+      //      tbRVNonOwnerLastNameUpdate.Text = tbRVOwnerLastNameUpdate.Text;
+        //    tbNonOwnerSunriverPhoneUpdate.Text = tbSunriverPhoneUpdate.Text;
+          //  tbNonOwnerEmailUpdate.Text = tbEmailUpdate.Text;
+            //tbNonOwnerDriversLicenseUpdate.Text = tbDriversLicenseUpdate.Text;
+            //tbNonOwnerStateUpdate.Text = tbStateUpdate.Text;
+        }
         protected void anOwnerFieldChanged_TextChanged(object sender, EventArgs args) {
             tbNonOwnerOtherPhoneUpdate.Text = tbOtherPhoneUpdate.Text;
             tbNonOwnerFirstNameUpdate.Text = tbRVOwnerFirstNameUpdate.Text;
@@ -657,5 +667,48 @@ namespace SubmittalProposal {
                 }
             }
         }
+        protected void lbRVStorageNewCmon_OnClick(object sender, EventArgs args) {
+            mpeNewRVStorage.Show();
+        }
+        protected void btnNewRVStorageCancel_Click(object sender, EventArgs args) {
+            clearAllSelectionInputFields();
+            clearAllNewFormInputFields();
+        }
+        protected void btnNewRVStorageOk_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd=new SqlCommand("uspRVStorageAdd");
+                SqlParameter newscRVLeaseID = new SqlParameter("@NewscLeaseID", SqlDbType.Int);
+                newscRVLeaseID.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newscRVLeaseID);
+                newscRVLeaseID.Value = 1;// Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+
+                performPostNewSuccessfulActions("RV Storage added", DataSetCacheKey, null, tbRVLeaseIdSearch, (int)newscRVLeaseID.Value);
+            } catch (Exception e2) {
+                performPostNewFailedActions("RVStorage not added. Msg: " + e2.Message);
+            }
+        }
+        protected void btnFindOwnerProperty_OnClick(object sender, EventArgs args) {
+            Session["byebyeAdd"] = null;
+            Session["valueselectedbyfindAdd"] = null;
+          //  TimerTickerEnabled = true;
+          //  Timer1.Enabled = true;
+            mpeNewRVStorage.Show();
+        }
+         /// <summary>
+        /// The form hasn't been updated yet; so this is a place where inter-tab communication can take place.
+        ///   -- PendingSpace has the Space from the Owner Info tab; so use that value on the RV & Space information tab.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void tcRVStorageAdd_ActiveTabChanged(object sender, EventArgs e) {
+            mpeNewRVStorage.Show();
+        }
+        protected void btnShowAvailableSpacesAdd_OnClick(object sender, EventArgs args) {
+            gvRVStorageAvailableSpaces.DataSource = buildDataSet().Tables[3];
+            gvRVStorageAvailableSpaces.DataBind();
+            mpeNewRVStorage.Hide();
+            mpeAvailableSpaces.Show();
+        }
+
     }
 }

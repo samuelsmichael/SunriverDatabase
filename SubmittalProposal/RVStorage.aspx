@@ -738,9 +738,194 @@
             ID="btnRVUpdate" OnClick="btnRVUpdateOkay_Click" 
             runat="server" Text="Submit" />
         <asp:Label ID="lblRVUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
-      
+   
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <asp:Panel runat="server" CssClass="newitempopup" Width="800" ID="pnlNewRVStorageId">
+        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewRVStorageTitleId">
+            <span>New RV Storage</span>
+        </asp:Panel>
+        <asp:Panel runat="server" style="text-align:center;" ID="pnlNewRVStorageContent" CssClass="newitemcontent">
+            <ajaxToolkit:TabContainer Height="316" ActiveTabIndex="0" ID="TabContainer1" AutoPostBack="true"
+                        runat="server"  onactivetabchanged="tcRVStorageAdd_ActiveTabChanged">
+                <ajaxToolkit:TabPanel runat="server" ID="tabPanel4" HeaderText="Owner Information">
+                    <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel4" runat="server">
+                        <ContentTemplate>
+
+                            <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                                <tr valign="top">
+                                    <td  width="50%" valign="top">
+                                        <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel10" GroupingText="Input Info">
+                                            <table cellpadding="4" cellspacing="4" border="0">
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label CssClass="form_field_heading" ID="Label48" runat="server" Text="First Name"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox CssClass="form_field" ID="tbRVOwnerFirstNameAdd" OnTextChanged="anOwnerAddFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                                            runat="server"></asp:TextBox>
+                                                        <asp:Button ID="btnFindOwnerProperty" Text="Find Owner/Property" runat="server" 
+                                                            OnClick="btnFindOwnerProperty_OnClick" 
+                                                            OnClientClick="javascript:openwindow();return true;" />
+                                      
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label9xa" runat="server" Text="Last Name"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbRVOwnerLastNameAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label3xa" runat="server" Text="Sunriver phone"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbSunriverPhoneAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label4xa" runat="server" Text="Other phone"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbOtherPhoneAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label5xa" runat="server" Text="Email"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbEmailAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="25" Width="125"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label6xa" runat="server" Text="Driver's license"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbDriversLicenseAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="20" Width="125"
+                                            runat="server"></asp:TextBox>
+                                        <asp:Label CssClass="form_field_heading" ID="Label7xa" runat="server" Text="State"></asp:Label>                                                
+                                        <asp:TextBox CssClass="form_field" ID="tbStateAdd" OnTextChanged="anOwnerFieldChanged_TextChanged" MaxLength="5" Width="25" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label8xa" runat="server" Text="Current space"></asp:Label>
+                                    </td>
+                                    <td>
+                                            <asp:TextBox CssClass="form_field_alwaysprotected" disabled="disabled" ID="tbCurrentSpaceProtectedAdd" MaxLength="25" Width="125"
+                                            runat="server"></asp:TextBox>
+                                            <asp:Button ID="btnShowAvailableSpacesAdd" OnClick="btnShowAvailableSpacesAdd_OnClick" runat="server" Text="Available Spaces" CausesValidation="false" />
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+
+                <ajaxToolkit:TabPanel runat="server" ID="tabPanel4a1" HeaderText="RV & Space Information">
+                    <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel4ac" runat="server">
+                        <ContentTemplate>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+                <ajaxToolkit:TabPanel runat="server" ID="tabPanel4b2" HeaderText="Lease Information">
+                    <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel4bb" runat="server">
+                        <ContentTemplate>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+                <ajaxToolkit:TabPanel runat="server" ID="tabPanel4c3" HeaderText="NonOwner Information">
+                    <ContentTemplate>
+                    <asp:UpdatePanel ID="updatePanel4ca" runat="server">
+                        <ContentTemplate>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+            </ajaxToolkit:TabContainer>
+        </asp:Panel>
+        <script  language="javascript" type="text/javascript" >
+            function doOk() {
+
+                var loading = $(".loadingdb");
+                loading.show();
+                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                loading.css({ top: top, left: left });
+                return true;
+            }
+
+            // Called when async postback ends
+            function prm_EndRequest(sender, args) {
+                // get the divImage and hide it again
+                //debugger
+                if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1
+                || (sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 && sender._postBackSettings.sourceElement.id.indexOf("Ok") != -1)) {
+                    var loading = $(".loading");
+                    loading.hide();
+                }
+            }
+
+        </script>
+        <center>
+            <table cellpadding="4">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnNewRVStorageOk" CausesValidation="true" OnClientClick="javascript: if(Page_IsValid) { return doOk();} " runat="server" Text="Okay" 
+                            onclick="btnNewRVStorageOk_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnNewRVStorageCancel" onclick="btnNewRVStorageCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblRVStorageNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="loadingdb" align="center">
+                Processing. Please wait.<br />
+                <br />
+                <img src="Images/animated_progress.gif" alt="" />
+            </div>
+        </center>
+
+    </asp:Panel>
+
+
+    <asp:LinkButton ID="lbRVStorageNew" OnClick="lbRVStorageNewCmon_OnClick" CausesValidation="false" runat="server">New Request</asp:LinkButton>
+    <asp:Button style="display:none;" ID="btnhiddenrvstorage1" runat="server" />
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewRVStorage" runat="server" TargetControlID="btnhiddenrvstorage1"
+        PopupControlID="pnlNewRVStorageId" BackgroundCssClass="modalBackground" 
+        PopupDragHandleControlID="pnlNewRVStorageTitleId"
+        BehaviorID="jdpopuprvstorage" />   
 </asp:Content>
   
