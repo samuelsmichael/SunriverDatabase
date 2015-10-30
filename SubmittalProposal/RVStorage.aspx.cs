@@ -307,7 +307,8 @@ namespace SubmittalProposal {
                                     btnRVUpdateOkay_Click(null, null);
                                     timetoclosewindowhidden.Value = "y";
                                     tbNonOwnerPropertyOwnerId.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
-                                    tbNonOwnerPropertyOwnerId.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
+                                    tbNonOwnerPropertyOwnerNameUpdate.Text = Utils.ObjectToString(dr["PrimaryOwner"]);
+
                                 }
 
                                 Session["PriorClientIDRVStorage"] = Session["HereCommaHaveAClientID"];
@@ -943,7 +944,7 @@ namespace SubmittalProposal {
                                     tbPostalCodeOwnerInfoAdd.Text = Utils.ObjectToString(dr["PostalCode"]); ;
                                     tbSunriverAddressOwnerInfoAdd.Text = Utils.ObjectToString(dr["SRAddress"]);
                                     tbNonOwnerPropertyOwnerIdAdd.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID_Add"]);
-                                    tbNonOwnerPropertyOwnerIdAdd.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID_Add"]);
+                                    tbNonOwnerPropertyOwnerNameAdd.Text = Utils.ObjectToString(dr["PrimaryOwner"]);
 
                                     timetoclosewindowhidden_add.Value = "y";
                                 }
