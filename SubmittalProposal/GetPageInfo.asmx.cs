@@ -40,6 +40,7 @@ namespace SubmittalProposal {
                             if (data.Count > 0) {
                                 if (checkingForMatch(data[0], out hereitis, "PropertyID")) {
                                     Session["HereCommaHaveAPropertyID"] = hereitis;
+                                    Session["HereCommaHaveAPropertyID_Add"] = hereitis;
                                 }
                             }
                         } catch { }
@@ -52,6 +53,7 @@ namespace SubmittalProposal {
                         try {
                             if (checkingForMatch(data[1], out hereitis2, "ClientID")) {
                                 Session["HereCommaHaveAClientID"] = hereitis2;
+                                Session["HereCommaHaveAClientID_Add"] = hereitis2;
                             }
                         } catch { }
                     }

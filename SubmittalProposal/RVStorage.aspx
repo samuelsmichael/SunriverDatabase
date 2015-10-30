@@ -939,51 +939,51 @@
 
 
                         <asp:Panel runat="server" CssClass="newitempopup" ID="pnlAvailableSpaces_Add" style="width:380">
-                        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlAvailableSpacesTitle_Add">
+                            <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlAvailableSpacesTitle_Add">
 
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td width="10%"></td>
-                                    <td align="center"><asp:Label id="lblx3" runat="server" Text="Available Spaces" ></asp:Label>
-                                    </td>
-                                    <td width="10%"><asp:HyperLink id="closePopup_Add" runat="server" CssClass="ClosePopupCls">Close [x]</asp:HyperLink>
-                                    </td>
-                                </tr>
-                            </table>
-                        </asp:Panel>
-                        <asp:Panel runat="server" Style="height:200px;overflow:auto; text-align: center;" ID="Panel6x44">
-                            <asp:GridView ID="gvRVStorageAvailableSpaces_Add" OnSelectedIndexChanged="gvRVStorageAvailableSpaces_SelectedIndexChanged_Add"
-                                runat="server" AutoGenerateColumns="False"
-                                CellPadding="4" ForeColor="#333333" GridLines="None" 
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td width="10%"></td>
+                                        <td align="center"><asp:Label id="lblx3" runat="server" Text="Available Spaces" ></asp:Label>
+                                        </td>
+                                        <td width="10%"><asp:HyperLink id="closePopup_Add" runat="server" CssClass="ClosePopupCls">Close [x]</asp:HyperLink>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <asp:Panel runat="server" Style="height:200px;overflow:auto; text-align: center;" ID="Panel6x44">
+                                <asp:GridView ID="gvRVStorageAvailableSpaces_Add" OnSelectedIndexChanged="gvRVStorageAvailableSpaces_SelectedIndexChanged_Add"
+                                    runat="server" AutoGenerateColumns="False"
+                                    CellPadding="4" ForeColor="#333333" GridLines="None" 
         
-                                Style="width: 100%; white-space: nowrap;" >
+                                    Style="width: 100%; white-space: nowrap;" >
 
-                                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                                <EmptyDataTemplate>
-                                    <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
-                                </EmptyDataTemplate>
-                                <Columns>
-                                    <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
-                                    <asp:BoundField DataField="tSISpace" HeaderText="Space" />
-                                    <asp:BoundField DataField="tSISpaceSize" HeaderText="Size" />
-                                    <asp:BoundField DataField="tSIElectServ" HeaderText="Electricity" />
-                                    <asp:BoundField DataField="AnnualRent" HeaderText="Annual Rent" DataFormatString="{0:c}" />
-                                </Columns>
-                                <EditRowStyle BackColor="#999999" />
-                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                                <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                                <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                                <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                            </asp:GridView>
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <EmptyDataTemplate>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                    </EmptyDataTemplate>
+                                    <Columns>
+                                        <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
+                                        <asp:BoundField DataField="tSISpace" HeaderText="Space" />
+                                        <asp:BoundField DataField="tSISpaceSize" HeaderText="Size" />
+                                        <asp:BoundField DataField="tSIElectServ" HeaderText="Electricity" />
+                                        <asp:BoundField DataField="AnnualRent" HeaderText="Annual Rent" DataFormatString="{0:c}" />
+                                    </Columns>
+                                    <EditRowStyle BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                </asp:GridView>
 
 
 
-                        </asp:Panel>
+                            </asp:Panel>
                     </asp:Panel>
 
 
@@ -1005,7 +1005,168 @@
                     <ContentTemplate>
                     <asp:UpdatePanel ID="updatePanel4ac" runat="server">
                         <ContentTemplate>
+                       <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                            <tr valign="top">
+                                <td  width="50%" valign="top">
+                                    <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel233x24" GroupingText="Input Info">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label13xde33" runat="server" Text="Electrical Req'd"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlRVSpaceInfoElectricalReqdYesNoAdd" runat="server">
+                                                        <asp:ListItem>Yes</asp:ListItem>
+                                                        <asp:ListItem Selected="True">No</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label1d3s35" runat="server" Text="Space Size Req'd"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlRVSpaceInfoSpaceSizeReqdAdd" runat="server" DataValueField="tSRSpaceSize" DataTextField="tSRSpaceSize">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label1adha7" runat="server" Text="Vehicle Length"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbVehicleLengthAdd" MaxLength="10" Width="50"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label1944x" runat="server" Text="RV Type"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbRVTypeAdd" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label320c3" runat="server" Text="RV Make"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbRVMakeAdd" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Labexl213" runat="server" Text="RV Model"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbRVModelAdd" MaxLength="25" Width="125"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Labelcc22" runat="server" Text="Vehicle License #"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbVehicleLicenseAdd" MaxLength="15" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label49" runat="server" Text="State"></asp:Label>                                                
+                                                    <asp:TextBox CssClass="form_field" ID="tbVehicleLicenseStateAdd" MaxLength="5" Width="25" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label50" runat="server" Text="Lien"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbLienAdd" MaxLength="30" Width="150"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                                <td  width="50%" valign="top">
+                                    <asp:Panel CssClass="form_field_panel_squished"  runat="server" ID="Panel11" GroupingText="Leased Space Info">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label51" runat="server" Text="Space"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="55" MaxLength="5"
+                                                        ID="tbRVSpaceInfoSpaceProtectedAdd"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label52" runat="server" Text="Leased?"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="55" MaxLength="5"
+                                                        ID="tbRVSpaceInfoSpaceLeasedProtectedAdd"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label53" runat="server" Text="Space Type"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList runat="server" ID="ddlSpaceTypeAdd">
+                                                        <asp:ListItem Selected="True">Primary</asp:ListItem>
+                                                        <asp:ListItem>Multiple</asp:ListItem>
+                                                        <asp:ListItem>Owner</asp:ListItem>
+                                                        <asp:ListItem>Non-Owner</asp:ListItem>
+                                                    </asp:DropDownList>
 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label54" runat="server" Text="Permanent Assignment"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList runat="server" ID="ddlPermanentAssignmentAdd">
+                                                        <asp:ListItem Selected="True">Yes</asp:ListItem>
+                                                        <asp:ListItem>No</asp:ListItem>
+                                                    </asp:DropDownList>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label55" runat="server" Text="Space Size"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="50" MaxLength="10"
+                                                        ID="tbSpaceSizeRVTabAdd"></asp:TextBox>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label56" runat="server" Text="Electrical Service"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="50" MaxLength="10"
+                                                        ID="tbElectricalServiceRVTabAdd"></asp:TextBox>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label57" runat="server" Text="Annual Rent"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="50" MaxLength="10"
+                                                        ID="tbAnnualRentRVTabAdd"></asp:TextBox>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     </ContentTemplate>
@@ -1014,7 +1175,111 @@
                     <ContentTemplate>
                     <asp:UpdatePanel ID="updatePanel4bb" runat="server">
                         <ContentTemplate>
+                        <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                            <tr valign="top">
+                                <td  width="25%" valign="top">
+                                        <table cellpadding="4" cellspacing="4" border="0">
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label58" runat="server" Text="Payment This Year"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlPaymentThisYearAdd" runat="server">
+                                                        <asp:ListItem>Yes</asp:ListItem>
+                                                        <asp:ListItem Selected="True">No</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label59" runat="server" Text="Least Start Date"></asp:Label>
+                                                </td>
+                                                <td style="white-space:nowrap">
+                                                    <asp:TextBox CssClass="form_field" ID="tbLeaseStartDateAdd" MaxLength="10" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbLeaseStartDateAdd" runat="server" />
+                                                </td>
+                                                <ajaxToolkit:CalendarExtender ID="cetbLeaseStartDateAdd" runat="server" TargetControlID="tbLeaseStartDateAdd"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLeaseStartDateAdd" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revtbLeaseStartDateAdd" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbLeaseStartDateAdd" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label60" runat="server" Text="Lease Cancelled"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList AutoPostBack="true" ID="ddlLeaseCancelledAdd" runat="server">
+                                                        <asp:ListItem>Yes</asp:ListItem>
+                                                        <asp:ListItem Selected="True">No</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label61" runat="server" Text="Wait List Date"></asp:Label>
+                                                </td>
+                                                <td style="white-space:nowrap">
+                                                    <asp:TextBox CssClass="form_field" ID="tbWaitListDateAdd" MaxLength="10" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbWaitListDateAdd" runat="server" />
+                                                </td>
+                                                <ajaxToolkit:CalendarExtender ID="cetbWaitListDateAdd" runat="server" TargetControlID="tbWaitListDateAdd"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbWaitListDateAdd" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvtbWaitListDateAdd" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbWaitListDateAdd" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label62" runat="server" Text="Lease Cancelled Date"></asp:Label>
+                                                </td>
+                                                <td style="white-space:nowrap">
+                                                    <asp:TextBox CssClass="form_field" ID="tbLeaseCancelledDateAdd" MaxLength="10" Width="75"
+                                                        runat="server"></asp:TextBox>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibtbLeaseCancelledDateAdd" runat="server" />
+                                                </td>
+                                                <ajaxToolkit:CalendarExtender ID="cbtbLeaseCancelledDateAdd" runat="server" TargetControlID="tbLeaseCancelledDateAdd"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLeaseCancelledDateAdd" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvtbLeaseCancelledDateAdd" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbLeaseCancelledDateAdd" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label63" runat="server" Text="RV Space #"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="50" MaxLength="5"
+                                                        ID="tbRVSpaceLeaseInformationProtectedAdd"></asp:TextBox>
 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label64" runat="server" Text="Annual Rent"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox runat="server" CssClass="form_field_alwaysprotected" Width="75" MaxLength="10"
+                                                        ID="tbLeaseInformationAnnualRentProtectedAdd"></asp:TextBox>
+
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+
+                                </td>
+                                <td valign="top">
+                                    <asp:Panel ID="Panel12" BorderWidth="0" BorderColor="White" BorderStyle="None" runat="server" Width="39em" GroupingText="Notes">
+                                        <center><asp:TextBox runat="server" ID="tbNotesAdd" Height="8em" TextMode="MultiLine" Width="40em"></asp:TextBox></center>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     </ContentTemplate>

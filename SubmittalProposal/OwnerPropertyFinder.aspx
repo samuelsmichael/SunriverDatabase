@@ -67,7 +67,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Owner Id"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" runat="server" ID="tbOwnerId" MaxLength="25" Width="125"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form_field" runat="server" ID="tbOwnerId" MaxLength="25" Width="165"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -75,7 +75,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Name"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbName" MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field" ID="tbName" MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -84,7 +84,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Contact"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbContact" MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field" ID="tbContact" MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -93,7 +93,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Sunriver phone"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbSunriverPhone"  MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field" ID="tbSunriverPhone"  MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -102,7 +102,7 @@
                                                     <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="Email"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" ID="tbEmail" MaxLength="25" Width="125"
+                                                    <asp:TextBox CssClass="form_field" ID="tbEmail" MaxLength="25" Width="165"
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                             </tr>

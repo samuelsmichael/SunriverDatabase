@@ -8,7 +8,7 @@ GO
 -- Description:	Get Client Info 
 /*
 	declare @cus nvarchar(20)
-	set @cus='002900'
+	set @cus='084580'
 	exec UspClientInfoGet @ClientID=@cus
 */
 -- =============================================

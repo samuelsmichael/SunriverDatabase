@@ -91,11 +91,11 @@ BEGIN
       ,[PropOwnerID] = @PropOwnerID
  WHERE RVLeaseID=@RVLeaseID
  if @LeaseCancelled=0 begin
-	Update tblSpaceLeased set SpaceLeased = 1 WHERE tSISpace=@tRVDSpace
+	Update [tblSpaceInfo{LU}] set SpaceLeased = 1 WHERE tSISpace=@tRVDSpace
  end else begin
 	if not exists ( select RVLeaseID from tblRVData
 					where RVLeaseID != @RVLeaseID and LeaseCancelled=0) begin
-		Update tblSpaceLeased set SpaceLeased = 0 WHERE tSISpace=@tRVDSpace
+		Update [tblSpaceInfo{LU}] set SpaceLeased = 0 WHERE tSISpace=@tRVDSpace
 	end
  end
 END

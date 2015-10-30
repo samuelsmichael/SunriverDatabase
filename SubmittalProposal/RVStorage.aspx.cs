@@ -547,7 +547,64 @@ namespace SubmittalProposal {
         }
 
         protected override void clearAllNewFormInputFields() {
-           // throw new NotImplementedException();
+            tbRVOwnerFirstNameAdd.Text = "";
+            tbRVOwnerLastNameAdd.Text = "";
+            tbSunriverPhoneAdd.Text = "";
+            tbOtherPhoneAdd.Text = "";
+            tbEmailAdd.Text = "";
+            tbDriversLicenseAdd.Text = "";
+            tbStateAdd.Text = "";
+            tbCurrentSpaceProtectedAdd.Text = "";
+            tbAddr1OwnerInfoAdd.Text = "";
+            tbAddr2OwnerInfoAdd.Text = "";
+            tbCityOwnerInfoAdd.Text = "";
+            tbRegionOwnerInfoAdd.Text = "";
+            tbPostalCodeOwnerInfoAdd.Text = "";
+            tbSunriverAddressOwnerInfoAdd.Text = "";
+            tbPropertyIdOwnerInfoAdd.Text="";
+            tbOwnerIdOwnerInfoAdd.Text = "";
+            ddlRVSpaceInfoElectricalReqdYesNoAdd.SelectedValue = "No";
+            ddlRVSpaceInfoSpaceSizeReqdAdd.SelectedIndex = 0;
+            tbVehicleLengthAdd.Text = "";
+            tbRVTypeAdd.Text = "";
+            tbRVMakeAdd.Text = "";
+            tbRVModelAdd.Text = "";
+            tbVehicleLicenseAdd.Text = "";
+            tbVehicleLicenseStateAdd.Text = "";
+            tbLienAdd.Text = "";
+            tbRVSpaceInfoSpaceProtectedAdd.Text = "";
+            tbRVSpaceInfoSpaceLeasedProtectedAdd.Text = "";
+            ddlSpaceTypeAdd.SelectedIndex = 0;
+            ddlPermanentAssignmentAdd.SelectedValue = "No";
+            tbSpaceSizeRVTabAdd.Text = "";
+            tbElectricalServiceRVTabAdd.Text = "";
+            tbAnnualRentRVTabAdd.Text = "";
+            ddlPaymentThisYearAdd.SelectedValue = "No";
+            tbLeaseStartDateAdd.Text = "";
+            tbLeaseStartDateAdd.Text = "";
+            ddlLeaseCancelledAdd.SelectedValue = "No";
+            tbWaitListDateAdd.Text = "";
+            tbLeaseCancelledDateAdd.Text = "";
+            tbRVSpaceLeaseInformationProtectedAdd.Text = "";
+            tbLeaseInformationAnnualRentProtectedAdd.Text = "";
+            tbNotesAdd.Text = "";
+            tbNonOwnerFirstNameAdd.Text = "";
+            tbRVNonOwnerLastNameAdd.Text = "";
+            tbNonOwnerSunriverPhoneAdd.Text = "";
+            tbNonOwnerOtherPhoneAdd.Text = "";
+            tbNonOwnerEmailAdd.Text = "";
+            tbNonOwnerDriversLicenseAdd.Text = "";
+            tbNonOwnerStateAdd.Text = "";
+            tbNonOwnerCurrentSpaceProtectedAdd.Text = "";
+            tbAddr1NonOwnerInfoAdd.Text = "";
+            tbAddr2NonOwnerInfoAdd.Text = "";
+            tbCityNonOwnerInfoAdd.Text = "";
+            tbRegionNonOwnerInfoAdd.Text = "";
+            tbPostalCodeNonOwnerInfoAdd.Text = "";
+            tbNonOwnerSunriverAddressAdd.Text = "";
+            lblIsSROAOwnerAdd.Text = "";
+            tbNonOwnerPropertyOwnerNameAdd.Text = "";
+            tbNonOwnerPropertyOwnerIdAdd.Text = "";
         }
 
         protected override string UpdateRoleName {
@@ -580,6 +637,8 @@ namespace SubmittalProposal {
 
                 ddlRVSpaceInfoSpaceSizeReqdUpdate.DataSource = buildDataSet().Tables[2];
                 ddlRVSpaceInfoSpaceSizeReqdUpdate.DataBind();
+                ddlRVSpaceInfoSpaceSizeReqdAdd.DataSource = buildDataSet().Tables[2];
+                ddlRVSpaceInfoSpaceSizeReqdAdd.DataBind();
                 Timer1.Enabled = false;
                 TimerTickerEnabled = false;
                 Timer2.Enabled = false;
@@ -728,8 +787,8 @@ namespace SubmittalProposal {
         protected void Button1X_Add_OnClick(object sender, EventArgs args) {
             Session["byebye_add"] = null;
             Session["valueselectedbyfind_add"] = null;
-            TimerTickerEnabled_Add = true;
             Timer2.Enabled = true;
+            TimerTickerEnabled_Add = true;
             mpeNewRVStorage.Show();
         }
         protected bool ImInTimerTick_Add {
@@ -759,6 +818,7 @@ namespace SubmittalProposal {
                         Session["byebye_add"] = null;
                         TimerTickerEnabled_Add = false;
                         Button1X_Add.Text = "Find Owner/Property";
+                        mpeNewRVStorage.Show();
                     }
                     /*           if (Session["HereCommaHaveAPropertyId"] != null) {
                                    if (!(Session["HereCommaHaveAPropertyID"]==(Session["PriorPropertIDRVStorage"]))) {
