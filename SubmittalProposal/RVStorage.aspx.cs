@@ -41,9 +41,9 @@ namespace SubmittalProposal {
         }
         private String zCustomerID {
             get{
-                return Utils.ObjectToString(Session["RVStorageCustomerID"]);
+                return Utils.ObjectToString(Session["zRVStorageCustomerID"]);
             } set {
-                Session["RVStorageCustomerID"]=value;
+                Session["zRVStorageCustomerID"]=value;
             }
         }
         private string PendingSpace {
@@ -290,14 +290,15 @@ namespace SubmittalProposal {
                                 if (ds != null && ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count > 0) {
                                     DataRow dr = ds.Tables[0].Rows[0];
                                     tbRVOwnerFirstNameUpdate.Text = Utils.ObjectToString(dr["PrimaryOwner"]);
+                                    
                                     tbRVOwnerLastNameUpdate.Text = "";
                                     tbOtherPhoneUpdate.Text = "";
                                     tbEmailUpdate.Text = "";
                                     tbDriversLicenseUpdate.Text = "";
                                     tbNonOwnerSunriverPhoneUpdate.Text = Utils.ObjectToString(dr["Addr1"]);
                                     tbAddr1OwnerInfoUpdate.Text = Utils.ObjectToString(dr["Addr1"]);
-                                    tbAddr2OwnerInfo.Text = Utils.ObjectToString(dr["Addr2"]); ;
-                                    tbSunriverPhoneUpdate.Text = Utils.ObjectToString(dr["Phone"]); ;
+                                    tbAddr2OwnerInfo.Text = Utils.ObjectToString(dr["Addr2"]); 
+                                    tbSunriverPhoneUpdate.Text = Utils.ObjectToString(dr["Phone"]); 
                                     tbCityOwnerInfo.Text = Utils.ObjectToString(dr["City"]); ;
                                     tbRegionOwnerInfo.Text = Utils.ObjectToString(dr["Region"]); ;
                                     tbPostalCodeOwnerInfo.Text = Utils.ObjectToString(dr["PostalCode"]); ;
@@ -305,6 +306,8 @@ namespace SubmittalProposal {
 
                                     btnRVUpdateOkay_Click(null, null);
                                     timetoclosewindowhidden.Value = "y";
+                                    tbNonOwnerPropertyOwnerId.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
+                                    tbNonOwnerPropertyOwnerId.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
                                 }
 
                                 Session["PriorClientIDRVStorage"] = Session["HereCommaHaveAClientID"];
@@ -338,11 +341,14 @@ namespace SubmittalProposal {
                 }
             }
         }
-        protected void button1click(object sender, EventArgs args) {
+        private void doFindOwnerPropertyClickedUpdate() {
             Session["byebye"] = null;
             Session["valueselectedbyfind"] = null;
             TimerTickerEnabled = true;
             Timer1.Enabled = true;
+        }
+        protected void button1click(object sender, EventArgs args) {
+            doFindOwnerPropertyClickedUpdate();
         }
         private static string DataSetCacheKey = "RVDataSet";
         protected override System.Data.DataSet buildDataSet() {
@@ -425,6 +431,11 @@ namespace SubmittalProposal {
     cmd.Parameters.Add("@PropOwnerName", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerNameUpdate.Text;
     cmd.Parameters.Add("@PropOwnerID", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerId.Text;
 
+                SqlParameter newscRVLeaseID = new SqlParameter("@NewscLeaseID", SqlDbType.Int);
+                newscRVLeaseID.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newscRVLeaseID);
+
+
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 clearAllSelectionInputFields();
                 tbCustomerIDSearch.Text = zCustomerID;
@@ -444,6 +455,8 @@ namespace SubmittalProposal {
         }
 
         protected override void unlockYourUpdateFields() {
+            btnShowAvailableSpacesUpdate.Enabled = true;
+            btnShowAvailableSpacesAdd.Enabled = true;
             tbRVOwnerFirstNameUpdate.Enabled = true;
             tbRVOwnerLastNameUpdate.Enabled = true;
             tbDriversLicenseUpdate.Enabled = true;
@@ -489,10 +502,20 @@ namespace SubmittalProposal {
             tbRegionNonOwnerInfoUpdate.Enabled = true;
             tbPostalCodeNonOwnerInfoUpdate.Enabled = true;
             tbNonOwnerSunriverAddressUpdate.Enabled = true;
-
+            Button1X.Enabled = true;
+            btnNonOwnerLookupSunriverPropertyOwnerInformation.Enabled = true;
+            Button1X_Add.Enabled = true;
+            btnNonOwnerLookupSunriverPropertyOwnerInformationAdd.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
+            btnShowAvailableSpacesUpdate.Enabled = false;
+            btnShowAvailableSpacesAdd.Enabled = false;
+            Button1X.Enabled = false;
+            btnNonOwnerLookupSunriverPropertyOwnerInformation.Enabled = false;
+            Button1X_Add.Enabled = false;
+            btnNonOwnerLookupSunriverPropertyOwnerInformationAdd.Enabled = false;
+
             ddlPermanentAssignmentUpdate.Enabled = false;
             ddlSpaceTypeUpdate.Enabled = false;
             tbRVOwnerFirstNameUpdate.Enabled = false;
@@ -685,6 +708,7 @@ namespace SubmittalProposal {
             }
         }
         protected void btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick(object sender, EventArgs args) {
+            doFindOwnerPropertyClickedUpdate();
         }
         protected void aNonOwnerFieldChanged_TextChanged(object sender, EventArgs args) {
             tbOtherPhoneUpdate.Text = tbNonOwnerOtherPhoneUpdate.Text;
@@ -705,6 +729,7 @@ namespace SubmittalProposal {
             tbStateUpdate.Text = tbNonOwnerStateAdd.Text;
         }
         protected void btnNonOwnerLookupSunriverPropertyOwnerInformationAdd_onclick(object sender, EventArgs args) {
+            doFindOwnerPropertyClickedAdd();
         }
 
         protected void anOwnerAddFieldChanged_TextChanged(object sender, EventArgs args) {
@@ -751,13 +776,67 @@ namespace SubmittalProposal {
         }
         protected void btnNewRVStorageOk_Click(object sender, EventArgs args) {
             try {
-                SqlCommand cmd=new SqlCommand("uspRVStorageAdd");
+                SqlCommand cmd=new SqlCommand("uspRVUpdate");
                 SqlParameter newscRVLeaseID = new SqlParameter("@NewscLeaseID", SqlDbType.Int);
                 newscRVLeaseID.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newscRVLeaseID);
-                newscRVLeaseID.Value = 1;// Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
 
+                cmd.Parameters.Add("@CustomerID", SqlDbType.NVarChar).Value = zCustomerID;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = tbRVOwnerFirstNameAdd.Text;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = tbRVOwnerLastNameAdd.Text;
+                cmd.Parameters.Add("@NO_MailAddr1", SqlDbType.NVarChar).Value = tbAddr1NonOwnerInfoAdd.Text;
+                cmd.Parameters.Add("@NO_MailAddr2", SqlDbType.NVarChar).Value = tbAddr2NonOwnerInfoAdd.Text;
+
+                cmd.Parameters.Add("@NO_City", SqlDbType.NVarChar).Value = tbCityNonOwnerInfoAdd.Text;
+                cmd.Parameters.Add("@NO_State", SqlDbType.NVarChar).Value = tbRegionNonOwnerInfoAdd.Text;
+                cmd.Parameters.Add("@NO_Zip", SqlDbType.NVarChar).Value = tbPostalCodeNonOwnerInfoAdd.Text;
+                cmd.Parameters.Add("@NO_SunriverAddr", SqlDbType.NVarChar).Value = tbNonOwnerSunriverAddressAdd.Text;
+                cmd.Parameters.Add("@SunriverPhone", SqlDbType.NVarChar).Value = tbSunriverPhoneAdd.Text;
+                cmd.Parameters.Add("@OtherPhone", SqlDbType.NVarChar).Value = tbOtherPhoneAdd.Text;
+                cmd.Parameters.Add("@E_Mail", SqlDbType.NVarChar).Value = tbEmailAdd.Text;
+                cmd.Parameters.Add("@DrivLics#", SqlDbType.NVarChar).Value = tbDriversLicenseAdd.Text;
+                cmd.Parameters.Add("@DrivLicsState", SqlDbType.NVarChar).Value = tbStateAdd.Text;
+                cmd.Parameters.Add("@RVType", SqlDbType.NVarChar).Value = tbRVTypeAdd.Text;
+                cmd.Parameters.Add("@RVMake", SqlDbType.NVarChar).Value = tbRVMakeAdd.Text;
+                cmd.Parameters.Add("@RVModel", SqlDbType.NVarChar).Value = tbRVModelAdd.Text;
+                cmd.Parameters.Add("@VehLics#", SqlDbType.NVarChar).Value = tbVehicleLicenseAdd.Text;
+                cmd.Parameters.Add("@VehLicsState", SqlDbType.NVarChar).Value = tbVehicleLicenseStateAdd.Text;
+                cmd.Parameters.Add("@VehicleLength", SqlDbType.NVarChar).Value = tbVehicleLengthAdd.Text;
+                cmd.Parameters.Add("@SpaceSizeReqt", SqlDbType.NVarChar).Value = ddlRVSpaceInfoSpaceSizeReqdAdd.SelectedValue;
+                cmd.Parameters.Add("@ElectricReqt", SqlDbType.Bit).Value = ddlRVSpaceInfoElectricalReqdYesNoAdd.SelectedValue == "Yes";
+                cmd.Parameters.Add("@Lien", SqlDbType.NVarChar).Value = tbLienAdd.Text;
+                cmd.Parameters.Add("@tRVDSpace", SqlDbType.NVarChar).Value = tbRVSpaceInfoSpaceProtectedAdd.Text;
+                cmd.Parameters.Add("@SpaceType", SqlDbType.NVarChar).Value = ddlSpaceTypeAdd.SelectedValue;
+                cmd.Parameters.Add("@PermanantAssign", SqlDbType.Bit).Value = ddlPermanentAssignmentAdd.SelectedValue == "Yes";
+                cmd.Parameters.Add("@LeasePaid", SqlDbType.Bit).Value = ddlPaymentThisYearAdd.SelectedValue == "Yes";
+                cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = tbNotesAdd.Text;
+                DateTime? waitListDate = Utils.ObjectToDateTimeNullable(tbWaitListDateAdd.Text);
+                if (waitListDate.HasValue) {
+                    cmd.Parameters.Add("@WaitListDate", SqlDbType.DateTime).Value = waitListDate;
+                }
+                DateTime? leaseStartDate = Utils.ObjectToDateTimeNullable(tbLeaseStartDateAdd.Text);
+                if (leaseStartDate.HasValue) {
+                    cmd.Parameters.Add("@LeaseStartDate", SqlDbType.DateTime).Value = leaseStartDate;
+                }
+                DateTime? leaseCancelDate = Utils.ObjectToDateTimeNullable(tbLeaseCancelledDateAdd.Text);
+                if (leaseCancelDate.HasValue) {
+                    cmd.Parameters.Add("@LeaseCancelDate", SqlDbType.DateTime).Value = leaseCancelDate;
+                }
+
+                cmd.Parameters.Add("@LeaseCancelled", SqlDbType.Bit).Value = ddlLeaseCancelledAdd.SelectedValue == "Yes";
+                //    @WarningFlag1 nvarchar(18),
+                //    @Credit$ real,
+                //    @CreditPaid bit,
+                //    @FinalRent real,
+                cmd.Parameters.Add("@PropOwnerName", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerNameAdd.Text;
+                cmd.Parameters.Add("@PropOwnerID", SqlDbType.NVarChar).Value = tbNonOwnerPropertyOwnerIdAdd.Text;
+
+
+
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
+                clearAllNewFormInputFields();
                 performPostNewSuccessfulActions("RV Storage added", DataSetCacheKey, null, tbRVLeaseIdSearch, (int)newscRVLeaseID.Value);
+
             } catch (Exception e2) {
                 performPostNewFailedActions("RVStorage not added. Msg: " + e2.Message);
             }
@@ -781,15 +860,22 @@ namespace SubmittalProposal {
             GridViewRow row = gvRVStorageAvailableSpaces_Add.SelectedRow;
             Object obj = row.Cells;
             tbCurrentSpaceProtectedAdd.Text = row.Cells[1].Text;
+            tbNonOwnerCurrentSpaceProtectedAdd.Text = row.Cells[1].Text;
+            tbRVSpaceInfoSpaceProtectedAdd.Text = row.Cells[1].Text;
+            tbRVSpaceLeaseInformationProtectedAdd.Text = row.Cells[1].Text;
+            
             mpeAvailableSpacesAdd.Hide();
             mpeNewRVStorage.Show();
         }
-        protected void Button1X_Add_OnClick(object sender, EventArgs args) {
+        protected void doFindOwnerPropertyClickedAdd() {
             Session["byebye_add"] = null;
             Session["valueselectedbyfind_add"] = null;
             Timer2.Enabled = true;
             TimerTickerEnabled_Add = true;
             mpeNewRVStorage.Show();
+        }
+        protected void Button1X_Add_OnClick(object sender, EventArgs args) {
+            doFindOwnerPropertyClickedAdd();
         }
         protected bool ImInTimerTick_Add {
             get {
@@ -856,6 +942,8 @@ namespace SubmittalProposal {
                                     tbRegionOwnerInfoAdd.Text = Utils.ObjectToString(dr["Region"]); ;
                                     tbPostalCodeOwnerInfoAdd.Text = Utils.ObjectToString(dr["PostalCode"]); ;
                                     tbSunriverAddressOwnerInfoAdd.Text = Utils.ObjectToString(dr["SRAddress"]);
+                                    tbNonOwnerPropertyOwnerIdAdd.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID_Add"]);
+                                    tbNonOwnerPropertyOwnerIdAdd.Text = Utils.ObjectToString(Session["HereCommaHaveAClientID_Add"]);
 
                                     timetoclosewindowhidden_add.Value = "y";
                                 }

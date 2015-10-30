@@ -675,8 +675,9 @@
                                             runat="server"></asp:TextBox>
                                     </td>
                                     <td>
-                                        <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformation" runat="server" Text="Lookup Sunriver Property Owner Information"
-                                                 OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick" />
+                                        <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformation" runat="server" Text="Find Owner/Property"
+                                                OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick" 
+                                                OnClientClick="javascript:openwindow();return true;"/>
                                     </td>
                                 </tr>
                             </table>
@@ -773,7 +774,7 @@
         }
     </script>
 
-    <asp:Panel runat="server" CssClass="newitempopup" Width="900" ID="pnlNewRVStorageId">
+    <asp:Panel runat="server" CssClass="newitempopup" Width="977" ID="pnlNewRVStorageId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewRVStorageTitleId">
             <span>New RV Storage</span>
         </asp:Panel>
@@ -1390,7 +1391,7 @@
                                             </table>
                                         </asp:Panel>
                                         <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="Panel833x" GroupingText="Sunriver Address">
-                                                        <asp:TextBox ID="tbNonOwnerSunriverAddressAdd" MaxLength="10" Width="155"
+                                                        <asp:TextBox ID="tbNonOwnerSunriverAddressAdd" MaxLength="25" Width="155"
                                                             runat="server"></asp:TextBox>
                                         </asp:Panel>
 
@@ -1420,8 +1421,10 @@
                                                 runat="server"></asp:TextBox>
                                         </td>
                                         <td>
-                                            <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformationAdd" runat="server" Text="Lookup Sunriver Property Owner Information"
-                                                     OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformationAdd_onclick" />
+                                            <asp:Button ID="btnNonOwnerLookupSunriverPropertyOwnerInformationAdd" runat="server" Text="Find Owner/Property"
+                                                     OnClick="btnNonOwnerLookupSunriverPropertyOwnerInformationAdd_onclick" 
+                                                     OnClientClick="javascript:openwindow_add();return true;"
+                                                     />
                                         </td>
                                     </tr>
                                 </table>
