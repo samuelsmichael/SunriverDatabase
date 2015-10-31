@@ -28,7 +28,7 @@ namespace SubmittalProposal.Reports {
             ((Reports)Master).getSubmitButton().Click += new EventHandler(AbstractReport_Click);
         }
 
-        void AbstractReport_Click(object sender, EventArgs e) {
+        protected virtual void AbstractReport_Click(object sender, EventArgs e) {
             buildReport(getReportParams());
         }
 

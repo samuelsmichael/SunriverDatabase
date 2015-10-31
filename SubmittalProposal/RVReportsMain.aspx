@@ -19,4 +19,18 @@
         <asp:LinkButton ID="lbMailingLabels" runat="server" 
             onclick="lbMailingLabels_Click">Mailing Labels</asp:LinkButton>
      </p>
+     <hr />
+     <h2>Billing Reports</h2>
+    <p>
+        <asp:LinkButton ID="lbPastDue" runat="server" 
+            onclick="lbPastDue_Click">Past Due</asp:LinkButton>
+     </p>
+    <p>
+        <asp:LinkButton ID="lbRenewNow" runat="server" 
+            onclick="lbRenewNow_Click">Renew Now</asp:LinkButton>
+     </p>
+    <p>
+        <asp:LinkButton ID="lbBillingInfo" runat="server" 
+            onclick="lbBillingInfo_Click">Billing Info</asp:LinkButton>
+     </p>
 </asp:Content>

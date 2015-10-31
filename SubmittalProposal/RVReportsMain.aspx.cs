@@ -19,7 +19,19 @@ namespace SubmittalProposal {
         protected void lbMailingLabels_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/RVMailingLabels.aspx");
         }
-
+        protected void lbPastDue_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/RVLease/RVPastDue.aspx");
+        }
+        protected void lbRenewNow_Click(object sender, EventArgs e) {
+            throw new NotImplementedException();
+          //  Response.Redirect("~/Reports/RVMailingLabels.aspx");
+        }
+        protected void lbBillingInfo_Click(object sender, EventArgs e) {
+            throw new NotImplementedException();
+            //  Response.Redirect("~/Reports/RVMailingLabels.aspx");
+        }
+        
+        
         
     }
 }

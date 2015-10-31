@@ -119,6 +119,7 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\RVLease\RVPastDue.aspx" />
     <Content Include="Reports\RVMailingLabels.aspx" />
     <Content Include="Reports\RVSpaceReport.aspx" />
     <Content Include="Reports\RVSpacesEmpty.aspx" />
@@ -531,6 +532,12 @@
       <DependentUpon>RptRVMailingLabels.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\RVLease\rptRVPastDue.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptRVPastDue.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\RVLease\RptSpaceInventory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -548,6 +555,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RVMailingLabels.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\RVLease\RVPastDue.aspx.cs">
+      <DependentUpon>RVPastDue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RVLease\RVPastDue.aspx.designer.cs">
+      <DependentUpon>RVPastDue.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\RVMailingLabels.aspx.cs">
       <DependentUpon>RVMailingLabels.aspx</DependentUpon>
@@ -842,6 +856,10 @@
     <EmbeddedResource Include="Reports\RVLease\RptRVMailingLabels.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptRVMailingLabels.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RVLease\rptRVPastDue.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptRVPastDue.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptSpaceInventory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
