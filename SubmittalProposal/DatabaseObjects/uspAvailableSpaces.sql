@@ -11,7 +11,8 @@ alter PROCEDURE uspAvailableSpaces
 AS
 BEGIN
 	SET NOCOUNT ON;
-SELECT t.tSISpace, t.SpaceLeased, t.tSISpaceSize, t.tSIElectServ, v.AnnualRent
+SELECT t.tSISpace, t.SpaceLeased, t.tSISpaceSize, t.tSIElectServ, v.AnnualRent,
+case when t.tSIElectServ=0 then 'No' else 'Yes' end as ElectricalService
 FROM [tblSpaceInfo{LU}] t LEFT OUTER JOIN vFindRent v ON t.tSISpace = v.tSISpace
 WHERE (((t.SpaceLeased)=0));
 

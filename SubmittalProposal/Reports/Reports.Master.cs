@@ -27,6 +27,22 @@ namespace SubmittalProposal.Reports {
                 } else {
                     if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliancereview")) {
                         Response.Redirect("~/ComplianceReview.aspx");
+                    } else {
+                        if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
+                            Response.Redirect("~/SellCheck.aspx");
+                        } else {
+                            if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rvstorage")) {
+                                Response.Redirect("~/RVStorage.aspx");
+                            } else {
+                                if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
+                                    Response.Redirect("~/Contractor.aspx");
+                                } else {
+                                    if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("cardmanage")) {
+                                        Response.Redirect("~/IDCardManagement.aspx");
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

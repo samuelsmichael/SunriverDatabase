@@ -77,7 +77,7 @@ namespace SubmittalProposal {
                                         if (HttpContext.Current.User.IsInRole("candoreportsrvstorage")) {
                                             lbReports.Visible = true;
                                         }
-                                    }
+                                    } 
                                 }
                             }
                         }
@@ -101,6 +101,10 @@ namespace SubmittalProposal {
                         } else {
                             if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
                                 Response.Redirect("~/SellCheckReportsMain.aspx");
+                            } else {
+                                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rv")) {
+                                    Response.Redirect("~/RVReportsMain.aspx");
+                                }
                             }
                         }
                     }

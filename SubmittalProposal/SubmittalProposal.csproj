@@ -119,6 +119,8 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\RVSpaceReport.aspx" />
+    <Content Include="Reports\RVSpacesEmpty.aspx" />
     <Content Include="Reports\SellCheckHistory.aspx" />
     <Content Include="Reports\SellCheckLetter.aspx" />
     <Content Include="Reports\SellCheckList.aspx" />
@@ -127,6 +129,7 @@
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
+    <Content Include="RVReportsMain.aspx" />
     <Content Include="RVStorage.aspx" />
     <Content Include="SellCheck.aspx" />
     <Content Include="SellCheckReportsMain.aspx" />
@@ -521,6 +524,42 @@
     <Compile Include="Reports\Reports.Master.designer.cs">
       <DependentUpon>Reports.Master</DependentUpon>
     </Compile>
+    <Compile Include="Reports\RVLease\RptRVMailingLabels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptRVMailingLabels.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RVLease\RptSpaceInventory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSpaceInventory.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\RVLease\RptSpacesEmpty.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptSpacesEmpty.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\RVLease\RVMailingLabels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RVMailingLabels.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RVSpaceReport.aspx.cs">
+      <DependentUpon>RVSpaceReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RVSpaceReport.aspx.designer.cs">
+      <DependentUpon>RVSpaceReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RVSpacesEmpty.aspx.cs">
+      <DependentUpon>RVSpacesEmpty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RVSpacesEmpty.aspx.designer.cs">
+      <DependentUpon>RVSpacesEmpty.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\SellCheckHistory.aspx.cs">
       <DependentUpon>SellCheckHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -630,6 +669,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SubmittalLotLane.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RVReportsMain.aspx.cs">
+      <DependentUpon>RVReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RVReportsMain.aspx.designer.cs">
+      <DependentUpon>RVReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="RVStorage.aspx.cs">
       <DependentUpon>RVStorage.aspx</DependentUpon>
@@ -782,6 +828,22 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorsAllData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RVLease\RptRVMailingLabels.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptRVMailingLabels.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RVLease\RptSpaceInventory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSpaceInventory.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RVLease\RptSpacesEmpty.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptSpacesEmpty.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RVLease\RVMailingLabels.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RVMailingLabels.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\SellCheck\RptSellCheckFeesDue.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
