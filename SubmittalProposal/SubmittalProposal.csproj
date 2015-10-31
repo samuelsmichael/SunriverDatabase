@@ -119,6 +119,7 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\RVMailingLabels.aspx" />
     <Content Include="Reports\RVSpaceReport.aspx" />
     <Content Include="Reports\RVSpacesEmpty.aspx" />
     <Content Include="Reports\SellCheckHistory.aspx" />
@@ -528,6 +529,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RptRVMailingLabels.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\RVLease\RptSpaceInventory.cs">
       <AutoGen>True</AutoGen>
@@ -545,6 +547,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RVMailingLabels.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\RVMailingLabels.aspx.cs">
+      <DependentUpon>RVMailingLabels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RVMailingLabels.aspx.designer.cs">
+      <DependentUpon>RVMailingLabels.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\RVSpaceReport.aspx.cs">
       <DependentUpon>RVSpaceReport.aspx</DependentUpon>

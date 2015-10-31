@@ -15,4 +15,8 @@
         <asp:LinkButton ID="lbSpacesEmpty" runat="server" 
             onclick="lbSpacesEmpty_Click">RV Spaces - Empty</asp:LinkButton>
      </p>
+    <p>
+        <asp:LinkButton ID="lbMailingLabels" runat="server" 
+            onclick="lbMailingLabels_Click">Mailing Labels</asp:LinkButton>
+     </p>
 </asp:Content>

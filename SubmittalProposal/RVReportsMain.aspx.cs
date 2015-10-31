@@ -16,5 +16,10 @@ namespace SubmittalProposal {
         protected void lbSpacesEmpty_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/RVSpacesEmpty.aspx");
         }
+        protected void lbMailingLabels_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/RVMailingLabels.aspx");
+        }
+
+        
     }
 }

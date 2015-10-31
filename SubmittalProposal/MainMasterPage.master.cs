@@ -75,6 +75,7 @@ namespace SubmittalProposal {
                                 } else {
                                     if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rvstorage")) {
                                         if (HttpContext.Current.User.IsInRole("candoreportsrvstorage")) {
+                                            lbReports.Text = "Reports/Procedures";
                                             lbReports.Visible = true;
                                         }
                                     } 

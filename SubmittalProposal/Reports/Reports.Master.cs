@@ -31,7 +31,7 @@ namespace SubmittalProposal.Reports {
                         if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
                             Response.Redirect("~/SellCheck.aspx");
                         } else {
-                            if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rvstorage")) {
+                            if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rv")) {
                                 Response.Redirect("~/RVStorage.aspx");
                             } else {
                                 if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {

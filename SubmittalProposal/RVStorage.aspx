@@ -1488,7 +1488,7 @@
     </asp:Panel>
 
 
-    <asp:LinkButton ID="lbRVStorageNew" OnClick="lbRVStorageNewCmon_OnClick" CausesValidation="false" runat="server">New Request</asp:LinkButton>
+    <asp:LinkButton ID="lbRVStorageNew" OnClick="lbRVStorageNewCmon_OnClick" CausesValidation="false" runat="server">New Space Request</asp:LinkButton>
     <asp:Button style="display:none;" ID="btnhiddenrvstorage1" runat="server" />
     <ajaxToolkit:ModalPopupExtender ID="mpeNewRVStorage" runat="server" TargetControlID="btnhiddenrvstorage1"
         PopupControlID="pnlNewRVStorageId" BackgroundCssClass="modalBackground" 
