@@ -75,4 +75,10 @@
         </table>
 
      </p>
+     <hr />
+     <h2>Queries</h2>
+    <p>
+        <asp:LinkButton ID="lbCrossReference" runat="server" 
+            onclick="lbCrossReference_Click">Cross Referrence</asp:LinkButton>
+     </p>
 </asp:Content>

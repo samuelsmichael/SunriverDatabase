@@ -15,6 +15,10 @@ using System.Security.Principal;
 namespace SubmittalProposal {
     public partial class MainMasterPage : System.Web.UI.MasterPage {
 
+        public Menu getNavigationMenu() {
+            return NavigationMenu;
+        }
+
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
                 MenuItem miSubmittals = new MenuItem("Submittal", "Submittal", null, "~/Submittal2.aspx");

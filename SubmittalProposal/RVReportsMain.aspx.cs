@@ -34,6 +34,9 @@ namespace SubmittalProposal {
         protected void lbBillingInfo_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/RVBillingInfo.aspx");
         }
+        protected void lbCrossReference_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Query_CrossReference3.aspx");
+        }
 
         protected void lbUpdateAllLeasePaidToNo_Click(object sender, EventArgs args) {
             SqlCommand cmd=null;

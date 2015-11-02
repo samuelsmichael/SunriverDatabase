@@ -206,6 +206,7 @@ namespace SubmittalProposal {
                 ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
             }
+            ((MainMasterPage)Master.Master).getNavigationMenu().Visible = false;
        }
     }
 }

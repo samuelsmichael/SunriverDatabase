@@ -160,7 +160,7 @@ namespace SubmittalProposal {
             tbNonOwnerSunriverAddressUpdate.Text = Common.Utils.ObjectToString(dr["NO-SunriverAddr"]);
 
             #endregion
-            return "RVLease ID: " + rvLeastIDBeingEdited + "  First Name:" + dr["FirstName"] + " Last Name: " + dr["LastName"] + (Common.Utils.ObjectToBool(dr["LeaseCancelled"])?"<span style='margin-left:3em;color:Red'>CANCELLED</span>":"");
+            return "RVLease ID: " + rvLeastIDBeingEdited + "  First Name:" + dr["FirstName"] + " Last Name: " + dr["LastName"] + (Common.Utils.ObjectToBool(dr["LeaseCancelled"])?"<span id='spnCancelledId' style='margin-left:3em;color:Red'>CANCELLED</span>":"");
 
         }
 
@@ -763,9 +763,21 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add(name);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 if (Utils.isNothingNot(rvLeaseID.Value)) {
-                    lblLeasedCancelledErrorMessage.Text = "This space is already leased by "+name.Value+ " (RVLeaseID "+rvLeaseID.Value+").";
+                    lblLeasedCancelledErrorMessage.Text = "This space is already leased by " + name.Value + " (RVLeaseID " + rvLeaseID.Value + ").";
                     ((DropDownList)sender).SelectedValue = "Yes";
                 }
+            }
+            /* This doesn't work.  Trying to update red "Cancelled" msg dynamically. No big deal, as it will get updated as soon as the user goes back to look at that record. */
+            if (((DropDownList)sender).SelectedValue == "Yes") {
+                ClientScriptManager cs = Page.ClientScript;
+                StringBuilder cstext2 = new StringBuilder();
+                cstext2.Append("<script type=\"text/javascript\">");
+                cstext2.Append("try {document.getElementById('spnCancelledId').value)='Cancelled'} catch (e) {alert(e.toString())} </");
+                cstext2.Append("script>");
+                Type cstype = this.GetType();
+                String csname2 = "UpdateCancelledStatusYes";
+                cs.RegisterClientScriptBlock(cstype, csname2, cstext2.ToString(), false);
+            } else {
             }
         }
         protected void lbRVStorageNewCmon_OnClick(object sender, EventArgs args) {

@@ -366,6 +366,7 @@
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList runat="server" ID="ddlSpaceTypeUpdate">
+                                                        <asp:ListItem></asp:ListItem>
                                                         <asp:ListItem Selected="True">Primary</asp:ListItem>
                                                         <asp:ListItem>Multiple</asp:ListItem>
                                                         <asp:ListItem>Owner</asp:ListItem>
@@ -1113,6 +1114,7 @@
                                                 </td>
                                                 <td>
                                                     <asp:DropDownList runat="server" ID="ddlSpaceTypeAdd">
+                                                        <asp:ListItem></asp:ListItem>
                                                         <asp:ListItem Selected="True">Primary</asp:ListItem>
                                                         <asp:ListItem>Multiple</asp:ListItem>
                                                         <asp:ListItem>Owner</asp:ListItem>
