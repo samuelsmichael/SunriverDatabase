@@ -119,8 +119,10 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
-    <Content Include="Reports\RVLease\RVPastDue.aspx" />
+    <Content Include="Reports\RVBillingInfo.aspx" />
+    <Content Include="Reports\RVPastDue.aspx" />
     <Content Include="Reports\RVMailingLabels.aspx" />
+    <Content Include="Reports\RVRenewNow2.aspx" />
     <Content Include="Reports\RVSpaceReport.aspx" />
     <Content Include="Reports\RVSpacesEmpty.aspx" />
     <Content Include="Reports\SellCheckHistory.aspx" />
@@ -526,6 +528,19 @@
     <Compile Include="Reports\Reports.Master.designer.cs">
       <DependentUpon>Reports.Master</DependentUpon>
     </Compile>
+    <Compile Include="Reports\RVBillingInfo.aspx.cs">
+      <DependentUpon>RVBillingInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RVBillingInfo.aspx.designer.cs">
+      <DependentUpon>RVBillingInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RVLease\RptRVBillingInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptRVBillingInfo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\RVLease\RptRVMailingLabels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -556,11 +571,11 @@
       <DependentUpon>RVMailingLabels.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\RVLease\RVPastDue.aspx.cs">
+    <Compile Include="Reports\RVPastDue.aspx.cs">
       <DependentUpon>RVPastDue.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reports\RVLease\RVPastDue.aspx.designer.cs">
+    <Compile Include="Reports\RVPastDue.aspx.designer.cs">
       <DependentUpon>RVPastDue.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\RVMailingLabels.aspx.cs">
@@ -569,6 +584,13 @@
     </Compile>
     <Compile Include="Reports\RVMailingLabels.aspx.designer.cs">
       <DependentUpon>RVMailingLabels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RVRenewNow2.aspx.cs">
+      <DependentUpon>RVRenewNow2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RVRenewNow2.aspx.designer.cs">
+      <DependentUpon>RVRenewNow2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\RVSpaceReport.aspx.cs">
       <DependentUpon>RVSpaceReport.aspx</DependentUpon>
@@ -852,6 +874,10 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorsAllData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RVLease\RptRVBillingInfo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptRVBillingInfo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptRVMailingLabels.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
