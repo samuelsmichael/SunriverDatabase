@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master"  AutoEventWireup="true" CodeBehind="Reports.master.cs" Inherits="SubmittalProposal.Reports.Reports" %>
+
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
+    Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ContentPlaceHolder ID="Heading" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:Panel ID="pnlReport" runat="server" DefaultButton="btnSubmitReport">
+        <table width="100%" cellpadding="3">
+            <tr>
+                <td width="100%" align="left">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderReportParms" runat="server">  
+                    </asp:ContentPlaceHolder>
+                </td>
+                <td align="right">
+                    <asp:Button ID="btnSubmitReport" runat="server" Text="Submit" />
+                </td>
+                <td align="right">
+                    <asp:LinkButton style="font-size:smaller;" CausesValidation="false" ID="lbHome"  runat="server" onclick="lbHome_Click">Home</asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <CR:CrystalReportViewer ID="CrystalReportViewer1"  ToolPanelView="None"  runat="server" AutoDataBind="true" />
+
+</asp:Content>
