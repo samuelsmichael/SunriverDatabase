@@ -28,6 +28,7 @@ namespace SubmittalProposal {
                 MenuItem miCardManagement = new MenuItem("ID Card", "IDCardManagement", null, "~/IDCardManagement.aspx");
                 MenuItem miSellCheck = new MenuItem("Sell Check", "SellCheck", null, "~/SellCheck.aspx");
                 MenuItem miRVStorage = new MenuItem("RV Storage", "RVStorage", null, "~/RVStorage.aspx");
+                MenuItem miLRFDVehicleMaintenance = new MenuItem("LRFD Vehicle", "LRFDVehicle", null, "~/LRFDVehicleMaintenance.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewcontractors")) {
                     NavigationMenu.Items.AddAt(1, miContractors);
                 }
@@ -48,6 +49,9 @@ namespace SubmittalProposal {
                 }
                 if (HttpContext.Current.User.IsInRole("canviewrvstorage")) {
                     NavigationMenu.Items.AddAt(1, miRVStorage);
+                }
+                if (HttpContext.Current.User.IsInRole("canviewlrfdvehiclemaintenance")) {
+                    NavigationMenu.Items.AddAt(1, miLRFDVehicleMaintenance);
                 }
 
 
@@ -82,7 +86,14 @@ namespace SubmittalProposal {
                                             lbReports.Text = "Reports/Procedures";
                                             lbReports.Visible = true;
                                         }
-                                    } 
+                                    } else {
+                                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
+                                            if (HttpContext.Current.User.IsInRole("candoreportslrfdvehiclemaintenance")) {
+                                                lbReports.Text = "Reports";
+                                                lbReports.Visible = true;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -109,6 +120,10 @@ namespace SubmittalProposal {
                             } else {
                                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rv")) {
                                     Response.Redirect("~/RVReportsMain.aspx");
+                                } else {
+                                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
+                                        Response.Redirect("~/LRFDVehicleMaintenanceReportsMain.aspx");
+                                    }
                                 }
                             }
                         }

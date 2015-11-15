@@ -7,7 +7,7 @@ GO
 -- Create date: 3/11/2015
 -- Description:	Gets the tables of LRFDVehicleMaintenance
 -- =============================================
-create PROCEDURE uspLRFDVehicleMaintenanceTablesGet 
+alter PROCEDURE uspLRFDVehicleMaintenanceTablesGet 
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -15,5 +15,8 @@ BEGIN
 	select * from tblVWOLabor;
 	select * from tblVWOParts;
 	select * from tblVWOServices
+	select * from [tblDepartment{LU}]
+	select * from [tblMechanicInfo{LU}]
+	select * from [tblVehicleList{LU}]
 END
 GO
