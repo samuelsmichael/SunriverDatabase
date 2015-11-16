@@ -37,7 +37,7 @@ namespace SubmittalProposal {
                 ds.Tables[6].PrimaryKey = new DataColumn[1] { ds.Tables[6].Columns["Number"] };
                 ds.Tables[6].Columns.Add(new DataColumn("VechicleNameForDDLs", typeof(String)));
                 foreach (DataRow dr in ds.Tables[6].Rows) {
-                    dr["VechicleNameForDDLs"] = "" + dr["Number"] + "-" + Utils.ObjectToString(dr["Description"]);
+                    dr["VechicleNameForDDLs"] = "" + dr["Number"] + " - " + Utils.ObjectToString(dr["Description"]);
                 }
                 ds.Tables["VWOData"].Columns.Add(new DataColumn("VehicleName", typeof(String)));
                 foreach (DataRow dr in ds.Tables["VWOData"].Rows) {
@@ -55,9 +55,64 @@ namespace SubmittalProposal {
             return ds;
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            throw new NotImplementedException();
-        }
+            GridViewRow row = gvResults.SelectedRow;
+            Object obj = row.Cells;
+            VMOIDBeingEdited=row.Cells[1].Text;
+            DataTable sourceTable = getGridViewDataTable();
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "VWOID='" + VMOIDBeingEdited + "'";
+            DataTable tblFiltered = view.ToTable();
+            DataRow dr = tblFiltered.Rows[0];
+            lblRFDUpdateWOI.Text = VMOIDBeingEdited;
+            ddlRFDUpdateVehicleNumber.SelectedValue = Utils.ObjectToString(dr["fkNumber"]);
+            tbRFDUpdateVehicleDescription.Text = Utils.ObjectToString(dr["Request Nature"]);
+            string estimate = Utils.ObjectToString(dr["Estimate"]);
+            ddlYesNoBlankEstimateUpdate.SelectedValue = (estimate==""?"":estimate=="True"?"Yes":"No");
+            tbRFDUpdateDataEntryBy.Text = Utils.ObjectToString(dr["Data Entry By"]);
+            DateTime? entryDate=Utils.ObjectToDateTimeNullable(dr["Data Entry Date"]);
+            tbLRFDUpdateDataEntryDate.Text = entryDate.HasValue ? entryDate.Value.ToString("d") : "";
+            DateTime? requestDateIn = Utils.ObjectToDateTimeNullable(dr["Date In"]);
+            tbLRFDUpdateRequestDateIn.Text = requestDateIn.HasValue ? requestDateIn.Value.ToString("d") : "";
+            tbRFDUpdateRequestedBy.Text = Utils.ObjectToString(dr["Request By"]);
+            tbLRFDUpdateOdometerReading.Text = Utils.ObjectToString(dr["Odometer"]);
+            tbLRFDUpdateHourReading.Text = Utils.ObjectToString(dr["hour Meter"]);
+            DataTable vehicleTable=LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"];
+            DataView vehicleView  = new DataView(vehicleTable);
+            vehicleView.RowFilter="Number='"+ dr["fkNumber"] +"'";
+            DataTable vehicleViewFiltered=vehicleView.ToTable();
+            DataRow drZVehicle=vehicleViewFiltered.Rows[0];
 
+            DataTable deptTable= LRFDVehicalMaintenance_DataSet().Tables["LRFDDepartment"];
+            DataView deptView=new DataView(deptTable);
+            deptView.RowFilter="DepartmentID="+drZVehicle["fkDeptID"];
+            DataTable deptViewFiltered=deptView.ToTable();
+            DataRow drZDept=deptViewFiltered.Rows[0];
+
+            DataTable partsTable = LRFDVehicalMaintenance_DataSet().Tables["VWOParts"];
+            DataView partsView = new DataView(partsTable);
+            partsView.RowFilter = "fkVWOP_ID='" + VMOIDBeingEdited + "'";
+            DataTable partsViewFiltered = partsView.ToTable();
+            gvRFDUpdateParts.DataSource = partsViewFiltered;
+            gvRFDUpdateParts.DataBind();
+
+
+            lblRFDUpdateDepartmentId.Text = ""+drZDept["DepartmentID"]+" - "+ drZDept["Department"];
+            lblRFDUpdateDepartmentAdminCharges.Text = "" + (Convert.ToDouble(drZDept["AdministrationRate"]) * 100).ToString("#0.##") + "%";
+            DateTime? dateOut = Utils.ObjectToDateTimeNullable(dr["Date Out"]);
+            tbRFDUpdateVehicleDateOut.Text = dateOut.HasValue ? dateOut.Value.ToString("d") : "";
+            tbRFDUpdateProcedurePerformed.Text = Utils.ObjectToString(dr["Proceedure 1"]);
+            tbRFDUpdateComments.Text = Utils.ObjectToString(dr["Comments"]);
+
+            return "Work Order #: " + VMOIDBeingEdited + " Vehicle ID: " + Utils.ObjectToString(dr["fkNumber"]) + " Vehicle description: " + Utils.ObjectToString(dr["VehicleName"]);
+        }
+        private string VMOIDBeingEdited {
+            get {
+                return Utils.ObjectToString(Session["VMOIDBeingEdited"]);
+            }
+            set {
+                Session["VMOIDBeingEdited"]=value;
+            }
+        }
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
@@ -93,7 +148,10 @@ namespace SubmittalProposal {
         }
 
         protected override Label getUpdateResultsLabel() {
-            throw new NotImplementedException();
+            return lblRFDUpdateResults;
+        }
+
+        protected void btnRFDUpdate_Click(Object sender, EventArgs args) {
         }
 
         protected override Label getNewResultsLabel() {
@@ -101,11 +159,51 @@ namespace SubmittalProposal {
         }
 
         protected override void unlockYourUpdateFields() {
-            throw new NotImplementedException();
+            ddlRFDUpdateVehicleNumber.Enabled = true;
+            btnRFDUpdate.Visible = true;
+            tbLRFDUpdateDataEntryDate.Enabled = true;
+            tbRFDUpdateDataEntryBy.Enabled = true;
+            tbRFDUpdateVehicleDescription.Enabled = true;
+            ddlYesNoBlankEstimateUpdate.Enabled = true;
+            ibtbLRFDUpdateDataEntryDate.Enabled = true;
+            tbLRFDUpdateRequestDateIn.Enabled = true;
+            ibtbLRFDUpdateRequestDateIn.Enabled = true;
+            tbRFDUpdateRequestedBy.Enabled = true;
+            tbLRFDUpdateOdometerReading.Enabled=true;
+            tbLRFDUpdateHourReading.Enabled = true;
+            tbRFDUpdateVehicleDateOut.Enabled = true;
+            tbRFDUpdateProcedurePerformed.Enabled = true;
+            tbRFDUpdateComments.Enabled = true;
         }
 
+
+        protected void gvUpdateParts_RowEditing(object sender, GridViewEditEventArgs e) {
+        }
+
+        protected void gvUpdateParts_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+        }
+
+        protected void gvUpdateParts_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+
+        }
+
+
         protected override void lockYourUpdateFields() {
-            throw new NotImplementedException();
+            tbRFDUpdateComments.Enabled = false;
+            tbRFDUpdateVehicleDateOut.Enabled = false;
+            tbRFDUpdateProcedurePerformed.Enabled = false;
+            tbLRFDUpdateOdometerReading.Enabled = false;
+            tbLRFDUpdateHourReading.Enabled = false;
+            tbLRFDUpdateRequestDateIn.Enabled = false;
+            ibtbLRFDUpdateRequestDateIn.Enabled = false;
+            tbRFDUpdateRequestedBy.Enabled = false;
+            ibtbLRFDUpdateDataEntryDate.Enabled = false;
+            tbLRFDUpdateDataEntryDate.Enabled = false;
+            ddlRFDUpdateVehicleNumber.Enabled = false;
+            btnRFDUpdate.Visible = false;
+            tbRFDUpdateVehicleDescription.Enabled = false;
+            tbRFDUpdateDataEntryBy.Enabled = false;
+            ddlYesNoBlankEstimateUpdate.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -132,6 +230,8 @@ namespace SubmittalProposal {
                 dt.Rows.InsertAt(newRow, 0);
                 ddlVehicle_Search.DataSource = dt;
                 ddlVehicle_Search.DataBind();
+                ddlRFDUpdateVehicleNumber.DataSource = LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"];
+                ddlRFDUpdateVehicleNumber.DataBind();
             }
         }
     }
