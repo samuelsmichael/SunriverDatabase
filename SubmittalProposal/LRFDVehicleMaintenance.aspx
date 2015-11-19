@@ -185,9 +185,9 @@
                             <div style="overflow:auto;height:6em;">
 
                                 <asp:GridView Width="100%" ID="gvRFDUpdateParts" runat="server" AutoGenerateColumns="False"
-                                    CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" 
+                                    CellPadding="1" ForeColor="#333333" GridLines="None" ShowFooter="true" 
                                     OnRowCancelingEdit="gvUpdateParts_RowCancelingEdit"
-                                    OnRowEditing="gvUpdateParts_RowEditing" 
+                                    OnRowEditing="gvUpdateParts_RowEditing" Font-Size="X-Small"
                                     OnRowUpdating="gvUpdateParts_RowUpdating" DataKeyNames="VWOPartID">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <EditRowStyle BackColor="#999999" />
@@ -202,12 +202,11 @@
                                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                     <EmptyDataTemplate>
                                         <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
-                                    </EmptyDataTemplate>
+                                    </EmptyDataTemplate>                                    
                                     <Columns>
                                         <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
                                             ShowCancelButton="true" />
-                                        <asp:BoundField DataField="VWOPartID" HeaderText="ID" SortExpression="VWOPartID" />
-                                        <asp:TemplateField HeaderText="Nbr">
+                                        <asp:TemplateField HeaderText="Description" SortExpression="PTDescription">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("PTDescription") %>'></asp:Label>
                                             </ItemTemplate>
@@ -215,11 +214,188 @@
                                                 <asp:TextBox ID="tbRFDUpdatePartsPTDescription" runat="server" Text= '<%# Bind("PtDescription") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Number" SortExpression="PTNumber">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("PTNumber") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTNumber" runat="server" Text= '<%# Bind("PtNumber") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Rate" SortExpression="PTRate">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTRate" runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Quantity" SortExpression="PtQuan">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text= '<%# Bind("PtQuan") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTQuantity" runat="server" Text= '<%# Bind("PtQuan") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cost">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" BackColor="Yellow" Text= '<%# getCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Surcharge">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server"  BackColor="Yellow" Text= '<%# getSurcharge(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
+                                                <asp:Label ID="Label344xu" runat="server" BackColor="Yellow" Text= '<%# getSurchargeRateAsPercentage() %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                Total Parts Cost:
+                                            </FooterTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Item Cost">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" BackColor="Yellow" Text= '<%# getItemCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:Label ID="lblX102" runat="server" Text='<%# getTotalPartsCost() %>'></asp:Label>
+                                            </FooterTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:BoundField DataField="VWOPartID" HeaderText="PardId" ControlStyle-BackColor="LightGray" SortExpression="VWOPartID" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
                         </td>
                     </tr>
+                    
+                    <tr>
+                        <td>Labor</td>
+                        <td>
+                            <div style="overflow:auto;height:6em;">
+
+                                <asp:GridView Width="100%" ID="gvRFDUpdateLabor" runat="server" AutoGenerateColumns="False"
+                                    CellPadding="1" ForeColor="#333333" GridLines="None" ShowFooter="true" 
+                                    OnRowCancelingEdit="gvUpdateLabor_RowCancelingEdit"
+                                    OnRowEditing="gvUpdateLabor_RowEditing" Font-Size="X-Small"
+                                    OnRowUpdating="gvUpdateLabor_RowUpdating" DataKeyNames="VWOLaborID">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <EditRowStyle BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                    <EmptyDataTemplate>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                    </EmptyDataTemplate>                                    
+                                    <Columns>
+                                        <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
+                                            ShowCancelButton="true" />
+                                        <asp:TemplateField HeaderText="Mechanic" SortExpression="MechName">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("MechName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdateLaborMechName" runat="server" Text= '<%# Bind("MechName") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Rate $/Hr" SortExpression="MechRate">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xddx3" runat="server" Text='<%# Eval("MechRate","{0:c}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdateLaborMechRate" runat="server" Text= '<%# Eval("MechRate","{0:c}") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Hours">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text= '<%# Bind("MechHours") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdateLaborMechHours" runat="server" Text= '<%# Bind("MechHours") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>Total Labor Cost:</FooterTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cost">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" BackColor="Yellow" Text= '<%# getCost(Eval("MechHours"),Eval("MechRate")) %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:Label ID="lblX102" runat="server" Text='<%# getTotalLaborCost() %>'></asp:Label>
+                                            </FooterTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="VWOLaborID" HeaderText="Labor ID" ControlStyle-BackColor="LightGray" SortExpression="VWOLaborID" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td>Service</td>
+                        <td>
+                            <div style="overflow:auto;height:6em;">
+
+                                <asp:GridView Width="100%" ID="gvRFDUpdateService" runat="server" AutoGenerateColumns="False"
+                                    CellPadding="1" ForeColor="#333333" GridLines="None" ShowFooter="true" 
+                                    OnRowCancelingEdit="gvUpdateService_RowCancelingEdit"
+                                    OnRowEditing="gvUpdateService_RowEditing" Font-Size="X-Small"
+                                    OnRowUpdating="gvUpdateService_RowUpdating" DataKeyNames="VWOCtrServID">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <EditRowStyle BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                    <EmptyDataTemplate>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                    </EmptyDataTemplate>                                    
+                                    <Columns>
+                                        <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
+                                            ShowCancelButton="true" />
+                                        <asp:TemplateField HeaderText="Description" SortExpression="CSDescription" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("CSDescription") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdateServiceDescription" runat="server" Text= '<%# Bind("CSDescription") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Vendor" SortExpression="CSVendor" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("CSVendor") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdateServiceVendor" runat="server" Text= '<%# Bind("CSVendor") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cost" SortExpression="CSCost" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label3xddx3" runat="server" Text='<%# Eval("CSCost","{0:c}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbRFDUpdateServiceCost" runat="server" Text= '<%# Eval("CSCost","{0:c}") %>'></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                Total Contracted Services:&nbsp; &nbsp;<asp:Label style="text-align:right;" ID="lblX102" runat="server" Text='<%# getTotalServicesCost() %>'></asp:Label>
+                                            </FooterTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="VWOCtrServID" HeaderText="Service ID" ControlStyle-BackColor="LightGray" SortExpression="VWOCtrServID" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </td>
+                    </tr>
+
+                    
                     <tr>
                         <td>Comments</td>
                         <td colspan="4">

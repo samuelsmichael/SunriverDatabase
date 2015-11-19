@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 namespace SubmittalProposal {
     public partial class LRFDVehicleMaintenance : AbstractDatabase {
         private static string LRFD_VEHICLE_MAINTENANCE_CACHE_KEY = "LRFD_CACHE_KEY";
+        private static string LRFD_SurchargeRate_CACHE_KEY = "LRFD_SurchargeRate_CACHE_KEY";
         public static DataSet LRFDVehicalMaintenance_DataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
@@ -95,6 +96,19 @@ namespace SubmittalProposal {
             gvRFDUpdateParts.DataSource = partsViewFiltered;
             gvRFDUpdateParts.DataBind();
 
+            DataTable laborTable = LRFDVehicalMaintenance_DataSet().Tables["VWOLabor"];
+            DataView laborView = new DataView(laborTable);
+            laborView.RowFilter = "fkVWOL_ID='" + VMOIDBeingEdited + "'";
+            DataTable laborViewFiltered = laborView.ToTable();
+            gvRFDUpdateLabor.DataSource = laborViewFiltered;
+            gvRFDUpdateLabor.DataBind();
+
+            DataTable ServiceTable = LRFDVehicalMaintenance_DataSet().Tables["VWOServices"];
+            DataView ServiceView = new DataView(ServiceTable);
+            ServiceView.RowFilter = "fkVWOS_ID='" + VMOIDBeingEdited + "'";
+            DataTable ServiceViewFiltered = ServiceView.ToTable();
+            gvRFDUpdateService.DataSource = ServiceViewFiltered;
+            gvRFDUpdateService.DataBind();
 
             lblRFDUpdateDepartmentId.Text = ""+drZDept["DepartmentID"]+" - "+ drZDept["Department"];
             lblRFDUpdateDepartmentAdminCharges.Text = "" + (Convert.ToDouble(drZDept["AdministrationRate"]) * 100).ToString("#0.##") + "%";
@@ -152,6 +166,40 @@ namespace SubmittalProposal {
         }
 
         protected void btnRFDUpdate_Click(Object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspLRFDVehicleMaintenanceUpdate");
+/*                cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text;
+                cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameUpdate.Text;
+                cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneUpdate.SelectedValue;
+                cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text;
+                cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorUpdate.Text;
+                cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeUpdate.SelectedValue;
+                int? contractorId = ddlContractorUpdate.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlContractorUpdate.SelectedValue);
+                cmd.Parameters.Add("@fkSRContrRegID", SqlDbType.Int).Value = contractorId;
+                cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectUpdate.Text;
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
+                cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredUpdate.SelectedValue == "Yes" ? true : false;
+                DateTime? issuedDate =
+                    tbIssuedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedUpdate.Text);
+                cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
+                DateTime? closeDate =
+                    tbClosedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedUpdate.Text);
+                cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
+                cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayUpdate.Text;
+                cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = SubmittalIDBeingEdited;
+                SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
+                newBPermitId.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newBPermitId);
+                SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
+                newSubmittalId.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newSubmittalId);
+ */
+     //           Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+
+                performPostUpdateSuccessfulActions("Update successful", LRFD_VEHICLE_MAINTENANCE_CACHE_KEY,LRFD_SurchargeRate_CACHE_KEY);
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
+            }
         }
 
         protected override Label getNewResultsLabel() {
@@ -184,6 +232,24 @@ namespace SubmittalProposal {
         }
 
         protected void gvUpdateParts_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+
+        }
+        protected void gvUpdateLabor_RowEditing(object sender, GridViewEditEventArgs e) {
+        }
+
+        protected void gvUpdateLabor_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+        }
+
+        protected void gvUpdateLabor_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+
+        }
+        protected void gvUpdateService_RowEditing(object sender, GridViewEditEventArgs e) {
+        }
+
+        protected void gvUpdateService_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+        }
+
+        protected void gvUpdateService_RowUpdating(object sender, GridViewUpdateEventArgs e) {
 
         }
 
@@ -233,6 +299,104 @@ namespace SubmittalProposal {
                 ddlRFDUpdateVehicleNumber.DataSource = LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"];
                 ddlRFDUpdateVehicleNumber.DataBind();
             }
+        }
+        protected string getCost(object quan, object rate) {
+            return
+                (Utils.ObjectToInt(quan) * Utils.ObjectToDouble(rate)).ToString("c");
+        }
+        protected string getSurchargeRateAsPercentage() {
+            return getSurchargeRate().ToString("P");
+        }
+        private double getSurchargeRateFromDictionary(Dictionary<string, double> surchargeDictionary,string fkNumber) {
+            double surchargeRate=.05d;
+            try {
+                surchargeRate=surchargeDictionary[fkNumber];
+            } catch {
+                DataTable sourceTableVehicle = LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"];
+                DataView viewVehicle = new DataView(sourceTableVehicle);
+                viewVehicle.RowFilter = "Number='" + fkNumber + "'";
+                DataTable tblFilteredVehicle = viewVehicle.ToTable();
+                DataRow drVehicle = tblFilteredVehicle.Rows[0];
+                int deptId = Utils.ObjectToInt(drVehicle["fkDeptID"]);
+                DataTable sourceTableDept = LRFDVehicalMaintenance_DataSet().Tables["LRFDDepartment"];
+                DataView viewDept = new DataView(sourceTableDept);
+                viewDept.RowFilter = "DepartmentID=" + deptId;
+                DataTable tblFilteredDepartment = viewDept.ToTable();
+                DataRow drDept = tblFilteredDepartment.Rows[0];
+                surchargeRate = Utils.ObjectToDouble(drDept["PartMarkUpRate"]);
+                surchargeDictionary[fkNumber] = surchargeRate;
+            }
+            return surchargeRate;
+        }
+        private double getCacheSurchargeRateForVehicle(string fkNumber) {
+            MemoryCache cache = MemoryCache.Default;
+            string key = LRFD_SurchargeRate_CACHE_KEY;
+            Dictionary<string,double> surchargeDictionary = (Dictionary<string,double>)cache[key];
+            if (surchargeDictionary == null) {
+                surchargeDictionary = new Dictionary<string, double>();
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration = new TimeSpan(0, 60, 0);
+                cache.Add(key, surchargeDictionary, policy);
+            }
+           double SurchargeRate = getSurchargeRateFromDictionary(surchargeDictionary,fkNumber);
+           return SurchargeRate;
+        }
+        private double getSurchargeRate() {
+            /* I've got the vehicle (fkNumber), and find the departmentid (fkDeptID), and find the PartMarkUpRate. */
+            DataTable sourceTable = LRFDVehicalMaintenance_DataSet().Tables["VWOData"];
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "VWOID='" + VMOIDBeingEdited + "'";
+            DataTable tblFiltered = view.ToTable();
+            DataRow dr = tblFiltered.Rows[0];
+            string fkNumber = Utils.ObjectToString(dr["fkNumber"]);
+            return getCacheSurchargeRateForVehicle(fkNumber);
+        }
+        protected string getSurcharge(object quan, object rate) {
+            double charge=Utils.ObjectToInt(quan) * Utils.ObjectToDouble(rate);
+            return (charge*getSurchargeRate()).ToString("c");
+        }
+        protected string getItemCost(object quan, object rate) {
+            double charge=Utils.ObjectToInt(quan) * Utils.ObjectToDouble(rate);
+            charge+=charge*getSurchargeRate();
+            return charge.ToString("c");
+        }
+
+        protected string getTotalPartsCost() {
+            DataTable sourceTable = LRFDVehicalMaintenance_DataSet().Tables["VWOParts"];
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "fkVWOP_ID='" + VMOIDBeingEdited + "'";
+            DataTable tblFiltered = view.ToTable();
+            double totalCost = 0d;
+            foreach (DataRow dr in tblFiltered.Rows) {
+                double cost=Utils.ObjectToDouble(dr["PtRate"]) * Utils.ObjectToInt(dr["PtQuan"]);
+                cost+=(cost * getSurchargeRate());
+                totalCost += cost;
+            }
+            return totalCost.ToString("c");
+        }
+        protected string getTotalLaborCost() {
+            DataTable sourceTable = LRFDVehicalMaintenance_DataSet().Tables["VWOLabor"];
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "fkVWOL_ID='" + VMOIDBeingEdited + "'";
+            DataTable tblFiltered = view.ToTable();
+            double totalCost = 0d;
+            foreach (DataRow dr in tblFiltered.Rows) {
+                double cost = Utils.ObjectToDouble(dr["MechRate"]) * Utils.ObjectToInt(dr["MechHours"]);
+                totalCost += cost;
+            }
+            return totalCost.ToString("c");
+        }
+        protected string getTotalServicesCost() {
+            DataTable sourceTable = LRFDVehicalMaintenance_DataSet().Tables["VWOServices"];
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "fkVWOS_ID='" + VMOIDBeingEdited + "'";
+            DataTable tblFiltered = view.ToTable();
+            double totalCost = 0d;
+            foreach (DataRow dr in tblFiltered.Rows) {
+                double cost = Utils.ObjectToDouble(dr["CSCost"]);
+                totalCost += cost;
+            }
+            return totalCost.ToString("c");
         }
     }
 }
