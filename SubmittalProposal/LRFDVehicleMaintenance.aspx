@@ -179,8 +179,8 @@
         <ajaxToolkit:TabPanel runat="server" ID="tabRFDUpdateParts" HeaderText="Parts-Labor-Services">
             <ContentTemplate>
                 <table border="0" cellpadding="3" cellspacing="0" width="100%">
-                    <tr>
-                        <td>Parts</td>
+                    <tr valign="top">
+                        <td valign="top">Parts</td>
                         <td>
                             <div style="overflow:auto;height:6em;">
 
@@ -190,7 +190,7 @@
                                     OnRowEditing="gvUpdateParts_RowEditing" Font-Size="X-Small"
                                     OnRowUpdating="gvUpdateParts_RowUpdating" DataKeyNames="VWOPartID">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                                    <EditRowStyle BackColor="#999999" />
+                                    <EditRowStyle BackColor="#999999" Font-Size="X-Small" />
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                     <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                                     <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -201,81 +201,154 @@
                                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                     <EmptyDataTemplate>
-                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No Parts items"></asp:Label>
                                     </EmptyDataTemplate>                                    
                                     <Columns>
-                                        <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
+                                        <asp:CommandField ButtonType="Link" CausesValidation="true" ShowEditButton="true"
                                             ShowCancelButton="true" />
-                                        <asp:TemplateField HeaderText="Description" SortExpression="PTDescription">
+                                        <asp:TemplateField HeaderText="Description" SortExpression="PTDescription" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("PTDescription") %>'></asp:Label>
+                                                <asp:Label ID="Label3xddxxx3" runat="server" Text='<%# Bind("PTDescription") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTDescription" runat="server" Text= '<%# Bind("PtDescription") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTDescription" runat="server" Width="90px" MaxLength="30" Text= '<%# Bind("PtDescription") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Number" SortExpression="PTNumber">
+                                        <asp:TemplateField HeaderText="Number" SortExpression="PTNumber" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("PTNumber") %>'></asp:Label>
+                                                <asp:Label ID="Label3xdyyyd3" runat="server" Text='<%# Bind("PTNumber") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTNumber" runat="server" Text= '<%# Bind("PtNumber") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTNumber" Width="40px" MaxLength="15"  runat="server" Text= '<%# Bind("PtNumber") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Rate" SortExpression="PTRate">
+                                        <asp:TemplateField HeaderText="Rate" SortExpression="PTRate"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:Label>
+                                                <asp:Label ID="Label3xdzzzd3" runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTRate" runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTRate" Width="90px" MaxLength="10"  runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Quantity" SortExpression="PtQuan">
+                                        <asp:TemplateField HeaderText="Quantity" SortExpression="PtQuan"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text= '<%# Bind("PtQuan") %>'></asp:Label>
+                                                <asp:Label ID="Label3xdred3" runat="server" Text= '<%# Bind("PtQuan") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTQuantity" runat="server" Text= '<%# Bind("PtQuan") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTQuantity" Width="45px" MaxLength="4"  runat="server" Text= '<%# Bind("PtQuan") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Cost">
+                                        <asp:TemplateField HeaderText="Cost" ItemStyle-BackColor="#ffff99"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" BackColor="Yellow" Text= '<%# getCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
+                                                <asp:Label ID="Label3xderd3" runat="server" Text= '<%# getCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Surcharge">
+                                        <asp:TemplateField HeaderText="Surcharge" ItemStyle-BackColor="#ffff99"   HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server"  BackColor="Yellow" Text= '<%# getSurcharge(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
-                                                <asp:Label ID="Label344xu" runat="server" BackColor="Yellow" Text= '<%# getSurchargeRateAsPercentage() %>'></asp:Label>
+                                                <asp:Label ID="Label3ccfxdd3" runat="server"   Text= '<%# getSurcharge(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
+                                                <asp:Label ID="Label344xu" runat="server" Text= '<%# getSurchargeRateAsPercentage() %>'></asp:Label>
                                             </ItemTemplate>
                                             <FooterTemplate>
                                                 Total Parts Cost:
                                             </FooterTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Item Cost">
+                                        <asp:TemplateField HeaderText="Item Cost"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" ItemStyle-BackColor="#ffff99" ControlStyle-BackColor="#FFFF99">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" BackColor="Yellow" Text= '<%# getItemCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
+                                                <asp:Label ID="Label3xdddddg3" runat="server" Text= '<%# getItemCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
                                             </ItemTemplate>
                                             <FooterTemplate>
-                                                <asp:Label ID="lblX102" runat="server" Text='<%# getTotalPartsCost() %>'></asp:Label>
+                                                <asp:Label ID="lblX102" runat="server" Text='<%# getTotalPartsCostString() %>'></asp:Label>
                                             </FooterTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:BoundField DataField="VWOPartID" HeaderText="PardId" ControlStyle-BackColor="LightGray" SortExpression="VWOPartID" />
+                                        <asp:BoundField ReadOnly="true"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" DataField="VWOPartID" HeaderText="PardId" ControlStyle-BackColor="LightGray" SortExpression="VWOPartID" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
+                                <center style="margin-top: 0px;">
+                                    <asp:LinkButton ID="lbLRFDNewPart" OnClick="lblLRFDNewPart_OnClick" runat="server">New Part</asp:LinkButton>
+                                </center>
+                            <asp:Button runat="server" ID="btndummyNewPart" Style="display: none" />
+                            <asp:Panel runat="server" CssClass="newitempopup" ID="pnlLRFDPanelNewPart">
+                                <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlLRFDPanelNewPartTitle">
+                                    <span>New Part</span>
+                                </asp:Panel>
+                                <asp:Panel runat="server" Style="text-align: center;" ID="Panel2" CssClass="newitemcontent">
+                                    <table>
+                                        <tr>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Description"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbPartDescriptionNew" Width="17em" MaxLength="30" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Part Number"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbPartNumberNew" Width="7em" MaxLength="15" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Cost"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbLRFDPartRateNew" Width="7em" runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="revtbLRFDPartRateNew" ForeColor="Red" Display="Dynamic"
+                                                    ControlToValidate="tbLRFDPartRateNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
+                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Quantity"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox ID="tbRFDNewPartsPTQuantity" Width="45px" MaxLength="4"  runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="revtbRFDNewPartsPTQuantity" ForeColor="Red" Display="Dynamic"
+                                                    ControlToValidate="tbRFDNewPartsPTQuantity" ValidationExpression="(?<![-.])\b[0-9]+\b(?!\.[0-9])" runat="server"
+                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>      
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                                <script language="javascript" type="text/javascript">
+                                    function donewPartjedisok() {
+                                        var loading = $(".loadingnewbpermit");
+                                        loading.show();
+                                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                        loading.css({ top: top, left: left });
+                                        return true;
+                                    }
+                                </script>
+                                <center>
+                                    <table cellpadding="3">
+                                        <tr>
+                                            <td>
+                                                <asp:Button CausesValidation="false" OnClientClick="javascript: return donewPartjedisok();" ID="btnNewLRFDPartOk"
+                                                    runat="server" Text="Okay" OnClick="btnNewLRFDPartOk_Click" />
+                                            </td>
+                                            <td>
+                                                <asp:Button ID="btnNewLRFDPartCancel" OnClientClick="if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Cancel" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </asp:Panel>
+                            <ajaxToolkit:ModalPopupExtender ID="mpeLRFDNewPart" runat="server" TargetControlID="btndummyNewPart"
+                                PopupControlID="pnlLRFDPanelNewPart" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlLRFDPanelNewPartTitle"
+                                BehaviorID="jdpopupbLRFDnewPart" />
                         </td>
                     </tr>
                     
-                    <tr>
-                        <td>Labor</td>
+                    <tr valign="top">
+                        <td valign="top">Labor</td>
                         <td>
                             <div style="overflow:auto;height:6em;">
 
                                 <asp:GridView Width="100%" ID="gvRFDUpdateLabor" runat="server" AutoGenerateColumns="False"
                                     CellPadding="1" ForeColor="#333333" GridLines="None" ShowFooter="true" 
                                     OnRowCancelingEdit="gvUpdateLabor_RowCancelingEdit"
+                                    OnRowDataBound="gvUpdateLabor_OnRowDataBound"
                                     OnRowEditing="gvUpdateLabor_RowEditing" Font-Size="X-Small"
                                     OnRowUpdating="gvUpdateLabor_RowUpdating" DataKeyNames="VWOLaborID">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -290,20 +363,22 @@
                                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                     <EmptyDataTemplate>
-                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No Labor items"></asp:Label>
                                     </EmptyDataTemplate>                                    
                                     <Columns>
-                                        <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
+                                        <asp:CommandField ItemStyle-Width="100px" HeaderStyle-Width="100px" ButtonType="Link" CausesValidation="false" ShowEditButton="true"
                                             ShowCancelButton="true" />
-                                        <asp:TemplateField HeaderText="Mechanic" SortExpression="MechName">
+                                        <asp:TemplateField ItemStyle-Width="150px" HeaderStyle-Width="150px" HeaderText="Mechanic" SortExpression="MechName" 
+                                            HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("MechName") %>'></asp:Label>
+                                                <asp:Label ID="Label3xdmsrred3" runat="server" Text='<%# Bind("MechName") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdateLaborMechName" runat="server" Text= '<%# Bind("MechName") %>'></asp:TextBox>
+                                                <asp:DropDownList runat="server" ID="ddlRFDUpdateLaborMechName" DataTextField="MechName" DataValueField="MechID"></asp:DropDownList>
+                                                <asp:Label ID="lblRFDUpdateLaborMechName" runat="server" Text='<%# Bind("MechName") %>' Visible="false"></asp:Label>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Rate $/Hr" SortExpression="MechRate">
+                                        <asp:TemplateField  ItemStyle-Width="100px" HeaderStyle-Width="100px" HeaderText="Rate $/Hr" SortExpression="MechRate"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xddx3" runat="server" Text='<%# Eval("MechRate","{0:c}") %>'></asp:Label>
                                             </ItemTemplate>
@@ -311,31 +386,98 @@
                                                 <asp:TextBox ID="tbRFDUpdateLaborMechRate" runat="server" Text= '<%# Eval("MechRate","{0:c}") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Hours">
+                                        <asp:TemplateField  ItemStyle-Width="150px" HeaderStyle-Width="150px" HeaderText="Hours" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text= '<%# Bind("MechHours") %>'></asp:Label>
+                                                <asp:Label ID="marre3Ladbel3xdd3x" runat="server" Text= '<%# Bind("MechHours") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="tbRFDUpdateLaborMechHours" runat="server" Text= '<%# Bind("MechHours") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                             <FooterTemplate>Total Labor Cost:</FooterTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Cost">
+                                        <asp:TemplateField ItemStyle-Width="222px" HeaderStyle-Width="222px" HeaderText="Cost" ItemStyle-BackColor="#ffff99"   HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" >
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" BackColor="Yellow" Text= '<%# getCost(Eval("MechHours"),Eval("MechRate")) %>'></asp:Label>
+                                                <asp:Label ID="ddLdadbel3xdd3" runat="server" Text= '<%# getCost(Eval("MechHours"),Eval("MechRate")) %>'></asp:Label>
                                             </ItemTemplate>
                                             <FooterTemplate>
-                                                <asp:Label ID="lblX102" runat="server" Text='<%# getTotalLaborCost() %>'></asp:Label>
+                                                <asp:Label ID="lblX102" runat="server" Text='<%# getTotalLaborCostString() %>'></asp:Label>
                                             </FooterTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="VWOLaborID" HeaderText="Labor ID" ControlStyle-BackColor="LightGray" SortExpression="VWOLaborID" />
+                                        <asp:BoundField  ReadOnly="true"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" DataField="VWOLaborID" HeaderText="Labor ID" ControlStyle-BackColor="LightGray" SortExpression="VWOLaborID" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
+                            <center style="margin-top: -8px;">
+                                <asp:LinkButton ID="lbLRFDNewLabor" OnClick="lbLRFDNewLabor_OnClick"  runat="server">New Labor</asp:LinkButton>
+                            </center>
+                            <asp:Button runat="server" ID="btndummyNewLabor" Style="display: none" />
+                            <asp:Panel runat="server" CssClass="newitempopup" ID="pnlLRFDPanelNewLabor">
+                                <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlLRFDPanelNewLaborTitle">
+                                    <span>New Labor</span>
+                                </asp:Panel>
+                                <asp:Panel runat="server" Style="text-align: center;" ID="Panel6x12" CssClass="newitemcontent">
+                                    <table>
+                                        <tr>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Mechanic Name"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:DropDownList OnSelectedIndexChanged="ddlRFDNewLaborMechName_OnSelectedIndexChanged" AutoPostBack="true" runat="server" ID="ddlRFDNewLaborMechName" DataTextField="MechName" DataValueField="MechID"></asp:DropDownList>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label33" runat="server" Text="Rate"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbLRFDLaborRateNew" Width="6em" runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="revtbLRFDLaborRateNew" ForeColor="Red" Display="Dynamic"
+                                                    ControlToValidate="tbLRFDLaborRateNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
+                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Labelx33" runat="server" Text="Hours"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbLRFDLaborHoursNew" Width="3em" runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="revtbLRFDLaborHoursNew" ForeColor="Red" Display="Dynamic"
+                                                    ControlToValidate="tbLRFDLaborHoursNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
+                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                                <script language="javascript" type="text/javascript">
+                                    function donewlaborjedisok() {
+                                        var loading = $(".loadingnewbpermit");
+                                        loading.show();
+                                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                        loading.css({ top: top, left: left });
+                                        return true;
+                                    }
+                                </script>
+                                <center>
+                                    <table cellpadding="3">
+                                        <tr>
+                                            <td>
+                                                <asp:Button OnClientClick="javascript: return donewlaborjedisok();" ID="btnNewLRFDLaborOk"
+                                                    runat="server" Text="Okay" OnClick="btnNewLRFDLaborOk_Click" />
+                                            </td>
+                                            <td>
+                                                <asp:Button ID="btnNewLRFDLaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Cancel" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </asp:Panel>
+                            <ajaxToolkit:ModalPopupExtender ID="mpeLRFDNewLabor" runat="server" TargetControlID="btndummyNewLabor"
+                                PopupControlID="pnlLRFDPanelNewLabor" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlLRFDPanelNewLaborTitle"
+                                BehaviorID="jdpopupbLRFDnewlabor" />
+
                         </td>
                     </tr>
-                                        <tr>
-                        <td>Service</td>
+                    <tr valign="top">
+                        <td valign="top">Service</td>
                         <td>
                             <div style="overflow:auto;height:6em;">
 
@@ -356,42 +498,127 @@
                                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                     <EmptyDataTemplate>
-                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No Service Items"></asp:Label>
                                     </EmptyDataTemplate>                                    
                                     <Columns>
-                                        <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
+                                        <asp:CommandField ItemStyle-Width="100px" HeaderStyle-Width="100px" ButtonType="Link" CausesValidation="true" ShowEditButton="true"
                                             ShowCancelButton="true" />
-                                        <asp:TemplateField HeaderText="Description" SortExpression="CSDescription" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Description" SortExpression="CSDescription" 
+                                             ItemStyle-Width="210px" HeaderStyle-Width="210px"
+                                             HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("CSDescription") %>'></asp:Label>
+                                                <asp:Label ID="Label3xddsss3" runat="server" Text='<%# Bind("CSDescription") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="tbRFDUpdateServiceDescription" runat="server" Text= '<%# Bind("CSDescription") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Vendor" SortExpression="CSVendor" ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Vendor" SortExpression="CSVendor" ItemStyle-Width="150px" HeaderStyle-Width="150px"
+                                             HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left" FooterStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label3xdd3" runat="server" Text='<%# Bind("CSVendor") %>'></asp:Label>
+                                                <asp:Label ID="Label3xddttt3" runat="server" Text='<%# Bind("CSVendor") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="tbRFDUpdateServiceVendor" runat="server" Text= '<%# Bind("CSVendor") %>'></asp:TextBox>
                                             </EditItemTemplate>
+                                            <FooterTemplate>Total Contracted Services:</FooterTemplate>
+                                            
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Cost" SortExpression="CSCost" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
+                                        <asp:TemplateField HeaderText="Cost" SortExpression="CSCost" 
+                                            ItemStyle-Width="264px" HeaderStyle-Width="264px"
+                                            ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xddx3" runat="server" Text='<%# Eval("CSCost","{0:c}") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="tbRFDUpdateServiceCost" runat="server" Text= '<%# Eval("CSCost","{0:c}") %>'></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="revtbRFDUpdateServiceCost" ForeColor="Red" Display="Dynamic"
+                                                    ControlToValidate="tbRFDUpdateServiceCost" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
+                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+
                                             </EditItemTemplate>
                                             <FooterTemplate>
-                                                Total Contracted Services:&nbsp; &nbsp;<asp:Label style="text-align:right;" ID="lblX102" runat="server" Text='<%# getTotalServicesCost() %>'></asp:Label>
+                                                <asp:Label style="text-align:right;" ID="lblX102" runat="server" Text='<%# getTotalServicesCostString() %>'></asp:Label>
                                             </FooterTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="VWOCtrServID" HeaderText="Service ID" ControlStyle-BackColor="LightGray" SortExpression="VWOCtrServID" />
+                                        <asp:BoundField ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right" DataField="VWOCtrServID" HeaderText="Service ID" ControlStyle-BackColor="LightGray" SortExpression="VWOCtrServID" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
+                            <table style="margin-top:-20px; font-size:x-small;" width="100%" cellpadding="0" border="0" cellspacing="0">
+                                <tr>
+                                    <td align="right" style="width:644px; font-weight:bold;">Total Work Order:</td>
+                                    <td align="right" style="font-weight:bold;">
+                                        <asp:Label runat="server" ID="lblTotalWorkOrderCost"></asp:Label>
+                                    </td>
+                                    <td style="width:86px;"></td>
+                                </tr>
+                            </table>
+                            <center style="margin-top: -16px;">
+                                <asp:LinkButton ID="lbLRFDNewService" OnClick="lbLRFDNewService_OnClick" runat="server">New Service</asp:LinkButton>
+                            </center>
+                            <asp:Button runat="server" ID="btndummyNewService" Style="display: none" />
+                            <asp:Panel runat="server" CssClass="newitempopup" ID="pnlLRFDPanelNewService">
+                                <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlLRFDPanelNewServiceTitle">
+                                    <span>New Service</span>
+                                </asp:Panel>
+                                <asp:Panel runat="server" Style="text-align: center;" ID="Panel1" CssClass="newitemcontent">
+                                    <table>
+                                        <tr>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Description"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbServiceDescriptionNew" Width="35em" MaxLength="50" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="Vendor"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbServiceVendorNew" Width="12em" MaxLength="20" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td class="form_field_heading">
+                                                <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Cost"></asp:Label>
+                                            </td>
+                                            <td class="form_field">
+                                                <asp:TextBox CssClass="form_field" ID="tbLRFDServiceCostNew" Width="7em" runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="revtbLRFDServiceCostNew" ForeColor="Red" Display="Dynamic"
+                                                    ControlToValidate="tbLRFDServiceCostNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
+                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                                <script language="javascript" type="text/javascript">
+                                    function donewServicejedisok() {
+                                        var loading = $(".loadingnewbpermit");
+                                        loading.show();
+                                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                        loading.css({ top: top, left: left });
+                                        return true;
+                                    }
+                                </script>
+                                <center>
+                                    <table cellpadding="3">
+                                        <tr>
+                                            <td>
+                                                <asp:Button OnClientClick="javascript: return donewServicejedisok();" ID="btnNewLRFDServiceOk"
+                                                    runat="server" Text="Okay" OnClick="btnNewLRFDServiceOk_Click" />
+                                            </td>
+                                            <td>
+                                                <asp:Button ID="btnNewLRFDServiceCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Cancel" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </asp:Panel>
+                            <ajaxToolkit:ModalPopupExtender ID="mpeLRFDNewService" runat="server" TargetControlID="btndummyNewService"
+                                PopupControlID="pnlLRFDPanelNewService" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlLRFDPanelNewServiceTitle"
+                                BehaviorID="jdpopupbLRFDnewService" />
+
+
                         </td>
                     </tr>
 
@@ -399,7 +626,7 @@
                     <tr>
                         <td>Comments</td>
                         <td colspan="4">
-                            <asp:TextBox ID="tbRFDUpdateComments" Width="550px" TextMode="MultiLine"
+                            <asp:TextBox ID="tbRFDUpdateComments" Width="530px" TextMode="MultiLine"
                                 Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="false"></asp:TextBox>
                         </td>
                     </tr>

@@ -23,11 +23,6 @@ namespace SubmittalProposal {
         }
  
         protected void Button1_Click(object sender, EventArgs e) {
-            GetPageInfo gpi = new GetPageInfo();
-            List<string> ls = new List<string>();
-            ls.Add("hi");
-            ls.Add("mom");
-            gpi.HeresYourData(ls);
 
         }
     }
