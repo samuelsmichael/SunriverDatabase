@@ -90,7 +90,7 @@ namespace SubmittalProposal {
             getNewResultsLabel().ForeColor = System.Drawing.Color.Red;
             getNewResultsLabel().Text = status;
         }
-        protected void performPostNewSuccessfulActions(string status, string cacheKey, string cacheKey2, TextBox tbHavingKeyField, int key) {
+        protected void performPostNewSuccessfulActions(string status, string cacheKey, string cacheKey2, TextBox tbHavingKeyField, object key) {
             MemoryCache.Default.Remove(cacheKey);
             if (cacheKey2 != null) {
                 MemoryCache.Default.Remove(cacheKey2);

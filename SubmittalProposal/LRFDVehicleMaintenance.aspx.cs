@@ -93,7 +93,7 @@ namespace SubmittalProposal {
             bindServiceTable();
 
             lblRFDUpdateDepartmentId.Text = "" + drZDept["DepartmentID"] + " - " + drZDept["Department"];
-            lblRFDUpdateDepartmentAdminCharges.Text = "" + (Convert.ToDouble(drZDept["AdministrationRate"]) * 100).ToString("#0.##") + "%";
+            lblRFDUpdateDepartmentAdminCharges.Text = "" + (Convert.ToDouble(drZDept["AdministrationRate"])).ToString("P");
             DateTime? dateOut = Utils.ObjectToDateTimeNullable(dr["Date Out"]);
             tbRFDUpdateVehicleDateOut.Text = dateOut.HasValue ? dateOut.Value.ToString("d") : "";
             tbRFDUpdateProcedurePerformed.Text = Utils.ObjectToString(dr["Proceedure 1"]);
@@ -195,7 +195,7 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@HourMeter",SqlDbType.Real).Value=tbLRFDUpdateHourReading.Text.Trim();
                 cmd.Parameters.Add("@Proceedure1",SqlDbType.NVarChar).Value=tbRFDUpdateProcedurePerformed.Text.Trim();
                 cmd.Parameters.Add("@Comments",SqlDbType.NVarChar).Value=tbRFDUpdateComments.Text.Trim();
-                cmd.Parameters.Add("@AdminRate", SqlDbType.Real).Value = Math.Round((Utils.ObjectToDouble(lblRFDUpdateDepartmentAdminCharges.Text.Trim().Replace(",","").Replace("%",""))*100),4);
+                cmd.Parameters.Add("@AdminRate", SqlDbType.Real).Value = Math.Round((Utils.ObjectToDouble(lblRFDUpdateDepartmentAdminCharges.Text.Trim().Replace(",","").Replace("%",""))/100),4);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
 
                 performPostUpdateSuccessfulActions("Update successful", LRFD_VEHICLE_MAINTENANCE_CACHE_KEY, LRFD_SurchargeRate_CACHE_KEY);
@@ -205,7 +205,7 @@ namespace SubmittalProposal {
         }
 
         protected override Label getNewResultsLabel() {
-            throw new NotImplementedException();
+            return lblRFDNewResults;
         }
 
         protected override void unlockYourUpdateFields() {
@@ -418,11 +418,23 @@ namespace SubmittalProposal {
         }
 
         protected override void clearAllSelectionInputFields() {
-            throw new NotImplementedException();
+            ddlVehicle_Search.SelectedIndex = 0;
+            tbWorkOrder_Search.Text = "LRFD-";
         }
 
         protected override void clearAllNewFormInputFields() {
-            throw new NotImplementedException();
+            tbRFDNewDataEntryBy.Text = "";
+            tbLRFDNewDataEntryDate.Text = "";
+            ddlRFDNewVehicleNumber.SelectedIndex = 0;
+            tbRFDNewRequestedBy.Text = "";
+            tbLRFDNewRequestDateIn.Text = "";
+            tbRFDNewVehicleDescription.Text = "";
+            tbLRFDNewOdometerReading.Text = "";
+            tbLRFDNewHourReading.Text = "";
+            ddlYesNoBlankEstimateNew.SelectedIndex = 0;
+            tbRFDNewProcedurePerformed.Text = "";
+            tbRFDNewVehicleDateOut.Text = "";
+            tbRFDNewComments.Text = "";
         }
 
         protected override string UpdateRoleName {
@@ -448,6 +460,8 @@ namespace SubmittalProposal {
                 ddlRFDUpdateVehicleNumber.DataBind();
                 ddlRFDNewLaborMechName.DataSource = LRFDVehicalMaintenance_DataSet().Tables["LRFDMechanicInfo"];
                 ddlRFDNewLaborMechName.DataBind();
+                ddlRFDNewVehicleNumber.DataSource = LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"];
+                ddlRFDNewVehicleNumber.DataBind();
             }
         }
         protected string getCost(object quan, object rate) {
@@ -571,6 +585,9 @@ namespace SubmittalProposal {
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                tbServiceDescriptionNew.Text = "";
+                tbServiceVendorNew.Text = "";
+                tbLRFDServiceCostNew.Text = "";
                 performPostUpdateSuccessfulActions("Labor added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Labor not added. Error msg: " + ee.Message);
@@ -589,6 +606,10 @@ namespace SubmittalProposal {
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                ddlRFDNewLaborMechName.SelectedIndex = -1;
+                tbLRFDLaborRateNew.Text = "";
+                tbLRFDLaborHoursNew.Text = "";
+
                 performPostUpdateSuccessfulActions("Labor added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Labor not added. Error msg: " + ee.Message);
@@ -666,15 +687,75 @@ namespace SubmittalProposal {
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                tbPartDescriptionNew.Text = "";
+                tbPartNumberNew.Text = "";
+                tbLRFDPartRateNew.Text = "";
+                tbRFDNewPartsPTQuantity.Text = "";
                 performPostUpdateSuccessfulActions("Labor added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Labor not added. Error msg: " + ee.Message);
             }
         }
-        protected void lbLRFDVehicleMaintenanceNew_OnClick(Object sender, EventArgs args) {
+        protected void ddlRFDNewVehicleNumber_OnSelectedIndexChanged(object sender, EventArgs args) {
+            DataTable vehicleTable = LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"];
+            DataView vehicleView = new DataView(vehicleTable);
+            vehicleView.RowFilter = "Number='" + ddlRFDNewVehicleNumber.SelectedValue + "'";
+            DataTable vehicleViewFiltered = vehicleView.ToTable();
+            DataRow drZVehicle = vehicleViewFiltered.Rows[0];
+
+            DataTable deptTable = LRFDVehicalMaintenance_DataSet().Tables["LRFDDepartment"];
+            DataView deptView = new DataView(deptTable);
+            deptView.RowFilter = "DepartmentID=" + drZVehicle["fkDeptID"];
+            DataTable deptViewFiltered = deptView.ToTable();
+            DataRow drZDept = deptViewFiltered.Rows[0];
+
+            lblRFDNewDepartmentId.Text = Utils.ObjectToString(drZDept["DepartmentID"]);
+            lblRFDNewDepartmentAdminCharges.Text = ((Utils.ObjectToDecimal(drZDept["AdministrationRate"]))).ToString("P");
             mpeLRFDVehicleMaintenance.Show();
         }
+        protected void lbLRFDVehicleMaintenanceNew_OnClick(Object sender, EventArgs args) {
+            SqlCommand cmd=new SqlCommand("uspLRFDFindHighestWordOrderNumber");
+            SqlParameter parm = new SqlParameter("@HighestWorkOrderIntergerComponent", SqlDbType.Int);
+            parm.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(parm);
+            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+            tbNewWorkOrderNbr.Text = "LRFD-" + (Utils.ObjectToInt(parm.Value) + 1);
+            tbRFDNewDataEntryBy.Text = HttpContext.Current.User.Identity.Name;
+            tbLRFDNewDataEntryDate.Text = DateTime.Now.ToShortDateString();
+            tbRFDNewRequestedBy.Text = "LRFD";
+            ddlRFDNewVehicleNumber_OnSelectedIndexChanged(null, null);
+        }
         protected void btnNewLRFDVehicleMaintenanceOk_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspLRFDVehicleMaintenanceUpdate");
+                cmd.Parameters.Add("@VWOID_new", SqlDbType.NVarChar).Value = tbNewWorkOrderNbr.Text;
+                cmd.Parameters.Add("@fkNumber", SqlDbType.NVarChar).Value = ddlRFDNewVehicleNumber.SelectedValue;
+                cmd.Parameters.Add("@Estimate", SqlDbType.Bit).Value = ddlYesNoBlankEstimateNew.SelectedValue == "Yes" ? true : false;
+                cmd.Parameters.Add("@RequestBy", SqlDbType.NVarChar).Value = tbRFDNewRequestedBy.Text.Trim();
+                cmd.Parameters.Add("@RequestNature", SqlDbType.NVarChar).Value = tbRFDNewVehicleDescription.Text.Trim();
+                DateTime? dateIn =
+                    tbLRFDNewRequestDateIn.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbLRFDNewRequestDateIn.Text.Trim());
+                cmd.Parameters.Add("@DateIn", SqlDbType.DateTime).Value = dateIn;
+                DateTime? dateOut =
+                    tbRFDNewVehicleDateOut.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbRFDNewVehicleDateOut.Text.Trim());
+                cmd.Parameters.Add("@DateOut", SqlDbType.DateTime).Value = dateOut;
+                DateTime? dataEntryDate =
+                    tbLRFDNewDataEntryDate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbLRFDNewDataEntryDate.Text.Trim());
+                cmd.Parameters.Add("@DataEntryDate", SqlDbType.DateTime).Value = dataEntryDate;
+
+                cmd.Parameters.Add("@DataEntryBy", SqlDbType.NVarChar).Value = tbRFDNewDataEntryBy.Text.Trim();
+                cmd.Parameters.Add("@Odometer", SqlDbType.Real).Value = Utils.ObjectToDouble(tbLRFDNewOdometerReading.Text);
+                cmd.Parameters.Add("@HourMeter", SqlDbType.Real).Value = tbLRFDNewHourReading.Text.Trim();
+                cmd.Parameters.Add("@Proceedure1", SqlDbType.NVarChar).Value = tbRFDNewProcedurePerformed.Text.Trim();
+                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = tbRFDNewComments.Text.Trim();
+                cmd.Parameters.Add("@AdminRate", SqlDbType.Real).Value = Math.Round((Utils.ObjectToDouble(lblRFDNewDepartmentAdminCharges.Text.Trim().Replace(",", "").Replace("%", "")) / 100), 4);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                performPostNewSuccessfulActions("Vehicle Maintenance added successfully", LRFD_VEHICLE_MAINTENANCE_CACHE_KEY, LRFD_SurchargeRate_CACHE_KEY, tbWorkOrder_Search, tbNewWorkOrderNbr.Text);
+
+                mpeLRFDVehicleMaintenance.Hide();
+            } catch (Exception e) {
+                performPostNewFailedActions("New Vehicle Maintenance not added. Msg: " + e.Message);
+            }
         }
         protected void btnNewSLRFDVehicleMaintenanceCancel_Click(object sender, EventArgs args) {
         }

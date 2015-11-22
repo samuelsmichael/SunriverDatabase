@@ -913,6 +913,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.LinkButton lbLRFDVehicleMaintenanceNew;
         
         /// <summary>
+        /// lblRFDNewResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRFDNewResults;
+        
+        /// <summary>
         /// btnhidden1xx control.
         /// </summary>
         /// <remarks>
@@ -1021,15 +1030,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel pnlLRFDNew1;
         
         /// <summary>
-        /// Label7nnn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7nnn;
-        
-        /// <summary>
         /// lblRFDNewWOI control.
         /// </summary>
         /// <remarks>
@@ -1037,6 +1037,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRFDNewWOI;
+        
+        /// <summary>
+        /// tbNewWorkOrderNbr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbNewWorkOrderNbr;
         
         /// <summary>
         /// Label3x3nnn control.
@@ -1253,6 +1262,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbRFDNewVehicleDateOut;
+        
+        /// <summary>
+        /// tbRFDNewComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRFDNewComments;
         
         /// <summary>
         /// btnNewLRFDVehicleMaintenanceOk control.

@@ -28,7 +28,7 @@
                 <asp:BoundField DataField="VehicleName" HeaderText="Vehicle Name" SortExpression="VehicleName" />
                 <asp:BoundField DataField="Date In" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Request Date In"
                     SortExpression="Date In" />
-                <asp:BoundField DataField="Request By" HeaderText="Requested By" SortExpression="Requested By" />
+                <asp:BoundField DataField="Request By" HeaderText="Requested By" SortExpression="Request By" />
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -93,7 +93,7 @@
                                 <asp:DropDownList ID="ddlRFDUpdateVehicleNumber" runat="server" DataValueField="Number"
                                     DataTextField="VechicleNameForDDLs">
                                 </asp:DropDownList>
-                                Dept: <asp:Label CssClass="form_field_lbl" ID="lblRFDUpdateDepartmentId" runat="server" Text=""></asp:Label><br />s
+                                Dept: <asp:Label CssClass="form_field_lbl" ID="lblRFDUpdateDepartmentId" runat="server" Text=""></asp:Label><br />
                                 Admin: <asp:Label CssClass="form_field_lbl" ID="lblRFDUpdateDepartmentAdminCharges" runat="server" Text=""></asp:Label>
                             </td>
 
@@ -132,7 +132,7 @@
                 </td>
                             <td colspan="4">
                                 <asp:TextBox ID="tbRFDUpdateVehicleDescription" Width="550px" TextMode="MultiLine"
-                                    Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="false"></asp:TextBox>
+                                    Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="true"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -206,7 +206,7 @@
                                         <asp:Label ID="lblEmptyTxt" runat="server" Text="No Parts items"></asp:Label>
                                     </EmptyDataTemplate>                                    
                                     <Columns>
-                                        <asp:CommandField ItemStyle-Width="75px" ButtonType="Link" CausesValidation="true" ShowDeleteButton="true" ShowEditButton="true"
+                                        <asp:CommandField ItemStyle-Width="75px" ButtonType="Link" CausesValidation="false" ShowDeleteButton="true" ShowEditButton="true"
                                             ShowCancelButton="true" />
                                         <asp:TemplateField ItemStyle-Width="125px" HeaderText="Description" SortExpression="PTDescription" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
@@ -268,7 +268,7 @@
                                 </asp:GridView>
                             </div>
                                 <center style="margin-top: 0px;">
-                                    <asp:LinkButton ID="lbLRFDNewPart" OnClick="lblLRFDNewPart_OnClick" runat="server">New Part</asp:LinkButton>
+                                    <asp:LinkButton ID="lbLRFDNewPart" CausesValidation="false" OnClick="lblLRFDNewPart_OnClick" runat="server">New Part</asp:LinkButton>
                                 </center>
                             <asp:Button runat="server" ID="btndummyNewPart" Style="display: none" />
                             <asp:Panel runat="server" CssClass="newitempopup" ID="pnlLRFDPanelNewPart">
@@ -411,7 +411,7 @@
                                 </asp:GridView>
                             </div>
                             <center style="margin-top: -8px;">
-                                <asp:LinkButton ID="lbLRFDNewLabor" OnClick="lbLRFDNewLabor_OnClick"  runat="server">New Labor</asp:LinkButton>
+                                <asp:LinkButton ID="lbLRFDNewLabor" CausesValidation="false" OnClick="lbLRFDNewLabor_OnClick"  runat="server">New Labor</asp:LinkButton>
                             </center>
                             <asp:Button runat="server" ID="btndummyNewLabor" Style="display: none" />
                             <asp:Panel runat="server" CssClass="newitempopup" ID="pnlLRFDPanelNewLabor">
@@ -560,7 +560,7 @@
                                 </tr>
                             </table>
                             <center style="margin-top: -16px;">
-                                <asp:LinkButton ID="lbLRFDNewService" OnClick="lbLRFDNewService_OnClick" runat="server">New Service</asp:LinkButton>
+                                <asp:LinkButton  CausesValidation="false" ID="lbLRFDNewService" OnClick="lbLRFDNewService_OnClick" runat="server">New Service</asp:LinkButton>
                             </center>
                             <asp:Button runat="server" ID="btndummyNewService" Style="display: none" />
                             <asp:Panel runat="server" CssClass="newitempopup" ID="pnlLRFDPanelNewService">
@@ -650,6 +650,9 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <asp:LinkButton ID="lbLRFDVehicleMaintenanceNew" OnClick="lbLRFDVehicleMaintenanceNew_OnClick" Visible="false" runat="server">New LRFDVehicle Work Order</asp:LinkButton>
+    <center>
+        <asp:Label ID="lblRFDNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+    </center>
     <asp:Button style="display:none;" ID="btnhidden1xx" runat="server" />
       <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewLRFDVehicleMaintenanceId">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewLRFDVehicleMaintenanceTitleId">
@@ -664,7 +667,7 @@
                         <asp:Label CssClass="form_field_heading" ID="Label19nn" runat="server" Text="By"></asp:Label>
                     </td>
                     <td style="white-space: nowrap;">
-                        <asp:TextBox CssClass="form_field" MaxLength="20" Width="8em" runat="server" ID="tbRFDNewDataEntryBy"></asp:TextBox>
+                        <asp:TextBox MaxLength="20" Width="8em"  runat="server" ID="tbRFDNewDataEntryBy"></asp:TextBox>
                     </td>
                     <td>
                         <asp:Label CssClass="form_field_heading" ID="Label20nn" runat="server" Text="Date"></asp:Label>
@@ -688,19 +691,19 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%">
                 <tr>
                     <td>
-                        <asp:Label CssClass="form_field_heading" ID="Label7nnn" runat="server" Text="Work Order #"></asp:Label>
+                        <asp:Label CssClass="form_field_lbl" ID="lblRFDNewWOI" runat="server" Text="Work Order #"></asp:Label>
                     </td>
                     <td>
-                        <asp:Label CssClass="form_field_lbl" ID="lblRFDNewWOI" runat="server" Text=""></asp:Label>
+                        <asp:TextBox CssClass="form_field_alwaysprotected" Enabled="false" ID="tbNewWorkOrderNbr" runat="server"></asp:TextBox>
                     </td>
                     <td>
                         <asp:Label CssClass="form_field_heading" ID="Label3x3nnn" runat="server" Text="Vehicle"></asp:Label>
                     </td>
-                    <td colspan="4">
-                        <asp:DropDownList ID="ddlRFDNewVehicleNumber" runat="server" DataValueField="Number"
+                    <td align="left" colspan="3">
+                        <asp:DropDownList ID="ddlRFDNewVehicleNumber" AutoPostBack="true" OnSelectedIndexChanged="ddlRFDNewVehicleNumber_OnSelectedIndexChanged"  runat="server" DataValueField="Number"
                             DataTextField="VechicleNameForDDLs">
                         </asp:DropDownList>
-                        Dept: <asp:Label CssClass="form_field_lbl" ID="lblRFDNewDepartmentId" runat="server" Text=""></asp:Label><br />s
+                        Dept: <asp:Label CssClass="form_field_lbl" ID="lblRFDNewDepartmentId" runat="server" Text=""></asp:Label>
                         Admin: <asp:Label CssClass="form_field_lbl" ID="lblRFDNewDepartmentAdminCharges" runat="server" Text=""></asp:Label>
                     </td>
 
@@ -734,12 +737,12 @@
                             </tr>
                         </table>
                     </td>
-                                            <td>
-            <asp:Label CssClass="form_field_heading" ID="Label4nnn" runat="server" Text="Nature"></asp:Label>
-        </td>
-                    <td colspan="4">
-                        <asp:TextBox ID="tbRFDNewVehicleDescription" Width="550px" TextMode="MultiLine"
-                            Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="false"></asp:TextBox>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Label4nnn" runat="server" Text="Nature"></asp:Label>
+                    </td>
+                    <td align="left" colspan="3">
+                        <asp:TextBox ID="tbRFDNewVehicleDescription" Width="500px" TextMode="MultiLine"
+                            Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="true"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -747,8 +750,10 @@
                     <td><asp:TextBox CssClass="form_field" MaxLength="10" Width="8em" runat="server" ID="tbLRFDNewOdometerReading"></asp:TextBox></td>
                     <td><asp:Label CssClass="form_field_heading" ID="Label10nnn" runat="server" Text="Hour Meter"></asp:Label></td>
                     <td colspan="1"><asp:TextBox CssClass="form_field" MaxLength="10" Width="8em" runat="server" ID="tbLRFDNewHourReading"></asp:TextBox></td>
-                    <td colspan="2">
+                    <td>
                         <asp:Label ID="Label19" runat="server" Text="Estimate"></asp:Label>
+                    </td>
+                    <td>
                         <asp:DropDownList runat="server" ID="ddlYesNoBlankEstimateNew">
                             <asp:ListItem Selected="True"></asp:ListItem>
                             <asp:ListItem>Yes</asp:ListItem>
@@ -763,9 +768,9 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%">
                 <tr>
                     <td>Procedure Performed</td>
-                    <td>
-                        <asp:TextBox ID="tbRFDNewProcedurePerformed" Width="550px" TextMode="MultiLine"
-                            Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="false"></asp:TextBox>
+                    <td align="left">
+                        <asp:TextBox ID="tbRFDNewProcedurePerformed" Width="500px" TextMode="MultiLine"
+                            Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="true"></asp:TextBox>
                     </td>
                     <td>Date Out</td>
                     <td>
@@ -778,6 +783,15 @@
                             Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                             ControlToValidate="tbRFDNewVehicleDateOut" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                     </td>
+                </tr>
+                <tr>
+                    <td>Comments</td>
+                    <td align="left">
+                        <asp:TextBox ID="tbRFDNewComments" Width="500px" TextMode="MultiLine"
+                            Height="3em"  CssClass="form_field" style=" font-size: 1em !important;" runat="server" Enabled="true"></asp:TextBox>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
             </table>
         </asp:Panel>
