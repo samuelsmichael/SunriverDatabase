@@ -93,7 +93,7 @@
                                 <asp:DropDownList ID="ddlRFDUpdateVehicleNumber" runat="server" DataValueField="Number"
                                     DataTextField="VechicleNameForDDLs">
                                 </asp:DropDownList>
-                                Dept: <asp:Label CssClass="form_field_lbl" ID="lblRFDUpdateDepartmentId" runat="server" Text=""></asp:Label>
+                                Dept: <asp:Label CssClass="form_field_lbl" ID="lblRFDUpdateDepartmentId" runat="server" Text=""></asp:Label><br />s
                                 Admin: <asp:Label CssClass="form_field_lbl" ID="lblRFDUpdateDepartmentAdminCharges" runat="server" Text=""></asp:Label>
                             </td>
 
@@ -165,8 +165,8 @@
                                 <asp:TextBox CssClass="form_field_date" ID="tbRFDUpdateVehicleDateOut" runat="server"></asp:TextBox>
                                 <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                     ID="ibtbRFDUpdateVehicleDateOut" runat="server" />
-                                <ajaxToolkit:CalendarExtender ID="cetbRFDUpdateVehicleDateOut" runat="server" TargetControlID="tbRFDUpdateVehicleDateOut"
-                                    Format="MM/dd/yyyy" PopupButtonID="ibtbLRFDUpdateRequestDateIn" />
+                                <ajaxToolkit:CalendarExtender ID="cettbRFDUpdateVehicleDateOut" runat="server" TargetControlID="tbRFDUpdateVehicleDateOut"
+                                    Format="MM/dd/yyyy" PopupButtonID="ibtbRFDUpdateVehicleDateOut" />
                                 <asp:RegularExpressionValidator ForeColor="Red" ID="revtbRFDUpdateVehicleDateOut"
                                     Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                     ControlToValidate="tbRFDUpdateVehicleDateOut" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
@@ -188,7 +188,9 @@
                                     CellPadding="1" ForeColor="#333333" GridLines="None" ShowFooter="true" 
                                     OnRowCancelingEdit="gvUpdateParts_RowCancelingEdit"
                                     OnRowEditing="gvUpdateParts_RowEditing" Font-Size="X-Small"
-                                    OnRowUpdating="gvUpdateParts_RowUpdating" DataKeyNames="VWOPartID">
+                                    OnRowDeleting="gvUpdateParts_RowDeleting"
+                                    OnRowUpdating="gvUpdateParts_RowUpdating" DataKeyNames="VWOPartID"
+                                    OnRowDataBound ="gvUpdateParts_OnRowDataBound">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <EditRowStyle BackColor="#999999" Font-Size="X-Small" />
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -204,46 +206,46 @@
                                         <asp:Label ID="lblEmptyTxt" runat="server" Text="No Parts items"></asp:Label>
                                     </EmptyDataTemplate>                                    
                                     <Columns>
-                                        <asp:CommandField ButtonType="Link" CausesValidation="true" ShowEditButton="true"
+                                        <asp:CommandField ItemStyle-Width="75px" ButtonType="Link" CausesValidation="true" ShowDeleteButton="true" ShowEditButton="true"
                                             ShowCancelButton="true" />
-                                        <asp:TemplateField HeaderText="Description" SortExpression="PTDescription" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField ItemStyle-Width="125px" HeaderText="Description" SortExpression="PTDescription" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xddxxx3" runat="server" Text='<%# Bind("PTDescription") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTDescription" runat="server" Width="90px" MaxLength="30" Text= '<%# Bind("PtDescription") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTDescription" runat="server" Width="100px" MaxLength="30" Text= '<%# Bind("PtDescription") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Number" SortExpression="PTNumber" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField  ItemStyle-Width="55px" HeaderText="Number" SortExpression="PTNumber" HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xdyyyd3" runat="server" Text='<%# Bind("PTNumber") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTNumber" Width="40px" MaxLength="15"  runat="server" Text= '<%# Bind("PtNumber") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTNumber" Width="55px" MaxLength="15"  runat="server" Text= '<%# Bind("PtNumber") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Rate" SortExpression="PTRate"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
+                                        <asp:TemplateField ItemStyle-Width="75px" HeaderText="Rate" SortExpression="PTRate"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xdzzzd3" runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTRate" Width="90px" MaxLength="10"  runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTRate" Width="75px" MaxLength="10"  runat="server" Text= '<%# Eval("PTRate","{0:c}") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Quantity" SortExpression="PtQuan"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
+                                        <asp:TemplateField ItemStyle-Width="61px" HeaderText="Quantity" SortExpression="PtQuan"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xdred3" runat="server" Text= '<%# Bind("PtQuan") %>'></asp:Label>
                                             </ItemTemplate>
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="tbRFDUpdatePartsPTQuantity" Width="45px" MaxLength="4"  runat="server" Text= '<%# Bind("PtQuan") %>'></asp:TextBox>
+                                                <asp:TextBox ID="tbRFDUpdatePartsPTQuantity" Width="35px" MaxLength="4"  runat="server" Text= '<%# Bind("PtQuan") %>'></asp:TextBox>
                                             </EditItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Cost" ItemStyle-BackColor="#ffff99"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
+                                        <asp:TemplateField  ItemStyle-Width="100px" HeaderText="Cost" ItemStyle-BackColor="#ffff99"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xderd3" runat="server" Text= '<%# getCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Surcharge" ItemStyle-BackColor="#ffff99"   HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                        <asp:TemplateField ItemStyle-Width="125px" HeaderText="Surcharge" ItemStyle-BackColor="#ffff99"   HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3ccfxdd3" runat="server"   Text= '<%# getSurcharge(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
                                                 <asp:Label ID="Label344xu" runat="server" Text= '<%# getSurchargeRateAsPercentage() %>'></asp:Label>
@@ -252,7 +254,7 @@
                                                 Total Parts Cost:
                                             </FooterTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Item Cost"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" ItemStyle-BackColor="#ffff99" ControlStyle-BackColor="#FFFF99">
+                                        <asp:TemplateField ItemStyle-Width="100px" HeaderText="Item Cost"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" ItemStyle-BackColor="#ffff99" ControlStyle-BackColor="#FFFF99">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label3xdddddg3" runat="server" Text= '<%# getItemCost(Eval("PtQuan"),Eval("PtRate")) %>'></asp:Label>
                                             </ItemTemplate>
@@ -294,8 +296,8 @@
                                             <td class="form_field">
                                                 <asp:TextBox CssClass="form_field" ID="tbLRFDPartRateNew" Width="7em" runat="server"></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="revtbLRFDPartRateNew" ForeColor="Red" Display="Dynamic"
-                                                    ControlToValidate="tbLRFDPartRateNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
-                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                                    ControlToValidate="tbLRFDPartRateNew" ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server"
+                                                    ErrorMessage="Must be amnt"></asp:RegularExpressionValidator>
                                             </td>
                                             <td class="form_field_heading">
                                                 <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Quantity"></asp:Label>
@@ -350,6 +352,7 @@
                                     OnRowCancelingEdit="gvUpdateLabor_RowCancelingEdit"
                                     OnRowDataBound="gvUpdateLabor_OnRowDataBound"
                                     OnRowEditing="gvUpdateLabor_RowEditing" Font-Size="X-Small"
+                                    OnRowDeleting="gvUpdateLabor_RowDeleting"
                                     OnRowUpdating="gvUpdateLabor_RowUpdating" DataKeyNames="VWOLaborID">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <EditRowStyle BackColor="#999999" />
@@ -367,7 +370,7 @@
                                     </EmptyDataTemplate>                                    
                                     <Columns>
                                         <asp:CommandField ItemStyle-Width="100px" HeaderStyle-Width="100px" ButtonType="Link" CausesValidation="false" ShowEditButton="true"
-                                            ShowCancelButton="true" />
+                                            ShowCancelButton="true" ShowDeleteButton="true" />
                                         <asp:TemplateField ItemStyle-Width="150px" HeaderStyle-Width="150px" HeaderText="Mechanic" SortExpression="MechName" 
                                             HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
@@ -430,8 +433,8 @@
                                             <td class="form_field">
                                                 <asp:TextBox CssClass="form_field" ID="tbLRFDLaborRateNew" Width="6em" runat="server"></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="revtbLRFDLaborRateNew" ForeColor="Red" Display="Dynamic"
-                                                    ControlToValidate="tbLRFDLaborRateNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
-                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                                    ControlToValidate="tbLRFDLaborRateNew" ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server"
+                                                    ErrorMessage="Must be amnt"></asp:RegularExpressionValidator>
                                             </td>
                                             <td class="form_field_heading">
                                                 <asp:Label CssClass="form_field_heading" ID="Labelx33" runat="server" Text="Hours"></asp:Label>
@@ -484,6 +487,8 @@
                                 <asp:GridView Width="100%" ID="gvRFDUpdateService" runat="server" AutoGenerateColumns="False"
                                     CellPadding="1" ForeColor="#333333" GridLines="None" ShowFooter="true" 
                                     OnRowCancelingEdit="gvUpdateService_RowCancelingEdit"
+                                    OnRowDeleting="gvUpdateService_RowDeleting"
+                                    OnRowDataBound ="gvUpdateService_OnRowDataBound"
                                     OnRowEditing="gvUpdateService_RowEditing" Font-Size="X-Small"
                                     OnRowUpdating="gvUpdateService_RowUpdating" DataKeyNames="VWOCtrServID">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
@@ -502,7 +507,7 @@
                                     </EmptyDataTemplate>                                    
                                     <Columns>
                                         <asp:CommandField ItemStyle-Width="100px" HeaderStyle-Width="100px" ButtonType="Link" CausesValidation="true" ShowEditButton="true"
-                                            ShowCancelButton="true" />
+                                            ShowCancelButton="true" ShowDeleteButton="true" />
                                         <asp:TemplateField HeaderText="Description" SortExpression="CSDescription" 
                                              ItemStyle-Width="210px" HeaderStyle-Width="210px"
                                              HeaderStyle-HorizontalAlign="Left" ItemStyle-HorizontalAlign="Left">
@@ -533,8 +538,8 @@
                                             <EditItemTemplate>
                                                 <asp:TextBox ID="tbRFDUpdateServiceCost" runat="server" Text= '<%# Eval("CSCost","{0:c}") %>'></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="revtbRFDUpdateServiceCost" ForeColor="Red" Display="Dynamic"
-                                                    ControlToValidate="tbRFDUpdateServiceCost" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
-                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                                    ControlToValidate="tbRFDUpdateServiceCost" ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server"
+                                                    ErrorMessage="Must be amnt"></asp:RegularExpressionValidator>
 
                                             </EditItemTemplate>
                                             <FooterTemplate>
@@ -545,7 +550,7 @@
                                     </Columns>
                                 </asp:GridView>
                             </div>
-                            <table style="margin-top:-20px; font-size:x-small;" width="100%" cellpadding="0" border="0" cellspacing="0">
+                            <table style="margin-top:0px; font-size:x-small;" width="100%" cellpadding="0" border="0" cellspacing="0">
                                 <tr>
                                     <td align="right" style="width:644px; font-weight:bold;">Total Work Order:</td>
                                     <td align="right" style="font-weight:bold;">
@@ -583,8 +588,8 @@
                                             <td class="form_field">
                                                 <asp:TextBox CssClass="form_field" ID="tbLRFDServiceCostNew" Width="7em" runat="server"></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="revtbLRFDServiceCostNew" ForeColor="Red" Display="Dynamic"
-                                                    ControlToValidate="tbLRFDServiceCostNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
-                                                    ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                                    ControlToValidate="tbLRFDServiceCostNew" ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$" runat="server"
+                                                    ErrorMessage="Must be amnt"></asp:RegularExpressionValidator>
                                             </td>
                                         </tr>
                                     </table>

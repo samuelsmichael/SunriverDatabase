@@ -373,13 +373,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.ImageButton ibtbRFDUpdateVehicleDateOut;
         
         /// <summary>
-        /// cetbRFDUpdateVehicleDateOut control.
+        /// cettbRFDUpdateVehicleDateOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender cetbRFDUpdateVehicleDateOut;
+        protected global::AjaxControlToolkit.CalendarExtender cettbRFDUpdateVehicleDateOut;
         
         /// <summary>
         /// revtbRFDUpdateVehicleDateOut control.

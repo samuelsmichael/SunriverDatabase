@@ -176,7 +176,7 @@ namespace SubmittalProposal {
             try {
                 SqlCommand cmd = new SqlCommand("uspLRFDVehicleMaintenanceUpdate");
                 cmd.Parameters.Add("@VWOID",SqlDbType.NVarChar).Value=VMOIDBeingEdited;
-                cmd.Parameters.Add("@fkNumber", SqlDbType.NVarChar).Value = ddlRFDUpdateVehicleNumber.DataValueField;
+                cmd.Parameters.Add("@fkNumber", SqlDbType.NVarChar).Value = ddlRFDUpdateVehicleNumber.SelectedValue;
                 cmd.Parameters.Add("@Estimate",SqlDbType.Bit).Value=ddlYesNoBlankEstimateUpdate.SelectedValue=="Yes"?true:false;
                 cmd.Parameters.Add("@RequestBy",SqlDbType.NVarChar).Value=tbRFDUpdateRequestedBy.Text.Trim();
                 cmd.Parameters.Add("@RequestNature",SqlDbType.NVarChar).Value=tbRFDUpdateVehicleDescription.Text.Trim();
@@ -191,6 +191,7 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@DataEntryDate", SqlDbType.DateTime).Value = dataEntryDate;
 
                 cmd.Parameters.Add("@DataEntryBy",SqlDbType.NVarChar).Value=tbRFDUpdateDataEntryBy.Text.Trim();
+                cmd.Parameters.Add("@Odometer", SqlDbType.Real).Value = Utils.ObjectToDouble(tbLRFDUpdateOdometerReading.Text);     
                 cmd.Parameters.Add("@HourMeter",SqlDbType.Real).Value=tbLRFDUpdateHourReading.Text.Trim();
                 cmd.Parameters.Add("@Proceedure1",SqlDbType.NVarChar).Value=tbRFDUpdateProcedurePerformed.Text.Trim();
                 cmd.Parameters.Add("@Comments",SqlDbType.NVarChar).Value=tbRFDUpdateComments.Text.Trim();
@@ -214,9 +215,10 @@ namespace SubmittalProposal {
             tbRFDUpdateDataEntryBy.Enabled = true;
             tbRFDUpdateVehicleDescription.Enabled = true;
             ddlYesNoBlankEstimateUpdate.Enabled = true;
-            ibtbLRFDUpdateDataEntryDate.Enabled = true;
+            ibtbLRFDUpdateDataEntryDate.Visible = true;
+            ibtbLRFDUpdateRequestDateIn.Visible = true;
+            ibtbRFDUpdateVehicleDateOut.Visible = true;
             tbLRFDUpdateRequestDateIn.Enabled = true;
-            ibtbLRFDUpdateRequestDateIn.Enabled = true;
             tbRFDUpdateRequestedBy.Enabled = true;
             tbLRFDUpdateOdometerReading.Enabled = true;
             tbLRFDUpdateHourReading.Enabled = true;
@@ -313,6 +315,57 @@ namespace SubmittalProposal {
             bindServiceTable();
         }
 
+        protected void gvUpdateParts_RowDeleting (Object sender, GridViewDeleteEventArgs e) {
+            try {
+                int VWOPartID = Utils.ObjectToInt(e.Keys[0]);
+                SqlCommand cmd = new SqlCommand("uspLRFDPartsDelete");
+                cmd.Parameters.Add("@VWOPartID", SqlDbType.Int).Value = VWOPartID;
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Part deleted", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Part not deleted. Error msg: " + ee.Message);
+            }
+            bindPartsTable();
+        }
+        protected void gvUpdateParts_OnRowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+                foreach (Object button in e.Row.Cells[0].Controls) {
+                    if (button.GetType().Name == "DataControlLinkButton") {
+                        if (((LinkButton)button).CommandName == "Delete") {
+                            string item = ((Label)e.Row.Cells[1].Controls[1]).Text.Trim();
+                            ((LinkButton)button).Attributes["onclick"] = "if(!confirm('Do you want to delete " + item + "?')){ return false; };";
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void gvUpdateService_OnRowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+                foreach (Object button in e.Row.Cells[0].Controls) {
+                    if (button.GetType().Name == "DataControlLinkButton") {
+                        if (((LinkButton)button).CommandName == "Delete") {
+                            string item = ((Label)e.Row.Cells[1].Controls[1]).Text.Trim();
+                            ((LinkButton)button).Attributes["onclick"] = "if(!confirm('Do you want to delete " + item + "?')){ return false; };";
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void gvUpdateService_RowDeleting(Object sender, GridViewDeleteEventArgs e) {
+            try {
+                int VWOServiceID = Utils.ObjectToInt(e.Keys[0]);
+                SqlCommand cmd = new SqlCommand("uspLRFDServiceDelete");
+                cmd.Parameters.Add("@VWOServiceID", SqlDbType.Int).Value = VWOServiceID;
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Service deleted", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Service not deleted. Error msg: " + ee.Message);
+            }
+            bindServiceTable();
+        }
+
         protected void gvUpdateService_RowUpdating(object sender, GridViewUpdateEventArgs e) {
             GridViewRow row = gvRFDUpdateService.Rows[e.RowIndex];
             try {
@@ -352,9 +405,10 @@ namespace SubmittalProposal {
             tbLRFDUpdateOdometerReading.Enabled = false;
             tbLRFDUpdateHourReading.Enabled = false;
             tbLRFDUpdateRequestDateIn.Enabled = false;
-            ibtbLRFDUpdateRequestDateIn.Enabled = false;
             tbRFDUpdateRequestedBy.Enabled = false;
-            ibtbLRFDUpdateDataEntryDate.Enabled = false;
+            ibtbLRFDUpdateDataEntryDate.Visible = false;
+            ibtbLRFDUpdateRequestDateIn.Visible = false;
+            ibtbRFDUpdateVehicleDateOut.Visible = false;
             tbLRFDUpdateDataEntryDate.Enabled = false;
             ddlRFDUpdateVehicleNumber.Enabled = false;
             btnRFDUpdate.Visible = false;
@@ -544,8 +598,31 @@ namespace SubmittalProposal {
             tbLRFDLaborRateNew.Text = Utils.ObjectToDecimal(LRFDVehicalMaintenance_DataSet().Tables["LRFDMechanicInfo"].Rows[0]["MechRate"]).ToString("c");
             mpeLRFDNewLabor.Show();
         }
+        protected void gvUpdateLabor_RowDeleting(Object sender, GridViewDeleteEventArgs e) {
+            try {
+                int VWOLaborID = Utils.ObjectToInt(e.Keys[0]);
+                SqlCommand cmd = new SqlCommand("uspLRFDLaborDelete");
+                cmd.Parameters.Add("@VWOLaborID", SqlDbType.Int).Value = VWOLaborID;
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Labor deleted", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Labor not deleted. Error msg: " + ee.Message);
+            }
+            bindLaborTable();
+        }
         protected void gvUpdateLabor_OnRowDataBound(object sender, GridViewRowEventArgs e) {
             if (e.Row.RowType == DataControlRowType.DataRow) {
+
+                foreach (Object button in e.Row.Cells[0].Controls) {
+                    if (button.GetType().Name == "DataControlLinkButton") {
+                        if (((LinkButton)button).CommandName == "Delete") {
+                            string item = ((Label)e.Row.Cells[1].Controls[1]).Text.Trim();
+                            ((LinkButton)button).Attributes["onclick"] = "if(!confirm('Do you want to delete " + item + "?')){ return false; };";
+                        }
+                    }
+                }
+
+
                 //Find the DropDownList in the Row
                 DropDownList ddlLaborMechanics = (e.Row.FindControl("ddlRFDUpdateLaborMechName") as DropDownList);
                 if (ddlLaborMechanics != null) {
