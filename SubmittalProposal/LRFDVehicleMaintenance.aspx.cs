@@ -434,6 +434,9 @@ namespace SubmittalProposal {
 
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
+                if (UpdateRoleName == "all" || HttpContext.Current.User.IsInRole(UpdateRoleName)) {
+                    lbLRFDVehicleMaintenanceNew.Visible = true;
+                }
                 DataTable dt = LRFDVehicalMaintenance_DataSet().Tables["LRFDVehicelList"].Copy();
                 DataRow newRow = dt.NewRow();
                 newRow["Number"] = -1;
@@ -667,6 +670,13 @@ namespace SubmittalProposal {
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Labor not added. Error msg: " + ee.Message);
             }
+        }
+        protected void lbLRFDVehicleMaintenanceNew_OnClick(Object sender, EventArgs args) {
+            mpeLRFDVehicleMaintenance.Show();
+        }
+        protected void btnNewLRFDVehicleMaintenanceOk_Click(object sender, EventArgs args) {
+        }
+        protected void btnNewSLRFDVehicleMaintenanceCancel_Click(object sender, EventArgs args) {
         }
     }
 }

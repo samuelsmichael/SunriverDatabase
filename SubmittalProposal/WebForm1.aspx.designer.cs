@@ -40,156 +40,336 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Button btnClose;
         
         /// <summary>
-        /// btndummyNewPart control.
+        /// pnlNewLRFDVehicleMaintenanceId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btndummyNewPart;
+        protected global::System.Web.UI.WebControls.Panel pnlNewLRFDVehicleMaintenanceId;
         
         /// <summary>
-        /// pnlLRFDPanelNewPart control.
+        /// pnlNewLRFDVehicleMaintenanceTitleId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLRFDPanelNewPart;
+        protected global::System.Web.UI.WebControls.Panel pnlNewLRFDVehicleMaintenanceTitleId;
         
         /// <summary>
-        /// pnlLRFDPanelNewPartTitle control.
+        /// pnlLRFDNewId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLRFDPanelNewPartTitle;
+        protected global::System.Web.UI.WebControls.Panel pnlLRFDNewId;
         
         /// <summary>
-        /// Panel6x12 control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel6x12;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// Label17 control.
+        /// tbRFDNewDataEntryBy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label17;
+        protected global::System.Web.UI.WebControls.TextBox tbRFDNewDataEntryBy;
         
         /// <summary>
-        /// tbPartDescriptionNew control.
+        /// Label8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbPartDescriptionNew;
+        protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
-        /// Label33 control.
+        /// tbLRFDNewDataEntryDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label33;
+        protected global::System.Web.UI.WebControls.TextBox tbLRFDNewDataEntryDate;
         
         /// <summary>
-        /// tbPartNumberNew control.
+        /// ibtbLRFDNewDataEntryDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbPartNumberNew;
+        protected global::System.Web.UI.WebControls.ImageButton ibtbLRFDNewDataEntryDate;
         
         /// <summary>
-        /// Labelx33 control.
+        /// cetbLRFDNewDataEntryDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Labelx33;
+        protected global::AjaxControlToolkit.CalendarExtender cetbLRFDNewDataEntryDate;
         
         /// <summary>
-        /// tbLRFDPartRateNew control.
+        /// revtbLRFDNewDataEntryDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLRFDPartRateNew;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbLRFDNewDataEntryDate;
         
         /// <summary>
-        /// revtbLRFDPartRateNew control.
+        /// pnlLRFDNew1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbLRFDPartRateNew;
+        protected global::System.Web.UI.WebControls.Panel pnlLRFDNew1;
         
         /// <summary>
-        /// Label1 control.
+        /// Label7nnn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label Label7nnn;
         
         /// <summary>
-        /// tbRFDNewPartsPTQuantity control.
+        /// lblRFDNewWOI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbRFDNewPartsPTQuantity;
+        protected global::System.Web.UI.WebControls.Label lblRFDNewWOI;
         
         /// <summary>
-        /// revtbRFDNewPartsPTQuantity control.
+        /// Label3x3nnn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbRFDNewPartsPTQuantity;
+        protected global::System.Web.UI.WebControls.Label Label3x3nnn;
         
         /// <summary>
-        /// btnNewLRFDPartOk control.
+        /// ddlRFDNewVehicleNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewLRFDPartOk;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRFDNewVehicleNumber;
         
         /// <summary>
-        /// btnNewLRFDPartCancel control.
+        /// lblRFDNewDepartmentId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewLRFDPartCancel;
+        protected global::System.Web.UI.WebControls.Label lblRFDNewDepartmentId;
         
         /// <summary>
-        /// mpeLRFDNewPart control.
+        /// lblRFDNewDepartmentAdminCharges control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpeLRFDNewPart;
+        protected global::System.Web.UI.WebControls.Label lblRFDNewDepartmentAdminCharges;
+        
+        /// <summary>
+        /// Label6nnn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6nnn;
+        
+        /// <summary>
+        /// tbRFDNewRequestedBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRFDNewRequestedBy;
+        
+        /// <summary>
+        /// tbLRFDNewRequestDateIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbLRFDNewRequestDateIn;
+        
+        /// <summary>
+        /// ibtbLRFDNewRequestDateIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibtbLRFDNewRequestDateIn;
+        
+        /// <summary>
+        /// cetbLRFDNewRequestDateIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cetbLRFDNewRequestDateIn;
+        
+        /// <summary>
+        /// revtbLRFDNewRequestDateIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbLRFDNewRequestDateIn;
+        
+        /// <summary>
+        /// Label4nnn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4nnn;
+        
+        /// <summary>
+        /// tbRFDNewVehicleDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRFDNewVehicleDescription;
+        
+        /// <summary>
+        /// Label9nnn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9nnn;
+        
+        /// <summary>
+        /// tbLRFDNewOdometerReading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbLRFDNewOdometerReading;
+        
+        /// <summary>
+        /// Label10nnn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label10nnn;
+        
+        /// <summary>
+        /// tbLRFDNewHourReading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbLRFDNewHourReading;
+        
+        /// <summary>
+        /// Label12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label12;
+        
+        /// <summary>
+        /// ddlYesNoBlankEstimateNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlYesNoBlankEstimateNew;
+        
+        /// <summary>
+        /// pnlWorkOrderResultsNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlWorkOrderResultsNew;
+        
+        /// <summary>
+        /// tbRFDNewProcedurePerformed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRFDNewProcedurePerformed;
+        
+        /// <summary>
+        /// tbRFDNewVehicleDateOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRFDNewVehicleDateOut;
+        
+        /// <summary>
+        /// ibtbRFDNewVehicleDateOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibtbRFDNewVehicleDateOut;
+        
+        /// <summary>
+        /// cettbRFDNewVehicleDateOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender cettbRFDNewVehicleDateOut;
+        
+        /// <summary>
+        /// revtbRFDNewVehicleDateOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbRFDNewVehicleDateOut;
     }
 }
