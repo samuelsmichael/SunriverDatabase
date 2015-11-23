@@ -105,6 +105,7 @@
     <Content Include="IDCardManagement.aspx" />
     <Content Include="Images\animated_progress.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
+    <Content Include="Images\lapinelog.png" />
     <Content Include="LRFDVehicleMaintenance.aspx" />
     <Content Include="LRFDVehicleMaintenanceReportsMain.aspx" />
     <Content Include="OwnerPropertyFinder.aspx" />
@@ -122,6 +123,8 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\LapineRFDInvoices.aspx" />
+    <Content Include="Reports\LapineRFDVehicles.aspx" />
     <Content Include="Reports\RVBillingInfo.aspx" />
     <Content Include="Reports\RVPastDue.aspx" />
     <Content Include="Reports\RVMailingLabels.aspx" />
@@ -136,6 +139,9 @@
     <Content Include="Reports\SubmittalAdministrativeApprovals.aspx" />
     <Content Include="Reports\SubmittalHistoryLotLane.aspx" />
     <Content Include="Reports\SubmittalStatus.aspx" />
+    <Content Include="Reports\VehicleMaintenanceHistory.aspx" />
+    <Content Include="Reports\VehicleMechanicActivity.aspx" />
+    <Content Include="Reports\VehicleShopActivity.aspx" />
     <Content Include="RVReportsMain.aspx" />
     <Content Include="RVStorage.aspx" />
     <Content Include="SellCheck.aspx" />
@@ -553,6 +559,49 @@
     <Compile Include="Reports\ContractorMailingLabels.aspx.designer.cs">
       <DependentUpon>ContractorMailingLabels.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\LapineRFDInvoices.aspx.cs">
+      <DependentUpon>LapineRFDInvoices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LapineRFDInvoices.aspx.designer.cs">
+      <DependentUpon>LapineRFDInvoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LapineRFDVehicles.aspx.cs">
+      <DependentUpon>LapineRFDVehicles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LapineRFDVehicles.aspx.designer.cs">
+      <DependentUpon>LapineRFDVehicles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\LapineRFDInvoicesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LapineRFDInvoicesReport.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\LapineRFDVehiclesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LapineRFDVehiclesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\VehicleMaintenanceHistory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleMaintenanceHistory.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\VehicleMechanicActivity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleMechanicActivity.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\VehicleShopActivity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleShopActivity.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Reports.Master.cs">
       <DependentUpon>Reports.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -748,6 +797,27 @@
       <DependentUpon>SubmittalLotLane.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\VehicleMaintenanceHistory.aspx.cs">
+      <DependentUpon>VehicleMaintenanceHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\VehicleMaintenanceHistory.aspx.designer.cs">
+      <DependentUpon>VehicleMaintenanceHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\VehicleMechanicActivity.aspx.cs">
+      <DependentUpon>VehicleMechanicActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\VehicleMechanicActivity.aspx.designer.cs">
+      <DependentUpon>VehicleMechanicActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\VehicleShopActivity.aspx.cs">
+      <DependentUpon>VehicleShopActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\VehicleShopActivity.aspx.designer.cs">
+      <DependentUpon>VehicleShopActivity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RVReportsMain.aspx.cs">
       <DependentUpon>RVReportsMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -907,6 +977,26 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorsAllData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\LapineRFDInvoicesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LapineRFDInvoicesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\LapineRFDVehiclesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>LapineRFDVehiclesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\VehicleMaintenanceHistory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VehicleMaintenanceHistory.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\VehicleMechanicActivity.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VehicleMechanicActivity.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\VehicleShopActivity.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VehicleShopActivity.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptRVBillingInfo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

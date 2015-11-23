@@ -39,6 +39,10 @@ namespace SubmittalProposal.Reports {
                                 } else {
                                     if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("cardmanage")) {
                                         Response.Redirect("~/IDCardManagement.aspx");
+                                    } else {
+                                        if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
+                                            Response.Redirect("~/LRFDVehicleMaintenance.aspx");
+                                        }
                                     }
                                 }
                             }

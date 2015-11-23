@@ -89,10 +89,10 @@ namespace SubmittalProposal {
                                     } else {
                                         if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
                                             if (HttpContext.Current.User.IsInRole("candoreportslrfdvehiclemaintenance")) {
-                                                lbReports.Text = "Reports";
+                                                lbReports.Text = "Reports/Forms";
                                                 lbReports.Visible = true;
                                             }
-                                        }
+                                        } 
                                     }
                                 }
                             }
