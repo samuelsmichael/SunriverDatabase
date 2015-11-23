@@ -125,6 +125,7 @@
     <Content Include="Reports\ContractorMailingLabels.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
+    <Content Include="Reports\LRFDVehicleMaintenance\BlankWorkOrder.aspx" />
     <Content Include="Reports\RVBillingInfo.aspx" />
     <Content Include="Reports\RVPastDue.aspx" />
     <Content Include="Reports\RVMailingLabels.aspx" />
@@ -573,10 +574,18 @@
     <Compile Include="Reports\LapineRFDVehicles.aspx.designer.cs">
       <DependentUpon>LapineRFDVehicles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\BlankWorkOrder.aspx.cs">
+      <DependentUpon>BlankWorkOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LRFDVehicleMaintenance\BlankWorkOrder.aspx.designer.cs">
+      <DependentUpon>BlankWorkOrder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\LRFDVehicleMaintenance\LapineRFDInvoicesReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LapineRFDInvoicesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\LRFDVehicleMaintenance\LapineRFDVehiclesReport.cs">
       <AutoGen>True</AutoGen>

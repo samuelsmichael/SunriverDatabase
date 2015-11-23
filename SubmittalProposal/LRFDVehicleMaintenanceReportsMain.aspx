@@ -27,4 +27,9 @@
         <asp:LinkButton ID="lbLapineRFDInvoices" runat="server" 
             onclick="lbLapineRFDInvoices_Click">Lapine RFD Invoices</asp:LinkButton>
     </p>    
+    <p>
+        <asp:LinkButton ID="lbPrintBlankWO" runat="server" 
+            onclick="lbPrintBlankWO_Click">Blank Work Order</asp:LinkButton>
+    </p>    
+
 </asp:Content>

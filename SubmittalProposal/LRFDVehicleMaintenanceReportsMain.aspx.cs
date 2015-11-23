@@ -24,7 +24,9 @@ namespace SubmittalProposal {
         }
         protected void lbLapineRFDInvoices_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/LapineRFDInvoices.aspx");
-        }        
-
+        }
+        protected void lbPrintBlankWO_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/LRFDVehicleMaintenance/BlankWorkOrder.aspx");
+        }
     }
 }
