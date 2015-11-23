@@ -41,27 +41,27 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <input disabled="disabled" style="border: thin solid black;height:1.7em; width:13em;" id="Text4" type="text"  value="LRFD-" />
+                                <input disabled="disabled" style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text4" type="text"  value="LRFD-" />
                             </td>                        
                         </tr>
                         <tr >
                             <td style="border-right: medium solid black;">Data&nbsp;</td>
                             <td>&nbsp;By:</td>
                             <td>
-                                <input style="border: thin  solid black;;height:1.7em; width:13em;" id="Text3" type="text" />
+                                <input style="border: thin  solid black;text-align:center;height:1.7em; width:13em;" id="Text3" type="text" />
                             </td>                        
                         </tr>
                         <tr>
                             <td style="border-right: medium solid black;">Entry&nbsp;</td>
                             <td>&nbsp;Date:</td>
                             <td>
-                                <input style="border: thin solid black;height:1.7em; width:13em;" id="Text2" type="text" />
+                                <input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text2" type="text" />
                             </td>
                         </tr>
                         <tr>
                             <td align="right" colspan="2">Estimate</td>
                             <td>
-                                <input style="border: thin solid black;;height:1.7em; width:13em;" id="Text1" type="text" /></td>
+                                <input style="border: thin solid black; text-align:center; height:1.7em; width:13em;" id="Text1" type="text" /></td>
                         </tr>
                     </table>                    
                 </td>
@@ -73,18 +73,18 @@
                     <table width="100%" border="0" cellpadding="2" cellspacing="0">
                         <tr>
                             <td></td>
-                            <td>Vehicle Number:<br /><input style="border: thin solid black;;height:1.7em; width:13em;" id="Text5" type="text" /></td></tr>
+                            <td>Vehicle Number:<br /><input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text5" type="text" /></td></tr>
                         <tr>
                             <td align="right"><b>Requested By:</b>&nbsp;</td>
-                            <td><input style="border: thin solid black;;height:1.7em; width:13em;" id="Text7" type="text" /></td>
+                            <td><input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text7" type="text" /></td>
                         </tr>
                         <tr>
                             <td align="right"><b>Requested Date In:</b>&nbsp;</td>
-                            <td><input style="border: thin solid black;height:1.7em; width:13em;" id="Text8" type="text" /></td>
+                            <td><input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text8" type="text" /></td>
                         </tr>
                         <tr>
                             <td align="right"><b>Vehicle Date Out:</b>&nbsp;</td>
-                            <td><input style="border: thin solid black;height:1.7em; width:13em;" id="Text9" type="text" /></td>
+                            <td><input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text9" type="text" /></td>
                         </tr>
                     </table>
                 </td>
@@ -92,7 +92,7 @@
                     <table width="100%" border="0" cellpadding="2" cellspacing="0">
                         <tr>
                             <td width="15%" align="right" style="padding-right:5px;"><b>Nature of<br />Request:</b></td>
-                            <td><input style="border: thin solid black;height:7em;width:42em;" id="Text6" type="text" /></td>
+                            <td><input style="border: thin solid black;text-align:center;height:7em;width:42em;" id="Text6" type="text" /></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -100,9 +100,9 @@
                                 <table border="0" cellpadding="2" cellspacing="0">
                                     <tr>
                                         <td><b>Odometer Reading:</b></td>
-                                        <td><input style="border: thin solid black;height:1.7em; width:13em;" id="Text11" type="text" /></td>
+                                        <td><input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text11" type="text" /></td>
                                         <td><b>Hour Meter:</b></td>
-                                        <td><input style="border: thin solid black;height:1.7em; width:13em;" id="Text10" type="text" /></td>
+                                        <td><input style="border: thin solid black;text-align:center;height:1.7em; width:13em;" id="Text10" type="text" /></td>
                                     </tr>
                                 </table>
                             </td>
@@ -114,7 +114,7 @@
         <table width="100%">
             <tr>
                 <td width="10%" align="right"><b>Procedure<br />Performed<br />On Vehicle:</b></td>
-                <td><input style="border: thin solid black;height:10em;width:100%" id="Text67" type="text" /></td>
+                <td><input style="border: thin solid black;text-align:center;height:10em;width:100%" id="Text67" type="text" /></td>
             </tr>
         </table><br />
         <table width="100%">
@@ -124,80 +124,80 @@
                     <table width="100%" cellpadding="1" cellspacing="1">
                         <tr>
                             <th></th>
-                            <th style="border: thin solid black;" align="center" width="60%"><b>Description</b></th>
-                            <th style="border: thin solid black;" align="center" width="15%"><b>Part #</b></th>
-                            <th style="border: thin solid black;" align="center" width="12%"><b>Rate</b></th>
-                            <th style="border: thin solid black;" align="center" width="13%"><b>Quantity</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="60%"><b>Description</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="15%"><b>Part #</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="12%"><b>Rate</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="13%"><b>Quantity</b></th>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>1</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text12" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text12" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text13" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text14" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>1</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text12" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text12" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text13" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text14" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>2</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text15" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text16" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text17" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text18" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>2</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text15" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text16" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text17" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text18" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>3</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text19" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text20" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text21" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text22" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>3</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text19" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text20" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text21" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text22" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>4</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text23" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text24" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text25" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text26" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>4</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text23" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text24" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text25" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text26" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>5</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text27" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text28" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text29" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text30" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>5</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text27" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text28" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text29" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text30" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>6</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text31" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text32" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text33" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text34" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>6</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text31" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text32" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text33" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text34" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>7</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text35" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text36" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text37" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text38" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>7</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text35" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text36" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text37" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text38" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>8</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text39" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text40" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text41" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text42" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>8</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text39" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text40" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text41" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text42" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>9</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text43" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text44" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text45" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text46" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>9</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text43" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text44" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text45" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text46" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>10</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text47" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text48" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text49" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text50" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>10</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text47" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text48" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text49" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text50" type="text" /></td>
                         </tr>
                     </table>
                 </td>
@@ -217,27 +217,27 @@
                     <table width="100%" cellpadding="1" cellspacing="1">
                         <tr>
                             <th></th>
-                            <th style="border: thin solid black;" align="center" width="60%"><b>Mechanic</b></th>
-                            <th style="border: thin solid black;" align="center" width="20%"><b>Rate - $/Hr</b></th>
-                            <th style="border: thin solid black;" align="center" width="20%"><b>Hours</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="60%"><b>Mechanic</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="20%"><b>Rate - $/Hr</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="20%"><b>Hours</b></th>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>1</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text51" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text52" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text57" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>1</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text51" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text52" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text57" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>2</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text53" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text54" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text58" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>2</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text53" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text54" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text58" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>3</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text55" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text59" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text56" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>3</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text55" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text59" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text56" type="text" /></td>
                         </tr>
                     </table>
                 </td>
@@ -257,21 +257,21 @@
                     <table width="100%" cellpadding="1" cellspacing="1">
                         <tr>
                             <th></th>
-                            <th style="border: thin solid black;" align="center" width="60%"><b>Description</b></th>
-                            <th style="border: thin solid black;" align="center" width="20%"><b>Vendor</b></th>
-                            <th style="border: thin solid black;" align="center" width="20%"><b>Cost</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="60%"><b>Description</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="20%"><b>Vendor</b></th>
+                            <th style="border: thin solid black;text-align:center;" align="center" width="20%"><b>Cost</b></th>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>1</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text60" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text61" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text62" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>1</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text60" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text61" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text62" type="text" /></td>
                         </tr>
                         <tr>
-                            <td style="background-color:Gray;border: thin solid black; padding-left:3px; padding-right:3px;"><center>2</center></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text63" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text64" type="text" /></td>
-                            <td><input style="width:100%;border: thin solid black;width:100%;height:1.7em;" id="Text65" type="text" /></td>
+                            <td style="background-color:Gray;border: thin solid black;text-align:center; padding-left:3px; padding-right:3px;"><center>2</center></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text63" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text64" type="text" /></td>
+                            <td><input style="width:100%;border: thin solid black;text-align:center;width:100%;height:1.7em;" id="Text65" type="text" /></td>
                         </tr>
                     </table>
                 </td>
@@ -279,7 +279,7 @@
         </table>
         <div style="margin-top:11px; text-decoration:underline;"><b>Comments:</b></div>
         <div style="width:100%;">
-            <input style="width:100%;border: thin solid black;width:100%;height:5em;" id="Text66"  type="text" />
+            <input style="width:100%;border: thin solid black;text-align:center;width:100%;height:5em;" id="Text66"  type="text" />
         </div>
         </div>
     </form>
