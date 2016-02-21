@@ -173,6 +173,7 @@ namespace SubmittalProposal {
             cmd.Parameters.Add("@PropId", SqlDbType.NVarChar).Value = propId;
             DataSet dsAddress = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
             lbPropertyLotLane.Text = Utils.ObjectToString(dsAddress.Tables[0].Rows[0]["srLotLane"]);
+            Session["lbPropertyLotLane"] = lbPropertyLotLane.Text;
             lbPropertyCountyAddress.Text = Utils.ObjectToString(dsAddress.Tables[0].Rows[0]["dc_address"]);
             lbPropertyPropertyId.Text = Utils.ObjectToString(dsAddress.Tables[0].Rows[0]["SRPropID"]);
             bindGvCardholders(propId);
@@ -191,6 +192,8 @@ namespace SubmittalProposal {
             DataSet dsCards = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
             gvCardholders.DataSource = dsCards;
             gvCardholders.DataBind();
+            Session["DataKeysBeingShown"] = gvCardholders.DataKeys;
+
         }
 
         protected override DataSet buildDataSet() {
@@ -206,11 +209,15 @@ namespace SubmittalProposal {
             ddlIssuedIdCardNew.SelectedIndex = 0;
             ddlIssuedRecPassNew.SelectedIndex = 0;
             tbCommentsNew.Text = "";
+            ddlcdClassNew.SelectedValue = "Owner";
+
         }
+  
         protected void lbIDCardNew_OnClick(object sender, EventArgs args) {
             DataTable dt = CRDataSet().Tables["CRDSCardClass"];
             ddlcdClassNew.DataSource = dt;
             ddlcdClassNew.DataBind();
+            ddlcdClassNew.SelectedValue = "Owner";
             DataTable dt2 = CRDataSet().Tables["CRDSCardStatus"];
             ddlcdCardStatusNew.DataSource = dt2;
             ddlcdCardStatusNew.DataBind();
@@ -224,56 +231,125 @@ namespace SubmittalProposal {
 
 
             mpeNewIDCard.Show();
-
         }
-        protected void btnNewIDCardOk_Click(object sender, EventArgs args) {
-            try {
-                SqlCommand cmd = new SqlCommand("uspCardPut");
-                string firstName = tbcdFirstNameNew.Text;
-                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = firstName;
-                string lastName = tbcdLastNameNew.Text;
-                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = lastName;
-                string cardClass = ddlcdClassNew.SelectedValue;
-                cmd.Parameters.Add("@Class", SqlDbType.NVarChar).Value = cardClass;
-                DateTime? birthDate = Utils.ObjectToDateTimeNullable(tbcdDateOfBirthNew.Text);
-                if (birthDate.HasValue) {
-                    cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
-                }
-                string status = ddlcdCardStatusNew.SelectedValue;
-                DateTime? issueDate = Utils.ObjectToDateTimeNullable(tbIssueDateNew.Text);
-                if (issueDate.HasValue) {
-                    cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
-                }
-                decimal? feePaid = null;
-                try {
-                    feePaid = Utils.ObjectToDecimal0IfNull(tbFeePaidNew.Text.Replace("$", ""));
-                } catch { }
-                if (feePaid.HasValue) {
-                    cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
-                }
-                string idCardIssued = ddlIssuedIdCardNew.SelectedValue;
-                cmd.Parameters.Add("@IDCardIssued", SqlDbType.NVarChar).Value = idCardIssued;
-                string recPassIssued = ddlIssuedRecPassNew.SelectedValue;
-                cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
-                string comments = (tbCommentsNew).Text;
-                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
-                cmd.Parameters.Add("@fkISPropID", SqlDbType.NVarChar).Value = Session["PropdIdBeingEdited"];
-                SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
-                newid.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(newid);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
-                getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
-                getUpdateResultsLabel().Text = "ID Card created";
-                setResultsContent((string)Session["PropdIdBeingEdited"], (string)Session["CustIdBeingEdited"]);
-
-            } catch (Exception ee) {
-                getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
-                getUpdateResultsLabel().Text = ee.Message;
+        protected void lbUpdatePrevious_OnClick(object sender, EventArgs args) {
+            if (Page.IsValid) {
+                btnUpdateIDCardOk_Click(null, null);
+                Edit(gvCardholders.Rows[Utils.ObjectToInt(Session["IndexOfDataKeysCurrentlyBeingShown"]) - 1].Cells[0].Controls[1], null);
             }
-            clearAllSelectionInputFields();
+        }
+        protected void lbUpdateNext_OnClick(object sender, EventArgs args) {
+            if (Page.IsValid) {
+                btnUpdateIDCardOk_Click(null, null);
+                Edit(gvCardholders.Rows[Utils.ObjectToInt(Session["IndexOfDataKeysCurrentlyBeingShown"]) + 1].Cells[0].Controls[1], null);
+            }
+        }
+        protected void ddlcdClassNew_SelectedIndexChanged(object sender, EventArgs args) {
+            if (((DropDownList)sender).SelectedValue == "Dependent") {
+           //     rfvtbcdDateOfBirthNew.Enabled = true;
+            } else {
+             //   rfvtbcdDateOfBirthNew.Enabled = false;
+            }
+            mpeNewIDCard.Show();
+        }
+
+        protected void DateOfBirth_OnValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            try {
+                if (ddlcdClassNew.SelectedValue == "Dependent") {
+                    if (args.Value.ToString().Trim() == String.Empty) {
+                        args.IsValid = false;
+                    }
+                }
+            } catch (Exception ex) {
+                args.IsValid = false;
+            }
+            if (!args.IsValid) {
+                mpeNewIDCard.Show();
+            }
+        }
+        protected void DateOfBirth_OnValidateUpdate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            try {
+                if (ddlcdClassUpdate.SelectedValue == "Dependent") {
+                    if (args.Value.ToString().Trim() == String.Empty) {
+                        args.IsValid = false;
+                    }
+                }
+            } catch (Exception ex) {
+                args.IsValid = false;
+            }
+            if (!args.IsValid) {
+                mpeUpdateIDCard.Show();
+            }
+        }
+
+        protected void btnNewIDCardOk_Click(object sender, EventArgs args) {
+            if (Page.IsValid) {
+                try {
+                    SqlCommand cmd = new SqlCommand("uspCardPut");
+                    string firstName = tbcdFirstNameNew.Text;
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = firstName;
+                    string lastName = tbcdLastNameNew.Text;
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = lastName;
+                    string cardClass = ddlcdClassNew.SelectedValue;
+                    cmd.Parameters.Add("@Class", SqlDbType.NVarChar).Value = cardClass;
+                    DateTime? birthDate = Utils.ObjectToDateTimeNullable(tbcdDateOfBirthNew.Text);
+                    if (birthDate.HasValue) {
+                        cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
+                    }
+                    string status = ddlcdCardStatusNew.SelectedValue;
+                    cmd.Parameters.Add("@status", SqlDbType.NVarChar).Value = status;
+                    cmd.Parameters.Add("@Photo1", SqlDbType.NVarChar).Value = deriveNewPhoto1Value(lastName);
+                    DateTime? issueDate = Utils.ObjectToDateTimeNullable(tbIssueDateNew.Text);
+                    if (issueDate.HasValue) {
+                        cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
+                    }
+                    decimal? feePaid = null;
+                    try {
+                        feePaid = Utils.ObjectToDecimal0IfNull(tbFeePaidNew.Text.Replace("$", ""));
+                    } catch { }
+                    if (feePaid.HasValue) {
+                        cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
+                    }
+                    string idCardIssued = ddlIssuedIdCardNew.SelectedValue;
+                    cmd.Parameters.Add("@IDCardIssued", SqlDbType.NVarChar).Value = idCardIssued;
+                    string recPassIssued = ddlIssuedRecPassNew.SelectedValue;
+                    cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
+                    string comments = (tbCommentsNew).Text;
+                    cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
+                    cmd.Parameters.Add("@fkISPropID", SqlDbType.NVarChar).Value = Session["PropdIdBeingEdited"];
+                    cmd.Parameters.Add("@ISAddress", SqlDbType.NVarChar).Value = Session["lbPropertyLotLane"];
+                    SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                    getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
+                    getUpdateResultsLabel().Text = "ID Card created";
+                    setResultsContent((string)Session["PropdIdBeingEdited"], (string)Session["CustIdBeingEdited"]);
+
+                } catch (Exception ee) {
+                    getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
+                    getUpdateResultsLabel().Text = ee.Message;
+                }
+                clearAllNewFormInputFields();
+            }
+        }
+
+        private String deriveNewPhoto1Value(string lastName) {
+            for (int i=30;i>=1;i--) {
+                if(doDeriveNewPhotoValueForNumber(lastName,""+i)) {
+                    return ""+i;
+                }
+            } 
+            return "";
+        }
+        private bool doDeriveNewPhotoValueForNumber(string lastName, string number) {
+            int index = lastName.ToLower().IndexOf(number+" of ");
+            return index >= 0;
         }
         protected void btnNewIDCardCancel_Click(object sender, EventArgs args) {
-            clearAllSelectionInputFields();
+            clearAllNewFormInputFields();
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -317,6 +393,34 @@ namespace SubmittalProposal {
             }
             return "";
         }
+        protected void tbcdDateOfBirthNew_OnTextChanged(object sender, EventArgs args) {
+            lblAgeNew.Text = Utils.ObjectToString(FormatAge(((TextBox)sender).Text));
+            mpeNewIDCard.Show();
+        }
+        protected void tbIssueDateUpdate_OnTextChanged(object sender, EventArgs args) {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text.Length >= 3 && tb.Text.Length<7) {
+                if (tb.Text.IndexOf("/") != -1) {
+                    tb.Text += "/" + DateTime.Today.Year;
+                }
+            }
+            mpeUpdateIDCard.Show();
+        }
+        protected void tbIssueDateNew_OnTextChanged(object sender, EventArgs args) {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text.Length >= 3 && tb.Text.Length < 7) {
+                if (tb.Text.IndexOf("/") != -1) {
+                    tb.Text += "/" + DateTime.Today.Year;
+                }
+            }
+            mpeNewIDCard.Show();
+        }
+
+        protected void tbcdDateOfBirthUpdate_OnTextChanged(object sender, EventArgs args) {
+            lblAgeUpdate.Text = Utils.ObjectToString(FormatAge(((TextBox)sender).Text));
+            mpeUpdateIDCard.Show();
+        }
+
         public object FormatAge(object value) {
             if (Utils.isNothing(value)) {
                 return "";
@@ -348,46 +452,83 @@ namespace SubmittalProposal {
         protected override string UpdateRoleName {
             get { return "canupdateIDCard"; }
         }
-        protected void gvCardholders_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
-            //Reset the edit index.
-            gvCardholders.EditIndex = -1;
 
-            //Bind data to the GridView control.
-            bindGvCardholders((string)Session["PropdIdBeingEdited"]);
+        protected void Edit(object sender, EventArgs e) {
+            
+            using (GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent)
+            {
+                Session["CardIDBeingUpdated"]=Utils.ObjectToInt(((Label)row.Cells[1].Controls[1]).Text);
+                // find the index of the row selected
+                for (int i = 0; i < ((DataKeyArray)Session["DataKeysBeingShown"]).Count; i++) {
+                    if (Utils.ObjectToInt(((DataKeyArray)Session["DataKeysBeingShown"])[i].Value) == (int)Session["CardIDBeingUpdated"]) {
+                        Session["IndexOfDataKeysCurrentlyBeingShown"] = i;
+                        break;
+                    }
+                }
+                string firstName = ((Label)row.Cells[2].Controls[1]).Text;
+                string lastName = ((Label)row.Cells[3].Controls[1]).Text;
+                string cardClass = ((Label)row.Cells[4].Controls[1]).Text;
+                string birthDate = ((Label)row.Cells[5].Controls[1]).Text;
+                string cardStatus = ((Label)row.Cells[7].Controls[1]).Text;
+                string issueDate = ((Label)row.Cells[8].Controls[1]).Text;
+                string feePaid = ((Label)row.Cells[9].Controls[1]).Text;
+                string idCard = ((Label)row.Cells[10].Controls[1]).Text;
+                string recPass = ((Label)row.Cells[11].Controls[1]).Text;
+                string comments = ((Label)row.Cells[12].Controls[1]).Text;
+
+
+                lblAgeUpdate.Text = Utils.ObjectToString(FormatAge(birthDate));
+
+
+                tbcdFirstNameUpdate.Text = firstName;
+                tbcdLastNameUpdate.Text = lastName;
+                tbcdDateOfBirthUpdate.Text = birthDate;
+                tbFeePaidUpdate.Text = feePaid.Replace("$", "");
+                tbIssueDateUpdate.Text = issueDate;
+                tbCommentsUpdate.Text = comments;
+
+                DataTable dt = CRDataSet().Tables["CRDSCardClass"];
+                ddlcdClassUpdate.DataSource = dt;
+                ddlcdClassUpdate.DataBind();
+                ddlcdClassUpdate.SelectedValue = cardClass;
+
+                DataTable dt2 = CRDataSet().Tables["CRDSCardStatus"];
+                ddlcdCardStatusUpdate.DataSource=dt2;
+                ddlcdCardStatusUpdate.DataBind();
+                ddlcdCardStatusUpdate.SelectedValue = cardStatus;
+
+                DataTable dt3 = CRDataSet().Tables["CRDSYesNo"];
+                ddlIssuedIdCardUpdate.DataSource=dt3;
+                ddlIssuedIdCardUpdate.DataBind();
+                ddlIssuedIdCardUpdate.SelectedValue = idCard;
+
+                DataTable dt4 = CRDataSet().Tables["CRDSYesNo"];
+                ddlIssuedRecPassUpdate.DataSource=dt4;
+                ddlIssuedRecPassUpdate.DataBind();
+                ddlIssuedRecPassUpdate.SelectedValue = recPass;
+
+                if( ((int)Session["IndexOfDataKeysCurrentlyBeingShown"])==0 ) {
+                    lbUpdatePrevious.Visible=false;
+                } else {
+                    lbUpdatePrevious.Visible=true;
+                }
+                if( ((int)Session["IndexOfDataKeysCurrentlyBeingShown"])== ( ((DataKeyArray)Session["DataKeysBeingShown"]).Count ) - 1 ) {
+                    lbUpdateNext.Visible=false;
+                } else {
+                    lbUpdateNext.Visible=true;
+                }
+
+                mpeUpdateIDCard.Show();
+            }           
         }
-        protected void gvCardholders_RowEditing(object sender, GridViewEditEventArgs e) {
-            //Set the edit index.
-            gvCardholders.EditIndex = e.NewEditIndex;
-            //Bind data to the GridView control.
-            bindGvCardholders((string)Session["PropdIdBeingEdited"]);
+
+        protected void btnUpdateIDCardCancel_Click(object sender, EventArgs args) {
+    // no need        mpeUpdateIDCard.Hide();
         }
+
         protected void gv_RowDataBound(object sender, GridViewRowEventArgs e) {
             if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
-                DropDownList ddList = (DropDownList)e.Row.FindControl("ddlcdClassUpdate");
-                //bind dropdownlist
-                DataTable dt = CRDataSet().Tables["CRDSCardClass"];
-                ddList.DataSource = dt;
-                ddList.DataBind();
-                DataRowView dr = e.Row.DataItem as DataRowView;
-                ddList.SelectedValue = dr["cdClass"].ToString();
 
-                DropDownList ddList2 = (DropDownList)e.Row.FindControl("ddlcdCardStatusUpdate");
-                //bind dropdownlist
-                DataTable dt2 = CRDataSet().Tables["CRDSCardStatus"];
-                ddList2.DataSource = dt2;
-                ddList2.DataBind();
-                ddList2.SelectedValue = dr["cdStatus"].ToString();
-
-                DropDownList ddList3 = (DropDownList)e.Row.FindControl("ddlcdIdCardIssuedUpdate");
-                DataTable dt3 = CRDataSet().Tables["CRDSYesNo"];
-                ddList3.DataSource = dt3;
-                ddList3.DataBind();
-                ddList3.SelectedValue = (String)FormatCardIssued(dr["cdIDCardIssued"]);
-                DropDownList ddList4 = (DropDownList)e.Row.FindControl("ddlcdRecPassIssuedUpdate");
-                DataTable dt4 = CRDataSet().Tables["CRDSYesNo"];
-                ddList4.DataSource = dt4;
-                ddList4.DataBind();
-                ddList4.SelectedValue = (String)FormatCardIssued(dr["cdRecPassIssued"]);
             } else {
                 if (e.Row.RowType.Equals(DataControlRowType.DataRow)) {
                     Label lblRecPassIssued = (Label)e.Row.FindControl("lblRecPassIssued");
@@ -403,82 +544,81 @@ namespace SubmittalProposal {
                 }
             }
         }
-        protected void gvCardholders_RowUpdating(object sender, GridViewUpdateEventArgs e) {
 
-            GridViewRow row = gvCardholders.Rows[e.RowIndex];
-            try {
-                SqlCommand cmd = new SqlCommand("uspCardPut");
-                int cardId = Utils.ObjectToInt(((Label)row.Cells[1].Controls[1]).Text);
-                cmd.Parameters.Add("@CardId", SqlDbType.Int).Value = cardId;
-                string firstName = ((TextBox)row.Cells[2].Controls[1]).Text;
-                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = firstName;
-                string lastName = ((TextBox)row.Cells[3].Controls[1]).Text;
-                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = lastName;
-                string cardClass = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue;
-                cmd.Parameters.Add("@Class", SqlDbType.NVarChar).Value = cardClass;
-                DateTime? birthDate = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[5].Controls[1]).Text);
-                if (birthDate.HasValue) {
-                    cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
-                }
-                string status = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
-                cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = status;
-                DateTime? issueDate = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
-                if (issueDate.HasValue) {
-                    cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
-                }
-                decimal? feePaid = null;
+        protected void btnUpdateIDCardOk_Click(object sender, EventArgs e) {
+            if (Page.IsValid) {
+
                 try {
-                    feePaid = Utils.ObjectToDecimal0IfNull(((TextBox)row.Cells[9].Controls[1]).Text.Replace("$", ""));
-                } catch { }
-                if (feePaid.HasValue) {
-                    cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
+                    SqlCommand cmd = new SqlCommand("uspCardPut");
+                    int cardId = Utils.ObjectToInt(Session["CardIDBeingUpdated"]);
+                    cmd.Parameters.Add("@CardId", SqlDbType.Int).Value = cardId;
+                    string firstName = tbcdFirstNameUpdate.Text;
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = firstName;
+                    string lastName = tbcdLastNameUpdate.Text;
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = lastName;
+                    string cardClass = ddlcdClassUpdate.SelectedValue;
+                    cmd.Parameters.Add("@Class", SqlDbType.NVarChar).Value = cardClass;
+                    DateTime? birthDate = Utils.ObjectToDateTimeNullable(tbcdDateOfBirthUpdate.Text);
+                    if (birthDate.HasValue) {
+                        cmd.Parameters.Add("@DOB", SqlDbType.DateTime).Value = birthDate.Value;
+                    }
+                    string status = ddlcdCardStatusUpdate.SelectedValue;
+                    cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = status;
+                    DateTime? issueDate = Utils.ObjectToDateTimeNullable(tbIssueDateUpdate.Text);
+                    if (issueDate.HasValue) {
+                        cmd.Parameters.Add("@IssueDate", SqlDbType.DateTime).Value = issueDate.Value;
+                    }
+                    decimal? feePaid = null;
+                    try {
+                        feePaid = Utils.ObjectToDecimal0IfNull(tbFeePaidUpdate.Text.Replace("$", ""));
+                    } catch { }
+                    if (feePaid.HasValue) {
+                        cmd.Parameters.Add("@FeePaid", SqlDbType.Money).Value = feePaid.Value;
+                    }
+                    string idCardIssued = ddlIssuedIdCardUpdate.SelectedValue;
+                    cmd.Parameters.Add("@IDCardIssued", SqlDbType.NVarChar).Value = idCardIssued;
+                    string recPassIssued = ddlIssuedRecPassUpdate.SelectedValue;
+                    cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
+                    string comments = tbCommentsUpdate.Text;
+                    cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
+                    SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                    /*
+                     * alter PROCEDURE uspCardPut (
+        @CardId int = null,
+        @fkISInputID int = null,
+        @FirstName nvarchar(20) = null,
+        @LastName nvarchar(20) = null,
+        @Class nvarchar(20)=null,
+        @DOB datetime=null,
+        @Status nvarchar(15)=null,
+        @IssueDate datetime=null,
+        @FeePaid money=null,
+        @IDCardIssued nvarchar(3)=null,
+        @RecPassIssued nvarchar(3)=null,
+        @Comments ntext=null,
+        @Photo1 nvarchar(80)=null,
+        @ISAddress nvarchar(50)=null,
+        @ISSort nvarchar(50)=null,
+        @fkISPropID nvarchar(50)=null,
+        @RenewalDate datetime=null,
+        @ExpirationDate datetime=null
+                     * 
+                    */
+                    getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
+                    getUpdateResultsLabel().Text = "ID Card updated";
+                } catch (Exception ee) {
+                    getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
+                    getUpdateResultsLabel().Text = ee.Message;
                 }
-                string idCardIssued = ((DropDownList)row.Cells[10].Controls[1]).SelectedValue;
-                cmd.Parameters.Add("@IDCardIssued", SqlDbType.NVarChar).Value = idCardIssued;
-                string recPassIssued = ((DropDownList)row.Cells[11].Controls[1]).SelectedValue;
-                cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
-                string comments = ((TextBox)row.Cells[12].Controls[1]).Text;
-                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
-                SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
-                newid.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(newid);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
-                /*
-                 * alter PROCEDURE uspCardPut (
-	@CardId int = null,
-	@fkISInputID int = null,
-	@FirstName nvarchar(20) = null,
-	@LastName nvarchar(20) = null,
-	@Class nvarchar(20)=null,
-	@DOB datetime=null,
-	@Status nvarchar(15)=null,
-	@IssueDate datetime=null,
-	@FeePaid money=null,
-	@IDCardIssued nvarchar(3)=null,
-	@RecPassIssued nvarchar(3)=null,
-	@Comments ntext=null,
-	@Photo1 nvarchar(80)=null,
-	@ISAddress nvarchar(50)=null,
-	@ISSort nvarchar(50)=null,
-	@fkISPropID nvarchar(50)=null,
-	@RenewalDate datetime=null,
-	@ExpirationDate datetime=null
-                 * 
-                */
-                getUpdateResultsLabel().ForeColor = System.Drawing.Color.DarkGreen;
-                getUpdateResultsLabel().Text = "ID Card updated";
+                //Reset the edit index.
+                gvCardholders.SelectedIndex = -1;
 
-                //setResultsContent(propId, custId);
-                //                performPostUpdateSuccessfulActions("ID Card updated", null, null);
-            } catch (Exception ee) {
-                getUpdateResultsLabel().ForeColor = System.Drawing.Color.Red;
-                getUpdateResultsLabel().Text = ee.Message;
+                //Bind data to the GridView control.
+                bindGvCardholders((string)Session["PropdIdBeingEdited"]);
             }
-            //Reset the edit index.
-            gvCardholders.EditIndex = -1;
-
-            //Bind data to the GridView control.
-            bindGvCardholders((string)Session["PropdIdBeingEdited"]);
         }
 
         [System.Web.Script.Services.ScriptMethod()]
@@ -533,6 +673,37 @@ namespace SubmittalProposal {
             public override string ToString() {
                 return _Name;
             }
+        }
+        protected void gvCardholders_Sorting(object sender, GridViewSortEventArgs e) {
+            SqlCommand cmd = new SqlCommand("uspCardGet");
+            cmd.Parameters.Add("@PropId", SqlDbType.NVarChar).Value = Session["PropdIdBeingEdited"];
+            DataSet dsCards = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+
+
+
+            DataTable sourceTable = dsCards.Tables[0];
+            DataView view = new DataView(sourceTable);
+            if (ViewState["sortExpression"] == null) {
+                ViewState["sortExpression"] = e.SortExpression + " desc";
+            }
+            string[] sortData = ViewState["sortExpression"].ToString().Trim().Split(' ');
+            if (e.SortExpression == sortData[0]) {
+                if (sortData[1] == "ASC") {
+                    view.Sort = e.SortExpression + " " + "DESC";
+                    this.ViewState["sortExpression"] = e.SortExpression + " " + "DESC";
+                } else {
+                    view.Sort = e.SortExpression + " " + "ASC";
+                    this.ViewState["sortExpression"] = e.SortExpression + " " + "ASC";
+                }
+            } else {
+                view.Sort = e.SortExpression + " " + "ASC";
+                this.ViewState["sortExpression"] = e.SortExpression + " " + "ASC";
+            }
+            DataTable tblOrdered = view.ToTable();
+            ((GridView)sender).DataSource = tblOrdered;
+            ((GridView)sender).DataBind();
+            Session["DataKeysBeingShown"] = gvCardholders.DataKeys;
+
         }
     }
 }

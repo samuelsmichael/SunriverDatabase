@@ -7,6 +7,10 @@ border: thin solid #000000;
 }
 */  
 
+input:focus, textarea:focus, select:focus
+{
+    background-color: #FFFF99;
+}
     
 .watermarkclass 
 {
@@ -341,6 +345,7 @@ legend
 {
     font-size:.9em !important;
 }
+
 .form_field_date 
 {
     font-size:.9em; width:6em !important;
