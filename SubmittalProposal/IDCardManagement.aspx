@@ -238,12 +238,12 @@
                     <tr style="white-space:nowrap;">
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="First name"></asp:Label>
-                            <asp:TextBox CssClass="form_field" ID="tbcdFirstNameNew" MaxLength="20" Width="13em"
+                            <asp:TextBox CssClass="form_field" ID="tbcdFirstNameNew" AutoPostBack="true" OnTextChanged="tbcdFirstNameNew_OnTextChanged" MaxLength="20" Width="13em"
                                 runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label1" runat="server" Text="Last name"></asp:Label>
-                            <asp:TextBox CssClass="form_field" ID="tbcdLastNameNew" MaxLength="20" Width="13em"
+                            <asp:TextBox CssClass="form_field" ID="tbcdLastNameNew"  AutoPostBack="true" OnTextChanged="tbcdLastNameNew_OnTextChanged" MaxLength="20" Width="13em"
                                 runat="server"></asp:TextBox>
                         </td>
                         <td style="white-space:nowrap;">
@@ -416,12 +416,12 @@
                     <tr style="white-space:nowrap;">
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="First name"></asp:Label>
-                            <asp:TextBox CssClass="form_field" ID="tbcdFirstNameUpdate" MaxLength="20" Width="13em"
+                            <asp:TextBox CssClass="form_field" ID="tbcdFirstNameUpdate"  AutoPostBack="true" OnTextChanged="tbcdFirstNameUpdate_OnTextChanged" MaxLength="20" Width="13em"
                                 runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="Last name"></asp:Label>
-                            <asp:TextBox CssClass="form_field" ID="tbcdLastNameUpdate" MaxLength="20" Width="13em"
+                            <asp:TextBox CssClass="form_field" ID="tbcdLastNameUpdate"  AutoPostBack="true" OnTextChanged="tbcdLastNameUpdate_OnTextChanged" MaxLength="20" Width="13em"
                                 runat="server"></asp:TextBox>
                         </td>
                         <td style="white-space:nowrap;">

@@ -396,6 +396,9 @@ namespace SubmittalProposal {
         protected void tbcdDateOfBirthNew_OnTextChanged(object sender, EventArgs args) {
             lblAgeNew.Text = Utils.ObjectToString(FormatAge(((TextBox)sender).Text));
             mpeNewIDCard.Show();
+            ddlcdClassNew.Attributes["onfocus"] = "javascript:this.select();";
+            ddlcdClassNew.Focus();
+
         }
         protected void tbIssueDateUpdate_OnTextChanged(object sender, EventArgs args) {
             TextBox tb = (TextBox)sender;
@@ -405,6 +408,50 @@ namespace SubmittalProposal {
                 }
             }
             mpeUpdateIDCard.Show();
+            ddlIssuedIdCardUpdate.Attributes["onfocus"] = "javascript:this.select();";
+            ddlIssuedIdCardUpdate.Focus();
+
+        }
+        private string captializeAllWords(string str) {
+            if (str == null) {
+                return "";
+            }
+            string[] sa=str.Trim().Split(new char[] {' '});
+            StringBuilder sb = new StringBuilder();
+            string space="";
+            foreach (string st in sa) {
+                if (st.Length == 0) {
+                    sb.Append("");
+                } else {
+                    sb.Append(space+st[0].ToString().ToUpperInvariant()+st.Substring(1));
+                }
+                space=" ";
+            }
+            return sb.ToString();
+        }
+        protected void tbcdLastNameNew_OnTextChanged(object sender, EventArgs args) {
+            tbcdLastNameNew.Text = captializeAllWords(tbcdLastNameNew.Text);
+            mpeNewIDCard.Show();
+            tbcdDateOfBirthNew.Attributes["onfocus"] = "javascript:this.select();";
+            tbcdDateOfBirthNew.Focus();
+        }
+        protected void tbcdLastNameUpdate_OnTextChanged(object sender, EventArgs args) {
+            tbcdLastNameUpdate.Text = captializeAllWords(tbcdLastNameUpdate.Text);
+            mpeUpdateIDCard.Show();
+            tbcdDateOfBirthUpdate.Attributes["onfocus"] = "javascript:this.select();";
+            tbcdDateOfBirthUpdate.Focus();
+        }
+        protected void tbcdFirstNameUpdate_OnTextChanged(object sender, EventArgs args) {
+            tbcdFirstNameUpdate.Text = captializeAllWords(tbcdFirstNameUpdate.Text);
+            mpeUpdateIDCard.Show();
+            tbcdLastNameUpdate.Attributes["onfocus"] = "javascript:this.select();";
+            tbcdLastNameUpdate.Focus();
+        }
+        protected void tbcdFirstNameNew_OnTextChanged(object sender, EventArgs args) {
+            tbcdFirstNameNew.Text = captializeAllWords(tbcdFirstNameNew.Text);
+            mpeNewIDCard.Show();
+            tbcdLastNameNew.Attributes["onfocus"] = "javascript:this.select();";
+            tbcdLastNameNew.Focus();
         }
         protected void tbIssueDateNew_OnTextChanged(object sender, EventArgs args) {
             TextBox tb = (TextBox)sender;
@@ -414,11 +461,15 @@ namespace SubmittalProposal {
                 }
             }
             mpeNewIDCard.Show();
+            ddlIssuedIdCardNew.Attributes["onfocus"] = "javascript:this.select();";
+            ddlIssuedIdCardNew.Focus();
         }
 
         protected void tbcdDateOfBirthUpdate_OnTextChanged(object sender, EventArgs args) {
             lblAgeUpdate.Text = Utils.ObjectToString(FormatAge(((TextBox)sender).Text));
             mpeUpdateIDCard.Show();
+            ddlcdClassUpdate.Attributes["onfocus"] = "javascript:this.select();";
+            ddlcdClassUpdate.Focus();
         }
 
         public object FormatAge(object value) {
