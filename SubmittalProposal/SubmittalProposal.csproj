@@ -101,6 +101,7 @@
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
+    <Content Include="IDCardManagementReportsMain.aspx" />
     <Content Include="GetPageInfo.asmx" />
     <Content Include="IDCardManagement.aspx" />
     <Content Include="Images\animated_progress.gif" />
@@ -335,6 +336,13 @@
     </Compile>
     <Compile Include="ContractorReportsMain.aspx.designer.cs">
       <DependentUpon>ContractorReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IDCardManagementReportsMain.aspx.cs">
+      <DependentUpon>IDCardManagementReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IDCardManagementReportsMain.aspx.designer.cs">
+      <DependentUpon>IDCardManagementReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="GetPageInfo.asmx.cs">
       <DependentUpon>GetPageInfo.asmx</DependentUpon>

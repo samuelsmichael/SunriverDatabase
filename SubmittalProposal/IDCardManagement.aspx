@@ -220,6 +220,12 @@
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Permanent Note">
+                <ItemTemplate>
+                    <asp:Label ID="Label1ij" runat="server" Text='<%# Bind("cdPermanentNote") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <asp:Label ID="lblIDCardManagementUpdateResults" Font-Bold="true" runat="server"
@@ -347,8 +353,12 @@
                 </table>
             </asp:Panel>
             <asp:Panel runat="server" ID="pnlCommentsNew" GroupingText="Comments">
-                <asp:TextBox  ID="tbCommentsNew" TextMode="MultiLine" Width="50em"
-                    runat="server"></asp:TextBox>
+                            <asp:TextBox  ID="tbCommentsNew" TextMode="MultiLine" Width="50em"
+                                runat="server"></asp:TextBox>
+            </asp:Panel>
+            <asp:Panel runat="server" ID="pnlPermanentNoteNew" GroupingText="Permanent Note">
+                            <asp:TextBox  ID="tbPermanentNoteNew" TextMode="MultiLine" MaxLength="30" Width="50em"
+                                runat="server"></asp:TextBox>
             </asp:Panel>
         </asp:Panel>
         <script language="javascript" type="text/javascript">
@@ -525,9 +535,14 @@
                 </table>
             </asp:Panel>
             <asp:Panel runat="server" ID="pnlCommentsUpdate" GroupingText="Comments">
-                <asp:TextBox  ID="tbCommentsUpdate" TextMode="MultiLine" Width="50em"
-                    runat="server"></asp:TextBox>
+                            <asp:TextBox  ID="tbCommentsUpdate" TextMode="MultiLine" Width="50em"
+                                runat="server"></asp:TextBox>
             </asp:Panel>
+            <asp:Panel runat="server" ID="pnlPermanentNoteUpdate" GroupingText="Permanent Note">
+                            <asp:TextBox  ID="tbPermanentNoteUpdate" TextMode="MultiLine" MaxLength="30" Width="50em"
+                                runat="server"></asp:TextBox>
+            </asp:Panel>
+
         </asp:Panel>
         <script language="javascript" type="text/javascript">
             function doOk() {

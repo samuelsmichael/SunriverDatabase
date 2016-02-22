@@ -209,6 +209,7 @@ namespace SubmittalProposal {
             ddlIssuedIdCardNew.SelectedIndex = 0;
             ddlIssuedRecPassNew.SelectedIndex = 0;
             tbCommentsNew.Text = "";
+            tbPermanentNoteNew.Text = "";
             ddlcdClassNew.SelectedValue = "Owner";
 
         }
@@ -318,6 +319,8 @@ namespace SubmittalProposal {
                     cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
                     string comments = (tbCommentsNew).Text;
                     cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
+                    string permanentNote = tbPermanentNoteNew.Text;
+                    cmd.Parameters.Add("@PermanentNote", SqlDbType.NVarChar).Value = permanentNote;
                     cmd.Parameters.Add("@fkISPropID", SqlDbType.NVarChar).Value = Session["PropdIdBeingEdited"];
                     cmd.Parameters.Add("@ISAddress", SqlDbType.NVarChar).Value = Session["lbPropertyLotLane"];
                     SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
@@ -526,6 +529,7 @@ namespace SubmittalProposal {
                 string idCard = ((Label)row.Cells[10].Controls[1]).Text;
                 string recPass = ((Label)row.Cells[11].Controls[1]).Text;
                 string comments = ((Label)row.Cells[12].Controls[1]).Text;
+                string permanentNote=((Label)row.Cells[13].Controls[1]).Text;
 
 
                 lblAgeUpdate.Text = Utils.ObjectToString(FormatAge(birthDate));
@@ -537,6 +541,7 @@ namespace SubmittalProposal {
                 tbFeePaidUpdate.Text = feePaid.Replace("$", "");
                 tbIssueDateUpdate.Text = issueDate;
                 tbCommentsUpdate.Text = comments;
+                tbPermanentNoteUpdate.Text = permanentNote;
 
                 DataTable dt = CRDataSet().Tables["CRDSCardClass"];
                 ddlcdClassUpdate.DataSource = dt;
@@ -632,6 +637,8 @@ namespace SubmittalProposal {
                     cmd.Parameters.Add("@RecPassIssued", SqlDbType.NVarChar).Value = recPassIssued;
                     string comments = tbCommentsUpdate.Text;
                     cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = comments;
+                    string permanentNote = tbPermanentNoteUpdate.Text;
+                    cmd.Parameters.Add("@PermanentNote", SqlDbType.NVarChar).Value = permanentNote;
                     SqlParameter newid = new SqlParameter("@NewCardId", SqlDbType.Int);
                     newid.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(newid);

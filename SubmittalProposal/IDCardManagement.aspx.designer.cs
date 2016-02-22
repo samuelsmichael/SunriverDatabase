@@ -463,6 +463,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbCommentsNew;
         
         /// <summary>
+        /// pnlPermanentNoteNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPermanentNoteNew;
+        
+        /// <summary>
+        /// tbPermanentNoteNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbPermanentNoteNew;
+        
+        /// <summary>
         /// btnNewIDCardOkId control.
         /// </summary>
         /// <remarks>
@@ -812,6 +830,24 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbCommentsUpdate;
+        
+        /// <summary>
+        /// pnlPermanentNoteUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPermanentNoteUpdate;
+        
+        /// <summary>
+        /// tbPermanentNoteUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbPermanentNoteUpdate;
         
         /// <summary>
         /// lbUpdatePrevious control.

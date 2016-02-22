@@ -30,6 +30,7 @@ alter PROCEDURE uspCardPut (
 	@fkISPropID nvarchar(50)=null,
 	@RenewalDate datetime=null,
 	@ExpirationDate datetime=null,
+	@PermanentNote nvarchar(30)=null,
 	@NewCardId int out
 )
 AS
@@ -48,6 +49,7 @@ BEGIN
 			  ,[cdFeePaid] = @FeePaid
 			  ,[cdIDCardIssued] = @IDCardIssued
 			  ,[cdRecPassIssued] = @RecPassIssued
+			  ,[cdPermanentNote]=@PermanentNote
 		 WHERE CardID=@CardId
 	end else 
 	begin
@@ -68,7 +70,8 @@ BEGIN
 				   ,[ISSort]
 				   ,[fkISPropID]
 				   ,[cdRenewalDate]
-				   ,[cdExpirationDate])
+				   ,[cdExpirationDate]
+				   ,[cdPermanentNote])
 			 VALUES
 				   (@fkISInputID
 				   ,@FirstName
@@ -86,7 +89,8 @@ BEGIN
 				   ,@IsSort
 				   ,@fkISPropID
 				   ,@RenewalDate
-				   ,@ExpirationDate)
+				   ,@ExpirationDate
+				   ,@PermanentNote)
 		set @NewCardId=scope_identity()
 	end
 end

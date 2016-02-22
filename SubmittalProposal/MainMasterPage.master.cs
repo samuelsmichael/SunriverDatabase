@@ -92,7 +92,14 @@ namespace SubmittalProposal {
                                                 lbReports.Text = "Reports/Forms";
                                                 lbReports.Visible = true;
                                             }
-                                        } 
+                                        } else {
+                                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("card")) {
+                                                if (HttpContext.Current.User.IsInRole("candoreportsidcard")) {
+                                                    lbReports.Text = "Procedures";
+                                                    lbReports.Visible = true;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -123,6 +130,10 @@ namespace SubmittalProposal {
                                 } else {
                                     if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
                                         Response.Redirect("~/LRFDVehicleMaintenanceReportsMain.aspx");
+                                    } else {
+                                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("card")) {
+                                            Response.Redirect("~/IDCardManagementReportsMain.aspx");
+                                        }
                                     }
                                 }
                             }
