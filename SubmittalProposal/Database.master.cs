@@ -72,6 +72,14 @@ namespace SubmittalProposal {
             btnGo_Click(null, null);
         }
 
+        public void setUnlockRecordCheckboxVisibility(bool isVisible) {
+            if (isVisible) {
+                cbUnlockRecord.Visible = true;
+            } else {
+                cbUnlockRecord.Visible = false;
+            }
+        }
+
         public void enableUnlockRecordCheckbox(bool enable) {
             cbUnlockRecord.Enabled = enable;
         }

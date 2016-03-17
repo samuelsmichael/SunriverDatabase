@@ -738,30 +738,30 @@ namespace SubmittalProposal {
             DataSet dsCards = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
 
 
-
-            DataTable sourceTable = dsCards.Tables[0];
-            DataView view = new DataView(sourceTable);
-            if (ViewState["sortExpression"] == null) {
-                ViewState["sortExpression"] = e.SortExpression + " desc";
-            }
-            string[] sortData = ViewState["sortExpression"].ToString().Trim().Split(' ');
-            if (e.SortExpression == sortData[0]) {
-                if (sortData[1] == "ASC") {
-                    view.Sort = e.SortExpression + " " + "DESC";
-                    this.ViewState["sortExpression"] = e.SortExpression + " " + "DESC";
+            if (dsCards.Tables != null && dsCards.Tables.Count > 0) {
+                DataTable sourceTable = dsCards.Tables[0];
+                DataView view = new DataView(sourceTable);
+                if (ViewState["sortExpression"] == null) {
+                    ViewState["sortExpression"] = e.SortExpression + " desc";
+                }
+                string[] sortData = ViewState["sortExpression"].ToString().Trim().Split(' ');
+                if (e.SortExpression == sortData[0]) {
+                    if (sortData[1] == "ASC") {
+                        view.Sort = e.SortExpression + " " + "DESC";
+                        this.ViewState["sortExpression"] = e.SortExpression + " " + "DESC";
+                    } else {
+                        view.Sort = e.SortExpression + " " + "ASC";
+                        this.ViewState["sortExpression"] = e.SortExpression + " " + "ASC";
+                    }
                 } else {
                     view.Sort = e.SortExpression + " " + "ASC";
                     this.ViewState["sortExpression"] = e.SortExpression + " " + "ASC";
                 }
-            } else {
-                view.Sort = e.SortExpression + " " + "ASC";
-                this.ViewState["sortExpression"] = e.SortExpression + " " + "ASC";
+                DataTable tblOrdered = view.ToTable();
+                ((GridView)sender).DataSource = tblOrdered;
+                ((GridView)sender).DataBind();
+                Session["DataKeysBeingShown"] = gvCardholders.DataKeys;
             }
-            DataTable tblOrdered = view.ToTable();
-            ((GridView)sender).DataSource = tblOrdered;
-            ((GridView)sender).DataBind();
-            Session["DataKeysBeingShown"] = gvCardholders.DataKeys;
-
         }
     }
 }

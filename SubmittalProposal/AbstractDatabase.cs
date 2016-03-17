@@ -22,6 +22,9 @@ namespace SubmittalProposal {
         protected abstract void lockYourUpdateFields();
         protected abstract void clearAllSelectionInputFields();
         protected abstract void clearAllNewFormInputFields();
+        /// <summary>
+        /// If this database doesn't allow updating, then throw an exception in here
+        /// </summary>
         protected abstract string UpdateRoleName { get; }
         protected abstract void weveComeHereForTheFirstTimeThisSession();        
         protected abstract void childPageLoad(object sender, EventArgs e);
@@ -36,10 +39,16 @@ namespace SubmittalProposal {
             }
             childPageLoad(sender, e);
             ((SiteMaster)Master.Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
-            if (UpdateRoleName=="all"||HttpContext.Current.User.IsInRole(UpdateRoleName)) {
-                ((Database)Master).enableUnlockRecordCheckbox(true);
-            } else {
-                ((Database)Master).enableUnlockRecordCheckbox(false);
+            try { // In this framework, if UpdateRoleName throws an exception, then this means that the database isn't updatable (yet).
+                string zUpdateRoleName = UpdateRoleName;
+                if (UpdateRoleName == "all" || HttpContext.Current.User.IsInRole(UpdateRoleName)) {
+                    ((Database)Master).enableUnlockRecordCheckbox(true);
+                } else {
+                    ((Database)Master).enableUnlockRecordCheckbox(false);
+                }
+            } catch {
+                ((Database)Master).setUnlockRecordCheckboxVisibility(false);
+                lockYourUpdateFields();
             }
         }
 
