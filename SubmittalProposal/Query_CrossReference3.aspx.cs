@@ -7,14 +7,18 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace SubmittalProposal {
-    public partial class Query_CrossReference3 : System.Web.UI.Page {
-        protected void Page_Load(object sender, EventArgs e) {
-            SqlCommand cmd = new SqlCommand("uspCrossReferenceLeaseIdASpace");
-            DataSet ds = Common.Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
-            ((AbstractQuery2)Master).getGridView().DataSource = ds;
-            ((AbstractQuery2)Master).getGridView().DataBind();
-            ((AbstractQuery2)Master).getTitleLabel().Text = "Cross Reference";
+    public partial class Query_CrossReference3 : AbstractQueryPage {
+
+        protected override string PageTitle {
+            get { return "Cross Reference"; }
+        }
+        protected override SqlCommand MSqlCommand {
+            get { return new SqlCommand("uspCrossReferenceLeaseIdASpace");}
+        }
+        protected override string ConnectionString {
+            get { return System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString; }
         }
     }
 }

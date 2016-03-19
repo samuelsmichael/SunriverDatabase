@@ -1,4 +1,4 @@
-c:\Users\Diamond\Documents\Visual Studio 2010\Projects\SunriverDatabase\Common\bin\Debug\Common.dll
-c:\Users\Diamond\Documents\Visual Studio 2010\Projects\SunriverDatabase\Common\bin\Debug\Common.pdb
-c:\Users\Diamond\Documents\Visual Studio 2010\Projects\SunriverDatabase\Common\obj\Debug\Common.dll
-c:\Users\Diamond\Documents\Visual Studio 2010\Projects\SunriverDatabase\Common\obj\Debug\Common.pdb
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\bin\Debug\Common.dll
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\bin\Debug\Common.pdb
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\obj\Debug\Common.dll
+C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\obj\Debug\Common.pdb

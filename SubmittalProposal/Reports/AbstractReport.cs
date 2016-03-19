@@ -24,6 +24,9 @@ namespace SubmittalProposal.Reports {
         private ReportDocument _RD;
 
         protected void Page_Load(object sender, EventArgs e) {
+            if (!IsPostBack) {
+                Session["GoBackTo"] = Request.UrlReferrer;
+            }
             child_Page_Load(sender, e);
             ((Reports)Master).getSubmitButton().Click += new EventHandler(AbstractReport_Click);
         }

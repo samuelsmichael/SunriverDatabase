@@ -18,40 +18,11 @@ namespace SubmittalProposal.Reports {
             return btnSubmitReport;
         }
 
+        protected void lbBack_Click(object sender, EventArgs e) {
+            Response.Redirect(Session["GoBackTo"].ToString());
+        }
         protected void lbHome_Click(object sender, EventArgs e) {
-            if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
-                Response.Redirect("~/Submittal2.aspx");
-            } else {
-                if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("bpermit")) {
-                    Response.Redirect("~/BPermit.aspx");
-                } else {
-                    if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliancereview")) {
-                        Response.Redirect("~/ComplianceReview.aspx");
-                    } else {
-                        if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
-                            Response.Redirect("~/SellCheck.aspx");
-                        } else {
-                            if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rv")) {
-                                Response.Redirect("~/RVStorage.aspx");
-                            } else {
-                                if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
-                                    Response.Redirect("~/Contractor.aspx");
-                                } else {
-                                    if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("cardmanage")) {
-                                        Response.Redirect("~/IDCardManagement.aspx");
-                                    } else {
-                                        if (((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
-                                            Response.Redirect("~/LRFDVehicleMaintenance.aspx");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            Response.Redirect("~/Submittal2.aspx");
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

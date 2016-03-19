@@ -19,6 +19,10 @@
         <asp:Label ID="Label1" runat="server" Text="Property ID"></asp:Label>
         <asp:TextBox ID="tbPropertyID" Width="46" runat="server"></asp:TextBox>
     </td>
+    <td>
+        <asp:Label ID="Label2" runat="server" Text="Deschutes County"></asp:Label>
+        <asp:Button ID="btnDeschutesCounty" runat="server"></asp:Button>
+    </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
     <asp:Panel runat="server" ID="pnlResults" Style="height: 200px; overflow: auto;">

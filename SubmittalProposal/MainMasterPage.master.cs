@@ -30,6 +30,7 @@ namespace SubmittalProposal {
                 MenuItem miRVStorage = new MenuItem("RV Storage", "RVStorage", null, "~/RVStorage.aspx");
                 MenuItem miLRFDVehicleMaintenance = new MenuItem("LRFD Vehicle", "LRFDVehicle", null, "~/LRFDVehicleMaintenance.aspx");
                 MenuItem miOwnerProperty = new MenuItem("Owner/Property", "OwnProp", null, "~/OwnerProperty.aspx");
+                MenuItem miItAdmin = new MenuItem("IT Admin", "ITAdmin", null, "~/ItAdmin.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewcontractors")) {
                     NavigationMenu.Items.AddAt(1, miContractors);
                 }
@@ -57,6 +58,10 @@ namespace SubmittalProposal {
                 if (HttpContext.Current.User.IsInRole("canviewownerproperty")) {
                     NavigationMenu.Items.AddAt(1, miOwnerProperty);
                 }
+                if (HttpContext.Current.User.IsInRole("itadmin")) {
+                    NavigationMenu.Items.AddAt(1, miItAdmin);
+                }
+
 
 
                 lbReports.Visible = false;

@@ -10,6 +10,10 @@
     <asp:Panel ID="pnlReport" runat="server" DefaultButton="btnSubmitReport">
         <table width="100%" cellpadding="3">
             <tr>
+                <td align="left">
+                    <asp:LinkButton style="font-size:smaller;" CausesValidation="false" 
+                        ID="lbBack"  runat="server" onclick="lbBack_Click"> Back</asp:LinkButton>
+                </td>
                 <td width="100%" align="left">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderReportParms" runat="server">  
                     </asp:ContentPlaceHolder>
@@ -18,7 +22,8 @@
                     <asp:Button ID="btnSubmitReport" runat="server" Text="Submit" />
                 </td>
                 <td align="right">
-                    <asp:LinkButton style="font-size:smaller;" CausesValidation="false" ID="lbHome"  runat="server" onclick="lbHome_Click">Home</asp:LinkButton>
+                    <asp:LinkButton style="font-size:smaller;" CausesValidation="false" 
+                        ID="lbHome"  runat="server" onclick="lbHome_Click">Home</asp:LinkButton>
                 </td>
             </tr>
         </table>

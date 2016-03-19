@@ -101,6 +101,7 @@
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
+    <Content Include="ITAdmin.aspx" />
     <Content Include="IDCardManagementReportsMain.aspx" />
     <Content Include="GetPageInfo.asmx" />
     <Content Include="IDCardManagement.aspx" />
@@ -268,6 +269,9 @@
     <Compile Include="AbstractQuery2.master.designer.cs">
       <DependentUpon>AbstractQuery2.master</DependentUpon>
     </Compile>
+    <Compile Include="AbstractQueryPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Account\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -337,6 +341,13 @@
     </Compile>
     <Compile Include="ContractorReportsMain.aspx.designer.cs">
       <DependentUpon>ContractorReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ITAdmin.aspx.cs">
+      <DependentUpon>ITAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ITAdmin.aspx.designer.cs">
+      <DependentUpon>ITAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="IDCardManagementReportsMain.aspx.cs">
       <DependentUpon>IDCardManagementReportsMain.aspx</DependentUpon>
@@ -925,7 +936,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
-    <Folder Include="Queries\RV\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

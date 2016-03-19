@@ -15,9 +15,9 @@
                     </td>
                 </tr>
             </table>
-            <h2>Submittal Reports</h2>
         </center>
     </p>
+    <h2>Submittal Reports</h2>
     <p>
         <asp:LinkButton ID="lbSpaceInventory" runat="server" 
             onclick="lbSpaceInventory_Click">Space Inventory</asp:LinkButton>
