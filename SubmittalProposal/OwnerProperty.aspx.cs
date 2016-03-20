@@ -87,6 +87,12 @@ namespace SubmittalProposal {
                 sbFilter.Append(and + " SRLane = '" + ddlLane.SelectedValue + "'");
                 and = " and ";
             }
+            if (Utils.isNothingNot(tbDCAddress.Text)) {
+                sb.Append(prepend + "DC Address: " + tbDCAddress.Text);
+                prepend = "  ";
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbDCAddress.Text, "DC_Address"));
+                and = " and ";
+            }
             searchCriteria = sb.ToString();
             filterString = sbFilter.ToString();
         }
@@ -100,8 +106,8 @@ namespace SubmittalProposal {
             DataSet ds = null;
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
-            SRPropIDBeingEdited = Utils.ObjectToString(row.Cells[4].Text);
-            CustomerIDBeingEdited = Utils.ObjectToString(row.Cells[5].Text);
+            SRPropIDBeingEdited = Utils.ObjectToString(row.Cells[5].Text);
+            CustomerIDBeingEdited = Utils.ObjectToString(row.Cells[6].Text);
 
             DataTable sourceTable = getGridViewDataTable();
             DataView view = new DataView(sourceTable);
@@ -109,11 +115,24 @@ namespace SubmittalProposal {
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
             #region Owner Information
-            tbName.Text = Common.Utils.ObjectToString(dr["PrimaryOwner"]);
-            tbOwnerId.Text = Common.Utils.ObjectToString(dr["CustId"]);
-            tbContact.Text = Common.Utils.ObjectToString(dr["Contact"]);
-            tbSunriverPhone.Text = Common.Utils.ObjectToString(dr["Phone"]);
-            tbEmail.Text = Common.Utils.ObjectToString(dr["Email"]);
+            tbNameUpdate.Text = Common.Utils.ObjectToString(dr["PrimaryOwner"]);
+            tbOwnerIdUpdate.Text = Common.Utils.ObjectToString(dr["CustId"]);
+            tbContactUpdate.Text = Common.Utils.ObjectToString(dr["Contact"]);
+            tbSunriverPhoneUpdate.Text = Common.Utils.ObjectToString(dr["Phone"]);
+            tbEmailUpdate.Text = Common.Utils.ObjectToString(dr["Email"]);
+            tbMailAddr1Update.Text = Common.Utils.ObjectToString(dr["Addr1"]);
+            tbMailAddr2Update.Text = Common.Utils.ObjectToString(dr["Addr2"]);
+            tbMailCityUpdate.Text = Common.Utils.ObjectToString(dr["City"]);
+            tbMailStateUpdate.Text = Common.Utils.ObjectToString(dr["Region"]);
+            tbMailCountryUpdate.Text = Common.Utils.ObjectToString(dr["Country"]);
+            tbMailZipUpdate.Text = Common.Utils.ObjectToString(dr["PostalCode"]);
+            tbFaxUpdate.Text=Common.Utils.ObjectToString(dr["Fax"]);
+            tbInternetUpdate.Text=Common.Utils.ObjectToString(dr["Internet"]);
+            tbDCTaxLotIDUpdate.Text = Common.Utils.ObjectToString(dr["DC_TaxLotID"]);
+            tbPropIDUpdate.Text = SRPropIDBeingEdited;
+            tbPropertyAddrUpdate.Text=Common.Utils.ObjectToString(dr["LotLane"]);
+            tbPurchaseDateUpdate.Text = Utils.ObjectToDateTime(dr["LastSaleDate"]).ToString("d");
+            tbDCAddressUpdate.Text = Utils.ObjectToString(dr["DC_Address"]);
             return "Propery Id: " + SRPropIDBeingEdited + "    Owner Id: " + dr["CustId"] + "  Name: " + dr["PrimaryOwner"];
             #endregion
         }
@@ -129,12 +148,25 @@ namespace SubmittalProposal {
         protected override void unlockYourUpdateFields() {
         }
         protected override void lockYourUpdateFields() {
-            tbContact.Enabled=false;
-            tbEmail.Enabled=false;
-            btnSubmit.Visible = false;
-            tbSunriverPhone.Enabled = false;
-            tbName.Enabled = false;
-            tbOwnerId.Enabled = false;
+            tbContactUpdate.Enabled=false;
+            tbEmailUpdate.Enabled = false;
+            btnSubmitUpdate.Visible = false;
+            tbSunriverPhoneUpdate.Enabled = false;
+            tbNameUpdate.Enabled = false;
+            tbOwnerIdUpdate.Enabled = false;
+            tbMailZipUpdate.Enabled = false;
+            tbMailCountryUpdate.Enabled = false;
+            tbMailStateUpdate.Enabled = false;
+            tbMailCityUpdate.Enabled = false;
+            tbMailAddr2Update.Enabled = false;
+            tbMailAddr1Update.Enabled = false;
+            tbFaxUpdate.Enabled = false;
+            tbInternetUpdate.Enabled = false;
+            tbPropIDUpdate.Enabled = false;
+            tbDCTaxLotIDUpdate.Enabled = false;
+            tbPropertyAddrUpdate.Enabled = false;
+            tbPurchaseDateUpdate.Enabled = false;
+            tbDCAddressUpdate.Enabled = false;
         }
         protected override string UpdateRoleName {
             // This role doesn't currently exist.  But, just in case we some day make the Owner+Property database updatable, here it is.
@@ -151,9 +183,7 @@ namespace SubmittalProposal {
         protected override System.Data.DataTable getGridViewDataTable() {
             return buildDataSet().Tables[0];
         }
-
-
-        protected void btnSubmit_Click(object sender, EventArgs e) {
+        protected void btnSubmitUpdate_Click(object sender, EventArgs e) {
         }    
     }
 }

@@ -31,7 +31,18 @@ namespace SubmittalProposal {
             }
         }
         protected void Page_Load(object sender, EventArgs e) {
-            
+            if (Page.ToString().ToLower().IndexOf("ownerproperty") == -1) {
+                lbDeschutesSearch.Visible = false;
+            } else {
+                lbDeschutesSearch.Visible = true;
+            }
+        }
+        protected void Page_PreRender(object sender, EventArgs e) {
+            if (Page.ToString().ToLower().IndexOf("ownerproperty") == -1 || Common.Utils.isNothing(Session["opSRPropIDBeingEdited"])) {
+                lbPrintEnvelope.Visible = false;
+            } else {
+                lbPrintEnvelope.Visible = true;
+            }
         }
         public void collapseCPESearch() {
             CPESearch.Collapsed=true;
@@ -84,7 +95,7 @@ namespace SubmittalProposal {
             cbUnlockRecord.Enabled = enable;
         }
 
-        public void clearUnlockRecordCheckbox() {
+         public void clearUnlockRecordCheckbox() {
             cbUnlockRecord.Checked = false;
             OnUnlockCheckboxChecked(false);
         }

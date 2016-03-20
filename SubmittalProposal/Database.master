@@ -24,6 +24,9 @@
                         <asp:ImageButton CausesValidation="False" ID="ImgSearchBar" runat="server" ImageUrl="~/images/expand_blue.jpg"
                             AlternateText="(Show details...)" />
                     </div>
+                    <div style="float: right; vertical-align:middle; padding-right:2em; font-size:x-small;">
+                        <asp:LinkButton ForeColor="AliceBlue" ID="lbDeschutesSearch" runat="server" OnClientClick="javascript:window.open('http://dial.deschutes.org/','_blank');">Deschutes County Search</asp:LinkButton>
+                    </div>
                 </div>
             </asp:Panel>
             <asp:Panel ID="PnlSearchContent" DefaultButton="btnGo" runat="server">
@@ -94,6 +97,9 @@
                     <div style="float: right; vertical-align: middle;">
                         <asp:ImageButton CausesValidation="False" ID="ImgFormBar" runat="server" ImageUrl="~/images/expand_blue.jpg"
                             AlternateText="(Show details...)" />
+                    </div>
+                    <div style="float: right; vertical-align:middle; padding-right:2em; font-size:x-small;">
+                        <asp:LinkButton ForeColor="AliceBlue" ID="lbPrintEnvelope" runat="server" OnClientClick="javascript:location.href='Reports/Envelope.aspx?Database=OwnerProperty'">Print Envelope</asp:LinkButton>
                     </div>
                 </div>
             </asp:Panel>

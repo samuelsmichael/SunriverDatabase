@@ -126,6 +126,7 @@
     <Content Include="Reports\CategoryList.aspx" />
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
+    <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
     <Content Include="Reports\LRFDVehicleMaintenance\BlankWorkOrder.aspx" />
@@ -587,6 +588,13 @@
     <Compile Include="Reports\ContractorMailingLabels.aspx.designer.cs">
       <DependentUpon>ContractorMailingLabels.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Envelope.aspx.cs">
+      <DependentUpon>Envelope.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Envelope.aspx.designer.cs">
+      <DependentUpon>Envelope.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\LapineRFDInvoices.aspx.cs">
       <DependentUpon>LapineRFDInvoices.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -636,6 +644,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VehicleShopActivity.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\Envelope.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Envelope.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
@@ -1032,6 +1046,10 @@
     <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\VehicleShopActivity.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>VehicleShopActivity.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\Envelope.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Envelope.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptRVBillingInfo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

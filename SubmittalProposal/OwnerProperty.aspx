@@ -20,8 +20,8 @@
         <asp:TextBox ID="tbPropertyID" Width="46" runat="server"></asp:TextBox>
     </td>
     <td>
-        <asp:Label ID="Label2" runat="server" Text="Deschutes County"></asp:Label>
-        <asp:Button ID="btnDeschutesCounty" runat="server"></asp:Button>
+        <asp:Label ID="Label2" runat="server" Text="DC Address"></asp:Label>
+        <asp:TextBox ID="tbDCAddress" runat="server" Width="125" MaxLength="33"></asp:TextBox>
     </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
@@ -38,6 +38,7 @@
                 <asp:BoundField DataField="SRLot" HeaderText="Lot" SortExpression="SRLot" />
                 <asp:BoundField DataField="SRLane" HeaderText="Lane" SortExpression="SRLane" />
                 <asp:BoundField DataField="PrimaryOwner" HeaderText="Owner" SortExpression="PrimaryOwner" />
+                <asp:BoundField DataField="DC_Address" HeaderText="DC Address" SortExpression="DC_Address" />
                 <asp:BoundField DataField="SRPropID" HeaderText="Property Id" SortExpression="SRPropID" />
                 <asp:BoundField DataField="CustID" HeaderText="Customer Id" SortExpression="CustID" />
             </Columns>
@@ -60,15 +61,16 @@
             <table cellpadding="4" width="100%" cellspacing="4" border="0">
                 <tr valign="top">
                     <td width="50%" valign="top">
-                        <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="pnlOwnerPropertySearchInputUpdate"
-                            GroupingText="Input Info">
-                            <table cellpadding="4" cellspacing="4" border="0">
+                        <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="pnlOwnerPropertyOwnerInfoUpdate"
+                            GroupingText="Owner Info">
+                            <table cellpadding="4" width="100%" cellspacing="4" border="0">
                                 <tr>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Owner Id"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" runat="server" ID="tbOwnerId" MaxLength="25" Width="165"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" runat="server" ID="tbOwnerIdUpdate" MaxLength="25"
+                                            Width="165"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -76,7 +78,7 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Name"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbName" MaxLength="25" Width="165" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbNameUpdate" MaxLength="25" Width="165" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,35 +86,183 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Contact"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbContact" MaxLength="25" Width="165" runat="server"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Sunriver phone"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbSunriverPhone" MaxLength="25" Width="165"
+                                        <asp:TextBox CssClass="form_field" ID="tbContactUpdate" MaxLength="25" Width="165"
                                             runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="Email"></asp:Label>
+                                        <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Mail Addr1"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" ID="tbEmail" MaxLength="25" Width="165" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbMailAddr1Update" MaxLength="25" Width="165"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Mail Addr2"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMailAddr2Update" MaxLength="25" Width="165"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="City"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMailCityUpdate" MaxLength="25" Width="165"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label11" runat="server" Text="State"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMailStateUpdate" MaxLength="25" Width="165"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Country"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMailCountryUpdate" MaxLength="25" Width="165"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Zip"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbMailZipUpdate" MaxLength="25" Width="165"
+                                            runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
                         </asp:Panel>
                     </td>
+                    <td width="50%" valign="top">
+                        <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                            <tr>
+                                <td>
+                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="pnlOwnerPropertyCommunicationsUpdate"
+                                        GroupingText="Communications">
+                                        <table cellpadding="4" width="100%" cellspacing="4" border="0">
+                                            <tr>
+                                                <td width="30%">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Sunriver phone"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbSunriverPhoneUpdate" MaxLength="25" Width="165"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Fax"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbFaxUpdate" MaxLength="25" Width="165" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="Email"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbEmailUpdate" MaxLength="25" Width="165"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label CssClass="form_field_heading" ID="Label15" runat="server" Text="Internet"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field" ID="tbInternetUpdate" MaxLength="25" Width="165"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Panel CssClass="form_field_panel_squished" runat="server" ID="pnlOwnerPropertyPropertyInfo"
+                                        GroupingText="Property Information">
+                                        <table cellpadding="4" cellspacing="4" width="100%" style="border: thin solid #0000aa;">
+                                            <tr>
+                                                <td colspan="2" style="background: #C0C0DE; text-align: center; color: #0000aa">
+                                                    SROA Database
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="PropID"></asp:Label>
+                                                </td>
+                                                <td align="left">
+                                                    <asp:TextBox CssClass="form_field" ID="tbPropIDUpdate" Width="165" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Property Addr"></asp:Label>
+                                                </td>
+                                                <td align="left">
+                                                    <asp:TextBox CssClass="form_field" ID="tbPropertyAddrUpdate" Width="165" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Purchase Date"></asp:Label>
+                                                </td>
+                                                <td align="left">
+                                                    <asp:TextBox CssClass="form_field" ID="tbPurchaseDateUpdate" Width="165" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table cellpadding="4" cellspacing="4" width="100%" style="border: thin solid #0000aa;
+                                            margin-top: 4px;">
+                                            <tr>
+                                                <td colspan="2" style="background: #C0C0DE; text-align: center; color: #0000aa">
+                                                    Deschutes County Database
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="DC Tax Lot ID"></asp:Label>
+                                                </td>
+                                                <td align="left">
+                                                    <asp:TextBox CssClass="form_field" ID="tbDCTaxLotIDUpdate" Width="165" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="DC Address"></asp:Label>
+                                                </td>
+                                                <td align="left">
+                                                    <asp:TextBox CssClass="form_field" ID="tbDCAddressUpdate" Width="165" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
             </table>
             <center>
                 <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
-                    ID="btnSubmit" OnClick="btnSubmit_Click" OnClientClick="return true;" runat="server"
-                    Text="Submit" />
+                    ID="btnSubmitUpdate" OnClick="btnSubmitUpdate_Click" OnClientClick="return true;"
+                    runat="server" Text="Submit" />
                 <asp:Label ID="lblDumbo" Font-Bold="true" runat="server" Text=""></asp:Label>
             </center>
         </ContentTemplate>

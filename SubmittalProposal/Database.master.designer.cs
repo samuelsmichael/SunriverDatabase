@@ -49,6 +49,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.ImageButton ImgSearchBar;
         
         /// <summary>
+        /// lbDeschutesSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbDeschutesSearch;
+        
+        /// <summary>
         /// PnlSearchContent control.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImgFormBar;
+        
+        /// <summary>
+        /// lbPrintEnvelope control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbPrintEnvelope;
         
         /// <summary>
         /// PnlFormContent control.

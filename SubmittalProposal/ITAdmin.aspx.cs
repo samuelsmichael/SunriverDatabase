@@ -21,7 +21,11 @@ namespace SubmittalProposal {
                 SqlCommand cmd = null;
                 SqlConnection conn = null;
                 cmd = new SqlCommand("somestoredprocedure", conn);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SomeConnectionString"].ConnectionString);
+                /*
+                 * If you had parameters, then for each one you would do this:
+                 * cmd.Parameters.Add("@AParameter", SqlDbType.VarChar).Value = ATextBox.Text;
+                */
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 lblRunSomeProcedureStatus.Text = "Successful";
             } catch (Exception e) {
                 lblRunSomeProcedureStatus.Text = "Failed. Msg: " + e.Message;
@@ -31,6 +35,10 @@ namespace SubmittalProposal {
             Response.Redirect("~/Reports/RVPastDue.aspx");
         }
         protected void lbCrossReference_Click(object sender, EventArgs args) {
+            /*
+             * If you had parameters then you could store them is the Session variable before 
+             * the Response.Redirect.  Example:  Session["AnyName"]=ATextBox.Text.  See
+            */
             Response.Redirect("~/Query_CrossReference3.aspx");
         }
     }
