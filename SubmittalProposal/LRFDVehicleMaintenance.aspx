@@ -305,31 +305,21 @@
                                             <td class="form_field">
                                                 <asp:TextBox ID="tbRFDNewPartsPTQuantity" Width="45px" MaxLength="4"  runat="server"></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="revtbRFDNewPartsPTQuantity" ForeColor="Red" Display="Dynamic"
-                                                    ControlToValidate="tbRFDNewPartsPTQuantity" ValidationExpression="(?<![-.])\b[0-9]+\b(?!\.[0-9])" runat="server"
+                                                    ControlToValidate="tbRFDNewPartsPTQuantity" ValidationExpression="^[0-9]+$" runat="server"
                                                     ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>      
                                             </td>
                                         </tr>
                                     </table>
                                 </asp:Panel>
-                                <script language="javascript" type="text/javascript">
-                                    function donewPartjedisok() {
-                                        var loading = $(".loadingnewbpermit");
-                                        loading.show();
-                                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                                        loading.css({ top: top, left: left });
-                                        return true;
-                                    }
-                                </script>
                                 <center>
                                     <table cellpadding="3">
                                         <tr>
                                             <td>
-                                                <asp:Button CausesValidation="false" OnClientClick="javascript: return donewPartjedisok();" ID="btnNewLRFDPartOk"
+                                                <asp:Button CausesValidation="true" OnClientClick="javascript: return donewPartjedisok();" ID="btnNewLRFDPartOk"
                                                     runat="server" Text="Okay" OnClick="btnNewLRFDPartOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button ID="btnNewLRFDPartCancel" OnClientClick="if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                <asp:Button ID="btnNewLRFDPartCancel" CausesValidation="false" OnClientClick="if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
                                                     runat="server" Text="Cancel" />
                                             </td>
                                         </tr>
@@ -442,31 +432,21 @@
                                             <td class="form_field">
                                                 <asp:TextBox CssClass="form_field" ID="tbLRFDLaborHoursNew" Width="3em" runat="server"></asp:TextBox>
                                                 <asp:RegularExpressionValidator ID="revtbLRFDLaborHoursNew" ForeColor="Red" Display="Dynamic"
-                                                    ControlToValidate="tbLRFDLaborHoursNew" ValidationExpression="[0-9]+(\.[0-9][0-9]?)?" runat="server"
+                                                    ControlToValidate="tbLRFDLaborHoursNew" ValidationExpression="^[0-9]+$" runat="server"
                                                     ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
                                             </td>
                                         </tr>
                                     </table>
                                 </asp:Panel>
-                                <script language="javascript" type="text/javascript">
-                                    function donewlaborjedisok() {
-                                        var loading = $(".loadingnewbpermit");
-                                        loading.show();
-                                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                                        loading.css({ top: top, left: left });
-                                        return true;
-                                    }
-                                </script>
                                 <center>
                                     <table cellpadding="3">
                                         <tr>
                                             <td>
-                                                <asp:Button OnClientClick="javascript: return donewlaborjedisok();" ID="btnNewLRFDLaborOk"
+                                                <asp:Button CausesValidation="true" OnClientClick="javascript: return donewlaborjedisok();" ID="btnNewLRFDLaborOk"
                                                     runat="server" Text="Okay" OnClick="btnNewLRFDLaborOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button ID="btnNewLRFDLaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                <asp:Button CausesValidation="false" ID="btnNewLRFDLaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
                                                     runat="server" Text="Cancel" />
                                             </td>
                                         </tr>
@@ -594,16 +574,6 @@
                                         </tr>
                                     </table>
                                 </asp:Panel>
-                                <script language="javascript" type="text/javascript">
-                                    function donewServicejedisok() {
-                                        var loading = $(".loadingnewbpermit");
-                                        loading.show();
-                                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                                        loading.css({ top: top, left: left });
-                                        return true;
-                                    }
-                                </script>
                                 <center>
                                     <table cellpadding="3">
                                         <tr>
@@ -799,6 +769,30 @@
          <script  language="javascript" type="text/javascript" >
              function doOk() {
 
+                 var loading = $(".loadingdb");
+                 loading.show();
+                 var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                 var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                 loading.css({ top: top, left: left });
+                 return true;
+             }
+             function donewServicejedisok() {
+                 var loading = $(".loadingdb");
+                 loading.show();
+                 var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                 var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                 loading.css({ top: top, left: left });
+                 return true;
+             }
+             function donewlaborjedisok() {
+                 var loading = $(".loadingdb");
+                 loading.show();
+                 var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                 var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                 loading.css({ top: top, left: left });
+                 return true;
+             }
+             function donewPartjedisok() {
                  var loading = $(".loadingdb");
                  loading.show();
                  var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);

@@ -17,7 +17,7 @@
             <p>
                 <script type="text/javascript" language="javascript">
                     function myFunction() {
-                        return confirm("If you press Okay, then blah blah blah (the procedure will run). Are you sure that you wish to proceed?")
+                        return confirm("If you press Okay, then such-and-such procedure will run. Are you sure that you wish to proceed?")
                     }
                 </script>
                 <table cellpadding="3" cellspacing="">

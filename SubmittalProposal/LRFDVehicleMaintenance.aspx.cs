@@ -175,11 +175,11 @@ namespace SubmittalProposal {
         protected void btnRFDUpdate_Click(Object sender, EventArgs args) {
             try {
                 SqlCommand cmd = new SqlCommand("uspLRFDVehicleMaintenanceUpdate");
-                cmd.Parameters.Add("@VWOID",SqlDbType.NVarChar).Value=VMOIDBeingEdited;
+                cmd.Parameters.Add("@VWOID", SqlDbType.NVarChar).Value = VMOIDBeingEdited;
                 cmd.Parameters.Add("@fkNumber", SqlDbType.NVarChar).Value = ddlRFDUpdateVehicleNumber.SelectedValue;
-                cmd.Parameters.Add("@Estimate",SqlDbType.Bit).Value=ddlYesNoBlankEstimateUpdate.SelectedValue=="Yes"?true:false;
-                cmd.Parameters.Add("@RequestBy",SqlDbType.NVarChar).Value=tbRFDUpdateRequestedBy.Text.Trim();
-                cmd.Parameters.Add("@RequestNature",SqlDbType.NVarChar).Value=tbRFDUpdateVehicleDescription.Text.Trim();
+                cmd.Parameters.Add("@Estimate", SqlDbType.Bit).Value = ddlYesNoBlankEstimateUpdate.SelectedValue == "Yes" ? true : false;
+                cmd.Parameters.Add("@RequestBy", SqlDbType.NVarChar).Value = tbRFDUpdateRequestedBy.Text.Trim();
+                cmd.Parameters.Add("@RequestNature", SqlDbType.NVarChar).Value = tbRFDUpdateVehicleDescription.Text.Trim();
                 DateTime? dateIn =
                     tbLRFDUpdateRequestDateIn.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbLRFDUpdateRequestDateIn.Text.Trim());
                 cmd.Parameters.Add("@DateIn", SqlDbType.DateTime).Value = dateIn;
@@ -190,12 +190,12 @@ namespace SubmittalProposal {
                     tbLRFDUpdateDataEntryDate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbLRFDUpdateDataEntryDate.Text.Trim());
                 cmd.Parameters.Add("@DataEntryDate", SqlDbType.DateTime).Value = dataEntryDate;
 
-                cmd.Parameters.Add("@DataEntryBy",SqlDbType.NVarChar).Value=tbRFDUpdateDataEntryBy.Text.Trim();
-                cmd.Parameters.Add("@Odometer", SqlDbType.Real).Value = Utils.ObjectToDouble(tbLRFDUpdateOdometerReading.Text);     
-                cmd.Parameters.Add("@HourMeter",SqlDbType.Real).Value=tbLRFDUpdateHourReading.Text.Trim();
-                cmd.Parameters.Add("@Proceedure1",SqlDbType.NVarChar).Value=tbRFDUpdateProcedurePerformed.Text.Trim();
-                cmd.Parameters.Add("@Comments",SqlDbType.NVarChar).Value=tbRFDUpdateComments.Text.Trim();
-                cmd.Parameters.Add("@AdminRate", SqlDbType.Real).Value = Math.Round((Utils.ObjectToDouble(lblRFDUpdateDepartmentAdminCharges.Text.Trim().Replace(",","").Replace("%",""))/100),4);
+                cmd.Parameters.Add("@DataEntryBy", SqlDbType.NVarChar).Value = tbRFDUpdateDataEntryBy.Text.Trim();
+                cmd.Parameters.Add("@Odometer", SqlDbType.Real).Value = Utils.ObjectToDouble(tbLRFDUpdateOdometerReading.Text);
+                cmd.Parameters.Add("@HourMeter", SqlDbType.Real).Value = tbLRFDUpdateHourReading.Text.Trim();
+                cmd.Parameters.Add("@Proceedure1", SqlDbType.NVarChar).Value = tbRFDUpdateProcedurePerformed.Text.Trim();
+                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = tbRFDUpdateComments.Text.Trim();
+                cmd.Parameters.Add("@AdminRate", SqlDbType.Real).Value = Math.Round((Utils.ObjectToDouble(lblRFDUpdateDepartmentAdminCharges.Text.Trim().Replace(",", "").Replace("%", "")) / 100), 4);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
 
                 performPostUpdateSuccessfulActions("Update successful", LRFD_VEHICLE_MAINTENANCE_CACHE_KEY, LRFD_SurchargeRate_CACHE_KEY);
@@ -588,9 +588,9 @@ namespace SubmittalProposal {
                 tbServiceDescriptionNew.Text = "";
                 tbServiceVendorNew.Text = "";
                 tbLRFDServiceCostNew.Text = "";
-                performPostUpdateSuccessfulActions("Labor added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+                performPostUpdateSuccessfulActions("Service added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
             } catch (Exception ee) {
-                performPostUpdateFailedActions("Labor not added. Error msg: " + ee.Message);
+                performPostUpdateFailedActions("Service not added. Error msg: " + ee.Message);
             }
         }
         protected void btnNewLRFDLaborOk_Click(Object sender, EventArgs args) {
@@ -672,28 +672,32 @@ namespace SubmittalProposal {
             mpeLRFDNewPart.Show();
         }
         protected void btnNewLRFDPartOk_Click(object sender, EventArgs args) {
-            try {
-                string description = tbPartDescriptionNew.Text.Trim();
-                string number = tbPartNumberNew.Text.Trim();
-                decimal rate = Utils.ObjectToDecimal(tbLRFDPartRateNew.Text.Trim().Replace("$", "").Replace(",", ""));
-                double quantity = Utils.ObjectToDouble(tbRFDNewPartsPTQuantity.Text.Trim());
-                SqlCommand cmd = new SqlCommand("uspLRFDPartsUpdate");
-                cmd.Parameters.Add("@fkVWOP_ID", SqlDbType.NVarChar).Value = VMOIDBeingEdited;
-                cmd.Parameters.Add("@ptDescription", SqlDbType.NVarChar).Value = description;
-                cmd.Parameters.Add("@ptNumber", SqlDbType.NVarChar).Value = number;
-                cmd.Parameters.Add("@ptRate", SqlDbType.Money).Value = rate;
-                cmd.Parameters.Add("@ptQuan", SqlDbType.Real).Value = quantity;
-                SqlParameter newid = new SqlParameter("@NewVWOPartID", SqlDbType.Int);
-                newid.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(newid);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
-                tbPartDescriptionNew.Text = "";
-                tbPartNumberNew.Text = "";
-                tbLRFDPartRateNew.Text = "";
-                tbRFDNewPartsPTQuantity.Text = "";
-                performPostUpdateSuccessfulActions("Labor added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
-            } catch (Exception ee) {
-                performPostUpdateFailedActions("Labor not added. Error msg: " + ee.Message);
+            if (IsValid) {
+                try {
+                    string description = tbPartDescriptionNew.Text.Trim();
+                    string number = tbPartNumberNew.Text.Trim();
+                    decimal rate = Utils.ObjectToDecimal(tbLRFDPartRateNew.Text.Trim().Replace("$", "").Replace(",", ""));
+                    double quantity = Utils.ObjectToDouble(tbRFDNewPartsPTQuantity.Text.Trim());
+                    SqlCommand cmd = new SqlCommand("uspLRFDPartsUpdate");
+                    cmd.Parameters.Add("@fkVWOP_ID", SqlDbType.NVarChar).Value = VMOIDBeingEdited;
+                    cmd.Parameters.Add("@ptDescription", SqlDbType.NVarChar).Value = description;
+                    cmd.Parameters.Add("@ptNumber", SqlDbType.NVarChar).Value = number;
+                    cmd.Parameters.Add("@ptRate", SqlDbType.Money).Value = rate;
+                    cmd.Parameters.Add("@ptQuan", SqlDbType.Real).Value = quantity;
+                    SqlParameter newid = new SqlParameter("@NewVWOPartID", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["LRFDVehicleMainenanceConnectionString"].ConnectionString);
+                    tbPartDescriptionNew.Text = "";
+                    tbPartNumberNew.Text = "";
+                    tbLRFDPartRateNew.Text = "";
+                    tbRFDNewPartsPTQuantity.Text = "";
+                    performPostUpdateSuccessfulActions("Part added", "LRFD_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+                } catch (Exception ee) {
+                    performPostUpdateFailedActions("Part not added. Error msg: " + ee.Message);
+                }
+            } else {
+                mpeLRFDNewPart.Show();
             }
         }
         protected void ddlRFDNewVehicleNumber_OnSelectedIndexChanged(object sender, EventArgs args) {
@@ -758,6 +762,14 @@ namespace SubmittalProposal {
             }
         }
         protected void btnNewSLRFDVehicleMaintenanceCancel_Click(object sender, EventArgs args) {
+        }
+        protected void Quantity_OnValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            try {
+                int i = int.Parse(args.Value);
+            } catch {
+                args.IsValid = false;
+            }
         }
     }
 }
