@@ -33,7 +33,7 @@ namespace SubmittalProposal {
             fvComplianceLetter.Enabled = false;
             pnlComplianceLetterRepeater.Enabled = false;
             tbCRLotNameUpdate.Enabled = false;
-            ddlCRLaneUpdate.Enabled = false;
+            ddlCRLaneUpdate.Enabled = false;            
         }
         protected override void unlockYourUpdateFields() {
             tbReviewDateUpdate.Enabled = true;
@@ -81,8 +81,8 @@ namespace SubmittalProposal {
             cmd.Parameters.Add("@crLot", SqlDbType.NVarChar).Value = tbCRLotNameUpdate.Text.Trim();
             cmd.Parameters.Add("@crLane", SqlDbType.NVarChar).Value = ddlCRLaneUpdate.SelectedValue;
             cmd.Parameters.Add("@crComments", SqlDbType.NVarChar).Value = tbCommentsFormUpdate.Text.Trim(); ;
-            cmd.Parameters.Add("@crRule", SqlDbType.NVarChar).Value = tbDesignRuleUpdate.Text.Trim();
             cmd.Parameters.Add("@crCorrection", SqlDbType.NVarChar).Value = tbRequiredActionUpdate.Text.Trim();
+            cmd.Parameters.Add("crRule", SqlDbType.NVarChar).Value = tbDesignRuleUpdate.Text.Trim();
             cmd.Parameters.Add("@CrFollowUp", SqlDbType.NVarChar).Value = tbFollowUpUpdate.Text.Trim();
             cmd.Parameters.Add("@crCloseDate", SqlDbType.DateTime).Value = tbCloseDateUpdate.Text.Trim() == "" ? (DateTime?)null : Convert.ToDateTime(tbCloseDateUpdate.Text);
             SqlParameter crReviewIDOut = new SqlParameter("@crReviewIDOut", SqlDbType.Int);

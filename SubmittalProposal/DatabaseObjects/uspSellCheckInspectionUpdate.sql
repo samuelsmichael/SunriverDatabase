@@ -13,7 +13,7 @@ alter PROCEDURE uspSellCheckInspectionUpdate
 	@scInspectionID int=null,
 	@fkscRequestID int,
 	@scDate DateTime=null,
-	@scFee money,
+	@scFee money=null,
 	@scPaid bit,
 	@scPaidMemo nvarchar(10),
 	@scDateClosed Datetime=null,

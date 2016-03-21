@@ -430,7 +430,7 @@
                     <table cellpadding="3">
                         <tr>
                             <td>
-                                <asp:Button  OnClientClick="javascript: return donewinspectionjedisok();" ID="btnNewInspectionOk" 
+                                <asp:Button CausesValidation="true"  OnClientClick="javascript: return donewinspectionjedisok();" ID="btnNewInspectionOk" 
                                     runat="server" Text="Okay" OnClick="btnNewInspectionOk_Click" />
                             </td>
                             <td>
@@ -443,16 +443,6 @@
                 </center>
 
             </asp:Panel>
-            <script  language="javascript" type="text/javascript" >
-                function donewinspectionjedisok() {
-                    var loading = $(".loadingnewbpermit");
-                    loading.show();
-                    var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                    var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                    loading.css({ top: top, left: left });
-                    return true;
-                }
-            </script>
 
         </asp:Panel>
         <asp:Button runat="server" ID="dummyNewInspection" style="display:none" />
@@ -604,6 +594,14 @@
                 loading.css({ top: top, left: left });
                 return true;
             }
+            function donewinspectionjedisok() {
+                var loading = $(".loadingdb");
+                loading.show();
+                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                loading.css({ top: top, left: left });
+                return true;
+            }
 
             // Called when async postback ends
             function prm_EndRequest(sender, args) {
@@ -611,7 +609,7 @@
                 //debugger
                 if (sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 || sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1
                 || (sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 && sender._postBackSettings.sourceElement.id.indexOf("Ok") != -1)) {
-                    var loading = $(".loading");
+                    var loading = $(".loadingdb");
                     loading.hide();
                 }
             }
