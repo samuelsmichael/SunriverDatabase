@@ -49,6 +49,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label lblRunSomeProcedureStatus;
         
         /// <summary>
+        /// lbIDCardMaintenanceClearComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbIDCardMaintenanceClearComments;
+        
+        /// <summary>
+        /// lblIdCardMaintenanceClearCommentsResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIdCardMaintenanceClearCommentsResult;
+        
+        /// <summary>
         /// lbCrossReference control.
         /// </summary>
         /// <remarks>
@@ -56,5 +74,14 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbCrossReference;
+        
+        /// <summary>
+        /// lbSecurityMaintenance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbSecurityMaintenance;
     }
 }

@@ -19,13 +19,6 @@
         </center>
     </p>
 
-    <p>
-        <asp:LinkButton ID="lbIDCardMaintenanceClearComments" runat="server" 
-            OnClientClick="javascript: if (confirm('WARNING! This will clear all of the comments in the Card table. Are you sure that you wish to continue?')) {return true;} else {return false;}"
-            onclick="lbCardMaintenanceClearComments_Click">Clear Comments</asp:LinkButton>
-    </p>
-    <p>
-        <asp:Label ID="lblClearCommentsResults" runat="server" Visible="false" Text="Comments have been cleared." ForeColor="Green" Font-Bold="true"></asp:Label>
-    </p>
+
 
 </asp:Content>

@@ -31,6 +31,18 @@ namespace SubmittalProposal {
                 lblRunSomeProcedureStatus.Text = "Failed. Msg: " + e.Message;
             }
         }
+        protected void lbCardMaintenanceClearComments_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspClearComments");
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                lblIdCardMaintenanceClearCommentsResult.ForeColor = System.Drawing.Color.Green;
+                lblIdCardMaintenanceClearCommentsResult.Text = "Comments have been cleared";
+            } catch (Exception e) {
+                lblIdCardMaintenanceClearCommentsResult.ForeColor = System.Drawing.Color.Red;
+                lblIdCardMaintenanceClearCommentsResult.Text = "Error. Msg: "+e.Message;
+            }
+        }
+
         protected void lbPastDue_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/RVPastDue.aspx");
         }
@@ -40,6 +52,9 @@ namespace SubmittalProposal {
              * the Response.Redirect.  Example:  Session["AnyName"]=ATextBox.Text.  See
             */
             Response.Redirect("~/Query_CrossReference3.aspx");
+        }
+        protected void lbSecurityMaintenance_Click(object sender, EventArgs args) {
+            Response.Redirect("~/SecurityMaintenance.aspx");
         }
     }
 }

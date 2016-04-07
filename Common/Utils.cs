@@ -34,18 +34,23 @@ namespace Common {
         public static DateTime NULL_DATETIME = DateTime.MinValue;
         public static DateTime SQL_NULL_DATETIME = new DateTime(1900, 1, 1);
 
-        public static void executeNonQuery(SqlCommand command, string connectionString) {
+
+        public static void executeNonQuery(SqlCommand command, string connectionString, CommandType commandType) {
             SqlConnection connection = null;
             try {
                 connection = new SqlConnection(connectionString);
                 connection.Open();
                 command.Connection = connection;
-                command.CommandType = CommandType.StoredProcedure;
+                command.CommandType = commandType;
                 command.ExecuteNonQuery();
             } finally {
                 try { command.Dispose(); } catch { }
                 try { connection.Close(); } catch { };
             }
+        }
+        
+        public static void executeNonQuery(SqlCommand command, string connectionString) {
+            executeNonQuery(command, connectionString, CommandType.StoredProcedure);
         }
 
         public static DataSet getDataSet(SqlCommand command, string connectionString) {

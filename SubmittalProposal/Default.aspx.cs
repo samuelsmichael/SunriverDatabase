@@ -12,7 +12,6 @@ namespace SubmittalProposal
         protected void Page_Load(object sender, EventArgs e)
         {
             ((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
-
         }
     }
 }
