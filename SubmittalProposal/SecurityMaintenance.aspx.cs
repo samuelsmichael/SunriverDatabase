@@ -256,7 +256,7 @@ namespace SubmittalProposal {
 
         protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e) {
             gvUsers.PageIndex = e.NewPageIndex;
-            bindUserGrid();
+            bindUserGrid(); 
         }
 
     }
