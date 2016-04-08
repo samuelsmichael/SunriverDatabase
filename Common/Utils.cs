@@ -187,6 +187,23 @@ namespace Common {
             }
         }
 
+        public static string arrayToString(object[] items) {
+            if (items == null) {
+                return "";
+            } else {
+                if (items.Length == 0) {
+                    return "";
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    string comma = "";
+                    foreach (object obj in items) {
+                        sb.Append(comma + obj.ToString());
+                        comma = ", ";
+                    }
+                    return sb.ToString();
+                }
+            }
+        }
         public static string ObjectToString(object obj) {
             if (obj == null) {
                 return "";

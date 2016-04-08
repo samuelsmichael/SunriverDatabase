@@ -37,12 +37,14 @@ namespace SubmittalProposal {
         protected void gvUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
             gvUsers.EditIndex = -1;
             bindUserGrid();
+            lbAddUser.Enabled = true;
         }
 
         protected void gvUsers_RowEditing(object sender, GridViewEditEventArgs e) {
             lblSecurityUserResults.Text = "";
             gvUsers.EditIndex = e.NewEditIndex;
             bindUserGrid();
+            lbAddUser.Enabled = false;
         }
 
         protected void gvUsers_RowDeleting(object sender, GridViewDeleteEventArgs e) {
@@ -57,6 +59,7 @@ namespace SubmittalProposal {
             if (updateUser(user, e.RowIndex) == 0) {
                 gvUsers.EditIndex = -1;
                 bindUserGrid();
+                lbAddUser.Enabled = true;
             }
         }
         protected int updateUser(Guid key, int rowNbr) {
@@ -94,6 +97,7 @@ namespace SubmittalProposal {
             Utils.executeNonQuery(cmd, ConnectionString, CommandType.Text);
             lblSecurityUserResults.ForeColor = System.Drawing.Color.Green;
             lblSecurityUserResults.Text = "Successfully deleted user " + userName;
+            bindUserGrid();
         }
 
         protected void lbAddUser_Click(object sender, EventArgs e) {
@@ -172,17 +176,46 @@ namespace SubmittalProposal {
             lblNameOfUserWhosePasswordWereChanging.Text = "";
             mpeChangePassword.Hide();
         }
-        protected void gvRolls_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
-        }
         protected void gvRolls_RowDeleting(object sender, GridViewDeleteEventArgs e) {
+            String roleName = e.Keys[e.RowIndex].ToString();
+            try {                
+                string[] usersInRoll=Roles.GetUsersInRole(roleName);
+                if (usersInRoll.Length > 0) {
+                    throw new Exception("Cannot delete a roll that has users assigned (" + Utils.arrayToString(usersInRoll) + ")");
+                }
+                Roles.DeleteRole(roleName);
+                lblSecurityRoleResults.ForeColor = System.Drawing.Color.Green;
+                lblSecurityRoleResults.Text = "Role "+roleName+" deleted";
+                bindRollGrid();
+            } catch (Exception ex) {
+                lblSecurityRoleResults.ForeColor = System.Drawing.Color.Red;
+                lblSecurityRoleResults.Text = "Role "+roleName+" not deleted. Msg: " + ex.Message;
+            }
         }
-        protected void gvRolls_RowEditing(object sender, GridViewEditEventArgs e) {
-        }
-        protected void gvRolls_RowUpdating(object sender, GridViewUpdateEventArgs e) {
-        }
-        protected void gvRolls_RowCommand(object sender, GridViewCommandEventArgs e) {
-        }
+
         protected void lbAddRoll_Click(object sender, EventArgs args) {
+            lblSecurityRoleResults.Text = "";
+            mpeNewSecurityRole.Show();
+        }
+        protected void btnNewSecurityRoleOk_Click(object sender, EventArgs e) {
+            string newRoleName = tbSecurityNewRoleName.Text.Trim();
+
+            if (!Roles.RoleExists(newRoleName)) {
+                Roles.CreateRole(newRoleName);
+            }
+            tbSecurityNewRoleName.Text = string.Empty;
+            bindRollGrid();
+            lblSecurityRoleResults.ForeColor = System.Drawing.Color.Green;
+            lblSecurityRoleResults.Text = "Role "+newRoleName+" Added";
+        }
+        protected void btnNewSecurityRoleCancel_Click(object sender, EventArgs e) {
+            tbSecurityNewRoleName.Text = "";
+            mpeNewSecurityRole.Hide();
+        }
+
+        protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e) {
+            gvUsers.PageIndex = e.NewPageIndex;
+            bindUserGrid();
         }
     }
 }
