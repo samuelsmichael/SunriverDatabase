@@ -31,6 +31,33 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.GridView gvUsers;
         
         /// <summary>
+        /// pnlListRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlListRoles;
+        
+        /// <summary>
+        /// divCheckBoxList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCheckBoxList;
+        
+        /// <summary>
+        /// cbListRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cbListRoles;
+        
+        /// <summary>
         /// lblSecurityUserResults control.
         /// </summary>
         /// <remarks>

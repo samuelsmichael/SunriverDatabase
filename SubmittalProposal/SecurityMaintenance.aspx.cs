@@ -37,14 +37,30 @@ namespace SubmittalProposal {
         protected void gvUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
             gvUsers.EditIndex = -1;
             bindUserGrid();
-            lbAddUser.Enabled = true;
+            lbAddUser.Visible = true;
+            pnlListRoles.Visible = false;
         }
 
         protected void gvUsers_RowEditing(object sender, GridViewEditEventArgs e) {
             lblSecurityUserResults.Text = "";
             gvUsers.EditIndex = e.NewEditIndex;
             bindUserGrid();
-            lbAddUser.Enabled = false;
+            lbAddUser.Visible = false;
+
+            String[] roles=Roles.GetAllRoles();
+            cbListRoles.DataSource = roles;
+            cbListRoles.DataBind();
+            GridViewRow row = gvUsers.Rows[e.NewEditIndex];
+            string userName = ((TextBox)(row.Cells[UPDATEUSERNAMECOLUMN].Controls[0])).Text;
+
+            foreach (string roleName in Roles.GetRolesForUser(userName)) {
+                foreach (ListItem role in cbListRoles.Items) {
+                    if (role.Value == roleName) {
+                        role.Selected = true;
+                    }
+                }
+            }
+            pnlListRoles.Visible = true;
         }
 
         protected void gvUsers_RowDeleting(object sender, GridViewDeleteEventArgs e) {
@@ -59,8 +75,9 @@ namespace SubmittalProposal {
             if (updateUser(user, e.RowIndex) == 0) {
                 gvUsers.EditIndex = -1;
                 bindUserGrid();
-                lbAddUser.Enabled = true;
+                lbAddUser.Visible = true;
             }
+            pnlListRoles.Visible = false;
         }
         protected int updateUser(Guid key, int rowNbr) {
             GridViewRow row = gvUsers.Rows[rowNbr];
@@ -69,7 +86,7 @@ namespace SubmittalProposal {
             MembershipUser u1 = Membership.GetUser(userName);
             if (u1!=null && !u1.ProviderUserKey.Equals(key)) {
                 lblSecurityUserResults.ForeColor = System.Drawing.Color.Red;
-                lblSecurityUserResults.Text = "This user name already exists";
+                lblSecurityUserResults.Text = "This user name "+userName+" already exists";
                 return 1;
             }
 
@@ -83,7 +100,31 @@ namespace SubmittalProposal {
             MembershipUser u = Membership.GetUser(key);
             u.Email = userEmail;
             Membership.Provider.UpdateUser(u);
+            foreach (string role in getArrayOfAllRoles()) {
+                try {
+                    Roles.RemoveUserFromRole(u.UserName, role);
+                } catch { }
+            }
+            foreach (string role in getArrayOfSelectedRoles()) {
+            Roles.AddUserToRole(u.UserName,role);
+            }
             return 0;
+        }
+        private string[] getArrayOfSelectedRoles() {
+            List<string> roles = new List<string>();
+            foreach (ListItem liRole in cbListRoles.Items) {
+                if (liRole.Selected) {
+                    roles.Add((string)liRole.Value);
+                }
+            }
+            return (string[])roles.ToArray<string>();
+        }
+        private string[] getArrayOfAllRoles() {
+            List<string> roles = new List<string>();
+            foreach (ListItem liRole in cbListRoles.Items) {
+                roles.Add((string)liRole.Value);
+            }
+            return (string[])roles.ToArray<string>();
         }
         protected void deleteUser(Guid key, string userName) {
             SqlCommand cmd = new SqlCommand("DELETE FROM aspnet_UsersInRoles WHERE UserId=@UserId");
@@ -217,5 +258,6 @@ namespace SubmittalProposal {
             gvUsers.PageIndex = e.NewPageIndex;
             bindUserGrid();
         }
+
     }
 }
