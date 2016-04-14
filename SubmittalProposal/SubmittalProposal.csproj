@@ -96,6 +96,7 @@
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
     <Content Include="BPermit.aspx" />
+    <Content Include="Citations.aspx" />
     <Content Include="ComplianceReview.aspx" />
     <Content Include="BPermitReportsMain.aspx" />
     <Content Include="ComplianceReviewReportsMain.aspx" />
@@ -308,6 +309,13 @@
     </Compile>
     <Compile Include="BPermit.aspx.designer.cs">
       <DependentUpon>BPermit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Citations.aspx.cs">
+      <DependentUpon>Citations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Citations.aspx.designer.cs">
+      <DependentUpon>Citations.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComplianceReview.aspx.cs">
       <DependentUpon>ComplianceReview.aspx</DependentUpon>

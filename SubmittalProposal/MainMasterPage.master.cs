@@ -31,6 +31,7 @@ namespace SubmittalProposal {
                 MenuItem miLRFDVehicleMaintenance = new MenuItem("LRFD Vehicle", "LRFDVehicle", null, "~/LRFDVehicleMaintenance.aspx");
                 MenuItem miOwnerProperty = new MenuItem("Owner/Property", "OwnProp", null, "~/OwnerProperty.aspx");
                 MenuItem miItAdmin = new MenuItem("IT Admin", "ITAdmin", null, "~/ItAdmin.aspx");
+                MenuItem miCitations = new MenuItem("Citations", "Citations", null, "~/Citations.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewcontractors")) {
                     NavigationMenu.Items.AddAt(1, miContractors);
                 }
@@ -60,6 +61,9 @@ namespace SubmittalProposal {
                 }
                 if (HttpContext.Current.User.IsInRole("itadmin")) {
                     NavigationMenu.Items.AddAt(1, miItAdmin);
+                }
+                if (HttpContext.Current.User.IsInRole("canviewcitations")) {
+                    NavigationMenu.Items.AddAt(1, miCitations);
                 }
 
 
@@ -106,6 +110,13 @@ namespace SubmittalProposal {
                                                 if (HttpContext.Current.User.IsInRole("candoreportsidcard")) {
                                                     lbReports.Text = "Procedures";
                                                     lbReports.Visible = true;
+                                                }
+                                            } else {
+                                                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("citation")) {
+                                                    if (HttpContext.Current.User.IsInRole("candoreportscitations")) {
+                                                        lbReports.Text = "Reports";
+                                                        lbReports.Visible = true;
+                                                    }
                                                 }
                                             }
                                         }
