@@ -175,13 +175,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.ImageButton ImgFormBar;
         
         /// <summary>
-        /// lbPrintEnvelope control.
+        /// lbPrintOwnerEnvelope control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbPrintEnvelope;
+        protected global::System.Web.UI.WebControls.LinkButton lbPrintOwnerEnvelope;
+        
+        /// <summary>
+        /// lbPrintViolatorsEnvelope control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbPrintViolatorsEnvelope;
         
         /// <summary>
         /// PnlFormContent control.

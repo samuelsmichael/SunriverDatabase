@@ -39,9 +39,14 @@ namespace SubmittalProposal {
         }
         protected void Page_PreRender(object sender, EventArgs e) {
             if (Page.ToString().ToLower().IndexOf("ownerproperty") == -1 || Common.Utils.isNothing(Session["opSRPropIDBeingEdited"])) {
-                lbPrintEnvelope.Visible = false;
+                lbPrintOwnerEnvelope.Visible = false;
             } else {
-                lbPrintEnvelope.Visible = true;
+                lbPrintOwnerEnvelope.Visible = true;
+            }
+            if (Page.ToString().ToLower().IndexOf("citations") == -1 || Common.Utils.isNothing(Session["CitationsIDBeingEdited"])) {
+                lbPrintViolatorsEnvelope.Visible = false;
+            } else {
+                lbPrintViolatorsEnvelope.Visible = true;
             }
         }
         public void collapseCPESearch() {
@@ -107,5 +112,6 @@ namespace SubmittalProposal {
                 OnUnlockCheckboxChecked(false);
             }
         }
+
     }
 }

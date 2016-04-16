@@ -113,6 +113,7 @@ namespace SubmittalProposal {
             DataView view = new DataView(sourceTable);
             view.RowFilter = "SRPropID='" + SRPropIDBeingEdited + "'";
             DataTable tblFiltered = view.ToTable();
+            Session["OwnerPropertyTblFiltered"] = tblFiltered;
             DataRow dr = tblFiltered.Rows[0];
             #region Owner Information
             tbNameUpdate.Text = Common.Utils.ObjectToString(dr["PrimaryOwner"]);
