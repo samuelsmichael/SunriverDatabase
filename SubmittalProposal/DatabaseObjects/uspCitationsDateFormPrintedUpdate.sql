@@ -10,7 +10,7 @@ GO
 	exec uspCitationsDateFormPrintedUpdate
 */
 -- =============================================
-alter PROCEDURE uspCitationsDateFormPrintedUpdate 
+create PROCEDURE uspCitationsDateFormPrintedUpdate 
 	@CitationID int
 AS
 BEGIN

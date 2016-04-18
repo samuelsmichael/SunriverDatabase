@@ -229,6 +229,114 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbCitationsZipUpdate;
         
         /// <summary>
+        /// pnlCitations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCitations;
+        
+        /// <summary>
+        /// lbl17x332 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl17x332;
+        
+        /// <summary>
+        /// tbCitationsViolationsDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbCitationsViolationsDateUpdate;
+        
+        /// <summary>
+        /// ibCitationsViolationsDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibCitationsViolationsDateUpdate;
+        
+        /// <summary>
+        /// ceCitationsViolationsDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceCitationsViolationsDateUpdate;
+        
+        /// <summary>
+        /// revCitationsViolationsDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revCitationsViolationsDateUpdate;
+        
+        /// <summary>
+        /// lbl17x332a3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl17x332a3;
+        
+        /// <summary>
+        /// tbCitationsViolationsLocationUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbCitationsViolationsLocationUpdate;
+        
+        /// <summary>
+        /// gvViolations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvViolations;
+        
+        /// <summary>
+        /// pnlCitationsFineUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCitationsFineUpdate;
+        
+        /// <summary>
+        /// Label1sx0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1sx0;
+        
+        /// <summary>
+        /// ddlCitationsFineStatusUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCitationsFineStatusUpdate;
+        
+        /// <summary>
         /// btnCitationsUpdate control.
         /// </summary>
         /// <remarks>
