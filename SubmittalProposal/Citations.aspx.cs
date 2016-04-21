@@ -45,13 +45,13 @@ namespace SubmittalProposal {
             dtFineStatus.Rows.InsertAt(row,0);
             ddlFineStatusLU.DataSource = dtFineStatus;
             ddlFineStatusLU.DataBind();
-            DataTable dtFineStatus2 = CIDataSet().Tables[2].Copy();
-            DataRow row2 = dtFineStatus2.NewRow();
-            row2["FineStatus"] = "";
-            dtFineStatus2.Rows.InsertAt(row2,0);
-            ddlSunriverStatusUpdate.DataSource=dtFineStatus2;
+            DataTable dtSunriverStatus = CIDataSet().Tables[4].Copy();
+            DataRow rowSunriverStatus = dtSunriverStatus.NewRow();
+            rowSunriverStatus["SunriverStatus"] = "";
+            dtSunriverStatus.Rows.InsertAt(rowSunriverStatus,0);
+            ddlSunriverStatusUpdate.DataSource=dtSunriverStatus;
             ddlSunriverStatusUpdate.DataBind();
-            ddlCitationsFineStatusUpdate.DataSource = dtFineStatus2;
+            ddlCitationsFineStatusUpdate.DataSource = dtFineStatus;
             ddlCitationsFineStatusUpdate.DataBind();
         }
         protected override void childPageLoad(object sender, EventArgs e) {
@@ -108,14 +108,27 @@ namespace SubmittalProposal {
             tbCitationsCityUpdate.Text = Utils.ObjectToString(dr["VCity"]);
             tbCitationsStateUpdate.Text = Utils.ObjectToString(dr["VState"]);
             tbCitationsZipUpdate.Text = Utils.ObjectToString(dr["VZip"]);
-            string fineStatus = Utils.ObjectToString(dr["FineStatus"]);
-            ddlSunriverStatusUpdate.SelectedValue = fineStatus;
+            tbCitingOfficerUpdate.Text = Utils.ObjectToString(dr["CitingOfficer"]);
+            tbMagistrateFine.Text = Utils.ObjectToDecimal0IfNull(dr["MagistrateFine"]).ToString("c");
+            tbToAccounting.Text = Utils.ObjectToDecimal0IfNull(dr["FineBalToAcctg"]).ToString("c");
+            tbJudicialFine.Text = Utils.ObjectToDecimal0IfNull(dr["JudicialFine"]).ToString("c");
+            tbWriteoffAmount.Text = Utils.ObjectToDecimal0IfNull(dr["WriteOff"]).ToString("c");
+            tbAssessedFine.Text= Utils.ObjectToDecimal0IfNull(dr["AssessedFine"]).ToString("c");
+            tbMagistrateNotes.Text = Utils.ObjectToString(dr["MagistrateNotes"]);
+            DateTime? hearingDate = Utils.ObjectToDateTimeNullable(dr["HearingDate"]);
+            tbHearingDateUpdate.Text=hearingDate.HasValue?hearingDate.Value.ToString("d"):"";
+            DateTime? offenseDate = Utils.ObjectToDateTimeNullable(dr["OffenseDate"]);
+            tbOffenseDateUpdate.Text =offenseDate.HasValue?offenseDate.Value.ToString("d"):"";
+            string sunriverStatus = Utils.ObjectToString(dr["VSunriverStatus"]);
+            ddlSunriverStatusUpdate.SelectedValue = sunriverStatus;
             DateTime? violationDate=getViolationDate(dr);
             tbCitationsViolationsDateUpdate.Text = violationDate.HasValue ? violationDate.Value.ToString("MM/dd/yyyy") : "";
             tbCitationsViolationsLocationUpdate.Text = Utils.ObjectToString(dr["OffenseLocation"]);
             ddlCitationsFineStatusUpdate.SelectedValue = Utils.ObjectToString(dr["FineStatus"]);
-
             bind_gvViolations();
+            // this statement must be after the bind_gvViolations() statement, above.
+            tbTotalCitationFine.Text = YetAnotherSumFine.ToString("c");
+            tbPrepayAmount.Text = Math.Round((YetAnotherSumFine / 2),2).ToString("c");
 
             object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
             if (Utils.isNothingNot(dateFormPrinted)) {
@@ -124,13 +137,33 @@ namespace SubmittalProposal {
             return "Last name: " + Utils.ObjectToString(dr["VLastName"]) + "nbsp;nbsp;nbsp;First name: " + Utils.ObjectToString(dr["VFirstName"]) + "     CitationID: " + CitationsIDBeingEdited;
         }
 
+        private DataTable CurrentViolationsTable {
+            get {
+                return (DataTable)Session["CurrentViolationsTable"];
+            }
+            set {
+                Session["CurrentViolationsTable"] = value;
+            }
+        }
+        private decimal YetAnotherSumFine {
+            get {
+                return Utils.ObjectToDecimal0IfNull(Session["YetAnotherSumFine"]);
+            }
+            set {
+                Session["YetAnotherSumFine"] = value;
+            }
+        }
         private void bind_gvViolations() {
             DataTable sourceTableViolations = CIDataSet().Tables[1];
             DataView viewViolations = new DataView(sourceTableViolations);
             viewViolations.RowFilter = "fkCitationID=" + CitationsIDBeingEdited;
-            DataTable tblFilteredViolations = viewViolations.ToTable();
-            gvViolations.DataSource = tblFilteredViolations;
+            CurrentViolationsTable = viewViolations.ToTable();
+            gvViolations.DataSource = CurrentViolationsTable;
             gvViolations.DataBind();
+            YetAnotherSumFine = 0;
+            foreach (DataRow dr in CurrentViolationsTable.Rows) {
+                YetAnotherSumFine += Utils.ObjectToDecimal0IfNull(dr["ScheduleFine"]);
+            }
         }
 
         protected void btnPrintForm_OnClick(object sender, EventArgs args) {
@@ -189,6 +222,15 @@ namespace SubmittalProposal {
             ibCitationsViolationsDateUpdate.Enabled = false;
             gvViolations.Enabled = false;
             ddlCitationsFineStatusUpdate.Enabled = false;
+            tbCitingOfficerUpdate.Enabled = false;
+            tbHearingDateUpdate.Enabled = false;
+            tbOffenseDateUpdate.Enabled = false;
+            tbMagistrateFine.Enabled = false;
+            tbToAccounting.Enabled = false;
+            tbJudicialFine.Enabled = false;
+            tbWriteoffAmount.Enabled = false;
+            tbAssessedFine.Enabled = false;
+            tbMagistrateNotes.Enabled = false;
         }
 
         protected override void unlockYourUpdateFields() {
@@ -206,6 +248,15 @@ namespace SubmittalProposal {
             ibCitationsViolationsDateUpdate.Enabled = true;
             gvViolations.Enabled = true;
             ddlCitationsFineStatusUpdate.Enabled = true;
+            tbCitingOfficerUpdate.Enabled = true;
+            tbHearingDateUpdate.Enabled = true;
+            tbOffenseDateUpdate.Enabled = true;
+            tbMagistrateFine.Enabled = true;
+            tbToAccounting.Enabled = true;
+            tbJudicialFine.Enabled = true;
+            tbWriteoffAmount.Enabled = true;
+            tbAssessedFine.Enabled = true;
+            tbMagistrateNotes.Enabled = true;
         }
         protected override string UpdateRoleName {
             get { return "canupdatecitations"; }
@@ -276,7 +327,7 @@ namespace SubmittalProposal {
             bind_gvViolations();
         }
 
-        decimal sumFine = 0;
+        private decimal sumFine=0;
         protected void gvViolations_RowDataBound(object sender, GridViewRowEventArgs e) {
             if (e.Row.RowType == DataControlRowType.DataRow) {
                 String text=null;
@@ -290,10 +341,99 @@ namespace SubmittalProposal {
                     }
                 }
                 sumFine += Utils.ObjectToDecimal0IfNull(text.Replace("$",""));
+
+
+                Control controlRuleID = (Label)e.Row.FindControl("lblRuleIDEditUpdate");
+                if (controlRuleID != null) { // we're in Edit mode
+                    DataTable dtRules = CIDataSet().Tables[3];
+                    DataRow drRule = dtRules.NewRow();
+                    drRule["RuleID"] = "bubba";
+                    drRule["RuleDescription"] = "";
+                    try {
+                        dtRules.Rows.InsertAt(drRule, 0);
+                    } catch { // already there
+                    }
+                    DropDownList controlRules = (DropDownList)e.Row.FindControl("ddlRulesUpdate");
+                    controlRules.DataSource = dtRules;
+                    controlRules.SelectedValue = ((Label)controlRuleID).Text;
+                    controlRules.DataBind();
+                    CheckBox cbIssueAsWarningUpdate = (CheckBox)e.Row.FindControl("cbIssueAsWarningUpdate");
+                    cbIssueAsWarningUpdate.Checked = Utils.ObjectToBool(CurrentViolationsTable.Rows[e.Row.RowIndex]["IssueAsWarning"]);
+                } else {
+                    Label lblIssueAsWarningUpdate = (Label)e.Row.FindControl("lblIssueAsWarningUpdate");
+                    if (Utils.ObjectToBool(CurrentViolationsTable.Rows[e.Row.RowIndex]["IssueAsWarning"])) {
+                        lblIssueAsWarningUpdate.BackColor = System.Drawing.Color.Red;
+                        lblIssueAsWarningUpdate.ForeColor = System.Drawing.Color.White;
+                    } else {
+                        lblIssueAsWarningUpdate.BackColor = System.Drawing.Color.Transparent;
+                    }
+                }
+
             }
             if (e.Row.RowType == DataControlRowType.Footer) {
                 Label lbl = (Label)e.Row.FindControl("lblSumFine");
                 lbl.Text = sumFine.ToString("c");
+            }
+        }
+
+        protected void cvMagistrateFine_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            if (Utils.isNothing(args.Value)) {
+                tbMagistrateFine.Text = "$0.00";
+            } else {
+                try {
+                    Decimal magistrateFine = Convert.ToDecimal(args.Value.Replace("$","").Replace(",",""));
+                } catch {
+                    args.IsValid = false;
+                }
+            }
+        }
+        protected void cvAssessedFine_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            if (Utils.isNothing(args.Value)) {
+                tbAssessedFine.Text = "$0.00";
+            } else {
+                try {
+                    Decimal assessedFine = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
+                } catch {
+                    args.IsValid = false;
+                }
+            }
+        }
+        protected void cvToAccounting_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            if (Utils.isNothing(args.Value)) {
+                tbToAccounting.Text = "$0.00";
+            } else {
+                try {
+                    Decimal ToAccounting = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
+                } catch {
+                    args.IsValid = false;
+                }
+            }
+        }
+        protected void cvJudicialFine_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            if (Utils.isNothing(args.Value)) {
+                tbJudicialFine.Text = "$0.00";
+            } else {
+                try {
+                    Decimal JudicialFine = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
+                } catch {
+                    args.IsValid = false;
+                }
+            }
+        }
+        protected void cvWriteoffAmount_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            if (Utils.isNothing(args.Value)) {
+                tbWriteoffAmount.Text = "$0.00";
+            } else {
+                try {
+                    Decimal writeOffAmount = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
+                } catch {
+                    args.IsValid = false;
+                }
             }
         }
     }
