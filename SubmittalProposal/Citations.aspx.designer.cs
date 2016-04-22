@@ -157,22 +157,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbHearingDateUpdate;
         
         /// <summary>
-        /// Label12 control.
+        /// ibHearingDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
-        
-        /// <summary>
-        /// tbOffenseDateUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbOffenseDateUpdate;
+        protected global::System.Web.UI.WebControls.ImageButton ibHearingDateUpdate;
         
         /// <summary>
         /// cvHearingDateUpdate control.
@@ -418,13 +409,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
-        /// tbMagistrateFine control.
+        /// tbMagistrateFineUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbMagistrateFine;
+        protected global::System.Web.UI.WebControls.TextBox tbMagistrateFineUpdate;
         
         /// <summary>
         /// cvMagistrateFine control.
@@ -445,13 +436,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label14;
         
         /// <summary>
-        /// tbToAccounting control.
+        /// tbToAccountingUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbToAccounting;
+        protected global::System.Web.UI.WebControls.TextBox tbToAccountingUpdate;
         
         /// <summary>
         /// cvToAccounting control.
@@ -472,13 +463,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label lblTotalCitationFine;
         
         /// <summary>
-        /// tbTotalCitationFine control.
+        /// tbTotalCitationFineUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbTotalCitationFine;
+        protected global::System.Web.UI.WebControls.TextBox tbTotalCitationFineUpdate;
         
         /// <summary>
         /// Label13x3a control.
@@ -490,13 +481,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label13x3a;
         
         /// <summary>
-        /// tbJudicialFine control.
+        /// tbJudicialFineUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbJudicialFine;
+        protected global::System.Web.UI.WebControls.TextBox tbJudicialFineUpdate;
         
         /// <summary>
         /// cvJudicialFine control.
@@ -517,13 +508,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label14x3;
         
         /// <summary>
-        /// tbWriteoffAmount control.
+        /// tbWriteoffAmountUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbWriteoffAmount;
+        protected global::System.Web.UI.WebControls.TextBox tbWriteoffAmountUpdate;
         
         /// <summary>
         /// cvWriteoffAmount control.
@@ -562,13 +553,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label Label15;
         
         /// <summary>
-        /// tbAssessedFine control.
+        /// tbAssessedFineUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbAssessedFine;
+        protected global::System.Web.UI.WebControls.TextBox tbAssessedFineUpdate;
         
         /// <summary>
         /// cvAssessedFine control.
@@ -589,13 +580,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel pnlMagistrateNotes;
         
         /// <summary>
-        /// tbMagistrateNotes control.
+        /// tbMagistrateNotesUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbMagistrateNotes;
+        protected global::System.Web.UI.WebControls.TextBox tbMagistrateNotesUpdate;
         
         /// <summary>
         /// btnCitationsUpdate control.

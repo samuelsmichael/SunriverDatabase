@@ -109,16 +109,14 @@ namespace SubmittalProposal {
             tbCitationsStateUpdate.Text = Utils.ObjectToString(dr["VState"]);
             tbCitationsZipUpdate.Text = Utils.ObjectToString(dr["VZip"]);
             tbCitingOfficerUpdate.Text = Utils.ObjectToString(dr["CitingOfficer"]);
-            tbMagistrateFine.Text = Utils.ObjectToDecimal0IfNull(dr["MagistrateFine"]).ToString("c");
-            tbToAccounting.Text = Utils.ObjectToDecimal0IfNull(dr["FineBalToAcctg"]).ToString("c");
-            tbJudicialFine.Text = Utils.ObjectToDecimal0IfNull(dr["JudicialFine"]).ToString("c");
-            tbWriteoffAmount.Text = Utils.ObjectToDecimal0IfNull(dr["WriteOff"]).ToString("c");
-            tbAssessedFine.Text= Utils.ObjectToDecimal0IfNull(dr["AssessedFine"]).ToString("c");
-            tbMagistrateNotes.Text = Utils.ObjectToString(dr["MagistrateNotes"]);
+            tbMagistrateFineUpdate.Text = Utils.ObjectToDecimal0IfNull(dr["MagistrateFine"]).ToString("c");
+            tbToAccountingUpdate.Text = Utils.ObjectToDecimal0IfNull(dr["FineBalToAcctg"]).ToString("c");
+            tbJudicialFineUpdate.Text = Utils.ObjectToDecimal0IfNull(dr["JudicialFine"]).ToString("c");
+            tbWriteoffAmountUpdate.Text = Utils.ObjectToDecimal0IfNull(dr["WriteOff"]).ToString("c");
+            tbAssessedFineUpdate.Text= Utils.ObjectToDecimal0IfNull(dr["AssessedFine"]).ToString("c");
+            tbMagistrateNotesUpdate.Text = Utils.ObjectToString(dr["MagistrateNotes"]);
             DateTime? hearingDate = Utils.ObjectToDateTimeNullable(dr["HearingDate"]);
             tbHearingDateUpdate.Text=hearingDate.HasValue?hearingDate.Value.ToString("d"):"";
-            DateTime? offenseDate = Utils.ObjectToDateTimeNullable(dr["OffenseDate"]);
-            tbOffenseDateUpdate.Text =offenseDate.HasValue?offenseDate.Value.ToString("d"):"";
             string sunriverStatus = Utils.ObjectToString(dr["VSunriverStatus"]);
             ddlSunriverStatusUpdate.SelectedValue = sunriverStatus;
             DateTime? violationDate=getViolationDate(dr);
@@ -127,7 +125,7 @@ namespace SubmittalProposal {
             ddlCitationsFineStatusUpdate.SelectedValue = Utils.ObjectToString(dr["FineStatus"]);
             bind_gvViolations();
             // this statement must be after the bind_gvViolations() statement, above.
-            tbTotalCitationFine.Text = YetAnotherSumFine.ToString("c");
+            tbTotalCitationFineUpdate.Text = YetAnotherSumFine.ToString("c");
             tbPrepayAmount.Text = Math.Round((YetAnotherSumFine / 2),2).ToString("c");
 
             object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
@@ -224,13 +222,13 @@ namespace SubmittalProposal {
             ddlCitationsFineStatusUpdate.Enabled = false;
             tbCitingOfficerUpdate.Enabled = false;
             tbHearingDateUpdate.Enabled = false;
-            tbOffenseDateUpdate.Enabled = false;
-            tbMagistrateFine.Enabled = false;
-            tbToAccounting.Enabled = false;
-            tbJudicialFine.Enabled = false;
-            tbWriteoffAmount.Enabled = false;
-            tbAssessedFine.Enabled = false;
-            tbMagistrateNotes.Enabled = false;
+            tbMagistrateFineUpdate.Enabled = false;
+            tbToAccountingUpdate.Enabled = false;
+            tbJudicialFineUpdate.Enabled = false;
+            tbWriteoffAmountUpdate.Enabled = false;
+            tbAssessedFineUpdate.Enabled = false;
+            tbMagistrateNotesUpdate.Enabled = false;
+            ibHearingDateUpdate.Enabled = false;
         }
 
         protected override void unlockYourUpdateFields() {
@@ -250,13 +248,14 @@ namespace SubmittalProposal {
             ddlCitationsFineStatusUpdate.Enabled = true;
             tbCitingOfficerUpdate.Enabled = true;
             tbHearingDateUpdate.Enabled = true;
-            tbOffenseDateUpdate.Enabled = true;
-            tbMagistrateFine.Enabled = true;
-            tbToAccounting.Enabled = true;
-            tbJudicialFine.Enabled = true;
-            tbWriteoffAmount.Enabled = true;
-            tbAssessedFine.Enabled = true;
-            tbMagistrateNotes.Enabled = true;
+            tbMagistrateFineUpdate.Enabled = true;
+            tbToAccountingUpdate.Enabled = true;
+            tbJudicialFineUpdate.Enabled = true;
+            tbWriteoffAmountUpdate.Enabled = true;
+            tbAssessedFineUpdate.Enabled = true;
+            tbMagistrateNotesUpdate.Enabled = true;
+            getUpdateResultsLabel().Text = "";
+            ibHearingDateUpdate.Enabled = true;
         }
         protected override string UpdateRoleName {
             get { return "canupdatecitations"; }
@@ -265,6 +264,72 @@ namespace SubmittalProposal {
             expandCPESearch();
         }
         protected void btnCitationsUpdateOkay_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspCitationsUpdate");
+                cmd.Parameters.Add("@CitationID", SqlDbType.Int).Value =CitationsIDBeingEdited;
+                cmd.Parameters.Add("@VLastName", SqlDbType.NVarChar).Value = tbCitationsLastNameUpdate.Text;
+                cmd.Parameters.Add("@VFirstName", SqlDbType.NVarChar).Value = tbCitationsFirstNameUpdate.Text;
+                cmd.Parameters.Add("@VMailAddr1", SqlDbType.NVarChar).Value = tbCitationsAddress1Update.Text;
+                cmd.Parameters.Add("@VMailAddr2", SqlDbType.NVarChar).Value = tbCitationsAddress2Update.Text;
+                cmd.Parameters.Add("@VCity", SqlDbType.NVarChar).Value = tbCitationsCityUpdate.Text;
+                cmd.Parameters.Add("@VZip", SqlDbType.NVarChar).Value = tbCitationsZipUpdate.Text;
+                cmd.Parameters.Add("@VState", SqlDbType.NVarChar).Value = tbCitationsStateUpdate.Text;
+                cmd.Parameters.Add("@VSunriverStatus", SqlDbType.NVarChar).Value = ddlSunriverStatusUpdate.SelectedValue;
+                DateTime? offenseDate = Utils.ObjectToDateTimeNullable(tbCitationsViolationsDateUpdate.Text);
+                if(offenseDate.HasValue) {
+                    cmd.Parameters.Add("@OffenseDate", SqlDbType.DateTime).Value = offenseDate;
+                }
+                cmd.Parameters.Add("@OffenseLocation", SqlDbType.NVarChar).Value = tbCitationsViolationsLocationUpdate.Text;
+                cmd.Parameters.Add("@CitingOfficer", SqlDbType.NVarChar).Value = tbCitingOfficerUpdate.Text;
+                DateTime? hearingDate=Utils.ObjectToDateTimeNullable(tbHearingDateUpdate.Text);
+                if(hearingDate.HasValue) {
+                    cmd.Parameters.Add("@HearingDate", SqlDbType.DateTime).Value = hearingDate;
+                }
+                decimal? magistrateFine = null;
+                try {
+                    magistrateFine = Utils.ObjectToDecimal0IfNull(tbMagistrateFineUpdate.Text.Replace("$", ""));
+                } catch { }
+                if (magistrateFine.HasValue) {
+                    cmd.Parameters.Add("@MagistrateFine", SqlDbType.Money).Value = magistrateFine.Value;
+                }                
+                decimal? judicialFine = null;
+                try {
+                    judicialFine = Utils.ObjectToDecimal0IfNull(tbJudicialFineUpdate.Text.Replace("$", ""));
+                } catch { }
+                if (judicialFine.HasValue) {
+                    cmd.Parameters.Add("@JudicialFine", SqlDbType.Money).Value = judicialFine.Value;
+                }                
+                decimal? assessedFine = null;
+                try {
+                    assessedFine = Utils.ObjectToDecimal0IfNull(tbAssessedFineUpdate.Text.Replace("$", ""));
+                } catch { }
+                if (assessedFine.HasValue) {
+                    cmd.Parameters.Add("@AssessedFine", SqlDbType.Money).Value = assessedFine.Value;
+                }                
+                decimal? writeOff = null;
+                try {
+                    writeOff = Utils.ObjectToDecimal0IfNull(tbWriteoffAmountUpdate.Text.Replace("$", ""));
+                } catch { }
+                if (writeOff.HasValue) {
+                    cmd.Parameters.Add("@WriteOff", SqlDbType.Money).Value = writeOff.Value;
+                }                
+                decimal? fineBalToAcctg = null;
+                try {
+                    fineBalToAcctg = Utils.ObjectToDecimal0IfNull(tbToAccountingUpdate.Text.Replace("$", ""));
+                } catch { }
+                if (fineBalToAcctg.HasValue) {
+                    cmd.Parameters.Add("@FineBalToAcctg", SqlDbType.Money).Value = fineBalToAcctg.Value;
+                }                
+                cmd.Parameters.Add("@MagistrateNotes", SqlDbType.NVarChar).Value = tbMagistrateNotesUpdate.Text;
+                cmd.Parameters.Add("@FineStatus", SqlDbType.NVarChar).Value = ddlCitationsFineStatusUpdate.SelectedValue;
+                SqlParameter newCitationID = new SqlParameter("@NewCitationID", SqlDbType.Int);
+                newCitationID.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newCitationID);
+                Utils.executeNonQuery(cmd, ConnectionString);
+                performPostUpdateSuccessfulActions("Update successful", DataSetCacheKey, null);
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
+            }
         }
 
         protected void gvViolations_RowEditing(object sender, GridViewEditEventArgs e) {
@@ -277,39 +342,29 @@ namespace SubmittalProposal {
         protected void gvViolations_RowUpdating(object sender, GridViewUpdateEventArgs e) {
             GridViewRow row = gvViolations.Rows[e.RowIndex];
             try {
-/*                int inspectionId = Convert.ToInt32(((Label)row.Cells[1].Controls[1]).Text);
-                DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
-                string comments = ((TextBox)row.Cells[3].Controls[1]).Text;
-                string strfee = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue;
-                decimal? fee = Utils.isNothing(strfee) ? (decimal?)null : Utils.ObjectToDecimal(strfee);
-                bool paid = ((CheckBox)row.Cells[5].Controls[1]).Checked;
-                string paidMemo = ((TextBox)row.Cells[6].Controls[1]).Text;
-                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[7].Controls[1]).Text);
-                string ladderFuel = ((DropDownList)row.Cells[8].Controls[1]).SelectedValue;
-                string noxWeeds = ((DropDownList)row.Cells[9].Controls[1]).SelectedValue;
-                string followUp = ((TextBox)row.Cells[10].Controls[1]).Text;
+                int violationId = Convert.ToInt32(((Label)row.FindControl("lblViolationIdEdit")).Text);
+                string ruleId=((DropDownList)row.FindControl("ddlRulesUpdate")).SelectedValue;
+                string fine=((TextBox)row.FindControl("tbScheduleFineUpdate")).Text.Replace("$","");
+                bool isWarning=((CheckBox)row.FindControl("cbIssueAsWarningUpdate")).Checked;
+                string violationNotes=((TextBox)row.Cells[6].Controls[0]).Text;
+                string orsNbr=((TextBox)row.Cells[7].Controls[0]).Text;
+                SqlCommand cmd = new SqlCommand("uspViolationsUpdate");
+                decimal scheduleFine = Utils.ObjectToDecimal0IfNull(fine);
 
-                SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
-
-                cmd.Parameters.Add("@scInspectionID", SqlDbType.Int).Value = inspectionId;
-                cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
-                cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
-                cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
-                cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = paid;
-                cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = paidMemo;
-                cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
-                cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ladderFuel;
-                cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = noxWeeds;
-                cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = comments;
-                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = followUp;
-                SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
+                cmd.Parameters.Add("@ViolationID", SqlDbType.Int).Value = violationId;
+                cmd.Parameters.Add("@fkCitationID", SqlDbType.Int).Value = CitationsIDBeingEdited;
+                cmd.Parameters.Add("@fkRuleID", SqlDbType.NVarChar).Value = ruleId;
+                cmd.Parameters.Add("@ScheduleFine", SqlDbType.Money).Value = scheduleFine;
+                cmd.Parameters.Add("@IssueAsWarning", SqlDbType.Bit).Value = isWarning;
+                cmd.Parameters.Add("@ViolationNotes", SqlDbType.NVarChar).Value = violationNotes;
+                cmd.Parameters.Add("@ORSNumber", SqlDbType.NVarChar).Value = orsNbr;
+                SqlParameter newid = new SqlParameter("@NewViolationID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
-                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-*/
-                performPostUpdateSuccessfulActions("Violation updated", DataSetCacheKey, null);
+                Utils.executeNonQuery(cmd, ConnectionString);
+                performPostUpdateSuccessfulActions("Citation updated", DataSetCacheKey, null);
             } catch (Exception ee) {
-                performPostUpdateFailedActions("Violoation not updated. Error msg: " + ee.Message);
+                performPostUpdateFailedActions("Citation not updated. Error msg: " + ee.Message);
             }
             //Reset the edit index.
             gvViolations.EditIndex = -1;
@@ -379,7 +434,7 @@ namespace SubmittalProposal {
         protected void cvMagistrateFine_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbMagistrateFine.Text = "$0.00";
+                tbMagistrateFineUpdate.Text = "$0.00";
             } else {
                 try {
                     Decimal magistrateFine = Convert.ToDecimal(args.Value.Replace("$","").Replace(",",""));
@@ -391,7 +446,7 @@ namespace SubmittalProposal {
         protected void cvAssessedFine_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbAssessedFine.Text = "$0.00";
+                tbAssessedFineUpdate.Text = "$0.00";
             } else {
                 try {
                     Decimal assessedFine = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -403,7 +458,7 @@ namespace SubmittalProposal {
         protected void cvToAccounting_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbToAccounting.Text = "$0.00";
+                tbToAccountingUpdate.Text = "$0.00";
             } else {
                 try {
                     Decimal ToAccounting = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -415,7 +470,7 @@ namespace SubmittalProposal {
         protected void cvJudicialFine_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbJudicialFine.Text = "$0.00";
+                tbJudicialFineUpdate.Text = "$0.00";
             } else {
                 try {
                     Decimal JudicialFine = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -427,7 +482,7 @@ namespace SubmittalProposal {
         protected void cvWriteoffAmount_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbWriteoffAmount.Text = "$0.00";
+                tbWriteoffAmountUpdate.Text = "$0.00";
             } else {
                 try {
                     Decimal writeOffAmount = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
