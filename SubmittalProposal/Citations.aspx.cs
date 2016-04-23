@@ -51,8 +51,12 @@ namespace SubmittalProposal {
             dtSunriverStatus.Rows.InsertAt(rowSunriverStatus,0);
             ddlSunriverStatusUpdate.DataSource=dtSunriverStatus;
             ddlSunriverStatusUpdate.DataBind();
+            ddlSunriverStatusNew.DataSource = dtSunriverStatus;
+            ddlSunriverStatusNew.DataBind();
             ddlCitationsFineStatusUpdate.DataSource = dtFineStatus;
             ddlCitationsFineStatusUpdate.DataBind();
+            ddlCitationsFineStatusNew.DataSource = dtFineStatus;
+            ddlCitationsFineStatusNew.DataBind();
             DataTable dtRules = getRulesTable();
             ddlRulesNew.DataSource = dtRules;
             ddlRulesNew.SelectedIndex = -1;
@@ -63,10 +67,38 @@ namespace SubmittalProposal {
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
                 bindDDLs();
+                try { // In this framework, if UpdateRoleName throws an exception, then this means that the database isn't updatable (yet).
+                    if (UpdateRoleName == "all" || HttpContext.Current.User.IsInRole(UpdateRoleName)) {
+                        lbNewCitation.Visible = true;
+                    } else {
+                        lbNewCitation.Visible = false;
+                    }
+                } catch {
+                    lbNewCitation.Visible = false;
+                }
+
             }
         }
         protected override void clearAllNewFormInputFields() {
-            throw new NotImplementedException();
+            ddlCitationsFineStatusNew.SelectedIndex = 0;
+            ddlSunriverStatusNew.SelectedIndex = 0;
+            tbCitationsLastNameNew.Text = "";
+            tbCitingOfficerNew.Text = "";
+            tbHearingDateNew.Text = "";
+            tbCitationsFirstNameNew.Text = "";
+            tbCitationsAddress1New.Text = "";
+            tbCitationsAddress2New.Text = "";
+            tbCitationsCityNew.Text = "";
+            tbCitationsStateNew.Text = "";
+            tbCitationsZipNew.Text = "";
+            tbCitationsViolationsDateNew.Text = "";
+            tbCitationsViolationsLocationNew.Text = "";
+            tbMagistrateFineNew.Text = "";
+            tbToAccountingNew.Text = "";
+            tbJudicialFineNew.Text = "";
+            tbWriteoffAmountNew.Text = "";
+            tbAssessedFineNew.Text = "";
+            tbMagistrateNotesNew.Text = "";
         }
         protected override void clearAllSelectionInputFields() {
             tbCitationLastNameLU.Text = "";
@@ -80,7 +112,7 @@ namespace SubmittalProposal {
             return gvResults;
         }
         protected override Label getNewResultsLabel() {
-            throw new NotImplementedException();
+            return lblCitationNewMessage;
         }
         private int CitationsIDBeingEdited {
             get {
@@ -447,7 +479,7 @@ namespace SubmittalProposal {
         protected void cvMagistrateFine_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbMagistrateFineUpdate.Text = "$0.00";
+                if (isAddCitationOpen) { tbMagistrateFineNew.Text = "$0.00"; } else { tbMagistrateFineUpdate.Text = "$0.00"; }
             } else {
                 try {
                     Decimal magistrateFine = Convert.ToDecimal(args.Value.Replace("$","").Replace(",",""));
@@ -456,10 +488,19 @@ namespace SubmittalProposal {
                 }
             }
         }
+        private bool isAddCitationOpen {
+            get {
+                object obj = Session["isAddCitationOpen"];
+                return obj == null ? false : (bool)obj;
+            }
+            set {
+                Session["isAddCitationOpen"] = value;
+            }
+        }
         protected void cvAssessedFine_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbAssessedFineUpdate.Text = "$0.00";
+                if (isAddCitationOpen) { tbAssessedFineNew.Text = "$0.00"; } else { tbAssessedFineUpdate.Text = "$0.00"; }
             } else {
                 try {
                     Decimal assessedFine = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -471,7 +512,7 @@ namespace SubmittalProposal {
         protected void cvToAccounting_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbToAccountingUpdate.Text = "$0.00";
+                if (isAddCitationOpen) { tbToAccountingNew.Text = "$0.00"; } else { tbToAccountingUpdate.Text = "$0.00"; }
             } else {
                 try {
                     Decimal ToAccounting = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -483,7 +524,7 @@ namespace SubmittalProposal {
         protected void cvJudicialFine_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbJudicialFineUpdate.Text = "$0.00";
+                if (isAddCitationOpen) { tbJudicialFineNew.Text = "$0.00"; } else { tbJudicialFineUpdate.Text = "$0.00"; }
             } else {
                 try {
                     Decimal JudicialFine = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -495,7 +536,7 @@ namespace SubmittalProposal {
         protected void cvWriteoffAmount_ServerValidate(object source, ServerValidateEventArgs args) {
             args.IsValid = true;
             if (Utils.isNothing(args.Value)) {
-                tbWriteoffAmountUpdate.Text = "$0.00";
+                if (isAddCitationOpen) { tbWriteoffAmountNew.Text = "$0.00"; } else { tbWriteoffAmountUpdate.Text = "$0.00"; }
             } else {
                 try {
                     Decimal writeOffAmount = Convert.ToDecimal(args.Value.Replace("$", "").Replace(",", ""));
@@ -525,26 +566,26 @@ namespace SubmittalProposal {
         protected void btnNewViolationOk_Click(object sender, EventArgs args) {
             if (checkNewViolationsPanel()) {
                 try {
-                    /*                SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
+                    string ruleId = ddlRulesNew.SelectedValue;
+                    string fine = tbScheduleFineNew.Text;                    
+                    bool isWarning =  cbIssueAsWarningNew.Checked;
+                    string violationNotes = tbViolationNotesNew.Text;
+                    string orsNbr = tbORSNumberNew.Text;
+                    SqlCommand cmd = new SqlCommand("uspViolationsUpdate");
+                    decimal scheduleFine = Utils.ObjectToDecimal0IfNull(fine);
 
-                                    cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
-                                    DateTime? date = Utils.ObjectToDateTimeNullable(tbDateNew.Text);
-                                    cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
-                                    decimal? fee = Utils.isNothing(ddlFeeNew.SelectedValue) ? (decimal?)null : Utils.ObjectToDecimal(ddlFeeNew.SelectedValue);
-                                    cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
-                                    cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = cbPaidNew.Checked;
-                                    cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = tbPaidMemoNew.Text;
-                                    DateTime? dateClosed = Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
-                                    cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
-                                    cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNew.SelectedValue;
-                                    cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNew.SelectedValue;
-                                    cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNew.Text;
-                                    cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text;
-                                    SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
-                                    newid.Direction = ParameterDirection.Output;
-                                    cmd.Parameters.Add(newid);
-                                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-                    */
+                    cmd.Parameters.Add("@fkCitationID", SqlDbType.Int).Value = CitationsIDBeingEdited;
+                    cmd.Parameters.Add("@fkRuleID", SqlDbType.NVarChar).Value = ruleId;
+                    cmd.Parameters.Add("@ScheduleFine", SqlDbType.Money).Value = scheduleFine;
+                    cmd.Parameters.Add("@IssueAsWarning", SqlDbType.Bit).Value = isWarning;
+                    cmd.Parameters.Add("@ViolationNotes", SqlDbType.NVarChar).Value = violationNotes;
+                    cmd.Parameters.Add("@ORSNumber", SqlDbType.NVarChar).Value = orsNbr;
+                    SqlParameter newid = new SqlParameter("@NewViolationID", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, ConnectionString);
+                    performPostUpdateSuccessfulActions("Violation updated", DataSetCacheKey, null);
+
                     performPostUpdateSuccessfulActions("Violation added", DataSetCacheKey, null);
                 } catch (Exception ee) {
                     performPostUpdateFailedActions("Violation not updated. Error msg: " + ee.Message);
@@ -561,8 +602,94 @@ namespace SubmittalProposal {
         protected void lbNewViolation_OnClick(object sender, EventArgs args) {
             ddlRulesNew.SelectedIndex = -1;
             lblNewViolationMessage.Text = "";
+            lblCitationNewMessage.Text = "";
             mpeNewViolation.Show();
         }
 
-    }
+        protected void lbNewCitation_OnClick(object sender, EventArgs args) {
+            isAddCitationOpen = true;
+            mpeNewCitation.Show();
+        }
+        protected void btnNewCitationOk_Click(object sender, EventArgs args) {
+            if (Page.IsValid) {
+                try {
+                    SqlCommand cmd = new SqlCommand("uspCitationsUpdate");
+                    cmd.Parameters.Add("@VLastName", SqlDbType.NVarChar).Value = tbCitationsLastNameNew.Text;
+                    cmd.Parameters.Add("@VFirstName", SqlDbType.NVarChar).Value = tbCitationsFirstNameNew.Text;
+                    cmd.Parameters.Add("@VMailAddr1", SqlDbType.NVarChar).Value = tbCitationsAddress1New.Text;
+                    cmd.Parameters.Add("@VMailAddr2", SqlDbType.NVarChar).Value = tbCitationsAddress2New.Text;
+                    cmd.Parameters.Add("@VCity", SqlDbType.NVarChar).Value = tbCitationsCityNew.Text;
+                    cmd.Parameters.Add("@VZip", SqlDbType.NVarChar).Value = tbCitationsZipNew.Text;
+                    cmd.Parameters.Add("@VState", SqlDbType.NVarChar).Value = tbCitationsStateNew.Text;
+                    cmd.Parameters.Add("@VSunriverStatus", SqlDbType.NVarChar).Value = ddlSunriverStatusNew.SelectedValue;
+                    DateTime? offenseDate = Utils.ObjectToDateTimeNullable(tbCitationsViolationsDateNew.Text);
+                    if (offenseDate.HasValue) {
+                        cmd.Parameters.Add("@OffenseDate", SqlDbType.DateTime).Value = offenseDate.Value;
+                    }
+                    cmd.Parameters.Add("@OffenseLocation", SqlDbType.NVarChar).Value = tbCitationsViolationsLocationNew.Text;
+                    cmd.Parameters.Add("@CitingOfficer", SqlDbType.NVarChar).Value = tbCitingOfficerNew.Text;
+                    DateTime? hearingDate = Utils.ObjectToDateTimeNullable(tbHearingDateNew.Text);
+                    if (hearingDate.HasValue) {
+                        cmd.Parameters.Add("@HearingDate", SqlDbType.DateTime).Value = hearingDate;
+                    }
+                    decimal? magistrateFine = null;
+                    try {
+                        magistrateFine = Utils.ObjectToDecimal0IfNull(tbMagistrateFineNew.Text.Replace("$", ""));
+                    } catch { }
+                    if (magistrateFine.HasValue) {
+                        cmd.Parameters.Add("@MagistrateFine", SqlDbType.Money).Value = magistrateFine.Value;
+                    }
+                    decimal? judicialFine = null;
+                    try {
+                        judicialFine = Utils.ObjectToDecimal0IfNull(tbJudicialFineNew.Text.Replace("$", ""));
+                    } catch { }
+                    if (judicialFine.HasValue) {
+                        cmd.Parameters.Add("@JudicialFine", SqlDbType.Money).Value = judicialFine.Value;
+                    }
+                    decimal? assessedFine = null;
+                    try {
+                        assessedFine = Utils.ObjectToDecimal0IfNull(tbAssessedFineNew.Text.Replace("$", ""));
+                    } catch { }
+                    if (assessedFine.HasValue) {
+                        cmd.Parameters.Add("@AssessedFine", SqlDbType.Money).Value = assessedFine.Value;
+                    }
+                    decimal? writeOff = null;
+                    try {
+                        writeOff = Utils.ObjectToDecimal0IfNull(tbWriteoffAmountNew.Text.Replace("$", ""));
+                    } catch { }
+                    if (writeOff.HasValue) {
+                        cmd.Parameters.Add("@WriteOff", SqlDbType.Money).Value = writeOff.Value;
+                    }
+                    decimal? fineBalToAcctg = null;
+                    try {
+                        fineBalToAcctg = Utils.ObjectToDecimal0IfNull(tbToAccountingNew.Text.Replace("$", ""));
+                    } catch { }
+                    if (fineBalToAcctg.HasValue) {
+                        cmd.Parameters.Add("@FineBalToAcctg", SqlDbType.Money).Value = fineBalToAcctg.Value;
+                    }
+                    cmd.Parameters.Add("@MagistrateNotes", SqlDbType.NVarChar).Value = tbMagistrateNotesNew.Text;
+                    cmd.Parameters.Add("@FineStatus", SqlDbType.NVarChar).Value = ddlCitationsFineStatusNew.SelectedValue;
+                    SqlParameter newCitationID = new SqlParameter("@NewCitationID", SqlDbType.Int);
+                    newCitationID.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newCitationID);
+                    Utils.executeNonQuery(cmd, ConnectionString);
+                    performPostNewSuccessfulActions("Update successful", DataSetCacheKey, null, tbCitationIDLU, newCitationID.Value);
+                } catch (Exception ee) {
+                    performPostNewFailedActions("Update failed. Msg: " + ee.Message);
+                    isAddCitationOpen = true;
+                    mpeNewCitation.Show();
+                    return;
+                }
+                isAddCitationOpen = false;
+                mpeNewCitation.Hide();
+            } else {
+                isAddCitationOpen = true;
+                mpeNewCitation.Show();
+            }
+        }
+        protected void btnNewCitationCancel_Click(object sender, EventArgs args) {
+            isAddCitationOpen = false;
+            mpeNewCitation.Hide();
+        }
+   }
 }

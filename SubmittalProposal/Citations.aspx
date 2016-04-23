@@ -304,12 +304,13 @@
                             <asp:Label CssClass="form_field_heading" ID="Labelabc22" runat="server" Text="Notes"></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:TextBox ID="tbViolationNotesNew" Width="99%" TextMode="MultiLine" Height="4em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbViolationNotesNew" Width="99%" TextMode="MultiLine" Height="4em"
+                                runat="server"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <asp:Label ID="lblNewViolationMessage" runat="server" Font-Bold="true" ForeColor="Red" ></asp:Label>
+                            <asp:Label ID="lblNewViolationMessage" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
                         </td>
                     </tr>
                 </table>
@@ -434,4 +435,258 @@
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <center>
+        <asp:LinkButton ID="lbNewCitation" CausesValidation="false" OnClick="lbNewCitation_OnClick"
+            runat="server">New Citation</asp:LinkButton>
+    </center>
+    <asp:Panel runat="server" CssClass="newitempopup" Width="800" ID="pnlCitationNewContent">
+        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlCitationNewTitle">
+            <span>New Citation</span>
+        </asp:Panel>
+        <asp:Panel runat="server" Style="text-align: center;" ID="pnlNewCitationContent"
+            CssClass="newitemcontent">
+            <asp:Panel ID="pnlCitationsViolatorNew" runat="server" GroupingText="Violator">
+                <table border="0" cellpadding="0" cellspacing="2">
+                    <tr valign="top">
+                        <td valign="top">
+                            <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Last Name"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbCitationsLastNameNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Sunriver Status"></asp:Label>
+                        </td>
+                        <td colspan="1">
+                            <asp:DropDownList ID="ddlSunriverStatusNew" DataTextField="SunriverStatus" DataValueField="SunriverStatus"
+                                runat="server">
+                            </asp:DropDownList>
+                        </td>
+                        <td colspan="2" rowspan="2">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Citing Officer"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="tbCitingOfficerNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label20" runat="server" Text="Hearing Date"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" ID="tbHearingDateNew" Width="7em" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibHearingDateNew" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <ajaxToolkit:CalendarExtender ID="cvHearingDateNew" runat="server" TargetControlID="tbHearingDateNew"
+                                Format="MM/dd/yyyy" PopupButtonID="ibHearingDateNew" />
+                            <asp:RegularExpressionValidator ForeColor="Red" ID="rvcvHearingDateNew" Display="Dynamic"
+                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                ControlToValidate="tbHearingDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td valign="top">
+                            <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="First Name"></asp:Label>
+                        </td>
+                        <td colspan="5">
+                            <asp:TextBox ID="tbCitationsFirstNameNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td valign="top">
+                            <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="Address1"></asp:Label>
+                        </td>
+                        <td colspan="5">
+                            <asp:TextBox ID="tbCitationsAddress1New" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td valign="top">
+                            <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Address2"></asp:Label>
+                        </td>
+                        <td colspan="5">
+                            <asp:TextBox ID="tbCitationsAddress2New" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="City"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbCitationsCityNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                        </td>
+                        <td align="right">
+                            <asp:Label CssClass="form_field_heading" ID="Label26" runat="server" Text="State"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbCitationsStateNew" MaxLength="2" Width="3em" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Zip"></asp:Label>
+                        </td>
+                        <td align="left">
+                            <asp:TextBox ID="tbCitationsZipNew" MaxLength="10" Width="6em" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="Panel1" runat="server" GroupingText="Violations List">
+                <table border="0">
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label28" runat="server" Text="Date"></asp:Label>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field_date" ID="tbCitationsViolationsDateNew" Width="7em"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                            ID="ibCitationsViolationsDateNew" runat="server" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <ajaxToolkit:CalendarExtender ID="ceCitationsViolationsDateNew" runat="server" TargetControlID="tbCitationsViolationsDateNew"
+                                Format="MM/dd/yyyy" PopupButtonID="ibCitationsViolationsDateNew" />
+                            <asp:RegularExpressionValidator ForeColor="Red" ID="revCitationsViolationsDateNew"
+                                Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                ControlToValidate="tbCitationsViolationsDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label29" runat="server" Text="Location"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox CssClass="form_field" runat="server" ID="tbCitationsViolationsLocationNew"
+                                Width="20em" MaxLength="50"></asp:TextBox>
+                        </td>
+                    </tr>
+                </table>
+ 
+            </asp:Panel>
+            <asp:Panel runat="server" ID="pnlCitationsFineNew" GroupingText="Fine Information">
+                <table width="100%">
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" style="font-weight: bold;">
+                            <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Fine Status"></asp:Label>
+                        </td>
+                        <td colspan="1">
+                            <asp:DropDownList runat="server" ID="ddlCitationsFineStatusNew" DataTextField="FineStatus"
+                                DataValueField="FineStatus">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label37" runat="server" Text="Magistrate Fine"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbMagistrateFineNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="cvMagistrateFineNew" ControlToValidate="tbMagistrateFineNew"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvMagistrateFine_ServerValidate"></asp:CustomValidator>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label38" runat="server" Text="To Accounting"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbToAccountingNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="CustomValidator2" ControlToValidate="tbToAccountingNew"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvToAccounting_ServerValidate"></asp:CustomValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label40" runat="server" Text="Judicial Fine"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbJudicialFineNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="CustomValidator3" ControlToValidate="tbJudicialFineNew"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvJudicialFine_ServerValidate"></asp:CustomValidator>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label41" runat="server" Text="Writeoff Amount"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="tbWriteoffAmountNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="CustomValidator4" ControlToValidate="tbWriteoffAmountNew"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvWriteoffAmount_ServerValidate"></asp:CustomValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label43" runat="server" Text="Assessed Fine"></asp:Label>
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="tbAssessedFineNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="CustomValidator5" ControlToValidate="tbAssessedFineNew"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvAssessedFine_ServerValidate"></asp:CustomValidator>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel runat="server" ID="Panel5" GroupingText="Magistrate Notes">
+                <div style="height: 3.3em; overflow: auto;">
+                    <asp:TextBox runat="server" Height="2em" Width="95%" TextMode="MultiLine" ID="tbMagistrateNotesNew"></asp:TextBox>
+                </div>
+            </asp:Panel>
+            <center>
+                <table cellpadding="3">
+                    <tr>
+                        <td>
+                            <asp:Button CausesValidation="true" OnClientClick="javascript: return donewviolationjedisok();"
+                                ID="btnCitationNewOkay" runat="server" Text="Okay" OnClick="btnNewCitationOk_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnCitationNewCancel" runat="server" Text="Cancel" CausesValidation="false"
+                                OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                OnClick="btnNewCitationCancel_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            <asp:Label ID="lblCitationNewMessage" Font-Bold="true" ForeColor="Red" runat="server" ></asp:Label></td>
+                    </tr>
+                </table>
+            </center>
+        </asp:Panel>
+    </asp:Panel>
+    <asp:Button Style="display: none;" ID="btncitationhidden1" runat="server" />
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewCitation" runat="server" TargetControlID="btncitationhidden1"
+        PopupControlID="pnlCitationNewContent" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlCitationNewTitle"
+        BehaviorID="jdpopupcitationnew" />
 </asp:Content>

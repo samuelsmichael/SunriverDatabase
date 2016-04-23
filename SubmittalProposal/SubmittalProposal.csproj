@@ -102,6 +102,7 @@
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
+    <Content Include="Dummy.aspx" />
     <Content Include="ITAdmin.aspx" />
     <Content Include="IDCardManagementReportsMain.aspx" />
     <Content Include="GetPageInfo.asmx" />
@@ -351,6 +352,13 @@
     </Compile>
     <Compile Include="ContractorReportsMain.aspx.designer.cs">
       <DependentUpon>ContractorReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dummy.aspx.cs">
+      <DependentUpon>Dummy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dummy.aspx.designer.cs">
+      <DependentUpon>Dummy.aspx</DependentUpon>
     </Compile>
     <Compile Include="ITAdmin.aspx.cs">
       <DependentUpon>ITAdmin.aspx</DependentUpon>
