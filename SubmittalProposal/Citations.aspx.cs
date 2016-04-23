@@ -423,40 +423,43 @@ namespace SubmittalProposal {
         }
 
         private decimal sumFine=0;
+        private int lastIndex = -1;
         protected void gvViolations_RowDataBound(object sender, GridViewRowEventArgs e) {
             if (e.Row.RowType == DataControlRowType.DataRow) {
-                String text=null;
-                object control = e.Row.FindControl("lblScheduleFineUpdate");
-                if (control != null) { // we're not in edit mode
-                    text = ((Label)control).Text;
-                } else {
-                    control = e.Row.FindControl("tbScheduleFineUpdate");
-                    if (control != null) { // we're in edit mode
-                        text = ((TextBox)control).Text;
-                    }
-                }
-                sumFine += Utils.ObjectToDecimal0IfNull(text.Replace("$",""));
-
-
-                Control controlRuleID = (Label)e.Row.FindControl("lblRuleIDEditUpdate");
-                if (controlRuleID != null) { // we're in Edit mode
-                    DataTable dtRules = getRulesTable();
-                    DropDownList controlRules = (DropDownList)e.Row.FindControl("ddlRulesUpdate");
-                    controlRules.DataSource = dtRules;
-                    controlRules.SelectedValue = ((Label)controlRuleID).Text;
-                    controlRules.DataBind();
-                    CheckBox cbIssueAsWarningUpdate = (CheckBox)e.Row.FindControl("cbIssueAsWarningUpdate");
-                    cbIssueAsWarningUpdate.Checked = Utils.ObjectToBool(CurrentViolationsTable.Rows[e.Row.RowIndex]["IssueAsWarning"]);
-                } else {
-                    Label lblIssueAsWarningUpdate = (Label)e.Row.FindControl("lblIssueAsWarningUpdate");
-                    if (Utils.ObjectToBool(CurrentViolationsTable.Rows[e.Row.RowIndex]["IssueAsWarning"])) {
-                        lblIssueAsWarningUpdate.BackColor = System.Drawing.Color.Red;
-                        lblIssueAsWarningUpdate.ForeColor = System.Drawing.Color.White;
+                if (e.Row.RowIndex > lastIndex) { // because after an update, it sweeps through the rows twice.
+                    lastIndex = e.Row.RowIndex;
+                    String text = null;
+                    object control = e.Row.FindControl("lblScheduleFineUpdate");
+                    if (control != null) { // we're not in edit mode
+                        text = ((Label)control).Text;
                     } else {
-                        lblIssueAsWarningUpdate.BackColor = System.Drawing.Color.Transparent;
+                        control = e.Row.FindControl("tbScheduleFineUpdate");
+                        if (control != null) { // we're in edit mode
+                            text = ((TextBox)control).Text;
+                        }
                     }
-                }
+                    sumFine += Utils.ObjectToDecimal0IfNull(text.Replace("$", ""));
 
+                    Control controlRuleID = (Label)e.Row.FindControl("lblRuleIDEditUpdate");
+                    if (controlRuleID != null) { // we're in Edit mode
+                        DataTable dtRules = getRulesTable();
+                        DropDownList controlRules = (DropDownList)e.Row.FindControl("ddlRulesUpdate");
+                        controlRules.DataSource = dtRules;
+                        controlRules.SelectedValue = ((Label)controlRuleID).Text;
+                        controlRules.DataBind();
+                        CheckBox cbIssueAsWarningUpdate = (CheckBox)e.Row.FindControl("cbIssueAsWarningUpdate");
+                        cbIssueAsWarningUpdate.Checked = Utils.ObjectToBool(CurrentViolationsTable.Rows[e.Row.RowIndex]["IssueAsWarning"]);
+                    } else {
+                        Label lblIssueAsWarningUpdate = (Label)e.Row.FindControl("lblIssueAsWarningUpdate");
+                        if (Utils.ObjectToBool(CurrentViolationsTable.Rows[e.Row.RowIndex]["IssueAsWarning"])) {
+                            lblIssueAsWarningUpdate.BackColor = System.Drawing.Color.Red;
+                            lblIssueAsWarningUpdate.ForeColor = System.Drawing.Color.White;
+                        } else {
+                            lblIssueAsWarningUpdate.BackColor = System.Drawing.Color.Transparent;
+                        }
+                    }
+
+                }
             }
             if (e.Row.RowType == DataControlRowType.Footer) {
                 Label lbl = (Label)e.Row.FindControl("lblSumFine");
@@ -603,6 +606,10 @@ namespace SubmittalProposal {
             ddlRulesNew.SelectedIndex = -1;
             lblNewViolationMessage.Text = "";
             lblCitationNewMessage.Text = "";
+            tbAssessedFineNew.Text = "";
+            tbORSNumberNew.Text = "";
+            cbIssueAsWarningNew.Checked = false;
+            tbViolationNotesNew.Text = "";
             mpeNewViolation.Show();
         }
 
