@@ -96,7 +96,7 @@
                         </tr>
                     </table>
                     <ajaxToolkit:CalendarExtender ID="cvHearingDateUpdate" runat="server" TargetControlID="tbHearingDateUpdate"
-                        Format="MM/dd/yyyy" PopupButtonID="ibHearingDateUpdate"  />
+                        Format="MM/dd/yyyy" PopupButtonID="ibHearingDateUpdate" />
                     <asp:RegularExpressionValidator ForeColor="Red" ID="rvcvHearingDateUpdate" Display="Dynamic"
                         ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                         ControlToValidate="tbHearingDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
@@ -149,7 +149,7 @@
         </table>
     </asp:Panel>
     <asp:Panel ID="pnlCitations" runat="server" GroupingText="Violations List">
-        <table>
+        <table border="0">
             <tr>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="lbl17x332" runat="server" Text="Date"></asp:Label>
@@ -183,7 +183,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <div style="height: 10em; width: 900px; overflow: auto;">
+                    <div style="height: 8em; width: 900px; overflow: auto;">
                         <asp:GridView ID="gvViolations" Style="width: 100%; white-space: nowrap;" runat="server"
                             AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None"
                             OnRowEditing="gvViolations_RowEditing" OnRowUpdating="gvViolations_RowUpdating"
@@ -211,26 +211,22 @@
                                         <asp:Label ID="lblViolationIdEdit" runat="server" Text='<%# Eval("ViolationID") %>'></asp:Label>
                                     </EditItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Rule Description" 
-                                    SortExpression="RuleDescription">
+                                <asp:TemplateField HeaderText="Rule Description" SortExpression="RuleDescription">
                                     <ItemTemplate>
-                                        <asp:Label ID="tbRuleDescriptionUpdate" runat="server" 
-                                            Text='<%# Bind("RuleDescription") %>'></asp:Label>
+                                        <asp:Label ID="tbRuleDescriptionUpdate" runat="server" Text='<%# Bind("RuleDescription") %>'></asp:Label>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:DropDownList ID="ddlRulesUpdate" runat="server" 
-                                            DataTextField="RuleDescription" DataValueField="RuleID">
+                                        <asp:DropDownList ID="ddlRulesUpdate" runat="server" DataTextField="RuleDescription"
+                                            DataValueField="RuleID">
                                         </asp:DropDownList>
                                     </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Fine $" SortExpression="ScheduleFine">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblScheduleFineUpdate" runat="server" 
-                                            Text='<%# Bind("ScheduleFine", "{0:c}") %>'></asp:Label>
+                                        <asp:Label ID="lblScheduleFineUpdate" runat="server" Text='<%# Bind("ScheduleFine", "{0:c}") %>'></asp:Label>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="tbScheduleFineUpdate" runat="server" 
-                                            Text='<%# Bind("ScheduleFine", "{0:c}") %>'></asp:TextBox>
+                                        <asp:TextBox ID="tbScheduleFineUpdate" runat="server" Text='<%# Bind("ScheduleFine", "{0:c}") %>'></asp:TextBox>
                                     </EditItemTemplate>
                                     <FooterTemplate>
                                         <asp:Label ID="lblSumFine" runat="server"></asp:Label>
@@ -239,15 +235,13 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Warning" SortExpression="IssueAsWarning">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblIssueAsWarningUpdate" runat="server" Style="padding: 2px;" 
-                                            Text='<%# Bind("IssueAsWarning") %>'></asp:Label>
+                                        <asp:Label ID="lblIssueAsWarningUpdate" runat="server" Style="padding: 2px;" Text='<%# Bind("IssueAsWarning") %>'></asp:Label>
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:CheckBox ID="cbIssueAsWarningUpdate" runat="server" />
                                     </EditItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="ViolationNotes" HeaderText="Violation Notes"
-                                    SortExpression="ViolationNotes" />
+                                <asp:BoundField DataField="ViolationNotes" HeaderText="Violation Notes" SortExpression="ViolationNotes" />
                                 <asp:BoundField DataField="ORS#" HeaderText="ORS #" SortExpression="ORS#" />
                             </Columns>
                             <EditRowStyle BackColor="#999999" />
@@ -262,9 +256,83 @@
                             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                         </asp:GridView>
                     </div>
+                    <center>
+                        <asp:LinkButton ID="lbNewViolation" CausesValidation="false" OnClick="lbNewViolation_OnClick"
+                            runat="server">New Violation</asp:LinkButton>
+                    </center>
                 </td>
             </tr>
         </table>
+        <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewViolation">
+            <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewViolationTitle">
+                <span>New Violation</span>
+            </asp:Panel>
+            <asp:Panel runat="server" Style="text-align: center;" ID="Panelx36" CssClass="newitemcontent">
+                <table border="0" cellpadding="3" cellspacing="3">
+                    <tr>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Rule "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:DropDownList ID="ddlRulesNew" runat="server" DataTextField="RuleDescription"
+                                DataValueField="RuleID">
+                            </asp:DropDownList>
+                        </td>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label1x12" runat="server" Text="Fine $ "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:TextBox ID="tbScheduleFineNew" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="ORS #"></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:TextBox ID="tbORSNumberNew" runat="server"></asp:TextBox>
+                        </td>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Labelab22" runat="server" Text="Issued as a Warning "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:CheckBox ID="cbIssueAsWarningNew" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Labelabc22" runat="server" Text="Notes"></asp:Label>
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="tbViolationNotesNew" Width="99%" TextMode="MultiLine" Height="4em" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:Label ID="lblNewViolationMessage" runat="server" Font-Bold="true" ForeColor="Red" ></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+                <center>
+                    <table cellpadding="3">
+                        <tr>
+                            <td>
+                                <asp:Button CausesValidation="true" OnClientClick="javascript: return donewviolationjedisok();"
+                                    ID="btnNewViolationOk" runat="server" Text="Okay" OnClick="btnNewViolationOk_Click" />
+                            </td>
+                            <td>
+                                <asp:Button ID="btnNewViolationCancel" runat="server" Text="Cancel" CausesValidation="false"
+                                    OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                    OnClick="btnNewViolationCancel_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </asp:Panel>
+        </asp:Panel>
+        <asp:Button runat="server" ID="dummyNewViolation" Style="display: none" />
+        <ajaxToolkit:ModalPopupExtender ID="mpeNewViolation" runat="server" TargetControlID="dummyNewViolation"
+            PopupControlID="pnlNewViolation" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewViolationTitle" />
     </asp:Panel>
     <asp:Panel runat="server" ID="pnlCitationsFineUpdate" GroupingText="Fine Information">
         <table width="100%">

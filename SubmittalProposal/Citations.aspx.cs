@@ -53,6 +53,12 @@ namespace SubmittalProposal {
             ddlSunriverStatusUpdate.DataBind();
             ddlCitationsFineStatusUpdate.DataSource = dtFineStatus;
             ddlCitationsFineStatusUpdate.DataBind();
+            DataTable dtRules = getRulesTable();
+            ddlRulesNew.DataSource = dtRules;
+            ddlRulesNew.SelectedIndex = -1;
+            ddlRulesNew.DataBind();
+
+
         }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
@@ -229,6 +235,7 @@ namespace SubmittalProposal {
             tbAssessedFineUpdate.Enabled = false;
             tbMagistrateNotesUpdate.Enabled = false;
             ibHearingDateUpdate.Enabled = false;
+            lbNewViolation.Enabled = false;
         }
 
         protected override void unlockYourUpdateFields() {
@@ -256,6 +263,7 @@ namespace SubmittalProposal {
             tbMagistrateNotesUpdate.Enabled = true;
             getUpdateResultsLabel().Text = "";
             ibHearingDateUpdate.Enabled = true;
+            lbNewViolation.Enabled = true;
         }
         protected override string UpdateRoleName {
             get { return "canupdatecitations"; }
@@ -343,11 +351,11 @@ namespace SubmittalProposal {
             GridViewRow row = gvViolations.Rows[e.RowIndex];
             try {
                 int violationId = Convert.ToInt32(((Label)row.FindControl("lblViolationIdEdit")).Text);
-                string ruleId=((DropDownList)row.FindControl("ddlRulesUpdate")).SelectedValue;
-                string fine=((TextBox)row.FindControl("tbScheduleFineUpdate")).Text.Replace("$","");
-                bool isWarning=((CheckBox)row.FindControl("cbIssueAsWarningUpdate")).Checked;
-                string violationNotes=((TextBox)row.Cells[6].Controls[0]).Text;
-                string orsNbr=((TextBox)row.Cells[7].Controls[0]).Text;
+                string ruleId = ((DropDownList)row.FindControl("ddlRulesUpdate")).SelectedValue;
+                string fine = ((TextBox)row.FindControl("tbScheduleFineUpdate")).Text.Replace("$", "");
+                bool isWarning = ((CheckBox)row.FindControl("cbIssueAsWarningUpdate")).Checked;
+                string violationNotes = ((TextBox)row.Cells[6].Controls[0]).Text;
+                string orsNbr = ((TextBox)row.Cells[7].Controls[0]).Text;
                 SqlCommand cmd = new SqlCommand("uspViolationsUpdate");
                 decimal scheduleFine = Utils.ObjectToDecimal0IfNull(fine);
 
@@ -400,14 +408,7 @@ namespace SubmittalProposal {
 
                 Control controlRuleID = (Label)e.Row.FindControl("lblRuleIDEditUpdate");
                 if (controlRuleID != null) { // we're in Edit mode
-                    DataTable dtRules = CIDataSet().Tables[3];
-                    DataRow drRule = dtRules.NewRow();
-                    drRule["RuleID"] = "bubba";
-                    drRule["RuleDescription"] = "";
-                    try {
-                        dtRules.Rows.InsertAt(drRule, 0);
-                    } catch { // already there
-                    }
+                    DataTable dtRules = getRulesTable();
                     DropDownList controlRules = (DropDownList)e.Row.FindControl("ddlRulesUpdate");
                     controlRules.DataSource = dtRules;
                     controlRules.SelectedValue = ((Label)controlRuleID).Text;
@@ -429,6 +430,18 @@ namespace SubmittalProposal {
                 Label lbl = (Label)e.Row.FindControl("lblSumFine");
                 lbl.Text = sumFine.ToString("c");
             }
+        }
+
+        private DataTable getRulesTable() {
+            DataTable dtRules = CIDataSet().Tables[3];
+            DataRow drRule = dtRules.NewRow();
+            drRule["RuleID"] = "bubba";
+            drRule["RuleDescription"] = "";
+            try {
+                dtRules.Rows.InsertAt(drRule, 0);
+            } catch { // already there
+            }
+            return dtRules;
         }
 
         protected void cvMagistrateFine_ServerValidate(object source, ServerValidateEventArgs args) {
@@ -491,5 +504,65 @@ namespace SubmittalProposal {
                 }
             }
         }
+        private bool checkNewViolationsPanel() {
+            string crnl="";
+            StringBuilder sb = new StringBuilder();
+            if (ddlRulesNew.SelectedIndex == 0) {
+                sb.Append("Must choose a rule");
+                crnl = "\r\n";
+            }
+            if (Utils.isNothingNot(tbScheduleFineNew.Text)) {
+                try {
+                    decimal d = Convert.ToDecimal(tbScheduleFineNew.Text.Replace("$", "").Replace(",", ""));
+                } catch {
+                    sb.Append(crnl + "Fine must be an amount");
+                }
+            }
+            lblNewViolationMessage.Text = sb.ToString();
+            return
+                sb.Length == 0;
+        }
+        protected void btnNewViolationOk_Click(object sender, EventArgs args) {
+            if (checkNewViolationsPanel()) {
+                try {
+                    /*                SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
+
+                                    cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
+                                    DateTime? date = Utils.ObjectToDateTimeNullable(tbDateNew.Text);
+                                    cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
+                                    decimal? fee = Utils.isNothing(ddlFeeNew.SelectedValue) ? (decimal?)null : Utils.ObjectToDecimal(ddlFeeNew.SelectedValue);
+                                    cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
+                                    cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = cbPaidNew.Checked;
+                                    cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = tbPaidMemoNew.Text;
+                                    DateTime? dateClosed = Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
+                                    cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
+                                    cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNew.SelectedValue;
+                                    cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNew.SelectedValue;
+                                    cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNew.Text;
+                                    cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text;
+                                    SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
+                                    newid.Direction = ParameterDirection.Output;
+                                    cmd.Parameters.Add(newid);
+                                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+                    */
+                    performPostUpdateSuccessfulActions("Violation added", DataSetCacheKey, null);
+                } catch (Exception ee) {
+                    performPostUpdateFailedActions("Violation not updated. Error msg: " + ee.Message);
+                }
+                mpeNewViolation.Hide();
+            } else {
+                mpeNewViolation.Show();
+            }
+        }
+        protected void btnNewViolationCancel_Click(object sender, EventArgs args) {
+            mpeNewViolation.Hide();
+
+        }
+        protected void lbNewViolation_OnClick(object sender, EventArgs args) {
+            ddlRulesNew.SelectedIndex = -1;
+            lblNewViolationMessage.Text = "";
+            mpeNewViolation.Show();
+        }
+
     }
 }
