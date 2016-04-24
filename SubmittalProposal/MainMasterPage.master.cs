@@ -153,6 +153,10 @@ namespace SubmittalProposal {
                                     } else {
                                         if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("card")) {
                                             Response.Redirect("~/IDCardManagementReportsMain.aspx");
+                                        } else {
+                                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("citation")) {
+                                                Response.Redirect("~/CitationsReportsMain.aspx");
+                                            }
                                         }
                                     }
                                 }

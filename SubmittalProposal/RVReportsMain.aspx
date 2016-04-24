@@ -17,7 +17,7 @@
             </table>
         </center>
     </p>
-    <h2>Submittal Reports</h2>
+    <h2>RV Reports</h2>
     <p>
         <asp:LinkButton ID="lbSpaceInventory" runat="server" 
             onclick="lbSpaceInventory_Click">Space Inventory</asp:LinkButton>

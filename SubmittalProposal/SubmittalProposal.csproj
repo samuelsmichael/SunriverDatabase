@@ -97,6 +97,7 @@
     </Content>
     <Content Include="BPermit.aspx" />
     <Content Include="Citations.aspx" />
+    <Content Include="CitationsReportsMain.aspx" />
     <Content Include="ComplianceReview.aspx" />
     <Content Include="BPermitReportsMain.aspx" />
     <Content Include="ComplianceReviewReportsMain.aspx" />
@@ -117,6 +118,7 @@
     <Content Include="Query_CrossReference3.aspx" />
     <Content Include="Reports\BPermitsBuildingPermitsIssued.aspx" />
     <Content Include="Reports\BPermitsClosed.aspx" />
+    <Content Include="Reports\CitationsReport_HearingCalendar.aspx" />
     <Content Include="Reports\ComplianceReviewHistory.aspx" />
     <Content Include="Reports\ComplianceReviewOpen.aspx" />
     <Content Include="Reports\BPermitsOpen.aspx" />
@@ -318,6 +320,13 @@
     <Compile Include="Citations.aspx.designer.cs">
       <DependentUpon>Citations.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CitationsReportsMain.aspx.cs">
+      <DependentUpon>CitationsReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CitationsReportsMain.aspx.designer.cs">
+      <DependentUpon>CitationsReportsMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ComplianceReview.aspx.cs">
       <DependentUpon>ComplianceReview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -472,6 +481,19 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BPermitsOpen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_HearingCalendar.aspx.cs">
+      <DependentUpon>CitationsReport_HearingCalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_HearingCalendar.aspx.designer.cs">
+      <DependentUpon>CitationsReport_HearingCalendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_HearingCalendar.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Citations_HearingCalendar.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ComplianceReviewHistory.aspx.cs">
@@ -1014,6 +1036,10 @@
     <EmbeddedResource Include="Reports\BPermits\BPermitsOpen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BPermitsOpen.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_HearingCalendar.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_HearingCalendar.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
