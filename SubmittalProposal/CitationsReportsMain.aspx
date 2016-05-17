@@ -22,5 +22,9 @@
         <asp:LinkButton ID="lbHearingCalendar" runat="server" 
             onclick="lbHearingCalendar_Click">Hearing Calendar</asp:LinkButton>
      </p>
+    <p>
+        <asp:LinkButton ID="lbCitationsOpen" runat="server" 
+            onclick="lbCitationsOpen_Click">Citations Open</asp:LinkButton>
+     </p>
 
 </asp:Content>

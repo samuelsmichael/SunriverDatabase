@@ -18,5 +18,9 @@ namespace SubmittalProposal {
         protected void lbHearingCalendar_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/CitationsReport_HearingCalendar.aspx");
         }
+
+        protected void lbCitationsOpen_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/CitationsReport_CitationsOpen.aspx");
+        }
     }
 }
