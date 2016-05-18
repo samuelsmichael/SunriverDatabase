@@ -22,5 +22,8 @@ namespace SubmittalProposal {
         protected void lbCitationsOpen_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/CitationsReport_CitationsOpen.aspx");
         }
+        protected void lbCitationsClosed_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/CitationsReport_CitationsClosed.aspx");
+        }
     }
 }

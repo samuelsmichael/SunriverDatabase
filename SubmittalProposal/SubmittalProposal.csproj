@@ -131,6 +131,7 @@
     <Content Include="Reports\ContractorEnvelope.aspx" />
     <Content Include="Reports\ContractorMailingLabels.aspx" />
     <Content Include="Reports\CitationsReport_CitationsOpen.aspx" />
+    <Content Include="Reports\CitationsReport_CitationsClosed.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -491,6 +492,12 @@
     <Compile Include="Reports\CitationsReport_HearingCalendar.aspx.designer.cs">
       <DependentUpon>CitationsReport_HearingCalendar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Citations\Citations_Closed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Citations_Closed.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Citations\Citations_HearingCalendar.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -640,6 +647,13 @@
     </Compile>
     <Compile Include="Reports\CitationsReport_CitationsOpen.aspx.designer.cs">
       <DependentUpon>CitationsReport_CitationsOpen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsClosed.aspx.cs">
+      <DependentUpon>CitationsReport_CitationsClosed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsClosed.aspx.designer.cs">
+      <DependentUpon>CitationsReport_CitationsClosed.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
@@ -1050,6 +1064,10 @@
     <EmbeddedResource Include="Reports\BPermits\BPermitsOpen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BPermitsOpen.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_Closed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_Closed.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Citations\Citations_HearingCalendar.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -26,5 +26,9 @@
         <asp:LinkButton ID="lbCitationsOpen" runat="server" 
             onclick="lbCitationsOpen_Click">Citations Open</asp:LinkButton>
      </p>
+    <p>
+        <asp:LinkButton ID="LinkButton1" runat="server" 
+            onclick="lbCitationsClosed_Click">Citations Closed</asp:LinkButton>
+     </p>
 
 </asp:Content>
