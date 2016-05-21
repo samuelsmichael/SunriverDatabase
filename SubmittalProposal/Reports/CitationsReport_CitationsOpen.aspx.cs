@@ -25,6 +25,8 @@ namespace SubmittalProposal.Reports {
             Hashtable reportParams = new Hashtable();
             reportParams.Add("@StartDate", tbStartDate.Text);
             reportParams.Add("@EndDate", tbEndDate.Text);
+            reportParams.Add("@WhereFineStatus", "Open");
+            reportParams.Add("@EqualvsNotEqual", 1);
             return reportParams;
         }
 

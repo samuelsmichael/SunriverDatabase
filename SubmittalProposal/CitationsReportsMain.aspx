@@ -27,8 +27,20 @@
             onclick="lbCitationsOpen_Click">Citations Open</asp:LinkButton>
      </p>
     <p>
-        <asp:LinkButton ID="LinkButton1" runat="server" 
+        <asp:LinkButton ID="lbCitationsClosed" runat="server" 
             onclick="lbCitationsClosed_Click">Citations Closed</asp:LinkButton>
+     </p>
+    <p>
+        <asp:LinkButton ID="lbFineWriteoff" runat="server" 
+            onclick="lbFineWriteoff_Click">Fine Writeoff</asp:LinkButton>
+     </p>
+    <p>
+        <asp:LinkButton ID="lbBalancesToAcctg" runat="server" 
+            onclick="lbBalancesToAcctg_Click">Balances to Acctg</asp:LinkButton>
+     </p>
+    <p>
+        <asp:LinkButton ID="lbFineSummary" runat="server" 
+            onclick="lbFineSummary_Click">Fine Summary</asp:LinkButton>
      </p>
 
 </asp:Content>

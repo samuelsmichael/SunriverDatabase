@@ -4,8 +4,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Mike Samuels
--- Create date: 4/22/2016
--- Description:	Updates Citations
+-- Create date: 5/20/2016
+-- Description:	Citations Open
 /*
 	exec [uspCitationsQry-Open] @StartDate='1/1/2016', @EndDate='6/1/2016'
 */
@@ -33,6 +33,7 @@ WHERE
 	c.OffenseDate Between @StartDate And @EndDate 
 	AND c.FineStatus='Open'
 ORDER BY c.CitationID;
+
 
 
 END

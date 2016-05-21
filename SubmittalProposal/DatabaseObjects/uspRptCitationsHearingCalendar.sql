@@ -7,7 +7,7 @@ GO
 -- Create date: 4/23/2016
 -- Description:	Gets Data Set that drives Citations Hearing Calendar report
 /*
-	Exec uspRptCitationsHearingCalendar '4/19/2016'
+	Exec uspRptCitationsHearingCalendar '9/8/2015'
 */
 -- =============================================
 CREATE PROCEDURE uspRptCitationsHearingCalendar 

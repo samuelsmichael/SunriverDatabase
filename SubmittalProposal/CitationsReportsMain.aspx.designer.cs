@@ -40,12 +40,39 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.LinkButton lbCitationsOpen;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// lbCitationsClosed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton lbCitationsClosed;
+        
+        /// <summary>
+        /// lbFineWriteoff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbFineWriteoff;
+        
+        /// <summary>
+        /// lbBalancesToAcctg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbBalancesToAcctg;
+        
+        /// <summary>
+        /// lbFineSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbFineSummary;
     }
 }

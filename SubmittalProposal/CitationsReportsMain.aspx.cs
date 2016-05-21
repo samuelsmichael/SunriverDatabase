@@ -25,5 +25,16 @@ namespace SubmittalProposal {
         protected void lbCitationsClosed_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/CitationsReport_CitationsClosed.aspx");
         }
+        protected void lbFineWriteoff_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/CitationsReport_CitationsFineWriteoff.aspx");
+        }
+        protected void lbBalancesToAcctg_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/CitationsReport_CitationsFineBalancesToAcctg.aspx");
+        }
+        protected void lbFineSummary_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/CitationsReport_CitationsFineSummary.aspx");
+        }
+
+        
     }
 }

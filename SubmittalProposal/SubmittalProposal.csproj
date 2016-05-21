@@ -132,6 +132,9 @@
     <Content Include="Reports\ContractorMailingLabels.aspx" />
     <Content Include="Reports\CitationsReport_CitationsOpen.aspx" />
     <Content Include="Reports\CitationsReport_CitationsClosed.aspx" />
+    <Content Include="Reports\CitationsReport_CitationsFineWriteoff.aspx" />
+    <Content Include="Reports\CitationsReport_CitationsFineBalancesToAcctg.aspx" />
+    <Content Include="Reports\CitationsReport_CitationsFineSummary.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -510,6 +513,24 @@
       <DependentUpon>Citations_Open.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Citations\Citations_FineWriteOff.cs">
+      <DependentUpon>Citations_FineWriteOff.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_FineBalancesToAcctg.cs">
+      <DependentUpon>Citations_FineBalancesToAcctg.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_FineSummary.cs">
+      <DependentUpon>Citations_FineSummary.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\ComplianceReviewHistory.aspx.cs">
       <DependentUpon>ComplianceReviewHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -654,6 +675,27 @@
     </Compile>
     <Compile Include="Reports\CitationsReport_CitationsClosed.aspx.designer.cs">
       <DependentUpon>CitationsReport_CitationsClosed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsFineWriteoff.aspx.cs">
+      <DependentUpon>CitationsReport_CitationsFineWriteoff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsFineWriteoff.aspx.designer.cs">
+      <DependentUpon>CitationsReport_CitationsFineWriteoff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsFineBalancesToAcctg.aspx.cs">
+      <DependentUpon>CitationsReport_CitationsFineBalancesToAcctg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsFineBalancesToAcctg.aspx.designer.cs">
+      <DependentUpon>CitationsReport_CitationsFineBalancesToAcctg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsFineSummary.aspx.cs">
+      <DependentUpon>CitationsReport_CitationsFineSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_CitationsFineSummary.aspx.designer.cs">
+      <DependentUpon>CitationsReport_CitationsFineSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
@@ -1076,6 +1118,18 @@
     <EmbeddedResource Include="Reports\Citations\Citations_Open.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Citations_Open.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_FineWriteOff.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_FineWriteOff.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_FineBalancesToAcctg.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_FineBalancesToAcctg.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_FineSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_FineSummary.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
