@@ -10,7 +10,7 @@ GO
 	exec [uspCitationsQry-Open] @StartDate='1/1/2016', @EndDate='6/1/2016'
 */
 -- =============================================
-create PROCEDURE [uspCitationsQry-Open] 
+alter PROCEDURE [uspCitationsQry-Open] 
 	@StartDate datetime,
 	@EndDate datetime
 AS
@@ -23,7 +23,7 @@ SELECT
 	case when FineStatus='Open' then '1' else '0' end AS CitationOpen, 
 	c.VLastName, c.VFirstName, c.VMailAddr1, c.VMailAddr2, 
 	c.VCity, c.VState, c.VZip, c.VSunriverStatus, c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, c.JudicialFine, 
-	c.VFirstName + case when c.VFirstName='' then '' else ' ' end + c.VLastName as vFullName,
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
 	c.AssessedFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 	--IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
 	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid

@@ -20,7 +20,7 @@ SELECT
 	CASE WHEN FineStatus = 'Open' then 1 ELSE 0 END AS CitationOpen,
 	--IIf([FineStatus]="Open","1","0") AS CitationOpen, 
 	c.VLastName, c.VFirstName, 
-	c.VFirstName + case when c.VFirstName='' then '' else ' ' end + c.VLastName as vFullName,
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
 
 	c.VMailAddr1, 
 	c.VMailAddr2, c.VCity, c.VState, c.VZip, c.VSunriverStatus, 

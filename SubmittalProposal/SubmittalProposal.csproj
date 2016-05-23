@@ -135,6 +135,11 @@
     <Content Include="Reports\CitationsReport_CitationsFineWriteoff.aspx" />
     <Content Include="Reports\CitationsReport_CitationsFineBalancesToAcctg.aspx" />
     <Content Include="Reports\CitationsReport_CitationsFineSummary.aspx" />
+    <Content Include="Reports\CitationsReport_RuleSummary.aspx" />
+    <Content Include="Reports\CitationsReport_DesignSummary.aspx" />
+    <Content Include="Reports\CitationsReport_Vegetation.aspx" />
+    <Content Include="Reports\CitationsReport_ViolatorHistory.aspx" />
+    <Content Include="Reports\CitationsReport_ORSViolationSummary.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -501,6 +506,12 @@
       <DependentUpon>Citations_Closed.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Citations\Citations_DesignSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Citations_DesignSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Citations\Citations_HearingCalendar.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -527,6 +538,30 @@
     </Compile>
     <Compile Include="Reports\Citations\Citations_FineSummary.cs">
       <DependentUpon>Citations_FineSummary.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_RuleSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Citations_RuleSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_Vegetation.cs">
+      <DependentUpon>Citations_Vegetation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_ViolatorHistory.cs">
+      <DependentUpon>Citations_ViolatorHistory.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_ORSViolationSummary.cs">
+      <DependentUpon>Citations_ORSViolationSummary.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -696,6 +731,41 @@
     </Compile>
     <Compile Include="Reports\CitationsReport_CitationsFineSummary.aspx.designer.cs">
       <DependentUpon>CitationsReport_CitationsFineSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_RuleSummary.aspx.cs">
+      <DependentUpon>CitationsReport_RuleSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_RuleSummary.aspx.designer.cs">
+      <DependentUpon>CitationsReport_RuleSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_DesignSummary.aspx.cs">
+      <DependentUpon>CitationsReport_DesignSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_DesignSummary.aspx.designer.cs">
+      <DependentUpon>CitationsReport_DesignSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_Vegetation.aspx.cs">
+      <DependentUpon>CitationsReport_Vegetation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_Vegetation.aspx.designer.cs">
+      <DependentUpon>CitationsReport_Vegetation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_ViolatorHistory.aspx.cs">
+      <DependentUpon>CitationsReport_ViolatorHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_ViolatorHistory.aspx.designer.cs">
+      <DependentUpon>CitationsReport_ViolatorHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_ORSViolationSummary.aspx.cs">
+      <DependentUpon>CitationsReport_ORSViolationSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_ORSViolationSummary.aspx.designer.cs">
+      <DependentUpon>CitationsReport_ORSViolationSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
@@ -1111,6 +1181,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Citations_Closed.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_DesignSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_DesignSummary.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Citations\Citations_HearingCalendar.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Citations_HearingCalendar.cs</LastGenOutput>
@@ -1130,6 +1204,22 @@
     <EmbeddedResource Include="Reports\Citations\Citations_FineSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Citations_FineSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_RuleSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_RuleSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_Vegetation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_Vegetation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_ViolatorHistory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_ViolatorHistory.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_ORSViolationSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_ORSViolationSummary.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

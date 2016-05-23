@@ -31,6 +31,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.LinkButton lbHearingCalendar;
         
         /// <summary>
+        /// lbFineSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbFineSummary;
+        
+        /// <summary>
+        /// lbORSViolationSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbORSViolationSummary;
+        
+        /// <summary>
         /// lbCitationsOpen control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbCitationsOpen;
+        
+        /// <summary>
+        /// lbRuleSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbRuleSummary;
         
         /// <summary>
         /// lbCitationsClosed control.
@@ -49,6 +76,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.LinkButton lbCitationsClosed;
         
         /// <summary>
+        /// lbDesignSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbDesignSummary;
+        
+        /// <summary>
         /// lbFineWriteoff control.
         /// </summary>
         /// <remarks>
@@ -56,6 +92,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbFineWriteoff;
+        
+        /// <summary>
+        /// lbVegetation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbVegetation;
         
         /// <summary>
         /// lbBalancesToAcctg control.
@@ -67,12 +112,12 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.LinkButton lbBalancesToAcctg;
         
         /// <summary>
-        /// lbFineSummary control.
+        /// lbViolatorHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbFineSummary;
+        protected global::System.Web.UI.WebControls.LinkButton lbViolatorHistory;
     }
 }

@@ -34,7 +34,21 @@ namespace SubmittalProposal {
         protected void lbFineSummary_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/CitationsReport_CitationsFineSummary.aspx");
         }
-
+        protected void lbRuleSummary_Click(object sender, EventArgs e) {
+            Response.Redirect("~/Reports/CitationsReport_RuleSummary.aspx");
+        }
+        protected void lbDesignSummary_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_DesignSummary.aspx");
+        }
+        protected void lbVegetation_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_Vegetation.aspx");
+        }
+        protected void lbViolatorHistory_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_ViolatorHistory.aspx");
+        }
+        protected void lbORSViolationSummary_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_ORSViolationSummary.aspx");
+        }
         
     }
 }

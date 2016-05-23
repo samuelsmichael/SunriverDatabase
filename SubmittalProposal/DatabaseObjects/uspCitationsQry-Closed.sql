@@ -20,7 +20,7 @@ SELECT
 	--IIf([FineStatus]="Open","1","0") AS CitationOpen
 	case when FineStatus='Open' THEN '1' else '0' end as CitationOpen,
 	c.VLastName, c.VFirstName, 
-	c.VFirstName + case when c.VFirstName='' then '' else ' ' end + c.VLastName as vFullName,
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
 	c.VMailAddr1, c.VMailAddr2, c.VCity, c.VState, c.VZip, c.VSunriverStatus, c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, c.JudicialFine, 
 	c.AssessedFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],

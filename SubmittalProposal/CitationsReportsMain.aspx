@@ -18,29 +18,70 @@
         </center>
     </p>
     <h2>Citations Reports</h2>
-    <p>
-        <asp:LinkButton ID="lbHearingCalendar" runat="server" 
-            onclick="lbHearingCalendar_Click">Hearing Calendar</asp:LinkButton>
-     </p>
-    <p>
-        <asp:LinkButton ID="lbCitationsOpen" runat="server" 
-            onclick="lbCitationsOpen_Click">Citations Open</asp:LinkButton>
-     </p>
-    <p>
-        <asp:LinkButton ID="lbCitationsClosed" runat="server" 
-            onclick="lbCitationsClosed_Click">Citations Closed</asp:LinkButton>
-     </p>
-    <p>
-        <asp:LinkButton ID="lbFineWriteoff" runat="server" 
-            onclick="lbFineWriteoff_Click">Fine Writeoff</asp:LinkButton>
-     </p>
-    <p>
-        <asp:LinkButton ID="lbBalancesToAcctg" runat="server" 
-            onclick="lbBalancesToAcctg_Click">Balances to Acctg</asp:LinkButton>
-     </p>
-    <p>
-        <asp:LinkButton ID="lbFineSummary" runat="server" 
-            onclick="lbFineSummary_Click">Fine Summary</asp:LinkButton>
-     </p>
+    
+    <table cellpadding="6" cellspacing="6">
+        <tr>
+            <td>
+                <asp:LinkButton ID="lbHearingCalendar" runat="server" 
+                    onclick="lbHearingCalendar_Click">Hearing Calendar</asp:LinkButton>
+            </td>
+            <td>
+                <asp:LinkButton ID="lbFineSummary" runat="server" 
+                    onclick="lbFineSummary_Click">Fine Summary</asp:LinkButton>
+            </td>
+            <td>
+                <asp:LinkButton ID="lbORSViolationSummary" runat="server" 
+                    onclick="lbORSViolationSummary_Click">Violators - ORS</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:LinkButton ID="lbCitationsOpen" runat="server" 
+                    onclick="lbCitationsOpen_Click">Citations Open</asp:LinkButton>
+            </td>
+            <td>
+                <asp:LinkButton ID="lbRuleSummary" runat="server" 
+                    onclick="lbRuleSummary_Click">Rule Summary</asp:LinkButton>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:LinkButton ID="lbCitationsClosed" runat="server" 
+                    onclick="lbCitationsClosed_Click">Citations Closed</asp:LinkButton>
 
+            </td>
+            <td>
+                <asp:LinkButton ID="lbDesignSummary" runat="server" 
+                    onclick="lbDesignSummary_Click">Design Summary</asp:LinkButton>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:LinkButton ID="lbFineWriteoff" runat="server" 
+                    onclick="lbFineWriteoff_Click">Fine Writeoff</asp:LinkButton>
+            </td>
+            <td>
+                <asp:LinkButton ID="lbVegetation" runat="server" 
+                    onclick="lbVegetation_Click">Vegetation</asp:LinkButton>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:LinkButton ID="lbBalancesToAcctg" runat="server" 
+                    onclick="lbBalancesToAcctg_Click">Balances to Acctg</asp:LinkButton>
+            </td>
+            <td>
+                <asp:LinkButton ID="lbViolatorHistory" runat="server" 
+                    onclick="lbViolatorHistory_Click">Violator History</asp:LinkButton>
+            </td>
+            <td>
+            </td>
+        </tr>
+     </table>
 </asp:Content>

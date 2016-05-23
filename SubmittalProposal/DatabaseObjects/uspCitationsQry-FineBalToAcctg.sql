@@ -18,12 +18,12 @@ BEGIN
 SELECT 
 	c.CitationID, c.OffenseDate, c.FineBalToAcctg, c.FineStatus, 
 	CASE WHEN FineStatus = 'Open' then 1 ELSE 0 END AS CitationOpen,
-	c.VFirstName + case when c.VFirstName='' then '' else ' ' end + c.VLastName as vFullName,
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
 	c.VMailAddr1, 
 	c.VMailAddr2, c.VCity, c.VState, c.VZip, c.VSunriverStatus, 
 	c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, c.JudicialFine, 
 	c.AssessedFine, c.WriteOff, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
-	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
+--	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
 	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
 
 FROM qryTotalCitationFine f RIGHT JOIN tblCitations c ON f.fkCitationID=c.CitationID
