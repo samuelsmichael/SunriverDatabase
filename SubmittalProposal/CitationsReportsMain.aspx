@@ -31,7 +31,7 @@
             </td>
             <td>
                 <asp:LinkButton ID="lbORSViolationSummary" runat="server" 
-                    onclick="lbORSViolationSummary_Click">Violators - ORS</asp:LinkButton>
+                    onclick="lbORSViolationSummary_Click">Violations - ORS</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -44,6 +44,8 @@
                     onclick="lbRuleSummary_Click">Rule Summary</asp:LinkButton>
             </td>
             <td>
+                <asp:LinkButton ID="lbORSWarningSummary" runat="server" 
+                    onclick="lbORSWarningSummary_Click">Warnings - ORS</asp:LinkButton>
             </td>
         </tr>
         <tr>

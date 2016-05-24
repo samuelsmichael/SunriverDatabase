@@ -49,6 +49,9 @@ namespace SubmittalProposal {
         protected void lbORSViolationSummary_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/CitationsReport_ORSViolationSummary.aspx");
         }
+        protected void lbORSWarningSummary_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_ORSWarningSummary.aspx");
+        }
         
     }
 }
