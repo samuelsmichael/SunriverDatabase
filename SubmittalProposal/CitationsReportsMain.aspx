@@ -59,6 +59,8 @@
                     onclick="lbDesignSummary_Click">Design Summary</asp:LinkButton>
             </td>
             <td>
+                <asp:LinkButton ID="lbParkingViolations" runat="server" 
+                    onclick="lbParkingViolations_Click">Parking Violations</asp:LinkButton>
             </td>
         </tr>
         <tr>
@@ -71,6 +73,8 @@
                     onclick="lbVegetation_Click">Vegetation</asp:LinkButton>
             </td>
             <td>
+                <asp:LinkButton ID="lbParkingWarningSummary" runat="server" 
+                    onclick="lbParkingWarningSummary_Click">Parking Warnings</asp:LinkButton>
             </td>
         </tr>
         <tr>

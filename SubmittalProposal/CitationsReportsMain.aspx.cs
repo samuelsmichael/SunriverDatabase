@@ -52,6 +52,12 @@ namespace SubmittalProposal {
         protected void lbORSWarningSummary_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/CitationsReport_ORSWarningSummary.aspx");
         }
+        protected void lbParkingViolations_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_ParkingViolations.aspx");
+        }
+        protected void lbParkingWarningSummary_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_ParkingWarningSummary.aspx");
+        }
         
     }
 }

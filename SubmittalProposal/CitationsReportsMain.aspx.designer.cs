@@ -94,6 +94,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.LinkButton lbDesignSummary;
         
         /// <summary>
+        /// lbParkingViolations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbParkingViolations;
+        
+        /// <summary>
         /// lbFineWriteoff control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbVegetation;
+        
+        /// <summary>
+        /// lbParkingWarningSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbParkingWarningSummary;
         
         /// <summary>
         /// lbBalancesToAcctg control.
