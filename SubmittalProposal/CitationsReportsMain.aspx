@@ -87,6 +87,16 @@
                     onclick="lbViolatorHistory_Click">Violator History</asp:LinkButton>
             </td>
             <td>
+                <asp:LinkButton ID="lbDesignRuleFines" runat="server" 
+                    onclick="lbDesignRuleFines_Click">Design Rule - Fines</asp:LinkButton>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+                <asp:LinkButton ID="lbDesignRuleWarnings" runat="server" 
+                    onclick="lbDesignRuleWarnings_Click">Design Rule - Warnings</asp:LinkButton>
             </td>
         </tr>
      </table>

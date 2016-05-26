@@ -58,6 +58,13 @@ namespace SubmittalProposal {
         protected void lbParkingWarningSummary_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/CitationsReport_ParkingWarningSummary.aspx");
         }
-        
+        protected void lbDesignRuleFines_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_DesignViolations.aspx");
+        }
+        protected void lbDesignRuleWarnings_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_DesignWarning.aspx");
+        }
+     
+         
     }
 }

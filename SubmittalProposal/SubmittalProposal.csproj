@@ -143,6 +143,8 @@
     <Content Include="Reports\CitationsReport_ORSWarningSummary.aspx" />
     <Content Include="Reports\CitationsReport_ParkingViolations.aspx" />
     <Content Include="Reports\CitationsReport_ParkingWarningSummary.aspx" />
+    <Content Include="Reports\CitationsReport_DesignViolations.aspx" />
+    <Content Include="Reports\CitationsReport_DesignWarning.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -587,6 +589,18 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\Citations\Citations_DesignViolations.cs">
+      <DependentUpon>Citations_DesignViolations.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_DesignWarning.cs">
+      <DependentUpon>Citations_DesignWarning.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\ComplianceReviewHistory.aspx.cs">
       <DependentUpon>ComplianceReviewHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -808,6 +822,20 @@
     </Compile>
     <Compile Include="Reports\CitationsReport_ParkingWarningSummary.aspx.designer.cs">
       <DependentUpon>CitationsReport_ParkingWarningSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_DesignViolations.aspx.cs">
+      <DependentUpon>CitationsReport_DesignViolations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_DesignViolations.aspx.designer.cs">
+      <DependentUpon>CitationsReport_DesignViolations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_DesignWarning.aspx.cs">
+      <DependentUpon>CitationsReport_DesignWarning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsReport_DesignWarning.aspx.designer.cs">
+      <DependentUpon>CitationsReport_DesignWarning.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
@@ -1274,6 +1302,14 @@
     <EmbeddedResource Include="Reports\Citations\Citations_ParkingWarningSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Citations_ParkingWarningSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_DesignViolations.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_DesignViolations.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_DesignWarning.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_DesignWarning.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
