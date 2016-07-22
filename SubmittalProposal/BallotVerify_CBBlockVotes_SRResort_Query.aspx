@@ -1,0 +1,1 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AbstractQuery2.master" AutoEventWireup="true" CodeBehind="BallotVerify_CBBlockVotes_SRResort_Query.aspx.cs" Inherits="SubmittalProposal.BallotVerify_CBBlockVotes_SRResort_Query" %>

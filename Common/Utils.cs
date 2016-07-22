@@ -34,7 +34,13 @@ namespace Common {
         public static DateTime NULL_DATETIME = DateTime.MinValue;
         public static DateTime SQL_NULL_DATETIME = new DateTime(1900, 1, 1);
 
-
+        public static bool hasData(DataSet ds) {
+            return ds != null
+                && ds.Tables != null
+                && ds.Tables.Count > 0
+                && ds.Tables[0].Rows != null
+                && ds.Tables[0].Rows.Count > 0;
+        }
         public static void executeNonQuery(SqlCommand command, string connectionString, CommandType commandType) {
             SqlConnection connection = null;
             try {

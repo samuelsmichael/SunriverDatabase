@@ -4,6 +4,54 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script type="text/javascript">
+        function ShowBallotProcessModalPopup() {
+            $find("mpeBallotProcessBehaviorID").show();
+            var ballotnbr = $find("tbBallotNumber");
+            ballotnbr.focus();
+            return false;
+        }
+        function HideBallotProcessModalPopup() {
+            $find("mpeBallotProcessBehaviorID").hide();
+            return false;
+        }
+    </script>    
+
+
+<asp:LinkButton ID="lnkDummyBallotProcess" style="display:none;" runat="server"></asp:LinkButton>
+<ajaxToolkit:ModalPopupExtender ID="mpeBallotProcess" BehaviorID="mpeBallotProcessBehaviorID" runat="server"
+    PopupControlID="pnlBallotProcess" TargetControlID="lnkDummyBallotProcess" BackgroundCssClass="modalBackground">
+</ajaxToolkit:ModalPopupExtender>
+<asp:Panel ID="pnlBallotProcess" runat="server" CssClass="newitempopup" Style="display: none">
+    <div class="newitemtitle">
+        Ballot Entry
+    </div>
+    <div class="newitemcontent">
+        <table cellpadding="3" cellspacing="3">
+            <tr>
+                <td colspan="2"><asp:Label ID="Label1" runat="server">Enter Ballot Number</asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><asp:TextBox ID="tbBallotNumber" runat="server"></asp:TextBox> </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <asp:Button ID="btnBallotOk" runat="server" Text="Okay" OnClick="btnBallotOk_onClick" />
+                </td>
+                <td align="center">
+                    <asp:Button ID="btnHide" runat="server" Text="Close" OnClientClick="return HideBallotProcessModalPopup()" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><asp:Label ID="lblBallotProcessingMessage" runat="server"></asp:Label></td>
+            </tr>
+        </table>
+        
+    </div>
+</asp:Panel>
+
+
+
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Panel ID="PnlSearchBar" runat="server" CssClass="collapsePanelHeader" Height="30px">
@@ -26,6 +74,7 @@
                     </div>
                     <div style="float: right; vertical-align:middle; padding-right:2em; font-size:x-small;">
                         <asp:LinkButton ForeColor="AliceBlue" ID="lbDeschutesSearch" runat="server" OnClientClick="javascript:window.open('http://dial.deschutes.org/','_blank');">Deschutes County Search</asp:LinkButton>
+                        <asp:LinkButton ForeColor="AliceBlue" ID="lbBallotProcess" runat="server" OnClientClick="javascript:return ShowBallotProcessModalPopup();">Process Ballot</asp:LinkButton>
                     </div>
                 </div>
             </asp:Panel>

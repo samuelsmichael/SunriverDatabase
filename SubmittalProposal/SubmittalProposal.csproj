@@ -95,6 +95,7 @@
     <Content Include="App_Data\aspnetdb_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
+    <Content Include="BallotVerify.aspx" />
     <Content Include="BPermit.aspx" />
     <Content Include="Citations.aspx" />
     <Content Include="CitationsReportsMain.aspx" />
@@ -103,6 +104,8 @@
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
+    <Content Include="BallotVerifyReportsMain.aspx" />
+    <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
     <Content Include="Dummy.aspx" />
     <Content Include="ITAdmin.aspx" />
     <Content Include="IDCardManagementReportsMain.aspx" />
@@ -145,6 +148,7 @@
     <Content Include="Reports\CitationsReport_ParkingWarningSummary.aspx" />
     <Content Include="Reports\CitationsReport_DesignViolations.aspx" />
     <Content Include="Reports\CitationsReport_DesignWarning.aspx" />
+    <Content Include="Reports\BallotVerify_Query.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -321,6 +325,13 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BallotVerify.aspx.cs">
+      <DependentUpon>BallotVerify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BallotVerify.aspx.designer.cs">
+      <DependentUpon>BallotVerify.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BPermit.aspx.cs">
       <DependentUpon>BPermit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -376,6 +387,20 @@
     </Compile>
     <Compile Include="ContractorReportsMain.aspx.designer.cs">
       <DependentUpon>ContractorReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BallotVerifyReportsMain.aspx.cs">
+      <DependentUpon>BallotVerifyReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BallotVerifyReportsMain.aspx.designer.cs">
+      <DependentUpon>BallotVerifyReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.cs">
+      <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
+      <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dummy.aspx.cs">
       <DependentUpon>Dummy.aspx</DependentUpon>
@@ -459,6 +484,12 @@
     </Compile>
     <Compile Include="Reports\AbstractReport.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BallotVerify\BallotVerifyGeneric.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BallotVerifyGeneric.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\BPermitsClosed.aspx.cs">
       <DependentUpon>BPermitsClosed.aspx</DependentUpon>
@@ -836,6 +867,13 @@
     </Compile>
     <Compile Include="Reports\CitationsReport_DesignWarning.aspx.designer.cs">
       <DependentUpon>CitationsReport_DesignWarning.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\BallotVerify_Query.aspx.cs">
+      <DependentUpon>BallotVerify_Query.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BallotVerify_Query.aspx.designer.cs">
+      <DependentUpon>BallotVerify_Query.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
@@ -1231,6 +1269,10 @@
     <None Include="Web References\getpageinforeference\GetPageInfo.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\BallotVerify\BallotVerifyGeneric.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BallotVerifyGeneric.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\BPermits\BPermitsClosed.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BPermitsClosed.cs</LastGenOutput>

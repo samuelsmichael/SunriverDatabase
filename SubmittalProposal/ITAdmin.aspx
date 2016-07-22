@@ -40,6 +40,14 @@
                         </td>
                         <td><asp:Label ID="lblIdCardMaintenanceClearCommentsResult" runat="server" ForeColor="Green" Font-Bold="true"></asp:Label></td>
                     </tr>
+                    <tr>
+                        <td>
+                            <asp:LinkButton ID="lbInitializeBallotVerify" runat="server" 
+                                OnClientClick="javascript: if (confirm('WARNING! This will clear all of the records in the BallotVerify table. Are you sure that you wish to continue?')) {return true;} else {return false;}"
+                                onclick="lbInitializeBallotVerify_Click">Initialize Ballot Verify</asp:LinkButton>
+                        </td>
+                        <td><asp:Label ID="lblInitializeBallotVerifyCommentsResult" runat="server" ForeColor="Green" Font-Bold="true"></asp:Label></td>
+                    </tr>
                 </table>
             </p>
             <hr />

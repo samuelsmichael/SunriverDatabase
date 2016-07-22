@@ -31,18 +31,29 @@ namespace SubmittalProposal {
                 lblRunSomeProcedureStatus.Text = "Failed. Msg: " + e.Message;
             }
         }
+        protected void lbInitializeBallotVerify_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspBallotVerifyInitialize");
+                Utils.executeNonQuery(cmd, BallotVerify.ConnectionString);
+                
+                lblInitializeBallotVerifyCommentsResult.ForeColor = System.Drawing.Color.Green;
+                lblInitializeBallotVerifyCommentsResult.Text = "Ballot Verify table has been initialized";
+            } catch (Exception e) {
+                lblInitializeBallotVerifyCommentsResult.ForeColor = System.Drawing.Color.Red;
+                lblInitializeBallotVerifyCommentsResult.Text = "Error. Msg: "+e.Message;
+            }
+        }
         protected void lbCardMaintenanceClearComments_Click(object sender, EventArgs args) {
             try {
                 SqlCommand cmd = new SqlCommand("uspClearComments");
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
                 lblIdCardMaintenanceClearCommentsResult.ForeColor = System.Drawing.Color.Green;
-                lblIdCardMaintenanceClearCommentsResult.Text = "Comments have been cleared";
+                lblInitializeBallotVerifyCommentsResult.Text = "The Ballot Verify table has been initialized";
             } catch (Exception e) {
                 lblIdCardMaintenanceClearCommentsResult.ForeColor = System.Drawing.Color.Red;
-                lblIdCardMaintenanceClearCommentsResult.Text = "Error. Msg: "+e.Message;
+                lblIdCardMaintenanceClearCommentsResult.Text = "Error. Msg: " + e.Message;
             }
         }
-
         protected void lbPastDue_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/RVPastDue.aspx");
         }

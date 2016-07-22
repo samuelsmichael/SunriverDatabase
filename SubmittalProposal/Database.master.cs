@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace SubmittalProposal {
     public partial class Database : System.Web.UI.MasterPage {
@@ -48,6 +49,54 @@ namespace SubmittalProposal {
             } else {
                 lbPrintViolatorsEnvelope.Visible = true;
             }
+            if (Page.ToString().ToLower().IndexOf("ballot") == -1 ) {
+                lbBallotProcess.Visible = false;
+            } else {
+                lbBallotProcess.Visible = true;
+            }
+        }
+        private bool ballotNumberExists() {
+            SqlCommand cmd = new SqlCommand("uspBallotVerifyGet");
+            cmd.Parameters.Add("@PropertyId", SqlDbType.NVarChar).Value = tbBallotNumber.Text;
+            DataSet ds=Common.Utils.getDataSet(cmd, BallotVerify.ConnectionString);
+            return Common.Utils.hasData(ds);
+        }
+        private bool alreadyVoted() {
+            SqlCommand cmd = new SqlCommand("uspBallotVerifyGet");
+            cmd.Parameters.Add("@PropertyId", SqlDbType.NVarChar).Value = tbBallotNumber.Text;
+            DataSet ds = Common.Utils.getDataSet(cmd, BallotVerify.ConnectionString);
+            return Common.Utils.isNothingNot(Common.Utils.ObjectToString(ds.Tables[0].Rows[0]["Voted"]));
+        }
+        protected void btnBallotOk_onClick(Object obj, EventArgs args) {
+            try {
+                if (Common.Utils.isNothingNot(tbBallotNumber.Text)) {
+                    if (ballotNumberExists()) {
+
+                        if (alreadyVoted()) {
+                            lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
+                            lblBallotProcessingMessage.Text = tbBallotNumber.Text + " already voted.";
+                        } else {
+                            SqlCommand cmd = new SqlCommand("uspBallotVerifySetVoted");
+                            cmd.Parameters.Add("@PropertyId", SqlDbType.NVarChar).Value = tbBallotNumber.Text;
+                            Common.Utils.executeNonQuery(cmd, BallotVerify.ConnectionString, CommandType.StoredProcedure);
+                            lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Green;
+                            lblBallotProcessingMessage.Text = tbBallotNumber.Text + " marked as voted.";
+                            tbBallotNumber.Text = "";
+                            tbBallotNumber.Focus();
+                        }
+                    } else {
+                        lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
+                        lblBallotProcessingMessage.Text = tbBallotNumber.Text + " is not a valid ballot number.";
+                    }
+                } else {
+                    lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
+                    lblBallotProcessingMessage.Text = tbBallotNumber.Text + " Enter a ballot number.";
+                }
+            } catch (Exception e) {
+                lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
+                lblBallotProcessingMessage.Text = "Error: " + e.Message;
+            }
+            mpeBallotProcess.Show();
         }
         public void collapseCPESearch() {
             CPESearch.Collapsed=true;
