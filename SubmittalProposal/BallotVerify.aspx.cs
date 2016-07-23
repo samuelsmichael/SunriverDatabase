@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SubmittalProposal {
     public partial class BallotVerify : AbstractDatabase {
-        private static string DataSetCacheKey = "BVDATASETCACHEKEY";
+        public static string DataSetCacheKey = "BVDATASETCACHEKEY";
         private int BallotVerifyIdSelected {
             get {
                 object obj = Session["BallotVerifyIdSelected"];
@@ -52,6 +52,15 @@ namespace SubmittalProposal {
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
             }
+        }
+
+        public void postUpdateBallotFunction() {
+            try {
+                if (!((Database)Master).getCPEDataGrid.Collapsed) {
+                    System.Runtime.Caching.MemoryCache.Default.Remove(BallotVerify.DataSetCacheKey);
+                    ((Database)Master).doGo();
+                }
+            } catch { }
         }
 
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {

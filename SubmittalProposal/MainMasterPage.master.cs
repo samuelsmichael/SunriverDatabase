@@ -32,7 +32,7 @@ namespace SubmittalProposal {
                 MenuItem miOwnerProperty = new MenuItem("Owner/Property", "OwnProp", null, "~/OwnerProperty.aspx");
                 MenuItem miItAdmin = new MenuItem("IT Admin", "ITAdmin", null, "~/ItAdmin.aspx");
                 MenuItem miCitations = new MenuItem("Citations", "Citations", null, "~/Citations.aspx");
-                MenuItem miBallotVerify = new MenuItem("BallotVerify", "BallowVerify", null, "~/BallotVerify.aspx");
+                MenuItem miBallotVerify = new MenuItem("Ballot Verify", "BallotVerify", null, "~/BallotVerify.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewballotverify")) {
                     NavigationMenu.Items.AddAt(1, miBallotVerify);
                 }

@@ -33,12 +33,12 @@
                                 <td>
                                     <asp:DropDownList ID="ddlArea" runat="server">
                                         <asp:ListItem Enabled="true" Text="All" Value="All"></asp:ListItem>
-                                        <asp:ListItem Enabled="true" Text="California" Value="ca"></asp:ListItem>
-                                        <asp:ListItem Enabled="true" Text="Oregon" Value="or"></asp:ListItem>
-                                        <asp:ListItem Enabled="true" Text="Washington" Value="wa"></asp:ListItem>
-                                        <asp:ListItem Enabled="true" Text="USA-Other" Value="usa"></asp:ListItem>
-                                        <asp:ListItem Enabled="true" Text="Sunriver" Value="sunriver"></asp:ListItem>
-                                        <asp:ListItem Enabled="true" Text="No zip" Value="nozip"></asp:ListItem>
+                                        <asp:ListItem Enabled="true" Text="California" Value="CA"></asp:ListItem>
+                                        <asp:ListItem Enabled="true" Text="Oregon" Value="OR"></asp:ListItem>
+                                        <asp:ListItem Enabled="true" Text="Washington" Value="WA"></asp:ListItem>
+                                        <asp:ListItem Enabled="true" Text="USA-Other" Value="USA-OTHER"></asp:ListItem>
+                                        <asp:ListItem Enabled="true" Text="Sunriver Area" Value="Sunriver Area"></asp:ListItem>
+                                        <asp:ListItem Enabled="true" Text="No zip" Value="NoZip"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>

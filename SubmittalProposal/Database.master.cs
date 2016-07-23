@@ -81,23 +81,33 @@ namespace SubmittalProposal {
                             Common.Utils.executeNonQuery(cmd, BallotVerify.ConnectionString, CommandType.StoredProcedure);
                             lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Green;
                             lblBallotProcessingMessage.Text = tbBallotNumber.Text + " marked as voted.";
+                            string postUpdate = tbBallotNumber.Text;
+                            ((BallotVerify)Page).postUpdateBallotFunction();
                             tbBallotNumber.Text = "";
-                            tbBallotNumber.Focus();
+                            tbBallotNumber.Focus();                            
                         }
                     } else {
                         lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
                         lblBallotProcessingMessage.Text = tbBallotNumber.Text + " is not a valid ballot number.";
+                        tbBallotNumber.Focus();
                     }
                 } else {
                     lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
                     lblBallotProcessingMessage.Text = tbBallotNumber.Text + " Enter a ballot number.";
+                    tbBallotNumber.Focus();
                 }
             } catch (Exception e) {
                 lblBallotProcessingMessage.ForeColor = System.Drawing.Color.Red;
                 lblBallotProcessingMessage.Text = "Error: " + e.Message;
+                tbBallotNumber.Focus();
             }
             mpeBallotProcess.Show();
         }
+        protected void btnBallotClose_onClick(Object obj, EventArgs args) {
+            mpeBallotProcess.Hide();
+            System.Runtime.Caching.MemoryCache.Default.Remove(BallotVerify.DataSetCacheKey);
+        }
+
         public void collapseCPESearch() {
             CPESearch.Collapsed=true;
             CPESearch.ClientState="true";

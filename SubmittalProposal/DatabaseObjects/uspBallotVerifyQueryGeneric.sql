@@ -10,11 +10,11 @@ GO
   gd
  */
 /*
-	select * from t where tblArshipTo_Addr1!=tblArCust_Addr1
+	exec uspBallotVerifyQueryGeneric @Type='All', @Voted='Yes'
 */
 -- =============================================
 ALTER PROCEDURE	 uspBallotVerifyQueryGeneric
-	@Type varchar(12),
+	@Type varchar(16),
 	@Voted varchar(10) -- Yes, No, Either
 as
 BEGIN
@@ -22,11 +22,11 @@ Declare @SQL varchar(1024),
 		@and VARCHAR(5)
 SET @AND = ''
 set @SQL='
-	SELECT t.CustId, t.PropID, t.tblArShipTo_Addr1, t.Voted, t.PostalCode, t.GroupCode, OwnerName, Contact, tblArCust_addr1, Addr2
+	SELECT t.CustId, t.PropID, t.tblArShipTo_Addr1, isnull(t.Voted,'''') as Voted, t.PostalCode, t.GroupCode, OwnerName, Contact, tblArCust_addr1, Addr2
 FROM tblBallotVerify t
 WHERE '
 if @Type='SRResort' begin
-	SET @SQL = @SQL + @and +  ' ((t.PropID Between ''61401'' And ''61433'') or (t.PropId=''60031'')) '
+	SET @SQL = @SQL + @and +  ' ((t.PropID Between ''61401'' And ''61433'') or (t.PropId=''60031'') or (t.PropId=''99984'')) '
 	set @and=' AND '
 END
 if @Type='Pines' begin
@@ -50,12 +50,12 @@ if @Type='WA' begin
 	SET @SQL = @SQL + @and +  ' (left(t.PostalCode,5) Between ''98001'' And ''99499'') '
 	set @and=' AND '
 end
-if @Type='USA' begin
+if @Type='USA-Other' begin
 	SET @SQL = @SQL + @and +  ' ((left(t.PostalCode,5) Between ''00000'' And ''89999'') OR (left(t.PostalCode,5) Between ''96701'' And ''96999'')  OR (left(t.PostalCode,5) Between ''99501'' And ''99999'')) '
 	set @and=' AND '
 end
-if @Type='SUNRIVER' BEGIN
-	SET @SQL = @SQL + @and +  ' (left(t.PostalCode,5) LIKE ''97707%'') '
+if @Type='Sunriver Area' BEGIN
+	SET @SQL = @SQL + @and +  ' (left(t.PostalCode,5) = ''97707'') '
 	set @and=' AND '
 END
 if @Type='NOZIP' BEGIN

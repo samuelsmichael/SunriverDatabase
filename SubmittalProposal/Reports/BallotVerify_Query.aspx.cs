@@ -9,7 +9,7 @@ using System.Collections;
 namespace SubmittalProposal.Reports {
     public partial class BallotVerify_Query : AbstractReport {
         protected override string ConnectionString {
-            get { return System.Configuration.ConfigurationManager.ConnectionStrings["CitationsSQLConnectionString"].ConnectionString; }
+            get { return SubmittalProposal.BallotVerify.ConnectionString; }
         }
         protected override void child_Page_Load(object sender, EventArgs args) {
             if (!IsPostBack) {
@@ -33,7 +33,7 @@ namespace SubmittalProposal.Reports {
             return reportParams;
         }
         private string deriveType() {
-            if(Common.Utils.isNothingNot(Request.QueryString["Type"])) {
+            if (Common.Utils.isNothingNot(Request.QueryString["Type"]) && Request.QueryString["Type"]!="None") {
                 return (string)Request.QueryString["Type"];
             } else {
                 return ddlArea.SelectedValue;

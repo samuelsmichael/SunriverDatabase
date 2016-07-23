@@ -60,7 +60,7 @@ namespace SubmittalProposal {
             }
         }
 
-        protected void performPostUpdateSuccessfulActions(string status, string cacheKey, string cacheKey2) {
+        public void performPostUpdateSuccessfulActions(string status, string cacheKey, string cacheKey2) {
             MemoryCache.Default.Remove(cacheKey);
             if (cacheKey2 != null) {
                 MemoryCache.Default.Remove(cacheKey2);
