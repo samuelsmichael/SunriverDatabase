@@ -33,6 +33,10 @@ namespace SubmittalProposal {
                 MenuItem miItAdmin = new MenuItem("IT Admin", "ITAdmin", null, "~/ItAdmin.aspx");
                 MenuItem miCitations = new MenuItem("Citations", "Citations", null, "~/Citations.aspx");
                 MenuItem miBallotVerify = new MenuItem("Ballot Verify", "BallotVerify", null, "~/BallotVerify.aspx");
+                MenuItem miComRoster = new MenuItem("Com Roster", "ComRoster", null, "~/ComRoster_Home.aspx");
+                if (HttpContext.Current.User.IsInRole("canviewcomroster")) {
+                    NavigationMenu.Items.AddAt(1, miComRoster);
+                }
                 if (HttpContext.Current.User.IsInRole("canviewballotverify")) {
                     NavigationMenu.Items.AddAt(1, miBallotVerify);
                 }

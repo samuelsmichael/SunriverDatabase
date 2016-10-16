@@ -102,6 +102,7 @@
     <Content Include="ComplianceReview.aspx" />
     <Content Include="BPermitReportsMain.aspx" />
     <Content Include="ComplianceReviewReportsMain.aspx" />
+    <Content Include="ComRoster_Home.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
@@ -149,6 +150,7 @@
     <Content Include="Reports\CitationsReport_DesignViolations.aspx" />
     <Content Include="Reports\CitationsReport_DesignWarning.aspx" />
     <Content Include="Reports\BallotVerify_Query.aspx" />
+    <Content Include="Reports\DummyCrystalReportsPage.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -373,6 +375,13 @@
     </Compile>
     <Compile Include="ComplianceReviewReportsMain.aspx.designer.cs">
       <DependentUpon>ComplianceReviewReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComRoster_Home.aspx.cs">
+      <DependentUpon>ComRoster_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComRoster_Home.aspx.designer.cs">
+      <DependentUpon>ComRoster_Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contractor.aspx.cs">
       <DependentUpon>Contractor.aspx</DependentUpon>
@@ -875,6 +884,13 @@
     <Compile Include="Reports\BallotVerify_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_Query.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DummyCrystalReportsPage.aspx.cs">
+      <DependentUpon>DummyCrystalReportsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\DummyCrystalReportsPage.aspx.designer.cs">
+      <DependentUpon>DummyCrystalReportsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -937,6 +953,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Envelope.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\PropertyAllInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyAllInfo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\PropertyAllInfo2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyAllInfo2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
@@ -1244,6 +1272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
+    <Folder Include="CrystalReportsViewers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
@@ -1412,6 +1441,14 @@
     <EmbeddedResource Include="Reports\OwnerProperty\Envelope.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Envelope.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PropertyAllInfo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfo2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PropertyAllInfo2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptRVBillingInfo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

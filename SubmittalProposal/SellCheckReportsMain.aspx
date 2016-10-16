@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p>
         <center>
-            <h2>Submittal Reports</h2>
+            <h2>Sell Check Reports</h2>
         </center>
     </p>
     <p>
