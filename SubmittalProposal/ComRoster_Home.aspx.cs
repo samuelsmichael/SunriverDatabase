@@ -65,8 +65,27 @@ namespace SubmittalProposal {
             DataTable tblFiltered = view.ToTable();
             Session["ComRosterTblFiltered"] = tblFiltered;
             DataRow dr = tblFiltered.Rows[0];
+            tbCommitteeNameUpdate.Text = Utils.ObjectToString(dr["CommitteeName"]);
+            DateTime? charterDate = Utils.ObjectToDateTimeNullable(dr["CharterDate"]);
+            if (charterDate.HasValue) {
+                tbCharterDateUpdate.Text = charterDate.Value.ToString("d");
+            } else {
+                tbCharterDateUpdate.Text = "";
+            }
+            try {
+                ddlCommitteeStatusUpdate.SelectedValue = Utils.ObjectToString(dr["Status"]);
+            } catch {
+                ddlCommitteeStatusUpdate.SelectedValue = "Active";
+            }
+            tbCommitteeNbrOfMembersUpdate.Text = Utils.ObjectToString(dr["#OfMembers"]);
+            tbCommitteeNbrOfMembersNotesUpdate.Text = Utils.ObjectToString(dr["#OfMembersNote"]);
+            tbCommitteeTermYearsUpdate.Text = Utils.ObjectToString(dr["Term"]);
+            tbCommitteeNbrOfTermsLimitUpdate.Text = Utils.ObjectToString(dr["TermLimit"]);
+            tbCommitteeTermNotesUpdate.Text= Utils.ObjectToString(dr["TermLimitNote"]);
+            cbCommitteeAlternateMembersAllowed.Checked = Utils.ObjectToBool(dr["AlternateMembers"]);
+            cbCommitteeAssociateMembersAllowed.Checked = Utils.ObjectToBool(dr["AssociateMembers"]);
 
-            lblCommitteeNameForUpdatePanel.Text = Utils.ObjectToString(dr["CommitteeName"]);
+            lblCommitteeNameForUpdatePanel.Text = Utils.ObjectToString(dr["CommitteeName"] + ", ID: " + CommitteeIDBeingEdited);
         }
         private int CommitteeIDBeingEdited {
             get {
@@ -75,6 +94,14 @@ namespace SubmittalProposal {
             }
             set {
                 Session["CommitteeIDBeingEdited"] = value;
+            }
+        }
+        protected void cvCommitteeNbrOfMembersUpdate_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            try {
+                int nbrOfMembers = Convert.ToInt32(args.Value);
+            } catch {
+                args.IsValid = false;
             }
         }
         private void setUnlockRecordCheckboxVisibility(bool isVisible) {
@@ -93,13 +120,33 @@ namespace SubmittalProposal {
 
         protected void cbUnlockRecordCommittee_CheckedChanged(object sender, EventArgs e) {
             if (cbUnlockRecordCommittee.Checked) {
+                lockCommitteeFields(true);
             } else {
+                lockCommitteeFields(false);
             }
         }
         protected void cbUnlockRecordLists_CheckedChanged(object sender, EventArgs e) {
             if (cbUnlockRecordLists.Checked) {
             } else {
             }
+        }
+        private void lockCommitteeFields(bool enable) {
+            tbCommitteeNameUpdate.Enabled = enable;
+            tbCharterDateUpdate.Enabled = enable;
+            ibCharterDateUpdate.Enabled = enable;
+            cvCharterDateUpdate.Enabled = enable;
+            rvcvCharterDateUpdate.Enabled = enable;
+            ddlCommitteeStatusUpdate.Enabled = enable;
+            tbCommitteeNbrOfMembersUpdate.Enabled = enable;
+            cvCommitteeNbrOfMembersUpdate.Enabled = enable;
+            tbCommitteeNbrOfMembersNotesUpdate.Enabled = enable;
+            tbCommitteeTermNotesUpdate.Enabled = enable;
+            tbCommitteeTermYearsUpdate.Enabled = enable;
+            cvCommitteeTermYearsUpdate.Enabled = enable;
+            tbCommitteeNbrOfTermsLimitUpdate.Enabled = enable;
+            cvCommitteeNbrOfTermsLimitUpdate.Enabled = enable;
+            cbCommitteeAlternateMembersAllowed.Enabled = enable;
+            cbCommitteeAssociateMembersAllowed.Enabled = enable;
         }
     }
 }
