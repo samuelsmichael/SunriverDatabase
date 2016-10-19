@@ -23,7 +23,7 @@
                     <Columns>
                         <asp:BoundField HeaderText="Name" DataField="CommitteeName" />
                         <asp:BoundField HeaderText="Status" DataField="Status" />
-                        <asp:BoundField HeaderText="Charter Date" DataField="CharterDate" DataFormatString="d" />
+                        <asp:BoundField HeaderText="Charter Date" DataField="CharterDate" DataFormatString="{0:MM/yyyy}" />
                         <asp:BoundField HeaderText="ID" DataField="CommitteeID" />
                     </Columns>
                 </asp:GridView>
@@ -158,6 +158,19 @@
                                     </td>
                                 </tr>
                             </table></center>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td colspan="6">
+                            <center>
+                                <asp:Button ID="btnCommitteeUpdateSubmit" Visible="false" runat="server" Text="Submit" 
+                                    onclick="btnCommitteeUpdateSubmit_Click" />
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <asp:Label ID="lblCommitteeUpdateMessage" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
                 </table>

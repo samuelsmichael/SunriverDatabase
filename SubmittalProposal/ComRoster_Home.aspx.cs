@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.Caching;
+using System.Drawing;
 using Common;
 
 namespace SubmittalProposal {
@@ -147,6 +148,40 @@ namespace SubmittalProposal {
             cvCommitteeNbrOfTermsLimitUpdate.Enabled = enable;
             cbCommitteeAlternateMembersAllowed.Enabled = enable;
             cbCommitteeAssociateMembersAllowed.Enabled = enable;
+            btnCommitteeUpdateSubmit.Visible = enable;
+        }
+
+        protected void btnCommitteeUpdateSubmit_Click(object sender, EventArgs e) {
+            try {
+                lblCommitteeUpdateMessage.Text = "";
+                SqlCommand cmd = new SqlCommand("uspComRosterCommitteeSet");
+                cmd.Parameters.Add("@CommitteeID", SqlDbType.Int).Value = CommitteeIDBeingEdited;
+                cmd.Parameters.Add("@CommitteeName", SqlDbType.NVarChar).Value = Utils.ObjectToString(tbCommitteeNameUpdate.Text);
+                cmd.Parameters.Add("@#OfMembers", SqlDbType.NVarChar).Value = Utils.ObjectToString(tbCommitteeNbrOfMembersUpdate.Text);
+                cmd.Parameters.Add("@#OfMembersNote", SqlDbType.NVarChar).Value = Utils.ObjectToString(tbCommitteeNbrOfMembersNotesUpdate.Text);
+                cmd.Parameters.Add("@Term", SqlDbType.Int).Value = Utils.ObjectToInt(tbCommitteeTermYearsUpdate.Text);
+                cmd.Parameters.Add("@TermLimit", SqlDbType.Int).Value = Utils.ObjectToInt(tbCommitteeNbrOfTermsLimitUpdate.Text);
+                cmd.Parameters.Add("@TermLimitNote", SqlDbType.NVarChar).Value = Utils.ObjectToString(tbCommitteeTermNotesUpdate.Text);
+                cmd.Parameters.Add("@AlternateMembers", SqlDbType.Bit).Value = Utils.ObjectToBool(cbCommitteeAlternateMembersAllowed.Checked);
+                cmd.Parameters.Add("@AssociateMembers", SqlDbType.Bit).Value = Utils.ObjectToBool(cbCommitteeAssociateMembersAllowed.Checked);
+                DateTime? charterDate = Utils.ObjectToDateTimeNullable(tbCharterDateUpdate.Text);
+                if (charterDate.HasValue) {
+                    cmd.Parameters.Add("@CharterDate", SqlDbType.DateTime).Value = charterDate;
+                }
+                cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = Utils.ObjectToString(ddlCommitteeStatusUpdate.SelectedValue);
+                SqlParameter dummy = new SqlParameter("@NewCommitteeID", SqlDbType.Int);
+                dummy.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(dummy);
+                Utils.executeNonQuery(cmd, ConnectionString);
+                lblCommitteeUpdateMessage.ForeColor = Color.DarkGreen;
+                lblCommitteeUpdateMessage.Text = "Update successful";
+                MemoryCache cache = MemoryCache.Default;
+                cache.Remove(DataSetCacheKey);
+                bindCommitteeGrid();
+            } catch (Exception ee) {
+                lblCommitteeUpdateMessage.ForeColor = Color.Red;
+                lblCommitteeUpdateMessage.Text = ee.Message;
+            }
         }
     }
 }
