@@ -27,7 +27,6 @@
                         <asp:BoundField HeaderText="ID" DataField="CommitteeID" />
                     </Columns>
                 </asp:GridView>
-                <center><asp:LinkButton ID="lbNewCommittee" runat="server">New Committee</asp:LinkButton></center>
             </asp:Panel>
             <ajaxToolkit:CollapsiblePanelExtender ID="CPECommittees" runat="server" TargetControlID="PnlCommitteesContent"
                 ExpandControlID="PnlCommitteesBar" CollapseControlID="PnlCommitteesBar" TextLabelID="LblCommittees"
@@ -181,7 +180,7 @@
                 ExpandedText="" ExpandedImage="~/Images/collapse_blue.jpg" CollapsedImage="~/Images/expand_blue.jpg"
                 Collapsed="true" SuppressPostBack="True" Enabled="True">
             </ajaxToolkit:CollapsiblePanelExtender>
-            <asp:Panel Style="margin-top: 4px;" ID="PnlLiaisonAndCommitteeListsBar" runat="server"
+            <asp:Panel Enabled="false" Width="100%" Style="margin-top: 4px;" ID="PnlLiaisonAndCommitteeListsBar" runat="server"
                 CssClass="collapsePanelHeader" Height="30px">
                 <div style="padding: 5px; cursor: pointer; vertical-align: middle;">
                     <div style="float: left;">
@@ -203,18 +202,44 @@
                     </div>
                 </div>
             </asp:Panel>
-            <asp:Panel runat="server" ID="PnlLiaisonAndCommitteeListsContent">
-                <asp:CheckBox ID="cbUnlockRecordLists" AutoPostBack="true" Text="Unlock record" TextAlign="Left"
-                    runat="server" OnCheckedChanged="cbUnlockRecordCommittee_CheckedChanged" />
-                <table>
+            <asp:Panel Width="100%" Enabled="false" runat="server" ID="PnlLiaisonAndCommitteeListsContent">
+                <asp:CheckBox ID="cbUnlockRecordLists" Enabled="true" AutoPostBack="true" Text="Unlock record" TextAlign="Left"
+                    runat="server" OnCheckedChanged="cbUnlockRecordLists_CheckedChanged" />
+                <table cellpadding="0" border="0" width="100%">
                     <tr>
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" ID="pnlLiaisonList" GroupingText="Liaison List">
+                                <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" 
+                                    BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+                                    <FooterStyle BackColor="White" ForeColor="#000066" />
+                                    <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                    <RowStyle ForeColor="#000066" />
+                                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                </asp:GridView>
                             </asp:Panel>
                             <center><asp:LinkButton ID="lbWorkWithLiaisons" runat="server">Work with Liaisons</asp:LinkButton></center>
                         </td>
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" ID="pnlMemberListAndCommitteeTerms" GroupingText="Member List & Committee Terms">
+                                <asp:GridView Width="100%" ID="gvMemberListAndCommitteeTerms" runat="server" 
+                                    BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
+                                    CellPadding="3" GridLines="Vertical">
+                                    <AlternatingRowStyle BackColor="#DCDCDC" />
+                                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                    <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
+                                    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#000065" />
+                                </asp:GridView>
                             </asp:Panel>
                             <center><asp:LinkButton ID="lbWorkWithMembers" runat="server">Work with Members</asp:LinkButton></center>
                         </td>

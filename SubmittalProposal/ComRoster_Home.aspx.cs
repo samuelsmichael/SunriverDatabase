@@ -18,8 +18,10 @@ namespace SubmittalProposal {
                 string zUpdateRoleName = "canupdatecomroster";
                 if (HttpContext.Current.User.IsInRole(zUpdateRoleName)) {
                     enableUnlockRecordCheckbox(true);
+  //                  cbUnlockRecordLists.Enabled=true;
                 } else {
                     enableUnlockRecordCheckbox(false);
+    //                cbUnlockRecordLists.Enabled = false;
                 }
             }
         }
@@ -108,15 +110,15 @@ namespace SubmittalProposal {
         private void setUnlockRecordCheckboxVisibility(bool isVisible) {
             if (isVisible) {
                 cbUnlockRecordCommittee.Visible = true;
-                cbUnlockRecordLists.Visible = true;
+     //           cbUnlockRecordLists.Visible = true;
             } else {
                 cbUnlockRecordCommittee.Visible = false;
-                cbUnlockRecordLists.Visible = false;
+     //           cbUnlockRecordLists.Visible = false;
             }
         }
         private void enableUnlockRecordCheckbox(bool enable) {
             cbUnlockRecordCommittee.Enabled = enable;
-            cbUnlockRecordLists.Enabled = enable;
+ //           cbUnlockRecordLists.Enabled = enable;
         }
 
         protected void cbUnlockRecordCommittee_CheckedChanged(object sender, EventArgs e) {
@@ -127,9 +129,15 @@ namespace SubmittalProposal {
             }
         }
         protected void cbUnlockRecordLists_CheckedChanged(object sender, EventArgs e) {
-            if (cbUnlockRecordLists.Checked) {
+            if (cbUnlockRecordCommittee.Checked) {
+                lockListFields(true);
             } else {
+                lockListFields(false);
             }
+        }
+        private void lockListFields(bool enabled) {
+            pnlMemberListAndCommitteeTerms.Enabled = enabled;
+            pnlLiaisonList.Enabled = enabled;
         }
         private void lockCommitteeFields(bool enable) {
             tbCommitteeNameUpdate.Enabled = enable;
@@ -185,3 +193,4 @@ namespace SubmittalProposal {
         }
     }
 }
+

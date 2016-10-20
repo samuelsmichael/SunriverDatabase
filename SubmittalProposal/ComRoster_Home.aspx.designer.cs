@@ -58,15 +58,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.GridView dgCommittees;
         
         /// <summary>
-        /// lbNewCommittee control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbNewCommittee;
-        
-        /// <summary>
         /// CPECommittees control.
         /// </summary>
         /// <remarks>
@@ -436,6 +427,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel pnlLiaisonList;
         
         /// <summary>
+        /// gvLiaisonList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvLiaisonList;
+        
+        /// <summary>
         /// lbWorkWithLiaisons control.
         /// </summary>
         /// <remarks>
@@ -452,6 +452,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlMemberListAndCommitteeTerms;
+        
+        /// <summary>
+        /// gvMemberListAndCommitteeTerms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMemberListAndCommitteeTerms;
         
         /// <summary>
         /// lbWorkWithMembers control.
