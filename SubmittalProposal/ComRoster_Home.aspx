@@ -202,15 +202,37 @@
                     </div>
                 </div>
             </asp:Panel>
-            <asp:Panel Width="100%" Enabled="false" runat="server" ID="PnlLiaisonAndCommitteeListsContent">
-                <asp:CheckBox ID="cbUnlockRecordLists" Enabled="true" AutoPostBack="true" Text="Unlock record" TextAlign="Left"
-                    runat="server" OnCheckedChanged="cbUnlockRecordLists_CheckedChanged" />
-                <table cellpadding="0" border="0" width="100%">
+            <asp:Panel Width="100%" runat="server" ID="PnlLiaisonAndCommitteeListsContent">
                     <tr>
                         <td style="width: 50%;">
-                            <asp:Panel Width="100%" runat="server" ID="pnlLiaisonList" GroupingText="Liaison List">
-                                <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" 
-                                    BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+                            <asp:Panel Width="100%" runat="server" ID="pnlLiaisonList" Enabled='false' GroupingText="Liaison List">
+                                <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" AutoGenerateEditButton="True" 
+                                  BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
+                                    style="margin-top: 0px" onrowcancelingedit="gvLiaisonList_RowCancelingEdit" 
+                                     AutoGenerateColumns="False"
+                                    onrowediting="gvLiaisonList_RowEditing" 
+                                    onrowupdating="gvLiaisonList_RowUpdating" 
+                                    onrowdatabound="gvLiaisonList_RowDataBound" DataKeyNames="RosterLiaisonID">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Liaison Name">
+                                            <EditItemTemplate>
+                                                <asp:DropDownList ID="ddlLiaisonListLiaisonName" runat="server"  DataTextField="LiaisonName" DataValueField="LiaisonID"></asp:DropDownList>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("LiaisonName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Liaison Type">
+                                            <EditItemTemplate>
+                                                <asp:DropDownList ID="ddlLiaisonListLiaisonType" runat="server"  DataTextField="LiaisonType" DataValueField="LiaisonType"></asp:DropDownList>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("LiaisonType") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="LiaisonID" DataField="LiaisonID" Visible="False" />
+                                        <asp:CommandField ShowDeleteButton="True" />
+                                    </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                                     <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -221,6 +243,8 @@
                                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                                 </asp:GridView>
+                                <center><asp:LinkButton ID="lbLiaisonInCommitteeAdd" runat="server" 
+                                        onclick="lbLiaisonInCommitteeAdd_Click">Add</asp:LinkButton></center>
                             </asp:Panel>
                             <center><asp:LinkButton ID="lbWorkWithLiaisons" runat="server">Work with Liaisons</asp:LinkButton></center>
                         </td>
@@ -228,7 +252,7 @@
                             <asp:Panel Width="100%" runat="server" ID="pnlMemberListAndCommitteeTerms" GroupingText="Member List & Committee Terms">
                                 <asp:GridView Width="100%" ID="gvMemberListAndCommitteeTerms" runat="server" 
                                     BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
-                                    CellPadding="3" GridLines="Vertical">
+                                    CellPadding="3" GridLines="Vertical" Enabled="false">
                                     <AlternatingRowStyle BackColor="#DCDCDC" />
                                     <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                                     <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />

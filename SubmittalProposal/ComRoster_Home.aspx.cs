@@ -29,6 +29,50 @@ namespace SubmittalProposal {
             dgCommittees.DataSource = ComRosterDataSet().Tables[0];
             dgCommittees.DataBind();
         }
+        private void bindLiaisonsGrid() {
+            var query = from committee in ComRosterDataSet().Tables[0].AsEnumerable()
+                        join rosterLiaison in ComRosterDataSet().Tables[4].AsEnumerable() on committee.Field<int>("CommitteeID") equals rosterLiaison.Field<int>("CommitteeID")
+                        join liaison in ComRosterDataSet().Tables[3].AsEnumerable() on rosterLiaison.Field<int>("LiaisonID") equals liaison.Field<int>("LiaisonID")
+                        where (committee.Field<int>("CommitteeID") == CommitteeIDBeingEdited) && (rosterLiaison.Field<int>("LiaisonID") != 1)
+                        select new {
+                            LiaisonName = liaison.Field<string>("LiaisonName"),
+                            LiaisonRepresents = liaison.Field<string>("LiaisonRepresents"),
+                            LiaisonID = liaison.Field<int>("LiaisonID"),
+                            RosterLiaisonID=rosterLiaison.Field<int>("RosterLiaisonID"),
+                            LiaisonType=liaison.Field<string>("LiaisonType")
+                        };
+
+            //DataView viewQuery = query.AsDataView();
+            gvLiaisonList.DataSource = query;
+            gvLiaisonList.DataBind();
+
+            /*
+             * var query =
+                from order in orders.AsEnumerable()
+                join detail in details.AsEnumerable()
+                on order.Field<int>("SalesOrderID") equals
+                    detail.Field<int>("SalesOrderID")
+                where order.Field<bool>("OnlineOrderFlag") == true
+                && order.Field<DateTime>("OrderDate").Month == 8
+                select new
+                {
+                    SalesOrderID =
+                        order.Field<int>("SalesOrderID"),
+                    SalesOrderDetailID =
+                        detail.Field<int>("SalesOrderDetailID"),
+                    OrderDate =
+                        order.Field<DateTime>("OrderDate"),
+                    ProductID =
+                        detail.Field<int>("ProductID")
+                };
+            */
+            //           var innerJoinQuery =
+            //                from category in categories
+            //              join prod in products on category.ID equals prod.CategoryID
+            //            select new { ProductName = prod.Name, Category = category.Name }; //produces flat sequence
+
+        }
+
         private static string DataSetCacheKey = "COMROSTERDATASETCACHEKEY";
         private static string ConnectionString {
             get {
@@ -60,6 +104,8 @@ namespace SubmittalProposal {
             CPECommittees.ClientState = "true";
             CPECommitteeUpdate.Collapsed = false;
             CPECommitteeUpdate.ClientState = "false";
+            CPELiaisonAndCommitteeLists.ClientState = "true";
+            CPELiaisonAndCommitteeLists.Collapsed = true;
             GridViewRow row = dgCommittees.SelectedRow;
             CommitteeIDBeingEdited = Convert.ToInt32(row.Cells[4].Text);
             DataTable sourceTable = ComRosterDataSet().Tables[0];
@@ -89,6 +135,8 @@ namespace SubmittalProposal {
             cbCommitteeAssociateMembersAllowed.Checked = Utils.ObjectToBool(dr["AssociateMembers"]);
 
             lblCommitteeNameForUpdatePanel.Text = Utils.ObjectToString(dr["CommitteeName"] + ", ID: " + CommitteeIDBeingEdited);
+            // Now do Lists
+            bindLiaisonsGrid();
         }
         private int CommitteeIDBeingEdited {
             get {
@@ -110,14 +158,17 @@ namespace SubmittalProposal {
         private void setUnlockRecordCheckboxVisibility(bool isVisible) {
             if (isVisible) {
                 cbUnlockRecordCommittee.Visible = true;
+                lockCommitteeFields(true);
      //           cbUnlockRecordLists.Visible = true;
             } else {
                 cbUnlockRecordCommittee.Visible = false;
+                lockCommitteeFields(false);
+
      //           cbUnlockRecordLists.Visible = false;
             }
         }
         private void enableUnlockRecordCheckbox(bool enable) {
-            cbUnlockRecordCommittee.Enabled = enable;
+            cbUnlockRecordCommittee.Enabled = enable;           
  //           cbUnlockRecordLists.Enabled = enable;
         }
 
@@ -138,6 +189,10 @@ namespace SubmittalProposal {
         private void lockListFields(bool enabled) {
             pnlMemberListAndCommitteeTerms.Enabled = enabled;
             pnlLiaisonList.Enabled = enabled;
+            lbLiaisonInCommitteeAdd.Visible = enabled;
+            lbWorkWithMembers.Visible = enabled;
+            lbWorkWithLiaisons.Visible = enabled;
+
         }
         private void lockCommitteeFields(bool enable) {
             tbCommitteeNameUpdate.Enabled = enable;
@@ -157,6 +212,9 @@ namespace SubmittalProposal {
             cbCommitteeAlternateMembersAllowed.Enabled = enable;
             cbCommitteeAssociateMembersAllowed.Enabled = enable;
             btnCommitteeUpdateSubmit.Visible = enable;
+            pnlMemberListAndCommitteeTerms.Enabled = enable;
+            pnlLiaisonList.Enabled = enable;
+            lockListFields(enable);
         }
 
         protected void btnCommitteeUpdateSubmit_Click(object sender, EventArgs e) {
@@ -190,6 +248,60 @@ namespace SubmittalProposal {
                 lblCommitteeUpdateMessage.ForeColor = Color.Red;
                 lblCommitteeUpdateMessage.Text = ee.Message;
             }
+        }
+
+        protected void lbLiaisonInCommitteeAdd_Click(object sender, EventArgs e) {
+            
+        }
+
+        protected void gvLiaisonList_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            gvLiaisonList.EditIndex = -1;
+            bindLiaisonsGrid();
+        }
+
+        protected void gvLiaisonList_RowEditing(object sender, GridViewEditEventArgs e) {
+            gvLiaisonList.EditIndex = Utils.ObjectToInt(e.NewEditIndex);
+            bindLiaisonsGrid();
+        }
+
+        protected void gvLiaisonList_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+            GridViewRow row = gvLiaisonList.Rows[e.RowIndex];
+            int newLiasonID= Utils.ObjectToInt(((DropDownList)(row.Cells[1].Controls[1])).SelectedValue);
+            string listType=Utils.ObjectToString(((DropDownList)(row.Cells[2].Controls[1])).SelectedValue);
+            string rosterLiaisonID = Utils.ObjectToString(gvLiaisonList.DataKeys[e.RowIndex].Value);
+
+            
+            //Reset the edit index.
+            gvLiaisonList.EditIndex = -1;
+            MemoryCache cache = MemoryCache.Default;
+            cache.Remove(DataSetCacheKey);
+            bindLiaisonsGrid();
+        }
+
+        protected void gvLiaisonList_RowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+                
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
+                    DropDownList ddList = (DropDownList)e.Row.FindControl("ddlLiaisonListLiaisonName");
+                    ddList.DataSource = ComRosterDataSet().Tables[3];
+                    ddList.DataBind();
+                    string mLiaisonID = Utils.ObjectToString(GetValueFromAnonymousType<int>(e.Row.DataItem, "LiaisonID"));
+                    int index=ddList.Items.IndexOf(ddList.Items.FindByValue(mLiaisonID));// If you want to find text by TextField.
+                    ddList.SelectedIndex = index;
+                    DropDownList ddlLiaisonType=(DropDownList)e.Row.FindControl("ddlLiaisonListLiaisonType");
+                    ddlLiaisonType.DataSource = ComRosterDataSet().Tables[8];
+                    ddlLiaisonType.DataBind();
+                    string mLiaisonType = Utils.ObjectToString(GetValueFromAnonymousType<string>(e.Row.DataItem, "LiaisonType"));
+                    int index2 = ddlLiaisonType.Items.IndexOf(ddlLiaisonType.Items.FindByValue(mLiaisonType));// If you want to find text by TextField.
+                    ddlLiaisonType.SelectedIndex = index2;
+                }
+                
+            }
+        }
+        public static T GetValueFromAnonymousType<T>(object dataitem, string itemkey) {
+            System.Type type = dataitem.GetType();
+            T itemvalue = (T)type.GetProperty(itemkey).GetValue(dataitem, null);
+            return itemvalue;
         }
     }
 }

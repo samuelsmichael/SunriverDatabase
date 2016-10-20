@@ -19,6 +19,8 @@ BEGIN
 	select * from tblLiaisonData ORDER BY LiaisonID
 	select * from tblRosterLiaison
 	select * from tblRosterMembers ORDER BY RosterMemberID
-	select * from tblCommitteeTerms{LU}
+	select * from [tblCommitteeTerms{LU}]
+	select * from [tblTitleSort{LU}]
+	select distinct LiasonType from tblLiaisonData where LiaisonType is not null
 END
 GO
