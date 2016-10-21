@@ -39,7 +39,8 @@ namespace SubmittalProposal {
                             LiaisonRepresents = liaison.Field<string>("LiaisonRepresents"),
                             LiaisonID = liaison.Field<int>("LiaisonID"),
                             RosterLiaisonID=rosterLiaison.Field<int>("RosterLiaisonID"),
-                            LiaisonType=liaison.Field<string>("LiaisonType")
+                            LiaisonType=liaison.Field<string>("LiaisonType"),
+                            LiaisonNameAndType=liaison.Field<string>("LiaisonNameAndType")
                         };
 
             //DataView viewQuery = query.AsDataView();
@@ -251,7 +252,9 @@ namespace SubmittalProposal {
         }
 
         protected void lbLiaisonInCommitteeAdd_Click(object sender, EventArgs e) {
-            
+            ddlLiaisonNew.DataSource = ComRosterDataSet().Tables[3];
+            ddlLiaisonNew.DataBind();
+            mpeNewLiaison.Show();
         }
 
         protected void gvLiaisonList_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
@@ -261,6 +264,15 @@ namespace SubmittalProposal {
 
         protected void gvLiaisonList_RowEditing(object sender, GridViewEditEventArgs e) {
             gvLiaisonList.EditIndex = Utils.ObjectToInt(e.NewEditIndex);
+            bindLiaisonsGrid();
+        }
+        protected void gvLiaisonList_RowDeleting(object sender, GridViewDeleteEventArgs e) {
+            string rosterLiaisonID = Utils.ObjectToString(gvLiaisonList.DataKeys[e.RowIndex].Value);
+            SqlCommand cmd = new SqlCommand("uspLiasonRemoveFromCommittee");
+            cmd.Parameters.Add("@RosterLiaisonID", SqlDbType.Int).Value = rosterLiaisonID;
+            Utils.executeNonQuery(cmd, ConnectionString);
+            MemoryCache cache = MemoryCache.Default;
+            cache.Remove(DataSetCacheKey);
             bindLiaisonsGrid();
         }
 
@@ -280,20 +292,25 @@ namespace SubmittalProposal {
 
         protected void gvLiaisonList_RowDataBound(object sender, GridViewRowEventArgs e) {
             if (e.Row.RowType == DataControlRowType.DataRow) {
-                
+
                 if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
                     DropDownList ddList = (DropDownList)e.Row.FindControl("ddlLiaisonListLiaisonName");
                     ddList.DataSource = ComRosterDataSet().Tables[3];
                     ddList.DataBind();
                     string mLiaisonID = Utils.ObjectToString(GetValueFromAnonymousType<int>(e.Row.DataItem, "LiaisonID"));
-                    int index=ddList.Items.IndexOf(ddList.Items.FindByValue(mLiaisonID));// If you want to find text by TextField.
+                    int index = ddList.Items.IndexOf(ddList.Items.FindByValue(mLiaisonID));// If you want to find text by TextField.
                     ddList.SelectedIndex = index;
-                    DropDownList ddlLiaisonType=(DropDownList)e.Row.FindControl("ddlLiaisonListLiaisonType");
+                    DropDownList ddlLiaisonType = (DropDownList)e.Row.FindControl("ddlLiaisonListLiaisonType");
                     ddlLiaisonType.DataSource = ComRosterDataSet().Tables[8];
                     ddlLiaisonType.DataBind();
                     string mLiaisonType = Utils.ObjectToString(GetValueFromAnonymousType<string>(e.Row.DataItem, "LiaisonType"));
                     int index2 = ddlLiaisonType.Items.IndexOf(ddlLiaisonType.Items.FindByValue(mLiaisonType));// If you want to find text by TextField.
                     ddlLiaisonType.SelectedIndex = index2;
+                } else {
+                    if (((int)e.Row.RowState) == (int)DataControlRowState.Normal || ((int)e.Row.RowState) == (int)DataControlRowState.Alternate) {
+                        LinkButton del = e.Row.Cells[4].Controls[0] as LinkButton;
+                        del.Attributes.Add("onclick", "return confirm('Are you sure you want to delete this liaison?');");
+                    }
                 }
                 
             }
@@ -302,6 +319,25 @@ namespace SubmittalProposal {
             System.Type type = dataitem.GetType();
             T itemvalue = (T)type.GetProperty(itemkey).GetValue(dataitem, null);
             return itemvalue;
+        }
+        protected void btnNewLiaisonCancel_Click(object sender, EventArgs args) {
+            mpeNewLiaison.Hide();
+        }
+        protected void btnNewLiaisonOk_Click(object sender, EventArgs args) {
+            try {
+                int newLiasonID = Utils.ObjectToInt( ddlLiaisonNew.SelectedValue);
+                SqlCommand cmd = new SqlCommand("uspLiasonAddToCommittee");
+                cmd.Parameters.Add("@CommitteeID", SqlDbType.Int).Value = CommitteeIDBeingEdited;
+                cmd.Parameters.Add("@LiaisonID", SqlDbType.NVarChar).Value = newLiasonID;
+                Utils.executeNonQuery(cmd, ConnectionString);
+                MemoryCache cache = MemoryCache.Default;
+                cache.Remove(DataSetCacheKey);
+                bindLiaisonsGrid();
+            } catch (Exception ee) {
+                lblNewLiaisonMessage.Text="Violation not updated. Error msg: " + ee.Message;
+                mpeNewLiaison.Show();
+            }
+            mpeNewLiaison.Hide();
         }
     }
 }

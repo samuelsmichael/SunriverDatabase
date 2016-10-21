@@ -207,16 +207,16 @@
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" ID="pnlLiaisonList" Enabled='false' GroupingText="Liaison List">
                                 <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" AutoGenerateEditButton="True" 
-                                  BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
+                                  BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3"  
                                     style="margin-top: 0px" onrowcancelingedit="gvLiaisonList_RowCancelingEdit" 
                                      AutoGenerateColumns="False"
-                                    onrowediting="gvLiaisonList_RowEditing" 
+                                    onrowediting="gvLiaisonList_RowEditing" OnRowDeleting="gvLiaisonList_RowDeleting"
                                     onrowupdating="gvLiaisonList_RowUpdating" 
                                     onrowdatabound="gvLiaisonList_RowDataBound" DataKeyNames="RosterLiaisonID">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Liaison Name">
                                             <EditItemTemplate>
-                                                <asp:DropDownList ID="ddlLiaisonListLiaisonName" runat="server"  DataTextField="LiaisonName" DataValueField="LiaisonID"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlLiaisonListLiaisonName" runat="server"  DataTextField="LiaisonNameAndType" DataValueField="LiaisonID"></asp:DropDownList>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("LiaisonName") %>'></asp:Label>
@@ -245,6 +245,51 @@
                                 </asp:GridView>
                                 <center><asp:LinkButton ID="lbLiaisonInCommitteeAdd" runat="server" 
                                         onclick="lbLiaisonInCommitteeAdd_Click">Add</asp:LinkButton></center>
+
+                                <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewLiaison">
+                                    <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlNewLiaisonTitle">
+                                        <span>New Liaison</span>
+                                    </asp:Panel>
+                                    <asp:Panel runat="server" Style="text-align: center;" ID="Panelx36" CssClass="newitemcontent">
+                                        <table border="0" cellpadding="3" cellspacing="3">
+                                            <tr>
+                                                <td class="form_field_heading">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Name "></asp:Label>
+                                                </td>
+                                                <td class="form_field">
+                                                    <asp:DropDownList ID="ddlLiaisonNew" runat="server" DataTextField="LiaisonNameAndType"
+                                                        DataValueField="LiaisonID">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <asp:Label ID="lblNewLiaisonMessage" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <center>
+                                            <table cellpadding="3">
+                                                <tr>
+                                                    <td>
+                                                        <asp:Button CausesValidation="true" OnClientClick="javascript: if(Page_IsValid) { return true;/*return doComRosterOk();*/} "
+                                                            ID="btnNewLiaisonOk" runat="server" Text="Okay" OnClick="btnNewLiaisonOk_Click" />
+                                                    </td>
+                                                    <td>
+                                                        <asp:Button ID="btnNewLiaisonCancel" runat="server" Text="Cancel" CausesValidation="false"
+                                                            OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                            OnClick="btnNewLiaisonCancel_Click" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+                                    </asp:Panel>
+                                </asp:Panel>
+                                <asp:Button runat="server" ID="dummyNewLiaison" Style="display: none" />
+                                <ajaxToolkit:ModalPopupExtender ID="mpeNewLiaison" runat="server" TargetControlID="dummyNewLiaison"
+                                    PopupControlID="pnlNewLiaison" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewLiaisonTitle" />
+
+
                             </asp:Panel>
                             <center><asp:LinkButton ID="lbWorkWithLiaisons" runat="server">Work with Liaisons</asp:LinkButton></center>
                         </td>
