@@ -29,6 +29,25 @@ namespace SubmittalProposal {
             dgCommittees.DataSource = ComRosterDataSet().Tables[0];
             dgCommittees.DataBind();
         }
+        private void bindMemberListAndCommitteeTermsGrid() {
+            var query = from rosterMember in ComRosterDataSet().Tables[2].AsEnumerable()
+                        join member in ComRosterDataSet().Tables[1].AsEnumerable() on rosterMember.Field<int>("MemberID") equals member.Field<int>("MemberID")
+                        where (rosterMember.Field<int>("CommitteeID") == CommitteeIDBeingEdited)
+                        select new {
+                            MemberName = member.Field<string>("FullName"),
+                            Title = rosterMember.Field<string>("MTitle"),
+                            Appointed = rosterMember.Field<DateTime?>("TAppointed"),
+                            Start = rosterMember.Field<DateTime?>("TStart"),
+                            End = rosterMember.Field<DateTime?>("TEnd"),
+                            Term = rosterMember.Field<string>("TTerm"),
+                            MemberID = member.Field<int>("MemberID"),
+                            RosterMemberID = rosterMember.Field<int>("RosterMemberID"),
+                            MemberFirstName=member.Field<string>("FirstName"),
+                            MemberLastName=member.Field<string>("LastName")
+                        };
+            gvMemberListAndCommitteeTerms.DataSource = query;
+            gvMemberListAndCommitteeTerms.DataBind();
+        }
         private void bindLiaisonsGrid() {
             var query = from committee in ComRosterDataSet().Tables[0].AsEnumerable()
                         join rosterLiaison in ComRosterDataSet().Tables[4].AsEnumerable() on committee.Field<int>("CommitteeID") equals rosterLiaison.Field<int>("CommitteeID")
@@ -105,8 +124,8 @@ namespace SubmittalProposal {
             CPECommittees.ClientState = "true";
             CPECommitteeUpdate.Collapsed = false;
             CPECommitteeUpdate.ClientState = "false";
-            CPELiaisonAndCommitteeLists.ClientState = "true";
-            CPELiaisonAndCommitteeLists.Collapsed = true;
+            CPELiaisonAndCommitteeLists.ClientState = "false";
+            CPELiaisonAndCommitteeLists.Collapsed = false;
             GridViewRow row = dgCommittees.SelectedRow;
             CommitteeIDBeingEdited = Convert.ToInt32(row.Cells[4].Text);
             DataTable sourceTable = ComRosterDataSet().Tables[0];
@@ -138,6 +157,7 @@ namespace SubmittalProposal {
             lblCommitteeNameForUpdatePanel.Text = Utils.ObjectToString(dr["CommitteeName"] + ", ID: " + CommitteeIDBeingEdited);
             // Now do Lists
             bindLiaisonsGrid();
+            bindMemberListAndCommitteeTermsGrid();
         }
         private int CommitteeIDBeingEdited {
             get {
@@ -339,6 +359,55 @@ namespace SubmittalProposal {
             }
             mpeNewLiaison.Hide();
         }
+        protected void gvMemberListAndCommitteeTerms_RowEditing(object sender, GridViewEditEventArgs e) {
+            gvMemberListAndCommitteeTerms.EditIndex = Utils.ObjectToInt(e.NewEditIndex);
+            bindMemberListAndCommitteeTermsGrid();
+        }
+        protected void gvMemberListAndCommitteeTerms_RowDeleting(object sender, GridViewDeleteEventArgs e) {
+            string rosterMemberID = Utils.ObjectToString(gvLiaisonList.DataKeys[e.RowIndex].Value);
+            SqlCommand cmd = new SqlCommand("uspMemberRosterFromCommittee");
+            cmd.Parameters.Add("@RosterMemberID", SqlDbType.Int).Value = rosterMemberID;
+ //           Utils.executeNonQuery(cmd, ConnectionString);
+            MemoryCache cache = MemoryCache.Default;
+            cache.Remove(DataSetCacheKey);
+            bindMemberListAndCommitteeTermsGrid();
+        }
+        protected void gvMemberListAndCommitteeTerms_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+            GridViewRow row = gvMemberListAndCommitteeTerms.Rows[e.RowIndex];
+
+            
+            //Reset the edit index.
+            gvMemberListAndCommitteeTerms.EditIndex = -1;
+            MemoryCache cache = MemoryCache.Default;
+            cache.Remove(DataSetCacheKey);
+            bindMemberListAndCommitteeTermsGrid();
+        }
+        protected void gvMemberListAndCommitteeTerms_RowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
+                    DropDownList ddList = (DropDownList)e.Row.FindControl("ddlMemberListAndCommitteeTermsNames");
+                    ddList.DataSource = ComRosterDataSet().Tables[1];
+                    ddList.DataBind();
+                    string mMemberID = Utils.ObjectToString(GetValueFromAnonymousType<int>(e.Row.DataItem, "MemberID"));
+                    int index = ddList.Items.IndexOf(ddList.Items.FindByValue(mMemberID));
+                    ddList.SelectedIndex = index;
+                    DropDownList ddlTitle = (DropDownList)e.Row.FindControl("ddlMemberListAndCommitteeTermsTitles");
+                    ddlTitle.DataSource = ComRosterDataSet().Tables[7];
+                    ddlTitle.DataBind();
+                    string mTitle = Utils.ObjectToString(GetValueFromAnonymousType<string>(e.Row.DataItem, "Title"));
+                    int index2 = ddlTitle.Items.IndexOf(ddlTitle.Items.FindByText(mTitle));// If you want to find text by TextField.
+                    ddlTitle.SelectedIndex = index2;
+                } else {
+                    if (((int)e.Row.RowState) == (int)DataControlRowState.Normal || ((int)e.Row.RowState) == (int)DataControlRowState.Alternate) {
+                        LinkButton del = e.Row.Cells[7].Controls[0] as LinkButton;
+                        del.Attributes.Add("onclick", "return confirm('Are you sure you want to delete this committee member?');");
+                    }
+                }
+
+            }
+        }
+
     }
 }
 

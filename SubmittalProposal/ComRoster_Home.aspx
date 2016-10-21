@@ -203,7 +203,8 @@
                 </div>
             </asp:Panel>
             <asp:Panel Width="100%" runat="server" ID="PnlLiaisonAndCommitteeListsContent">
-                    <tr>
+                <table>
+                    <tr valign="top">
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" ID="pnlLiaisonList" Enabled='false' GroupingText="Liaison List">
                                 <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" AutoGenerateEditButton="True" 
@@ -272,7 +273,7 @@
                                             <table cellpadding="3">
                                                 <tr>
                                                     <td>
-                                                        <asp:Button CausesValidation="true" OnClientClick="javascript: if(Page_IsValid) { return true;/*return doComRosterOk();*/} "
+                                                        <asp:Button CausesValidation="true" OnClientClick="javascript: if(Page_IsValid) { return doComRosterOk();} "
                                                             ID="btnNewLiaisonOk" runat="server" Text="Okay" OnClick="btnNewLiaisonOk_Click" />
                                                     </td>
                                                     <td>
@@ -284,6 +285,17 @@
                                             </table>
                                         </center>
                                     </asp:Panel>
+                                        <script  language="javascript" type="text/javascript" >
+                                            function doComRosterOk() {
+
+                                                var loading = $(".loadingdb");
+                                                loading.show();
+                                                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                                                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                                                loading.css({ top: top, left: left });
+                                                return true;
+                                            }
+                                        </script>
                                 </asp:Panel>
                                 <asp:Button runat="server" ID="dummyNewLiaison" Style="display: none" />
                                 <ajaxToolkit:ModalPopupExtender ID="mpeNewLiaison" runat="server" TargetControlID="dummyNewLiaison"
@@ -295,9 +307,63 @@
                         </td>
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" ID="pnlMemberListAndCommitteeTerms" GroupingText="Member List & Committee Terms">
-                                <asp:GridView Width="100%" ID="gvMemberListAndCommitteeTerms" runat="server" 
+                                <asp:GridView Width="100%" ID="gvMemberListAndCommitteeTerms" runat="server" AutoGenerateColumns="false"
+                                    AutoGenerateEditButton="true" onrowediting="gvMemberListAndCommitteeTerms_RowEditing" OnRowDeleting="gvMemberListAndCommitteeTerms_RowDeleting"
+                                    onrowupdating="gvMemberListAndCommitteeTerms_RowUpdating" 
+                                    onrowdatabound="gvMemberListAndCommitteeTerms_RowDataBound" DataKeyNames="RosterMemberID"
                                     BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
                                     CellPadding="3" GridLines="Vertical" Enabled="false">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Member Name">
+                                            <EditItemTemplate>
+                                                <asp:DropDownList ID="ddlMemberListAndCommitteeTermsNames" runat="server"  DataTextField="MemberName" DataValueField="MemberID"></asp:DropDownList>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("MemberName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Title">
+                                            <EditItemTemplate>
+                                                <asp:DropDownList ID="ddlMemberListAndCommitteeTermsTitles" runat="server"  DataTextField="MTitle" DataValueField="TitleSort"></asp:DropDownList>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Appointed">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbMemberListAndCommitteeTermsAppointed" runat="server" Text='<%# Convert.ToDateTime(Eval("Appointed")).ToString("MM/yyyy") %>' ></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Convert.ToDateTime(Eval("Appointed")).ToString("MM/yyyy") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Start">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbMemberListAndCommitteeTermsStart" runat="server" Text='<%# Convert.ToDateTime(Eval("Start")).ToString("MM/yyyy") %>' ></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Convert.ToDateTime(Eval("Start")).ToString("MM/yyyy") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="End">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbMemberListAndCommitteeTermsEnd" runat="server" Text='<%# Convert.ToDateTime(Eval("End")).ToString("MM/yyyy") %>' ></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Convert.ToDateTime(Eval("End")).ToString("NN/yyyy") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Term">
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="tbMemberListAndCommitteeTermsTerm" runat="server" Text='<%# Bind("Term") %>' ></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("Term") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:CommandField ShowDeleteButton="True" />
+                                    </Columns>
                                     <AlternatingRowStyle BackColor="#DCDCDC" />
                                     <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                                     <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
