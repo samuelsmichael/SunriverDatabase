@@ -213,7 +213,8 @@ namespace SubmittalProposal {
             lbLiaisonInCommitteeAdd.Visible = enabled;
             lbWorkWithMembers.Visible = enabled;
             lbWorkWithLiaisons.Visible = enabled;
-
+            lbLiaisonInCommitteeAdd.Visible = enabled;
+            lbMemberListAndCommitteeTermsAdd.Visible = enabled;
         }
         private void lockCommitteeFields(bool enable) {
             tbCommitteeNameUpdate.Enabled = enable;
@@ -336,9 +337,13 @@ namespace SubmittalProposal {
             }
         }
         public static T GetValueFromAnonymousType<T>(object dataitem, string itemkey) {
-            System.Type type = dataitem.GetType();
-            T itemvalue = (T)type.GetProperty(itemkey).GetValue(dataitem, null);
-            return itemvalue;
+            try {
+                System.Type type = dataitem.GetType();
+                T itemvalue = (T)type.GetProperty(itemkey).GetValue(dataitem, null);
+                return itemvalue;
+            } catch {
+                return default(T);
+            }
         }
         protected void btnNewLiaisonCancel_Click(object sender, EventArgs args) {
             mpeNewLiaison.Hide();
@@ -354,28 +359,60 @@ namespace SubmittalProposal {
                 cache.Remove(DataSetCacheKey);
                 bindLiaisonsGrid();
             } catch (Exception ee) {
-                lblNewLiaisonMessage.Text="Violation not updated. Error msg: " + ee.Message;
+                lblNewLiaisonMessage.Text="Liaison not updated. Error msg: " + ee.Message;
                 mpeNewLiaison.Show();
             }
             mpeNewLiaison.Hide();
+        }
+        protected void gvMemberListAndCommitteeTerms_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            gvMemberListAndCommitteeTerms.EditIndex = -1;
+            bindMemberListAndCommitteeTermsGrid();
         }
         protected void gvMemberListAndCommitteeTerms_RowEditing(object sender, GridViewEditEventArgs e) {
             gvMemberListAndCommitteeTerms.EditIndex = Utils.ObjectToInt(e.NewEditIndex);
             bindMemberListAndCommitteeTermsGrid();
         }
         protected void gvMemberListAndCommitteeTerms_RowDeleting(object sender, GridViewDeleteEventArgs e) {
-            string rosterMemberID = Utils.ObjectToString(gvLiaisonList.DataKeys[e.RowIndex].Value);
-            SqlCommand cmd = new SqlCommand("uspMemberRosterFromCommittee");
+            string rosterMemberID = Utils.ObjectToString(gvMemberListAndCommitteeTerms.DataKeys[e.RowIndex].Values[0]);
+            SqlCommand cmd = new SqlCommand("uspRemoveMemberFromCommittee");
             cmd.Parameters.Add("@RosterMemberID", SqlDbType.Int).Value = rosterMemberID;
- //           Utils.executeNonQuery(cmd, ConnectionString);
+            Utils.executeNonQuery(cmd, ConnectionString);
             MemoryCache cache = MemoryCache.Default;
             cache.Remove(DataSetCacheKey);
             bindMemberListAndCommitteeTermsGrid();
         }
         protected void gvMemberListAndCommitteeTerms_RowUpdating(object sender, GridViewUpdateEventArgs e) {
             GridViewRow row = gvMemberListAndCommitteeTerms.Rows[e.RowIndex];
-
-            
+            string memberID=Utils.ObjectToString(((DropDownList)(row.Cells[1].Controls[1])).SelectedItem.Value);
+            string title = Utils.ObjectToString(((DropDownList)(row.Cells[2].Controls[1])).SelectedItem.Value);
+            string appointed=Utils.ObjectToString(((TextBox)row.Cells[3].Controls[1]).Text);
+            string start = Utils.ObjectToString(((TextBox)row.Cells[4].Controls[1]).Text);
+            string end = Utils.ObjectToString(((TextBox)row.Cells[5].Controls[1]).Text);
+            string term = Utils.ObjectToString(((DropDownList)(row.Cells[6].Controls[1])).SelectedValue);
+            int rosterMemberID = Utils.ObjectToInt( gvMemberListAndCommitteeTerms.DataKeys[e.RowIndex].Values[0]);
+            int oldMemberID = Utils.ObjectToInt(gvMemberListAndCommitteeTerms.DataKeys[e.RowIndex].Values[1]);
+            SqlCommand cmd = new SqlCommand("uspRosterMemberSet");
+            cmd.Parameters.Add("@RosterMemberID", SqlDbType.Int).Value = Utils.ObjectToInt(rosterMemberID);
+            cmd.Parameters.Add("@CommitteeID",SqlDbType.Int).Value=CommitteeIDBeingEdited;
+            cmd.Parameters.Add("@MemberID",SqlDbType.Int).Value=Utils.ObjectToInt(memberID);
+            cmd.Parameters.Add("@MTitle",SqlDbType.NVarChar).Value=title;
+            DateTime? tAppointed=Utils.ObjectToDateTimeNullable(appointed);
+            if(tAppointed.HasValue) {
+                cmd.Parameters.Add("@TAppointed",SqlDbType.DateTime).Value=tAppointed.Value;
+            }
+            DateTime? tEnd=Utils.ObjectToDateTimeNullable(end);
+            if(tEnd.HasValue) {
+                cmd.Parameters.Add("@TEnd",SqlDbType.DateTime).Value=tEnd.Value;
+            }
+            DateTime? tStart=Utils.ObjectToDateTimeNullable(start);
+            if(tStart.HasValue) {
+                cmd.Parameters.Add("@TStart",SqlDbType.DateTime).Value=tStart.Value;
+            }
+            cmd.Parameters.Add("@TTerm",SqlDbType.NVarChar).Value=term;
+            SqlParameter newRosterMemberID=new SqlParameter("@NewRosterMemberID",SqlDbType.Int);
+            newRosterMemberID.Direction=ParameterDirection.Output;
+            cmd.Parameters.Add(newRosterMemberID);
+            Utils.executeNonQuery(cmd,ConnectionString);
             //Reset the edit index.
             gvMemberListAndCommitteeTerms.EditIndex = -1;
             MemoryCache cache = MemoryCache.Default;
@@ -384,8 +421,21 @@ namespace SubmittalProposal {
         }
         protected void gvMemberListAndCommitteeTerms_RowDataBound(object sender, GridViewRowEventArgs e) {
             if (e.Row.RowType == DataControlRowType.DataRow) {
-
                 if ((e.Row.RowState & DataControlRowState.Edit) > 0) {
+                    TextBox tbMemberListAndCommitteeTermsStart = (TextBox)e.Row.FindControl("tbMemberListAndCommitteeTermsStart");
+                    DateTime? dateTimeMemberListAndCommitteeTermsStart = Utils.ObjectToDateTimeNullable(GetValueFromAnonymousType<DateTime>(e.Row.DataItem, "Start"));
+                    if (dateTimeMemberListAndCommitteeTermsStart.HasValue && dateTimeMemberListAndCommitteeTermsStart != Utils.SQL_MINIMUM_DATETIME) {
+                        tbMemberListAndCommitteeTermsStart.Text=dateTimeMemberListAndCommitteeTermsStart.Value.ToString("MM/yyyy");
+                    } else {
+                        tbMemberListAndCommitteeTermsStart.Text = "";
+                    }
+                    TextBox tbMemberListAndCommitteeTermsEnd = (TextBox)e.Row.FindControl("tbMemberListAndCommitteeTermsEnd");
+                    DateTime? dateTimeMemberListAndCommitteeTermsEnd = Utils.ObjectToDateTimeNullable(GetValueFromAnonymousType<DateTime>(e.Row.DataItem, "End"));
+                    if (dateTimeMemberListAndCommitteeTermsEnd.HasValue && dateTimeMemberListAndCommitteeTermsStart != Utils.SQL_MINIMUM_DATETIME) {
+                        tbMemberListAndCommitteeTermsEnd.Text=dateTimeMemberListAndCommitteeTermsEnd.Value.ToString("MM/yyyy");
+                    } else {
+                        tbMemberListAndCommitteeTermsEnd.Text = "";
+                    }
                     DropDownList ddList = (DropDownList)e.Row.FindControl("ddlMemberListAndCommitteeTermsNames");
                     ddList.DataSource = ComRosterDataSet().Tables[1];
                     ddList.DataBind();
@@ -398,14 +448,81 @@ namespace SubmittalProposal {
                     string mTitle = Utils.ObjectToString(GetValueFromAnonymousType<string>(e.Row.DataItem, "Title"));
                     int index2 = ddlTitle.Items.IndexOf(ddlTitle.Items.FindByText(mTitle));// If you want to find text by TextField.
                     ddlTitle.SelectedIndex = index2;
+                    DropDownList ddlTerm = (DropDownList)e.Row.FindControl("ddlCommitteeMemberTerm");
+                    string mTerm = Utils.ObjectToString(GetValueFromAnonymousType<string>(e.Row.DataItem, "Term"));
+                    int index3 = ddlTerm.Items.IndexOf(ddlTerm.Items.FindByValue(mTerm));// If you want to find text by TextField.
+                    ddlTerm.SelectedIndex = index3;
                 } else {
                     if (((int)e.Row.RowState) == (int)DataControlRowState.Normal || ((int)e.Row.RowState) == (int)DataControlRowState.Alternate) {
                         LinkButton del = e.Row.Cells[7].Controls[0] as LinkButton;
                         del.Attributes.Add("onclick", "return confirm('Are you sure you want to delete this committee member?');");
+                        Label lblMemberListAndCommitteeTermsStart = (Label)e.Row.FindControl("lblMemberListAndCommitteeTermsStart");
+                        DateTime? dateTimeMemberListAndCommitteeTermsStart = Utils.ObjectToDateTimeNullable(GetValueFromAnonymousType<DateTime>(e.Row.DataItem, "Start"));
+                        if (dateTimeMemberListAndCommitteeTermsStart.HasValue && dateTimeMemberListAndCommitteeTermsStart != Utils.SQL_MINIMUM_DATETIME) {
+                            lblMemberListAndCommitteeTermsStart.Text=dateTimeMemberListAndCommitteeTermsStart.Value.ToString("MM/yyyy");
+                        } else {
+                            lblMemberListAndCommitteeTermsStart.Text = "";
+                        }
+                        Label lblMemberListAndCommitteeTermsEnd = (Label)e.Row.FindControl("lblMemberListAndCommitteeTermsEnd");
+                        DateTime? dateTimeMemberListAndCommitteeTermsEnd = Utils.ObjectToDateTimeNullable(GetValueFromAnonymousType<DateTime>(e.Row.DataItem, "End"));
+                        if (dateTimeMemberListAndCommitteeTermsEnd.HasValue && dateTimeMemberListAndCommitteeTermsStart != Utils.SQL_MINIMUM_DATETIME) {
+                            lblMemberListAndCommitteeTermsEnd.Text=dateTimeMemberListAndCommitteeTermsEnd.Value.ToString("MM/yyyy");
+                        } else {
+                            lblMemberListAndCommitteeTermsEnd.Text = "";
+                        }
                     }
                 }
-
             }
+        }
+        protected void lbMemberListAndCommitteeTermsAdd_Click(object sender, EventArgs e) {
+            ddlMemberListAndCommitteeTermsNamesAdd.DataSource = ComRosterDataSet().Tables[1];
+            ddlMemberListAndCommitteeTermsNamesAdd.DataBind();
+            ddlMemberListAndCommitteeTermsTitlesAdd.DataSource = ComRosterDataSet().Tables[7];
+            ddlMemberListAndCommitteeTermsTitlesAdd.DataBind();
+            mpeNewCommitteeMember.Show();
+        }
+        protected void btnNewCommitteeMemberCancel_Click(object sender, EventArgs args) {
+            mpeNewCommitteeMember.Hide();
+        }
+        protected void btnNewCommitteeMemberOk_Click(object sender, EventArgs args) {
+            try {
+                string memberID = ddlMemberListAndCommitteeTermsNamesAdd.SelectedItem.Value;
+                string title = ddlMemberListAndCommitteeTermsTitlesAdd.SelectedValue;
+                string appointed = tbCommitteeMemberAppointedNew.Text;
+                string start = tbCommitteeMemberStartNew.Text;
+                string end = tbCommitteeMemberEndNew.Text;
+                string term = ddlCommitteeMemberTermAdd.SelectedValue;
+                SqlCommand cmd = new SqlCommand("uspRosterMemberSet");
+                cmd.Parameters.Add("@CommitteeID", SqlDbType.Int).Value = CommitteeIDBeingEdited;
+                cmd.Parameters.Add("@MemberID", SqlDbType.Int).Value = Utils.ObjectToInt(memberID);
+                cmd.Parameters.Add("@MTitle", SqlDbType.NVarChar).Value = title;
+                DateTime? tAppointed = Utils.ObjectToDateTimeNullable(appointed);
+                if (tAppointed.HasValue) {
+                    cmd.Parameters.Add("@TAppointed", SqlDbType.DateTime).Value = tAppointed.Value;
+                }
+                DateTime? tEnd = Utils.ObjectToDateTimeNullable(end);
+                if (tEnd.HasValue) {
+                    cmd.Parameters.Add("@TEnd", SqlDbType.DateTime).Value = tEnd.Value;
+                }
+                DateTime? tStart = Utils.ObjectToDateTimeNullable(start);
+                if (tStart.HasValue) {
+                    cmd.Parameters.Add("@TStart", SqlDbType.DateTime).Value = tStart.Value;
+                }
+                cmd.Parameters.Add("@TTerm", SqlDbType.NVarChar).Value = term;
+                SqlParameter newRosterMemberID = new SqlParameter("@NewRosterMemberID", SqlDbType.Int);
+                newRosterMemberID.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newRosterMemberID);
+                Utils.executeNonQuery(cmd, ConnectionString);
+                //Reset the edit index.
+                gvMemberListAndCommitteeTerms.EditIndex = -1;
+                MemoryCache cache = MemoryCache.Default;
+                cache.Remove(DataSetCacheKey);
+                bindMemberListAndCommitteeTermsGrid();
+            } catch (Exception ee) {
+                lblNewLiaisonMessage.Text = "Committee Member not updated. Error msg: " + ee.Message;
+                mpeNewCommitteeMember.Show();
+            }
+            mpeNewCommitteeMember.Hide();
         }
 
     }

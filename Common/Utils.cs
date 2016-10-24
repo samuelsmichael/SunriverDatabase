@@ -33,6 +33,7 @@ namespace Common {
         public static decimal NULL_DECIMAL = 40404040m;
         public static DateTime NULL_DATETIME = DateTime.MinValue;
         public static DateTime SQL_NULL_DATETIME = new DateTime(1900, 1, 1);
+        public static DateTime SQL_MINIMUM_DATETIME = new DateTime(1, 1, 1);
 
         public static bool hasData(DataSet ds) {
             return ds != null
@@ -40,6 +41,25 @@ namespace Common {
                 && ds.Tables.Count > 0
                 && ds.Tables[0].Rows != null
                 && ds.Tables[0].Rows.Count > 0;
+        }
+        public static DateTime? dateTimeFrom(string mm_slashyyyy) {
+            if (mm_slashyyyy == null) {
+                return null;
+            } else {
+                if (mm_slashyyyy.Length == 6) {
+                    int mm = Utils.ObjectToInt(mm_slashyyyy.Substring(0, 1));
+                    int yyyy = Utils.ObjectToInt(mm_slashyyyy.Substring(1)) + 2000;
+                    return new DateTime(yyyy, mm, 2);
+                } else {
+                    if (mm_slashyyyy.Length == 7) {
+                        int mm = Utils.ObjectToInt(mm_slashyyyy.Substring(0, 2));
+                        int yyyy = Utils.ObjectToInt(mm_slashyyyy.Substring(3));
+                        return new DateTime(yyyy, mm, 1);
+                    } else {
+                        return null;
+                    }
+                }
+            }
         }
         public static void executeNonQuery(SqlCommand command, string connectionString, CommandType commandType) {
             SqlConnection connection = null;
