@@ -21,19 +21,19 @@ namespace SubmittalProposal {
 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
-                MenuItem miSubmittals = new MenuItem("Submittal", "Submittal", null, "~/Submittal2.aspx");
-                MenuItem miBPermit = new MenuItem("BPermits", "BPermits", null, "~/BPermit.aspx");
-                MenuItem miComplianceReview = new MenuItem("Compliance Reviews", "Compliance Reviews", null, "~/ComplianceReview.aspx");
-                MenuItem miContractors = new MenuItem("Contractors", "Contractors", null, "~/Contractor.aspx");
-                MenuItem miCardManagement = new MenuItem("ID Card", "IDCardManagement", null, "~/IDCardManagement.aspx");
-                MenuItem miSellCheck = new MenuItem("Sell Check", "SellCheck", null, "~/SellCheck.aspx");
-                MenuItem miRVStorage = new MenuItem("RV Storage", "RVStorage", null, "~/RVStorage.aspx");
-                MenuItem miLRFDVehicleMaintenance = new MenuItem("LRFD Vehicle", "LRFDVehicle", null, "~/LRFDVehicleMaintenance.aspx");
-                MenuItem miOwnerProperty = new MenuItem("Owner/Property", "OwnProp", null, "~/OwnerProperty.aspx");
+                MenuItem miSubmittals = new MenuItem(Submittal2.MyMenuName, "Submittal", null, "~/Submittal2.aspx");
+                MenuItem miBPermit = new MenuItem(BPermit.MyMenuName, "BPermits", null, "~/BPermit.aspx");
+                MenuItem miComplianceReview = new MenuItem(ComplianceReview.MyMenuName, "Compliance Reviews", null, "~/ComplianceReview.aspx");
+                MenuItem miContractors = new MenuItem(Contractor.MyMenuName, "Contractors", null, "~/Contractor.aspx");
+                MenuItem miCardManagement = new MenuItem(IDCardManagement.MyMenuName, "IDCardManagement", null, "~/IDCardManagement.aspx");
+                MenuItem miSellCheck = new MenuItem(SellCheck.MyMenuName, "SellCheck", null, "~/SellCheck.aspx");
+                MenuItem miRVStorage = new MenuItem(RVStorage.MyMenuName, "RVStorage", null, "~/RVStorage.aspx");
+                MenuItem miLRFDVehicleMaintenance = new MenuItem(LRFDVehicleMaintenance.MyMenuName, "LRFDVehicle", null, "~/LRFDVehicleMaintenance.aspx");
+                MenuItem miOwnerProperty = new MenuItem(OwnerProperty.MyMenuName, "OwnProp", null, "~/OwnerProperty.aspx");
                 MenuItem miItAdmin = new MenuItem("IT Admin", "ITAdmin", null, "~/ItAdmin.aspx");
-                MenuItem miCitations = new MenuItem("Citations", "Citations", null, "~/Citations.aspx");
-                MenuItem miBallotVerify = new MenuItem("Ballot Verify", "BallotVerify", null, "~/BallotVerify.aspx");
-                MenuItem miComRoster = new MenuItem("Com Roster", "ComRoster", null, "~/ComRoster_Home.aspx");
+                MenuItem miCitations = new MenuItem(Citations.MyMenuName, "Citations", null, "~/Citations.aspx");
+                MenuItem miBallotVerify = new MenuItem(BallotVerify.MyMenuName, "BallotVerify", null, "~/BallotVerify.aspx");
+                MenuItem miComRoster = new MenuItem(ComRoster_Home.MyMenuName, "ComRoster", null, "~/ComRoster_Home.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewcomroster")) {
                     NavigationMenu.Items.AddAt(1, miComRoster);
                 }
@@ -73,13 +73,10 @@ namespace SubmittalProposal {
                 if (HttpContext.Current.User.IsInRole("canviewcitations")) {
                     NavigationMenu.Items.AddAt(1, miCitations);
                 }
-
-
-
                 lbReports.Visible = false;
                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
                     if (HttpContext.Current.User.IsInRole("candoreportssubmittals")) {
-                        lbReports.Visible = true;
+                        lbReports.Visible = true;                        
                     }
                 } else {
                     if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("bpermit")) {
@@ -130,6 +127,13 @@ namespace SubmittalProposal {
                                                         if (HttpContext.Current.User.IsInRole("candoreportsballotverify")) {
                                                             lbReports.Text = "Reports";
                                                             lbReports.Visible = true;
+                                                        }
+                                                    } else {
+                                                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_home")) {
+                                                            if (HttpContext.Current.User.IsInRole("candoreportscomroster")) {
+                                                                lbReports.Text = "Reports";
+                                                                lbReports.Visible = true;
+                                                            }
                                                         }
                                                     }
                                                 }

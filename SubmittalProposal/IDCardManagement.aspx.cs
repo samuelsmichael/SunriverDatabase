@@ -763,5 +763,9 @@ namespace SubmittalProposal {
                 Session["DataKeysBeingShown"] = gvCardholders.DataKeys;
             }
         }
+        public static string MyMenuName = "ID Card";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

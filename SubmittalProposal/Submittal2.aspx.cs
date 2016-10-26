@@ -331,5 +331,9 @@ namespace SubmittalProposal
         protected override void weveComeHereForTheFirstTimeThisSession() {
            
         }
+        public static string MyMenuName = "Submittal";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

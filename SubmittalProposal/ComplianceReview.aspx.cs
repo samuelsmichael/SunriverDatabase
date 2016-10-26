@@ -546,5 +546,9 @@ namespace SubmittalProposal {
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
         }
+        public static string MyMenuName="Compliance Reviews";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

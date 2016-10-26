@@ -25,6 +25,7 @@ namespace SubmittalProposal {
                 resultTable = null;
             }
         }
+        
         protected virtual void OnUnlockCheckboxChecked(bool isUnlocked) {
             UnlockCheckboxCheckedHandler handler = UnlockCheckboxChecked;
             if (handler != null) {
@@ -54,6 +55,56 @@ namespace SubmittalProposal {
             } else {
                 lbBallotProcess.Visible = true;
             }
+
+            lblSearchCriteriaBarName.Text = "";
+            try {
+                lblSearchCriteriaBarName.Text = "("+((HasMenuName)Page).MenuName + ")";
+            } catch { }
+/*            if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
+                lblSearchCriteriaBarName.Text = ((HasMenuName)Page).MenuName;
+            } else {
+                if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("bpermit")) {
+                        lblSearchCriteriaBarName.Text = "(BPermits)";
+                } else {
+                    if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("compliance")) {
+                            lblSearchCriteriaBarName.Text = "(Compliance Reviews)";
+                    } else {
+                        if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
+                                lblSearchCriteriaBarName.Text = "(Contractors)";
+                        } else {
+                            if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {
+                                    lblSearchCriteriaBarName.Text = "(Sell Check)";
+                            } else {
+                                if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("rvstorage")) {
+                                        lblSearchCriteriaBarName.Text = "(RV Storage)";
+                                } else {
+                                    if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("lrfd")) {
+                                            lblSearchCriteriaBarName.Text = "(LRFD Maintenance)";
+                                    } else {
+                                        if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("card")) {
+                                                lblSearchCriteriaBarName.Text = "(ID Card)";
+                                        } else {
+                                            if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("citation")) {
+                                                    lblSearchCriteriaBarName.Text = "(Citations)";
+                                            } else {
+                                                if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("ballot")) {
+                                                    lblSearchCriteriaBarName.Text = "(Ballot Verify)";
+                                                } else {
+                                                    if (((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("ownerproperty")) {
+                                                        lblSearchCriteriaBarName.Text = "(Owner/Property)";
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+*/
         }
         private bool ballotNumberExists() {
             SqlCommand cmd = new SqlCommand("uspBallotVerifyGet");
@@ -117,8 +168,8 @@ namespace SubmittalProposal {
             CPEForm.ClientState = "true";
         }
         public void expandCPESearch() {
-            CPEForm.Collapsed = false;
-            CPEForm.ClientState = "false";
+            CPESearch.Collapsed = false;
+            CPESearch.ClientState = "false";
         }
         private void expandCPEGrid() {
             CPEDataGrid.Collapsed = false;

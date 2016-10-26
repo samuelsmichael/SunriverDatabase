@@ -208,5 +208,8 @@ namespace SubmittalProposal {
             }
             ((MainMasterPage)Master.Master).getNavigationMenu().Visible = false;
        }
+        protected override string childMenuName {
+            get { return "Owner/Property Finder"; }
+        }
     }
 }

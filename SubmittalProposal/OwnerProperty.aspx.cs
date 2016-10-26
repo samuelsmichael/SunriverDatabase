@@ -185,6 +185,10 @@ namespace SubmittalProposal {
             return buildDataSet().Tables[0];
         }
         protected void btnSubmitUpdate_Click(object sender, EventArgs e) {
-        }    
+        }
+        public static string MyMenuName = "Owner/Property";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

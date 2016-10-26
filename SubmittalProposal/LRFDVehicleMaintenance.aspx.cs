@@ -771,5 +771,9 @@ namespace SubmittalProposal {
                 args.IsValid = false;
             }
         }
+        public static string MyMenuName = "LRFD Vehicle";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

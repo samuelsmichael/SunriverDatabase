@@ -10,7 +10,7 @@ using System.Data;
 using System.Runtime.Caching;
 
 namespace SubmittalProposal {
-    public abstract class AbstractDatabase : System.Web.UI.Page {
+    public abstract class AbstractDatabase : System.Web.UI.Page, HasMenuName {
         protected abstract string gvResults_DoSelectedIndexChanged(object sender, EventArgs e);
         protected abstract void performSubmittalButtonClick(out string searchCriteria, out string filterString);
         protected abstract GridView getGridViewResults();
@@ -22,12 +22,15 @@ namespace SubmittalProposal {
         protected abstract void lockYourUpdateFields();
         protected abstract void clearAllSelectionInputFields();
         protected abstract void clearAllNewFormInputFields();
+        protected abstract string childMenuName { get; }
         /// <summary>
         /// If this database doesn't allow updating, then throw an exception in here
         /// </summary>
         protected abstract string UpdateRoleName { get; }
         protected abstract void weveComeHereForTheFirstTimeThisSession();        
         protected abstract void childPageLoad(object sender, EventArgs e);
+
+        public string MenuName { get { return childMenuName; } }
 
         protected void Page_Load(object sender, EventArgs e) {
             Database database = (Database)Master;

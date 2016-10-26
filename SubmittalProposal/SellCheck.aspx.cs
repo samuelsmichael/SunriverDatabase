@@ -630,5 +630,9 @@ namespace SubmittalProposal {
                 }
             }
         }
+        public static string MyMenuName = "Sell Check";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

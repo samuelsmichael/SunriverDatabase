@@ -376,5 +376,9 @@ namespace SubmittalProposal {
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
         }
+        public static string MyMenuName = "Contractor";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

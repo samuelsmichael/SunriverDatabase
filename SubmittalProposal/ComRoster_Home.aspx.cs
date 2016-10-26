@@ -11,8 +11,9 @@ using System.Drawing;
 using Common;
 
 namespace SubmittalProposal {
-    public partial class ComRoster_Home : System.Web.UI.Page {
+    public partial class ComRoster_Home : System.Web.UI.Page, HasMenuName {
         protected void Page_Load(object sender, EventArgs e) {
+            ((SiteMaster)Master.Master).HomePageImOnSinceMenuItemClickDoesntWork = GetType().Name;
             if (!IsPostBack) {
                 bindCommitteeGrid();
                 string zUpdateRoleName = "canupdatecomroster";
@@ -25,6 +26,7 @@ namespace SubmittalProposal {
                 }
             }
         }
+        string GetName { get { return "Com Roster"; } }
         private void bindCommitteeGrid() {
             dgCommittees.DataSource = ComRosterDataSet().Tables[0];
             dgCommittees.DataBind();
@@ -270,6 +272,10 @@ namespace SubmittalProposal {
                 lblCommitteeUpdateMessage.ForeColor = Color.Red;
                 lblCommitteeUpdateMessage.Text = ee.Message;
             }
+        }
+
+        protected void lbWorkWithMembers_click(object sender, EventArgs e) {
+            Response.Redirect("~/ComRoster_Members.aspx");
         }
 
         protected void lbLiaisonInCommitteeAdd_Click(object sender, EventArgs e) {
@@ -524,7 +530,10 @@ namespace SubmittalProposal {
             }
             mpeNewCommitteeMember.Hide();
         }
-
+        public static string MyMenuName = "Com Roster";
+        public string MenuName {
+            get { return MyMenuName; }
+        }
     }
 }
 

@@ -989,5 +989,9 @@ namespace SubmittalProposal {
                 }
             }
         }
+        public static string MyMenuName = "RV Storage";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }

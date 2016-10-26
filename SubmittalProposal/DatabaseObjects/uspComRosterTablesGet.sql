@@ -14,7 +14,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	select * FROM tblCommitteeData ORDER BY CommitteeID
-	Select *, FirstName + ' ' + LastName as FullName from tblMemberData WHERE MemberID!=1 ORDER BY MemberID
+	Select *, FirstName + ' ' + LastName as FullName, dbo.udfCommitteesForMember(MemberID) as Committees from tblMemberData WHERE MemberID!=1 ORDER BY MemberID
 	Select rm.RosterMemberID, CommitteeID, MemberID,TAppointed,TStart, TEnd, TTerm,ts.MTitle from tblRostermembers rm LEFT OUTER JOIN [tblTitleSort{LU}] ts ON ts.TitleSort=rm.MTitle ORDER BY RosterMemberID
 	select *, LiaisonName+' ('+LiaisonType+')' as LiaisonNameAndType from tblLiaisonData ORDER BY LiaisonID
 	select * from tblRosterLiaison

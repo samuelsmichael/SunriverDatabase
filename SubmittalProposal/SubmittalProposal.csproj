@@ -103,6 +103,7 @@
     <Content Include="BPermitReportsMain.aspx" />
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="ComRoster_Home.aspx" />
+    <Content Include="ComRoster_Members.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
@@ -383,6 +384,13 @@
     <Compile Include="ComRoster_Home.aspx.designer.cs">
       <DependentUpon>ComRoster_Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ComRoster_Members.aspx.cs">
+      <DependentUpon>ComRoster_Members.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComRoster_Members.aspx.designer.cs">
+      <DependentUpon>ComRoster_Members.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contractor.aspx.cs">
       <DependentUpon>Contractor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -418,6 +426,7 @@
     <Compile Include="Dummy.aspx.designer.cs">
       <DependentUpon>Dummy.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HasMenuName.cs" />
     <Compile Include="ITAdmin.aspx.cs">
       <DependentUpon>ITAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

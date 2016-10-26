@@ -585,6 +585,10 @@ namespace SubmittalProposal {
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {            
         }
+        public static string MyMenuName = "BPermit";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
     public static class CustomLINQtoDataSetMethods {
         public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) {

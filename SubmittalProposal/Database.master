@@ -71,7 +71,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
                                 <td>
-                                    Search criteria
+                                    Search criteria&nbsp<asp:Label runat="server" ID="lblSearchCriteriaBarName"></asp:Label>
                                 </td>
                                 <td>
                                     <asp:Label ID="LblSearch" CssClass="collapsePanelText" Text="" runat="server"></asp:Label>

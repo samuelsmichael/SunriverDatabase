@@ -698,5 +698,9 @@ namespace SubmittalProposal {
             isAddCitationOpen = false;
             mpeNewCitation.Hide();
         }
-   }
+        public static string MyMenuName = "Citations";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
+    }
 }

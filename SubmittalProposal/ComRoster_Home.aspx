@@ -546,7 +546,7 @@
                             <ajaxToolkit:ModalPopupExtender ID="mpeNewCommitteeMember" runat="server" TargetControlID="dummyNewCommitteeMember"
                                 PopupControlID="pnlNewCommitteeMember" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewCommitteeMemberTitle" />
                             <center>
-                                <asp:LinkButton ID="lbWorkWithMembers" Visible="false" runat="server">Work with Members</asp:LinkButton></center>
+                                <asp:LinkButton ID="lbWorkWithMembers" OnClick="lbWorkWithMembers_click" Visible="false" runat="server" >Work with Members</asp:LinkButton></center>
                         </td>
                     </tr>
                 </table>

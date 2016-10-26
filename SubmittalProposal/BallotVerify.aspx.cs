@@ -214,5 +214,9 @@ namespace SubmittalProposal {
                 ddlLaneSearch.DataBind();
             }
         }
+        public static string MyMenuName = "Ballot Verify";
+        protected override string childMenuName {
+            get { return MyMenuName; }
+        }
     }
 }
