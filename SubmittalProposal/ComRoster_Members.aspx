@@ -49,6 +49,80 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
+    <table border="0" cellpadding="2" cellspacing="2">
+        <tr valign="top">
+            <td valign="top">
+                <asp:Label CssClass="form_field_heading" ID="Label7x" runat="server" Text="First Name"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersFirstNameUpdate" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Last Name"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersLastNameUpdate" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label10x3" runat="server" Text="SR Mail Addr1"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersSRMailAddr1Update" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label10x3dc" runat="server" Text="SR Mail Addr2"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersSRMailAddr2Update" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label3x33" runat="server" Text="SR Phone"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersSRPhoneUpdate" MaxLength="20" Width="8em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label3x332zs" runat="server" Text="FAX"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersFAXUpdate" MaxLength="20" Width="8em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="Email"></asp:Label>
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="tbComRosterMembersEmailUpdate" MaxLength="50" Width="27em" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label4x11" runat="server" Text="NR Mail Addr"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersNRMailAddrUpdate" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="NR Phone"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbComRosterMembersNRPhoneUpdate" MaxLength="20" Width="8em" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Comments"></asp:Label>
+            </td>
+            <td colspan="3">
+                <asp:TextBox TextMode="MultiLine" ID="tbComRosterMembersCommentsUpdate" Height="4em" Width="27em" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+    </table>
+    <center>
+        <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
+            ID="btnComRosterMemberUpdate" OnClick="btnComRosterMemberUpdateOkay_Click" OnClientClick="javascript: return true;"
+            runat="server" Text="Submit" />
+        <asp:Label ID="lblComRosterMemberUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+    </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
 </asp:Content>

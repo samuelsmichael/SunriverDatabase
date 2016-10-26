@@ -24,6 +24,9 @@ namespace SubmittalProposal {
                     enableUnlockRecordCheckbox(false);
     //                cbUnlockRecordLists.Enabled = false;
                 }
+
+                CPECommittees.Collapsed = false;
+                CPECommittees.ClientState = "false";
             }
         }
         string GetName { get { return "Com Roster"; } }

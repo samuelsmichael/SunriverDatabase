@@ -11,8 +11,33 @@ using Common;
 
 namespace SubmittalProposal {
     public partial class ComRoster_Members : AbstractDatabase {
+        private static string DataSetCacheKey = "COMROSTERDATASETCACHEKEY";
+        private static string ConnectionString {
+            get {
+                return System.Configuration.ConfigurationManager.ConnectionStrings["ComRosterSQLConnectionString"].ConnectionString;
+            }
+        }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            throw new NotImplementedException();
+            GridViewRow row = gvResults.SelectedRow;
+            MemberIDBeingEdited = Convert.ToInt32(row.Cells[9].Text);
+            DataTable sourceTable = getGridViewDataTable();
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = "MemberID=" + MemberIDBeingEdited;
+            DataTable tblFiltered = view.ToTable();
+            Session["MembersTblFiltered"] = tblFiltered;
+            DataRow dr = tblFiltered.Rows[0];
+            tbComRosterMembersFirstNameUpdate.Text = Utils.ObjectToString(dr["FirstName"]);
+            tbComRosterMembersLastNameUpdate.Text = Utils.ObjectToString(dr["LastName"]);
+            tbComRosterMembersSRMailAddr1Update.Text=Utils.ObjectToString(dr["SRMailAddr1"]);
+            tbComRosterMembersSRMailAddr2Update.Text = Utils.ObjectToString(dr["SRMailAddr2"]);
+            tbComRosterMembersSRPhoneUpdate.Text = Utils.ObjectToString(dr["SRPhone"]);
+            tbComRosterMembersFAXUpdate.Text = Utils.ObjectToString(dr["SRFax"]);
+            tbComRosterMembersEmailUpdate.Text = Utils.ObjectToString(dr["Email"]);
+            tbComRosterMembersNRMailAddrUpdate.Text=Utils.ObjectToString(dr["NRMailAddr"]);
+            tbComRosterMembersNRPhoneUpdate.Text=Utils.ObjectToString(dr["NRPhone"]);
+            tbComRosterMembersCommentsUpdate.Text=Utils.ObjectToString(dr["Comments"]);
+
+            return "Last name: " + Utils.ObjectToString(dr["LastName"]) + "nbsp;nbsp;nbsp;First name: " + Utils.ObjectToString(dr["FirstName"]) + "     MemberID: " + MemberIDBeingEdited;
         }
 
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
@@ -29,7 +54,7 @@ namespace SubmittalProposal {
             if (Utils.isNothingNot(ddlComRosterMembersCommitteeLU.SelectedValue) && ddlComRosterMembersCommitteeLU.SelectedValue!="0") {
                 sb.Append(prepend + "Committee: " + ddlComRosterMembersCommitteeLU.SelectedItem);
                 prepend = "  ";
-                sbFilter.Append(and + Common.Utils.getDataViewQuery(ddlComRosterMembersCommitteeLU.SelectedValue, "Committees"));
+                sbFilter.Append(and + Common.Utils.getDataViewQuery("|"+ddlComRosterMembersCommitteeLU.SelectedValue+"|", "Committees"));
                 and = " and ";
             }
             if (Utils.isNothingNot( tbComRosterMemberIDLU.Text)) {
@@ -56,7 +81,7 @@ namespace SubmittalProposal {
         }
 
         protected override Label getUpdateResultsLabel() {
-            throw new NotImplementedException();
+            return lblComRosterMemberUpdateResults;
         }
 
         protected override Label getNewResultsLabel() {
@@ -64,11 +89,31 @@ namespace SubmittalProposal {
         }
 
         protected override void unlockYourUpdateFields() {
-            throw new NotImplementedException();
+            tbComRosterMembersCommentsUpdate.Enabled = false;
+            tbComRosterMembersEmailUpdate.Enabled = false;
+            tbComRosterMembersFAXUpdate.Enabled = false;
+            tbComRosterMembersFirstNameUpdate.Enabled = false;
+            tbComRosterMembersLastNameUpdate.Enabled = false;
+            tbComRosterMembersNRMailAddrUpdate.Enabled = false;
+            tbComRosterMembersNRPhoneUpdate.Enabled = false;
+            tbComRosterMembersSRMailAddr1Update.Enabled = false;
+            tbComRosterMembersSRMailAddr2Update.Enabled = false;
+            tbComRosterMembersSRPhoneUpdate.Enabled = false;
+            btnComRosterMemberUpdate.Visible = false;
         }
 
         protected override void lockYourUpdateFields() {
-            throw new NotImplementedException();
+            tbComRosterMembersCommentsUpdate.Enabled = true;
+            tbComRosterMembersEmailUpdate.Enabled = true;
+            tbComRosterMembersFAXUpdate.Enabled = true;
+            tbComRosterMembersFirstNameUpdate.Enabled = true;
+            tbComRosterMembersLastNameUpdate.Enabled = true;
+            tbComRosterMembersNRMailAddrUpdate.Enabled = true;
+            tbComRosterMembersNRPhoneUpdate.Enabled = true;
+            tbComRosterMembersSRMailAddr1Update.Enabled = true;
+            tbComRosterMembersSRMailAddr2Update.Enabled = true;
+            tbComRosterMembersSRPhoneUpdate.Enabled = true;
+            btnComRosterMemberUpdate.Visible = true;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -107,5 +152,39 @@ namespace SubmittalProposal {
             ddlComRosterMembersCommitteeLU.DataSource = committee;
             ddlComRosterMembersCommitteeLU.DataBind();
         }
+        private int MemberIDBeingEdited {
+            get {
+                object obj = Session["ComRosterMembersMemberIDBeingEdited"];
+                return obj == null ? 0 : (int)obj;
+            }
+            set {
+                Session["ComRosterMembersMemberIDBeingEdited"] = value;
+            }
+        }
+
+        protected void btnComRosterMemberUpdateOkay_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspComRosterMemberSet");
+                cmd.Parameters.Add("@MemberID", SqlDbType.Int).Value = MemberIDBeingEdited;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = tbComRosterMembersFirstNameUpdate.Text;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = tbComRosterMembersLastNameUpdate.Text;
+                cmd.Parameters.Add("@SRMailAddr1", SqlDbType.NVarChar).Value = tbComRosterMembersSRMailAddr1Update.Text;
+                cmd.Parameters.Add("@SRMailAddr2", SqlDbType.NVarChar).Value = tbComRosterMembersSRMailAddr2Update.Text;
+                cmd.Parameters.Add("@SRPhone", SqlDbType.NVarChar).Value = tbComRosterMembersSRPhoneUpdate.Text;
+                cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = tbComRosterMembersEmailUpdate.Text;
+                cmd.Parameters.Add("@SRFax", SqlDbType.NVarChar).Value = tbComRosterMembersFAXUpdate.Text;
+                cmd.Parameters.Add("@NRMailAddr", SqlDbType.NVarChar).Value = tbComRosterMembersNRMailAddrUpdate.Text;
+                cmd.Parameters.Add("@NRPhone", SqlDbType.NVarChar).Value = tbComRosterMembersNRPhoneUpdate.Text;
+                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = tbComRosterMembersCommentsUpdate.Text;
+                SqlParameter newMemberID = new SqlParameter("@NewMemberID", SqlDbType.Int);
+                newMemberID.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newMemberID);
+                Utils.executeNonQuery(cmd, ConnectionString);
+                performPostUpdateSuccessfulActions("Update successful", DataSetCacheKey, null);
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
+            }
+        }
+
     }
 }

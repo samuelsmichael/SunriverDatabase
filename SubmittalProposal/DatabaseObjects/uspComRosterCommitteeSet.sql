@@ -41,7 +41,7 @@ BEGIN
 		WHERE CommitteeID=@CommitteeID	
 		SET @NewCommitteeID=@CommitteeID
 	end else begin
-		INSERT INTO tblCommitteeDate (CommitteeName, #OfMembers, #OfMembersNote, Term, TermLimit, TermLimitNote, AlternateMembers, AssociateMembers, CharterDate, [Status])
+		INSERT INTO tblCommitteeData (CommitteeName, #OfMembers, #OfMembersNote, Term, TermLimit, TermLimitNote, AlternateMembers, AssociateMembers, CharterDate, [Status])
 		SELECT
 			@CommitteeName, @#OfMembers, @#OfMembersNote, @Term, @TermLimit, @TermLimitNote, @AlternateMembers, @AssociateMembers, @CharterDate, @Status
 		set @NewCommitteeID=scope_identity()
