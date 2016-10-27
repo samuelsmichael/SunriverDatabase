@@ -88,7 +88,7 @@ namespace SubmittalProposal {
             throw new NotImplementedException();
         }
 
-        protected override void unlockYourUpdateFields() {
+        protected override void lockYourUpdateFields() {
             tbComRosterMembersCommentsUpdate.Enabled = false;
             tbComRosterMembersEmailUpdate.Enabled = false;
             tbComRosterMembersFAXUpdate.Enabled = false;
@@ -102,7 +102,7 @@ namespace SubmittalProposal {
             btnComRosterMemberUpdate.Visible = false;
         }
 
-        protected override void lockYourUpdateFields() {
+        protected override void unlockYourUpdateFields() {
             tbComRosterMembersCommentsUpdate.Enabled = true;
             tbComRosterMembersEmailUpdate.Enabled = true;
             tbComRosterMembersFAXUpdate.Enabled = true;
@@ -123,7 +123,16 @@ namespace SubmittalProposal {
         }
 
         protected override void clearAllNewFormInputFields() {
-            throw new NotImplementedException();
+            tbComRosterMembersCommentsNew.Text="";
+            tbComRosterMembersEmailNew.Text="";
+            tbComRosterMembersFAXNew.Text="";
+            tbComRosterMembersFirstNameNew.Text="";
+            tbComRosterMembersLastNameNew.Text="";
+            tbComRosterMembersNRMailAddrNew.Text="";
+            tbComRosterMembersNRPhoneNew.Text="";
+            tbComRosterMembersSRMailAddr1New.Text="";
+            tbComRosterMembersSRMailAddr2New.Text="";
+            tbComRosterMembersSRPhoneNew.Text="";
         }
 
         protected override string UpdateRoleName {
@@ -185,6 +194,55 @@ namespace SubmittalProposal {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
             }
         }
-
+        protected void btnNewComRosterMemberOk_Click(object sender, EventArgs args) {
+            if (Page.IsValid) {
+                try {
+                    SqlCommand cmd = new SqlCommand("uspComRosterMemberSet");
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = tbComRosterMembersFirstNameNew.Text;
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = tbComRosterMembersLastNameNew.Text;
+                    cmd.Parameters.Add("@SRMailAddr1", SqlDbType.NVarChar).Value = tbComRosterMembersSRMailAddr1New.Text;
+                    cmd.Parameters.Add("@SRMailAddr2", SqlDbType.NVarChar).Value = tbComRosterMembersSRMailAddr2New.Text;
+                    cmd.Parameters.Add("@SRPhone", SqlDbType.NVarChar).Value = tbComRosterMembersSRPhoneNew.Text;
+                    cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = tbComRosterMembersEmailNew.Text;
+                    cmd.Parameters.Add("@SRFax", SqlDbType.NVarChar).Value = tbComRosterMembersFAXNew.Text;
+                    cmd.Parameters.Add("@NRMailAddr", SqlDbType.NVarChar).Value = tbComRosterMembersNRMailAddrNew.Text;
+                    cmd.Parameters.Add("@NRPhone", SqlDbType.NVarChar).Value = tbComRosterMembersNRPhoneNew.Text;
+                    cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = tbComRosterMembersCommentsNew.Text;
+                    SqlParameter newMemberID = new SqlParameter("@NewMemberID", SqlDbType.Int);
+                    newMemberID.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newMemberID);
+                    Utils.executeNonQuery(cmd, ConnectionString);
+                    performPostNewSuccessfulActions("Update successful", DataSetCacheKey, null, tbComRosterMemberIDLU, newMemberID.Value);
+  
+                } catch (Exception ee) {
+                    performPostNewFailedActions("Update failed. Msg: " + ee.Message);
+                    isAddNewMemberOpen = true;
+                    mpeNewComRosterMember.Show();
+                    return;
+                }
+                isAddNewMemberOpen = false;
+                mpeNewComRosterMember.Hide();
+            } else {
+                isAddNewMemberOpen = true;
+                mpeNewComRosterMember.Show();
+            }
+        }
+        protected void btnNewComRosterMemberCancel_Click(object sender, EventArgs args) {
+            isAddNewMemberOpen = false;
+            mpeNewComRosterMember.Hide();
+        }
+        protected void lbNewComRosterMember_OnClick(object sender, EventArgs args) {
+            isAddNewMemberOpen = true;
+            mpeNewComRosterMember.Show();
+        }
+        private bool isAddNewMemberOpen {
+            get {
+                object obj = Session["isAddNewMemberOpen"];
+                return obj == null ? false : (bool)obj;
+            }
+            set {
+                Session["isAddNewMemberOpen"] = value;
+            }
+        }
     }
 }

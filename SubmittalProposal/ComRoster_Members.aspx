@@ -125,4 +125,116 @@
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
-</asp:Content>
+    <center>
+        <asp:LinkButton ID="lbNewComRosterMember" CausesValidation="false" OnClick="lbNewComRosterMember_OnClick"
+            runat="server">New Member</asp:LinkButton>
+    </center>
+    <script language="javascript" type="text/javascript">
+        function donewcomrosterjedisok() {
+            var loading = $(".loadingnewbpermit");
+            loading.show();
+            var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+            var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+            loading.css({ top: top, left: left });
+            return true;
+        }
+    </script>
+    <asp:Panel runat="server" CssClass="newitempopup" Width="900" ID="pnlComRosterMemberNewContent">
+        <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlComRosterMemberNewTitle">
+            <span>New Member</span>
+        </asp:Panel>
+        <asp:Panel runat="server" Style="text-align: center;" ID="pnlNewComRosterMemberContent"
+            CssClass="newitemcontent">
+            <table border="0" cellpadding="2" cellspacing="2">
+                <tr valign="top">
+                    <td valign="top">
+                        <asp:Label CssClass="form_field_heading" ID="Laabel7x" runat="server" Text="First Name"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersFirstNameNew" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel7" runat="server" Text="Last Name"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersLastNameNew" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel10x3" runat="server" Text="SR Mail Addr1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersSRMailAddr1New" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel10x3dc" runat="server" Text="SR Mail Addr2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersSRMailAddr2New" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel3x33" runat="server" Text="SR Phone"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersSRPhoneNew" MaxLength="20" Width="8em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel3x332zs" runat="server" Text="FAX"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersFAXNew" MaxLength="20" Width="8em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel3" runat="server" Text="Email"></asp:Label>
+                    </td>
+                    <td colspan="3">
+                        <asp:TextBox ID="tbComRosterMembersEmailNew" MaxLength="50" Width="27em" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel4x11" runat="server" Text="NR Mail Addr"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersNRMailAddrNew" MaxLength="30" Width="10em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel5" runat="server" Text="NR Phone"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="tbComRosterMembersNRPhoneNew" MaxLength="20" Width="8em" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label CssClass="form_field_heading" ID="Laabel4" runat="server" Text="Comments"></asp:Label>
+                    </td>
+                    <td colspan="3">
+                        <asp:TextBox TextMode="MultiLine" ID="tbComRosterMembersCommentsNew" Height="4em" Width="27em" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+            </table>
+            <center>
+                <table cellpadding="3">
+                    <tr>
+                        <td>
+                            <asp:Button CausesValidation="true" OnClientClick="javascript: return donewcomrosterjedisok();"
+                                ID="btnComRosterMemberNewOkay" runat="server" Text="Okay" OnClick="btnNewComRosterMemberOk_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnComRosterMemberNewCancel" runat="server" Text="Cancel" CausesValidation="false"
+                                OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                OnClick="btnNewComRosterMemberCancel_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            <asp:Label ID="lblComRosterMemberNewMessage" Font-Bold="true" ForeColor="Red" runat="server" ></asp:Label></td>
+                    </tr>
+                </table>
+            </center>
+        </asp:Panel>
+    </asp:Panel>
+    <asp:Button Style="display: none;" ID="btnComRosterMemberhidden1" runat="server" />
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewComRosterMember" runat="server" TargetControlID="btnComRosterMemberhidden1"
+        PopupControlID="pnlComRosterMemberNewContent" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlComRosterMemberNewTitle"
+        BehaviorID="jdpopupComRosterMembernew" /></asp:Content>
