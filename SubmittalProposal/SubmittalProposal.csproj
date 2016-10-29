@@ -103,6 +103,7 @@
     <Content Include="BPermitReportsMain.aspx" />
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="ComRoster_Home.aspx" />
+    <Content Include="ComRoster_Liaisons.aspx" />
     <Content Include="ComRoster_Members.aspx" />
     <Content Include="Contractor.aspx" />
     <Content Include="ContractorReportsMain.aspx" />
@@ -383,6 +384,13 @@
     </Compile>
     <Compile Include="ComRoster_Home.aspx.designer.cs">
       <DependentUpon>ComRoster_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComRoster_Liaisons.aspx.cs">
+      <DependentUpon>ComRoster_Liaisons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComRoster_Liaisons.aspx.designer.cs">
+      <DependentUpon>ComRoster_Liaisons.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComRoster_Members.aspx.cs">
       <DependentUpon>ComRoster_Members.aspx</DependentUpon>

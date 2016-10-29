@@ -314,7 +314,7 @@
                                     PopupControlID="pnlNewLiaison" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewLiaisonTitle" />
                             </asp:Panel>
                             <center>
-                                <asp:LinkButton ID="lbWorkWithLiaisons" Visible="false" runat="server">Work with Liaisons</asp:LinkButton></center>
+                                <asp:LinkButton ID="lbWorkWithLiaisons" Visible="false" OnClick="lbWorkWithLiaisons_click" runat="server">Work with Liaisons</asp:LinkButton></center>
                         </td>
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" Enabled="false" ID="pnlMemberListAndCommitteeTerms"

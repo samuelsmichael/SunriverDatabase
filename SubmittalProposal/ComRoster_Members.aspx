@@ -13,7 +13,8 @@
     <td>
         <asp:Label ID="Label1" runat="server" Text="MemberID"></asp:Label>
         <asp:TextBox ID="tbComRosterMemberIDLU" Width="46" runat="server"></asp:TextBox>
-    </td></asp:Content>
+    </td>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
     <div style="height: 400px; overflow: auto;">
         <asp:GridView AllowSorting="True" ID="gvResults" OnSelectedIndexChanged="gvResults_SelectedIndexChanged"
@@ -26,9 +27,8 @@
             <Columns>
                 <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
                 <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
-                <asp:BoundField DataField="SRPhone" HeaderText="Phone" SortExpression="SRPhone" />
+                <asp:BoundField DataField="SRPhone" HeaderText="SR Phone" SortExpression="SRPhone" />
                 <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                <asp:BoundField DataField="NRMailAddr" HeaderText="NR Address" SortExpression="NRMailAddr" />
                 <asp:BoundField DataField="NRMailAddr" HeaderText="NR Address" SortExpression="NRMailAddr" />
                 <asp:BoundField DataField="NRPhone" HeaderText="NR Phone" SortExpression="NRPhone" />
                 <asp:BoundField DataField="Comments" HeaderText="Comments" SortExpression="Comments" />

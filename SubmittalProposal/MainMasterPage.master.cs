@@ -134,6 +134,20 @@ namespace SubmittalProposal {
                                                                 lbReports.Text = "Reports";
                                                                 lbReports.Visible = true;
                                                             }
+                                                        } else {
+                                                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_members")) {
+                                                                if (HttpContext.Current.User.IsInRole("candoreportscommembers")) {
+                                                                    lbReports.Text = "Reports";
+                                                                    lbReports.Visible = true;
+                                                                }
+                                                            } else {
+                                                                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_liaisons")) {
+                                                                    if (HttpContext.Current.User.IsInRole("candoreportscomliaisons")) {
+                                                                        lbReports.Text = "Reports";
+                                                                        lbReports.Visible = true;
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }

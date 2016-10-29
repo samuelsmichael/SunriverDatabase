@@ -281,6 +281,10 @@ namespace SubmittalProposal {
             Response.Redirect("~/ComRoster_Members.aspx");
         }
 
+        protected void lbWorkWithLiaisons_click(object sender, EventArgs e) {
+            Response.Redirect("~/ComRoster_Liaisons.aspx");
+        }
+
         protected void lbLiaisonInCommitteeAdd_Click(object sender, EventArgs e) {
             ddlLiaisonNew.DataSource = ComRosterDataSet().Tables[3];
             ddlLiaisonNew.DataBind();

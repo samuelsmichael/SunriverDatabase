@@ -37,7 +37,7 @@ namespace SubmittalProposal {
             tbComRosterMembersNRPhoneUpdate.Text=Utils.ObjectToString(dr["NRPhone"]);
             tbComRosterMembersCommentsUpdate.Text=Utils.ObjectToString(dr["Comments"]);
 
-            return "Last name: " + Utils.ObjectToString(dr["LastName"]) + "nbsp;nbsp;nbsp;First name: " + Utils.ObjectToString(dr["FirstName"]) + "     MemberID: " + MemberIDBeingEdited;
+            return "Last name: " + Utils.ObjectToString(dr["LastName"]) + "&nbsp;&nbsp;&nbsp;First name: " + Utils.ObjectToString(dr["FirstName"]) + "     MemberID: " + MemberIDBeingEdited;
         }
 
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
@@ -152,7 +152,7 @@ namespace SubmittalProposal {
         protected override string childMenuName {
             get { return MyMenuName; }
         }
-        public void bindCommitteeDropDown() {
+        private void bindCommitteeDropDown() {
             DataTable committee = ComRoster_Home.ComRosterDataSet().Tables[0].Copy();
             DataRow row = committee.NewRow();
             row["CommitteeID"]=0;
@@ -212,6 +212,7 @@ namespace SubmittalProposal {
                     newMemberID.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(newMemberID);
                     Utils.executeNonQuery(cmd, ConnectionString);
+                    clearAllSelectionInputFields();
                     performPostNewSuccessfulActions("Update successful", DataSetCacheKey, null, tbComRosterMemberIDLU, newMemberID.Value);
   
                 } catch (Exception ee) {

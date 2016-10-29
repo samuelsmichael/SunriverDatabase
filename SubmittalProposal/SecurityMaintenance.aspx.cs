@@ -218,7 +218,7 @@ namespace SubmittalProposal {
             mpeChangePassword.Hide();
         }
         protected void gvRolls_RowDeleting(object sender, GridViewDeleteEventArgs e) {
-            String roleName = e.Keys[e.RowIndex].ToString();
+            String roleName = Utils.ObjectToString(e.Keys[0]);
             try {                
                 string[] usersInRoll=Roles.GetUsersInRole(roleName);
                 if (usersInRoll.Length > 0) {
