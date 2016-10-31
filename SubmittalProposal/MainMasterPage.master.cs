@@ -137,14 +137,14 @@ namespace SubmittalProposal {
                                                         } else {
                                                             if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_members")) {
                                                                 if (HttpContext.Current.User.IsInRole("candoreportscommembers")) {
-                                                                    lbReports.Text = "Reports";
-                                                                    lbReports.Visible = true;
+                                                             /*  There are no members reports     lbReports.Text = "Reports";
+                                                                    lbReports.Visible = true;*/
                                                                 }
                                                             } else {
                                                                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_liaisons")) {
                                                                     if (HttpContext.Current.User.IsInRole("candoreportscomliaisons")) {
-                                                                        lbReports.Text = "Reports";
-                                                                        lbReports.Visible = true;
+                                                                   /* there are no liaisons reports     lbReports.Text = "Reports";
+                                                                        lbReports.Visible = true; */
                                                                     }
                                                                 }
                                                             }
@@ -193,8 +193,13 @@ namespace SubmittalProposal {
                                                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("ballot")) {
                                                     Response.Redirect("~/BallotVerifyReportsMain.aspx");
                                                 }
+                                                {
+                                                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_home")) {
+                                                        Response.Redirect("~/ComRoster_HomeReportsMain.aspx");
+                                                    }
+                                                }
                                             }
-                                        } 
+                                        }
                                     }
                                 }
                             }

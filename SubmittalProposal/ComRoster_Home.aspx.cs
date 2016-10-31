@@ -27,6 +27,17 @@ namespace SubmittalProposal {
 
                 CPECommittees.Collapsed = false;
                 CPECommittees.ClientState = "false";
+                if (HttpContext.Current.User.IsInRole("canviewcommembers")) {
+                    lbWorkWithMembersBar.Visible = true;
+                } else {
+                    lbWorkWithMembersBar.Visible = false;
+                }
+                if (HttpContext.Current.User.IsInRole("canviewcomliaisons")) {
+                    lbWorkWithLiaisonsBar.Visible = true;
+                } else {
+                    lbWorkWithLiaisonsBar.Visible = false;
+                }
+
             }
         }
         string GetName { get { return "Com Roster"; } }
@@ -216,8 +227,13 @@ namespace SubmittalProposal {
             pnlMemberListAndCommitteeTerms.Enabled = enabled;
             pnlLiaisonList.Enabled = enabled;
             lbLiaisonInCommitteeAdd.Visible = enabled;
-            lbWorkWithMembers.Visible = enabled;
-            lbWorkWithLiaisons.Visible = enabled;
+            if (HttpContext.Current.User.IsInRole("canviewcommembers")) {
+                lbWorkWithMembers.Visible = enabled;
+            }
+            if (HttpContext.Current.User.IsInRole("canviewcomliaisons")) {
+                lbWorkWithLiaisons.Visible = enabled;
+            }
+
             lbLiaisonInCommitteeAdd.Visible = enabled;
             lbMemberListAndCommitteeTermsAdd.Visible = enabled;
         }

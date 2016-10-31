@@ -26,6 +26,7 @@ namespace SubmittalProposal {
             }
         }
         
+
         protected virtual void OnUnlockCheckboxChecked(bool isUnlocked) {
             UnlockCheckboxCheckedHandler handler = UnlockCheckboxChecked;
             if (handler != null) {
@@ -39,6 +40,10 @@ namespace SubmittalProposal {
                 lbDeschutesSearch.Visible = true;
             }
         }
+        protected void btnWorkWithLiaisons_Click(object sender, EventArgs args) {
+            Response.Redirect("~/ComRoster_Liaisons.aspx");
+        }
+
         protected void Page_PreRender(object sender, EventArgs e) {
             if (Page.ToString().ToLower().IndexOf("ownerproperty") == -1 || Common.Utils.isNothing(Session["opSRPropIDBeingEdited"])) {
                 lbPrintOwnerEnvelope.Visible = false;

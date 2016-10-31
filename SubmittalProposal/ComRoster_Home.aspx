@@ -15,6 +15,14 @@
                         <asp:ImageButton CausesValidation="False" ID="ImgCommitteesBar" runat="server" ImageUrl="~/images/expand_blue.jpg"
                             AlternateText="(Show details...)" />
                     </div>
+                    <div style="float:right;vertical-align:middle;margin-right:.5em">
+                        <asp:LinkButton Font-Bold="false" ForeColor="White" ID="lbWorkWithLiaisonsBar" Visible="false" OnClientClick="javascript: return true;" runat="server" Text="Work with Liaisons "
+                            OnClick="lbWorkWithLiaisons_click" />
+                    </div>
+                    <div style="float:right;vertical-align:middle;margin-right:.5em"">
+                        <asp:LinkButton Font-Bold="false" ID="lbWorkWithMembersBar" Visible="false" OnClientClick="javascript: return true;" runat="server" Text="Work with Members "
+                            ForeColor="White" OnClick="lbWorkWithMembers_click" />
+                    </div>
                 </div>
             </asp:Panel>
             <asp:Panel ID="PnlCommitteesContent" runat="server">

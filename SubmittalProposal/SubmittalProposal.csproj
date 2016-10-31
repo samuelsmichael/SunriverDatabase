@@ -103,6 +103,7 @@
     <Content Include="BPermitReportsMain.aspx" />
     <Content Include="ComplianceReviewReportsMain.aspx" />
     <Content Include="ComRoster_Home.aspx" />
+    <Content Include="ComRoster_HomeReportsMain.aspx" />
     <Content Include="ComRoster_Liaisons.aspx" />
     <Content Include="ComRoster_Members.aspx" />
     <Content Include="Contractor.aspx" />
@@ -130,6 +131,7 @@
     <Content Include="Reports\BPermitsOpen.aspx" />
     <Content Include="Reports\BPermitsExpired.aspx" />
     <Content Include="Reports\ComplianceReviewSummary.aspx" />
+    <Content Include="Reports\ComRoster_HomeReport_CommitteeData.aspx" />
     <Content Include="Reports\ContractorByCategory.aspx" />
     <Content Include="Reports\ContractorAllData.aspx" />
     <Content Include="Reports\ContractorList.aspx" />
@@ -384,6 +386,13 @@
     </Compile>
     <Compile Include="ComRoster_Home.aspx.designer.cs">
       <DependentUpon>ComRoster_Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComRoster_HomeReportsMain.aspx.cs">
+      <DependentUpon>ComRoster_HomeReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComRoster_HomeReportsMain.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComRoster_Liaisons.aspx.cs">
       <DependentUpon>ComRoster_Liaisons.aspx</DependentUpon>
@@ -710,6 +719,19 @@
     </Compile>
     <Compile Include="Reports\ComplianceReviewSummary.aspx.designer.cs">
       <DependentUpon>ComplianceReviewSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster\CommitteeData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommitteeData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_CommitteeData.aspx.cs">
+      <DependentUpon>ComRoster_HomeReport_CommitteeData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_CommitteeData.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReport_CommitteeData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Contractor\CategoryList.cs">
       <AutoGen>True</AutoGen>
@@ -1410,6 +1432,10 @@
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceReviewsSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceReviewsSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteeData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteeData.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\CategoryList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
