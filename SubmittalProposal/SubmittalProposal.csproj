@@ -154,6 +154,8 @@
     <Content Include="Reports\CitationsReport_DesignViolations.aspx" />
     <Content Include="Reports\CitationsReport_DesignWarning.aspx" />
     <Content Include="Reports\BallotVerify_Query.aspx" />
+    <Content Include="Reports\ComRoster_HomeReport_ChairPersonList.aspx" />
+    <Content Include="Reports\ComRoster_HomeReport_ComRoster.aspx" />
     <Content Include="Reports\DummyCrystalReportsPage.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
@@ -720,10 +722,22 @@
     <Compile Include="Reports\ComplianceReviewSummary.aspx.designer.cs">
       <DependentUpon>ComplianceReviewSummary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ComRoster\ChairPersonList.cs">
+      <DependentUpon>ChairPersonList.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ComRoster\CommitteeData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommitteeData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster\CommitteeRoster.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommitteeRoster.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ComRoster_HomeReport_CommitteeData.aspx.cs">
@@ -922,6 +936,20 @@
     </Compile>
     <Compile Include="Reports\BallotVerify_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_ChairPersonList.aspx.cs">
+      <DependentUpon>ComRoster_HomeReport_ChairPersonList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_ChairPersonList.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReport_ChairPersonList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_ComRoster.aspx.cs">
+      <DependentUpon>ComRoster_HomeReport_ComRoster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_ComRoster.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReport_ComRoster.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\DummyCrystalReportsPage.aspx.cs">
       <DependentUpon>DummyCrystalReportsPage.aspx</DependentUpon>
@@ -1433,9 +1461,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComplianceReviewsSummary.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\ChairPersonList.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ChairPersonList.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComRoster\CommitteeData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CommitteeData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteeRoster.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteeRoster.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\CategoryList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

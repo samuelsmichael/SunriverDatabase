@@ -20,7 +20,7 @@ namespace SubmittalProposal {
             Response.Redirect("~/Reports/ComRoster_HomeReport_ChairPersonList.aspx");
         }
         protected void lbCommitteeRosters_Click(object sender, EventArgs e) {
-            Response.Redirect("~/Reports/ComRoster_HomeReport_CommitteeRoster.aspx");
+            Response.Redirect("~/Reports/ComRoster_HomeReport_ComRoster.aspx");
         }
         protected void lbOneRoster_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/ComRoster_HomeReport_OneRoster.aspx");
