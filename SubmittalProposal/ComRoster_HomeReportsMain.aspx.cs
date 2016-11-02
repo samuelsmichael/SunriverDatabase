@@ -26,7 +26,7 @@ namespace SubmittalProposal {
             Response.Redirect("~/Reports/ComRoster_HomeReport_OneRoster.aspx");
         }
         protected void lbExpiringTerms_Click(object sender, EventArgs e) {
-            Response.Redirect("~/Reports/ComRoster_HomeReport_ExpiringTerms.aspx");
+            Response.Redirect("~/Reports/ComRoster_HomeReport_MemberTermUp.aspx");
         }
         protected void lbCommitteeListAll_Click(object sender, EventArgs e) {
             Response.Redirect("~/Reports/ComRoster_HomeReport_CommitteeListAll.aspx");

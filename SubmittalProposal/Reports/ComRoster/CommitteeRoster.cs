@@ -98,7 +98,7 @@ namespace SubmittalProposal.Reports.ComRoster {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Liaisons_CommitteeID {
+        public CrystalDecisions.Shared.IParameterField Parameter_CommitteeID {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -106,9 +106,17 @@ namespace SubmittalProposal.Reports.ComRoster {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Members_CommitteeID {
+        public CrystalDecisions.Shared.IParameterField Parameter_Liaisons_CommitteeID {
             get {
                 return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Members_CommitteeID {
+            get {
+                return this.DataDefinition.ParameterFields[2];
             }
         }
     }

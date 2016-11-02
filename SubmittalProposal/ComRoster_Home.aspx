@@ -225,11 +225,11 @@
                     <tr valign="top">
                         <td style="width: 50%;">
                             <asp:Panel Width="100%" runat="server" ID="pnlLiaisonList" Enabled='false' GroupingText="Liaison List">
-                                <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" AutoGenerateEditButton="True"
+                                <asp:GridView Width="100%" ID="gvLiaisonList" runat="server" BackColor="White" 
                                     BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Style="margin-top: 0px"
                                     OnRowCancelingEdit="gvLiaisonList_RowCancelingEdit" AutoGenerateColumns="False"
-                                    OnRowEditing="gvLiaisonList_RowEditing" OnRowDeleting="gvLiaisonList_RowDeleting"
-                                    OnRowUpdating="gvLiaisonList_RowUpdating" OnRowDataBound="gvLiaisonList_RowDataBound"
+                                     OnRowDeleting="gvLiaisonList_RowDeleting"
+                                     OnRowDataBound="gvLiaisonList_RowDataBound"
                                     DataKeyNames="RosterLiaisonID">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Liaison Name">

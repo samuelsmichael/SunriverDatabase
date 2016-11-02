@@ -156,6 +156,9 @@
     <Content Include="Reports\BallotVerify_Query.aspx" />
     <Content Include="Reports\ComRoster_HomeReport_ChairPersonList.aspx" />
     <Content Include="Reports\ComRoster_HomeReport_ComRoster.aspx" />
+    <Content Include="Reports\ComRoster_HomeReport_OneRoster.aspx" />
+    <Content Include="Reports\ComRoster_HomeReport_MemberTermUp.aspx" />
+    <Content Include="Reports\ComRoster_HomeReport_CommitteeListAll.aspx" />
     <Content Include="Reports\DummyCrystalReportsPage.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
@@ -734,10 +737,34 @@
       <DependentUpon>CommitteeData.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ComRoster\CommitteeMembers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommitteeMembers.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ComRoster\CommitteeRoster.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommitteeRoster.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster\CommitteeRosters.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommitteeRosters.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster\CommitteesWithMembersAndLiasons.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommitteesWithMembersAndLiasons.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster\MemberTermUp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberTermUp.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ComRoster_HomeReport_CommitteeData.aspx.cs">
@@ -950,6 +977,27 @@
     </Compile>
     <Compile Include="Reports\ComRoster_HomeReport_ComRoster.aspx.designer.cs">
       <DependentUpon>ComRoster_HomeReport_ComRoster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_OneRoster.aspx.cs">
+      <DependentUpon>ComRoster_HomeReport_OneRoster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_OneRoster.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReport_OneRoster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_MemberTermUp.aspx.cs">
+      <DependentUpon>ComRoster_HomeReport_MemberTermUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_MemberTermUp.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReport_MemberTermUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_CommitteeListAll.aspx.cs">
+      <DependentUpon>ComRoster_HomeReport_CommitteeListAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ComRoster_HomeReport_CommitteeListAll.aspx.designer.cs">
+      <DependentUpon>ComRoster_HomeReport_CommitteeListAll.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\DummyCrystalReportsPage.aspx.cs">
       <DependentUpon>DummyCrystalReportsPage.aspx</DependentUpon>
@@ -1469,9 +1517,25 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CommitteeData.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteeMembers.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteeMembers.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComRoster\CommitteeRoster.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CommitteeRoster.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteeRosters.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteeRosters.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteesWithMembersAndLiasons.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteesWithMembersAndLiasons.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\MemberTermUp.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MemberTermUp.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Contractor\CategoryList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

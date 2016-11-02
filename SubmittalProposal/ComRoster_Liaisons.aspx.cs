@@ -203,6 +203,7 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@LiaisonRepresents", SqlDbType.NVarChar).Value = tbComRosterLiaisonsRepresentsUpdate.Text;
                 cmd.Parameters.Add("@LiaisonNRMail", SqlDbType.NVarChar).Value = tbComRosterLiaisonsNRMailAddrUpdate.Text;
                 cmd.Parameters.Add("@LiaisonNRPhone", SqlDbType.NVarChar).Value = tbComRosterLiaisonsNRPhoneUpdate.Text;
+                cmd.Parameters.Add("@HonorLiaisonIDRestrictions", SqlDbType.Bit).Value = true;
                 SqlParameter newLiaisonID = new SqlParameter("@NewLiaisonID", SqlDbType.Int);
                 newLiaisonID.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newLiaisonID);
@@ -242,6 +243,7 @@ namespace SubmittalProposal {
                     cmd.Parameters.Add("@LiaisonRepresents", SqlDbType.NVarChar).Value = tbComRosterLiaisonsRepresentsNew.Text;
                     cmd.Parameters.Add("@LiaisonNRMail", SqlDbType.NVarChar).Value = tbComRosterLiaisonsNRMailAddrNew.Text;
                     cmd.Parameters.Add("@LiaisonNRPhone", SqlDbType.NVarChar).Value = tbComRosterLiaisonsNRPhoneNew.Text;
+                    cmd.Parameters.Add("@HonorLiaisonIDRestrictions", SqlDbType.Bit).Value = true;
                     SqlParameter newLiaisonID = new SqlParameter("@NewLiaisonID", SqlDbType.Int);
                     newLiaisonID.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(newLiaisonID);

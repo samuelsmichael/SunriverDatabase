@@ -15,7 +15,7 @@ namespace SubmittalProposal.Reports {
         }
 
         protected override CrystalDecisions.CrystalReports.Engine.ReportDocument getReportDocument() {
-            return new ComRoster.CommitteeRoster();
+            return new ComRoster.CommitteeRosters();
         }
 
         protected override bool getIgnoreSubreportsWhenBuildingParameters() {

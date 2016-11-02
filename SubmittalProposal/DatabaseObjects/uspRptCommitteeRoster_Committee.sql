@@ -3,9 +3,10 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /* =============================================
-	exec uspRptCommitteeRoster_Committee
+	exec uspRptCommitteeRoster_Committee @CommitteeID=2
    ============================================= */
 alter PROCEDURE uspRptCommitteeRoster_Committee
+	@CommitteeID int
 AS
 BEGIN
 SELECT cd.[CommitteeID], cd.[CommitteeName], cd.[#OfMembers], cd.[#OfMembersNote], cd.[Term], cd.[TermLimit], cd.[TermLimitNote], cd.[AlternateMembers], 
@@ -21,6 +22,7 @@ SELECT cd.[CommitteeID], cd.[CommitteeName], cd.[#OfMembers], cd.[#OfMembersNote
 		 else '' end as TermInfo
 
 FROM tblCommitteeData cd
+WHERE @CommitteeId is null or CommitteeID=@CommitteeID 
 ORDER BY cd.[CommitteeID]
 END
 GO

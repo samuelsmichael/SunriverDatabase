@@ -3,7 +3,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /* =============================================
-	exec uspRptCommitteeRoster_Member @CommitteeID=3
+	exec uspRptCommitteeRoster_Member @CommitteeID=2
    ============================================= */
 alter PROCEDURE uspRptCommitteeRoster_Member
 	@CommitteeID int

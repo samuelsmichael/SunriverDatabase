@@ -16,7 +16,7 @@ BEGIN
 	select * FROM tblCommitteeData ORDER BY CommitteeID
 	Select *, FirstName + ' ' + LastName as FullName, dbo.udfCommitteesForMember(MemberID) as Committees from tblMemberData WHERE MemberID!=1 ORDER BY MemberID
 	Select rm.RosterMemberID, CommitteeID, MemberID,TAppointed,TStart, TEnd, TTerm,ts.MTitle from tblRostermembers rm LEFT OUTER JOIN [tblTitleSort{LU}] ts ON ts.TitleSort=rm.MTitle ORDER BY RosterMemberID
-	select *, dbo.udfCommitteesForLiaison(LiaisonID) as Committees, LiaisonName+' ('+LiaisonType+')' as LiaisonNameAndType from tblLiaisonData ORDER BY LiaisonID
+	select *, dbo.udfCommitteesForLiaison(LiaisonID) as Committees, LiaisonName+' ('+LiaisonType+')' as LiaisonNameAndType from tblLiaisonData where LiaisonID!=1 ORDER BY LiaisonID
 	select * from tblRosterLiaison
 	select * from tblRosterMembers ORDER BY RosterMemberID
 	select * from [tblCommitteeTerms{LU}]

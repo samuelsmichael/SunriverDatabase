@@ -358,7 +358,7 @@ namespace SubmittalProposal {
                     ddlLiaisonType.SelectedIndex = index2;
                 } else {
                     if (((int)e.Row.RowState) == (int)DataControlRowState.Normal || ((int)e.Row.RowState) == (int)DataControlRowState.Alternate) {
-                        LinkButton del = e.Row.Cells[4].Controls[0] as LinkButton;
+                        LinkButton del = e.Row.Cells[3].Controls[0] as LinkButton;
                         del.Attributes.Add("onclick", "return confirm('Are you sure you want to delete this liaison?');");
                     }
                 }

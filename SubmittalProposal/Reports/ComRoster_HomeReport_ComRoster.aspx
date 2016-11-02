@@ -2,5 +2,5 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Heading" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderReportParms" runat="server">
-    <center><h2>Committee Roster</h2></center>
+    <center><h2>Committee Rosters</h2></center>
 </asp:Content>
