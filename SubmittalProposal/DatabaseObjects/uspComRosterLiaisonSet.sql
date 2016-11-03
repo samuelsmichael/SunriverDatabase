@@ -98,9 +98,25 @@ BEGIN
 			set @LiaisonID=@LiaisonID
 		end 
 	end else begin
-		INSERT INTO tblLiaisonData (LiaisonID, LiaisonName, LiaisonType,LiaisonSRMail1,LiaisonSRMail2,LiaisonSRPhone,LiaisonRepresents,LiaisonNRMail,LiaisonNRPhone, LiaisonEmail)
-		SELECT
-			@LiaisonIDTakingIntoConsiderationRestrictions, @LiaisonName, @LiaisonType,@LiaisonSRMail1,@LiaisonSRMail2,@LiaisonSRPhone,@LiaisonRepresents,@LiaisonNRMail,@LiaisonNRPhone,@LiaisonEmail
+		if exists (select * from tblLiaisonData where LiaisonID=@LiaisonIDTakingIntoConsiderationRestrictions) begin
+			UPDATE tblLiaisonData
+			SET 
+				LiaisonName=@LiaisonName,
+				LiaisonType=@LiaisonType,
+				LiaisonSRMail1=@LiaisonSRMail1,
+				LiaisonSRMail2=@LiaisonSRMail2,
+				LiaisonEmail=@LiaisonEmail,
+				LiaisonSRPhone=@LiaisonSRPhone,
+				LiaisonRepresents=@LiaisonRepresents,
+				LiaisonNRMail=@LiaisonNRMail,
+				LiaisonNRPhone=@LiaisonNRPhone,
+				LiaisonID=@LiaisonIDTakingIntoConsiderationRestrictions
+			WHERE LiaisonID=@LiaisonIDTakingIntoConsiderationRestrictions	
+		end else begin
+			INSERT INTO tblLiaisonData (LiaisonID, LiaisonName, LiaisonType,LiaisonSRMail1,LiaisonSRMail2,LiaisonSRPhone,LiaisonRepresents,LiaisonNRMail,LiaisonNRPhone, LiaisonEmail)
+			SELECT
+				@LiaisonIDTakingIntoConsiderationRestrictions, @LiaisonName, @LiaisonType,@LiaisonSRMail1,@LiaisonSRMail2,@LiaisonSRPhone,@LiaisonRepresents,@LiaisonNRMail,@LiaisonNRPhone,@LiaisonEmail
+		end
 		set @NewLiaisonID=@LiaisonIDTakingIntoConsiderationRestrictions
 	end
 END

@@ -359,7 +359,7 @@ namespace SubmittalProposal {
                 } else {
                     if (((int)e.Row.RowState) == (int)DataControlRowState.Normal || ((int)e.Row.RowState) == (int)DataControlRowState.Alternate) {
                         LinkButton del = e.Row.Cells[3].Controls[0] as LinkButton;
-                        del.Attributes.Add("onclick", "return confirm('Are you sure you want to delete this liaison?');");
+                        del.Attributes.Add("onclick", "return confirm('Are you sure you want to remove this liaison?');");
                     }
                 }
                 
@@ -484,7 +484,7 @@ namespace SubmittalProposal {
                 } else {
                     if (((int)e.Row.RowState) == (int)DataControlRowState.Normal || ((int)e.Row.RowState) == (int)DataControlRowState.Alternate) {
                         LinkButton del = e.Row.Cells[7].Controls[0] as LinkButton;
-                        del.Attributes.Add("onclick", "return confirm('Are you sure you want to delete this committee member?');");
+                        del.Attributes.Add("onclick", "return confirm('Are you sure you want to remove this committee member?');");
                         Label lblMemberListAndCommitteeTermsStart = (Label)e.Row.FindControl("lblMemberListAndCommitteeTermsStart");
                         DateTime? dateTimeMemberListAndCommitteeTermsStart = Utils.ObjectToDateTimeNullable(GetValueFromAnonymousType<DateTime>(e.Row.DataItem, "Start"));
                         if (dateTimeMemberListAndCommitteeTermsStart.HasValue && dateTimeMemberListAndCommitteeTermsStart != Utils.SQL_MINIMUM_DATETIME) {

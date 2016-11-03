@@ -101,7 +101,7 @@ namespace SubmittalProposal {
         }
 
         protected override Label getNewResultsLabel() {
-            throw new NotImplementedException();
+            return lblComRosterLiaisonNewMessage;
         }
 
         protected override void unlockYourUpdateFields() {
@@ -138,15 +138,15 @@ namespace SubmittalProposal {
         }
 
         protected override void clearAllNewFormInputFields() {
-            tbComRosterLiaisonNameUpdate.Text="";
-            dllComRosterLiaisonLiaisonTypeUpdate.SelectedIndex = 0;
-            tbComRosterLiaisonsSRMailAddr1Update.Text="";
-            tbComRosterLiaisonsSRMailAddr2Update.Text="";
-            tbComRosterLiaisonsEmailUpdate.Text="";
-            tbComRosterLiaisonsSRPhoneUpdate.Text="";
-            tbComRosterLiaisonsRepresentsUpdate.Text="";
-            tbComRosterLiaisonsNRMailAddrUpdate.Text="";
-            tbComRosterLiaisonsNRPhoneUpdate.Text="";
+            tbComRosterLiaisonNameNew.Text="";
+            dllComRosterLiaisonLiaisonTypeNew.SelectedIndex = 0;
+            tbComRosterLiaisonsSRMailAddr1New.Text="";
+            tbComRosterLiaisonsSRMailAddr2New.Text="";
+            tbComRosterLiaisonsEmailNew.Text="";
+            tbComRosterLiaisonsSRPhoneNew.Text="";
+            tbComRosterLiaisonsRepresentsNew.Text="";
+            tbComRosterLiaisonsNRMailAddrNew.Text="";
+            tbComRosterLiaisonsNRPhoneNew.Text="";
         }
 
         public static string MyMenuName = "Com Liasons";

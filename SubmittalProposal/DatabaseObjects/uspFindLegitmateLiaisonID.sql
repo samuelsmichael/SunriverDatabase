@@ -12,7 +12,8 @@ SSD STAFF 41-49
 Associate 51-69
 
 We need to find a vacant LiaisonId (per the rules) that is empty,
-or create a new one (per the rules).  If both of these fail
+or create a new one (per the rules).  If this fails, then 
+a new number is created at the end.
 
 /*
 	Test:
@@ -20,6 +21,13 @@ or create a new one (per the rules).  If both of these fail
 		exec uspFindLegitmateLiaisonID @OrignalLiaisonID=60, @OriginalLiaisonType='Associate', @NewLiaisonType='sroa staff',@NewLiaisonID=@NewLiaisonID out
 		print 'New LiaisonID='
 		print cast (@NewLiaisonID as varchar)
+
+	Test2:
+		declare @NewLiaisonID int
+		exec uspFindLegitmateLiaisonID @OrignalLiaisonID=null, @OriginalLiaisonType='', @NewLiaisonType='ssd staff',@NewLiaisonID=@NewLiaisonID out
+		print 'New LiaisonID='
+		print cast (@NewLiaisonID as varchar)
+
 
 */
 
@@ -46,7 +54,7 @@ BEGIN
 				set @LowerBound=21
 				set @UpperBound=39
 			end else begin
-				if @NewLiaisonType = 'SDD Staff' begin
+				if @NewLiaisonType = 'SSD Staff' begin
 					set @LowerBound=41
 					set @UpperBound=49
 				end else begin
@@ -58,10 +66,11 @@ BEGIN
 		print '@LowerBound='+cast(@LowerBound as varchar)
 		print '@UpperBound='+Cast(@UpperBound as varchar)
 		-- Try to find an existiong one in the range whose LiaisonName is null
-			select @NewLiaisonID=LiaisonID from tblLiaisonData where LiaisonName is null and LiaisonID >= @LowerBound and LiaisonID <= @UpperBound
+			declare @WorkingLiaisonID2 int
+			select @WorkingLiaisonID2=LiaisonID from tblLiaisonData where LiaisonName is null and LiaisonID >= @LowerBound and LiaisonID <= @UpperBound
 			print 'I got one in the range:'
-			print Cast (@NewLiaisonID as varchar)
-			if @NewLiaisonID is null begin
+			print Cast (@WorkingLiaisonID2 as varchar)
+			if @WorkingLiaisonID2 is null begin
 				declare @WorkingLiaisonID int
 				set @WorkingLiaisonID=@LowerBound
 				while @WorkingLiaisonID <= @UpperBound begin
@@ -75,6 +84,8 @@ BEGIN
 					select top 1 @NewLiaisonID = LiaisonID from tblLiaisonData order by LiaisonID desc
 					set @NewLiaisonID = @NewLiaisonID + 1
 				end
+			end else begin
+				set @NewLiaisonID=@WorkingLiaisonID2
 			end
 	end
 	print 'FindLegitimateID='

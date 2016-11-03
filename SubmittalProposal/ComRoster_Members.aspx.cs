@@ -19,7 +19,7 @@ namespace SubmittalProposal {
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
             GridViewRow row = gvResults.SelectedRow;
-            MemberIDBeingEdited = Convert.ToInt32(row.Cells[9].Text);
+            MemberIDBeingEdited = Convert.ToInt32(row.Cells[8].Text);
             DataTable sourceTable = getGridViewDataTable();
             DataView view = new DataView(sourceTable);
             view.RowFilter = "MemberID=" + MemberIDBeingEdited;
@@ -85,7 +85,7 @@ namespace SubmittalProposal {
         }
 
         protected override Label getNewResultsLabel() {
-            throw new NotImplementedException();
+            return lblComRosterMemberNewMessage;
         }
 
         protected override void lockYourUpdateFields() {

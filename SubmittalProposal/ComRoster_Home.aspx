@@ -253,7 +253,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField HeaderText="LiaisonID" DataField="LiaisonID" Visible="False" />
-                                        <asp:CommandField ShowDeleteButton="True" />
+                                        <asp:CommandField ShowDeleteButton="True" DeleteText="Remove" />
                                     </Columns>
                                     <FooterStyle BackColor="White" ForeColor="#000066" />
                                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -391,7 +391,7 @@
                                                 <asp:Label ID="Label1sxx1" runat="server" Text='<%# Bind("Term") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:CommandField ShowDeleteButton="True" />
+                                        <asp:CommandField ShowDeleteButton="True" DeleteText="Remove" />
                                         <asp:BoundField HeaderText="MemberID" DataField="MemberID" Visible="False" />
                                     </Columns>
                                     <AlternatingRowStyle BackColor="#DCDCDC" />
