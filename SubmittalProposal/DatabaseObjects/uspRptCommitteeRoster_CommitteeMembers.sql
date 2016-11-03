@@ -9,9 +9,10 @@ alter PROCEDURE uspRptCommitteeRoster_Committee
 	@CommitteeID int
 AS
 BEGIN
+	SELECT
 		cd.[CommitteeID], cd.[CommitteeName], cd.[#OfMembers], cd.[#OfMembersNote], cd.[Term], cd.[TermLimit], cd.[TermLimitNote], 
 		cd.[AlternateMembers], Case when [AlternateMembers]=0 THEN 'No' ELSE 'Yes' END AS [AlternatesY\N], cd.[AssociateMembers], 
-		Case when [AssociateMembers]=0 then 'No' else 'Yes' end AS [AssociatesY\N], cd.[CharterDate], cd.[Status]
+		Case when [AssociateMembers]=0 then 'No' else 'Yes' end AS [AssociatesY\N], cd.[CharterDate], cd.[Status],
 
 	Cast(Term as varchar) + 
 		case when Term>1 then ' years ' else ' year ' end + 

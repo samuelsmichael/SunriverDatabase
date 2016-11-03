@@ -5,7 +5,7 @@ GO
 /* =============================================
 	exec uspRptCommitteeMembers @ReportDate='9/1/2016'
    ============================================= */
-create PROCEDURE uspRptCommitteeMembers
+alter PROCEDURE uspRptCommitteeMembers
 	@ReportDate datetime
 AS
 BEGIN

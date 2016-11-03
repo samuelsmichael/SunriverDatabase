@@ -5,7 +5,7 @@ GO
 /* =============================================
 	exec uspRptCommitteeRoster_Committees
    ============================================= */
-create PROCEDURE uspRptCommitteeRoster_Committees
+alter PROCEDURE uspRptCommitteeRoster_Committees
 AS
 BEGIN
 SELECT cd.[CommitteeID], cd.[CommitteeName], cd.[#OfMembers], cd.[#OfMembersNote], cd.[Term], cd.[TermLimit], cd.[TermLimitNote], cd.[AlternateMembers], 
