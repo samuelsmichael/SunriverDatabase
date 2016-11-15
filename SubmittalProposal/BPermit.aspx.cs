@@ -583,7 +583,8 @@ namespace SubmittalProposal {
             lbBPermitNewReview.Enabled = true;
             ddlContractorUpdate.Enabled = true;
         }
-        protected override void weveComeHereForTheFirstTimeThisSession() {            
+        protected override void weveComeHereForTheFirstTimeThisSession() {
+            expandCPESearch();
         }
         public static string MyMenuName = "BPermit";
         protected override string childMenuName {

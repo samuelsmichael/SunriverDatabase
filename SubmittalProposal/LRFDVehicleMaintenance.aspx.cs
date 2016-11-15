@@ -442,6 +442,7 @@ namespace SubmittalProposal {
         }
 
         protected override void weveComeHereForTheFirstTimeThisSession() {
+            expandCPESearch();
         }
 
         protected override void childPageLoad(object sender, EventArgs e) {

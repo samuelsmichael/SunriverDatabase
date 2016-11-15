@@ -329,7 +329,7 @@ namespace SubmittalProposal
             tbMeetingDateNew.Text = "";
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
-           
+            expandCPESearch();
         }
         public static string MyMenuName = "Submittal";
         protected override string childMenuName {

@@ -120,6 +120,7 @@
     <Content Include="Images\lapinelog.png" />
     <Content Include="LRFDVehicleMaintenance.aspx" />
     <Content Include="LRFDVehicleMaintenanceReportsMain.aspx" />
+    <Content Include="OwnerConcerns.aspx" />
     <Content Include="OwnerProperty.aspx" />
     <Content Include="OwnerPropertyFinder.aspx" />
     <Content Include="Query_CrossReference3.aspx" />
@@ -496,6 +497,13 @@
       <DependentUpon>MainMasterPage.master</DependentUpon>
     </Compile>
     <Compile Include="ObjectShredder.cs" />
+    <Compile Include="OwnerConcerns.aspx.cs">
+      <DependentUpon>OwnerConcerns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OwnerConcerns.aspx.designer.cs">
+      <DependentUpon>OwnerConcerns.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OwnerProperty.aspx.cs">
       <DependentUpon>OwnerProperty.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

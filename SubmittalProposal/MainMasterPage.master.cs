@@ -34,6 +34,10 @@ namespace SubmittalProposal {
                 MenuItem miCitations = new MenuItem(Citations.MyMenuName, "Citations", null, "~/Citations.aspx");
                 MenuItem miBallotVerify = new MenuItem(BallotVerify.MyMenuName, "BallotVerify", null, "~/BallotVerify.aspx");
                 MenuItem miComRoster = new MenuItem(ComRoster_Home.MyMenuName, "ComRoster", null, "~/ComRoster_Home.aspx");
+                MenuItem miOwnerConcerns = new MenuItem(OwnerConcerns.MyMenuName, "OwnerConcerns", null, "~/OwnerConcerns.aspx");
+                if (HttpContext.Current.User.IsInRole("canviewownerconcerns")) {
+                    NavigationMenu.Items.AddAt(1, miOwnerConcerns);
+                }
                 if (HttpContext.Current.User.IsInRole("canviewcomroster")) {
                     NavigationMenu.Items.AddAt(1, miComRoster);
                 }
@@ -143,8 +147,15 @@ namespace SubmittalProposal {
                                                             } else {
                                                                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("comroster_liaisons")) {
                                                                     if (HttpContext.Current.User.IsInRole("candoreportscomliaisons")) {
-                                                                   /* there are no liaisons reports     lbReports.Text = "Reports";
-                                                                        lbReports.Visible = true; */
+                                                                        /* there are no liaisons reports     lbReports.Text = "Reports";
+                                                                             lbReports.Visible = true; */
+                                                                    }
+                                                                } else {
+                                                                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("ownerconcerns")) {
+                                                                        if (HttpContext.Current.User.IsInRole("candoreportsownerconcerns")) {
+                                                                            lbReports.Text = "Reports";
+                                                                            lbReports.Visible = true;
+                                                                        }
                                                                     }
                                                                 }
                                                             }

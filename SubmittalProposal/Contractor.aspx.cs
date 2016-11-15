@@ -375,6 +375,7 @@ namespace SubmittalProposal {
             get { return "canupdatecontractors"; }
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
+            expandCPESearch();
         }
         public static string MyMenuName = "Contractor";
         protected override string childMenuName {

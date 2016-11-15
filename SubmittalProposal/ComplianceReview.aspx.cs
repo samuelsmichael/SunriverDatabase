@@ -545,6 +545,7 @@ namespace SubmittalProposal {
             tbRule.Text = "";
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
+            expandCPESearch();
         }
         public static string MyMenuName="Compliance Reviews";
         protected override string childMenuName {

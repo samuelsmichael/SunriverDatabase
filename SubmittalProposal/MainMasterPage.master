@@ -15,7 +15,7 @@
                         IncludeStyleBlock="false" Orientation="Horizontal">
                         <Items>
                             <asp:MenuItem Value="default" NavigateUrl="~/Default.aspx" Text="Home" />
-                            <asp:MenuItem Value="about" NavigateUrl="~/About.aspx" Text="Release Notes" />
+                            
                         </Items>
                     </asp:Menu>
                 </td>
