@@ -61,6 +61,33 @@ namespace SubmittalProposal {
             tbOwnerConcernsMailCity.Text=Utils.ObjectToString(dr["MailCity"]);
             tbOwnerConcernsMailState.Text = Utils.ObjectToString(dr["MailState"]);
             tbOwnerConcernsMailPostalCode.Text = Utils.ObjectToString(dr["MailZip"]);
+            string referred1 = Utils.ObjectToString(dr["DeptReferred1"]);
+            ddlOwnerConcernsDeptReferred1Update.SelectedValue=referred1;
+            string referred2 = Utils.ObjectToString(dr["DeptReferred2"]);
+            ddlOwnerConcernsDeptReferred2Update.SelectedValue=referred2;
+            string category = Utils.ObjectToString(dr["Category"]);
+            ddlOwnerConcernsCategoryUpdate.SelectedValue = category;
+            tbOwnerConcernsStartedByUpdate.Text = Utils.ObjectToString(dr["StartFormBy"]);
+            DateTime? submitDate = Utils.ObjectToDateTimeNullable(dr["SubmitDate"]);
+            if (submitDate.HasValue) {
+                tbOwnerConcernsSubmitDateUpdate.Text = submitDate.Value.ToString("MM/dd/yyyy");
+            } else {
+                tbOwnerConcernsSubmitDateUpdate.Text = "";
+            }
+            tbOwnerConcernsClosedByUpdate.Text = Utils.ObjectToString(dr["CloseFormBy"]);
+            tbOwnerConcernsApprovedByUpdate.Text = Utils.ObjectToString(dr["ApprovedBy"]);
+            tbOwnerConcernsNotifiedByUpdate.Text = Utils.ObjectToString(dr["NotifiedBy"]);
+            DateTime? notifiedDate=Utils.ObjectToDateTimeNullable(dr["NotifyDate"]);
+            if (notifiedDate.HasValue) {
+                tbOwnerConcernsNotifiedDateUpdate.Text = notifiedDate.Value.ToString("MM/dd/yyyy");
+            } else {
+                tbOwnerConcernsNotifiedDateUpdate.Text = "";
+            }
+            object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
+            if (Utils.isNothingNot(dateFormPrinted)) {
+                lblDatePrinted.Text = dateFormPrinted.ToString();
+            }
+
             return "Name: " + Utils.ObjectToString(dr["FullName"]) + "     Case#: " + CaseIdBeingEdited;
 
         }
@@ -86,6 +113,16 @@ namespace SubmittalProposal {
                 sb.Append(prepend + "Department Referred: " + ddlOwnerConcernsDepartmentReferredLU.SelectedItem);
                 prepend = "  ";
                 sbFilter.Append(and + Common.Utils.getDataViewQuery(ddlOwnerConcernsDepartmentReferredLU.SelectedValue, "DeptReferred1"));
+                and = " and ";
+            }
+            if (Utils.isNothingNot(ddlOwnerConcernsResolvedLU.SelectedValue) && ddlOwnerConcernsResolvedLU.SelectedIndex != 0) {
+                sb.Append(prepend + "Resolved: " + ddlOwnerConcernsResolvedLU.SelectedValue);
+                prepend = "  ";
+                if (ddlOwnerConcernsResolvedLU.SelectedValue.ToLower() == "yes") {
+                    sbFilter.Append(and + " ResolutionDate is not null");
+                } else {
+                    sbFilter.Append(and + " ResolutionDate is null");
+                }
                 and = " and ";
             }
             if (Utils.isNothingNot(ddlOwnerConcernsCategoryLU.SelectedValue) && ddlOwnerConcernsCategoryLU.SelectedIndex != 0) {
@@ -133,6 +170,19 @@ namespace SubmittalProposal {
             btnOwnerConcernsUpdate.Visible = true;
             tbOwnerConcernsPhoneNbrUpdate.Enabled = true;
             tbOwnerConcernsEmailUpdate.Enabled = true;
+            ddlOwnerConcernsDeptReferred1Update.Enabled = true;
+            ddlOwnerConcernsDeptReferred2Update.Enabled = true;
+            ddlOwnerConcernsCategoryUpdate.Enabled = true;
+            tbOwnerConcernsStartedByUpdate.Enabled = true;
+            tbOwnerConcernsSubmitDateUpdate.Enabled = true;
+            tbOwnerConcernsClosedByUpdate.Enabled = true;
+            tbOwnerConcernsApprovedByUpdate.Enabled = true;
+            tbOwnerConcernsNotifiedByUpdate.Enabled = true;
+            tbOwnerConcernsNotifiedDateUpdate.Enabled = true;
+            ibOwnerConcernsNotifiedDateUpdate.Enabled = true;
+            ibOwnerConcernsSubmitDateUpdate.Enabled = true;
+            tbOwnerConcernsConcernDescriptionUpdate.Enabled = true;
+            tbOwnerConcernsConcernResolutionUpdate.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
@@ -151,6 +201,19 @@ namespace SubmittalProposal {
             tbOwnerConcernsMailCity.Enabled = false;
             tbOwnerConcernsMailPostalCode.Enabled = false;
             tbOwnerConcernsMailState.Enabled = false;
+            ddlOwnerConcernsDeptReferred1Update.Enabled = false;
+            ddlOwnerConcernsDeptReferred2Update.Enabled = false;
+            ddlOwnerConcernsCategoryUpdate.Enabled = false;
+            tbOwnerConcernsStartedByUpdate.Enabled = false;
+            tbOwnerConcernsSubmitDateUpdate.Enabled = false;
+            tbOwnerConcernsClosedByUpdate.Enabled = false;
+            tbOwnerConcernsApprovedByUpdate.Enabled = false;
+            tbOwnerConcernsNotifiedByUpdate.Enabled = false;
+            tbOwnerConcernsNotifiedDateUpdate.Enabled = false;
+            ibOwnerConcernsNotifiedDateUpdate.Enabled = false;
+            ibOwnerConcernsSubmitDateUpdate.Enabled = false;
+            tbOwnerConcernsConcernDescriptionUpdate.Enabled = false;
+            tbOwnerConcernsConcernResolutionUpdate.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -159,6 +222,7 @@ namespace SubmittalProposal {
             ddlOwnerConcernsCategoryLU.SelectedIndex = -1;
             tbOwnerConcernsCaseNbrLU.Text = "";
             tbOwnerConcernsSunriverAddressLU.Text = "";
+            ddlOwnerConcernsResolvedLU.SelectedIndex = -1;
         }
 
         protected override void clearAllNewFormInputFields() {
@@ -191,6 +255,10 @@ namespace SubmittalProposal {
             department.Rows.InsertAt(row, 0);
             ddlOwnerConcernsDepartmentReferredLU.DataSource = department;
             ddlOwnerConcernsDepartmentReferredLU.DataBind();
+            ddlOwnerConcernsDeptReferred1Update.DataSource = department;
+            ddlOwnerConcernsDeptReferred1Update.DataBind();
+            ddlOwnerConcernsDeptReferred2Update.DataSource = department;
+            ddlOwnerConcernsDeptReferred2Update.DataBind();
         }
         private void bindCategoryDropdown() {
             DataTable category = OwnerConcernsDataSet().Tables[1].Copy();
@@ -199,6 +267,8 @@ namespace SubmittalProposal {
             category.Rows.InsertAt(row, 0);
             ddlOwnerConcernsCategoryLU.DataSource = category;
             ddlOwnerConcernsCategoryLU.DataBind();
+            ddlOwnerConcernsCategoryUpdate.DataSource = category;
+            ddlOwnerConcernsCategoryUpdate.DataBind();
         }
         protected void btnOwnerConcernsUpdateOkay_Click(object sender, EventArgs args) {
             try {
@@ -223,7 +293,7 @@ namespace SubmittalProposal {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
             }
         }
-
+        #region Stuff for managing the popup of the Find Owner
         protected bool ImInTimerTick {
             get {
                 object obj = Session["ImInTimerTicks"];
@@ -310,6 +380,7 @@ namespace SubmittalProposal {
                 }
             }
         }
+        #endregion
         private void doFindOwnerPropertyClickedUpdate() {
             Session["byebye"] = null;
             Session["valueselectedbyfind"] = null;
@@ -318,6 +389,14 @@ namespace SubmittalProposal {
         }
         protected void btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick(object sender, EventArgs args) {
             doFindOwnerPropertyClickedUpdate();
+        }
+        protected void btnPrintForm_OnClick(object sender, EventArgs args) {
+            SqlCommand cmd = new SqlCommand("uspOwnerConcernsDateFormPrintedUpdate");
+            cmd.Parameters.Add("@OCCase#", SqlDbType.Int).Value = CaseIdBeingEdited;
+            Utils.executeNonQuery(cmd, ConnectionString);
+            MemoryCache cache = MemoryCache.Default;
+            cache.Remove(DataSetCacheKey);
+            lblDatePrinted.Text = DateTime.Now.ToString();
         }
     }
 }
