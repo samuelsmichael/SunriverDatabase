@@ -198,7 +198,7 @@
                                 </td>
                                 <td valign="top">
                                     <asp:DropDownList ID="ddlOwnerConcernsDeptReferred1Update" runat="server" DataTextField="Department"
-                                        DataValueField="Department">
+                                        DataValueField="Department" Width="11em">
                                     </asp:DropDownList>
                                 </td>
                                 <td valign="top">
@@ -206,16 +206,22 @@
                                 </td>
                                 <td valign="top">
                                     <asp:DropDownList ID="ddlOwnerConcernsDeptReferred2Update" runat="server" DataTextField="Department"
-                                        DataValueField="Department">
+                                        DataValueField="Department" Width="11em">
                                     </asp:DropDownList>
                                 </td>
                                 <td valign="top">
-                                    <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Category"></asp:Label>
+                                    <asp:Label CssClass="form_field_heading" ID="Label19cm" runat="server" Text="Category"></asp:Label>
                                 </td>
                                 <td valign="top">
                                     <asp:DropDownList ID="ddlOwnerConcernsCategoryUpdate" runat="server" DataTextField="Category"
-                                        DataValueField="Category">
+                                        DataValueField="Category" Width="11em">
                                     </asp:DropDownList>
+                                </td>
+                                <td valign="top">
+                                    <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="Public Works WO#"></asp:Label>
+                                </td>
+                                <td valign="top">
+                                    <asp:TextBox ID="tbOwnerConcernsPublicWorksWONbr" Width="2em" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -305,6 +311,28 @@
                                     </td>
                                     <td valign="top">
                                         <asp:TextBox ID="tbOwnerConcernsClosedByUpdate" MaxLength="25" Width="6em" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td valign="top">
+                                        <asp:Label CssClass="form_field_heading" ID="Label19xllk" runat="server" Text="Resolution Date"></asp:Label>
+                                    </td>
+                                    <td valign="top">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbOwnerConcernsResolutionDateUpdate"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibOwnerConcernsResolutionDateUpdate" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceOwnerConcernsResolutionDateUpdate" runat="server"
+                                            TargetControlID="tbOwnerConcernsResolutionDateUpdate" Format="MM/dd/yyyy" PopupButtonID="ibOwnerConcernsResolutionDateUpdate" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revOwnerConcernsResolutionDateUpdate"
+                                            Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbOwnerConcernsResolutionDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                             </table>

@@ -418,13 +418,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.DropDownList ddlOwnerConcernsDeptReferred2Update;
         
         /// <summary>
-        /// Label19 control.
+        /// Label19cm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label19;
+        protected global::System.Web.UI.WebControls.Label Label19cm;
         
         /// <summary>
         /// ddlOwnerConcernsCategoryUpdate control.
@@ -434,6 +434,24 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOwnerConcernsCategoryUpdate;
+        
+        /// <summary>
+        /// Label21 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label21;
+        
+        /// <summary>
+        /// tbOwnerConcernsPublicWorksWONbr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbOwnerConcernsPublicWorksWONbr;
         
         /// <summary>
         /// Label11 control.
@@ -650,6 +668,51 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbOwnerConcernsClosedByUpdate;
+        
+        /// <summary>
+        /// Label19xllk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label19xllk;
+        
+        /// <summary>
+        /// tbOwnerConcernsResolutionDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbOwnerConcernsResolutionDateUpdate;
+        
+        /// <summary>
+        /// ibOwnerConcernsResolutionDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibOwnerConcernsResolutionDateUpdate;
+        
+        /// <summary>
+        /// ceOwnerConcernsResolutionDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceOwnerConcernsResolutionDateUpdate;
+        
+        /// <summary>
+        /// revOwnerConcernsResolutionDateUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revOwnerConcernsResolutionDateUpdate;
         
         /// <summary>
         /// tabPanelOwnerConcernsPhotos control.

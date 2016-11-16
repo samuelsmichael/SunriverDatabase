@@ -77,11 +77,20 @@ namespace SubmittalProposal {
             tbOwnerConcernsClosedByUpdate.Text = Utils.ObjectToString(dr["CloseFormBy"]);
             tbOwnerConcernsApprovedByUpdate.Text = Utils.ObjectToString(dr["ApprovedBy"]);
             tbOwnerConcernsNotifiedByUpdate.Text = Utils.ObjectToString(dr["NotifiedBy"]);
+            tbOwnerConcernsConcernDescriptionUpdate.Text = Utils.ObjectToString(dr["Description"]);
+            tbOwnerConcernsConcernResolutionUpdate.Text = Utils.ObjectToString(dr["Resolution"]);
+            tbOwnerConcernsPublicWorksWONbr.Text = Utils.ObjectToString(dr["PubWksWO#"]);
             DateTime? notifiedDate=Utils.ObjectToDateTimeNullable(dr["NotifyDate"]);
             if (notifiedDate.HasValue) {
                 tbOwnerConcernsNotifiedDateUpdate.Text = notifiedDate.Value.ToString("MM/dd/yyyy");
             } else {
                 tbOwnerConcernsNotifiedDateUpdate.Text = "";
+            }
+            DateTime? resolutionDate = Utils.ObjectToDateTimeNullable(dr["ResolutionDate"]);
+            if (resolutionDate.HasValue) {
+                tbOwnerConcernsResolutionDateUpdate.Text = resolutionDate.Value.ToString("MM/dd/yyyy");
+            } else {
+                tbOwnerConcernsResolutionDateUpdate.Text = "";
             }
             object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
             if (Utils.isNothingNot(dateFormPrinted)) {
@@ -179,10 +188,12 @@ namespace SubmittalProposal {
             tbOwnerConcernsApprovedByUpdate.Enabled = true;
             tbOwnerConcernsNotifiedByUpdate.Enabled = true;
             tbOwnerConcernsNotifiedDateUpdate.Enabled = true;
+            tbOwnerConcernsResolutionDateUpdate.Enabled = true;
             ibOwnerConcernsNotifiedDateUpdate.Enabled = true;
             ibOwnerConcernsSubmitDateUpdate.Enabled = true;
             tbOwnerConcernsConcernDescriptionUpdate.Enabled = true;
             tbOwnerConcernsConcernResolutionUpdate.Enabled = true;
+            tbOwnerConcernsPublicWorksWONbr.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
@@ -210,10 +221,12 @@ namespace SubmittalProposal {
             tbOwnerConcernsApprovedByUpdate.Enabled = false;
             tbOwnerConcernsNotifiedByUpdate.Enabled = false;
             tbOwnerConcernsNotifiedDateUpdate.Enabled = false;
+            tbOwnerConcernsResolutionDateUpdate.Enabled = false;
             ibOwnerConcernsNotifiedDateUpdate.Enabled = false;
             ibOwnerConcernsSubmitDateUpdate.Enabled = false;
             tbOwnerConcernsConcernDescriptionUpdate.Enabled = false;
             tbOwnerConcernsConcernResolutionUpdate.Enabled = false;
+            tbOwnerConcernsPublicWorksWONbr.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
@@ -272,22 +285,46 @@ namespace SubmittalProposal {
         }
         protected void btnOwnerConcernsUpdateOkay_Click(object sender, EventArgs args) {
             try {
-                SqlCommand cmd = new SqlCommand("uspComRosterMemberSet");
-/*                cmd.Parameters.Add("@MemberID", SqlDbType.Int).Value = MemberIDBeingEdited;
-                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = tbComRosterMembersFirstNameUpdate.Text;
-                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = tbComRosterMembersLastNameUpdate.Text;
-                cmd.Parameters.Add("@SRMailAddr1", SqlDbType.NVarChar).Value = tbComRosterMembersSRMailAddr1Update.Text;
-                cmd.Parameters.Add("@SRMailAddr2", SqlDbType.NVarChar).Value = tbComRosterMembersSRMailAddr2Update.Text;
-                cmd.Parameters.Add("@SRPhone", SqlDbType.NVarChar).Value = tbComRosterMembersSRPhoneUpdate.Text;
-                cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = tbComRosterMembersEmailUpdate.Text;
-                cmd.Parameters.Add("@SRFax", SqlDbType.NVarChar).Value = tbComRosterMembersFAXUpdate.Text;
-                cmd.Parameters.Add("@NRMailAddr", SqlDbType.NVarChar).Value = tbComRosterMembersNRMailAddrUpdate.Text;
-                cmd.Parameters.Add("@NRPhone", SqlDbType.NVarChar).Value = tbComRosterMembersNRPhoneUpdate.Text;
-                cmd.Parameters.Add("@Comments", SqlDbType.NVarChar).Value = tbComRosterMembersCommentsUpdate.Text;
-                SqlParameter newMemberID = new SqlParameter("@NewMemberID", SqlDbType.Int);
-                newMemberID.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(newMemberID);
-                Utils.executeNonQuery(cmd, ConnectionString);*/
+                SqlCommand cmd = new SqlCommand("uspOwnerConcernsSet");
+                cmd.Parameters.Add("@OCCase#",SqlDbType.Int).Value=CaseIdBeingEdited;
+                DateTime? submitDate=Utils.ObjectToDateTimeNullable(tbOwnerConcernsSubmitDateUpdate.Text);
+                if(submitDate.HasValue) {
+                    cmd.Parameters.Add("@SubmitDate",SqlDbType.DateTime).Value=submitDate.Value;
+                }
+                cmd.Parameters.Add("@FirstName",SqlDbType.NVarChar).Value=tbOwnerConcernsFirstNameUpdate.Text;
+                cmd.Parameters.Add("@LastName",SqlDbType.NVarChar).Value=tbOwnerConcernsLastNameUpdate.Text;
+                string ownerID=tbOwnerConcernsOwnerIDUpdate.Text.Trim();
+                if(Utils.isNothingNot(ownerID)) {
+                    cmd.Parameters.Add("@OwnerID#",SqlDbType.NVarChar).Value=ownerID;
+                }
+                cmd.Parameters.Add("@OwnerPhone#",SqlDbType.NVarChar).Value=tbOwnerConcernsPhoneNbrUpdate.Text;
+                cmd.Parameters.Add("@DeptReferred1",SqlDbType.NVarChar).Value=ddlOwnerConcernsDeptReferred1Update.SelectedValue;
+                cmd.Parameters.Add("@DeptReferred2",SqlDbType.NVarChar).Value=ddlOwnerConcernsDeptReferred2Update.SelectedValue;
+                cmd.Parameters.Add("@Category",SqlDbType.NVarChar).Value=ddlOwnerConcernsCategoryUpdate.SelectedValue;
+                cmd.Parameters.Add("@Description",SqlDbType.NVarChar).Value=tbOwnerConcernsConcernDescriptionUpdate.Text;
+                cmd.Parameters.Add("@Resolution",SqlDbType.NVarChar).Value=tbOwnerConcernsConcernResolutionUpdate.Text;
+                cmd.Parameters.Add("@StartFormBy", SqlDbType.NVarChar).Value = tbOwnerConcernsStartedByUpdate.Text;
+                DateTime? resolutionDate = Utils.ObjectToDateTimeNullable(tbOwnerConcernsResolutionDateUpdate.Text);
+                if(resolutionDate.HasValue) {
+                    cmd.Parameters.Add("@ResolutionDate",SqlDbType.DateTime).Value=resolutionDate;
+                }
+                cmd.Parameters.Add("@CloseFormBy",SqlDbType.NVarChar).Value=tbOwnerConcernsClosedByUpdate.Text;
+                cmd.Parameters.Add("@ApprovedBy",SqlDbType.NVarChar).Value=tbOwnerConcernsApprovedByUpdate.Text;
+                cmd.Parameters.Add("@NotifiedBy",SqlDbType.NVarChar).Value=tbOwnerConcernsNotifiedByUpdate.Text;
+                DateTime? notifyDate=Utils.ObjectToDateTimeNullable(tbOwnerConcernsNotifiedDateUpdate.Text);
+                if(notifyDate.HasValue) {
+                    cmd.Parameters.Add("@NotifyDate",SqlDbType.DateTime).Value=notifyDate;
+                }
+                cmd.Parameters.Add("@SRAddress",SqlDbType.NVarChar).Value=tbOwnerConcernsSunriverAddress.Text;
+                cmd.Parameters.Add("@EmailAddr",SqlDbType.NVarChar).Value=tbOwnerConcernsEmailUpdate.Text;
+                int? pubWksWO = Utils.ObjectToIntNullable(tbOwnerConcernsPublicWorksWONbr.Text);
+                if (pubWksWO.HasValue) {
+                    cmd.Parameters.Add("@PubWksWO#", SqlDbType.Int).Value = pubWksWO.Value;
+                }
+                SqlParameter newOCCase=new SqlParameter("@NewOCCase#",SqlDbType.Int);
+                newOCCase.Direction=ParameterDirection.Output;
+                cmd.Parameters.Add(newOCCase);
+                Utils.executeNonQuery(cmd, ConnectionString);
                 performPostUpdateSuccessfulActions("Update successful", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
