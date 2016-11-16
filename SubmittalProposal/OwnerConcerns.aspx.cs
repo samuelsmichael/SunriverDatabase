@@ -168,7 +168,7 @@ namespace SubmittalProposal {
         }
 
         protected override Label getNewResultsLabel() {
-            throw new NotImplementedException();
+            return lblOwnerConcernsNewMessage;
         }
 
         protected override void unlockYourUpdateFields() {
@@ -239,7 +239,32 @@ namespace SubmittalProposal {
         }
 
         protected override void clearAllNewFormInputFields() {
-            throw new NotImplementedException();
+            tbOwnerConcernsFirstNameNew.Text = "";
+            tbOwnerConcernsLastNameNew.Text = "";
+            tbOwnerConcernsPhoneNbrNew.Text = "";
+            tbOwnerConcernsEmailNew.Text = "";
+            tbOwnerConcernsSunriverAddressNew.Text = "";
+            tbOwnerConcernsCustPhoneNew.Text = "";
+            tbOwnerConcernsOwnerIDNew.Text = "";
+            tbOwnerConcernsMailAddr1New.Text = "";
+            tbOwnerConcernsMailAddr2New.Text = "";
+            tbOwnerConcernsMailCityNew.Text = "";
+            tbOwnerConcernsMailStateNew.Text = "";
+            tbOwnerConcernsMailPostalCodeNew.Text = "";
+            ddlOwnerConcernsDeptReferred1New.SelectedIndex = -1;
+            ddlOwnerConcernsDeptReferred2New.SelectedIndex = -1;
+            ddlOwnerConcernsCategoryNew.SelectedIndex = -1;
+            tbOwnerConcernsPublicWorksWONbrNew.Text = "";
+            tbOwnerConcernsStartedByNew.Text = "";
+            tbOwnerConcernsApprovedByNew.Text = "";
+            tbOwnerConcernsNotifiedByNew.Text = "";
+            tbOwnerConcernsNotifiedDateNew.Text = "";
+            tbOwnerConcernsConcernDescriptionNew.Text = "";
+            tbOwnerConcernsConcernResolutionNew.Text = "";
+            tbOwnerConcernsClosedByNew.Text = "";
+            tbOwnerConcernsResolutionDateNew.Text = "";
+            getNewResultsLabel().Text = "";
+            tbOwnerConcernsSubmitDateNew.Text = "";
         }
         public static string MyMenuName = "Owner Concerns";
         protected override string childMenuName {
@@ -272,6 +297,10 @@ namespace SubmittalProposal {
             ddlOwnerConcernsDeptReferred1Update.DataBind();
             ddlOwnerConcernsDeptReferred2Update.DataSource = department;
             ddlOwnerConcernsDeptReferred2Update.DataBind();
+            ddlOwnerConcernsDeptReferred1New.DataSource = department;
+            ddlOwnerConcernsDeptReferred1New.DataBind();
+            ddlOwnerConcernsDeptReferred2New.DataSource = department;
+            ddlOwnerConcernsDeptReferred2New.DataBind();
         }
         private void bindCategoryDropdown() {
             DataTable category = OwnerConcernsDataSet().Tables[1].Copy();
@@ -282,6 +311,8 @@ namespace SubmittalProposal {
             ddlOwnerConcernsCategoryLU.DataBind();
             ddlOwnerConcernsCategoryUpdate.DataSource = category;
             ddlOwnerConcernsCategoryUpdate.DataBind();
+            ddlOwnerConcernsCategoryNew.DataSource = category;
+            ddlOwnerConcernsCategoryNew.DataBind();
         }
         protected void btnOwnerConcernsUpdateOkay_Click(object sender, EventArgs args) {
             try {
@@ -357,14 +388,26 @@ namespace SubmittalProposal {
                     if (winhidden.Value == "y" || (Session["byebye"] != null && ((string)Session["byebye"]) == "yes")) {
                         Session["byebye"] = null;
                         TimerTickerEnabled = false;
+                        if (isAddNewMemberOpen) {
+                            mpeNewOwnerConcerns.Show();
+                        }
    ///                     Button1X.Text = "Find Owner/Property";
                     }
 
                     if (Session["HereCommaHaveAClientID"] != null) {
                         
                         if (Session["PriorClientIDRVStorage"] == null || !((Session["HereCommaHaveAClientID"] == (Session["PriorClientIDRVStorage"])))) {
-                            if (!(tbOwnerConcernsOwnerIDUpdate.Text.Equals((string)Session["HereCommaHaveAClientID"]))) {
-                                tbOwnerConcernsOwnerIDUpdate.Text = Common.Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
+                            if (!
+                                    ((!isAddNewMemberOpen && tbOwnerConcernsOwnerIDUpdate.Text.Equals((string)Session["HereCommaHaveAClientID"]))
+                                            ||
+                                    (isAddNewMemberOpen && tbOwnerConcernsOwnerIDNew.Text.Equals((string)Session["HereCommaHaveAClientID"])))
+                                            
+                                ) {
+                                    if (!isAddNewMemberOpen) {
+                                        tbOwnerConcernsOwnerIDUpdate.Text = Common.Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
+                                    } else {
+                                        tbOwnerConcernsOwnerIDNew.Text = Common.Utils.ObjectToString(Session["HereCommaHaveAClientID"]);
+                                    }
 
                                 SqlCommand cmd = new SqlCommand("uspClientInfoGet");
                                 cmd.Parameters.Add("ClientID", SqlDbType.NVarChar).Value = Session["HereCommaHaveAClientID"];
@@ -375,13 +418,23 @@ namespace SubmittalProposal {
                                 if (ds != null && ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count > 0) {
                                     DataRow dr = ds.Tables[0].Rows[0];
 
-                                    tbOwnerConcernsSunriverAddress.Text = Utils.ObjectToString(dr["SRAddress"]);
-                                    tbOwnerConcernsCustPhone.Text = Utils.ObjectToString(dr["Phone"]);
-                                    tbOwnerConcernsMailAddr1.Text = Utils.ObjectToString(dr["Addr1"]);
-                                    tbOwnerConcernsMailAddr2.Text = Utils.ObjectToString(dr["Addr2"]);
-                                    tbOwnerConcernsMailCity.Text = Utils.ObjectToString(dr["City"]);
-                                    tbOwnerConcernsMailState.Text = Utils.ObjectToString(dr["Region"]);
-                                    tbOwnerConcernsMailPostalCode.Text = Utils.ObjectToString(dr["PostalCode"]);
+                                    if (!isAddNewMemberOpen) {
+                                        tbOwnerConcernsSunriverAddress.Text = Utils.ObjectToString(dr["SRAddress"]);
+                                        tbOwnerConcernsCustPhone.Text = Utils.ObjectToString(dr["Phone"]);
+                                        tbOwnerConcernsMailAddr1.Text = Utils.ObjectToString(dr["Addr1"]);
+                                        tbOwnerConcernsMailAddr2.Text = Utils.ObjectToString(dr["Addr2"]);
+                                        tbOwnerConcernsMailCity.Text = Utils.ObjectToString(dr["City"]);
+                                        tbOwnerConcernsMailState.Text = Utils.ObjectToString(dr["Region"]);
+                                        tbOwnerConcernsMailPostalCode.Text = Utils.ObjectToString(dr["PostalCode"]);
+                                    } else {
+                                        tbOwnerConcernsSunriverAddressNew.Text = Utils.ObjectToString(dr["SRAddress"]);
+                                        tbOwnerConcernsCustPhoneNew.Text = Utils.ObjectToString(dr["Phone"]);
+                                        tbOwnerConcernsMailAddr1New.Text = Utils.ObjectToString(dr["Addr1"]);
+                                        tbOwnerConcernsMailAddr2New.Text = Utils.ObjectToString(dr["Addr2"]);
+                                        tbOwnerConcernsMailCityNew.Text = Utils.ObjectToString(dr["City"]);
+                                        tbOwnerConcernsMailStateNew.Text = Utils.ObjectToString(dr["Region"]);
+                                        tbOwnerConcernsMailPostalCodeNew.Text = Utils.ObjectToString(dr["PostalCode"]);
+                                    }
                                 }
 
                                 Session["PriorClientIDRVStorage"] = Session["HereCommaHaveAClientID"];
@@ -406,13 +459,25 @@ namespace SubmittalProposal {
             }
             set {
                 Session["TimerTickerEnableBB"] = value;
-                if (value) {
-                    if (!Timer1.Enabled) {
-                        Timer1.Enabled = true;
+                if (!isAddNewMemberOpen) {
+                    if (value) {
+                        if (!Timer1.Enabled) {
+                            Timer1.Enabled = true;
+                        }
+                    } else {
+                        if (Timer1.Enabled) {
+                            Timer1.Enabled = false;
+                        }
                     }
                 } else {
-                    if (Timer1.Enabled) {
-                        Timer1.Enabled = false;
+                    if (value) {
+                        if (!Timer2.Enabled) {
+                            Timer2.Enabled = true;
+                        }
+                    } else {
+                        if (Timer2.Enabled) {
+                            Timer2.Enabled = false;
+                        }
                     }
                 }
             }
@@ -424,8 +489,19 @@ namespace SubmittalProposal {
             TimerTickerEnabled = true;
             Timer1.Enabled = true;
         }
+        private void doFindOwnerPropertyClickedNew() {
+            Session["byebye"] = null;
+            Session["valueselectedbyfind"] = null;
+            TimerTickerEnabled = true;
+            Timer2.Enabled = true;
+            mpeNewOwnerConcerns.Show();
+        }
         protected void btnNonOwnerLookupSunriverPropertyOwnerInformation_onclick(object sender, EventArgs args) {
             doFindOwnerPropertyClickedUpdate();
+        }
+        protected void btnNonOwnerLookupSunriverPropertyOwnerInformationNew_onclick(object sender, EventArgs args) {
+            doFindOwnerPropertyClickedNew();
+            mpeNewOwnerConcerns.Show();
         }
         protected void btnPrintForm_OnClick(object sender, EventArgs args) {
             SqlCommand cmd = new SqlCommand("uspOwnerConcernsDateFormPrintedUpdate");
@@ -434,6 +510,79 @@ namespace SubmittalProposal {
             MemoryCache cache = MemoryCache.Default;
             cache.Remove(DataSetCacheKey);
             lblDatePrinted.Text = DateTime.Now.ToString();
+        }
+        protected void btnNewOwnerConcernsOk_Click(object sender, EventArgs args) {
+            if (Page.IsValid) {
+                try {
+                    SqlCommand cmd = new SqlCommand("uspOwnerConcernsSet");
+                    DateTime? submitDate = Utils.ObjectToDateTimeNullable(tbOwnerConcernsSubmitDateNew.Text);
+                    if (submitDate.HasValue) {
+                        cmd.Parameters.Add("@SubmitDate", SqlDbType.DateTime).Value = submitDate.Value;
+                    }
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = tbOwnerConcernsFirstNameNew.Text;
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = tbOwnerConcernsLastNameNew.Text;
+                    string ownerID = tbOwnerConcernsOwnerIDNew.Text.Trim();
+                    if (Utils.isNothingNot(ownerID)) {
+                        cmd.Parameters.Add("@OwnerID#", SqlDbType.NVarChar).Value = ownerID;
+                    }
+                    cmd.Parameters.Add("@OwnerPhone#", SqlDbType.NVarChar).Value = tbOwnerConcernsPhoneNbrNew.Text;
+                    cmd.Parameters.Add("@DeptReferred1", SqlDbType.NVarChar).Value = ddlOwnerConcernsDeptReferred1New.SelectedValue;
+                    cmd.Parameters.Add("@DeptReferred2", SqlDbType.NVarChar).Value = ddlOwnerConcernsDeptReferred2New.SelectedValue;
+                    cmd.Parameters.Add("@Category", SqlDbType.NVarChar).Value = ddlOwnerConcernsCategoryNew.SelectedValue;
+                    cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = tbOwnerConcernsConcernDescriptionNew.Text;
+                    cmd.Parameters.Add("@Resolution", SqlDbType.NVarChar).Value = tbOwnerConcernsConcernResolutionNew.Text;
+                    cmd.Parameters.Add("@StartFormBy", SqlDbType.NVarChar).Value = tbOwnerConcernsStartedByNew.Text;
+                    DateTime? resolutionDate = Utils.ObjectToDateTimeNullable(tbOwnerConcernsResolutionDateNew.Text);
+                    if (resolutionDate.HasValue) {
+                        cmd.Parameters.Add("@ResolutionDate", SqlDbType.DateTime).Value = resolutionDate;
+                    }
+                    cmd.Parameters.Add("@CloseFormBy", SqlDbType.NVarChar).Value = tbOwnerConcernsClosedByNew.Text;
+                    cmd.Parameters.Add("@ApprovedBy", SqlDbType.NVarChar).Value = tbOwnerConcernsApprovedByNew.Text;
+                    cmd.Parameters.Add("@NotifiedBy", SqlDbType.NVarChar).Value = tbOwnerConcernsNotifiedByNew.Text;
+                    DateTime? notifyDate = Utils.ObjectToDateTimeNullable(tbOwnerConcernsNotifiedDateNew.Text);
+                    if (notifyDate.HasValue) {
+                        cmd.Parameters.Add("@NotifyDate", SqlDbType.DateTime).Value = notifyDate;
+                    }
+                    cmd.Parameters.Add("@SRAddress", SqlDbType.NVarChar).Value = tbOwnerConcernsSunriverAddressNew.Text;
+                    cmd.Parameters.Add("@EmailAddr", SqlDbType.NVarChar).Value = tbOwnerConcernsEmailNew.Text;
+                    int? pubWksWO = Utils.ObjectToIntNullable(tbOwnerConcernsPublicWorksWONbrNew.Text);
+                    if (pubWksWO.HasValue) {
+                        cmd.Parameters.Add("@PubWksWO#", SqlDbType.Int).Value = pubWksWO.Value;
+                    }
+                    SqlParameter newOCCase = new SqlParameter("@NewOCCase#", SqlDbType.Int);
+                    newOCCase.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newOCCase);
+                    Utils.executeNonQuery(cmd, ConnectionString);
+                    performPostNewSuccessfulActions("Update successful", DataSetCacheKey, null, tbOwnerConcernsCaseNbrLU,newOCCase.Value.ToString());
+                } catch (Exception ee) {
+                    performPostNewFailedActions("Update failed. Msg: " + ee.Message);
+                    isAddNewMemberOpen = true;
+                    mpeNewOwnerConcerns.Show();
+                    return;
+                }
+                isAddNewMemberOpen = false;
+                mpeNewOwnerConcerns.Hide();
+            } else {
+                isAddNewMemberOpen = true;
+                mpeNewOwnerConcerns.Show();
+            }
+        }
+        protected void btnNewOwnerConcernsCancel_Click(object sender, EventArgs args) {
+            isAddNewMemberOpen = false;
+            mpeNewOwnerConcerns.Hide();
+        }
+        protected void lbNewOwnerConcerns_OnClick(object sender, EventArgs args) {
+            isAddNewMemberOpen = true;
+            mpeNewOwnerConcerns.Show();
+        }
+        private bool isAddNewMemberOpen {
+            get {
+                object obj = Session["isAddNewMemberOpen"];
+                return obj == null ? false : (bool)obj;
+            }
+            set {
+                Session["isAddNewMemberOpen"] = value;
+            }
         }
     }
 }
