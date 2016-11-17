@@ -733,6 +733,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.UpdatePanel updatePanel1y8;
         
         /// <summary>
+        /// PhotoManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SubmittalProposal.PhotoManager PhotoManager1;
+        
+        /// <summary>
         /// btnOwnerConcernsUpdate control.
         /// </summary>
         /// <remarks>

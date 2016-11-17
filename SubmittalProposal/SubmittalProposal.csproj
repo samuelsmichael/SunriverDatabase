@@ -123,6 +123,7 @@
     <Content Include="OwnerConcerns.aspx" />
     <Content Include="OwnerProperty.aspx" />
     <Content Include="OwnerPropertyFinder.aspx" />
+    <Content Include="PhotoManager.ascx" />
     <Content Include="Query_CrossReference3.aspx" />
     <Content Include="Reports\BPermitsBuildingPermitsIssued.aspx" />
     <Content Include="Reports\BPermitsClosed.aspx" />
@@ -450,6 +451,7 @@
       <DependentUpon>Dummy.aspx</DependentUpon>
     </Compile>
     <Compile Include="HasMenuName.cs" />
+    <Compile Include="IHasPhotos.cs" />
     <Compile Include="ITAdmin.aspx.cs">
       <DependentUpon>ITAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -517,6 +519,13 @@
     </Compile>
     <Compile Include="OwnerPropertyFinder.aspx.designer.cs">
       <DependentUpon>OwnerPropertyFinder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoManager.ascx.cs">
+      <DependentUpon>PhotoManager.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhotoManager.ascx.designer.cs">
+      <DependentUpon>PhotoManager.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

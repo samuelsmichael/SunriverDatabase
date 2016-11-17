@@ -11,7 +11,7 @@ using System.Runtime.Caching;
 using System.Text;
 
 namespace SubmittalProposal {
-    public partial class OwnerConcerns : AbstractDatabase {
+    public partial class OwnerConcerns : AbstractDatabase, IHasPhotos {
         private static string DataSetCacheKey = "OWNERCONCERSDATASETCACHEKEY";
         private static string ConnectionString {
             get {
@@ -39,6 +39,11 @@ namespace SubmittalProposal {
             }
             set {
                 Session["ComOwnerConcernsCaseIDBeingEdited"] = value;
+            }
+        }
+        public string CurrentItemKey {
+            get {
+                return Utils.ObjectToString(CaseIdBeingEdited);
             }
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {

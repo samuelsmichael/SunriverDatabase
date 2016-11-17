@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true"
     CodeBehind="OwnerConcerns.aspx.cs" Inherits="SubmittalProposal.OwnerConcerns" %>
 
+<%@ Register src="PhotoManager.ascx" tagname="PhotoManager" tagprefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <asp:HiddenField ID="winhidden" Value="n" runat="server" />
     <asp:HiddenField ID="timetoclosewindowhidden" runat="server" Value="n" />
@@ -349,7 +351,7 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1y8" runat="server">
                     <ContentTemplate>
-                        This page intentionally left blank
+                        <uc1:PhotoManager ID="PhotoManager1" runat="server" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>
