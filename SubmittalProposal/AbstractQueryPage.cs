@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common;
 using System.Linq;
 using System.Web;
 using System.Data;
@@ -14,11 +15,22 @@ namespace SubmittalProposal {
         protected abstract string PageTitle { get; }
         protected abstract SqlCommand MSqlCommand { get; }
         protected abstract string ConnectionString { get; }
+        protected abstract void ChildPagePreRender();
         protected void Page_Load(object sender, EventArgs e) {
-            if ( !IsPostBack) {
+            if (!IsPostBack) {
                 Session["GoBackTo"] = Request.UrlReferrer;
-                DataSet ds = Common.Utils.getDataSet(MSqlCommand, ConnectionString);
-                ((AbstractQuery2)Master).getGridView().DataSource = ds;
+            }
+            ((AbstractQuery2)Master).getSubmitButton().Click += new EventHandler(AbstractQuery_Click);
+        }
+        protected void Page_PreRender(object sender, EventArgs args) {
+            ChildPagePreRender();
+        }
+        protected virtual void AbstractQuery_Click(object sender, EventArgs e) {
+            DataSet ds = Common.Utils.getDataSet(MSqlCommand, ConnectionString);
+            if (Utils.hasData(ds)) {
+                DataTable dt = ds.Tables[0];
+                Session["aqpTaskTable"] = dt;
+                ((AbstractQuery2)Master).getGridView().DataSource = dt;
                 ((AbstractQuery2)Master).getGridView().DataBind();
                 ((AbstractQuery2)Master).getTitleLabel().Text = PageTitle;
             }

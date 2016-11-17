@@ -110,6 +110,8 @@
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
+    <Content Include="Query_OwnerConcernsQueries.aspx" />
+    <Content Include="OwnerConcernsReportsMain.aspx" />
     <Content Include="Dummy.aspx" />
     <Content Include="ITAdmin.aspx" />
     <Content Include="IDCardManagementReportsMain.aspx" />
@@ -442,6 +444,20 @@
     </Compile>
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Query_OwnerConcernsQueries.aspx.cs">
+      <DependentUpon>Query_OwnerConcernsQueries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Query_OwnerConcernsQueries.aspx.designer.cs">
+      <DependentUpon>Query_OwnerConcernsQueries.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OwnerConcernsReportsMain.aspx.cs">
+      <DependentUpon>OwnerConcernsReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OwnerConcernsReportsMain.aspx.designer.cs">
+      <DependentUpon>OwnerConcernsReportsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dummy.aspx.cs">
       <DependentUpon>Dummy.aspx</DependentUpon>

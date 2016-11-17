@@ -29,5 +29,8 @@ namespace SubmittalProposal {
         protected override string ConnectionString {
             get { return System.Configuration.ConfigurationManager.ConnectionStrings["BallotVerifySQLConnectionString"].ConnectionString; }
         }
+        protected override void ChildPagePreRender() {
+            
+        }
     }
 }

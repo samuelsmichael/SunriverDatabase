@@ -22,6 +22,60 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label lblQueryName;
         
         /// <summary>
+        /// pnlReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlReport;
+        
+        /// <summary>
+        /// lbBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbBack;
+        
+        /// <summary>
+        /// ContentPlaceHolderQueryParms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderQueryParms;
+        
+        /// <summary>
+        /// btnSubmitReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmitReport;
+        
+        /// <summary>
+        /// lbHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbHome;
+        
+        /// <summary>
+        /// photomanagerupdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel photomanagerupdatePanel;
+        
+        /// <summary>
         /// GridView2 control.
         /// </summary>
         /// <remarks>
@@ -29,14 +83,5 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView2;
-        
-        /// <summary>
-        /// btnReturnFromQueryPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReturnFromQueryPage;
     }
 }
