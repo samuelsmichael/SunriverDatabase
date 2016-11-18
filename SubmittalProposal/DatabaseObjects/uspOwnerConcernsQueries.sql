@@ -9,7 +9,7 @@ GO
 -- Create date: 10/14/2016
 -- Description:	Gets the data for OwnerConcerns Queries
 /*
-	exec uspOwnerConcernsQueries @deptreferred='community development', @Category='Animals - Wild'
+	exec uspOwnerConcernsQueries  @DeptReferred='Administration'
 */
 -- =============================================
 alter PROCEDURE uspOwnerConcernsQueries 
@@ -18,6 +18,9 @@ alter PROCEDURE uspOwnerConcernsQueries
 	,@EndDate datetime=null
 	,@ConcernsOpen bit = null
 	,@Category nvarchar(30) = null
+	,@ForceSortByCategory bit = null
+	,@ButIncludeBothOpensAndClosedInTheDataSet bit = null
+	,@JustDoingCategorySummary bit = null
 	
 AS
 BEGIN
@@ -30,12 +33,13 @@ WHERE
 	AND (@StartDate is null or c.SubmitDate>=@StartDate)
 	AND (@EndDate is null or c.SubmitDate<DateAdd(d,1,@EndDate))
 	AND (@Category is null or @Category=Category)
-	AND (@ConcernsOpen is null or (
+	AND (@ConcernsOpen is null or @ButIncludeBothOpensAndClosedInTheDataSet=1 or (
 		((@ConcernsOpen=1 and ResolutionDate is null) or
 		(@ConcernsOpen=0 and ResolutionDate is not null))
 	)) 
 ORDER BY 
-	CASE WHEN @DeptReferred is null then c.DeptReferred1 end,
+	CASE WHEN @ForceSortByCategory=1 then c.Category end,
+	CASE WHEN @DeptReferred is null and @ForceSortByCategory is null then c.DeptReferred1 end,
 	case when @Category is null then c.Category end,
 	c.[OCCase#]
 END

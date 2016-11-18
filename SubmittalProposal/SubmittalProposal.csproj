@@ -1105,6 +1105,12 @@
     <Compile Include="Reports\OwnerConcernsReport.aspx.designer.cs">
       <DependentUpon>OwnerConcernsReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\OwnerConcerns\OwnerConcernsCategoryOrder.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OwnerConcernsCategoryOrder.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\OwnerConcerns\OwnerConcernsOpenClosed.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1633,6 +1639,10 @@
     <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\VehicleShopActivity.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>VehicleShopActivity.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerConcerns\OwnerConcernsCategoryOrder.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OwnerConcernsCategoryOrder.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OwnerConcerns\OwnerConcernsOpenClosed.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

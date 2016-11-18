@@ -30,7 +30,15 @@ namespace SubmittalProposal.Reports {
             if (ddlReport.SelectedValue == "Concerns Open" || ddlReport.SelectedValue == "Concerns Closed" || ddlReport.SelectedValue=="All Concerns" ) {
                 return new OwnerConcerns.OwnerConcernsOpenClosed();
             } else {
-                throw new NotImplementedException();
+                if (ddlReport.SelectedValue == "Concern Categories") {
+                    return new OwnerConcerns.OwnerConcernsCategoryOrder();
+                } else {
+                    if (ddlReport.SelectedValue == "Category Summary") {
+                        return new OwnerConcerns.OwnerConcernsCategoryOrder();
+                    } else {
+                        throw new NotImplementedException();
+                    }
+                }
             }
         }
 
@@ -65,7 +73,18 @@ namespace SubmittalProposal.Reports {
                     if (ddlReport.SelectedValue == "All Concerns") {
                         reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - All Owner Concerns");
                     } else {
-                        throw new NotImplementedException();
+                        if (ddlReport.SelectedValue == "Concern Categories") {
+                            reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Categories");
+                            reportParams.Add("@ForceSortByCategory", true);
+                        } else {
+                            if (ddlReport.SelectedValue == "Category Summary") {
+                                reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Categories");
+                                reportParams.Add("@ForceSortByCategory", true);
+                                reportParams.Add("@JustDoingCategorySummary", true);
+                            } else {
+                                throw new NotImplementedException();
+                            }
+                        }
                     }
                 }
             }
