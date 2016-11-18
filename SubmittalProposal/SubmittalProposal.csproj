@@ -168,6 +168,7 @@
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
     <Content Include="Reports\LRFDVehicleMaintenance\BlankWorkOrder.aspx" />
+    <Content Include="Reports\OwnerConcernsReport.aspx" />
     <Content Include="Reports\RVBillingInfo.aspx" />
     <Content Include="Reports\RVPastDue.aspx" />
     <Content Include="Reports\RVMailingLabels.aspx" />
@@ -1097,6 +1098,25 @@
       <DependentUpon>VehicleShopActivity.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\OwnerConcernsReport.aspx.cs">
+      <DependentUpon>OwnerConcernsReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerConcernsReport.aspx.designer.cs">
+      <DependentUpon>OwnerConcernsReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OwnerConcerns\OwnerConcernsOpenClosed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OwnerConcernsOpenClosed.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerConcerns\OwnerConcernsTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OwnerConcernsTemplate.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\OwnerProperty\Envelope.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1613,6 +1633,14 @@
     <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\VehicleShopActivity.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>VehicleShopActivity.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerConcerns\OwnerConcernsOpenClosed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OwnerConcernsOpenClosed.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerConcerns\OwnerConcernsTemplate.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OwnerConcernsTemplate.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OwnerProperty\Envelope.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

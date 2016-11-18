@@ -9,7 +9,7 @@ GO
 -- Create date: 10/14/2016
 -- Description:	Gets the data for OwnerConcerns Queries
 /*
-	exec uspOwnerConcernsQueries @DeptReferred='Community Development'
+	exec uspOwnerConcernsQueries @deptreferred='community development', @Category='Animals - Wild'
 */
 -- =============================================
 alter PROCEDURE uspOwnerConcernsQueries 
@@ -22,9 +22,8 @@ alter PROCEDURE uspOwnerConcernsQueries
 AS
 BEGIN
 	SET NOCOUNT ON;
-declare @cmd nvarchar(max)
-set @cmd='
-SELECT c.[OCCase#], c.DeptReferred1,  c.SubmitDate, c.ResolutionDate, c.FirstName, c.LastName, a.Addr1 AS SRLane, c.Category, c.[Description], c.Resolution, c.CloseFormBy, c.DeptReferred2
+SELECT c.[OCCase#], c.DeptReferred1,  c.SubmitDate, c.ResolutionDate, c.FirstName, c.LastName, case when c.ResolutionDate is null then 'Yes' else 'No' end as [Open],
+	 a.Addr1 AS SRLane, c.Category, c.[Description], c.Resolution, c.CloseFormBy, c.DeptReferred2
 FROM [ID-Card_Split_FE]..tblArShipTo a INNER JOIN tblOCData c ON a.CustId = c.[OwnerID#]
 WHERE 
 	(@DeptReferred is null or c.DeptReferred1=@DeptReferred) 
@@ -35,22 +34,9 @@ WHERE
 		((@ConcernsOpen=1 and ResolutionDate is null) or
 		(@ConcernsOpen=0 and ResolutionDate is not null))
 	)) 
-ORDER BY '
-if @DeptReferred is null and @Category is null begin
-	set @cmd=@cmd+' c.DeptReferred1,c.Category,c.[OCCase#] '
-end else begin
-	if @DeptReferred is null begin
-		set @cmd=@cmd + ' c.DeptReferred1,c.[OCCase#]'
-	end else begin
-		if @Category is null begin
-			set @cmd=@cmd + ' c.Category,c.[OCCase#]'
-		end else begin
-			set @cmd=@cmd + ' c.[OCCase#]'
-		end
-	end
-end
-print @cmd
-exec (@cmd)
-
+ORDER BY 
+	CASE WHEN @DeptReferred is null then c.DeptReferred1 end,
+	case when @Category is null then c.Category end,
+	c.[OCCase#]
 END
 GO

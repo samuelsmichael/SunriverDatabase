@@ -23,6 +23,17 @@ namespace SubmittalProposal.Reports {
         private string _ServerName;
         private ReportDocument _RD;
 
+
+        protected void Page_Init(object sender, EventArgs e) {
+            if (IsPostBack) {
+                if (Session["rptDeliveryLabels"] != null) {
+                    // cast the report from object to ReportClass so it can be set as the CrystalReportViewer ReportSource
+                    // (All Crystal Reports inherit from ReportClass, so it serves as an acceptable data type through polymorphism)
+                    ((Reports)Master).getCrystalReportView().ReportSource = (ReportClass)Session["rptDeliveryLabels"];
+                }
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
                 Session["GoBackTo"] = Request.UrlReferrer;
@@ -58,7 +69,7 @@ namespace SubmittalProposal.Reports {
                     ParameterDiscreteValue parameterDiscreteValue = new ParameterDiscreteValue();
                     try {
                         if (reportParams[pfd.Name]==null) {
-                            parameterDiscreteValue.Value = String.Empty;
+                            parameterDiscreteValue.Value = null;
                         } else {
                             parameterDiscreteValue.Value = reportParams[pfd.Name];
                         }
@@ -70,6 +81,7 @@ namespace SubmittalProposal.Reports {
                 }
             }
             ((Reports)Master).getCrystalReportView().ReportSource = _RD;
+            Session["rptDeliveryLabels"] = _RD;
         }
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument) {
             Tables tables = reportDocument.Database.Tables;

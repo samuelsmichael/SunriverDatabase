@@ -28,6 +28,6 @@
             </tr>
         </table>
     </asp:Panel>
-    <CR:CrystalReportViewer ID="CrystalReportViewer1"  ToolPanelView="None"  runat="server" AutoDataBind="true" />
+    <CR:CrystalReportViewer ID="CrystalReportViewer1" ViewStateMode="Enabled"  ToolPanelView="None"  runat="server" AutoDataBind="true" />
 
 </asp:Content>

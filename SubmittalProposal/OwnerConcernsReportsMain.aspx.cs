@@ -14,7 +14,7 @@ namespace SubmittalProposal {
             ((SiteMaster)Master).ReportPageImOnSinceMenuItemClickDoesntWork = GetType().Name;
         }
         protected void lbOwnerConcernReports_Click(object sender, EventArgs e) {
-            //Response.Redirect("~/Reports/RVSpaceReport.aspx");
+            Response.Redirect("~/Reports/OwnerConcernsReport.aspx");
         }
         protected void lbOwnerConcernQueries_Click(object sender, EventArgs args) {
             Response.Redirect("~/Query_OwnerConcernsQueries.aspx");
