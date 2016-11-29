@@ -35,6 +35,10 @@ namespace SubmittalProposal {
                 MenuItem miBallotVerify = new MenuItem(BallotVerify.MyMenuName, "BallotVerify", null, "~/BallotVerify.aspx");
                 MenuItem miComRoster = new MenuItem(ComRoster_Home.MyMenuName, "ComRoster", null, "~/ComRoster_Home.aspx");
                 MenuItem miOwnerConcerns = new MenuItem(OwnerConcerns.MyMenuName, "OwnerConcerns", null, "~/OwnerConcerns.aspx");
+                MenuItem miSROAVehicleMaintenanceConcerns = new MenuItem(SROAVehicleMaintenance.MyMenuName, "SROAVehicle", null, "~/SROAVehicleMaintenance.aspx");
+                if (HttpContext.Current.User.IsInRole("canviewsroavehiclemaintenance")) {
+                    NavigationMenu.Items.AddAt(1, miSROAVehicleMaintenanceConcerns);
+                }
                 if (HttpContext.Current.User.IsInRole("canviewownerconcerns")) {
                     NavigationMenu.Items.AddAt(1, miOwnerConcerns);
                 }
@@ -156,6 +160,13 @@ namespace SubmittalProposal {
                                                                             lbReports.Text = "Reports";
                                                                             lbReports.Visible = true;
                                                                         }
+                                                                    } else {
+                                                                        if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sroavehicle")) {
+                                                                            if (HttpContext.Current.User.IsInRole("candoreportssroavehiclemaintenance")) {
+                                                                                lbReports.Text = "Reports";
+                                                                                lbReports.Visible = true;
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -209,6 +220,10 @@ namespace SubmittalProposal {
                                                     } else {
                                                         if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("ownerconcerns")) {
                                                             Response.Redirect("~/OwnerConcernsReportsMain.aspx");
+                                                        } else {
+                                                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sroavehicle")) {
+                                                                Response.Redirect("~/SROAVehicleMaintenanceReportsMain.aspx");
+                                                            }
                                                         }
                                                     }
                                                 }

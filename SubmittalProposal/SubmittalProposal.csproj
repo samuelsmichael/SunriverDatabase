@@ -110,6 +110,14 @@
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
+    <Content Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx" />
+    <Content Include="Reports\VehicleMechanicActivitySROA.aspx" />
+    <Content Include="Reports\VehicleShopActivitySROA.aspx" />
+    <Content Include="Reports\VehicleMaintenanceHistorySROA.aspx" />
+    <Content Include="Reports\SROAVehicles.aspx" />
+    <Content Include="Reports\SROAInvoices.aspx" />
+    <Content Include="SROAVehicleMaintenanceReportsMain.aspx" />
+    <Content Include="SROAVehicleMaintenance.aspx" />
     <Content Include="Query_OwnerConcernsQueries.aspx" />
     <Content Include="OwnerConcernsReportsMain.aspx" />
     <Content Include="Dummy.aspx" />
@@ -445,6 +453,92 @@
     </Compile>
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx.cs">
+      <DependentUpon>BlankWorkOrderSROA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx.designer.cs">
+      <DependentUpon>BlankWorkOrderSROA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\VehicleMechanicActivitySROA.cs">
+      <DependentUpon>VehicleMechanicActivitySROA.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\VehicleMechanicActivitySROA.aspx.cs">
+      <DependentUpon>VehicleMechanicActivitySROA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\VehicleMechanicActivitySROA.aspx.designer.cs">
+      <DependentUpon>VehicleMechanicActivitySROA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\VehicleShopActivitySROA.cs">
+      <DependentUpon>VehicleShopActivitySROA.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\VehicleShopActivitySROA.aspx.cs">
+      <DependentUpon>VehicleShopActivitySROA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\VehicleShopActivitySROA.aspx.designer.cs">
+      <DependentUpon>VehicleShopActivitySROA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\VehicleMaintenanceHistorySROA.cs">
+      <DependentUpon>VehicleMaintenanceHistorySROA.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\VehicleMaintenanceHistorySROA.aspx.cs">
+      <DependentUpon>VehicleMaintenanceHistorySROA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\VehicleMaintenanceHistorySROA.aspx.designer.cs">
+      <DependentUpon>VehicleMaintenanceHistorySROA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\SROAVehiclesReport.cs">
+      <DependentUpon>SROAVehiclesReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\SROAVehicles.aspx.cs">
+      <DependentUpon>SROAVehicles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SROAVehicles.aspx.designer.cs">
+      <DependentUpon>SROAVehicles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAInvoices.aspx.cs">
+      <DependentUpon>SROAInvoices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\SROAInvoices.aspx.designer.cs">
+      <DependentUpon>SROAInvoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\SROAVehicleMaintenance\SROAInvoicesReport.cs">
+      <DependentUpon>SROAInvoicesReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SROAVehicleMaintenanceReportsMain.aspx.cs">
+      <DependentUpon>SROAVehicleMaintenanceReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SROAVehicleMaintenanceReportsMain.aspx.designer.cs">
+      <DependentUpon>SROAVehicleMaintenanceReportsMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SROAVehicleMaintenance.aspx.cs">
+      <DependentUpon>SROAVehicleMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SROAVehicleMaintenance.aspx.designer.cs">
+      <DependentUpon>SROAVehicleMaintenance.aspx</DependentUpon>
     </Compile>
     <Compile Include="Query_OwnerConcernsQueries.aspx.cs">
       <DependentUpon>Query_OwnerConcernsQueries.aspx</DependentUpon>
@@ -1707,6 +1801,26 @@
     <EmbeddedResource Include="Reports\SellCheck\SellCheckLetter.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SellCheckLetter.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SROAVehicleMaintenance\SROAVehiclesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SROAVehiclesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SROAVehicleMaintenance\SROAInvoicesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SROAInvoicesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SROAVehicleMaintenance\VehicleMaintenanceHistorySROA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VehicleMaintenanceHistorySROA.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SROAVehicleMaintenance\VehicleMechanicActivitySROA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VehicleMechanicActivitySROA.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SROAVehicleMaintenance\VehicleShopActivitySROA.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VehicleShopActivitySROA.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Submittal\RptSubmittalAdministrativeApprovals.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
