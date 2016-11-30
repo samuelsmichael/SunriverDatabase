@@ -110,6 +110,8 @@
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
+    <Content Include="Images\PDFImage.png" />
+    <Content Include="PDFsPage.aspx" />
     <Content Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx" />
     <Content Include="Reports\VehicleMechanicActivitySROA.aspx" />
     <Content Include="Reports\VehicleShopActivitySROA.aspx" />
@@ -453,6 +455,14 @@
     </Compile>
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PDFFileModel.cs" />
+    <Compile Include="PDFsPage.aspx.cs">
+      <DependentUpon>PDFsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PDFsPage.aspx.designer.cs">
+      <DependentUpon>PDFsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx.cs">
       <DependentUpon>BlankWorkOrderSROA.aspx</DependentUpon>

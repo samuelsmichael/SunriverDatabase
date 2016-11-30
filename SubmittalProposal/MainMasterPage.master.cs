@@ -81,6 +81,11 @@ namespace SubmittalProposal {
                 if (HttpContext.Current.User.IsInRole("canviewcitations")) {
                     NavigationMenu.Items.AddAt(1, miCitations);
                 }
+                lbPDFs.Visible=false;
+                if (HttpContext.Current.User.IsInRole("canviewpdfs")) {
+                    lbPDFs.Visible = true;
+                }
+
                 lbReports.Visible = false;
                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
                     if (HttpContext.Current.User.IsInRole("candoreportssubmittals")) {
@@ -183,7 +188,9 @@ namespace SubmittalProposal {
                 }
             }
         }
-
+        protected void lbPDFs_Click(object sender, EventArgs e) {
+            Response.Redirect("~/PDFsPage.aspx?Type=all");
+        }
         protected void lbReports_Click(object sender, EventArgs e) {
             if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("submittal")) {
                 Response.Redirect("~/SubmittalReportsMain.aspx");
