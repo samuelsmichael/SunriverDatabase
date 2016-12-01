@@ -11,15 +11,30 @@ namespace SubmittalProposal {
     public partial class PDFsPage : System.Web.UI.Page {
         protected void Page_PreRender(object sender, EventArgs e) {
             if (!IsPostBack) {
-                if (Request.QueryString["Type"] != null && Request.QueryString["Type"].ToLower() == "all") {
-                    List<PDFFileModel> pdfFiles = new List<PDFFileModel>();
-                    string[] filespecs = Directory.GetFiles(System.Configuration.ConfigurationManager.AppSettings["PDFDirectory"], "*.pdf");
-                    foreach (string filespec in filespecs) {
-                        pdfFiles.Add(new PDFFileModel(filespec, null, null));
+                if (Request.QueryString["Type"] != null) {
+                    if (Request.QueryString["Type"].ToLower() == "all") {
+                        List<PDFFileModel> pdfFiles = new List<PDFFileModel>();
+                        string[] filespecs = Directory.GetFiles(System.Configuration.ConfigurationManager.AppSettings["PDFDirectory"], "*.pdf");
+                        foreach (string filespec in filespecs) {
+                            pdfFiles.Add(new PDFFileModel(filespec, null, null));
+                        }
+                        RepeaterPDFs.DataSource = pdfFiles;
+                        RepeaterPDFs.DataBind();
+                        lblPDFsPageHeading.Text = "All PDFs";
+                    } else {
+                        if (Request.QueryString["Type"].ToLower() == "property") {
+                            List<PDFFileModel> pdfFiles = new List<PDFFileModel>();
+                            string[] filespecs = Directory.GetFiles(System.Configuration.ConfigurationManager.AppSettings["PDFDirectory"], "*.pdf");
+                            foreach (string filespec in filespecs) {
+                                if (filespec.ToLower().IndexOf(((string)Session["LaneLotForPDFs"]).ToLower()) != -1) {
+                                    pdfFiles.Add(new PDFFileModel(filespec, null, null));
+                                }
+                            }
+                            RepeaterPDFs.DataSource = pdfFiles;
+                            RepeaterPDFs.DataBind();
+                            lblPDFsPageHeading.Text = "PDFs for " + Session["LaneLotForPDFs"];
+                        }
                     }
-                    RepeaterPDFs.DataSource = pdfFiles;
-                    RepeaterPDFs.DataBind();
-                    lblPDFsPageHeading.Text = "All PDFs";
                 }
             }
         }

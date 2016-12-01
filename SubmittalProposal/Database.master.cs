@@ -50,6 +50,14 @@ namespace SubmittalProposal {
             } else {
                 lbPrintOwnerEnvelope.Visible = true;
             }
+            lbShowPDFs.Visible = false;
+            if (Page is ICanHavePDFs) {
+                if (!CPEForm.Collapsed) {
+                    if (((ICanHavePDFs)Page).HasPropertyAvailable) {
+                        lbShowPDFs.Visible = true;
+                    }
+                }
+            }
             if (Page.ToString().ToLower().IndexOf("citations") == -1 || Common.Utils.isNothing(Session["CitationsIDBeingEdited"])) {
                 lbPrintViolatorsEnvelope.Visible = false;
             } else {

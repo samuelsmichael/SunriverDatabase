@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SubmittalProposal {
 
-    public partial class OwnerProperty : AbstractDatabase {
+    public partial class OwnerProperty : AbstractDatabase, ICanHavePDFs {
         public static string ConnectionString {
             get {
                 return System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString;
@@ -106,8 +106,9 @@ namespace SubmittalProposal {
             DataSet ds = null;
             GridViewRow row = gvResults.SelectedRow;
             Object obj = row.Cells;
-            SRPropIDBeingEdited = Utils.ObjectToString(row.Cells[5].Text);
-            CustomerIDBeingEdited = Utils.ObjectToString(row.Cells[6].Text);
+            SRPropIDBeingEdited = Utils.ObjectToString(row.Cells[5].Text.Trim());
+            CustomerIDBeingEdited = Utils.ObjectToString(row.Cells[6].Text.Trim());
+            SetLaneLotForPDFs(Utils.ObjectToString(row.Cells[2].Text) + " " + Utils.ObjectToString(row.Cells[1].Text));
 
             DataTable sourceTable = getGridViewDataTable();
             DataView view = new DataView(sourceTable);
@@ -189,6 +190,13 @@ namespace SubmittalProposal {
         public static string MyMenuName = "Owner/Property";
         protected override string childMenuName {
             get { return MyMenuName; }
+        }
+        public bool HasPropertyAvailable {
+            get { return Utils.isNothingNot(SRPropIDBeingEdited); }
+        }
+
+        public void SetLaneLotForPDFs(string lanelot) {
+            LaneLotForPDFs = lanelot;
         }
     }
 }

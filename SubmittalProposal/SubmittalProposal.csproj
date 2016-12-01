@@ -456,6 +456,7 @@
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ICanHavePDFs.cs" />
     <Compile Include="PDFFileModel.cs" />
     <Compile Include="PDFsPage.aspx.cs">
       <DependentUpon>PDFsPage.aspx</DependentUpon>

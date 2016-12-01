@@ -123,6 +123,16 @@ namespace SubmittalProposal {
             ((Database)Master).getPanelForm.Visible = true;
         }
 
+        protected string LaneLotForPDFs {
+            get {
+                return Utils.ObjectToString(Session["LaneLotForPDFs"]);
+            }
+            set {
+                Session["LaneLotForPDFs"] = value;
+            }
+        }
+
+
         protected void gvResults_SelectedIndexChanged(object sender, EventArgs e) {
             ((Database)Master).clearUnlockRecordCheckbox();
             string expandedText = gvResults_DoSelectedIndexChanged(sender, e);
