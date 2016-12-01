@@ -12,7 +12,7 @@ using System.Runtime.Caching;
 
 namespace SubmittalProposal
 {
-    public partial class Submittal2 : AbstractDatabase
+    public partial class Submittal2 : AbstractDatabase, ICanHavePDFs
     {
         private static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
         protected override string UpdateRoleName {
@@ -199,6 +199,7 @@ namespace SubmittalProposal
                 ddlLaneUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]),Utils.ObjectToString(dr["Lane"])));
             }
             ddlLaneUpdate.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            SetLaneLotForPDFs(ddlLaneUpdate.SelectedValue + " " + tbLotNameUpdate.Text);
             tbApplicantNameUpdate.Text = Utils.ObjectToString(dr["Applicant"]);
             tbContractorUpdate.Text = Utils.ObjectToString(dr["Contractor"]);
             DateTime? meetingDate = Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
@@ -334,6 +335,14 @@ namespace SubmittalProposal
         public static string MyMenuName = "Submittal";
         protected override string childMenuName {
             get { return MyMenuName; }
+        }
+
+        public bool HasPropertyAvailable {
+            get { return Utils.isNothingNot(CurrentSubmittalId); }
+        }
+
+        public void SetLaneLotForPDFs(string lanelot) {
+            LaneLotForPDFs = lanelot;
         }
     }
 }

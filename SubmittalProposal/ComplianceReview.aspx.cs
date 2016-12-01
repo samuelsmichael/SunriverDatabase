@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Globalization;
 
 namespace SubmittalProposal {
-    public partial class ComplianceReview : AbstractDatabase {
+    public partial class ComplianceReview : AbstractDatabase, ICanHavePDFs {
         private int ReviewIDBeingUpdated {
             get {
                 object obj = ViewState["ReviewIDBeingUpdated"];
@@ -363,6 +363,8 @@ namespace SubmittalProposal {
             tbFollowUpUpdate.Text = getFollowUp(dr);
             tbCRLotNameUpdate.Text = getReviewLotName(dr);
             ddlCRLaneUpdate.SelectedValue = getReviewLane(dr);
+            SetLaneLotForPDFs(ddlCRLaneUpdate.SelectedValue + " " + tbCRLotNameUpdate.Text);
+
             ReviewIDBeingUpdated = getReviewId(dr);
             
             DataView    dvComplianceLetters = CRDataSet().Tables[1].AsDataView();
@@ -550,6 +552,14 @@ namespace SubmittalProposal {
         public static string MyMenuName="Compliance Reviews";
         protected override string childMenuName {
             get { return MyMenuName; }
+        }
+
+        public bool HasPropertyAvailable {
+            get { return Utils.isNothingNot(ReviewIDBeingUpdated); }
+        }
+
+        public void SetLaneLotForPDFs(string lanelot) {
+            LaneLotForPDFs = lanelot;
         }
     }
 }

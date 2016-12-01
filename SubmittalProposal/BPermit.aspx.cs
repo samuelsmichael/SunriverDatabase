@@ -11,7 +11,7 @@ using System.Runtime.Caching;
 using System.Data.SqlClient;
 
 namespace SubmittalProposal {
-    public partial class BPermit : AbstractDatabase {
+    public partial class BPermit : AbstractDatabase, ICanHavePDFs {
         static DataTable dtBPayment = null;
 
         private static string BPERMIT_CACHE_KEY = "BPermitDS";
@@ -185,6 +185,8 @@ namespace SubmittalProposal {
                 ddlLaneUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
             }
             ddlLaneUpdate.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            SetLaneLotForPDFs(ddlLaneUpdate.SelectedValue + " " + tbLotNameUpdate.Text);
+
             ddlContractorUpdate.SelectedValue = Utils.ObjectToString(Utils.ObjectToInt(dr["fkSRContrRegID"]));
 
             bind_gvReviews(getBPermitId(row));
@@ -589,6 +591,14 @@ namespace SubmittalProposal {
         public static string MyMenuName = "BPermit";
         protected override string childMenuName {
             get { return MyMenuName; }
+        }
+
+        public bool HasPropertyAvailable {
+            get { return Utils.isNothingNot(BPermitIDBeingEdited); }
+        }
+
+        public void SetLaneLotForPDFs(string lanelot) {
+            LaneLotForPDFs = lanelot;
         }
     }
     public static class CustomLINQtoDataSetMethods {

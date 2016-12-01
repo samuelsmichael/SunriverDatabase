@@ -11,7 +11,7 @@ using System.Runtime.Caching;
 using System.Text;
 
 namespace SubmittalProposal {
-    public partial class SellCheck : AbstractDatabase {
+    public partial class SellCheck : AbstractDatabase, ICanHavePDFs {
         private int scRequestIDBeingEdited {
             get {
                 object obj = ViewState["scRequestIDBeingEdited"];
@@ -192,6 +192,8 @@ namespace SubmittalProposal {
             scLotBeingEdited = (string)dr["scLot"];
             scLaneBeingEdited = (string)dr["scLane"];
             scfkPropIDBeingEdited = (string)dr["fkscPropID"];
+            SetLaneLotForPDFs(scLaneBeingEdited + " " + scLotBeingEdited);
+
             object dateFormPrinted = Utils.ObjectToString(dr["DateFormPrinted"]);
             if (Utils.isNothingNot(dateFormPrinted)) {
                 lblDatePrinted.Text = dateFormPrinted.ToString();
@@ -633,6 +635,14 @@ namespace SubmittalProposal {
         public static string MyMenuName = "Sell Check";
         protected override string childMenuName {
             get { return MyMenuName; }
+        }
+
+        public bool HasPropertyAvailable {
+            get { return Utils.isNothingNot(scfkPropIDBeingEdited); }
+        }
+
+        public void SetLaneLotForPDFs(string lanelot) {
+            LaneLotForPDFs = lanelot;
         }
     }
 }

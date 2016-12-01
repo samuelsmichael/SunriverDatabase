@@ -80,6 +80,7 @@ namespace SubmittalProposal {
             tbCustAddr2Update.Text = Utils.ObjectToString(dr["Addr2"]);
             tbContactUpate.Text = Utils.ObjectToString(dr["Contact"]);
             tbSunriverAddrUpdate.Text = Utils.ObjectToString(dr["tblArShipTo_Addr1"]);
+
             tbPostalCodeUpdate.Text = Utils.ObjectToString(dr["PostalCode"]);
 
             return "Name: " +  Utils.ObjectToString(dr["OwnerName"]) + "PropertyId: "+Utils.ObjectToString(dr["PropID"]) + "CustId: "+Utils.ObjectToString(dr["CustID"]);

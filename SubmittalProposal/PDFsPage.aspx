@@ -2,6 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+    <asp:LinkButton style="float:left;font-size:x-small;" ID="LinkButton1" runat="server" OnClientClick="javascript:window.history.back();">back</asp:LinkButton>
     <asp:HyperLink style="float:right;font-size:x-small;" ID="HyperLink1" NavigateUrl="~/Default.aspx" runat="server">Home</asp:HyperLink>
     <asp:HiddenField ID="hfRootDirectory" runat="server" />
     <center><h2><asp:Label runat="server" ID="lblPDFsPageHeading" /></h2></center>
