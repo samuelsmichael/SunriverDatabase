@@ -39,7 +39,13 @@ namespace SubmittalProposal.Reports {
                 Session["GoBackTo"] = Request.UrlReferrer;
             }
             child_Page_Load(sender, e);
-            ((Reports)Master).getSubmitButton().Click += new EventHandler(AbstractReport_Click);
+            if (Master != null) { // in case class isn't using Report.Master
+                ((Reports)Master).getSubmitButton().Click += new EventHandler(AbstractReport_Click);
+            }
+        }
+
+        protected void publicBuildReport() {
+            buildReport(getReportParams());
         }
 
         protected virtual void AbstractReport_Click(object sender, EventArgs e) {

@@ -9,7 +9,7 @@ GO
 -- Create date: 10/14/2016
 -- Description:	Gets the data for OwnerConcerns Queries
 /*
-	exec uspOwnerConcernsQueries  @DeptReferred='Administration'
+	exec uspOwnerConcernsQueries  @SRLotLane='5 Shadow'
 */
 -- =============================================
 alter PROCEDURE uspOwnerConcernsQueries 
@@ -21,6 +21,7 @@ alter PROCEDURE uspOwnerConcernsQueries
 	,@ForceSortByCategory bit = null
 	,@ButIncludeBothOpensAndClosedInTheDataSet bit = null
 	,@JustDoingCategorySummary bit = null
+	,@SRLotLane nvarchar(50) = null
 	
 AS
 BEGIN
@@ -36,7 +37,8 @@ WHERE
 	AND (@ConcernsOpen is null or @ButIncludeBothOpensAndClosedInTheDataSet=1 or (
 		((@ConcernsOpen=1 and ResolutionDate is null) or
 		(@ConcernsOpen=0 and ResolutionDate is not null))
-	)) 
+	))                                                                   
+	AND (@SRLotLane is null or a.Addr1 like @SRLotLane + '%'
 ORDER BY 
 	CASE WHEN @ForceSortByCategory=1 then c.Category end,
 	CASE WHEN @DeptReferred is null and @ForceSortByCategory is null then c.DeptReferred1 end,

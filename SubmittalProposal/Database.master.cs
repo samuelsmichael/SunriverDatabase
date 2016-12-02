@@ -45,10 +45,14 @@ namespace SubmittalProposal {
         }
 
         protected void Page_PreRender(object sender, EventArgs e) {
-            if (Page.ToString().ToLower().IndexOf("ownerproperty") == -1 || Common.Utils.isNothing(Session["opSRPropIDBeingEdited"])) {
-                lbPrintOwnerEnvelope.Visible = false;
-            } else {
-                lbPrintOwnerEnvelope.Visible = true;
+            lbPropertyAllInfo.Visible = false;
+            if (!CPEForm.Collapsed) {
+                if (Page.ToString().ToLower().IndexOf("ownerproperty") == -1 || Common.Utils.isNothing(Session["opSRPropIDBeingEdited"])) {
+                    lbPrintOwnerEnvelope.Visible = false;
+                } else {
+                    lbPropertyAllInfo.Visible = true;
+                    lbPrintOwnerEnvelope.Visible = true;
+                }
             }
             lbShowPDFs.Visible = false;
             if (Page is ICanHavePDFs) {

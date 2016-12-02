@@ -76,7 +76,14 @@ namespace SubmittalProposal {
                 } catch {
                     lbNewCitation.Visible = false;
                 }
-
+            }
+            if (Common.Utils.isNothingNot(Session["ShowCitationsID"])) {
+                tbCitationIDLU.Text = Utils.ObjectToString(Session["ShowCitationsID"]);
+                tbCitationLastNameLU.Text = "";
+                ddlFineStatusLU.SelectedIndex = -1;
+                Session["ShowCitationsID"] = null;
+                ((Database)Master).doGo();
+                gvResults.SelectRow(0);
             }
         }
         protected override void clearAllNewFormInputFields() {

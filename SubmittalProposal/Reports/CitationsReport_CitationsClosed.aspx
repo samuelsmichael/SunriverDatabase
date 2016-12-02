@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderReportParms" runat="server">
     <table>
         <tr>
-            <td>
+            <td> 
                 <asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="Start Date:"></asp:Label>
                 <asp:TextBox CssClass="form_field" ID="tbStartDate" runat="server" Width="8em"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="cetbStartDate" runat="server" TargetControlID="tbStartDate"

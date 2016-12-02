@@ -289,6 +289,14 @@ namespace SubmittalProposal {
                 bindDepartmentReferredToDropdown();
                 bindCategoryDropdown();
             }
+            if (Common.Utils.isNothingNot(Session["CaseID"])) {
+                clearAllSelectionInputFields();
+                tbOwnerConcernsCaseNbrLU.Text=Utils.ObjectToString(Session["ShowCaseID"]);
+                Session["ShowCaseID"] = null;
+                ((Database)Master).doGo();
+                gvResults.SelectRow(0);
+            }
+
         }
         private void bindDepartmentReferredToDropdown() {
             DataTable department = OwnerConcernsDataSet().Tables[2].Copy();

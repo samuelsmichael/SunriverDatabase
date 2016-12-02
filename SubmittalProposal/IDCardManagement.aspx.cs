@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Globalization;
 
 namespace SubmittalProposal {
-    public partial class IDCardManagement : AbstractDatabase {
+    public partial class IDCardManagement : AbstractDatabase, ICanHavePDFs {
         public static DataSet CRDataSet() {
             DataSet dsTii = new DataSet();
             SqlCommand cmd = null;
@@ -154,6 +154,10 @@ namespace SubmittalProposal {
                 } else {
                     lockYourUpdateFields();
                 }
+                if(Utils.isNothingNot(Session["ShowIDCardsID"])) {
+                    setResultsContent(Utils.ObjectToString(Session["opSRPropIDBeingEdited"]), Utils.ObjectToString(Session["ShowIDCardsID"]));
+                    Session["ShowIDCardsID"]=null;
+                }
             }
         }
         private void setResultsContent(String propId, String custId) {
@@ -174,6 +178,7 @@ namespace SubmittalProposal {
             DataSet dsAddress = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
             lbPropertyLotLane.Text = Utils.ObjectToString(dsAddress.Tables[0].Rows[0]["srLotLane"]);
             Session["lbPropertyLotLane"] = lbPropertyLotLane.Text;
+            SetLaneLotForPDFs((string)Session["lbPropertyLotLane"]);
             lbPropertyCountyAddress.Text = Utils.ObjectToString(dsAddress.Tables[0].Rows[0]["dc_address"]);
             lbPropertyPropertyId.Text = Utils.ObjectToString(dsAddress.Tables[0].Rows[0]["SRPropID"]);
             bindGvCardholders(propId);
@@ -766,6 +771,22 @@ namespace SubmittalProposal {
         public static string MyMenuName = "ID Card";
         protected override string childMenuName {
             get { return MyMenuName; }
+        }
+
+        public bool HasPropertyAvailable {
+            get { return Utils.isNothingNot(Session["lbPropertyLotLane"]); }
+        }
+
+        /// <summary>
+        /// This comes in as 3 Acer Lane.  I have to remove the "Lane", and swap the lane and the lot.
+        /// </summary>
+        /// <param name="lanelot"></param>
+        public void SetLaneLotForPDFs(string lanelot) {
+            string str = lanelot.ToLower().Replace("lane", "").Trim();
+            int indexoffirstspace = str.IndexOf(" ");
+            string realLaneLot =
+               str.Substring(indexoffirstspace).Trim() + " " + str.Substring(0, indexoffirstspace);
+            LaneLotForPDFs = realLaneLot;
         }
     }
 }

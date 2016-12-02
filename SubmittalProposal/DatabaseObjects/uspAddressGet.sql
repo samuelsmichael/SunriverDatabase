@@ -1,3 +1,4 @@
+USE [ID-Card_Split_FE]
 -- ================================================
 SET ANSI_NULLS ON
 GO
@@ -17,6 +18,6 @@ alter PROCEDURE uspAddressGet (
 AS
 BEGIN
 	SET NOCOUNT ON;
-	select srlotlane,dc_address, SRPropID from [tbllotlane_master] where srPropId=@PropId
+	select srlotlane,dc_address, SRPropID, SRLot, SRLane from [tbllotlane_master] where srPropId=@PropId
 end
 GO

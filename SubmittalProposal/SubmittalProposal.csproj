@@ -112,6 +112,10 @@
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
     <Content Include="Images\PDFImage.png" />
     <Content Include="PDFsPage.aspx" />
+    <Content Include="Reports\BPermitsLaunchManager.aspx" />
+    <Content Include="Reports\CitationsLaunchManager.aspx" />
+    <Content Include="Reports\IDCardsLaunchManager.aspx" />
+    <Content Include="Reports\OwnerConcernsLaunchManager.aspx" />
     <Content Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx" />
     <Content Include="Reports\VehicleMechanicActivitySROA.aspx" />
     <Content Include="Reports\VehicleShopActivitySROA.aspx" />
@@ -173,7 +177,7 @@
     <Content Include="Reports\ComRoster_HomeReport_OneRoster.aspx" />
     <Content Include="Reports\ComRoster_HomeReport_MemberTermUp.aspx" />
     <Content Include="Reports\ComRoster_HomeReport_CommitteeListAll.aspx" />
-    <Content Include="Reports\DummyCrystalReportsPage.aspx" />
+    <Content Include="Reports\AllInfoCrystalReportsPage.aspx" />
     <Content Include="Reports\Envelope.aspx" />
     <Content Include="Reports\LapineRFDInvoices.aspx" />
     <Content Include="Reports\LapineRFDVehicles.aspx" />
@@ -464,6 +468,58 @@
     </Compile>
     <Compile Include="PDFsPage.aspx.designer.cs">
       <DependentUpon>PDFsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\BPermitsLaunchManager.aspx.cs">
+      <DependentUpon>BPermitsLaunchManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\BPermitsLaunchManager.aspx.designer.cs">
+      <DependentUpon>BPermitsLaunchManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CitationsLaunchManager.aspx.cs">
+      <DependentUpon>CitationsLaunchManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\CitationsLaunchManager.aspx.designer.cs">
+      <DependentUpon>CitationsLaunchManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\IDCardsLaunchManager.aspx.cs">
+      <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\IDCardsLaunchManager.aspx.designer.cs">
+      <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OwnerConcernsLaunchManager.aspx.cs">
+      <DependentUpon>OwnerConcernsLaunchManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerConcernsLaunchManager.aspx.designer.cs">
+      <DependentUpon>OwnerConcernsLaunchManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\PropertyAllInfoBPermits.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyAllInfoBPermits.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\PropertyAllInfoCitations.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyAllInfoCitations.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\PropertyAllInfoIDCard.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyAllInfoIDCard.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerProperty\PropertyAllInfoOwnerConcerns.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyAllInfoOwnerConcerns.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx.cs">
       <DependentUpon>BlankWorkOrderSROA.aspx</DependentUpon>
@@ -1138,12 +1194,12 @@
     <Compile Include="Reports\ComRoster_HomeReport_CommitteeListAll.aspx.designer.cs">
       <DependentUpon>ComRoster_HomeReport_CommitteeListAll.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DummyCrystalReportsPage.aspx.cs">
-      <DependentUpon>DummyCrystalReportsPage.aspx</DependentUpon>
+    <Compile Include="Reports\AllInfoCrystalReportsPage.aspx.cs">
+      <DependentUpon>AllInfoCrystalReportsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reports\DummyCrystalReportsPage.aspx.designer.cs">
-      <DependentUpon>DummyCrystalReportsPage.aspx</DependentUpon>
+    <Compile Include="Reports\AllInfoCrystalReportsPage.aspx.designer.cs">
+      <DependentUpon>AllInfoCrystalReportsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Envelope.aspx.cs">
       <DependentUpon>Envelope.aspx</DependentUpon>
@@ -1238,12 +1294,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertyAllInfo.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\OwnerProperty\PropertyAllInfo2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PropertyAllInfo2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reports.Master.cs">
@@ -1765,9 +1815,21 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PropertyAllInfo.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfo2.rpt">
+    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfoBPermits.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PropertyAllInfo2.cs</LastGenOutput>
+      <LastGenOutput>PropertyAllInfoBPermits.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfoCitations.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PropertyAllInfoCitations.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfoIDCard.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PropertyAllInfoIDCard.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfoOwnerConcerns.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PropertyAllInfoOwnerConcerns.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptRVBillingInfo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
