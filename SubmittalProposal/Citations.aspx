@@ -318,12 +318,12 @@
                     <table cellpadding="3">
                         <tr>
                             <td>
-                                <asp:Button CausesValidation="true" OnClientClick="javascript: return donewviolationjedisok();"
+                                <asp:Button CausesValidation="true" OnClientClick="javascript: return true;"
                                     ID="btnNewViolationOk" runat="server" Text="Okay" OnClick="btnNewViolationOk_Click" />
                             </td>
                             <td>
-                                <asp:Button ID="btnNewViolationCancel" runat="server" Text="Cancel" CausesValidation="false"
-                                    OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                <asp:Button ID="btnNewViolationCancel" runat="server" Text="Abort" CausesValidation="false"
+                                    OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                     OnClick="btnNewViolationCancel_Click" />
                             </td>
                         </tr>
@@ -668,12 +668,12 @@
                 <table cellpadding="3">
                     <tr>
                         <td>
-                            <asp:Button CausesValidation="true" OnClientClick="javascript: return donewviolationjedisok();"
-                                ID="btnCitationNewOkay" runat="server" Text="Okay" OnClick="btnNewCitationOk_Click" />
+                            <asp:Button CausesValidation="true" OnClientClick="javascript: return true;"
+                                ID="btnNewCitationOkay" runat="server" Text="Okay" OnClick="btnNewCitationOk_Click" />
                         </td>
                         <td>
-                            <asp:Button ID="btnCitationNewCancel" runat="server" Text="Cancel" CausesValidation="false"
-                                OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                            <asp:Button ID="btnCitationNewCancel" runat="server" Text="Abort" CausesValidation="false"
+                                OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                 OnClick="btnNewCitationCancel_Click" />
                         </td>
                     </tr>

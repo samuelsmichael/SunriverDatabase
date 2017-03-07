@@ -195,7 +195,6 @@ namespace SubmittalProposal {
             tbOwnerConcernsNotifiedDateUpdate.Enabled = true;
             tbOwnerConcernsResolutionDateUpdate.Enabled = true;
             ibOwnerConcernsNotifiedDateUpdate.Enabled = true;
-            ibOwnerConcernsSubmitDateUpdate.Enabled = true;
             tbOwnerConcernsConcernDescriptionUpdate.Enabled = true;
             tbOwnerConcernsConcernResolutionUpdate.Enabled = true;
             tbOwnerConcernsPublicWorksWONbr.Enabled = true;
@@ -228,7 +227,6 @@ namespace SubmittalProposal {
             tbOwnerConcernsNotifiedDateUpdate.Enabled = false;
             tbOwnerConcernsResolutionDateUpdate.Enabled = false;
             ibOwnerConcernsNotifiedDateUpdate.Enabled = false;
-            ibOwnerConcernsSubmitDateUpdate.Enabled = false;
             tbOwnerConcernsConcernDescriptionUpdate.Enabled = false;
             tbOwnerConcernsConcernResolutionUpdate.Enabled = false;
             tbOwnerConcernsPublicWorksWONbr.Enabled = false;

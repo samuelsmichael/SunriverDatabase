@@ -258,7 +258,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
         function onNewContractorCancel() {
-            if (confirm("Are you sure that you wish to cancel?")) {
+            if (confirm("Are you sure that you wish to abort?")) {
                 return true;
             } else {
                 return false;
@@ -459,7 +459,7 @@
                     </td>
                     <td>
                         <asp:Button ID="btnContractorCancelNew" OnClientClick="return onNewContractorCancel()"
-                            runat="server" Text="Cancel" />
+                            runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>

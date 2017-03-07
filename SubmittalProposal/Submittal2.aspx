@@ -405,7 +405,7 @@
                             onclick="btnNewSubmittalOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnNewSubmittalCancel" onclick="btnNewSubmittalCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                        <asp:Button ID="btnNewSubmittalCancel" onclick="btnNewSubmittalCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')" runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>

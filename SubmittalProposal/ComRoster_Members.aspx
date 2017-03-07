@@ -217,12 +217,12 @@
                 <table cellpadding="3">
                     <tr>
                         <td>
-                            <asp:Button CausesValidation="true" OnClientClick="javascript: return donewcomrosterjedisok();"
-                                ID="btnComRosterMemberNewOkay" runat="server" Text="Okay" OnClick="btnNewComRosterMemberOk_Click" />
+                            <asp:Button CausesValidation="true" OnClientClick="javascript: return true;"
+                                ID="btnNewComRosterMemberOk" runat="server" Text="Okay" OnClick="btnNewComRosterMemberOk_Click" />
                         </td>
                         <td>
-                            <asp:Button ID="btnComRosterMemberNewCancel" runat="server" Text="Cancel" CausesValidation="false"
-                                OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                            <asp:Button ID="btnComRosterMemberNewCancel" runat="server" Text="Abort" CausesValidation="false"
+                                OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                 OnClick="btnNewComRosterMemberCancel_Click" />
                         </td>
                     </tr>

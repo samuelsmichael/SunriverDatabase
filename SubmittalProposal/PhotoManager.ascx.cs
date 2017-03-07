@@ -30,8 +30,8 @@ namespace SubmittalProposal {
             RepeaterImages.DataBind();
             string scriptText = "javascript:"+StatusLabel.ClientID+".innerHTML='';if (this.value != '') {" + btnSave.ClientID + ".click();}";
             FileUploadControl.Attributes["onchange"] = scriptText;
-            string scriptText2 = "debugger;"+ FileUploadControl.ClientID + ".click();";
-//            btnChooseAFile.Attributes["onclick"] = scriptText2;
+            string scriptText2 = FileUploadControl.ClientID + ".click();";
+   //         btnChooseAFile.Attributes["onclick"] = scriptText2;
             if (Page is IHasPhotos) {
                 if (((IHasPhotos)Page).CurrentItemKey != "0") {
                     string databaseDirectory = Page.GetType().Name.Replace("_aspx", "");

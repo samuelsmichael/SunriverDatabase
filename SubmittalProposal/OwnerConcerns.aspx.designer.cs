@@ -490,15 +490,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbOwnerConcernsSubmitDateUpdate;
         
         /// <summary>
-        /// ibOwnerConcernsSubmitDateUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibOwnerConcernsSubmitDateUpdate;
-        
-        /// <summary>
         /// ceOwnerConcernsSubmitDateUpdate control.
         /// </summary>
         /// <remarks>
@@ -515,6 +506,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revOwnerConcernsSubmitDateUpdate;
+        
+        /// <summary>
+        /// rfvSubmitDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubmitDate;
         
         /// <summary>
         /// Label13 control.
@@ -686,15 +686,6 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbOwnerConcernsResolutionDateUpdate;
-        
-        /// <summary>
-        /// ibOwnerConcernsResolutionDateUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibOwnerConcernsResolutionDateUpdate;
         
         /// <summary>
         /// ceOwnerConcernsResolutionDateUpdate control.
@@ -1165,15 +1156,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbOwnerConcernsSubmitDateNew;
         
         /// <summary>
-        /// ibOwnerConcernsSubmitDateNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibOwnerConcernsSubmitDateNew;
-        
-        /// <summary>
         /// ceOwnerConcernsSubmitDateNew control.
         /// </summary>
         /// <remarks>
@@ -1190,6 +1172,15 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revOwnerConcernsSubmitDateNew;
+        
+        /// <summary>
+        /// rfvSubmitDateAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubmitDateAdd;
         
         /// <summary>
         /// Labelx10313 control.
@@ -1408,13 +1399,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.UpdatePanel NewPanel1y8;
         
         /// <summary>
-        /// btnOwnerConcernsNewOkay control.
+        /// btnNewOwnerConcernsOk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOwnerConcernsNewOkay;
+        protected global::System.Web.UI.WebControls.Button btnNewOwnerConcernsOk;
         
         /// <summary>
         /// btnOwnerConcernsNewCancel control.

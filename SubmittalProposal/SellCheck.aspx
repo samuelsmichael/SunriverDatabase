@@ -434,8 +434,8 @@
                                     runat="server" Text="Okay" OnClick="btnNewInspectionOk_Click" />
                             </td>
                             <td>
-                                <asp:Button ID="btnNewInspectionCancel" runat="server" Text="Cancel" CausesValidation="false" 
-                                    OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                <asp:Button ID="btnNewInspectionCancel" runat="server" Text="Abort" CausesValidation="false" 
+                                    OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                     OnClick="btnNewInspectionCancel_Click" />
                             </td>
                         </tr>
@@ -623,7 +623,7 @@
                             onclick="btnNewRequestOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnNewRequestCancel" onclick="btnNewRequestCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                        <asp:Button ID="btnNewRequestCancel" onclick="btnNewRequestCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')" runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>

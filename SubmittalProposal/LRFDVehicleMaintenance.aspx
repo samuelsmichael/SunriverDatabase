@@ -319,8 +319,8 @@
                                                     runat="server" Text="Okay" OnClick="btnNewLRFDPartOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button ID="btnNewLRFDPartCancel" CausesValidation="false" OnClientClick="if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                    runat="server" Text="Cancel" />
+                                                <asp:Button ID="btnNwLRFDPartCancel" CausesValidation="false" OnClientClick="if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
                                             </td>
                                         </tr>
                                     </table>
@@ -446,8 +446,8 @@
                                                     runat="server" Text="Okay" OnClick="btnNewLRFDLaborOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button CausesValidation="false" ID="btnNewLRFDLaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                    runat="server" Text="Cancel" />
+                                                <asp:Button CausesValidation="false" ID="btnNewLRFDLaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
                                             </td>
                                         </tr>
                                     </table>
@@ -582,8 +582,8 @@
                                                     runat="server" Text="Okay" OnClick="btnNewLRFDServiceOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button ID="btnNewLRFDServiceCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                    runat="server" Text="Cancel" />
+                                                <asp:Button ID="btnNewLRFDServiceCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
                                             </td>
                                         </tr>
                                     </table>
@@ -821,7 +821,7 @@
                             onclick="btnNewLRFDVehicleMaintenanceOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnNewbtnNewLRFDVehicleMaintenanceNewCancel" onclick="btnNewSLRFDVehicleMaintenanceCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                        <asp:Button ID="btnNewbtnNewLRFDVehicleMaintenanceNewCancel" onclick="btnNewSLRFDVehicleMaintenanceCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')" runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>

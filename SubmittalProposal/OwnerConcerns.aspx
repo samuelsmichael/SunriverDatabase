@@ -246,16 +246,15 @@
                                                     runat="server"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                    ID="ibOwnerConcernsSubmitDateUpdate" runat="server" />
                                             </td>
                                         </tr>
                                     </table>
                                     <ajaxToolkit:CalendarExtender ID="ceOwnerConcernsSubmitDateUpdate" runat="server"
-                                        TargetControlID="tbOwnerConcernsSubmitDateUpdate" Format="MM/dd/yyyy" PopupButtonID="ibOwnerConcernsSubmitDateUpdate" />
+                                        TargetControlID="tbOwnerConcernsSubmitDateUpdate" Format="MM/dd/yyyy" />
                                     <asp:RegularExpressionValidator ForeColor="Red" ID="revOwnerConcernsSubmitDateUpdate"
                                         Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                         ControlToValidate="tbOwnerConcernsSubmitDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="rfvSubmitDate" runat="server" ControlToValidate="tbOwnerConcernsSubmitDateUpdate" Font-Bold="true" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                 </td>
                                 <td valign="top">
                                     <asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Approved By"></asp:Label>
@@ -329,13 +328,11 @@
                                                         runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibOwnerConcernsResolutionDateUpdate" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
                                         <ajaxToolkit:CalendarExtender ID="ceOwnerConcernsResolutionDateUpdate" runat="server"
-                                            TargetControlID="tbOwnerConcernsResolutionDateUpdate" Format="MM/dd/yyyy" PopupButtonID="ibOwnerConcernsResolutionDateUpdate" />
+                                            TargetControlID="tbOwnerConcernsResolutionDateUpdate" Format="MM/dd/yyyy"  />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revOwnerConcernsResolutionDateUpdate"
                                             Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbOwnerConcernsResolutionDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
@@ -531,16 +528,15 @@
                                                             runat="server"></asp:TextBox>
                                                     </td>
                                                     <td>
-                                                        <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                            ID="ibOwnerConcernsSubmitDateNew" runat="server" />
                                                     </td>
                                                 </tr>
                                             </table>
                                             <ajaxToolkit:CalendarExtender ID="ceOwnerConcernsSubmitDateNew" runat="server" TargetControlID="tbOwnerConcernsSubmitDateNew"
-                                                Format="MM/dd/yyyy" PopupButtonID="ibOwnerConcernsSubmitDateNew" />
+                                                Format="MM/dd/yyyy"  />
                                             <asp:RegularExpressionValidator ForeColor="Red" ID="revOwnerConcernsSubmitDateNew"
                                                 Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                                 ControlToValidate="tbOwnerConcernsSubmitDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator ID="rfvSubmitDateAdd" runat="server" ControlToValidate="tbOwnerConcernsSubmitDateNew" Font-Bold="true" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                         </td>
                                         <td valign="top">
                                             <asp:Label CssClass="form_field_heading" ID="Labelx10313" runat="server" Text="Approved By"></asp:Label>
@@ -646,12 +642,12 @@
                 <table cellpadding="3">
                     <tr>
                         <td>
-                            <asp:Button CausesValidation="true" OnClientClick="javascript: return donewownerconcernsjedisok();"
-                                ID="btnOwnerConcernsNewOkay" runat="server" Text="Okay" OnClick="btnNewOwnerConcernsOk_Click" />
+                            <asp:Button CausesValidation="true" OnClientClick="javascript: return true;"
+                                ID="btnNewOwnerConcernsOk" runat="server" Text="Okay" OnClick="btnNewOwnerConcernsOk_Click" />
                         </td>
                         <td>
-                            <asp:Button ID="btnOwnerConcernsNewCancel" runat="server" Text="Cancel" CausesValidation="false"
-                                OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                            <asp:Button ID="btnOwnerConcernsNewCancel" runat="server" Text="Abort" CausesValidation="false"
+                                OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                 OnClick="btnNewOwnerConcernsCancel_Click" />
                         </td>
                     </tr>

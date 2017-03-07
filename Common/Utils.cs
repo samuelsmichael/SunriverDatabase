@@ -22,7 +22,7 @@ namespace Common {
             sr.Close();
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
-            Response.Write(str);
+            Response.Write(str); 
             Response.End();
         }
 
@@ -41,7 +41,7 @@ namespace Common {
                 && ds.Tables.Count > 0
                 && ds.Tables[0].Rows != null
                 && ds.Tables[0].Rows.Count > 0;
-        }
+        } 
         public static DateTime? dateTimeFrom(string mm_slashyyyy) {
             if (mm_slashyyyy == null) {
                 return null;
@@ -376,10 +376,10 @@ namespace Common {
                 }
             }
             if (
-                String.IsNullOrWhiteSpace(_Server) ||
-                String.IsNullOrWhiteSpace(_Database) ||
-                String.IsNullOrWhiteSpace(_UserId) ||
-                String.IsNullOrWhiteSpace(_Password)
+                Common.Utils.isNothing(_Server) ||
+                Common.Utils.isNothing(_Database) ||
+                Common.Utils.isNothing(_UserId) ||
+                Common.Utils.isNothing(_Password)
             ) {
                 throw new Exception("Unable to parse: " + connectionString);
             }

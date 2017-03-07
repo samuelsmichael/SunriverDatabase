@@ -53,6 +53,9 @@ namespace SubmittalProposal {
                     lbPropertyAllInfo.Visible = true;
                     lbPrintOwnerEnvelope.Visible = true;
                 }
+            } else {
+                lbPropertyAllInfo.Visible = false;
+                lbPrintOwnerEnvelope.Visible = false;
             }
             lbShowPDFs.Visible = false;
             if (Page is ICanHavePDFs) {

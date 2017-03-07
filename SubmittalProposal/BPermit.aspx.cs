@@ -561,8 +561,21 @@ namespace SubmittalProposal {
             ibIssuedUpdate.Enabled = false;
             ibClosedUpdate.Enabled = false;
             lbBPermitNewPayment.Enabled = false;
-            lbBPermitNewReview.Enabled = false;
+            lbBPermitNewReview2.Enabled = false;
             ddlContractorUpdate.Enabled = false;
+        }
+        protected void lbBPermitNewPayment_Click(object sender, EventArgs args) {
+            tbBPPaymentFeeNew.Text = "";
+            tbBPPaymentMonthsNew.Text = "";
+            mpeBPermitNewPayment.Show();
+        }
+        protected void lbBPermitNewReview_Click(object sender, EventArgs args) {
+            tbBPermitReviewDateNew.Text = "";
+            tbBPermitActionDateNew.Text = "";
+            tbBPermitLetterDateNew.Text = "";
+            tbBPRLetterRefNew.Text = "";
+            tbBPRCommentsNew.Text = "";
+            mpeBPermitNewReview.Show();
         }
         protected override void unlockYourUpdateFields() {
             tbDelayUpdate.Enabled = true;
@@ -582,7 +595,7 @@ namespace SubmittalProposal {
             ibIssuedUpdate.Enabled = true;
             ibClosedUpdate.Enabled = true;
             lbBPermitNewPayment.Enabled = true;
-            lbBPermitNewReview.Enabled = true;
+            lbBPermitNewReview2.Enabled = true;
             ddlContractorUpdate.Enabled = true;
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
@@ -600,6 +613,7 @@ namespace SubmittalProposal {
         public void SetLaneLotForPDFs(string lanelot) {
             LaneLotForPDFs = lanelot;
         }
+
     }
     public static class CustomLINQtoDataSetMethods {
         public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) {

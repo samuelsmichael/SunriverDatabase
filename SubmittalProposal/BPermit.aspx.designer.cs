@@ -472,13 +472,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.GridView gvPayments;
         
         /// <summary>
+        /// dummylbBPermitNewPayment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button dummylbBPermitNewPayment;
+        
+        /// <summary>
         /// lbBPermitNewPayment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbBPermitNewPayment;
+        protected global::System.Web.UI.WebControls.Button lbBPermitNewPayment;
         
         /// <summary>
         /// pnlBPermitNewPayment control.
@@ -607,13 +616,22 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.GridView gvReviews;
         
         /// <summary>
-        /// lbBPermitNewReview control.
+        /// dummylbBPermitNewReview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbBPermitNewReview;
+        protected global::System.Web.UI.WebControls.Button dummylbBPermitNewReview;
+        
+        /// <summary>
+        /// lbBPermitNewReview2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button lbBPermitNewReview2;
         
         /// <summary>
         /// pnlBPermitNewReview control.
@@ -661,15 +679,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbBPermitReviewDateNew;
         
         /// <summary>
-        /// ibBPermitReviewDateNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibBPermitReviewDateNew;
-        
-        /// <summary>
         /// ceBPermitReviewDateNew control.
         /// </summary>
         /// <remarks>
@@ -706,15 +715,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbBPermitActionDateNew;
         
         /// <summary>
-        /// ibBPermitActionDateNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibBPermitActionDateNew;
-        
-        /// <summary>
         /// ceBPermitActionDateNew control.
         /// </summary>
         /// <remarks>
@@ -749,15 +749,6 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbBPermitLetterDateNew;
-        
-        /// <summary>
-        /// ibBPermitLetterDateNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ibBPermitLetterDateNew;
         
         /// <summary>
         /// ceBPermitLetterDateNew control.

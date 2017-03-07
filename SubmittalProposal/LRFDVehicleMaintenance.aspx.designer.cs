@@ -553,13 +553,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Button btnNewLRFDPartOk;
         
         /// <summary>
-        /// btnNewLRFDPartCancel control.
+        /// btnNwLRFDPartCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewLRFDPartCancel;
+        protected global::System.Web.UI.WebControls.Button btnNwLRFDPartCancel;
         
         /// <summary>
         /// mpeLRFDNewPart control.

@@ -1470,7 +1470,7 @@
                             onclick="btnNewRVStorageOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnNewRVStorageCancel" onclick="btnNewRVStorageCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                        <asp:Button ID="btnNewRVStorageCancel" onclick="btnNewRVStorageCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')" runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>

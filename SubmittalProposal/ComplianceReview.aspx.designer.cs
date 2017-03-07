@@ -985,13 +985,13 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbFollowUpNew;
         
         /// <summary>
-        /// btnComplianceOkayNew control.
+        /// btnNewComplianceOk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnComplianceOkayNew;
+        protected global::System.Web.UI.WebControls.Button btnNewComplianceOk;
         
         /// <summary>
         /// btnComplianceOkayUpdate control.

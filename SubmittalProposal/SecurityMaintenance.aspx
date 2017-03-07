@@ -148,8 +148,8 @@
                                 </td>
                                 <td>
                                     <asp:Button ID="btnNewSecurityUserCancel" OnClick="btnNewSecurityUserCancel_Click"
-                                        OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')"
-                                        runat="server" Text="Cancel" />
+                                        OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')"
+                                        runat="server" Text="Abort" />
                                 </td>
                             </tr>
                             <tr>
@@ -217,8 +217,8 @@
                                     runat="server" Text="Okay" OnClick="btnNewPasswordOkay_Click" />
                             </td>
                             <td>
-                                <asp:Button ID="btnNewPasswordCancel" OnClick="btnNewPasswordCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')"
-                                    runat="server" Text="Cancel" />
+                                <asp:Button ID="btnNewPasswordCancel" OnClick="btnNewPasswordCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')"
+                                    runat="server" Text="Abort" />
                             </td>
                         </tr>
                         <tr>
@@ -259,8 +259,8 @@
                                 </td>
                                 <td>
                                     <asp:Button ID="btnNewSecurityRoleCancel" OnClick="btnNewSecurityRoleCancel_Click"
-                                        OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')"
-                                        runat="server" Text="Cancel" />
+                                        OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')"
+                                        runat="server" Text="Abort" />
                                 </td>
                             </tr>
                             <tr>

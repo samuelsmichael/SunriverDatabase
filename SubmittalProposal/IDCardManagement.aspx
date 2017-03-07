@@ -388,12 +388,12 @@
             <table cellpadding="4">
                 <tr>
                     <td>
-                        <asp:Button ID="btnNewIDCardOkId" OnClientClick="javascript: if(Page_IsValid) { return doOk();}"
+                        <asp:Button ID="btnNewIDCardOkId" OnClientClick="javascript: if(Page_IsValid) { return true;}"
                             CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewIDCardOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnNewIDCardCancelId" CausesValidation="false" OnClick="btnNewIDCardCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')"
-                            runat="server" Text="Cancel" />
+                        <asp:Button ID="btnNewIDCardCancelId" CausesValidation="false" OnClick="btnNewIDCardCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')"
+                            runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>
@@ -576,12 +576,12 @@
                         <asp:LinkButton ID="lbUpdatePrevious" CausesValidation="true" runat="server" OnClick="lbUpdatePrevious_OnClick"><<</asp:LinkButton>
                     </td>
                     <td>
-                        <asp:Button ID="btnUpdateIDCardOkId" OnClientClick="javascript: if(Page_IsValid) { return doOk();}"
+                        <asp:Button ID="btnUpdateIDCardOkId" OnClientClick="javascript: if(Page_IsValid) { return true;}"
                             CausesValidation="true" runat="server" Text="Okay" OnClick="btnUpdateIDCardOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnUpdateIDCardCancelId" CausesValidation="false" OnClick="btnUpdateIDCardCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')"
-                            runat="server" Text="Cancel" />
+                        <asp:Button ID="btnUpdateIDCardCancelId" CausesValidation="false" OnClick="btnUpdateIDCardCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')"
+                            runat="server" Text="Abort" />
                     </td>
                     <td>
                         <asp:LinkButton ID="lbUpdateNext" CausesValidation="true" runat="server" OnClick="lbUpdateNext_OnClick">>></asp:LinkButton>

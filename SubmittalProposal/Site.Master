@@ -25,6 +25,11 @@
         prm.add_endRequest(prm_EndRequest);
 
         // Called when async postback begins
+        /*
+            PLEASE NOTE!  This is the mechanism that produces the twirly "in progress" icon.
+            Note how the button's name must be either btnNew and Ok; or it must be btn Update for this
+            to come into affect.
+        */
         function prm_InitializeRequest(sender, args) {
             // get the divImage and set it to visible
             
@@ -33,6 +38,7 @@
                 (args._postBackElement.id).indexOf("BtnGo") != -1 ||
                 (args._postBackElement.id).indexOf("ddlLotLaneOrder") != -1 ||
                 (args._postBackElement.id).indexOf("ddlNameOrder") != -1 ||
+                (args._postBackElement.id).indexOf("sBar") != -1 || // ComRoster work with members and work with liaisons
                 (args._postBackElement.id).indexOf("gvResults") != -1 ||
                 (
                     (args._postBackElement.id).indexOf("btnNew") != -1 &&
@@ -48,7 +54,7 @@
                     loading.show();
                     var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
                     var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                    loading.css({ top: top, left: left });
+                    loading.css({ top: top, left: left, "z-index": 99999 });
                 }
         }
 
@@ -60,6 +66,7 @@
                 sender._postBackSettings.sourceElement.id.indexOf("BtnGo") != -1 ||
                 sender._postBackSettings.sourceElement.id.indexOf("ddlLotLaneOrder") != -1 ||
                 sender._postBackSettings.sourceElement.id.indexOf("ddlNameOrder") != -1 ||
+                sender._postBackSettings.sourceElement.id.indexOf("sBar") != -1 || // ComRoster work with members and work with liaisons
                 sender._postBackSettings.sourceElement.id.indexOf("gvResults") != -1 ||
                 (
                     sender._postBackSettings.sourceElement.id.indexOf("btnNew") != -1 &&

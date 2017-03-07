@@ -297,8 +297,8 @@
                                                             ID="btnNewLiaisonOk" runat="server" Text="Okay" OnClick="btnNewLiaisonOk_Click" />
                                                     </td>
                                                     <td>
-                                                        <asp:Button ID="btnNewLiaisonCancel" runat="server" Text="Cancel" CausesValidation="false"
-                                                            OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                        <asp:Button ID="btnNewLiaisonCancel" runat="server" Text="Abort" CausesValidation="false"
+                                                            OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                                             OnClick="btnNewLiaisonCancel_Click" />
                                                     </td>
                                                 </tr>
@@ -530,8 +530,8 @@
                                                         ID="btnNewCommitteeMemberOk" runat="server" Text="Okay" OnClick="btnNewCommitteeMemberOk_Click" />
                                                 </td>
                                                 <td>
-                                                    <asp:Button ID="btnNewCommitteeMemberCancel" runat="server" Text="Cancel" CausesValidation="false"
-                                                        OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
+                                                    <asp:Button ID="btnNewCommitteeMemberCancel" runat="server" Text="Abort" CausesValidation="false"
+                                                        OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                                         OnClick="btnNewCommitteeMemberCancel_Click" />
                                                 </td>
                                             </tr>

@@ -567,12 +567,12 @@
                                 <table cellpadding="3">
                                     <tr>
                                         <td>
-                                            <asp:Button ID="btnNewComplianceReviewLetterOk" OnClick="btnNewComplianceReviewLetterOk_Click"
+                                            <asp:Button ID="btnNewComplianceReviewLetterOk" OnClientClick="javascript: return true;" OnClick="btnNewComplianceReviewLetterOk_Click"
                                                 CausesValidation="true" runat="server" Text="Okay" />
                                         </td>
                                         <td>
-                                            <asp:Button ID="btnNewComplianceReviewLetterCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                runat="server" Text="Cancel" />
+                                            <asp:Button ID="btnNewComplianceReviewLetterCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                runat="server" Text="Abort" />
                                         </td>
                                     </tr>
                                 </table>
@@ -816,7 +816,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <script language="javascript" type="text/javascript">
         function onNewComplianceReviewCancel() {
-            if (confirm("Are you sure that you wish to cancel?")) {
+            if (confirm("Are you sure that you wish to abort?")) {
                 return true;
             } else {
                 return false;
@@ -934,12 +934,12 @@
                 <table cellpadding="2" cellspacing="2">
                     <tr>
                         <td>
-                            <asp:Button ID="btnComplianceOkayNew" CausesValidation="true" runat="server" Text="Okay"
+                            <asp:Button ID="btnNewComplianceOk" CausesValidation="true" runat="server" Text="Okay"
                                 OnClick="btnNewComplianceReviewOk_Click" />
                         </td>
                         <td>
                             <asp:Button ID="btnComplianceOkayUpdate" OnClientClick="return onNewComplianceReviewCancel()"
-                                runat="server" Text="Cancel" />
+                                runat="server" Text="Abort" />
                         </td>
                     </tr>
                     <tr>

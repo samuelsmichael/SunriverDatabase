@@ -80,6 +80,8 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
+
+
     <asp:Panel ID="Panel1" GroupingText="Building Permit Data" runat="server">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
@@ -306,7 +308,9 @@
                         </Columns>
                     </asp:GridView>
                     <center style="margin-top: 5px;">
-                        <asp:LinkButton ID="lbBPermitNewPayment" runat="server">New Payment</asp:LinkButton></center>
+                        <asp:Button runat="server" ID="dummylbBPermitNewPayment" Style="display: none" />
+
+                        <asp:Button ID="lbBPermitNewPayment" runat="server" Text="New Payment" OnClick="lbBPermitNewPayment_Click" OnClientClick="javascript: return true;" /></center>
                     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlBPermitNewPayment">
                         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlBPermitNewPaymentTitle">
                             <span>New Payment</span>
@@ -335,32 +339,22 @@
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <script language="javascript" type="text/javascript">
-                            function donewpaymentjedisok() {
-                                var loading = $(".loadingnewbpermit");
-                                loading.show();
-                                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                                loading.css({ top: top, left: left });
-                                return true;
-                            }
-                        </script>
                         <center>
                             <table cellpadding="3">
                                 <tr>
                                     <td>
-                                        <asp:Button OnClientClick="javascript: return donewpaymentjedisok();" ID="btnNewBPermitPaymentOk"
+                                        <asp:Button OnClientClick="javascript: return true;" CausesValidation="true" ID="btnNewBPermitPaymentOk"
                                             runat="server" Text="Okay" OnClick="btnNewBPermitPaymentOk_Click" />
                                     </td>
                                     <td>
-                                        <asp:Button ID="btnNewBPermitPaymentCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                            runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnNewBPermitPaymentCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                            runat="server" Text="Abort" />
                                     </td>
                                 </tr>
                             </table>
                         </center>
                     </asp:Panel>
-                    <ajaxToolkit:ModalPopupExtender ID="mpeBPermitNewPayment" runat="server" TargetControlID="lbBPermitNewPayment"
+                    <ajaxToolkit:ModalPopupExtender ID="mpeBPermitNewPayment" runat="server" TargetControlID="dummylbBPermitNewPayment"
                         PopupControlID="pnlBPermitNewPayment" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlBPermitNewPaymentTitle"
                         BehaviorID="jdpopupbpermitnewpayment" />
                     <script language="javascript" type="text/javascript">
@@ -376,6 +370,7 @@
 
                     </script>
                 </asp:Panel>
+            
             </td>
             <td>
                 <asp:Panel runat="server" ID="pnlReviews" GroupingText="Reviews">
@@ -505,8 +500,9 @@
                         </Columns>
                     </asp:GridView>
                     <center style="margin-top: 5px;">
-                        <asp:LinkButton ID="lbBPermitNewReview" runat="server">New Review</asp:LinkButton>
-                    </center>
+                        <asp:Button runat="server" ID="dummylbBPermitNewReview" Style="display: none" />
+                        <asp:Button ID="lbBPermitNewReview2" runat="server" Text="New Review"  OnClick="lbBPermitNewReview_Click" OnClientClick="javascript: return true;" /></center>
+                    
                     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlBPermitNewReview">
                         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlBPermitNewReviewTitle">
                             <span>New Review</span>
@@ -524,13 +520,11 @@
                                                     <asp:TextBox CssClass="form_field" ID="tbBPermitReviewDateNew" Width="8em" runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibBPermitReviewDateNew" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
                                         <ajaxToolkit:CalendarExtender ID="ceBPermitReviewDateNew" runat="server" TargetControlID="tbBPermitReviewDateNew"
-                                            Format="MM/dd/yyyy" PopupButtonID="ibBPermitReviewDateNew" />
+                                            Format="MM/dd/yyyy" />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitReviewDateNew" Display="Dynamic"
                                             ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbBPermitReviewDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
@@ -545,13 +539,11 @@
                                                     <asp:TextBox CssClass="form_field" ID="tbBPermitActionDateNew" Width="8em" runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibBPermitActionDateNew" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
                                         <ajaxToolkit:CalendarExtender ID="ceBPermitActionDateNew" runat="server" TargetControlID="tbBPermitActionDateNew"
-                                            Format="MM/dd/yyyy" PopupButtonID="ibBPermitActionDateNew" />
+                                            Format="MM/dd/yyyy"  />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitActionDateNew" Display="Dynamic"
                                             ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbBPermitActionDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
@@ -566,13 +558,11 @@
                                                     <asp:TextBox CssClass="form_field" ID="tbBPermitLetterDateNew" Width="8em" runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                        ID="ibBPermitLetterDateNew" runat="server" />
                                                 </td>
                                             </tr>
                                         </table>
                                         <ajaxToolkit:CalendarExtender ID="ceBPermitLetterDateNew" runat="server" TargetControlID="tbBPermitLetterDateNew"
-                                            Format="MM/dd/yyyy" PopupButtonID="ibBPermitLetterDateNew" />
+                                            Format="MM/dd/yyyy"   />
                                         <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitLetterDateNew" Display="Dynamic"
                                             ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                             ControlToValidate="tbBPermitLetterDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
@@ -596,28 +586,16 @@
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <script language="javascript" type="text/javascript">
-                            function doOkNewReview() {
-
-                                var loading = $(".loadingdb");
-                                loading.show();
-                                var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
-                                var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
-                                loading.css({ top: top, left: left });
-                                return true;
-                            }
-
-                        </script>
                         <center>
                             <table cellpadding="2" cellspacing="2">
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btnNewBPermitReviewOk" OnClientClick="javascript: return doOkNewReview();}"
-                                            CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
+                                        <asp:Button ID="btnNewBPermitReviewOk" OnClientClick="javascript: return true;" CausesValidation="true" runat="server" Text="Okay" OnClick="btnNewBPermitReviewOk_Click" />
+                                        <div style="font-size:xx-small;"></div>
                                     </td>
                                     <td>
-                                        <asp:Button ID="btnNewBPermitReviewCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                            runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnNewBPermitReviewCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                            runat="server" Text="Abort" />
                                     </td>
                                 </tr>
                             </table>
@@ -628,7 +606,7 @@
                             </div>
                         </center>
                     </asp:Panel>
-                    <ajaxToolkit:ModalPopupExtender ID="mpeBPermitNewReview" runat="server" TargetControlID="lbBPermitNewReview"
+                    <ajaxToolkit:ModalPopupExtender ID="mpeBPermitNewReview" runat="server" TargetControlID="dummylbBPermitNewReview"
                         PopupControlID="pnlBPermitNewReview" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlBPermitNewReviewTitle"
                         BehaviorID="jdpopupbpermitnewreview" />
                     <script language="javascript" type="text/javascript">
@@ -651,6 +629,7 @@
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
             ID="btnBPermitUpdate" OnClick="btnBPermitUpdate_Click" OnClientClick="javascript: return true;"
             runat="server" Text="Submit" />
+        
         <asp:Label ID="lblBPermitUpdateResults" Font-Bold="true" runat="server" Text=""></asp:Label>
     </center>
 </asp:Content>
@@ -830,8 +809,8 @@
                                 runat="server" Text="Okay" OnClick="btnNewBPermitOk_Click" />
                         </td>
                         <td>
-                            <asp:Button ID="btnNewBPermitCancel" OnClick="btnNewBPermitCancel_Click" OnClientClick="javacript: return confirm('Are you sure that you wish to cancel?')"
-                                runat="server" Text="Cancel" />
+                            <asp:Button ID="btnNewBPermitCancel" OnClick="btnNewBPermitCancel_Click" OnClientClick="javacript: return confirm('Are you sure that you wish to abort?')"
+                                runat="server" Text="Abort" />
                         </td>
                     </tr>
                     <tr>

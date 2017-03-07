@@ -319,8 +319,8 @@
                                                     runat="server" Text="Okay" OnClick="btnNewSROAPartOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button ID="btnNewSROAPartCancel" CausesValidation="false" OnClientClick="if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                    runat="server" Text="Cancel" />
+                                                <asp:Button ID="btnNewSROAPartCancel" CausesValidation="false" OnClientClick="if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
                                             </td>
                                         </tr>
                                     </table>
@@ -446,8 +446,8 @@
                                                     runat="server" Text="Okay" OnClick="btnNewSROALaborOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button CausesValidation="false" ID="btnNewSROALaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                    runat="server" Text="Cancel" />
+                                                <asp:Button CausesValidation="false" ID="btnNewSROALaborCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
                                             </td>
                                         </tr>
                                     </table>
@@ -582,8 +582,8 @@
                                                     runat="server" Text="Okay" OnClick="btnNewSROAServiceOk_Click" />
                                             </td>
                                             <td>
-                                                <asp:Button ID="btnNewSROAServiceCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to cancel?')) {return true;} else {return false;}"
-                                                    runat="server" Text="Cancel" />
+                                                <asp:Button ID="btnNewSROAServiceCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
                                             </td>
                                         </tr>
                                     </table>
@@ -821,7 +821,7 @@
                             onclick="btnNewSROAVehicleMaintenanceOk_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnNewbtnNewSROAVehicleMaintenanceNewCancel" onclick="btnNewSSROAVehicleMaintenanceCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to cancel?')" runat="server" Text="Cancel" />
+                        <asp:Button ID="btnNewbtnNewSROAVehicleMaintenanceNewCancel" onclick="btnNewSSROAVehicleMaintenanceCancel_Click" OnClientClick="javascript: return confirm('Are you sure that you wish to abort?')" runat="server" Text="Abort" />
                     </td>
                 </tr>
                 <tr>
