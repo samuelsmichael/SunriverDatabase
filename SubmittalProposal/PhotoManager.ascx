@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PhotoManager.ascx.cs"
-    Inherits="SubmittalProposal.PhotoManager" %>
+    Inherits="SubmittalProposal.PhotoManager" %>    
+    
     <asp:Panel ID="pnlPhotos" runat="server" Width="100%" style="height:204px; overflow:auto; padding-bottom: 1em;">
         <asp:Repeater ID="RepeaterImages" runat="server" >
             <ItemTemplate>
@@ -16,7 +17,7 @@
             <asp:FileUpload ID="FileUploadControl" runat="server" />
             <br />
             <asp:Label ID="StatusLabel" runat="server" ForeColor="Green" />
-            <asp:Button ID="btnSave" Text="Upload" runat="server" OnClick="UploadButton_Click"
+            <asp:Button ID="btnSave" Text="Upload" runat="server" OnClientClick="return true;" OnClick="UploadButton_Click"
                 Style="display: none;" />
         </ContentTemplate>
     </asp:UpdatePanel>

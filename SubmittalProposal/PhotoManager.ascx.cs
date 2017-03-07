@@ -28,9 +28,10 @@ namespace SubmittalProposal {
         protected void Page_PreRender(object sender, EventArgs e) {
             RepeaterImages.DataSource=new List<string>();
             RepeaterImages.DataBind();
-            string scriptText = "javascript:"+StatusLabel.ClientID+".innerHTML='';if (this.value != '') {" + btnSave.ClientID + ".click();}";
+            string scriptText = "javascript:"+StatusLabel.ClientID+".innerHTML='';         if (this.value != '') {" + btnSave.ClientID + ".click();}";
+
             FileUploadControl.Attributes["onchange"] = scriptText;
-            string scriptText2 = FileUploadControl.ClientID + ".click();";
+   //         string scriptText2 = FileUploadControl.ClientID + ".click();";
    //         btnChooseAFile.Attributes["onclick"] = scriptText2;
             if (Page is IHasPhotos) {
                 if (((IHasPhotos)Page).CurrentItemKey != "0") {
