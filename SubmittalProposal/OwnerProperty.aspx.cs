@@ -45,7 +45,8 @@ namespace SubmittalProposal {
             ds = (DataSet)cache[key];
             if (ds == null) {
                 ds = Utils.getDataSetFromQuery("SELECT * FROM qryLotLaneWithOwners_Master", ConnectionString);
-                ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["SRPropID"] };
+                // Removed 3/25/2017: it's unnecessary, and there are duplicate owners from / property via ID-CARD-SPLIT-FE.qryLotLaneWithOwners_Master
+                //ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["SRPropID"] };
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, ds, policy);

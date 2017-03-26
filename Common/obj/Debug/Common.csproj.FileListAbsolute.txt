@@ -2,3 +2,7 @@ C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\b
 C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\bin\Debug\Common.pdb
 C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\obj\Debug\Common.dll
 C:\Users\Diamond\documents\visual studio 2010\Projects\SunriverDatabase\Common\obj\Debug\Common.pdb
+C:\Temp\Sunriver\SunriverDatabase\Common\bin\Debug\Common.dll
+C:\Temp\Sunriver\SunriverDatabase\Common\bin\Debug\Common.pdb
+C:\Temp\Sunriver\SunriverDatabase\Common\obj\Debug\Common.dll
+C:\Temp\Sunriver\SunriverDatabase\Common\obj\Debug\Common.pdb
