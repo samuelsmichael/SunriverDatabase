@@ -20,6 +20,6 @@ SELECT v.*,l.*,vl.[Description] as VehicleName
 FROM qry_VehicleMaintenanceHistory v inner join tblVWOLabor l on l.fkVWOL_ID=VWOID
 	inner join [tblVehicleList{LU}] vl on vl.Number = v.fkNumber
 WHERE v.[Date Out] Between @FromDate And @ToDate
-ORDER BY l.MechName,v.fkNumber;
+ORDER BY l.MechName,v.[Date Out];
 END
 GO

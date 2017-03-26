@@ -42,7 +42,7 @@ BEGIN
 			tblSubmittal s INNER JOIN tblBPData b ON s.SubmittalID = b.fkSubmittalID_PD
 		WHERE 
 			s.Lot=@Lot and s.Lane=@Lane
-		ORDER BY s.SubmittalID;
+		ORDER BY s.Mtg_Date;
 	END
 END
 GO

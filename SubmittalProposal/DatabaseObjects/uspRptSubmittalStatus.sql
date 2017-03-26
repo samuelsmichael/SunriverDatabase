@@ -41,8 +41,9 @@ BEGIN
 				CASE WHEN s.ProjectDecision='DEF' THEN 1 else 0 END as CountDeferred,
 				CASE WHEN s.ProjectDecision='DEN' THEN 1 else 0 END as CountDenied
 		FROM 
-			tblSubmittal s INNER JOIN 
-			[tblProjectType{LU}] pt ON s.ProjectType = pt.ProjectType INNER JOIN 
+		    tblBPData bp right JOIN 
+			tblSubmittal s ON bp.fkSubmittalID_PD = s.SubmittalID INNER JOIN
+			[tblProjectType{LU}] pt ON s.ProjectType = pt.ProjectType LEFT OUTER JOIN 
 			[tblProjectDecision{LU}] pd ON s.ProjectDecision = pd.ProjectDecision
 		WHERE s.Mtg_Date Between @FromDate And @ToDate
 		ORDER BY TypeDescription, SubmittalID

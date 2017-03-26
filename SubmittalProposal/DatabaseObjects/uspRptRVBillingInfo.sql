@@ -19,6 +19,6 @@ BEGIN
 SELECT r.RVLeaseID, r.CustomerID, [LastName] + ', ' + [FirstName] AS Name, r.LastName, r.FirstName, r.LeaseCancelled, r.tRVDSpace, r.LeasePaid, fr.AnnualRent, r.LeaseStartDate, r.LeaseCancelDate, r.Notes
 FROM tblRVData  r INNER JOIN vFindRent fr ON r.tRVDSpace=fr.tSISpace
 WHERE (((r.LastName)<>'Department') And ((r.FirstName)<>'Sunriver PD') And ((r.LeaseCancelled)=0))
-ORDER BY r.LastName;
+ORDER BY r.CustomerID;
 END
 GO

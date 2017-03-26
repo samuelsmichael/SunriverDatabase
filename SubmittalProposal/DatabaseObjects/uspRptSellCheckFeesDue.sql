@@ -23,6 +23,6 @@ BEGIN
 	from tblSellCheck sc INNER JOIN 
 		tblRequest r ON sc.fkscRequestID = r.scRequestID
 	where scPaid=0 and scDate>=@StartDate and scDate<=@EndDate
-
+	order by scLane
 END
 GO

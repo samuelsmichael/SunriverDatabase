@@ -10,7 +10,7 @@ GO
 	EXEC uspRptVehicleShopActivity @FromDate='1/1/2014', @ToDate='12/31/2015'
 */
 -- =============================================
-create PROCEDURE uspRptVehicleShopActivity 
+alter PROCEDURE uspRptVehicleShopActivity 
 	@FromDate datetime,
 	@ToDate datetime
 AS
@@ -19,6 +19,6 @@ set @ToDate=DateAdd(ss,60,@ToDate)
 SELECT v.*
 FROM qry_VehicleMaintenanceHistory v
 WHERE v.[Date Out] Between @FromDate And @ToDate
-ORDER BY v.fkNumber;
+ORDER BY v.[Date Out]
 END
 GO
