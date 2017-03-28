@@ -10,6 +10,8 @@ GO
 	exec uspRptComplianceHistory @Lot='6', @Lane='Sisters'
 */
 -- =============================================
+use srpropertysql;
+go
 alter PROCEDURE uspRptComplianceHistory 
 	@Lot varchar(100) = null, 
 	@Lane varchar(100) = null
@@ -28,12 +30,14 @@ BEGIN
 			cast ('' as varchar(max)) as crRule,
 			cast ('' as varchar(max)) as crFollowUp,
 			cast (getdate() as DateTime) as crCloseDate,
-			cast ('' as varchar(6)) as crOpenClosed
-	end else begin
+			cast ('' as varchar(6)) as crOpenClosed,
+			cast ('' as varchar(100)) as Lot,
+			cast ('' as varchar(100)) as Lane
 		SELECT 
 			cr.crReviewID, cr.crDate, cr.crLOT, cr.crLANE, cr.crSubmittalID, 
 			cr.crComments, cr.crCorrection, cr.crRule, cr.crFollowUp, cr.crCloseDate, 
-			CASE WHEN crCloseDate is null then 'OPEN' ELSE 'CLOSED' END as crOpenClosed
+			CASE WHEN crCloseDate is null then 'OPEN' ELSE 'CLOSED' END as crOpenClosed,
+			@Lot as Lot, @Lane as Lane
 		FROM tblComplianceReview cr
 		WHERE (((cr.crLOT)=@Lot) AND ((cr.crLANE)=@Lane))
 		ORDER BY cr.crReviewID;

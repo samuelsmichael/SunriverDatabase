@@ -10,6 +10,8 @@ GO
 	exec uspRptComplianceReviewsOpen @FromDate='1/1/2014', @ToDate='12/31/2014'
 */
 -- =============================================
+use srpropertysql;
+go
 alter PROCEDURE uspRptComplianceReviewsOpen 
 	@FromDate datetime = null, 
 	@ToDate datetime = null
@@ -29,13 +31,16 @@ BEGIN
 			cast('' as nvarchar(max)) as crRule,
 			cast('' as nvarchar(max)) as crFollowUp,
 			cast(null as datetime) as crCloseDate,
-			cast(null as datetime) as crLTActionDate
+			cast(null as datetime) as crLTActionDate,
+			cast ('4/19/2016' as datetime) as FromDate,
+			cast ('4/19/2016' as datetime) as ToDate
 	end else begin
 		SELECT 
 			cr.crReviewID, cr.crDate, 
 			CASE WHEN IsDate(crCloseDate)=1 THEN 'CLOSED' ELSE 'OPEN' END as crOpenClosed,
 			cr.crLOT, cr.crLANE, cr.crSubmittalID, cr.crComments, cr.crCorrection, cr.crRule, 
 			cr.crFollowUp, cr.crCloseDate, cld.crLTActionDate
+			, @FromDate as FromDate, @ToDate as ToDate
 		FROM 
 			tblComplianceLetterData cld RIGHT OUTER JOIN tblComplianceReview cr ON cld.fkcrReviewID = cr.crReviewID
 		WHERE cr.crDate Between @FromDate and @ToDate AND CASE WHEN IsDate(crCloseDate)=1 THEN 'CLOSED' ELSE 'OPEN' END ='OPEN'

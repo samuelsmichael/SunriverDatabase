@@ -10,6 +10,8 @@ GO
 	exec uspRptComplianceReviewsSummary @FromDate='1/1/2014', @ToDate='12/31/2014'
 */
 -- =============================================
+use srpropertysql;
+go
 alter PROCEDURE uspRptComplianceReviewsSummary 
 	@FromDate datetime = null, 
 	@ToDate datetime = null
@@ -30,10 +32,13 @@ BEGIN
 			cast('' as nvarchar(6)) as crOpenClosed,
 			cast(null as datetime) as crCloseDate,
 			cast(null as datetime) as crLTActionDate,
-			cast(0 as int) as fkcrReviewID
+			cast(0 as int) as fkcrReviewID,
+			cast ('4/19/2016' as datetime) as FromDate,
+			cast ('4/19/2016' as datetime) as ToDate
 	end else begin
 		SELECT cr.crReviewID, cr.crDate, cr.crLOT, cr.crLANE, cr.crSubmittalID, cr.crComments, cr.crCorrection, cr.crRule, cr.crFollowUp, 
 		crOpenClosed, cr.crCloseDate, cl.crLTActionDate, cl.fkcrReviewID
+		, @FromDate as FromDate, @ToDate as ToDate
 		FROM tblComplianceReview cr LEFT OUTER JOIN tblComplianceLetterData cl ON cr.crReviewID = cl.fkcrReviewID
 		WHERE cr.crDate Between @FromDate And @ToDate
 		ORDER BY cr.crReviewID

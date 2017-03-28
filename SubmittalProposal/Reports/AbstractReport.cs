@@ -79,6 +79,17 @@ namespace SubmittalProposal.Reports {
             connectionInfo.Password = _Password;
             connectionInfo.ServerName = _ServerName;
             if (RD.Subreports.Count>0) {
+                for (int c = 0; c < RD.Subreports.Count; c++) {
+                    CrystalDecisions.CrystalReports.Engine.Table table = RD.Subreports[c].Database.Tables[0];
+                    SqlCommand cmd = new SqlCommand(deriveName(table.Location));
+                    foreach (string parmName in getReportParams().Keys) {
+                        cmd.Parameters.Add(new SqlParameter(parmName, getReportParams()[parmName]));
+                    }
+                    DataSet ds = Utils.getDataSet(cmd, ConnectionString);
+                    table.SetDataSource(ds.Tables[0]);
+                }
+
+
                 /*
                 CrystalDecisions.CrystalReports.Engine.ReportClass rep;
                 ReportClientDocumentWrapper doc = (ReportClientDocumentWrapper)RD.ReportClientDocument;
@@ -90,12 +101,14 @@ namespace SubmittalProposal.Reports {
             }
             //////RD.ReportClientDocument
             //////////////RD.ReportClientDocument
-            SqlCommand cmd = new SqlCommand(deriveName(RD.Database.Tables[0].Location));
-            foreach (string parmName in getReportParams().Keys) {
-                cmd.Parameters.Add(new SqlParameter(parmName, getReportParams()[parmName]));
+            if (RD.Database.Tables.Count > 0) {
+                SqlCommand cmd = new SqlCommand(deriveName(RD.Database.Tables[0].Location));
+                foreach (string parmName in getReportParams().Keys) {
+                    cmd.Parameters.Add(new SqlParameter(parmName, getReportParams()[parmName]));
+                }
+                DataSet ds = Utils.getDataSet(cmd, ConnectionString);
+                RD.SetDataSource(ds.Tables[0]);
             }
-            DataSet ds = Utils.getDataSet(cmd, ConnectionString);            
-            RD.SetDataSource(ds.Tables[0]);
             
 /*
 

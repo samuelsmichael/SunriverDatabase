@@ -513,6 +513,23 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\ComRoster\CommitteeRosters.cs">
+      <DependentUpon>CommitteeRosters.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\ComRoster\CommitteeRosters2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommitteeRosters2.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ComRoster\CommitteesWithMembersAndLiasons.cs">
+      <DependentUpon>CommitteesWithMembersAndLiasons.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\IDCardsLaunchManager.aspx.cs">
       <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -968,16 +985,10 @@
       <DependentUpon>CommitteeRoster.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ComRoster\CommitteeRosters.cs">
+    <Compile Include="Reports\ComRoster\CommitteesWithMembersAndLiasons2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CommitteeRosters.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\ComRoster\CommitteesWithMembersAndLiasons.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CommitteesWithMembersAndLiasons.rpt</DependentUpon>
+      <DependentUpon>CommitteesWithMembersAndLiasons2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ComRoster\MemberTermUp.cs">
@@ -1772,6 +1783,14 @@
     <EmbeddedResource Include="Reports\ComRoster\CommitteeRosters.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CommitteeRosters.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteeRosters2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteeRosters2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ComRoster\CommitteesWithMembersAndLiasons2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CommitteesWithMembersAndLiasons2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComRoster\CommitteesWithMembersAndLiasons.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
