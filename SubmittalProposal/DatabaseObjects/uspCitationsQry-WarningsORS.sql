@@ -10,6 +10,8 @@ GO
 	exec [uspCitationsQry-Warnings-ORS] @StartDate='1/1/2005', @EndDate='6/1/2016'
 */
 -- =============================================
+use srcitations;
+go
 alter PROCEDURE [uspCitationsQry-Warnings-ORS] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -19,7 +21,8 @@ BEGIN
 SELECT 
 	c.CitationID, v.fkRuleID, v.[ORS#], v.IssueAsWarning, v.ViolationNotes, r.RuleDescription, c.OffenseDate, c.FineStatus, c.VLastName, c.VFirstName, 
 	c.OffenseLocation, c.CitingOfficer,
-	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
+	@EndDate as EndDate, @StartDate as StartDate
 FROM 
 	[tblRuleType{LU}] r INNER JOIN 
 	tblViolations v ON r.RuleID = v.fkRuleID inner join

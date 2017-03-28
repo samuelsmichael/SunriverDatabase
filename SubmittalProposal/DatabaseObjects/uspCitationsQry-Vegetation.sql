@@ -10,6 +10,8 @@ GO
 	exec [uspCitationsQry-Vegetation] @StartDate='1/1/2014', @EndDate='6/1/2016'
 */
 -- =============================================
+use SRCitations;
+go
 alter PROCEDURE [uspCitationsQry-Vegetation] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -21,7 +23,8 @@ SELECT
 	case when FineStatus='Dismissed' THEN 0 else AssessedFine end as PaidAssessedFine,
 	case when FineStatus='Dissmissed' then 0 else case when FineStatus='PrePay Amount - Paid' then ScheduleFine/2 else 0 end end as PaidPrePayFine,
 	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
-	((case when FineStatus='Dismissed' THEN 0 else AssessedFine end) + (case when FineStatus='Dissmissed' then 0 else case when FineStatus='PrePay Amount - Paid' then ScheduleFine/2 else 0 end end)) as TotalFine
+	((case when FineStatus='Dismissed' THEN 0 else AssessedFine end) + (case when FineStatus='Dissmissed' then 0 else case when FineStatus='PrePay Amount - Paid' then ScheduleFine/2 else 0 end end)) as TotalFine,
+	@StartDate as StartDate, @EndDate as EndDate
 FROM [tblRuleType{LU}] r INNER JOIN (tblCitations c LEFT JOIN tblViolations v ON c.CitationID = v.fkCitationID) ON [r].RuleID = v.fkRuleID
 WHERE v.fkRuleID Like '4.01%' AND v.IssueAsWarning=0 AND c.OffenseDate Between @StartDate And @EndDate
 ORDER BY [r].RuleIndex, c.CitationID

@@ -10,6 +10,8 @@ GO
 	exec [uspCitationsQry-ParkingViolations] @StartDate='1/1/2005', @EndDate='1/21/2016'
 */
 -- =============================================
+use srcitations;
+go
 alter PROCEDURE [uspCitationsQry-ParkingViolations] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -23,7 +25,8 @@ SELECT
 	case when FineStatus='Dismissed' THEN 0 else case when FineStatus='PrePay Amount - Paid' then ScheduleFine/2 else 0 end end as PaidPrePayFine,
 	c.JudicialFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, c.CitingOfficer, r.RuleIndex,
 	((case when FineStatus='Dismissed' then 0 else AssessedFine end) + (case when FineStatus='Dismissed' THEN 0 else case when FineStatus='PrePay Amount - Paid' then ScheduleFine/2 else 0 end end)) as TotalFine,
-	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
+	@EndDate as EndDate, @StartDate as StartDate
 FROM 
 	[tblRuleType{LU}] r RIGHT JOIN (tblCitations c LEFT JOIN tblViolations v ON c.CitationID=v.fkCitationID) ON r.RuleID=v.fkRuleID
 WHERE 

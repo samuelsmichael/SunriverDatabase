@@ -16,7 +16,7 @@ namespace SubmittalProposal.Reports {
             }
         }
         protected override CrystalDecisions.CrystalReports.Engine.ReportDocument getReportDocument() {
-            return new Citations.Citations_ViolatorHistory();
+            return new Citations.Citations_ViolatorHistory2();
         }
         protected override bool getIgnoreSubreportsWhenBuildingParameters() {
             return true;

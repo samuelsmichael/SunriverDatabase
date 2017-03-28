@@ -26,6 +26,7 @@ namespace SubmittalProposal.Reports {
             Hashtable reportParams = new Hashtable();
             reportParams.Add("@StartDate", Common.Utils.ObjectToDateTime(tbFromDate.Text));
             reportParams.Add("@EndDate", Common.Utils.ObjectToDateTime(tbToDate.Text));
+            reportParams.Add("@ReportingHeading",Common.Utils.ObjectToString(tbReportHeading.Text));
             return reportParams;
         }
     }

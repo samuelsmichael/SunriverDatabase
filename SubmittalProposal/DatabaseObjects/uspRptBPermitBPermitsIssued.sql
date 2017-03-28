@@ -14,6 +14,8 @@ GO
 	exec uspRptBPermitBPermitsIssued @Lot='3', @Lane='Fairway'
 */
 -- =============================================
+USE SRPropertySQL;
+GO
 ALTER PROCEDURE [dbo].[uspRptBPermitBPermitsIssued] 
 	@StartDate datetime = null,
 	@EndDate datetime = null,
@@ -44,7 +46,7 @@ BEGIN
 		qrySubmittal.BPermitID, qrySubmittal.Lot, qrySubmittal.Lane, qrySubmittal.BPIssueDate, qrySubmittal.BPExpires, 
 		qrySubmittal.BPStatus, qrySubmittal.SubmittalID, qrySubmittal.Submittal as ProjectDescription, qrySubmittal.ProjectType, cast(TypeDescription as varchar(25)) as TypeDescription,
 		case when qrySubmittal.BPStatus='CLOSED' then 1 else 0 end as CountClosed,
-		case when qrySubmittal.BPStatus!='CLOSED' then 1 else 0 end as CountOpen,Own_Name
+		case when qrySubmittal.BPStatus!='CLOSED' then 1 else 0 end as CountOpen,Own_Name, @StartDate as StartDate, @EndDate as EndDate, @ReportingHeading as RepoingrtHeading, @Lot as Lot, @Lane as Lane
 	FROM 
 		tblBPData LEFT JOIN qrySubmittal ON tblBPData.fkSubmittalID_PD = qrySubmittal.SubmittalID
 		inner join [tblProjectType{LU}] pt ON qrySubmittal.ProjectType =pt.ProjectType

@@ -10,6 +10,8 @@ GO
 	exec uspRptSubmittalAdminApproval '1/9/2014', '1/9/2015', @ReportingHeading='My Report Heading'
 */
 -- =============================================
+use SRPropertySQL;
+go
 alter PROCEDURE uspRptSubmittalAdminApproval 
 	@StartDate datetime,
 	@EndDate datetime,
@@ -30,7 +32,7 @@ BEGIN
 
 	SELECT 
 		qrySubmittal.SubmittalID, qrySubmittal.ProjectType, qrySubmittal.ProjectDecision, qrySubmittal.Lot, qrySubmittal.Lane, qrySubmittal.Mtg_Date, qrySubmittal.Submittal, 
-		qrySubmittal.Conditions, [tblProjectDecision{LU}].DecisionDescription, @ReportingHeading AS MonthAndYear, qrySubmittal.ProjectFee
+		qrySubmittal.Conditions, [tblProjectDecision{LU}].DecisionDescription, @ReportingHeading AS MonthAndYear, qrySubmittal.ProjectFee, @ReportingHeading as ReportHeading
 	FROM 
 		qrySubmittal LEFT JOIN [tblProjectDecision{LU}] ON qrySubmittal.ProjectDecision = [tblProjectDecision{LU}].ProjectDecision
 	WHERE 

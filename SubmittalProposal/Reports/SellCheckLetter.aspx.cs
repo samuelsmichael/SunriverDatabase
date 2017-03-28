@@ -24,6 +24,8 @@ namespace SubmittalProposal.Reports {
         protected override Hashtable getReportParams() {
             Hashtable reportParams = new Hashtable();
             reportParams.Add("@InspectionId", Common.Utils.ObjectToString(tbInspectionID.Text));
+            reportParams.Add("@Employee", ddlEmployee.SelectedItem.Text);
+            reportParams.Add("@Title", ddlTitle.SelectedItem.Text);
             return reportParams;
         }
     }

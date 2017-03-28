@@ -6,8 +6,10 @@ using CrystalDecisions;
 using CrystalDecisions.CrystalReports;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using CrystalDecisions.ReportAppServer;
 using System.Collections;
 using System.Data;
+using System.Data.SqlClient;
 using Common;
 
 namespace SubmittalProposal.Reports {
@@ -26,10 +28,10 @@ namespace SubmittalProposal.Reports {
 
         protected void Page_Init(object sender, EventArgs e) {
             if (IsPostBack) {
-                if (Session["rptDeliveryLabels"] != null) {
+                if (Session[RDName] != null) {
                     // cast the report from object to ReportClass so it can be set as the CrystalReportViewer ReportSource
                     // (All Crystal Reports inherit from ReportClass, so it serves as an acceptable data type through polymorphism)
-                    ((Reports)Master).getCrystalReportView().ReportSource = (ReportClass)Session["rptDeliveryLabels"];
+                    ((Reports)Master).getCrystalReportView().ReportSource = (ReportClass)Session[RDName];
                 }
             }
         }
@@ -59,6 +61,16 @@ namespace SubmittalProposal.Reports {
             _Password = csp.Password;
             _ServerName = csp.Server;
         }
+        private string deriveName(string crystalReportsName) {
+            string retValue;
+            int index = crystalReportsName.IndexOf(";");
+            if (index >= 0) {
+                retValue = crystalReportsName.Substring(0, index);
+            } else {
+                retValue = crystalReportsName;
+            }
+            return retValue;
+        }
         public void buildReport(Hashtable reportParams) {
             _RD = null;
             ConnectionInfo connectionInfo = new ConnectionInfo();
@@ -66,6 +78,27 @@ namespace SubmittalProposal.Reports {
             connectionInfo.UserID = _UserName;
             connectionInfo.Password = _Password;
             connectionInfo.ServerName = _ServerName;
+            if (RD.Subreports.Count>0) {
+                /*
+                CrystalDecisions.CrystalReports.Engine.ReportClass rep;
+                ReportClientDocumentWrapper doc = (ReportClientDocumentWrapper)RD.ReportClientDocument;
+                CrystalDecisions.ReportAppServer.ReportDefModel.Section sec = doc.ReportDefController.ReportDefinition.ReportHeaderArea.Sections[0];
+                doc.SubreportController.ImportSubreport("SubReport", csr.ReportFileName, sec);
+                rep.OpenSubreport("SubReport").SetDataSource(csr.ds.Tables[0]);
+                */
+                int herehere = 1;
+            }
+            //////RD.ReportClientDocument
+            //////////////RD.ReportClientDocument
+            SqlCommand cmd = new SqlCommand(deriveName(RD.Database.Tables[0].Location));
+            foreach (string parmName in getReportParams().Keys) {
+                cmd.Parameters.Add(new SqlParameter(parmName, getReportParams()[parmName]));
+            }
+            DataSet ds = Utils.getDataSet(cmd, ConnectionString);            
+            RD.SetDataSource(ds.Tables[0]);
+            
+/*
+
             SetDBLogonForReport(connectionInfo, RD);
 
             ParameterFieldDefinitions parameterFieldDefinitions = RD.DataDefinition.ParameterFields;
@@ -86,8 +119,9 @@ namespace SubmittalProposal.Reports {
                     pfd.ApplyCurrentValues(currentParameterValues);
                 }
             }
+*/             
             ((Reports)Master).getCrystalReportView().ReportSource = _RD;
-            Session["rptDeliveryLabels"] = _RD;
+            Session[RDName] = _RD;
         }
         private void SetDBLogonForReport(ConnectionInfo connectionInfo, ReportDocument reportDocument) {
             Tables tables = reportDocument.Database.Tables;
@@ -110,6 +144,11 @@ namespace SubmittalProposal.Reports {
                     table.ApplyLogOnInfo(tableLogonInfo);
                 } else {
                 }
+            }
+        }
+        private string RDName {
+            get {
+                return RD.GetType().Name;
             }
         }
         private ReportDocument RD {

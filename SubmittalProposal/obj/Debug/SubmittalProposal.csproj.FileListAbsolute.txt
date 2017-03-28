@@ -130,3 +130,4 @@ C:\Temp\Sunriver\SunriverDatabase\SubmittalProposal\bin\zh-Hant\System.Spatial.r
 C:\Temp\Sunriver\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.csprojResolveAssemblyReference.cache
 C:\Temp\Sunriver\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.dll
 C:\Temp\Sunriver\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.pdb
+C:\Temp\Sunriver\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.csproj.ResolveComReference.cache

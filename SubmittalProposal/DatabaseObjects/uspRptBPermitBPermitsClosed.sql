@@ -7,9 +7,11 @@ GO
 -- Create date: 4/14/2015
 -- Description:	Query for Submittal report: Admin Approval
 /*
-	exec uspRptBPermitBPermitsClosed '1/9/2014', '1/9/2015'
+	exec uspRptBPermitBPermitsClosed '1/1/2016', '12/31/2017'
 */
 -- =============================================
+USE SRPropertySQL;
+go
 alter PROCEDURE uspRptBPermitBPermitsClosed 
 	@StartDate datetime,
 	@EndDate datetime
@@ -29,11 +31,13 @@ BEGIN
 			cast(getdate() as datetime) as BPExipres,
 			cast('' as nvarchar(7)) as BPStatus,
 			cast('' as nvarchar(3)) as ProjectType,
-			cast('' as nvarchar(255)) as BPDelay
+			cast('' as nvarchar(255)) as BPDelay,
+			cast('4/19/2017' as datetime) as StartDate,
+			cast('4/19/2017' as datetime) as EndDate
 	end else begin
 		SELECT 
 			s.SubmittalID, s.BPermitID, s.Lot, s.Lane, bp.BPClosed, s.Own_Name, bp.BPIssueDate, bp.BPExpires, bp.BPStatus,
-			s.ProjectType, bp.BPDelay
+			s.ProjectType, bp.BPDelay,@StartDate as StartDate, @EndDate as EndDate
 		FROM tblBPData bp left outer JOIN qrySubmittal s ON bp.fkSubmittalID_PD = s.SubmittalID
 		WHERE bp.BPClosed>0 AND bp.BPIssueDate Between @StartDate And @EndDate
 		ORDER BY s.BPermitID

@@ -9,9 +9,12 @@ GO
 /*
 	exec [uspCitationsQry-StdBasedOnFineStatus] @StartDate='1/1/2014', @EndDate='12/31/2016', @WhereFineStatus='Issued as a Warning', @EqualvsNotEqual = 0 -- Fine Summary
 	exec [uspCitationsQry-StdBasedOnFineStatus] @StartDate='1/1/2014', @EndDate='12/31/2016', @WhereFineStatus='Balance To Accounting', @EqualvsNotEqual = 1 -- Balance to Acctg
+	exec [uspCitationsQry-StdBasedOnFineStatus] @StartDate='1/1/2014', @EndDate='12/31/2016', @WhereFineStatus='Open', @EqualvsNotEqual = 1 -- Open
 	
 */
 -- =============================================
+Use SRCitations;
+go
 ALTER PROCEDURE [uspCitationsQry-StdBasedOnFineStatus] 
 	@StartDate datetime,
 	@EndDate datetime,
@@ -28,7 +31,8 @@ SELECT
 	c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, c.JudicialFine, 
 	c.AssessedFine, c.WriteOff, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
-	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
+	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
+	@EndDate as EndDate, @StartDate as StartDate
 
 FROM qryTotalCitationFine f inner JOIN tblCitations c ON f.fkCitationID=c.CitationID 
 WHERE c.OffenseDate Between @StartDate And @EndDate AND 

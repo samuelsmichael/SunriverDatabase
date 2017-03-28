@@ -7,9 +7,11 @@ GO
 -- Create date: 5/20/2016
 -- Description:	Violator History
 /*
-	exec [uspCitationsQry-ViolatorHistory] @LastName='phillips'
+	exec [uspCitationsQry-ViolatorHistory] @LastName='smith'
 */
 -- =============================================
+USE SRCitations;
+go
 alter PROCEDURE [uspCitationsQry-ViolatorHistory] 
 	@LastName nvarchar(20)
 AS

@@ -25,6 +25,8 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -98,6 +100,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Account\Web.config" />
     <Content Include="App_Data\ASPNETDB.MDF" />
     <Content Include="App_Data\aspnetdb_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
@@ -299,6 +302,8 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="AbstractQuery2.master" />
+    <None Include="App_Data\ASPNETDB.MDF.orig" />
+    <None Include="App_Data\aspnetdb_log.ldf.orig" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -476,6 +481,12 @@
     <Compile Include="PDFsPage.aspx.designer.cs">
       <DependentUpon>PDFsPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\BallotVerify\BallotVerifyGeneric.cs">
+      <DependentUpon>BallotVerifyGeneric.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="Reports\BPermitsLaunchManager.aspx.cs">
       <DependentUpon>BPermitsLaunchManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -489,6 +500,18 @@
     </Compile>
     <Compile Include="Reports\CitationsLaunchManager.aspx.designer.cs">
       <DependentUpon>CitationsLaunchManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_HearingCalendar2.cs">
+      <DependentUpon>Citations_HearingCalendar2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Citations\Citations_ViolatorHistory2.cs">
+      <DependentUpon>Citations_ViolatorHistory2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\IDCardsLaunchManager.aspx.cs">
       <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>
@@ -726,12 +749,6 @@
     </Compile>
     <Compile Include="Reports\AbstractReport.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\BallotVerify\BallotVerifyGeneric.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BallotVerifyGeneric.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\BPermitsClosed.aspx.cs">
       <DependentUpon>BPermitsClosed.aspx</DependentUpon>
@@ -1608,10 +1625,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
-    <Folder Include="CrystalReportsViewers\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -1717,6 +1732,14 @@
     <EmbeddedResource Include="Reports\Citations\Citations_DesignWarning.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Citations_DesignWarning.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_HearingCalendar2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_HearingCalendar2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Citations\Citations_ViolatorHistory2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Citations_ViolatorHistory2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ComplianceReview\ComplianceHistory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1940,6 +1963,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SubmittalProposal_getpageinforeference_GetPageInfo</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

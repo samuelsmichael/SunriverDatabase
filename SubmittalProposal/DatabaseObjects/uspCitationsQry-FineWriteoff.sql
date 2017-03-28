@@ -7,9 +7,11 @@ GO
 -- Create date: 5/20/2016
 -- Description:	rpt Fine Writeoff
 /*
-	exec [uspCitationsQry-FineWriteoff] @StartDate='1/1/2014', @EndDate='6/1/2016'
+	exec [uspCitationsQry-FineWriteoff] @StartDate='1/1/2014', @EndDate='6/1/2017'
 */
 -- =============================================
+use SRCitations;
+go
 alter PROCEDURE [uspCitationsQry-FineWriteoff] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -27,7 +29,8 @@ SELECT
 	c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, 
 	c.JudicialFine, c.AssessedFine, c.FineBalToAcctg, c.MagistrateNotes, 
 	f.TotalCitationFine, f.PrePayAmount, 
-	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
+	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
+	@StartDate as StartDate, @EndDate as EndDate
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
 FROM qryTotalCitationFine f RIGHT outer JOIN tblCitations c ON f.fkCitationID = c.CitationID
 WHERE c.OffenseDate Between @StartDate And @EndDate AND c.WriteOff>0

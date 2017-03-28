@@ -10,6 +10,8 @@ GO
 	exec [uspCitationsQry-RuleSummary] @StartDate='1/1/2014', @EndDate='6/1/2016'
 */
 -- =============================================
+use SRCitations;
+go
 ALTER PROCEDURE [uspCitationsQry-RuleSummary] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -17,7 +19,8 @@ AS
 BEGIN
 
 SELECT 
-	r.RuleID, CASE WHEN RuleSource='SRR&R' THEN 'Sunriver Rules & Regulations' ELSE CASE WHEN RuleSource='SRDC' THEN 'Sunriver Design Committee' ELSE 'Unknown' END END AS RuleSourceDescription, r.RuleDescription, count(r.RuleID) as Total, sum(CASE WHEN v.IssueAsWarning=0 THEN 1 ELSE 0 END) AS Magistrate, sum(CASE WHEN v.IssueAsWarning=1 THEN 1 ELSE 0 END) AS Warning
+	r.RuleID, CASE WHEN RuleSource='SRR&R' THEN 'Sunriver Rules & Regulations' ELSE CASE WHEN RuleSource='SRDC' THEN 'Sunriver Design Committee' ELSE 'Unknown' END END AS RuleSourceDescription, r.RuleDescription, count(r.RuleID) as Total, sum(CASE WHEN v.IssueAsWarning=0 THEN 1 ELSE 0 END) AS Magistrate, sum(CASE WHEN v.IssueAsWarning=1 THEN 1 ELSE 0 END) AS Warning,
+	@StartDate as StartDate, @EndDate as EndDate
 /*	c.CitationID, r.RuleIndex, r.RuleID, r.RuleDescription, v.ViolationID, v.ScheduleFine, v.IssueAsWarning, c.AssessedFine, c.OffenseDate, c.FineStatus, r.RuleSource, 
 	CASE WHEN FineStatus='Dismissed' THEN 0 ELSE AssessedFine END AS PaidAssessedFine, 
 	CASE WHEN FineStatus='Dismissed' THEN 0 ELSE CASE WHEN FineStatus='PrePay Amount - Paid' THEN ScheduleFine/2 ELSE 0 END END as PaidPrePayFine,

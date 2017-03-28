@@ -7,9 +7,11 @@ GO
 -- Create date: 5/20/2016
 -- Description:	Parking Warning
 /*
-	exec [uspCitationsQry-ParkingWarning] @StartDate='1/1/2005', @EndDate='6/1/2016'
+	exec [uspCitationsQry-ParkingWarning] @StartDate='1/1/2005', @EndDate='6/1/2017'
 */
 -- =============================================
+use srcitations;
+go
 alter PROCEDURE [uspCitationsQry-ParkingWarning] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -18,7 +20,8 @@ BEGIN
 
 SELECT 
 	c.CitationID, v.fkRuleID, v.IssueAsWarning, v.ViolationNotes, r.RuleDescription, c.OffenseDate, c.FineStatus, c.VLastName, c.VFirstName, c.OffenseLocation, c.CitingOfficer, r.RuleIndex,
-	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
+	@EndDate as EndDate, @StartDate as StartDate
 FROM 
 	[tblRuleType{LU}] r RIGHT JOIN (tblCitations c LEFT JOIN tblViolations v ON c.CitationID = v.fkCitationID) ON r.RuleID = v.fkRuleID
 WHERE 

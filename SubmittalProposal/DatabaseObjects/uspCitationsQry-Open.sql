@@ -10,6 +10,8 @@ GO
 	exec [uspCitationsQry-Open] @StartDate='1/1/2016', @EndDate='6/1/2016'
 */
 -- =============================================
+use SRCitations;
+go
 alter PROCEDURE [uspCitationsQry-Open] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -26,7 +28,8 @@ SELECT
 	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
 	c.AssessedFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 	--IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
-	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
+	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
+	@EndDate as EndDate, @StartDate as StartDate
 FROM 
 	qryTotalCitationFine f RIGHT JOIN tblCitations c ON f.fkCitationID = c.CitationID
 WHERE 

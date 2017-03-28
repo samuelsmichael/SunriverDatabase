@@ -10,7 +10,10 @@ GO
 	exec [uspCitationsQry-DesignSummary] @StartDate='1/1/2014', @EndDate='6/1/2016'
 */
 -- =============================================
+Use SRCitations;
+go
 alter PROCEDURE [uspCitationsQry-DesignSummary] 
+
 	@StartDate datetime,
 	@EndDate datetime
 AS
@@ -21,7 +24,8 @@ SELECT
 	c.OffenseLocation, c.HearingDate, c.MagistrateFine, c.AssessedFine, c.JudicialFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, c.CitingOfficer, r.RuleIndex,
 	CASE WHEN v.IssueAsWarning = 1 then 1 else 0 end as Warning,
 	CASE WHEN v.IssueAsWarning = 0 then 1 else 0 end as Fine,
-	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
+	@StartDate as StartDate, @EndDate as EndDate
 
 FROM 
 	[tblRuleType{LU}] r INNER JOIN 

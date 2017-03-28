@@ -27,5 +27,6 @@ namespace SubmittalProposal.Reports {
             reportParams.Add("@ToDate", Common.Utils.ObjectToDateTime(tbToDate.Text));
             return reportParams;
         }
+        
     }
 }

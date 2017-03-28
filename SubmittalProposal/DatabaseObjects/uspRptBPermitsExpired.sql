@@ -10,7 +10,9 @@ GO
 	exec uspRptBPermitsExpired '1/9/2014', '1/9/2015'
 */
 -- =============================================
-create PROCEDURE uspRptBPermitsExpired 
+use SRPropertySQL;
+go
+alter PROCEDURE uspRptBPermitsExpired 
 	@StartDate datetime,
 	@EndDate datetime
 
@@ -28,10 +30,12 @@ BEGIN
 			cast(getdate() as datetime) as BPIssueDate,
 			cast(getdate() as datetime) as BPExipres,
 			cast('' as nvarchar(40)) as Own_Name,
-			cast('' as nvarchar(3)) as ProjectType
+			cast('' as nvarchar(3)) as ProjectType,
+			cast('1/1/2015' as datetime) as StartDate,
+			cast('12/31/2017' as datetime) as EndDate
 	end else begin
 		SELECT s.SubmittalID, s.BPermitID, s.Lot, s.Lane, bp.BPClosed, 
-		BPStatus, bp.BPIssueDate, bp.BPExpires, s.Own_Name, s.ProjectType
+		BPStatus, bp.BPIssueDate, bp.BPExpires, s.Own_Name, s.ProjectType, @StartDate as StartDate, @EndDate as EndDate
 		FROM tblBPData bp LEFT JOIN qrySubmittal s ON bp.fkSubmittalID_PD = s.SubmittalID
 		WHERE 
 			BPStatus='Expired' AND 

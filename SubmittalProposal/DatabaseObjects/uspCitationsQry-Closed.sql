@@ -10,6 +10,9 @@ GO
 	exec [uspCitationsQry-Closed] @StartDate='1/1/2014', @EndDate='6/1/2016'
 */
 -- =============================================
+Use SRCitations;
+go
+
 alter PROCEDURE [uspCitationsQry-Closed] 
 	@StartDate datetime,
 	@EndDate datetime
@@ -25,7 +28,8 @@ SELECT
 	c.AssessedFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],
 	--	IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
-	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
+	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
+	@EndDate as EndDate, @StartDate as StartDate
 
 FROM 
 	qryTotalCitationFine f RIGHT JOIN tblCitations c ON f.fkCitationID = c.CitationID
