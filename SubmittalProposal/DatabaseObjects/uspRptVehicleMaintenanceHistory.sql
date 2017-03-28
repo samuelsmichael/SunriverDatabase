@@ -10,6 +10,8 @@ GO
 	EXEC uspRptVehicleMaintenanceHistory @Number='1002', @FromDate='1/1/2014', @ToDate='12/31/2015'
 */
 -- =============================================
+use lrfdVehicleMaintenance;
+go
 alter PROCEDURE uspRptVehicleMaintenanceHistory 
 	@Number nvarchar(12),
 	@FromDate datetime,
@@ -20,7 +22,7 @@ BEGIN
 	SET NOCOUNT ON;
 	set @ToDate=dateadd(ss,60,@Todate)
 	print cast(@todate as varchar)
-	SELECT q.*
+	SELECT q.*,@Number as Number, @FromDate as FromDate, @ToDate as ToDate, @VehicleName as VehicleName
 	FROM qry_VehicleMaintenanceHistory q
 	WHERE q.fkNumber=@Number AND q.[Date Out] Between @FromDate And @ToDate
 	ORDER BY q.fkNumber;

@@ -10,6 +10,8 @@ GO
 	exec uspRptContractorsAllData @RegistrationStartDate='1/1/2014'
 */
 -- =============================================
+use contractorregsql;
+go
 alter PROCEDURE uspRptContractorsAllData 
 	@RegistrationStartDate datetime,
 	@ListYear varchar(4)
@@ -39,9 +41,12 @@ BEGIN
 			cast('' as nvarchar(35)) as CAT_2,
 			cast('' as nvarchar(35)) as CAT_3,
 			cast('' as nvarchar(35)) as CAT_4,
-			cast('' as ntext) as Comment
+			cast('' as ntext) as Comment,
+			cast('4/19/2011' as datetime) as RegistrationStartDate,
+			cast('2017' as varchar(4)) as ListYear
 	end else begin
-		SELECT c.SRContrRegID, c.Reg_Date,c.Company, c.Contact, c.MailAddr1, c.MailAddr2, c.City, c.State, c.ZIP, c.Phone_1, c.Phone_2, c.Lic_Number, c.Lic_X_Date, c.CAT_1, c.CAT_2, c.CAT_3, c.CAT_4, c.Comment
+		SELECT c.SRContrRegID, c.Reg_Date,c.Company, c.Contact, c.MailAddr1, c.MailAddr2, c.City, c.State, c.ZIP, c.Phone_1, c.Phone_2, c.Lic_Number, c.Lic_X_Date, c.CAT_1, c.CAT_2, c.CAT_3, c.CAT_4, c.Comment,
+			@RegistrationStartDate as RegistrationStartDate, @ListYear as ListYear
 		FROM tblContractors c
 		WHERE (((c.Reg_Date)>=@RegistrationStartDate))
 		ORDER BY c.Company;

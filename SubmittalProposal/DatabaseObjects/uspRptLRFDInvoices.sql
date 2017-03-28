@@ -10,14 +10,16 @@ GO
 	EXEC uspRptLRFDInvoices @StartDate='1/1/2014', @EndDate='12/31/2015'
 */
 -- =============================================
-create PROCEDURE uspRptLRFDInvoices
+use lrfdvehiclemaintenance;
+go
+alter PROCEDURE uspRptLRFDInvoices
 	@StartDate datetime,
 	@EndDate datetime
 
 AS
 BEGIN
 set @Enddate=dateadd(ss,55,@EndDate)
-SELECT v.*
+SELECT v.*, @StartDate as StartDate, @EndDate as EndDate
 FROM qry_VehicleMaintenanceHistory v
 WHERE v.[Date Out] Between @StartDate And @Enddate
 ORDER BY v.fkNumber;

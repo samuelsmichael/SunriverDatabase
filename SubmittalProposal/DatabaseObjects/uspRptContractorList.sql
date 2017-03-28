@@ -10,6 +10,8 @@ GO
 	exec uspRptContractorList @RegistrationStartDate='1/1/2014', @RegistrationEndDate='12/31/2015', @ListYear='2015'
 */
 -- =============================================
+use contractorregsql;
+go
 alter PROCEDURE uspRptContractorList 
 	@RegistrationStartDate datetime,
 	@RegistrationEndDate datetime,
@@ -25,9 +27,13 @@ BEGIN
 			cast ('' as nvarchar(50)) as Contact,
 			cast ('' as nvarchar(14)) as Phone_1,
 			cast ('' as nvarchar(14)) as Phone_2,
-			cast ('' as nvarchar(14)) as Active
+			cast ('' as nvarchar(14)) as Active,
+			cast ('4/12/2014' as datetime) as RegistrationStartDate,
+			cast ('4/19/2017' as datetime) as RegistrationEndDate,
+			cast ('2017' as varchar(4)) as ListYear
 	end else begin
-		SELECT c.SRContrRegID, c.Reg_Date, c.Company, c.Contact, c.Phone_1, c.Phone_2, c.Active
+		SELECT c.SRContrRegID, c.Reg_Date, c.Company, c.Contact, c.Phone_1, c.Phone_2, c.Active,
+			@RegistrationStartDate as RegistrationStartDate, @RegistrationEndDate as RegistrationEndDate, @ListYear as ListYear
 		FROM tblContractors c
 		WHERE 
 			c.Reg_Date Between @RegistrationStartDate and @RegistrationEndDate

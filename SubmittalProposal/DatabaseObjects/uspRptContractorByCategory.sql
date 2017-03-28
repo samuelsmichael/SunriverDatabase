@@ -10,6 +10,8 @@ GO
 	exec uspRptContractorByCategory @RegistrationStartDate='1/1/2015', @ListRevisionDate='4/19/2015', @ListYear='2015'
 */
 -- =============================================
+use ContractorRegSQL;
+go
 alter PROCEDURE uspRptContractorByCategory 
 	@RegistrationStartDate datetime,
 	@ListRevisionDate datetime,
@@ -32,7 +34,8 @@ BEGIN
 			cast('' as nvarchar(35)) as CAT_4
 	end else begin
 		SELECT 
-				c.SRContrRegID, a.Category, c.Company, c.Reg_Date, c.Phone_1, c.Phone_2, c.Lic_Number, c.CAT_1, c.CAT_2, c.CAT_3, c.CAT_4
+				c.SRContrRegID, a.Category, c.Company, c.Reg_Date, c.Phone_1, c.Phone_2, c.Lic_Number, c.CAT_1, c.CAT_2, c.CAT_3, c.CAT_4,
+				@ListYear as ListYear,@RegistrationStartDate as RegistrationStartDate, @ListRevisionDate as ListRevisionDate
 			FROM tblContractors c, [tblContractorCategories{LU}] a
 		WHERE 
 			(((a.Category)=[CAT_1]) AND ((c.Reg_Date)>=@RegistrationStartDate)) OR 

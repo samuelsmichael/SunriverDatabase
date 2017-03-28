@@ -523,6 +523,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommitteeRosters2.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ComRoster\CommitteesWithMembersAndLiasons.cs">
       <DependentUpon>CommitteesWithMembersAndLiasons.rpt</DependentUpon>
