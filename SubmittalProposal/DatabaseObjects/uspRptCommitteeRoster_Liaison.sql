@@ -5,6 +5,8 @@ GO
 /* =============================================
 	exec uspRptCommitteeRoster_Liaison @CommitteeID=2
    ============================================= */
+   use comroster;
+   go
 alter PROCEDURE uspRptCommitteeRoster_Liaison
 	@CommitteeID int
 AS

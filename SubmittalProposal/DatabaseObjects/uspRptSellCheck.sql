@@ -10,13 +10,16 @@ GO
 	exec uspRptSellCheck '1/1/2015','12/31/2015'
 */
 -- =============================================
+Use SRsellCheck
+Go
 alter PROCEDURE uspRptSellCheck
 	@FromDate datetime,
 	@ToDate datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT r.scLot, r.scLane,sc.*
+	SELECT r.scLot, r.scLane,sc.*,
+	@FromDate as FromDate, @ToDate as ToDate
 	FROM [SRSellCheck].[dbo].tblsellcheck sc inner join tblRequest r on r.scRequestId=sc.fkscRequestId
 	WHERE scDate>=@FromDate and scDate <= @ToDate
 END

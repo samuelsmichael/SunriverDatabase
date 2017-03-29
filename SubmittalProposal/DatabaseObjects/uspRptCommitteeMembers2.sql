@@ -33,11 +33,13 @@ BEGIN
 			WHEN 2 THEN ': Co-Chr'
 			WHEN 3 THEN ': V Chr'
 			WHEN 4 THEN ': Sec'
-			WHEN 5 THEN ': Alt'
+			WHEN 5 THEN ': Member'
+			WHEN 6 THEN ': Alt'
 		ELSE '' END AS MemberName_and_Title, SRPhone, NRPhone,
 		IsNull([NRMailAddr],[SRMailAddr1]) as Addr, 
 		Email,
 		case when Left([SRMailAddr1],3)='PMB' then '18160 Cottonwood Rd' else ' ' end as SRMailAddr,
+		TAppointed, TEnd, case when TEND is null then '' else '{'+TTerm +'}' end as MiddlePartOfTermDescription,
 		null as CommitteeID_Li, null as LiaisonNRMail, null as LiaisonSRMail, null as LiaisonName, null as LiaisonType, null as LiaisonSRPhone, null as LiaisonEmail, null as LiaisonRepresents, null LiaisonNRPhone
 	FROM 
 		tblRostermembers rm  INNER JOIN 
@@ -54,11 +56,12 @@ union
 		case when Term>1 then ' years ' else ' year ' end + 
 		case when isnull(TermLimit,0)>0 then 'with a limit of ' + cast(TermLimit as varchar) + ' year' + 
 			case when TermLimit>1 then 's' else '' end
-		 else '' end as TermInfo
+		 else '' end as TermInfo	
 		FROM tblCommitteeData cd
 	) com2 INNER JOIN (
 		select
 			null as CommitteeID_Mem,null as MemberName_and_Title, null as SRPhone, null as NRPhone, null as Addr, null as Email, null as SRMailAddr,
+			null as TAppointed, null as TEnd, null as MiddlePartOfTermDescription,
 			CommitteeID as CommitteeID_Li, 
 			IsNull([LiaisonNRMail],[LiaisonSRMail1]) as [LiaisonNRMail],
 			CASE WHEN Left([LiaisonSRMail1],3)='PMB' then '18160 Cottonwood Rd' else '' end as LiaisonSRMail,

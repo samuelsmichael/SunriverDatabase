@@ -25,7 +25,7 @@ namespace SubmittalProposal.Reports {
             ddlDepartmentsParm.DataSource = department;
             ddlDepartmentsParm.DataBind();
         }
-
+            
         protected override CrystalDecisions.CrystalReports.Engine.ReportDocument getReportDocument() {
             if (ddlReport.SelectedValue == "Concerns Open" || ddlReport.SelectedValue == "Concerns Closed" || ddlReport.SelectedValue=="All Concerns" ) {
                 return new OwnerConcerns.OwnerConcernsOpenClosed();
@@ -62,12 +62,12 @@ namespace SubmittalProposal.Reports {
             }
             if (ddlReport.SelectedValue == "Concerns Open") {
                 reportParams.Add("@ButIncludeBothOpensAndClosedInTheDataSet", true);
-                reportParams.Add("@ConcernsOpen", true);
+                reportParams.Add("@ConcernsOpen222", true);
                 reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Open");
             } else {
                 if (ddlReport.SelectedValue == "Concerns Closed") {
                     reportParams.Add("@ButIncludeBothOpensAndClosedInTheDataSet", true);
-                    reportParams.Add("@ConcernsOpen", false);
+                    reportParams.Add("@ConcernsOpen222", false);
                     reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Closed");
                 } else {
                     if (ddlReport.SelectedValue == "All Concerns") {

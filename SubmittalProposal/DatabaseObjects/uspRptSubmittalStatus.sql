@@ -10,6 +10,8 @@ GO
 	exec uspRptSubmittalStatus @FromDate='1/1/2014', @ToDate='12/31/2014'
 */
 -- =============================================
+Use srpropertysql
+go
 alter PROCEDURE uspRptSubmittalStatus 
 	-- Add the parameters for the stored procedure here
 	@FromDate Datetime = null, 
@@ -33,13 +35,16 @@ BEGIN
 			cast (0 as int) as CountApproved,
 			cast (0 AS int) as CountApprovedWithConditions,
 			cast (0 as int) as CountDeferred,
-			cast (0 as int) as CountDenied
+			cast (0 as int) as CountDenied,
+			cast ('4/19/2016' as datetime) as FromDate,
+			cast ('5/19/2017' as datetime) as ToDate
 	end else begin
 		SELECT s.SubmittalID, s.Lot, s.Lane, s.Own_Name, s.Project, s.Mtg_Date, s.ProjectType, s.ProjectDecision, s.Conditions, pt.TypeDescription, pd.DecisionDescription,
 				CASE WHEN s.ProjectDecision='A' THEN 1 else 0 END as CountApproved,
 				CASE WHEN s.ProjectDecision='AWC' THEN 1 else 0 END as CountApprovedWithConditions,
 				CASE WHEN s.ProjectDecision='DEF' THEN 1 else 0 END as CountDeferred,
-				CASE WHEN s.ProjectDecision='DEN' THEN 1 else 0 END as CountDenied
+				CASE WHEN s.ProjectDecision='DEN' THEN 1 else 0 END as CountDenied,
+				@FromDate as FromDate, @ToDate as ToDate
 		FROM 
 		    tblBPData bp right JOIN 
 			tblSubmittal s ON bp.fkSubmittalID_PD = s.SubmittalID INNER JOIN

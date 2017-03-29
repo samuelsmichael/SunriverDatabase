@@ -106,7 +106,7 @@ namespace SubmittalProposal.Reports.RVLease {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReportHeading {
+        public CrystalDecisions.Shared.IParameterField Parameter_IsPastDueReport {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -114,7 +114,7 @@ namespace SubmittalProposal.Reports.RVLease {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SideBarHeading {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReportHeading {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -122,9 +122,17 @@ namespace SubmittalProposal.Reports.RVLease {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_IsPastDueReport {
+        public CrystalDecisions.Shared.IParameterField Parameter_SidebarHeading {
             get {
                 return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_MarreMaisMarre {
+            get {
+                return this.DataDefinition.ParameterFields[4];
             }
         }
     }

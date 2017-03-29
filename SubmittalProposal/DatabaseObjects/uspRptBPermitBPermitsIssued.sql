@@ -21,7 +21,9 @@ ALTER PROCEDURE [dbo].[uspRptBPermitBPermitsIssued]
 	@EndDate datetime = null,
 	@ReportingHeading varchar(256)=null,
 	@Lot varchar(50)=null,
-	@Lane varchar(50)=null
+	@Lane varchar(50)=null,
+	@PropID varchar(10)=null, -- dummy
+	@ReportHeading varchar(30)=null --dummy
 AS
 BEGIN
 	SET NOCOUNT ON;

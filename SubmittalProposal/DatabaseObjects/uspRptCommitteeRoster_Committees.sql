@@ -5,6 +5,8 @@ GO
 /* =============================================
 	exec uspRptCommitteeRoster_Committees
    ============================================= */
+   use comroster;
+   go
 alter PROCEDURE uspRptCommitteeRoster_Committees
 AS
 BEGIN

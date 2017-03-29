@@ -138,7 +138,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ConcernsOpen {
+        public CrystalDecisions.Shared.IParameterField Parameter_Category {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -146,7 +146,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Category {
+        public CrystalDecisions.Shared.IParameterField Parameter_ForceSortByCategory {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -154,7 +154,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ForceSortByCategory {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReportTitle {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -162,7 +162,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReportTitle {
+        public CrystalDecisions.Shared.IParameterField Parameter_ButIncludeBothOpensAndClosedInTheDataSet {
             get {
                 return this.DataDefinition.ParameterFields[6];
             }
@@ -170,9 +170,25 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ButIncludeBothOpensAndClosedInTheDataSet {
+        public CrystalDecisions.Shared.IParameterField Parameter_JustDoingCategorySummary {
             get {
                 return this.DataDefinition.ParameterFields[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_SRLotLane {
+            get {
+                return this.DataDefinition.ParameterFields[8];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_ConcernsOpen222 {
+            get {
+                return this.DataDefinition.ParameterFields[9];
             }
         }
     }

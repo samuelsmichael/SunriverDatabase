@@ -10,16 +10,20 @@ GO
 	exec uspRptSellCheckList '1/1/2015', '9/20/2015'
 */
 -- =============================================
+use SRSellCheck
+go
 alter PROCEDURE uspRptSellCheckList
 	@StartDate DateTime,
 	@EndDate DateTime
 AS
 BEGIN
 	SET NOCOUNT ON;
+	declare @OriginalEndDate datetime
+	set @OriginalEndDate=@EndDate
 	set @EndDate=DateAdd(dd,1,@EndDate)
 	set @EndDate=DateAdd(mi,-1,@EndDate)
 	
-	select sc.*, r.scLot, r.scLane
+	select sc.*, r.scLot, r.scLane, @StartDate as StartDate, @OriginalEndDate as EndDate
 	from tblSellCheck sc INNER JOIN 
 		tblRequest r ON sc.fkscRequestID = r.scRequestID
 	where scDate>=@StartDate and scDate<=@EndDate

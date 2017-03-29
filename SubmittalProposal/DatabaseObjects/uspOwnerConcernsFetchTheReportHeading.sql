@@ -14,16 +14,14 @@ GO
 -- =============================================
 use srpropertysql
 go
-alter PROCEDURE uspOwnerConcernsQueriesFromSRProperty 	
-	@Lot nvarchar(20) = null
-	,@Lane nvarchar(30) = null
+alter PROCEDURE uspOwnerConcernsFetchTheReportHeading 	
+	@Lot nvarchar(20) = null -- dummy
+	,@Lane nvarchar(30) = null -- dummy
 	,@PropID nvarchar(10) = null --dummy
-	,@ReportHeading nvarchar(256)=null --dummy
+	,@ReportHeading nvarchar(256)
 
 AS
 BEGIN
-	declare @LotLane nvarchar(50)
-	set @LotLane= @Lot + ' ' + @Lane
-	exec OwnerConcerns..uspOwnerConcernsQueries @SRLotLane=@LotLane  
+	select top 1 @ReportHeading AS ReportHeading FROM tblBPData
 END
 GO

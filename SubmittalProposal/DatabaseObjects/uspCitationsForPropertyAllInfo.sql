@@ -11,10 +11,13 @@ GO
 	exec uspCitationsForPropertyAllInfo @Lot='3', @Lane='RedWing'
 */
 -- =============================================
+Use srpropertysql
+go
 alter PROCEDURE uspCitationsForPropertyAllInfo 
 	@ReportHeading nvarchar(256)=null,
 	@Lot nvarchar(20),
-	@Lane nvarchar(30)
+	@Lane nvarchar(30),
+	@PropID nvarchar(10) -- dummy
 
 AS
 BEGIN

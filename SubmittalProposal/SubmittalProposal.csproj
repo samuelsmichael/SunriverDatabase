@@ -545,6 +545,12 @@
     <Compile Include="Reports\OwnerConcernsLaunchManager.aspx.designer.cs">
       <DependentUpon>OwnerConcernsLaunchManager.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\OwnerProperty\OwnerConcernsTemplate.cs">
+      <DependentUpon>OwnerConcernsTemplate.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\OwnerProperty\PropertyAllInfoBPermits.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1314,12 +1320,6 @@
       <DependentUpon>OwnerConcernsOpenClosed.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\OwnerConcerns\OwnerConcernsTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OwnerConcernsTemplate.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\OwnerProperty\Envelope.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1853,13 +1853,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>OwnerConcernsOpenClosed.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\OwnerConcerns\OwnerConcernsTemplate.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>OwnerConcernsTemplate.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\OwnerProperty\Envelope.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Envelope.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\OwnerProperty\OwnerConcernsTemplate.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OwnerConcernsTemplate.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

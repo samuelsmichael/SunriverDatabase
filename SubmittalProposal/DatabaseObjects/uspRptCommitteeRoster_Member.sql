@@ -3,8 +3,10 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 /* =============================================
-	exec uspRptCommitteeRoster_Member @CommitteeID=2
+	exec uspRptCommitteeRoster_Member @CommitteeID=7
    ============================================= */
+   use comroster;
+   go
 alter PROCEDURE uspRptCommitteeRoster_Member
 	@CommitteeID int
 AS
@@ -16,7 +18,8 @@ CommitteeID, [FirstName] + ' ' + LastName +
 		WHEN 2 THEN ': Co-Chr'
 		WHEN 3 THEN ': V Chr'
 		WHEN 4 THEN ': Sec'
-		WHEN 5 THEN ': Alt'
+		WHEN 5 THEN ': Member'
+		when 6 then ': Alt'
 	ELSE '' END AS MemberName_and_Title,
 TAppointed, TStart, TEnd, SRPhone, NRPhone, TTerm,
 case when TEND is null then '' else '{'+TTerm +'}' end as MiddlePartOfTermDescription,

@@ -16,14 +16,14 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class OwnerConcernsTemplate : ReportClass {
+    public class OwnerConcernsTemplate2 : ReportClass {
         
-        public OwnerConcernsTemplate() {
+        public OwnerConcernsTemplate2() {
         }
         
         public override string ResourceName {
             get {
-                return "OwnerConcernsTemplate.rpt";
+                return "OwnerConcernsTemplate2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         public override string FullResourceName {
             get {
-                return "SubmittalProposal.Reports.OwnerConcerns.OwnerConcernsTemplate.rpt";
+                return "SubmittalProposal.Reports.OwnerConcerns.OwnerConcernsTemplate2.rpt";
             }
             set {
                 // Do nothing
@@ -178,9 +178,9 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedOwnerConcernsTemplate : Component, ICachedReport {
+    public class CachedOwnerConcernsTemplate2 : Component, ICachedReport {
         
-        public CachedOwnerConcernsTemplate() {
+        public CachedOwnerConcernsTemplate2() {
         }
         
         [Browsable(false)]
@@ -217,7 +217,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            OwnerConcernsTemplate rpt = new OwnerConcernsTemplate();
+            OwnerConcernsTemplate2 rpt = new OwnerConcernsTemplate2();
             rpt.Site = this.Site;
             return rpt;
         }

@@ -10,13 +10,15 @@ GO
 	exec uspRptSellCheckHistory 3,'Quail'
 */
 -- =============================================
+Use SRSellCheck
+go
 alter PROCEDURE uspRptSellCheckHistory
 	@Lot varchar(10),
 	@Lane varchar(28)
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT sc.*
+	SELECT sc.*, @Lot as Lot, @Lane as Lane
 	FROM [SRSellCheck].[dbo].tblsellcheck sc inner join tblRequest r on r.scRequestId=sc.fkscRequestId where scLot=@lot and scLane=@lane
 END
 GO

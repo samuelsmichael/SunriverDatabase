@@ -7,7 +7,7 @@ GO
 -- Create date: 4/22/2016
 -- Description:	Updates Citations
 /*
-	exec [uspCitationsQry-Closed] @StartDate='1/1/2014', @EndDate='6/1/2016'
+	exec [uspCitationsQry-Closed] @StartDate='1/1/2014', @EndDate='1/1/2017'
 */
 -- =============================================
 Use SRCitations;

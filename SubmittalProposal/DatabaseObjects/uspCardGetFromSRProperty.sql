@@ -12,8 +12,13 @@ GO
 	exec uspCardGetFromSRProperty  @PropID='01001'
 */
 -- =============================================
+use srpropertysql
+go
 alter PROCEDURE uspCardGetFromSRProperty 
-	@PropID nvarchar(10)	
+	@PropID nvarchar(10),
+	@ReportHeading nvarchar(256)=null, --dummy
+	@Lot nvarchar(20) = null, -- dummy
+	@Lane nvarchar(30) = null -- dummy
 AS
 BEGIN
 	select p.CardID,CustId,cdFirstName, cdLastName, cdClass, cdStatus, cdIssueDate
