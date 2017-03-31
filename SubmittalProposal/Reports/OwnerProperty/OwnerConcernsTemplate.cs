@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SubmittalProposal.Reports.OwnerConcerns {
+namespace SubmittalProposal.Reports.OwnerProperty {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace SubmittalProposal.Reports.OwnerConcerns {
         
         public override string FullResourceName {
             get {
-                return "SubmittalProposal.Reports.OwnerConcerns.OwnerConcernsTemplate.rpt";
+                return "SubmittalProposal.Reports.OwnerProperty.OwnerConcernsTemplate.rpt";
             }
             set {
                 // Do nothing
