@@ -10,7 +10,9 @@ GO
 	exec [uspCitationsQry-FineBalToAcctg] @StartDate='1/1/2014', @EndDate='6/1/2016'
 */
 -- =============================================
-create PROCEDURE [uspCitationsQry-FineBalToAcctg] 
+use srcitations
+go
+alter PROCEDURE [uspCitationsQry-FineBalToAcctg] 
 	@StartDate datetime,
 	@EndDate datetime
 AS
@@ -24,11 +26,12 @@ SELECT
 	c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, c.JudicialFine, 
 	c.AssessedFine, c.WriteOff, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
-	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
+	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
+	c.Citation#
 
 FROM qryTotalCitationFine f RIGHT JOIN tblCitations c ON f.fkCitationID=c.CitationID
 WHERE c.OffenseDate Between @StartDate And @EndDate AND c.FineStatus='Balance To Accounting'
-ORDER BY c.CitationID;
+ORDER BY c.Citation#;
 
 
 

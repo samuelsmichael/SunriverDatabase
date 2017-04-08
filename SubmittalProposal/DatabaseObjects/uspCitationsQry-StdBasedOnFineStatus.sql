@@ -32,7 +32,7 @@ SELECT
 	c.AssessedFine, c.WriteOff, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
 	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
-	@EndDate as EndDate, @StartDate as StartDate
+	@EndDate as EndDate, @StartDate as StartDate, c.Citation#
 
 FROM qryTotalCitationFine f inner JOIN tblCitations c ON f.fkCitationID=c.CitationID 
 WHERE c.OffenseDate Between @StartDate And @EndDate AND 
@@ -41,7 +41,7 @@ WHERE c.OffenseDate Between @StartDate And @EndDate AND
 		or
 		(@EqualvsNotEqual=0 and c.FineStatus != @WhereFineStatus) 
 	)
-ORDER BY FineStatus,c.CitationID;
+ORDER BY FineStatus,c.Citation#;
 
 
 

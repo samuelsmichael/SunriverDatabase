@@ -12,7 +12,7 @@ GO
 -- =============================================
 use SRCitations;
 go
-CREATE PROCEDURE uspRptCitationsHearingCalendar2 
+alter PROCEDURE uspRptCitationsHearingCalendar2 
 	@HearingDate datetime
 AS
 BEGIN	
@@ -27,7 +27,8 @@ BEGIN
 			c.CitingOfficer, c.MagistrateFine, c.JudicialFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, f.TotalCitationFine, 
 			f.PrePayAmount, 
 			case when [FineStatus]='Assessed Fine - Paid' then [AssessedFine] else 0 end as AssessedFine,
-			case when [FineStatus]='PrePay Amount - Paid' then [PrePayAmount] else 0 end AS FinePaid
+			case when [FineStatus]='PrePay Amount - Paid' then [PrePayAmount] else 0 end AS FinePaid,
+			c.Citation#
 		FROM 
 			qryTotalCitationFine f RIGHT JOIN 
 			tblCitations c ON f.fkCitationID = c.CitationID

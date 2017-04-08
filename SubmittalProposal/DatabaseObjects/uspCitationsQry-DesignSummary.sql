@@ -25,7 +25,7 @@ SELECT
 	CASE WHEN v.IssueAsWarning = 1 then 1 else 0 end as Warning,
 	CASE WHEN v.IssueAsWarning = 0 then 1 else 0 end as Fine,
 	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
-	@StartDate as StartDate, @EndDate as EndDate
+	@StartDate as StartDate, @EndDate as EndDate, c.Citation#
 
 FROM 
 	[tblRuleType{LU}] r INNER JOIN 

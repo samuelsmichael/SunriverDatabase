@@ -13,14 +13,14 @@
         </asp:DropDownList>
     </td>
     <td>
-        <asp:Label ID="Label1" runat="server" Text="CitationID"></asp:Label>
-        <asp:TextBox ID="tbCitationIDLU" Width="46" runat="server"></asp:TextBox>
+        <asp:Label ID="Label1" runat="server" Text="Citation#"></asp:Label>
+        <asp:TextBox ID="tbCitationIDLU" Width="46" MaxLength="10" runat="server"></asp:TextBox>
     </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
     <div style="height: 400px; overflow: auto;">
         <asp:GridView AllowSorting="True" ID="gvResults" OnSelectedIndexChanged="gvResults_SelectedIndexChanged"
-            Style="width: 100%; white-space: nowrap;" runat="server" AutoGenerateColumns="False"
+            Style="width: 100%; white-space: nowrap;" runat="server" AutoGenerateColumns="False" DataKeyNames="CitationID"
             CellPadding="4" ForeColor="#333333" GridLines="None" OnSorting="gvResults_Sorting">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EmptyDataTemplate>
@@ -33,7 +33,7 @@
                 <asp:BoundField DataField="OffenseDate" HeaderText="Offence Date" SortExpression="OffenseDate"
                     DataFormatString="{0:d}" />
                 <asp:BoundField DataField="FineStatus" HeaderText="Fine Status" SortExpression="FineStatus" />
-                <asp:BoundField DataField="CitationID" HeaderText="CitationID" SortExpression="CitationID" />
+                <asp:BoundField DataField="Citation#" HeaderText="Citation#" SortExpression="Citation#" />
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -73,7 +73,7 @@
                                 <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Citing Officer"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="tbCitingOfficerUpdate" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="tbCitingOfficerUpdate" MaxLength="20" Width="11em" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -101,12 +101,18 @@
                         ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                         ControlToValidate="tbHearingDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                 </td>
+                <td><asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Citation#"></asp:Label></td>
+                <td><asp:TextBox ID="tbCitationNbrUpdate" Width="46" MaxLength="10" runat="server"></asp:TextBox>
+                    <asp:CustomValidator ID="cvCitationNbrUpdate" ControlToValidate="tbCitationNbrUpdate" ValidateEmptyText="true"
+                        Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                        ErrorMessage="Req'd" OnServerValidate="cvCitationNbr_ServerValidateUpdate"></asp:CustomValidator>
+                </td>
             </tr>
             <tr valign="top">
                 <td valign="top">
                     <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="First Name"></asp:Label>
                 </td>
-                <td colspan="5">
+                <td colspan="7">
                     <asp:TextBox ID="tbCitationsFirstNameUpdate" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
                 </td>
             </tr>
@@ -114,7 +120,7 @@
                 <td valign="top">
                     <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Address1"></asp:Label>
                 </td>
-                <td colspan="5">
+                <td colspan="7">
                     <asp:TextBox ID="tbCitationsAddress1Update" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
                 </td>
             </tr>
@@ -122,7 +128,7 @@
                 <td valign="top">
                     <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Address2"></asp:Label>
                 </td>
-                <td colspan="5">
+                <td colspan="7">
                     <asp:TextBox ID="tbCitationsAddress2Update" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
                 </td>
             </tr>
@@ -142,8 +148,11 @@
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label9" runat="server" Text="Zip"></asp:Label>
                 </td>
-                <td align="left">
-                    <asp:TextBox ID="tbCitationsZipUpdate" MaxLength="10" Width="6em" runat="server"></asp:TextBox>
+                <td align="left" colspan="1">
+                    <asp:TextBox ID="tbCitationsZipUpdate" MaxLength="10" Width="8em" runat="server"></asp:TextBox>
+                </td>
+                <td align="left" colspan="2">
+                    &nbsp;
                 </td>
             </tr>
         </table>
@@ -257,7 +266,7 @@
                         </asp:GridView>
                     </div>
                     <center>
-                        <asp:LinkButton ID="lbNewViolation" CausesValidation="false" OnClick="lbNewViolation_OnClick"
+                        <asp:LinkButton ID="lbNewViolation" CausesValidation="false" OnClientClick="javascript: return true;" OnClick="lbNewViolation_OnClick"
                             runat="server">New Violation</asp:LinkButton>
                     </center>
                 </td>
@@ -436,8 +445,8 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
     <center>
-        <asp:LinkButton ID="lbNewCitation" CausesValidation="false" OnClick="lbNewCitation_OnClick"
-            runat="server">New Citation</asp:LinkButton>
+        <asp:Button ID="lbNewCitation" CausesValidation="false" OnClick="lbNewCitation_OnClick" Text="New Citation"
+            runat="server"></asp:Button>
     </center>
     <asp:Panel runat="server" CssClass="newitempopup" Width="800" ID="pnlCitationNewContent">
         <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlCitationNewTitle">
@@ -469,7 +478,7 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Citing Officer"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="tbCitingOfficerNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="tbCitingOfficerNew" MaxLength="20" Width="11em" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -497,12 +506,18 @@
                                 ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                 ControlToValidate="tbHearingDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
+                        <td><asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Citation#"></asp:Label></td>
+                        <td><asp:TextBox ID="tbCitationNbrNew" Width="46" MaxLength="10" runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="cvCitationNbrNew" ControlToValidate="tbCitationNbrNew" ValidateEmptyText="true"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Req'd" OnServerValidate="cvCitationNbr_ServerValidateNew"></asp:CustomValidator>
+                        </td>
                     </tr>
                     <tr valign="top">
                         <td valign="top">
                             <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="First Name"></asp:Label>
                         </td>
-                        <td colspan="5">
+                        <td colspan="7">
                             <asp:TextBox ID="tbCitationsFirstNameNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
@@ -510,7 +525,7 @@
                         <td valign="top">
                             <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="Address1"></asp:Label>
                         </td>
-                        <td colspan="5">
+                        <td colspan="7">
                             <asp:TextBox ID="tbCitationsAddress1New" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
@@ -518,7 +533,7 @@
                         <td valign="top">
                             <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Address2"></asp:Label>
                         </td>
-                        <td colspan="5">
+                        <td colspan="7">
                             <asp:TextBox ID="tbCitationsAddress2New" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
@@ -538,8 +553,11 @@
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Zip"></asp:Label>
                         </td>
-                        <td align="left">
-                            <asp:TextBox ID="tbCitationsZipNew" MaxLength="10" Width="6em" runat="server"></asp:TextBox>
+                        <td align="left" colspan="1">
+                            <asp:TextBox ID="tbCitationsZipNew" MaxLength="10" Width="8em" runat="server"></asp:TextBox>
+                        </td>
+                        <td align="left" colspan="2">
+                            &nbsp;
                         </td>
                     </tr>
                 </table>

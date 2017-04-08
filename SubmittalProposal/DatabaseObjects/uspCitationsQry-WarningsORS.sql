@@ -22,7 +22,7 @@ SELECT
 	c.CitationID, v.fkRuleID, v.[ORS#], v.IssueAsWarning, v.ViolationNotes, r.RuleDescription, c.OffenseDate, c.FineStatus, c.VLastName, c.VFirstName, 
 	c.OffenseLocation, c.CitingOfficer,
 	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
-	@EndDate as EndDate, @StartDate as StartDate
+	@EndDate as EndDate, @StartDate as StartDate, c.Citation#
 FROM 
 	[tblRuleType{LU}] r INNER JOIN 
 	tblViolations v ON r.RuleID = v.fkRuleID inner join

@@ -1,3 +1,5 @@
+USE SRCitations
+go
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -31,6 +33,7 @@ alter PROCEDURE uspCitationsUpdate
 	@FineBalToAcctg money = null,
 	@FineStatus nvarchar(30),
 	@MagistrateNotes nvarchar(max),
+	@Citation# nvarchar(10),
 	@NewCitationID int out
 AS
 BEGIN
@@ -56,7 +59,8 @@ BEGIN
 			  [WriteOff] = @WriteOff, 
 			  [FineBalToAcctg] = @FineBalToAcctg,
 			  [FineStatus] = @FineStatus, 
-			  [MagistrateNotes] = @MagistrateNotes 
+			  [MagistrateNotes] = @MagistrateNotes, 
+			  [Citation#]=@Citation#
 		 WHERE CitationID=@CitationID	
  end else begin
 INSERT INTO [dbo].[tblCitations]
@@ -78,7 +82,8 @@ INSERT INTO [dbo].[tblCitations]
            ,[WriteOff]
            ,[FineBalToAcctg]
            ,[FineStatus]
-           ,[MagistrateNotes])
+           ,[MagistrateNotes]
+		   ,[Citation#])
      VALUES
            (@VLastName,
            @VFirstName,
@@ -98,7 +103,8 @@ INSERT INTO [dbo].[tblCitations]
            @WriteOff,
            @FineBalToAcctg,
            @FineStatus, 
-           @MagistrateNotes)
+           @MagistrateNotes,
+		   @Citation#)
 	set @NewCitationID=scope_identity()
 	end
 END

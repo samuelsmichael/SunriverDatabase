@@ -25,7 +25,7 @@ SELECT
 	c.FineBalToAcctg, c.FineStatus, c.MagistrateNotes, f.TotalCitationFine, f.PrePayAmount, 
 	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid,
-	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName
+	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName, c.Citation#
 
 FROM 
 	qryTotalCitationFine f INNER JOIN tblCitations c ON f.fkCitationID=c.CitationID

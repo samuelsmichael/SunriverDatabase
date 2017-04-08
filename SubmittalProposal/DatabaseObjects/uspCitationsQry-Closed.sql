@@ -29,7 +29,7 @@ SELECT
 --	IIf([FineStatus]="Assessed Fine - Paid",[AssessedFine],
 	--	IIf([FineStatus]="PrePay Amount - Paid",[PrePayAmount],0)) AS FinePaid
 	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid,
-	@EndDate as EndDate, @StartDate as StartDate
+	@EndDate as EndDate, @StartDate as StartDate, [Citation#]
 
 FROM 
 	qryTotalCitationFine f RIGHT JOIN tblCitations c ON f.fkCitationID = c.CitationID
@@ -42,7 +42,7 @@ WHERE
 		'PrePay Amount - Paid',
 		'Reduced to a Warning',
 		'WriteOff\Uncollectable')
-ORDER BY FineStatus,c.CitationID;
+ORDER BY FineStatus,c.Citation#;
 
 END
 GO
