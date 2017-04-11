@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
-    <ExcludeApp_Data>true</ExcludeApp_Data>
+    <ExcludeApp_Data>false</ExcludeApp_Data>
     <PackageAsSingleFile>true</PackageAsSingleFile>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
