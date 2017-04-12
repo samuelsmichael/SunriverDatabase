@@ -24,8 +24,8 @@
         <asp:TextBox ID="tbSubmittalId" Width="46" runat="server"></asp:TextBox>
     </td>
     <td>
-        <asp:Label ID="Label23" runat="server" Text="BPermit Id"></asp:Label>
-        <asp:TextBox ID="tbBPermitId" Width="46" runat="server"></asp:TextBox>
+        <asp:Label ID="Label23" runat="server" Text="BPermit#"></asp:Label>
+        <asp:TextBox ID="tbBPermitNbr" Width="46" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label6" runat="server" Text="Delay"></asp:Label>
@@ -34,7 +34,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
     <asp:GridView AllowSorting="True" ID="gvResults" AllowPaging="true" OnSelectedIndexChanged="gvResults_SelectedIndexChanged"
-        Style="width: 100%; white-space: nowrap;" runat="server" AutoGenerateColumns="False"
+        Style="width: 100%; white-space: nowrap;" runat="server" AutoGenerateColumns="False" DataKeyNames="BPermitID"
         CellPadding="4" ForeColor="#333333" GridLines="None" OnSorting="gvResults_Sorting"
         OnPageIndexChanging="gvResults_PageIndexChanging" PageSize="15">
         <PagerSettings Mode="NumericFirstLast" FirstPageText="<<" LastPageText=">>" Position="Bottom"
@@ -48,7 +48,7 @@
             <asp:BoundField DataField="Lot" HeaderText="Lot" SortExpression="Lot" />
             <asp:BoundField DataField="Lane" HeaderText="Lane" SortExpression="Lane" />
             <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" SortExpression="SubmittalId" />
-            <asp:BoundField DataField="BPermitId" HeaderText="BPermitId" SortExpression="BPermitId" />
+            <asp:BoundField DataField="BPermit#" HeaderText="BPermit#" SortExpression="BPermit#" />
             <asp:BoundField DataField="BPIssueDate" DataFormatString="{0:MM/dd/yyyy}" HeaderText="Issue Date"
                 SortExpression="BPIssueDate" />
             <asp:TemplateField HeaderText="Expires" SortExpression="BPExpires">
@@ -85,6 +85,16 @@
     <asp:Panel ID="Panel1" GroupingText="Building Permit Data" runat="server">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
+                <td>
+                    <asp:Label CssClass="form_field_heading" ID="Label41" runat="server" Text="BPermit#"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox CssClass="form_field" MaxLength="20" ID="tbBPermitNbrUpdate" Width="5em"
+                        runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="cvBPermitNbrUpdate" Enabled="true" ControlToValidate="tbBPermitNbrUpdate" ValidateEmptyText="true"
+                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                ErrorMessage="Req'd" OnServerValidate="cvBPermitNbr_ServerValidate"></asp:CustomValidator>
+                </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Delay"></asp:Label>
                 </td>
@@ -140,6 +150,8 @@
                         ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                         ControlToValidate="tbClosedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Permit Required"></asp:Label>
                 </td>
@@ -150,12 +162,10 @@
                         <asp:ListItem>No</asp:ListItem>
                     </asp:RadioButtonList>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label34" runat="server" Text="Contractor"></asp:Label>
                 </td>
-                <td colspan="9">
+                <td colspan="7">
                     <asp:DropDownList CssClass="form_field" runat="server" ID="ddlContractorUpdate" DataTextField="Company"
                         DataValueField="SRContrRegID">
                     </asp:DropDownList>
@@ -646,6 +656,16 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                         <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label41x3" runat="server" Text="BPermit#"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox CssClass="form_field" MaxLength="20" ID="tbBPermitNbrNew" Width="5em"
+                                runat="server"></asp:TextBox>
+                                    <asp:CustomValidator ID="cvBPermitNbrNew" ControlToValidate="tbBPermitNbrNew" ValidateEmptyText="true"
+                                        Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
+                                        ErrorMessage="Req'd" OnServerValidate="cvBPermitNbr_ServerValidate"></asp:CustomValidator>
+                        </td>
+                        <td>
                             <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Delay"></asp:Label>
                         </td>
                         <td>
@@ -701,6 +721,8 @@
                                 ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
                                 ControlToValidate="tbClosedNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Permit Required"></asp:Label>
                         </td>
@@ -710,12 +732,10 @@
                                 <asp:ListItem>No</asp:ListItem>
                             </asp:RadioButtonList>
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label35" runat="server" Text="Contractor"></asp:Label>
                         </td>
-                        <td colspan="9">
+                        <td colspan="7">
                             <asp:DropDownList CssClass="form_field" runat="server" ID="ddlContractorNew" DataTextField="Company"
                                 DataValueField="SRContrRegID">
                             </asp:DropDownList>

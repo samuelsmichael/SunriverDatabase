@@ -121,9 +121,9 @@ namespace SubmittalProposal
                 and = " and ";
             }
             if (Utils.isNothingNot(tbBPermitId.Text)) {
-                sb.Append(prepend + "BPermit Id: " + tbBPermitId.Text);
+                sb.Append(prepend + "BPermit#: " + tbBPermitId.Text);
                 prepend = "  ";
-                sbFilter.Append(and + " BPermitId =" + tbBPermitId.Text);
+                sbFilter.Append(and + " [BPermit#] ='" + tbBPermitId.Text+"'");
                 and = " and ";
             }
             if (ddlIsCommercial.SelectedValue != "Null") {
@@ -144,8 +144,8 @@ namespace SubmittalProposal
         private DateTime? getMeetingDate(DataRow dr) {
             return Utils.ObjectToDateTimeNullable(dr["Mtg_Date"]);
         }
-        private int? getBPermitId(DataRow dr) {
-            return Utils.ObjectToIntNullable(dr["BPermitID"]);
+        private string getBPermitId(DataRow dr) {
+            return Utils.ObjectToString(dr["BPermit#"]);
         }
         private string getLotLane(DataRow dr) {
             return (Utils.ObjectToString(dr["Lot"])) + "\\" + Utils.ObjectToString(dr["Lane"]);
@@ -218,10 +218,10 @@ namespace SubmittalProposal
             tbProjectUpdate.Text = Utils.ObjectToString(dr["Project"]);
             tbSubmittalUpdate.Text = Utils.ObjectToString(dr["Submittal"]);
             cbIsCommercialUpdate.Checked=Convert.ToBoolean(dr["IsCommercial"]);
-            int? permitid = getBPermitId(dr);
-            CurrentBPermitId =permitid.HasValue? Convert.ToString(permitid.Value):"";
+            string permitid = getBPermitId(dr);
+            CurrentBPermitId =permitid;
             
-            return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(row) + "  BPermitId :" + getBPermitId(dr) + "  Meeting Date: " + getMeetingDate(dr) + " Owner: " + getOwner(dr);
+            return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(row) + "  BPermit# :" + permitid + "  Meeting Date: " + getMeetingDate(dr) + " Owner: " + getOwner(dr);
         }
         string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {

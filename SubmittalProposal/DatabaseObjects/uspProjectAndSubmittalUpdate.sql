@@ -10,6 +10,8 @@ GO
 	exec uspProjectAndSubmittalUpdate
 */
 -- =============================================
+use srpropertysql
+go
 alter PROCEDURE uspProjectAndSubmittalUpdate 
 	@SubmittalId int=null,
 	@Own_Name nvarchar(40),
@@ -25,6 +27,7 @@ alter PROCEDURE uspProjectAndSubmittalUpdate
 	@BPClosed datetime=null,
 	@BPDelay nvarchar(255),
 	@fkSRContrRegID int=null, -- for backward compatibility
+	@BPermit# nvarchar(20),
 	@NewBPermitID int out,
 	@NewSubmittalID int out
 AS
@@ -69,7 +72,8 @@ BEGIN
 			BPIssueDate=@BPIssueDate,
 			BPClosed=@BPClosed,
 			BPDelay=@BPDelay,
-			fkSRContrRegID=@fkSRContrRegID
+			fkSRContrRegID=@fkSRContrRegID,
+			BPermit#=@BPermit#
 		WHERE BPermitID = @BPermitId
 	end else begin
 		INSERT INTO [dbo].[tblBPData]
@@ -79,7 +83,8 @@ BEGIN
            ,[BPIssueDate]
            ,[BPClosed]
            ,[BPDelay]
-		   ,[fkSRContrRegID])
+		   ,[fkSRContrRegID]
+		   ,BPermit#)
 		VALUES
            (
 		    @SubmittalId
@@ -88,6 +93,7 @@ BEGIN
            ,@BPClosed
            ,@BPDelay
 		   ,@fkSRContrRegID
+		   ,@BPermit#
 		   )
 		set @NewBPermitID=scope_identity()
 	end

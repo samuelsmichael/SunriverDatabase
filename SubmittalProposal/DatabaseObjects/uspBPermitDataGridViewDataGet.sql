@@ -10,6 +10,8 @@ GO
 	Exec uspBPermitDataGridViewDataGet
 */
 -- =============================================
+Use srpropertysql
+go
 ALTER PROCEDURE uspBPermitDataGridViewDataGet 
 AS
 BEGIN	
@@ -32,7 +34,8 @@ BEGIN
 			s.ProjectType,
 			s.Project,
 			b.BPDelay,
-			b.fkSRContrRegID
+			b.fkSRContrRegID,
+			b.BPermit#
 		FROM
 			tblBPData b inner JOIN
 			tblSubmittal s on s.SubmittalId=b.fkSubmittalID_PD left outer join

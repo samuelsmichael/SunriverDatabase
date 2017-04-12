@@ -25,7 +25,7 @@
         <asp:TextBox CssClass="form_field" ID="tbSubmittalId" Width="46" runat="server"></asp:TextBox>
     </td>
     <td>
-        <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="BPermit Id"></asp:Label>
+        <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="BPermit#"></asp:Label>
         <asp:TextBox CssClass="form_field" ID="tbBPermitId" Width="46" runat="server"></asp:TextBox>
     </td>
     <td>
