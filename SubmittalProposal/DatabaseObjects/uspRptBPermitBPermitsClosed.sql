@@ -33,11 +33,12 @@ BEGIN
 			cast('' as nvarchar(3)) as ProjectType,
 			cast('' as nvarchar(255)) as BPDelay,
 			cast('4/19/2017' as datetime) as StartDate,
-			cast('4/19/2017' as datetime) as EndDate
+			cast('4/19/2017' as datetime) as EndDate,
+			cast('' as nvarchar(20)) as BPermit#
 	end else begin
 		SELECT 
 			s.SubmittalID, s.BPermitID, s.Lot, s.Lane, bp.BPClosed, s.Own_Name, bp.BPIssueDate, bp.BPExpires, bp.BPStatus,
-			s.ProjectType, bp.BPDelay,@StartDate as StartDate, @EndDate as EndDate
+			s.ProjectType, bp.BPDelay,@StartDate as StartDate, @EndDate as EndDate, bp.BPermit#
 		FROM tblBPData bp left outer JOIN qrySubmittal s ON bp.fkSubmittalID_PD = s.SubmittalID
 		WHERE bp.BPClosed>0 AND bp.BPIssueDate Between @StartDate And @EndDate
 		ORDER BY s.BPermitID
