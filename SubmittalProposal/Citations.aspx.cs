@@ -171,6 +171,7 @@ namespace SubmittalProposal {
                 tbCitationsViolationsLocationUpdate.Text = Utils.ObjectToString(dr["OffenseLocation"]);
                 ddlCitationsFineStatusUpdate.SelectedValue = Utils.ObjectToString(dr["FineStatus"]);
                 string citationNbr = Utils.ObjectToString(dr["Citation#"]);
+                Session["Citation#Current"] = citationNbr;
                 tbCitationNbrUpdate.Text = citationNbr.Trim();
                 bind_gvViolations();
                 // this statement must be after the bind_gvViolations() statement, above.

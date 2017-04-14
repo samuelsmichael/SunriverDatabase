@@ -64,7 +64,9 @@ namespace SubmittalProposal {
         protected void lbDesignRuleWarnings_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/CitationsReport_DesignWarning.aspx");
         }
-     
+        protected void lbCitationData_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/CitationsReport_CitationData.aspx");
+        }
          
     }
 }

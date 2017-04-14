@@ -92,7 +92,8 @@
             </td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
+            <td>                <asp:LinkButton ID="lbCitationData" runat="server" 
+                    onclick="lbCitationData_Click">Citation Data</asp:LinkButton></td>
             <td>&nbsp;</td>
             <td>
                 <asp:LinkButton ID="lbDesignRuleWarnings" runat="server" 

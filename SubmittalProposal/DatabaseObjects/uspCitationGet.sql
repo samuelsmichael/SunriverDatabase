@@ -7,17 +7,20 @@ GO
 -- Create date: 5/20/2016
 -- Description:	Violator History
 /*
-	exec [uspCitationGet] @LastName='smith'
+	exec [uspCitationGet] @CitationID=
+	select * from tblcitations
 */
 -- =============================================
 USE SRCitations;
 go
-create PROCEDURE [uspCitationGet] 
+alter PROCEDURE [uspCitationGet] 
 	@CitationID int = null,
 	@Citation# nvarchar(20) = null
 AS
 BEGIN
-select * from tblCitations
+select * from tblCitations c
+left outer join tblViolations v on c.CitationId=v.fkCitationID
+inner join [tblRuleType{LU}] r on r.RuleID=v.fkRuleID
 where
 	(@CitationID is null or CitationID=@CitationID) and
 	(@Citation# is null or Citation#=@Citation#)

@@ -165,6 +165,7 @@
                             OnClientClick=>Print Envelope</asp:LinkButton>
                         <asp:LinkButton Visible="false" ForeColor="AliceBlue" ID="lbShowPDFs" style="margin-left:.5em;" runat="server" OnClientClick="javascript:location.href='PDFsPage.aspx?Type=Property'">PDFs</asp:LinkButton>
                         <asp:LinkButton Visible="false" ForeColor="AliceBlue" ID="lbPropertyAllInfo" style="margin-left:.5em;" runat="server" OnClientClick="javascript:location.href='Reports/AllInfoCrystalReportsPage.aspx'">All Info</asp:LinkButton>
+                        <asp:LinkButton Visible="false" ForeColor="AliceBlue" ID="lbCitationData" style="margin-left:.5em;" runat="server" OnClientClick="javascript:location.href='Reports/CitationsReport_CitationData.aspx'">Citation Data</asp:LinkButton>
                     </div>
                 </div>
             </asp:Panel>

@@ -53,9 +53,15 @@ namespace SubmittalProposal {
                     lbPropertyAllInfo.Visible = true;
                     lbPrintOwnerEnvelope.Visible = true;
                 }
+                if (Page.ToString().ToLower().IndexOf("citation") == -1 || Common.Utils.isNothing(Session["Citation#Current"])) {
+                    lbCitationData.Visible = false;
+                } else {
+                    lbCitationData.Visible = true;
+                }
             } else {
                 lbPropertyAllInfo.Visible = false;
                 lbPrintOwnerEnvelope.Visible = false;
+                lbCitationData.Visible = false;
             }
             lbShowPDFs.Visible = false;
             if (Page is ICanHavePDFs) {
