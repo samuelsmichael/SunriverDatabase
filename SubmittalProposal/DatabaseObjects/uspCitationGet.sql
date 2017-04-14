@@ -7,7 +7,7 @@ GO
 -- Create date: 5/20/2016
 -- Description:	Violator History
 /*
-	exec [uspCitationGet] @CitationID=
+	exec [uspCitationGet] @CitationID=15356
 	select * from tblcitations
 */
 -- =============================================
