@@ -28,4 +28,17 @@
     </p>    <p>
         Click on one of the tabs in order to open the database.
     </p>
+    <p>
+        2.02.0.1 -- 05/31/17<br />
+        Citations -- <br />
+        New Citations<br />
+        --Changed Tab Order, Created on Focus<br />
+        Reports:<br />
+        --Turned to landacape Citations Open, Citations Closed,Citations Fine Summary, Vegitation, Parking Violation, Design Violation, Design Rules Summary.<br />
+        <br />
+    </p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
 </asp:Content>
