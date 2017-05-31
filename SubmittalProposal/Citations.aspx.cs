@@ -652,6 +652,7 @@ namespace SubmittalProposal {
         protected void lbNewCitation_OnClick(object sender, EventArgs args) {
             isAddCitationOpen = true;
             Session["CitationNewPanelOpen"] = "Y";
+            tbCitationsLastNameNew.Focus();
             mpeNewCitation.Show();
         }
         protected void btnNewCitationOk_Click(object sender, EventArgs args) {
