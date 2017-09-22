@@ -461,13 +461,13 @@
                             <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Last Name"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbCitationsLastNameNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsLastNameNew" TabIndex="1" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Sunriver Status"></asp:Label>
                         </td>
                         <td colspan="1">
-                            <asp:DropDownList ID="ddlSunriverStatusNew" DataTextField="SunriverStatus" DataValueField="SunriverStatus"
+                            <asp:DropDownList ID="ddlSunriverStatusNew" TabIndex="8" DataTextField="SunriverStatus" DataValueField="SunriverStatus"
                                 runat="server">
                             </asp:DropDownList>
                         </td>
@@ -478,7 +478,7 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Citing Officer"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="tbCitingOfficerNew" MaxLength="20" Width="11em" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="tbCitingOfficerNew" TabIndex="9" MaxLength="20" Width="11em" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -489,10 +489,10 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field_date" ID="tbHearingDateNew" Width="7em" runat="server"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form_field_date" TabIndex="10" ID="tbHearingDateNew" Width="7em" runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
-                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                    <asp:ImageButton TabIndex="-1"  ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                                         ID="ibHearingDateNew" runat="server" />
                                                 </td>
                                             </tr>
@@ -507,7 +507,7 @@
                                 ControlToValidate="tbHearingDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
                         <td><asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Citation#"></asp:Label></td>
-                        <td><asp:TextBox ID="tbCitationNbrNew" Width="46" MaxLength="10" runat="server"></asp:TextBox>
+                        <td><asp:TextBox ID="tbCitationNbrNew" TabIndex="11" Width="46" MaxLength="10" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="cvCitationNbrNew" ControlToValidate="tbCitationNbrNew" ValidateEmptyText="true"
                                 Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
                                 ErrorMessage="Req'd" OnServerValidate="cvCitationNbr_ServerValidateNew"></asp:CustomValidator>
@@ -518,7 +518,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label21" runat="server" Text="First Name"></asp:Label>
                         </td>
                         <td colspan="7">
-                            <asp:TextBox ID="tbCitationsFirstNameNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsFirstNameNew" TabIndex="2" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -526,7 +526,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label23" runat="server" Text="Address1"></asp:Label>
                         </td>
                         <td colspan="7">
-                            <asp:TextBox ID="tbCitationsAddress1New" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsAddress1New" TabIndex="3" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -534,7 +534,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Address2"></asp:Label>
                         </td>
                         <td colspan="7">
-                            <asp:TextBox ID="tbCitationsAddress2New" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsAddress2New" TabIndex="4" MaxLength="35" Width="15em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -542,19 +542,19 @@
                             <asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="City"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbCitationsCityNew" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsCityNew" TabIndex="5" MaxLength="20" Width="15em" runat="server"></asp:TextBox>
                         </td>
                         <td align="right">
                             <asp:Label CssClass="form_field_heading" ID="Label26" runat="server" Text="State"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbCitationsStateNew" MaxLength="2" Width="3em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsStateNew" TabIndex="6" MaxLength="2" Width="3em" runat="server"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label27" runat="server" Text="Zip"></asp:Label>
                         </td>
                         <td align="left" colspan="1">
-                            <asp:TextBox ID="tbCitationsZipNew" MaxLength="10" Width="8em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbCitationsZipNew" TabIndex="7" MaxLength="10" Width="8em" runat="server"></asp:TextBox>
                         </td>
                         <td align="left" colspan="2">
                             &nbsp;
@@ -572,11 +572,11 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:TextBox CssClass="form_field_date" ID="tbCitationsViolationsDateNew" Width="7em"
+                                        <asp:TextBox CssClass="form_field_date" ID="tbCitationsViolationsDateNew" TabIndex="12" Width="7em"
                                             runat="server"></asp:TextBox>
                                     </td>
                                     <td>
-                                        <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                        <asp:ImageButton  TabIndex="-2" ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                             ID="ibCitationsViolationsDateNew" runat="server" />
                                     </td>
                                 </tr>
@@ -592,7 +592,7 @@
                         </td>
                         <td>
                             <asp:TextBox CssClass="form_field" runat="server" ID="tbCitationsViolationsLocationNew"
-                                Width="20em" MaxLength="50"></asp:TextBox>
+                                 TabIndex="13" Width="20em" MaxLength="50"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -609,7 +609,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Fine Status"></asp:Label>
                         </td>
                         <td colspan="1">
-                            <asp:DropDownList runat="server" ID="ddlCitationsFineStatusNew" DataTextField="FineStatus"
+                            <asp:DropDownList runat="server" ID="ddlCitationsFineStatusNew"  TabIndex="14" DataTextField="FineStatus"
                                 DataValueField="FineStatus">
                             </asp:DropDownList>
                         </td>
@@ -617,7 +617,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label37" runat="server" Text="Magistrate Fine"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbMagistrateFineNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbMagistrateFineNew"  TabIndex="15" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="cvMagistrateFineNew" ControlToValidate="tbMagistrateFineNew"
                                 Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
                                 ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvMagistrateFine_ServerValidate"></asp:CustomValidator>
@@ -626,7 +626,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label38" runat="server" Text="To Accounting"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbToAccountingNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbToAccountingNew" TabIndex="18" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator2" ControlToValidate="tbToAccountingNew"
                                 Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
                                 ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvToAccounting_ServerValidate"></asp:CustomValidator>
@@ -643,7 +643,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label40" runat="server" Text="Judicial Fine"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbJudicialFineNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbJudicialFineNew"  TabIndex="16" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator3" ControlToValidate="tbJudicialFineNew"
                                 Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
                                 ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvJudicialFine_ServerValidate"></asp:CustomValidator>
@@ -652,7 +652,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label41" runat="server" Text="Writeoff Amount"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="tbWriteoffAmountNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbWriteoffAmountNew" TabIndex="19" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator4" ControlToValidate="tbWriteoffAmountNew"
                                 Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
                                 ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvWriteoffAmount_ServerValidate"></asp:CustomValidator>
@@ -669,7 +669,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label43" runat="server" Text="Assessed Fine"></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:TextBox ID="tbAssessedFineNew" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbAssessedFineNew"  TabIndex="17" MaxLength="7" Width="6em" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator5" ControlToValidate="tbAssessedFineNew"
                                 Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
                                 ErrorMessage="Must be an amount (or blank)" OnServerValidate="cvAssessedFine_ServerValidate"></asp:CustomValidator>
@@ -679,18 +679,18 @@
             </asp:Panel>
             <asp:Panel runat="server" ID="Panel5" GroupingText="Magistrate Notes">
                 <div style="height: 3.3em; overflow: auto;">
-                    <asp:TextBox runat="server" Height="2em" Width="95%" TextMode="MultiLine" ID="tbMagistrateNotesNew"></asp:TextBox>
+                    <asp:TextBox runat="server" TabIndex="20" Height="2em" Width="95%" TextMode="MultiLine" ID="tbMagistrateNotesNew"></asp:TextBox>
                 </div>
             </asp:Panel>
             <center>
                 <table cellpadding="3">
                     <tr>
                         <td>
-                            <asp:Button CausesValidation="true" OnClientClick="javascript: return true;"
+                            <asp:Button CausesValidation="true"  TabIndex="21" OnClientClick="javascript: return true;"
                                 ID="btnNewCitationOkay" runat="server" Text="Okay" OnClick="btnNewCitationOk_Click" />
                         </td>
                         <td>
-                            <asp:Button ID="btnCitationNewCancel" runat="server" Text="Abort" CausesValidation="false"
+                            <asp:Button ID="btnCitationNewCancel"  TabIndex="22" runat="server" Text="Abort" CausesValidation="false"
                                 OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
                                 OnClick="btnNewCitationCancel_Click" />
                         </td>
