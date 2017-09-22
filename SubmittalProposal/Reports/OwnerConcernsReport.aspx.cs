@@ -72,15 +72,18 @@ namespace SubmittalProposal.Reports {
                 } else {
                     if (ddlReport.SelectedValue == "All Concerns") {
                         reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - All Owner Concerns");
+                        reportParams.Add("@ConcernsOpen222", false);
                     } else {
                         if (ddlReport.SelectedValue == "Concern Categories") {
                             reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Categories");
                             reportParams.Add("@ForceSortByCategory", true);
+                            reportParams.Add("@ConcernsOpen222", false);
                         } else {
                             if (ddlReport.SelectedValue == "Category Summary") {
                                 reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Categories");
                                 reportParams.Add("@ForceSortByCategory", true);
                                 reportParams.Add("@JustDoingCategorySummary", true);
+                                reportParams.Add("@ConcernsOpen222", false);
                             } else {
                                 throw new NotImplementedException();
                             }

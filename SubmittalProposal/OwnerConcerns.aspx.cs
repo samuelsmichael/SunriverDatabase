@@ -118,7 +118,7 @@ namespace SubmittalProposal {
                 and = " and ";
             }
             if (Utils.isNothingNot(tbOwnerConcernsSunriverAddressLU.Text)) {
-                sb.Append(prepend + "Name: " + tbOwnerConcernsSunriverAddressLU.Text);
+                sb.Append(prepend + "Address: " + tbOwnerConcernsSunriverAddressLU.Text);
                 prepend = "  ";
                 sbFilter.Append(and + Common.Utils.getDataViewQuery(tbOwnerConcernsSunriverAddressLU.Text, "SRLotLane"));
                 and = " and ";

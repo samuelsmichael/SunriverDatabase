@@ -162,7 +162,7 @@
                     <div style="float: right; vertical-align: middle; padding-right: 2em; font-size: x-small;">
                         <asp:LinkButton ForeColor="AliceBlue" ID="lbPrintOwnerEnvelope" runat="server" OnClientClick="javascript:location.href='Reports/Envelope.aspx?Database=OwnerProperty'">Print Envelope</asp:LinkButton>
                         <asp:LinkButton ForeColor="AliceBlue" ID="lbPrintViolatorsEnvelope" runat="server"
-                            OnClientClick=>Print Envelope</asp:LinkButton>
+                            OnClientClick="javascript:location.href='Reports/Envelope.aspx?Database=OwnerProperty'">Print Envelope</asp:LinkButton>
                         <asp:LinkButton Visible="false" ForeColor="AliceBlue" ID="lbShowPDFs" style="margin-left:.5em;" runat="server" OnClientClick="javascript:location.href='PDFsPage.aspx?Type=Property'">PDFs</asp:LinkButton>
                         <asp:LinkButton Visible="false" ForeColor="AliceBlue" ID="lbPropertyAllInfo" style="margin-left:.5em;" runat="server" OnClientClick="javascript:location.href='Reports/AllInfoCrystalReportsPage.aspx'">All Info</asp:LinkButton>
                         <asp:LinkButton Visible="false" ForeColor="AliceBlue" ID="lbCitationData" style="margin-left:.5em;" runat="server" OnClientClick="javascript:location.href='Reports/CitationsReport_CitationData.aspx'">Citation Data</asp:LinkButton>

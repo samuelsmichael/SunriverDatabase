@@ -33,6 +33,7 @@ BEGIN
 			cast ('' as varchar(6)) as crOpenClosed,
 			cast ('' as varchar(100)) as Lot,
 			cast ('' as varchar(100)) as Lane
+	end else begin
 		SELECT 
 			cr.crReviewID, cr.crDate, cr.crLOT, cr.crLANE, cr.crSubmittalID, 
 			cr.crComments, cr.crCorrection, cr.crRule, cr.crFollowUp, cr.crCloseDate, 

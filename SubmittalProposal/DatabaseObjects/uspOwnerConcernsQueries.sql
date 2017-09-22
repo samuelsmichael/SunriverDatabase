@@ -10,6 +10,7 @@ GO
 -- Description:	Gets the data for OwnerConcerns Queries
 /*
 	exec uspOwnerConcernsQueries  @SRLotLane='5 Shadow'
+	exec uspOwnerConcernsQueries  @DeptReferred='Environmental', @ReportTitle='Environmental - All Owner Concerns'
 */
 -- =============================================
 use OwnerConcerns;
@@ -30,7 +31,7 @@ BEGIN
 	SET NOCOUNT ON;
 SELECT c.[OCCase#], c.DeptReferred1,  c.SubmitDate, c.ResolutionDate, c.FirstName, c.LastName, case when c.ResolutionDate is null then 'Yes' else 'No' end as [Open],
 	 a.Addr1 AS SRLane, c.Category, c.[Description], c.Resolution, c.CloseFormBy, c.DeptReferred2, 
-	 @StartDate as StartDate, @EndDate as EndDate, @ReportTitle as ReportTitle,@ConcernsOpen222 as ConcernsOpen,
+	 @StartDate as StartDate, @EndDate as EndDate, @ReportTitle as ReportTitle,@ConcernsOpen222 as ConcernsOpen222,
 	 @JustDoingCategorySummary as JustDoingCategorySummary
 FROM [ID-Card_Split_FE]..tblArShipTo a INNER JOIN tblOCData c ON a.CustId = c.[OwnerID#]
 WHERE 
