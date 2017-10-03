@@ -246,6 +246,16 @@ namespace SubmittalProposal
                     Page.ClientScript.RegisterStartupScript(Page.GetType(), "startupBB", sb.ToString());
                 }
                  */
+                DataTable contractor = Contractor.CRDataSet().Tables[1];
+                DataRow dr = contractor.NewRow();
+                dr["Contact"] = "";
+                dr["SRContrRegID"] = 0;
+                try { // it might already be there
+                    contractor.Rows.InsertAt(dr, 0);
+                } catch { }
+                ddlContractorUpdate.DataSource = contractor;
+                ddlContractorUpdate.DataBind();
+
             }
         }
         protected override DataTable getGridViewDataTable() {
