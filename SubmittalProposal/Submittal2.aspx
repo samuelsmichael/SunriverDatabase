@@ -332,13 +332,13 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label33" runat="server" Text="Lot"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" ID="TextBox1" MaxLength="5" Width="35" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbLotNameUpdateBP" MaxLength="5" Width="35" runat="server"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label34" runat="server" Text="Lane"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList CssClass="form_field" ID="DropDownList1" runat="server" DataTextField="Lane"
+                                        <asp:DropDownList CssClass="form_field" ID="ddlLaneUpdateBP" runat="server" DataTextField="Lane"
                                             DataValueField="Lane">
                                         </asp:DropDownList>
                                     </td>
@@ -346,13 +346,13 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label35" runat="server" Text="Owner"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" ID="TextBox2" MaxLength="40" Width="20em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" ID="tbOwnersNameUpdateBP" MaxLength="40" Width="20em" runat="server"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label36" runat="server" Text="Applicant"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" MaxLength="25" ID="TextBox3" Width="20em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" MaxLength="25" ID="tbApplicantNameUpdateBP" Width="20em" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -360,20 +360,20 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label37" runat="server" Text="Contractor"></asp:Label>
                                     </td>
                                     <td colspan="2">
-                                        <asp:TextBox CssClass="form_field" MaxLength="30" ID="TextBox4" Width="20em" runat="server"></asp:TextBox>
+                                        <asp:TextBox CssClass="form_field" MaxLength="30" ID="tbContractorUpdateBP" Width="20em" runat="server"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label38" runat="server" Text="Project"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox CssClass="form_field" MaxLength="100" ID="TextBox5" runat="server" Width="20em"
+                                        <asp:TextBox CssClass="form_field" MaxLength="100" ID="tbProjectUpdateBP" runat="server" Width="20em"
                                             TextMode="MultiLine" Rows="4"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label39" runat="server" Text="Project Type"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList CssClass="form_field" ID="DropDownList2" runat="server">
+                                        <asp:DropDownList CssClass="form_field" ID="ddlProjectTypeUpdateBP" runat="server">
                                             <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                                             <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                                             <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>

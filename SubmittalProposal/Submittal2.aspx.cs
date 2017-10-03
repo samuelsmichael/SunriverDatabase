@@ -71,7 +71,7 @@ namespace SubmittalProposal
                 cmd.Parameters.Add(dummy);
                 Utils.executeNonQuery(cmd,
                     System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                performPostUpdateSuccessfulActions("Update successful", SUBMITTAL_CACHE_KEY,null);
+                performPostUpdateSuccessfulActions("Update successful", SUBMITTAL_CACHE_KEY, "BPermitDSGridView");
             } catch (Exception e) {
                 performPostUpdateFailedActions("Update failed. Msg: " + e.Message);
             }
@@ -302,7 +302,7 @@ namespace SubmittalProposal
                     cmd.Parameters.Add(newSubmittalId);
                     Utils.executeNonQuery(cmd,
                         System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                    performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY, null, tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
+                    performPostNewSuccessfulActions("Submittal added successfully", SUBMITTAL_CACHE_KEY, "BPermitDSGridView", tbSubmittalId, Convert.ToInt32(newSubmittalId.Value));
                     mpeNewSubmittal.Hide();
                 } catch (Exception e) {
                     performPostNewFailedActions("Submittal not added. Msg: " + e.Message);
@@ -428,17 +428,17 @@ namespace SubmittalProposal
             } else {
                 rbListPermitRequiredUpdate.SelectedValue = "No";
             }
-            tbApplicantNameUpdate.Text = Utils.ObjectToString(dr["Applicant"]);
-            tbOwnersNameUpdate.Text = Utils.ObjectToString(dr["OwnersName"]);
-            tbContractorUpdate.Text = Utils.ObjectToString(dr["Contractor"]);
-            ddlProjectTypeUpdate.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
-            tbProjectUpdate.Text = Utils.ObjectToString(dr["Project"]);
-            tbLotNameUpdate.Text = Utils.ObjectToString(dr["Lot"]);
-            if (ddlLaneUpdate.Items.FindByText(Utils.ObjectToString(dr["Lane"])) == null) {
-                ddlLaneUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
+            tbApplicantNameUpdateBP.Text = Utils.ObjectToString(dr["Applicant"]);
+            tbOwnersNameUpdateBP.Text = Utils.ObjectToString(dr["OwnersName"]);
+            tbContractorUpdateBP.Text = Utils.ObjectToString(dr["Contractor"]);
+            ddlProjectTypeUpdateBP.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
+            tbProjectUpdateBP.Text = Utils.ObjectToString(dr["Project"]);
+            tbLotNameUpdateBP.Text = Utils.ObjectToString(dr["Lot"]);
+            if (ddlLaneUpdateBP.Items.FindByText(Utils.ObjectToString(dr["Lane"])) == null) {
+                ddlLaneUpdateBP.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
             }
-            ddlLaneUpdate.SelectedValue = Utils.ObjectToString(dr["Lane"]);
-            SetLaneLotForPDFs(ddlLaneUpdate.SelectedValue + " " + tbLotNameUpdate.Text);
+            ddlLaneUpdateBP.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            SetLaneLotForPDFs(ddlLaneUpdateBP.SelectedValue + " " + tbLotNameUpdateBP.Text);
 
             ddlContractorUpdate.SelectedValue = Utils.ObjectToString(Utils.ObjectToInt(dr["fkSRContrRegID"]));
 
@@ -636,13 +636,13 @@ namespace SubmittalProposal
             tbIssuedUpdate.Enabled = false;
             tbClosedUpdate.Enabled = false;
             rbListPermitRequiredUpdate.Enabled = false;
-            tbLotNameUpdate.Enabled = false;
-            ddlLaneUpdate.Enabled = false;
-            tbOwnersNameUpdate.Enabled = false;
-            tbApplicantNameUpdate.Enabled = false;
-            tbContractorUpdate.Enabled = false;
-            tbProjectUpdate.Enabled = false;
-            ddlProjectTypeUpdate.Enabled = false;
+            tbLotNameUpdateBP.Enabled = false;
+            ddlLaneUpdateBP.Enabled = false;
+            tbOwnersNameUpdateBP.Enabled = false;
+            tbApplicantNameUpdateBP.Enabled = false;
+            tbContractorUpdateBP.Enabled = false;
+            tbProjectUpdateBP.Enabled = false;
+            ddlProjectTypeUpdateBP.Enabled = false;
             gvPayments.Enabled = false;
             gvReviews.Enabled = false;
             ibIssuedUpdate.Enabled = false;
@@ -657,12 +657,12 @@ namespace SubmittalProposal
             tbIssuedUpdate.Enabled = true;
             tbClosedUpdate.Enabled = true;
             rbListPermitRequiredUpdate.Enabled = true;
-            tbLotNameUpdate.Enabled = true;
-            ddlLaneUpdate.Enabled = true;
-            tbOwnersNameUpdate.Enabled = true;
-            tbApplicantNameUpdate.Enabled = true;
-            tbContractorUpdate.Enabled = true;
-            tbProjectUpdate.Enabled = true;
+            tbLotNameUpdateBP.Enabled = true;
+            ddlLaneUpdateBP.Enabled = true;
+            tbOwnersNameUpdateBP.Enabled = true;
+            tbApplicantNameUpdateBP.Enabled = true;
+            tbContractorUpdateBP.Enabled = true;
+            tbProjectUpdateBP.Enabled = true;
             ddlProjectTypeUpdate.Enabled = true;
             gvPayments.Enabled = true;
             gvReviews.Enabled = true;
