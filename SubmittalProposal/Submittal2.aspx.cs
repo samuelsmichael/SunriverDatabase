@@ -165,6 +165,7 @@ namespace SubmittalProposal
             tbSubmittalUpdate.Enabled = false;
             tbConditionsUpdate.Enabled = false;
             ddlLaneUpdate.Enabled = false;
+            lockYourUpdateFieldsBPermit();
         }
         protected override void unlockYourUpdateFields() {
             btnSubmitalUpdate.Enabled = true;
@@ -180,6 +181,7 @@ namespace SubmittalProposal
             tbSubmittalUpdate.Enabled = true;
             tbConditionsUpdate.Enabled = true;
             ddlLaneUpdate.Enabled = true;
+            unlockYourUpdateFieldsBPermit();
         }
 
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
@@ -220,7 +222,7 @@ namespace SubmittalProposal
             cbIsCommercialUpdate.Checked=Convert.ToBoolean(dr["IsCommercial"]);
             string permitid = getBPermitId(dr);
             CurrentBPermitId =permitid;
-            
+            loadBPermitPage();
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(row) + "  BPermit# :" + permitid + "  Meeting Date: " + getMeetingDate(dr) + " Owner: " + getOwner(dr);
         }
         string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
@@ -344,5 +346,348 @@ namespace SubmittalProposal
         public void SetLaneLotForPDFs(string lanelot) {
             LaneLotForPDFs = lanelot;
         }
+
+
+        /* ---------------------------------------- BPermit tab ------------------------------------------------------------ */
+        protected void cvBPermitNbr_ServerValidate(object source, ServerValidateEventArgs args) {
+            args.IsValid = true;
+            if (Utils.isNothing(args.Value)) {
+                args.IsValid = false;
+            }
+        }
+        decimal feeTotal = 0;
+        int monthsTotal = 0;
+        public int getBPMonthsTotal() {
+            return monthsTotal;
+        }
+        public string getBPFeeTotal() {
+            return feeTotal.ToString("c");
+        }
+        private void bind_gvReviews(int bPermitId) {
+            DataTable sourceTableReviews = BPermit.BPermitDataSet().Tables["BPReviews"];
+            DataView viewReviews = new DataView(sourceTableReviews);
+            viewReviews.RowFilter = "fkBPermitID_PR=" + bPermitId;
+            DataTable tblFilteredReviews = viewReviews.ToTable();
+            gvReviews.DataSource = tblFilteredReviews;
+            gvReviews.DataBind();
+
+        }
+        private void bind_gvPayments(int bPermitId) {
+            DataTable sourceTablePayments = BPermit.BPermitDataSet().Tables["BPPayment"];
+            DataView viewPayments = new DataView(sourceTablePayments);
+            viewPayments.RowFilter = "BPermitID =" + bPermitId;
+            DataTable tblFilteredPayments = viewPayments.ToTable();
+
+            feeTotal = 0;
+            monthsTotal = 0;
+            foreach (DataRow dr1 in tblFilteredPayments.Rows) {
+                try {
+                    feeTotal += Utils.ObjectToDecimal0IfNull(dr1["BPFee$"]);
+                } catch { };
+                try {
+                    monthsTotal += Utils.ObjectToInt(dr1["BPMonths"]);
+                } catch { }
+            }
+
+            gvPayments.DataSource = tblFilteredPayments;
+            gvPayments.DataBind();
+        }
+
+        private void loadBPermitPage() {
+            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitId));
+
+            DataTable sourceTable = BPermit.BPermitsGetGridViewDataTable();
+
+            DataView view = new DataView(sourceTable);
+
+            view.RowFilter = "BPermitId=" + CurrentBPermitId;
+            DataTable tblFiltered = view.ToTable();
+            DataRow dr = tblFiltered.Rows[0];
+
+            tbDelayUpdate.Text = Utils.ObjectToString(dr["BPDelay"]);
+            DateTime? issueDate = Utils.ObjectToDateTimeNullable(dr["BPIssueDate"]);
+            tbIssuedUpdate.Text = issueDate.HasValue ? issueDate.Value.ToString("MM/dd/yyyy") : "";
+            Object expires = dr["BPExpires"];
+            if (expires is DBNull) {
+                lblExpired.Text = "";
+            } else {
+                lblExpired.Text = Utils.ObjectToDateTime(expires).ToString("MM/dd/yyyy");
+            }
+            lblExpired.BackColor = System.Drawing.Color.FromName("White");
+            lblExpired.ForeColor = System.Drawing.Color.FromName("Black");
+            try {
+                if (Convert.ToDateTime(lblExpired.Text) < DateTime.Today) {
+                    lblExpired.BackColor = System.Drawing.Color.FromName("Red");
+                    lblExpired.ForeColor = System.Drawing.Color.FromName("White");
+                }
+            } catch { }
+            DateTime? closed = Utils.ObjectToDateTimeNullable(dr["BPClosed"]);
+            tbClosedUpdate.Text = closed.HasValue ? closed.Value.ToString("MM/dd/yyyy") : "";
+            if (Utils.ObjectToBool(dr["BPermitReqd"])) {
+                rbListPermitRequiredUpdate.SelectedValue = "Yes";
+            } else {
+                rbListPermitRequiredUpdate.SelectedValue = "No";
+            }
+            tbApplicantNameUpdate.Text = Utils.ObjectToString(dr["Applicant"]);
+            tbOwnersNameUpdate.Text = Utils.ObjectToString(dr["OwnersName"]);
+            tbContractorUpdate.Text = Utils.ObjectToString(dr["Contractor"]);
+            ddlProjectTypeUpdate.SelectedValue = Utils.ObjectToString(dr["ProjectType"]);
+            tbProjectUpdate.Text = Utils.ObjectToString(dr["Project"]);
+            tbLotNameUpdate.Text = Utils.ObjectToString(dr["Lot"]);
+            if (ddlLaneUpdate.Items.FindByText(Utils.ObjectToString(dr["Lane"])) == null) {
+                ddlLaneUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["Lane"]), Utils.ObjectToString(dr["Lane"])));
+            }
+            ddlLaneUpdate.SelectedValue = Utils.ObjectToString(dr["Lane"]);
+            SetLaneLotForPDFs(ddlLaneUpdate.SelectedValue + " " + tbLotNameUpdate.Text);
+
+            ddlContractorUpdate.SelectedValue = Utils.ObjectToString(Utils.ObjectToInt(dr["fkSRContrRegID"]));
+
+            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitId));
+            tbBPermitNbrUpdate.Text = Utils.ObjectToString(CurrentBPermitId);
+        }
+        protected void btnNewBPermitOk_Click(object sender, EventArgs e) {/*
+            bool jdPageIsValid = true;
+            foreach (BaseValidator validator in Page.Validators) {
+                if (validator.Enabled && !validator.IsValid) {
+                    // Put a breakpoint here
+                    string clientID = validator.ClientID;
+                    if (clientID.IndexOf("cvBPermitNbrNew") != -1) {
+                        jdPageIsValid = false;
+                    }
+                }
+            }
+            if (jdPageIsValid) {
+                try {
+                    SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
+                    cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameNew.Text;
+                    cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameNew.Text;
+                    cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneNew.SelectedValue;
+                    cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameNew.Text;
+                    cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorNew.Text;
+                    cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeNew.SelectedValue;
+                    cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectNew.Text;
+                    cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredNew.SelectedValue == "Yes" ? true : false;
+                    DateTime? issuedDate =
+                        tbIssuedNew.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedNew.Text);
+                    cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
+                    DateTime? closeDate =
+                        tbClosedNew.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedNew.Text);
+                    cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
+                    cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayNew.Text;
+                    cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = tbSubmittalIdNew.Text;
+                    cmd.Parameters.Add("@BPermit#", SqlDbType.NVarChar).Value = tbBPermitNbrNew.Text;
+                    SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
+                    newBPermitId.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newBPermitId);
+                    int? contractorId = ddlContractorNew.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlContractorNew.SelectedValue);
+                    cmd.Parameters.Add("@fkSRContrRegID", SqlDbType.Int).Value = contractorId;
+                    SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
+                    newSubmittalId.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newSubmittalId);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                    performPostNewSuccessfulActions("BPermit added successfully", BPERMIT_CACHE_KEY, BPERMIT_CACHE_GRID_KEY, tbBPermitNbr, tbBPermitNbrNew.Text);
+                    mpeNewBPermit.Hide();
+                } catch (Exception e2) {
+                    performPostNewFailedActions("BPermit not added. Msg: " + e2.Message);
+                }
+            } else {
+                mpeNewBPermit.Show();
+            }
+                                                                           */
+        }
+        protected void btnNewBPermitCancel_Click(object sender, EventArgs e) {/*
+            hfAutoShowPopupNew.Value = "n";
+            mpeBPermitNewPayment.Hide();
+            clearAllSelectionInputFields();*/
+        }
+        protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {/*
+            try {
+                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitId;
+                int? months = tbBPPaymentMonthsNew.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNew.Text.Trim().Replace("$", "").Replace(",", ""));
+                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                decimal? fee = tbBPPaymentFeeNew.Text.Trim() == "" ? (decimal?)null : Utils.ObjectToDecimal(tbBPPaymentFeeNew.Text.Trim().Replace("$", "").Replace(",", ""));
+                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Payment added", "BPermitDS", "BPermitDSGridView");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Payment not added. Error msg: " + ee.Message);
+            }
+                                                                                  */
+        }
+        protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {/*
+            try {
+                SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitId;
+                DateTime? review = tbBPermitReviewDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNew.Text.Trim());
+                cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
+                DateTime? action = tbBPermitActionDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitActionDateNew.Text.Trim());
+                cmd.Parameters.Add("@BPRActionDate", SqlDbType.DateTime).Value = action;
+                DateTime? letter = tbBPermitLetterDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitLetterDateNew.Text.Trim());
+                cmd.Parameters.Add("@BPRLetterDate", SqlDbType.DateTime).Value = letter;
+                cmd.Parameters.Add("@BPRLetterRef", SqlDbType.NVarChar).Value = tbBPRLetterRefNew.Text.Trim();
+                cmd.Parameters.Add("@BPRComments", SqlDbType.NVarChar).Value = tbBPRCommentsNew.Text.Trim();
+
+                SqlParameter newid = new SqlParameter("@NewBPReviewID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Review added", "BPermitDS", "BPermitDSGridView");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Review not added. Error msg: " + ee.Message);
+            }
+                                                                                    */
+        }
+
+        protected void gvPayments_RowEditing(object sender, GridViewEditEventArgs e) {
+            //Set the edit index.
+            gvPayments.EditIndex = e.NewEditIndex;
+            //Bind data to the GridView control.
+            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitId));
+        }
+
+        protected void gvPayments_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            //Reset the edit index.
+            gvPayments.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvPayments(Utils.ObjectToInt(this.CurrentBPermitId));
+        }
+
+        protected void gvPayments_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+
+            GridViewRow row = gvPayments.Rows[e.RowIndex];
+            try {
+                string strfee = ((TextBox)row.Cells[2].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                decimal? fee = strfee == "" ? (decimal?)null : Utils.ObjectToDecimal(strfee);
+                string strmonths = ((TextBox)row.Cells[3].Controls[1]).Text.Trim().Replace("$", "").Replace(",", "");
+                int? months = strmonths == "" ? (int?)null : Utils.ObjectToInt(strmonths);
+                int paymentid = Utils.ObjectToInt(gvPayments.DataKeys[e.RowIndex].Value);
+
+                SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
+                cmd.Parameters.Add("@BPPaymentId", SqlDbType.Int).Value = paymentid;
+                cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+
+
+                performPostUpdateSuccessfulActions("Payment updated", "LRFD_VEHICLE_MAINTENANCE_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Payment not updated. Error msg: " + ee.Message);
+            }
+            //Reset the edit index.
+            gvPayments.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitId));
+        }
+
+        protected void gvReviews_RowEditing(object sender, GridViewEditEventArgs e) {
+            gvReviews.EditIndex = e.NewEditIndex;
+            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitId));
+
+        }
+
+        protected void gvReviews_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+
+            GridViewRow row = gvReviews.Rows[e.RowIndex];
+            try {
+                string strreview = ((TextBox)row.Cells[2].Controls[1]).Text.Trim();
+                DateTime? review = strreview == "" ? (DateTime?)null : Utils.ObjectToDateTime(strreview);
+                string straction = ((TextBox)row.Cells[3].Controls[1]).Text.Trim();
+                DateTime? action = straction == "" ? (DateTime?)null : Utils.ObjectToDateTime(straction);
+                string strletter = ((TextBox)row.Cells[4].Controls[1]).Text.Trim();
+                DateTime? letter = strletter == "" ? (DateTime?)null : Utils.ObjectToDateTime(strletter);
+
+                SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
+                cmd.Parameters.Add("@BPReviewID", SqlDbType.Int).Value = gvReviews.DataKeys[e.RowIndex].Value;
+                cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
+                cmd.Parameters.Add("@BPRActionDate", SqlDbType.DateTime).Value = action;
+                cmd.Parameters.Add("@BPRLetterDate", SqlDbType.DateTime).Value = letter;
+                cmd.Parameters.Add("@BPRLetterRef", SqlDbType.NVarChar).Value = ((TextBox)row.Cells[5].Controls[1]).Text.Trim(); ;
+                cmd.Parameters.Add("@BPRComments", SqlDbType.NVarChar).Value = ((TextBox)row.Cells[6].Controls[1]).Text.Trim();
+
+                SqlParameter newid = new SqlParameter("@NewBPReviewID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                performPostUpdateSuccessfulActions("Review updated", "BPermitDS", "BPermitDSGridView");
+            } catch (Exception ee) {
+                performPostUpdateFailedActions("Review not updated. Error msg: " + ee.Message);
+            }
+
+            gvReviews.EditIndex = -1;
+            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitId));
+        }
+
+        protected void gvReviews_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            gvReviews.EditIndex = -1;
+            bind_gvReviews(Utils.ObjectToInt(Utils.ObjectToInt(CurrentBPermitId)));
+        }
+
+        private void lockYourUpdateFieldsBPermit() {
+            tbDelayUpdate.Enabled = false;
+            tbIssuedUpdate.Enabled = false;
+            tbClosedUpdate.Enabled = false;
+            rbListPermitRequiredUpdate.Enabled = false;
+            tbLotNameUpdate.Enabled = false;
+            ddlLaneUpdate.Enabled = false;
+            tbOwnersNameUpdate.Enabled = false;
+            tbApplicantNameUpdate.Enabled = false;
+            tbContractorUpdate.Enabled = false;
+            tbProjectUpdate.Enabled = false;
+            ddlProjectTypeUpdate.Enabled = false;
+            gvPayments.Enabled = false;
+            gvReviews.Enabled = false;
+            ibIssuedUpdate.Enabled = false;
+            ibClosedUpdate.Enabled = false;
+            lbBPermitNewPayment.Enabled = false;
+            lbBPermitNewReview2.Enabled = false;
+            ddlContractorUpdate.Enabled = false;
+            tbBPermitNbrUpdate.Enabled = false;
+        }
+        private void unlockYourUpdateFieldsBPermit() {
+            tbDelayUpdate.Enabled = true;
+            tbIssuedUpdate.Enabled = true;
+            tbClosedUpdate.Enabled = true;
+            rbListPermitRequiredUpdate.Enabled = true;
+            tbLotNameUpdate.Enabled = true;
+            ddlLaneUpdate.Enabled = true;
+            tbOwnersNameUpdate.Enabled = true;
+            tbApplicantNameUpdate.Enabled = true;
+            tbContractorUpdate.Enabled = true;
+            tbProjectUpdate.Enabled = true;
+            ddlProjectTypeUpdate.Enabled = true;
+            gvPayments.Enabled = true;
+            gvReviews.Enabled = true;
+            ibIssuedUpdate.Enabled = true;
+            ibClosedUpdate.Enabled = true;
+            lbBPermitNewPayment.Enabled = true;
+            lbBPermitNewReview2.Enabled = true;
+            ddlContractorUpdate.Enabled = true;
+            tbBPermitNbrUpdate.Enabled = true;
+        }
+
+        protected void lbBPermitNewPayment_Click(object sender, EventArgs args) {
+            tbBPPaymentFeeNew.Text = "";
+            tbBPPaymentMonthsNew.Text = "";
+            mpeBPermitNewPayment.Show();
+        }
+        protected void lbBPermitNewReview_Click(object sender, EventArgs args) {
+            tbBPermitReviewDateNew.Text = "";
+            tbBPermitActionDateNew.Text = "";
+            tbBPermitLetterDateNew.Text = "";
+            tbBPRLetterRefNew.Text = "";
+            tbBPRCommentsNew.Text = "";
+            mpeBPermitNewReview.Show();
+        }
+
+
     }
 }

@@ -9,7 +9,7 @@ GO
 --				fit the new model we had to employ ... by which model we simply pass the dataset to the report.
 --				This is a kind of dummy report in that it simply takes parms and returns a dataset.
 -- =============================================
-use OwnerProperty
+use [ID-Card_Split_FE]
 go
 create PROCEDURE uspRptEnvelope 
 	@Name nvarchar(50)=null,

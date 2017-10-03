@@ -377,7 +377,9 @@ namespace SubmittalProposal {
             tbOwnersNameNew.Text = "";
             tbApplicantNameNew.Text = "";
         }
-
+        public static DataTable BPermitsGetGridViewDataTable() {
+            return new BPermit().getGridViewDataTable();
+        }
         protected override DataTable getGridViewDataTable() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
