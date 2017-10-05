@@ -5,10 +5,15 @@
 <script language="javascript" type="text/javascript">
     function clientActiveTabChanged(sender, args) {
 //alert('marre')
-    if (sender.get_activeTabIndex() == 2) { // BPermit tab clicked
-        document.getElementById(document.getElementById('Hidden1').value).click();
-//        __doPostBack('btnBPTabTrigger', '');
-    }    
+        if (sender.get_activeTabIndex() == 2) { // BPermit tab clicked
+            document.getElementById(document.getElementById('Hidden1').value).click();
+            //        __doPostBack('btnBPTabTrigger', '');
+        } else {
+            if (sender.get_activeTabIndex() == 0) { // Main tab clicked
+                document.getElementById(document.getElementById('Hidden2').value).click();
+                //        __doPostBack('btnBPTabTrigger', '');
+            }
+        }
 //    alert('tab clicked: ' + sender.get_activeTabIndex());
 
  ////   __doPostBack('btnOrdersTrigger', '');
@@ -102,8 +107,10 @@
                 <asp:UpdatePanel ID="updatePanel5" runat="server">
                     <ContentTemplate>
     <asp:Button ID="btnBPTabTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnBPTabTrigger_Click" />
+    <asp:Button ID="btnMainTabTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnMainTabTrigger_Click" />
     </ContentTemplate></asp:UpdatePanel>
     <input id="Hidden1" type="hidden" value="<% = btnBPTabTrigger.ClientID %>" />
+    <input id="Hidden2" type="hidden" value="<% = btnMainTabTrigger.ClientID %>" />
     <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChanged" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Applicant Infromation">
             <ContentTemplate>

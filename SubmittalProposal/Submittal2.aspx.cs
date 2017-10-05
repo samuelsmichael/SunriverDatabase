@@ -723,5 +723,16 @@ namespace SubmittalProposal
             TabContainer1.ActiveTabIndex = 2;
             tbProjectUpdateBP.Text = tbProjectUpdate.Text;
         }
+        protected void btnMainTabTrigger_Click(object sender, EventArgs args) {
+            tbContractorUpdate.Text = tbContractorUpdateBP.Text;
+            tbApplicantNameUpdate.Text = tbApplicantNameUpdateBP.Text;
+            tbOwnersNameUpdate.Text = tbOwnersNameUpdateBP.Text;
+            tbLotNameUpdate.Text = tbLotNameUpdateBP.Text;
+            ddlLaneUpdate.SelectedIndex = ddlLaneUpdateBP.SelectedIndex;
+            ddlProjectTypeUpdate.SelectedIndex = ddlProjectTypeUpdateBP.SelectedIndex;
+            TabContainer1.ActiveTabIndex = 0;
+            tbProjectUpdate.Text = tbProjectUpdateBP.Text;
+        }
+        
     }
 }
