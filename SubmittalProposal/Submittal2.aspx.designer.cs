@@ -148,6 +148,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.GridView gvResults;
         
         /// <summary>
+        /// updatePanel5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel5;
+        
+        /// <summary>
+        /// btnBPTabTrigger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBPTabTrigger;
+        
+        /// <summary>
         /// TabContainer1 control.
         /// </summary>
         /// <remarks>

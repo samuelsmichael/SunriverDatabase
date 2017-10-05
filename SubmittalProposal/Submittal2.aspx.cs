@@ -15,6 +15,7 @@ namespace SubmittalProposal
     public partial class Submittal2 : AbstractDatabase, ICanHavePDFs
     {
         private static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
+
         protected override string UpdateRoleName {
             get { return "canupdatesubmittals"; }
         }
@@ -147,6 +148,9 @@ namespace SubmittalProposal
         private string getBPermitId(DataRow dr) {
             return Utils.ObjectToString(dr["BPermit#"]);
         }
+        private int getBPermitIdReally(DataRow dr) {
+            return Utils.ObjectToInt(dr["BPermitID"]);
+        }
         private string getLotLane(DataRow dr) {
             return (Utils.ObjectToString(dr["Lot"])) + "\\" + Utils.ObjectToString(dr["Lane"]);
         }
@@ -221,17 +225,28 @@ namespace SubmittalProposal
             tbSubmittalUpdate.Text = Utils.ObjectToString(dr["Submittal"]);
             cbIsCommercialUpdate.Checked=Convert.ToBoolean(dr["IsCommercial"]);
             string permitid = getBPermitId(dr);
-            CurrentBPermitId =permitid;
+            CurrentBPermitId =permitid; // This is the Permit#
+            CurrentBPermitIdReally = getBPermitIdReally(dr); // This is the PermitID
+
             loadBPermitPage();
             return "Lot\\Lane: " + getLotLane(dr) + "  Submittal Id: " + getSubmittalId(row) + "  BPermit# :" + permitid + "  Meeting Date: " + getMeetingDate(dr) + " Owner: " + getOwner(dr);
         }
+        /// <summary>
+        /// This is the BPermit#
+        /// </summary>
         string CurrentBPermitId { get { return (string)Session["CurrentBPermitId"]; } set { Session["CurrentBPermitId"] = value; } }
+        /// <summary>
+        /// This is the BPermitID
+        /// </summary>
+        int CurrentBPermitIdReally { get { if (Utils.isNothing(Session["CurrentBPermitIdReally"])) { return -1; } else { return (int)Session["CurrentBPermitIdReally"]; } } set { Session["CurrentBPermitIdReally"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
                 ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
                 ddlLaneUpdate.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneUpdate.DataBind();
+                ddlLaneUpdateBP.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
+                ddlLaneUpdateBP.DataBind();
                 ddlLaneNew.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLaneNew.DataBind();
                 /*
@@ -255,6 +270,7 @@ namespace SubmittalProposal
                 } catch { }
                 ddlContractorUpdate.DataSource = contractor;
                 ddlContractorUpdate.DataBind();
+               
 
             }
         }
@@ -404,13 +420,13 @@ namespace SubmittalProposal
         }
 
         private void loadBPermitPage() {
-            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitId));
+            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitIdReally));
 
             DataTable sourceTable = BPermit.BPermitsGetGridViewDataTable();
 
             DataView view = new DataView(sourceTable);
 
-            view.RowFilter = "BPermitId=" + CurrentBPermitId;
+            view.RowFilter = "BPermitId=" + CurrentBPermitIdReally;
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
 
@@ -452,7 +468,7 @@ namespace SubmittalProposal
 
             ddlContractorUpdate.SelectedValue = Utils.ObjectToString(Utils.ObjectToInt(dr["fkSRContrRegID"]));
 
-            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitId));
+            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitIdReally));
             tbBPermitNbrUpdate.Text = Utils.ObjectToString(CurrentBPermitId);
         }
         protected void btnNewBPermitOk_Click(object sender, EventArgs e) {/*
@@ -513,7 +529,7 @@ namespace SubmittalProposal
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {/*
             try {
                 SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
-                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitId;
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitIdReally;
                 int? months = tbBPPaymentMonthsNew.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNew.Text.Trim().Replace("$", "").Replace(",", ""));
                 cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
                 decimal? fee = tbBPPaymentFeeNew.Text.Trim() == "" ? (decimal?)null : Utils.ObjectToDecimal(tbBPPaymentFeeNew.Text.Trim().Replace("$", "").Replace(",", ""));
@@ -531,7 +547,7 @@ namespace SubmittalProposal
         protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {/*
             try {
                 SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
-                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitId;
+                cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitIdReally;
                 DateTime? review = tbBPermitReviewDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNew.Text.Trim());
                 cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
                 DateTime? action = tbBPermitActionDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitActionDateNew.Text.Trim());
@@ -556,7 +572,7 @@ namespace SubmittalProposal
             //Set the edit index.
             gvPayments.EditIndex = e.NewEditIndex;
             //Bind data to the GridView control.
-            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitId));
+            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitIdReally));
         }
 
         protected void gvPayments_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
@@ -564,7 +580,7 @@ namespace SubmittalProposal
             gvPayments.EditIndex = -1;
 
             //Bind data to the GridView control.
-            bind_gvPayments(Utils.ObjectToInt(this.CurrentBPermitId));
+            bind_gvPayments(Utils.ObjectToInt(this.CurrentBPermitIdReally));
         }
 
         protected void gvPayments_RowUpdating(object sender, GridViewUpdateEventArgs e) {
@@ -595,12 +611,12 @@ namespace SubmittalProposal
             gvPayments.EditIndex = -1;
 
             //Bind data to the GridView control.
-            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitId));
+            bind_gvPayments(Utils.ObjectToInt(CurrentBPermitIdReally));
         }
 
         protected void gvReviews_RowEditing(object sender, GridViewEditEventArgs e) {
             gvReviews.EditIndex = e.NewEditIndex;
-            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitId));
+            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitIdReally));
 
         }
 
@@ -633,12 +649,12 @@ namespace SubmittalProposal
             }
 
             gvReviews.EditIndex = -1;
-            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitId));
+            bind_gvReviews(Utils.ObjectToInt(CurrentBPermitIdReally));
         }
 
         protected void gvReviews_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
             gvReviews.EditIndex = -1;
-            bind_gvReviews(Utils.ObjectToInt(Utils.ObjectToInt(CurrentBPermitId)));
+            bind_gvReviews(Utils.ObjectToInt(Utils.ObjectToInt(CurrentBPermitIdReally)));
         }
 
         private void lockYourUpdateFieldsBPermit() {
@@ -673,7 +689,7 @@ namespace SubmittalProposal
             tbApplicantNameUpdateBP.Enabled = true;
             tbContractorUpdateBP.Enabled = true;
             tbProjectUpdateBP.Enabled = true;
-            ddlProjectTypeUpdate.Enabled = true;
+            ddlProjectTypeUpdateBP.Enabled = true;
             gvPayments.Enabled = true;
             gvReviews.Enabled = true;
             ibIssuedUpdate.Enabled = true;
@@ -697,7 +713,15 @@ namespace SubmittalProposal
             tbBPRCommentsNew.Text = "";
             mpeBPermitNewReview.Show();
         }
-
-
+        protected void btnBPTabTrigger_Click(object sender, EventArgs args) {
+            tbContractorUpdateBP.Text = tbContractorUpdate.Text;
+            tbApplicantNameUpdateBP.Text = tbApplicantNameUpdate.Text;
+            tbOwnersNameUpdateBP.Text = tbOwnersNameUpdate.Text;
+            tbLotNameUpdateBP.Text = tbLotNameUpdate.Text;
+            ddlLaneUpdateBP.SelectedIndex = ddlLaneUpdate.SelectedIndex;
+            ddlProjectTypeUpdateBP.SelectedIndex = ddlProjectTypeUpdate.SelectedIndex;
+            TabContainer1.ActiveTabIndex = 2;
+            tbProjectUpdateBP.Text = tbProjectUpdate.Text;
+        }
     }
 }

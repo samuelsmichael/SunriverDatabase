@@ -1,6 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.Master" AutoEventWireup="true"
     CodeBehind="Submittal2.aspx.cs" Inherits="SubmittalProposal.Submittal2" %>
 
+<asp:Content ID="Content5xyz" ContentPlaceHolderID="HeadContent" runat="server">
+<script language="javascript" type="text/javascript">
+    function clientActiveTabChanged(sender, args) {
+//alert('marre')
+    if (sender.get_activeTabIndex() == 2) { // BPermit tab clicked
+        document.getElementById(document.getElementById('Hidden1').value).click();
+//        __doPostBack('btnBPTabTrigger', '');
+    }    
+//    alert('tab clicked: ' + sender.get_activeTabIndex());
+
+ ////   __doPostBack('btnOrdersTrigger', '');
+}
+</script>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>
         <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Owner"></asp:Label>
@@ -83,7 +98,13 @@
     </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FormContent" runat="server">
-    <ajaxToolkit:TabContainer Height="346" ActiveTabIndex="0" ID="TabContainer1" runat="server">
+
+                <asp:UpdatePanel ID="updatePanel5" runat="server">
+                    <ContentTemplate>
+    <asp:Button ID="btnBPTabTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnBPTabTrigger_Click" />
+    </ContentTemplate></asp:UpdatePanel>
+    <input id="Hidden1" type="hidden" value="<% = btnBPTabTrigger.ClientID %>" />
+    <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChanged" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Applicant Infromation">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3" runat="server">
@@ -94,7 +115,7 @@
                                     <asp:Panel ID="Panel1" GroupingText="Owner" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Name"></asp:Label>
                                         <asp:TextBox CssClass="form_field" Enabled="false" ID="tbOwnersNameUpdate" Width="30em"
-                                            MaxLength="40" runat="server"></asp:TextBox>
+                                            MaxLength="40" runat="server" ></asp:TextBox>
                                     </asp:Panel>
                                 </td>
                                 <td>
@@ -112,7 +133,7 @@
                                     <asp:Panel ID="Panel3" GroupingText="Applicant" runat="server">
                                         <asp:Label CssClass="form_field_heading" ID="Label10" runat="server" Text="Name"></asp:Label>
                                         <asp:TextBox CssClass="form_field" Enabled="false" ID="tbApplicantNameUpdate" MaxLength="25"
-                                            runat="server"></asp:TextBox>
+                                            runat="server" ></asp:TextBox>
                                     </asp:Panel>
                                 </td>
                             </tr>
@@ -129,7 +150,8 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox CssClass="form_field" Enabled="false" ID="tbMeetingDateUpdate" runat="server"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form_field" Enabled="false" ID="tbMeetingDateUpdate" 
+                                                    runat="server"></asp:TextBox>
                                                 </td>
                                                 <td>
                                                     <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
