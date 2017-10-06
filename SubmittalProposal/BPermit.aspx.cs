@@ -14,8 +14,8 @@ namespace SubmittalProposal {
     public partial class BPermit : AbstractDatabase, ICanHavePDFs {
         static DataTable dtBPayment = null;
 
-        private static string BPERMIT_CACHE_KEY = "BPermitDS";
-        private static string BPERMIT_CACHE_GRID_KEY = "BPermitDSGridView";
+        public static string BPERMIT_CACHE_KEY = "BPermitDS";
+        public static string BPERMIT_CACHE_GRID_KEY = "BPermitDSGridView";
         protected override string UpdateRoleName {
             get { return "canupdatebpermits"; }
         }
@@ -24,7 +24,7 @@ namespace SubmittalProposal {
         }
         protected void btnBPermitUpdate_Click(object sender, EventArgs e) {
             bool jdPageIsValid=true;
-            foreach (BaseValidator validator in Page.Validators) {
+/* this seems to make it so the Submit button has to be clicked twice            foreach (BaseValidator validator in Page.Validators) {
                 if (validator.Enabled && !validator.IsValid) {
                     // Put a breakpoint here
                     string clientID = validator.ClientID;
@@ -33,8 +33,12 @@ namespace SubmittalProposal {
                     }
                 }
             }
+ */
             if (jdPageIsValid) {
                 try {
+                    if (Utils.isNothing(tbBPermitNbrUpdate.Text)) {
+                        throw new Exception("BPermit# must not be blank");
+                    }
                     SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
                     cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text;
                     cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameUpdate.Text;
@@ -396,7 +400,7 @@ namespace SubmittalProposal {
         }
         protected void btnNewBPermitOk_Click(object sender, EventArgs e) {
             bool jdPageIsValid=true;
-            foreach (BaseValidator validator in Page.Validators) {
+            /* causes submit button to be clicked twice? foreach (BaseValidator validator in Page.Validators) {
                 if (validator.Enabled && !validator.IsValid) {
                     // Put a breakpoint here
                     string clientID = validator.ClientID;
@@ -404,9 +408,13 @@ namespace SubmittalProposal {
                         jdPageIsValid = false;
                     }
                 }
-            }
+            }*/
             if (jdPageIsValid) {
                 try {
+                    if (Utils.isNothing(tbBPermitNbrNew.Text)) {
+                        throw new Exception("BPermit# must not be blank");
+                    }
+
                     SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
                     cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameNew.Text;
                     cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameNew.Text;

@@ -91,9 +91,6 @@
                 <td>
                     <asp:TextBox CssClass="form_field" MaxLength="20" ID="tbBPermitNbrUpdate" Width="5em"
                         runat="server"></asp:TextBox>
-                            <asp:CustomValidator ID="cvBPermitNbrUpdate" Enabled="true" ControlToValidate="tbBPermitNbrUpdate" ValidateEmptyText="true"
-                                Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
-                                ErrorMessage="Req'd" OnServerValidate="cvBPermitNbr_ServerValidate"></asp:CustomValidator>
                 </td>
                 <td>
                     <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Delay"></asp:Label>
@@ -661,9 +658,6 @@
                         <td>
                             <asp:TextBox CssClass="form_field" MaxLength="20" ID="tbBPermitNbrNew" Width="5em"
                                 runat="server"></asp:TextBox>
-                                    <asp:CustomValidator ID="cvBPermitNbrNew" ControlToValidate="tbBPermitNbrNew" ValidateEmptyText="true"
-                                        Display="Dynamic" ForeColor="Red" Font-Bold="true" SetFocusOnError="true" runat="server"
-                                        ErrorMessage="Req'd" OnServerValidate="cvBPermitNbr_ServerValidate"></asp:CustomValidator>
                         </td>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Delay"></asp:Label>

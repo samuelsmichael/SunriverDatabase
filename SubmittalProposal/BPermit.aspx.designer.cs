@@ -175,15 +175,6 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbBPermitNbrUpdate;
         
         /// <summary>
-        /// cvBPermitNbrUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvBPermitNbrUpdate;
-        
-        /// <summary>
         /// Label7 control.
         /// </summary>
         /// <remarks>
@@ -929,15 +920,6 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbBPermitNbrNew;
-        
-        /// <summary>
-        /// cvBPermitNbrNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvBPermitNbrNew;
         
         /// <summary>
         /// Label12 control.
