@@ -564,12 +564,7 @@ namespace SubmittalProposal
             cmd.Parameters.Add(newSubmittalId);
             Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
         }
-        protected void btnNewBPermitCancel_Click(object sender, EventArgs e) {/*
-            hfAutoShowPopupNew.Value = "n";
-            mpeBPermitNewPayment.Hide();
-            clearAllSelectionInputFields();*/
-        }
-        protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {/*
+        protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
             try {
                 SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitIdReally;
@@ -582,12 +577,14 @@ namespace SubmittalProposal
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
                 performPostUpdateSuccessfulActions("Payment added", "BPermitDS", "BPermitDSGridView");
+                TabContainer1.ActiveTabIndex = 2;
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Payment not added. Error msg: " + ee.Message);
+                TabContainer1.ActiveTabIndex = 2;
             }
-                                                                                  */
+                                                                                  
         }
-        protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {/*
+        protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {
             try {
                 SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitIdReally;
@@ -605,10 +602,12 @@ namespace SubmittalProposal
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
                 performPostUpdateSuccessfulActions("Review added", "BPermitDS", "BPermitDSGridView");
+                TabContainer1.ActiveTabIndex = 2;
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Review not added. Error msg: " + ee.Message);
+                TabContainer1.ActiveTabIndex = 2;
             }
-                                                                                    */
+                                                                                    
         }
 
         protected void gvPayments_RowEditing(object sender, GridViewEditEventArgs e) {
@@ -646,9 +645,11 @@ namespace SubmittalProposal
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
 
 
-                performPostUpdateSuccessfulActions("Payment updated", "LRFD_VEHICLE_MAINTENANCE_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+                performPostUpdateSuccessfulActions("Payment updated", "BPermitDS", "BPermitDSGridView");
+                TabContainer1.ActiveTabIndex = 2;
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Payment not updated. Error msg: " + ee.Message);
+                TabContainer1.ActiveTabIndex = 2;
             }
             //Reset the edit index.
             gvPayments.EditIndex = -1;
@@ -687,8 +688,10 @@ namespace SubmittalProposal
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
                 performPostUpdateSuccessfulActions("Review updated", "BPermitDS", "BPermitDSGridView");
+                TabContainer1.ActiveTabIndex = 2;
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Review not updated. Error msg: " + ee.Message);
+                TabContainer1.ActiveTabIndex = 2;
             }
 
             gvReviews.EditIndex = -1;
