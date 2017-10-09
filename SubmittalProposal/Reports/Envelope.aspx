@@ -20,12 +20,6 @@
     <table cellpadding="3" width="100%">
         <tr valign="top">
             <td>
-                <asp:RadioButtonList ID="rbListTypeOfAddress" runat="server" RepeatDirection="Horizontal">
-                    <asp:ListItem Selected="True" Value="sunriver">Use Sunriver Address</asp:ListItem>
-                    <asp:ListItem Value="home">Use Home Address</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-            <td>
                 <table>
                     <tr>
                         <td colspan="2">

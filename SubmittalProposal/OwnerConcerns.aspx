@@ -67,6 +67,16 @@
         <asp:Label ID="Label2" runat="server" Text="Case#"></asp:Label>
         <asp:TextBox ID="tbOwnerConcernsCaseNbrLU" Width="3em" runat="server"></asp:TextBox>
     </td>
+    <td>
+        <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Lot"></asp:Label>
+        <asp:TextBox CssClass="form_field" ID="tbLot" Width="30" runat="server"></asp:TextBox>
+    </td>
+    <td>
+        <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Lane"></asp:Label>
+        <asp:DropDownList ID="ddlLane" CssClass="form_field" runat="server" DataTextField="Lane"
+            DataValueField="Lane">
+        </asp:DropDownList>
+    </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
     <div style="height: 400px; overflow: auto;">
@@ -624,15 +634,6 @@
                                         </tr>
                                     </table>
                                 </asp:Panel>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </ContentTemplate>
-                </ajaxToolkit:TabPanel>
-                <ajaxToolkit:TabPanel runat="server" ID="tabPanel3" HeaderText="Photos">
-                    <ContentTemplate>
-                        <asp:UpdatePanel ID="NewPanel1y8" runat="server">
-                            <ContentTemplate>
-                                This page intentionally left blank
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </ContentTemplate>

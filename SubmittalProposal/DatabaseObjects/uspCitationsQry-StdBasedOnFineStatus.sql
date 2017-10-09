@@ -25,7 +25,7 @@ BEGIN
 SELECT 
 	c.CitationID, c.OffenseDate, c.FineBalToAcctg, c.FineStatus, 
 	CASE WHEN FineStatus = 'Open' then 1 ELSE 0 END AS CitationOpen,
-	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
+	isnull(c.VFirstName,'') + case when isnull(c.VLastName,'')='' then '' else ' ' end + isnull(c.VFirstName,'') as vFullName,
 	c.VMailAddr1, 
 	c.VMailAddr2, c.VCity, c.VState, c.VZip, c.VSunriverStatus, 
 	c.OffenseLocation, c.CitingOfficer, c.HearingDate, c.MagistrateFine, c.JudicialFine, 

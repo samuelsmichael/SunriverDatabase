@@ -89,6 +89,9 @@
             <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" SortExpression="SubmittalId">
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
+            <asp:BoundField DataField="BPermitID" HeaderText="Permit Id" SortExpression="BPermitID">
+                <HeaderStyle HorizontalAlign="Left" />
+            </asp:BoundField>
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -230,6 +233,16 @@
                                                     <asp:TextBox Enabled="false" CssClass="form_field" ID="tbProjectUpdate" MaxLength="100"
                                                         Width="100%" runat="server" TextMode="SingleLine" Rows="1"></asp:TextBox>
                                                 </td>
+                                            </tr>
+                                            <tr align="center">
+                                                <td colspan="7">
+                                                    <asp:ImageButton 
+                                                        OnClientClick="javascript:document.getElementById('MainContent_MainContent_FormContent_TabContainer1_tabPanelApplicantInformation_tbSubmittalUpdate').value=document.getElementById('MainContent_MainContent_FormContent_TabContainer1_tabPanelApplicantInformation_tbProjectUpdate').value;" 
+                                                        CausesValidation="False" ID="ImgCopyProjectToSubmittal" runat="server" ImageUrl="~/images/expand_blue.jpg"                                                         
+                                                        ToolTip="(Copy Project to Submittal)" /></td>
+
+
+
                                             </tr>
                                             <tr>
                                                 <td>

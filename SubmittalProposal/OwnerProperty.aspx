@@ -35,7 +35,7 @@
             </EmptyDataTemplate>
             <Columns>
                 <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
-                <asp:BoundField DataField="SRLot" HeaderText="Lot" SortExpression="SRLot" />
+                <asp:BoundField DataField="SRLot" HeaderText="Lot" SortExpression="SRLotSortable" />
                 <asp:BoundField DataField="SRLane" HeaderText="Lane" SortExpression="SRLane" />
                 <asp:BoundField DataField="PrimaryOwner" HeaderText="Owner" SortExpression="PrimaryOwner" />
                 <asp:BoundField DataField="DC_Address" HeaderText="DC Address" SortExpression="DC_Address" />

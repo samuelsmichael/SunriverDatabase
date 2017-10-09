@@ -199,6 +199,7 @@ namespace SubmittalProposal
             tbSubmittalUpdate.Enabled = false;
             tbConditionsUpdate.Enabled = false;
             ddlLaneUpdate.Enabled = false;
+            ImgCopyProjectToSubmittal.Enabled = false;
             lockYourUpdateFieldsBPermit();
         }
         protected override void unlockYourUpdateFields() {
@@ -215,6 +216,7 @@ namespace SubmittalProposal
             tbSubmittalUpdate.Enabled = true;
             tbConditionsUpdate.Enabled = true;
             ddlLaneUpdate.Enabled = true;
+            ImgCopyProjectToSubmittal.Enabled = true;
             unlockYourUpdateFieldsBPermit();
         }
 

@@ -151,6 +151,18 @@ namespace SubmittalProposal {
                 sbFilter.Append(and + " [OCCase#] = '" + tbOwnerConcernsCaseNbrLU.Text + "'");
                 and = " and ";
             }
+            if (Utils.isNothingNot(tbLot.Text) || (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane")) {
+                if (Utils.isNothingNot(tbLot.Text)) {
+                    sb.Append(prepend + "Lot: " + tbLot.Text);
+                }
+                if (Utils.isNothingNot(ddlLane.SelectedValue) && ddlLane.SelectedValue.ToLower() != "choose lane") {
+                    sb.Append(prepend + "Lane: " + ddlLane.SelectedValue);
+                }
+                prepend = "  ";
+                sbFilter.Append(and +Utils.getDataViewQuery(tbLot.Text + ' ' + ddlLane.SelectedValue, "SRLotLane"));
+                and = " and ";
+            }
+
             searchCriteria = sb.ToString();
             filterString = sbFilter.ToString();
 
@@ -239,6 +251,8 @@ namespace SubmittalProposal {
             tbOwnerConcernsCaseNbrLU.Text = "";
             tbOwnerConcernsSunriverAddressLU.Text = "";
             ddlOwnerConcernsResolvedLU.SelectedIndex = -1;
+            tbLot.Text = "";
+            ddlLane.SelectedIndex = -1;
         }
 
         protected override void clearAllNewFormInputFields() {
@@ -286,6 +300,8 @@ namespace SubmittalProposal {
             if (!IsPostBack) {
                 bindDepartmentReferredToDropdown();
                 bindCategoryDropdown();
+                ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
+                ddlLane.DataBind();
             }
             if (Common.Utils.isNothingNot(Session["CaseID"])) {
                 clearAllSelectionInputFields();

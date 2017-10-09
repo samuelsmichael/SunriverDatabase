@@ -17,9 +17,6 @@ namespace SubmittalProposal.Reports {
                     */
                     DataTable tblFiltered = (DataTable)Session["OwnerPropertyTblFiltered"];
                     lblPrintEnvelopeFor.Text = Utils.ObjectToString(tblFiltered.Rows[0]["PrimaryOwner"]);
-                    if (Utils.isNothingNot(Utils.ObjectToString(Session["opSRPropIDBeingEdited"]))) {
-                        rbListTypeOfAddress.Visible=true;
-                    }
                 } else {
                     if (Utils.isNothingNot(Request.QueryString["Database"]) && Request.QueryString["Database"] == "Citations") {
                         DataTable tblFiltered = (DataTable)Session["CitationsTblFiltered"];
@@ -31,7 +28,6 @@ namespace SubmittalProposal.Reports {
                             vLastName
                             ;
 
-                        rbListTypeOfAddress.Visible = false;
                     }
                 }
             }
@@ -53,19 +49,11 @@ namespace SubmittalProposal.Reports {
             if (Utils.isNothingNot(Request.QueryString["Database"]) && Request.QueryString["Database"] == "OwnerProperty") {
                 DataTable tblFiltered = (DataTable)Session["OwnerPropertyTblFiltered"];
                 ht["@Name"] = Utils.ObjectToString(tblFiltered.Rows[0]["PrimaryOwner"]);
-                if (rbListTypeOfAddress.SelectedValue == "sunriver") {
                     ht["@Address1"] = Utils.ObjectToString(tblFiltered.Rows[0]["DC_Address"]);
                     ht["@Address2"] = "";
                     ht["@City"] = "Sunriver";
                     ht["@State"] = "OR";
                     ht["@Zip"] = "97707";
-                } else {
-                    ht["@Address1"] = Utils.ObjectToString(tblFiltered.Rows[0]["Addr1"]);
-                    ht["@Address2"] = Utils.ObjectToString(tblFiltered.Rows[0]["Addr2"]);
-                    ht["@City"] = Utils.ObjectToString(tblFiltered.Rows[0]["City"]);
-                    ht["@State"] = Utils.ObjectToString(tblFiltered.Rows[0]["Region"]);
-                    ht["@Zip"] = Utils.ObjectToString(tblFiltered.Rows[0]["PostalCode"]);
-                }
             } else {
                 if (Utils.isNothingNot(Request.QueryString["Database"]) && Request.QueryString["Database"] == "Citations") {
                     DataTable tblFiltered = (DataTable)Session["CitationsTblFiltered"];
