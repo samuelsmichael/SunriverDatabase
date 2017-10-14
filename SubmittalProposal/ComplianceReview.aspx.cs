@@ -13,6 +13,7 @@ using System.Globalization;
 
 namespace SubmittalProposal {
     public partial class ComplianceReview : AbstractDatabase, ICanHavePDFs {
+        public static string DataSetCacheKey = "CRDS";
         private int ReviewIDBeingUpdated {
             get {
                 object obj = ViewState["ReviewIDBeingUpdated"];

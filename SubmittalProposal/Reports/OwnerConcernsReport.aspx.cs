@@ -60,19 +60,23 @@ namespace SubmittalProposal.Reports {
             if (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue)) {
                 reportParams.Add("@DeptReferred", ddlDepartmentsParm.SelectedValue);
             }
+            string baseDirForPhotos = Server.MapPath("~") + @"\Images\ownerconcerns";
             if (ddlReport.SelectedValue == "Concerns Open") {
                 reportParams.Add("@ButIncludeBothOpensAndClosedInTheDataSet", true);
                 reportParams.Add("@ConcernsOpen222", true);
                 reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Open");
+                reportParams.Add("@BaseDirForPhotos",baseDirForPhotos);
             } else {
                 if (ddlReport.SelectedValue == "Concerns Closed") {
                     reportParams.Add("@ButIncludeBothOpensAndClosedInTheDataSet", true);
                     reportParams.Add("@ConcernsOpen222", false);
                     reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Closed");
+                    reportParams.Add("@BaseDirForPhotos", baseDirForPhotos);
                 } else {
                     if (ddlReport.SelectedValue == "All Concerns") {
+                        reportParams.Add("@ButIncludeBothOpensAndClosedInTheDataSet", true);
                         reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - All Owner Concerns");
-                        reportParams.Add("@ConcernsOpen222", false);
+                        reportParams.Add("@BaseDirForPhotos", baseDirForPhotos);
                     } else {
                         if (ddlReport.SelectedValue == "Concern Categories") {
                             reportParams.Add("@ReportTitle", (Utils.isNothingNot(ddlDepartmentsParm.SelectedValue) ? ddlDepartmentsParm.SelectedValue : "All SROA") + " - Owner Concerns Categories");

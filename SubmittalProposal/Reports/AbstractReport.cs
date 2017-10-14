@@ -106,6 +106,9 @@ namespace SubmittalProposal.Reports {
                 foreach (string parmName in getReportParams().Keys) {
                     cmd.Parameters.Add(new SqlParameter(parmName, getReportParams()[parmName]));
                 }
+/*                if (this.GetType().Name.ToLower().IndexOf("ownerconcersreport")!=-1) { // kludge because Crystal Reports won't let me fix up the rpt
+                    cmd.Parameters.Add(new SqlParameter("@BaseDirForPhotos",getReportParams()["@BaseDirForPhotos"]));
+                }*/
                 DataSet ds = Utils.getDataSet(cmd, ConnectionString);
                 RD.SetDataSource(ds.Tables[0]);
             }

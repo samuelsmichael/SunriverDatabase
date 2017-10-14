@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SubmittalProposal {
     public partial class OwnerConcerns : AbstractDatabase, IHasPhotos {
-        private static string DataSetCacheKey = "OWNERCONCERSDATASETCACHEKEY";
+        public static string DataSetCacheKey = "OWNERCONCERSDATASETCACHEKEY";
         private static string ConnectionString {
             get {
                 return System.Configuration.ConfigurationManager.ConnectionStrings["OwnerConcernsSQLConnectionString"].ConnectionString;

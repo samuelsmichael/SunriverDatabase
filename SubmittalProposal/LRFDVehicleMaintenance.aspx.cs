@@ -12,8 +12,8 @@ using System.Data.SqlClient;
 
 namespace SubmittalProposal {
     public partial class LRFDVehicleMaintenance : AbstractDatabase {
-        private static string LRFD_VEHICLE_MAINTENANCE_CACHE_KEY = "LRFD_CACHE_KEY";
-        private static string LRFD_SurchargeRate_CACHE_KEY = "LRFD_SurchargeRate_CACHE_KEY";
+        public static string LRFD_VEHICLE_MAINTENANCE_CACHE_KEY = "LRFD_CACHE_KEY";
+        public static string LRFD_SurchargeRate_CACHE_KEY = "LRFD_SurchargeRate_CACHE_KEY";
         public static DataSet LRFDVehicalMaintenance_DataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;

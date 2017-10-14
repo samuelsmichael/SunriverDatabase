@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SubmittalProposal {
     public partial class Citations : AbstractDatabase {
-        private static string DataSetCacheKey = "CIDATASETCACHEKEY";
+        public static string DataSetCacheKey = "CIDATASETCACHEKEY";
         private static string ConnectionString {
             get {
                 return System.Configuration.ConfigurationManager.ConnectionStrings["CitationsSQLConnectionString"].ConnectionString;

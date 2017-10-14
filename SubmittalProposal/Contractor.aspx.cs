@@ -12,6 +12,8 @@ using System.Text;
 
 namespace SubmittalProposal {
     public partial class Contractor : AbstractDatabase {
+        public static string DataSetCacheKey = "CONDS";
+
         public static string ConnectionString {
             get {
                 return System.Configuration.ConfigurationManager.ConnectionStrings["ContractorRegSQLConnectionString"].ConnectionString;

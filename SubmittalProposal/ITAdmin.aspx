@@ -7,15 +7,15 @@
     <center><h2>IT Admin</h2></center>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <h2>
+            <h2 style="margin-top:-4px;">
                 Reports</h2>
-            <p>
+            <p style="margin-top:-4px;">
                 <asp:LinkButton ID="lbPastDue" runat="server" OnClick="lbPastDue_Click">Some Report</asp:LinkButton>
             </p>
             <hr />
-            <h2>
+            <h2 style="margin-top:-4px;">
                 Procedures</h2>
-            <p>
+            <p style="margin-top:-4px;">
                 <script type="text/javascript" language="javascript">
                     function myFunction() {
                         return confirm("If you press Okay, then such-and-such procedure will run. Are you sure that you wish to proceed?")
@@ -51,16 +51,29 @@
                 </table>
             </p>
             <hr />
-            <h2>
+            <h2 style="margin-top:-4px;">
                 Queries</h2>
-            <p>
+            <p style="margin-top:-4px;">
                 <asp:LinkButton ID="lbCrossReference" runat="server" OnClick="lbCrossReference_Click">Some Query</asp:LinkButton>
             </p>
             <hr />
-            <h2>
+            <h2 style="margin-top:-4px;">
                 Miscellaneous</h2>
-            <p>
+            <p style="margin-top:-4px;">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                <asp:Button ID="btnClearCache" runat="server" Text="Clear data cache" 
+                    onclick="btnClearCache_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                 <asp:LinkButton ID="lbSecurityMaintenance" runat="server" OnClick="lbSecurityMaintenance_Click">Security Admin</asp:LinkButton>
+                        </td>
+                    </tr>
+                </table>
+
             </p>
         </ContentTemplate>
     </asp:UpdatePanel>

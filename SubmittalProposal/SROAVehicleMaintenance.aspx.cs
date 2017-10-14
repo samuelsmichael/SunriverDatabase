@@ -12,8 +12,8 @@ using System.Data.SqlClient;
 
 namespace SubmittalProposal {
     public partial class SROAVehicleMaintenance : AbstractDatabase {
-        private static string SROA_VEHICLE_MAINTENANCE_CACHE_KEY = "SROA_CACHE_KEY";
-        private static string SROA_SurchargeRate_CACHE_KEY = "SROA_SurchargeRate_CACHE_KEY";
+        public static string SROA_VEHICLE_MAINTENANCE_CACHE_KEY = "SROA_CACHE_KEY";
+        public static string SROA_SurchargeRate_CACHE_KEY = "SROA_SurchargeRate_CACHE_KEY";
         public static DataSet SROAVehicalMaintenance_DataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;

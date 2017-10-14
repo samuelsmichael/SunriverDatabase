@@ -14,7 +14,7 @@ namespace SubmittalProposal
 {
     public partial class Submittal2 : AbstractDatabase, ICanHavePDFs
     {
-        private static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
+        public static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
 
         protected override string UpdateRoleName {
             get { return "canupdatesubmittals"; }

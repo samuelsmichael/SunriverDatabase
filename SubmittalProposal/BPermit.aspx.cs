@@ -531,7 +531,7 @@ namespace SubmittalProposal {
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
 
 
-                performPostUpdateSuccessfulActions("Payment updated", "LRFD_VEHICLE_MAINTENANCE_CACHE_KEY", "LRFD_SurchargeRate_CACHE_KEY");
+                performPostUpdateSuccessfulActions("Payment updated", LRFDVehicleMaintenance.LRFD_VEHICLE_MAINTENANCE_CACHE_KEY, LRFDVehicleMaintenance.LRFD_SurchargeRate_CACHE_KEY);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Payment not updated. Error msg: " + ee.Message);
             }

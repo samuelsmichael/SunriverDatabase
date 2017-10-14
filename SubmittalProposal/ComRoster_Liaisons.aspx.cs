@@ -11,7 +11,7 @@ using Common;
 
 namespace SubmittalProposal {
     public partial class ComRoster_Liaisons : AbstractDatabase {
-        private static string DataSetCacheKey = "COMROSTERDATASETCACHEKEY";
+        public static string DataSetCacheKey = "COMROSTERDATASETCACHEKEY";
         private static string ConnectionString {
             get {
                 return System.Configuration.ConfigurationManager.ConnectionStrings["ComRosterSQLConnectionString"].ConnectionString;

@@ -111,7 +111,7 @@ namespace SubmittalProposal {
             return ds;
         }
 
-        protected static string DataSetCacheKey {
+        public static string DataSetCacheKey {
             get { return "SCDS"; }
         }
         protected override System.Data.DataSet buildDataSet() {

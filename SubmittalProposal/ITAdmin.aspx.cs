@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using Common;
+using System.Runtime.Caching;
 
 namespace SubmittalProposal {
     public partial class ITAdmin : System.Web.UI.Page {
@@ -66,6 +67,33 @@ namespace SubmittalProposal {
         }
         protected void lbSecurityMaintenance_Click(object sender, EventArgs args) {
             Response.Redirect("~/SecurityMaintenance.aspx");
+        }
+
+        protected void btnClearCache_Click(object sender, EventArgs e) {
+            MemoryCache.Default.Dispose();
+            /*
+            using (MemoryCache mc=MemoryCache.Default) {
+                mc.Remove(BallotVerify.DataSetCacheKey);
+                mc.Remove(BPermit.BPERMIT_CACHE_GRID_KEY);
+                mc.Remove(BPermit.BPERMIT_CACHE_KEY);
+                mc.Remove(LRFDVehicleMaintenance.LRFD_SurchargeRate_CACHE_KEY);
+                mc.Remove(LRFDVehicleMaintenance.LRFD_VEHICLE_MAINTENANCE_CACHE_KEY);
+                mc.Remove(Citations.DataSetCacheKey);
+                mc.Remove(ComplianceReview.DataSetCacheKey);
+                mc.Remove(ComRoster_Liaisons.DataSetCacheKey);
+                mc.Remove(ComRoster_Members.DataSetCacheKey);
+                mc.Remove(Contractor.DataSetCacheKey);
+                mc.Remove(OwnerConcerns.DataSetCacheKey);
+                mc.Remove(RVStorage.DataSetCacheKey);
+                mc.Remove(SellCheck.DataSetCacheKey);
+                mc.Remove(SROAVehicleMaintenance.SROA_SurchargeRate_CACHE_KEY);
+                mc.Remove(SROAVehicleMaintenance.SROA_VEHICLE_MAINTENANCE_CACHE_KEY);
+                mc.Remove(Submittal2.SUBMITTAL_CACHE_KEY);
+                mc.Remove();
+                mc.Remove();
+                mc.Remove();
+            }
+             */
         }
     }
 }

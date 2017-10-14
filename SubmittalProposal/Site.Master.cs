@@ -17,6 +17,7 @@ namespace SubmittalProposal
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
+                
             }
         }
         public string getPropIDForLotLane(string lot, string lane) {

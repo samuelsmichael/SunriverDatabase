@@ -351,7 +351,7 @@ namespace SubmittalProposal {
         protected void button1click(object sender, EventArgs args) {
             doFindOwnerPropertyClickedUpdate();
         }
-        private static string DataSetCacheKey = "RVDataSet";
+        public static string DataSetCacheKey = "RVDataSet";
         protected override System.Data.DataSet buildDataSet() {
             DataSet ds = null;
             MemoryCache cache = MemoryCache.Default;
