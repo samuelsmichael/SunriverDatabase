@@ -68,6 +68,11 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><asp:Label ID="lblITAdminMsg" runat="server" ForeColor="Green" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    
+                    <tr>
                         <td>
                 <asp:LinkButton ID="lbSecurityMaintenance" runat="server" OnClick="lbSecurityMaintenance_Click">Security Admin</asp:LinkButton>
                         </td>

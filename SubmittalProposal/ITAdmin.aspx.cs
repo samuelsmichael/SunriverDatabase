@@ -70,7 +70,9 @@ namespace SubmittalProposal {
         }
 
         protected void btnClearCache_Click(object sender, EventArgs e) {
+            lblITAdminMsg.Text = "";
             MemoryCache.Default.Dispose();
+            lblITAdminMsg.Text = "Data cache has been cleared.";
             /*
             using (MemoryCache mc=MemoryCache.Default) {
                 mc.Remove(BallotVerify.DataSetCacheKey);
