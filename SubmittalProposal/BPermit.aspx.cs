@@ -22,6 +22,22 @@ namespace SubmittalProposal {
         protected override Label getUpdateResultsLabel() {
             return lblBPermitUpdateResults;
         }
+
+        private bool weveAlreadyGotABPermitId() {
+            return Utils.isNothingNot(BPermitIDBeingEdited);
+        }
+        private bool thisBPermitNbrAlreadyExistsAndItsNotMe(string bPermitNbr) {
+            string filter = " [BPermit#] ='" + bPermitNbr + "'";
+            if (weveAlreadyGotABPermitId()) {
+                filter += " AND BPermitId <> " + BPermitIDBeingEdited;
+            }
+            DataTable sourceTable = BPermit.BPermitDataSet().Tables["BPData"];
+            DataView view = new DataView(sourceTable);
+            view.RowFilter = filter;
+            DataTable tab = view.ToTable();
+            return tab.Rows != null && tab.Rows.Count > 0;
+        }
+
         protected void btnBPermitUpdate_Click(object sender, EventArgs e) {
             bool jdPageIsValid=true;
 /* this seems to make it so the Submit button has to be clicked twice            foreach (BaseValidator validator in Page.Validators) {
@@ -36,8 +52,8 @@ namespace SubmittalProposal {
  */
             if (jdPageIsValid) {
                 try {
-                    if (Utils.isNothing(tbBPermitNbrUpdate.Text)) {
-                        throw new Exception("BPermit# must not be blank");
+                    if (thisBPermitNbrAlreadyExistsAndItsNotMe(tbBPermitNbrUpdate.Text)) {
+                        throw new Exception("This bPermit# already exists in another BPermit.");
                     }
                     SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
                     cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text;
@@ -411,8 +427,8 @@ namespace SubmittalProposal {
             }*/
             if (jdPageIsValid) {
                 try {
-                    if (Utils.isNothing(tbBPermitNbrNew.Text)) {
-                        throw new Exception("BPermit# must not be blank");
+                    if (thisBPermitNbrAlreadyExistsAndItsNotMe(tbBPermitNbrNew.Text)) {
+                        throw new Exception("This bPermit# already exists in another BPermit.");
                     }
 
                     SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");

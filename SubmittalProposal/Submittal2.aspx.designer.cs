@@ -175,6 +175,15 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Button btnMainTabTrigger;
         
         /// <summary>
+        /// btnProjectConditionsTrigger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnProjectConditionsTrigger;
+        
+        /// <summary>
         /// TabContainer1 control.
         /// </summary>
         /// <remarks>
