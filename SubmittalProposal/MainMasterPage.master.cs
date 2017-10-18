@@ -105,6 +105,7 @@ namespace SubmittalProposal {
                             if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("contractor")) {
                                 if (HttpContext.Current.User.IsInRole("candoreportscontractors")) {
                                     lbReports.Visible = true;
+                                    lbReports.Text = "Reports/CSVs";
                                 }
                             } else {
                                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sellcheck")) {

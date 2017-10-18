@@ -1,0 +1,9 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/AbstractQuery2.master" AutoEventWireup="true" CodeBehind="AbstractCSVPage.master.cs" Inherits="SubmittalProposal.AbstractCSVPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderQueryParms" runat="server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderCSVParms" runat="server">  
+    </asp:ContentPlaceHolder>
+    <div style="width:100%; text-align:center;">
+        <asp:Button ID="btnCreateCSVFile" Visible="false"  runat="server" Text="Download CSV File" 
+            onclick="btnCreateCSVFile_Click" />
+    </div>
+</asp:Content>

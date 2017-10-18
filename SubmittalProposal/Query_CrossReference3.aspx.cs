@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 
 namespace SubmittalProposal {
     public partial class Query_CrossReference3 : AbstractQueryPage {
+        protected override void queryHasBeenRun(DataSet ds) {
+        }
 
         protected override string PageTitle {
             get { return "Cross Reference"; }

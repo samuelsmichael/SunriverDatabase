@@ -16,11 +16,18 @@ namespace SubmittalProposal {
         protected abstract SqlCommand MSqlCommand { get; }
         protected abstract string ConnectionString { get; }
         protected abstract void ChildPagePreRender();
+        protected abstract void queryHasBeenRun(DataSet ds);
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
                 Session["GoBackTo"] = Request.UrlReferrer;
             }
-            ((AbstractQuery2)Master).getSubmitButton().Click += new EventHandler(AbstractQuery_Click);
+            System.Web.UI.MasterPage zMasterPageNeeded = Master;
+
+            while (zMasterPageNeeded.GetType().Name.ToLower().IndexOf("abstractquery2") == -1) {
+                zMasterPageNeeded = zMasterPageNeeded.Master;
+            }
+                
+            ((AbstractQuery2)zMasterPageNeeded).getSubmitButton().Click += new EventHandler(AbstractQuery_Click);
         }
         protected void Page_PreRender(object sender, EventArgs args) {
             ChildPagePreRender();
@@ -28,12 +35,18 @@ namespace SubmittalProposal {
         protected virtual void AbstractQuery_Click(object sender, EventArgs e) {
             DataSet ds = Common.Utils.getDataSet(MSqlCommand, ConnectionString);
             if (Utils.hasData(ds)) {
+                System.Web.UI.MasterPage zMasterPageNeeded = Master;
+
+                while (zMasterPageNeeded.GetType().Name.ToLower().IndexOf("abstractquery2") == -1) {
+                    zMasterPageNeeded = zMasterPageNeeded.Master;
+                }
                 DataTable dt = ds.Tables[0];
                 Session["aqpTaskTable"] = dt;
-                ((AbstractQuery2)Master).getGridView().DataSource = dt;
-                ((AbstractQuery2)Master).getGridView().DataBind();
-                ((AbstractQuery2)Master).getTitleLabel().Text = PageTitle;
+                ((AbstractQuery2)zMasterPageNeeded).getGridView().DataSource = dt;
+                ((AbstractQuery2)zMasterPageNeeded).getGridView().DataBind();
+                ((AbstractQuery2)zMasterPageNeeded).getTitleLabel().Text = PageTitle;
             }
+            queryHasBeenRun(ds);
         }
     }
 }

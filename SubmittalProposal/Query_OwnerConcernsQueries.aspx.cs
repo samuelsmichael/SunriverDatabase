@@ -10,6 +10,8 @@ using Common;
 
 namespace SubmittalProposal {
     public partial class Query_OwnerConcernsQueries : AbstractQueryPage {
+        protected override void queryHasBeenRun(DataSet ds) {
+        }
 
         protected override string PageTitle {
             get { return "Owner Concerns"; }

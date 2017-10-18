@@ -28,5 +28,8 @@ namespace SubmittalProposal {
         protected void ContractorMailingLabels_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ContractorMailingLabels.aspx");
         }
+        protected void ContractorMailingLabelsCSV_Click(object sender, EventArgs args) {
+            Response.Redirect("~/Reports/ContractorMailingLabelsCSV.aspx");
+        }
     }
 }
