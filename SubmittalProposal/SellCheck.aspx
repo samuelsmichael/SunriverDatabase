@@ -232,90 +232,114 @@
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
 
+                <asp:TemplateField HeaderText="Prepared By">
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Width="6em" Text='<%# Bind("scPreparedBy") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbPreparedByUpdatge" runat="server" Width="8em" Text='<%# Bind("scPreparedBy") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Fee">
                     <EditItemTemplate>
-                        <asp:DropDownList ID="ddlFeeUpdate" Width="8em" runat="server" OnDataBound="ddlFeeUpdate_DataBound" DataTextField="InspectionFee" DataValueField="InspectionFee"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlFeeUpdate" runat="server" 
+                            DataTextField="InspectionFee" DataValueField="InspectionFee" 
+                            OnDataBound="ddlFeeUpdate_DataBound" Width="8em">
+                        </asp:DropDownList>
                     </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label1b" runat="server" Text='<%# Eval("scFee","{0:c}") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Paid">
                     <ItemTemplate>
-                        <asp:Label ID="Label4s" runat="server" Enabled="false" Text='<%# Bind("scPaid") %>'></asp:Label>
+                        <asp:Label ID="Label1b" runat="server" Text='<%# Eval("scFee","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:CheckBox ID="cbscPaidUpdate" runat="server" Checked='<%#Eval("scPaid").ToString().Equals("True") %>' />
+                        <asp:CheckBox ID="cbscPaidUpdate" runat="server" 
+                            Checked='<%#Eval("scPaid").ToString().Equals("True") %>' />
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
+                    <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Paid Memo">
                     <ItemTemplate>
-                        <asp:Label ID="Label4t" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:Label>
+                        <asp:Label ID="Label4s" runat="server" Text='<%# Bind("scPaid") %>' 
+                            Enabled="false"></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="cbscPaidMemoUpdate" Width="8em" runat="server" MaxLength="10" Text='<%# Bind("scPaidMemo") %>'></asp:TextBox>
+                        <asp:TextBox ID="cbscPaidMemoUpdate" runat="server" MaxLength="10" 
+                            Text='<%# Bind("scPaidMemo") %>' Width="8em"></asp:TextBox>
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Date Closed">
                     <EditItemTemplate>
                         <table border="0" cellpadding="1" cellspacing="1">
                             <tr>
-                                <td>                    
+                                <td>
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>' CssClass="form_field" ID="tbDateClosedUpdate" 
-                                                Width="8em" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="tbDateClosedUpdate" runat="server" CssClass="form_field" 
+                                                    Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>' Width="8em"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                    ID="ibDateClosedUpdate" runat="server" />
+                                                <asp:ImageButton ID="ibDateClosedUpdate" runat="server" ImageAlign="AbsMiddle" 
+                                                    ImageUrl="~/Images/Calendar_scheduleHS.png" 
+                                                    ToolTip="Click to show date selector" />
                                             </td>
                                         </tr>
                                     </table>
-                                    <ajaxToolkit:CalendarExtender ID="ceDateClosedUpdate" runat="server" TargetControlID="tbDateClosedUpdate"
-                                        Format="MM/dd/yyyy" PopupButtonID="ibDateClosedUpdate" />
-                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revtbDateClosedUpdate" Display="Dynamic"
-                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                                        ControlToValidate="tbDateClosedUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-
+                                    <ajaxToolkit:CalendarExtender ID="ceDateClosedUpdate" runat="server" 
+                                        Format="MM/dd/yyyy" PopupButtonID="ibDateClosedUpdate" 
+                                        TargetControlID="tbDateClosedUpdate" />
+                                    <asp:RegularExpressionValidator ID="revtbDateClosedUpdate" runat="server" 
+                                        ControlToValidate="tbDateClosedUpdate" Display="Dynamic" 
+                                        ErrorMessage="Please enter a valid date" ForeColor="Red" 
+                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                         </table>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1c" runat="server" Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                        <asp:Label ID="Label4t" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Right" />
+                    <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Ladder Fuel">
+                    <ItemTemplate>
+                        <asp:Label ID="Label1c" runat="server" 
+                            Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" 
+                            DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Right" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Nox Weeds">
                     <ItemTemplate>
                         <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scLadderFuel") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlNoxWeedsUpdate" runat="server" 
+                            DataTextField="LadderFuel" DataValueField="LadderFuel" Width="8em">
+                        </asp:DropDownList>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Nox Weeds">
+
+
+                <asp:TemplateField HeaderText="Follow-up">
                     <ItemTemplate>
                         <asp:Label ID="Label4r" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
                     </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="ddlNoxWeedsUpdate" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Follow-up">
                     <ItemTemplate>
-                        <asp:Label ID="Label5aa" Enabled="false" runat="server" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scFollowUp")) %>'></asp:Label>
+                        <asp:Label ID="Label5aa" runat="server" Enabled="false" Height="2em" 
+                            Text='<%# getBRsInsteadOfCRLFs(Eval("scFollowUp")) %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="tbscFollowUpUpdate" runat="server" TextMode="MultiLine" Height="10em" Width="35em" Text='<%# Bind("scFollowUp") %>'></asp:TextBox>
+                        <asp:TextBox ID="tbscFollowUpUpdate" runat="server" Height="10em" 
+                            Text='<%# Bind("scFollowUp") %>' TextMode="MultiLine" Width="35em"></asp:TextBox>
                     </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
 
@@ -360,8 +384,10 @@
                                 DataTextField="InspectionFee" DataValueField="InspectionFee"                                  
                                 OnDataBound="ddlFeeNew_DataBound"></asp:DropDownList>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td class="form_field_heading">Prepared By</td>
+                        <td>
+                            <asp:TextBox ID="tbPreparedByNew" Width="8em" runat="server"></asp:TextBox>
+                        </td>
                     </tr>
                     <tr>
                         <td><asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Paid "></asp:Label></td>

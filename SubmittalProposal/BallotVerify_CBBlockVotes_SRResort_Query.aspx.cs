@@ -10,7 +10,8 @@ using System.Data.SqlClient;
 
 namespace SubmittalProposal {
     public partial class BallotVerify_CBBlockVotes_SRResort_Query : AbstractQueryPage {
-
+        protected override void queryHasBeenRun(DataSet ds) {
+        }
         protected override string PageTitle {
             get { return "SR Resort"; }
         }

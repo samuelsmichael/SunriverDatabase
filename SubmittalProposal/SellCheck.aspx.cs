@@ -470,14 +470,15 @@ namespace SubmittalProposal {
                 int inspectionId = Convert.ToInt32(((Label)row.Cells[1].Controls[1]).Text);
                 DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
                 string comments = ((TextBox)row.Cells[3].Controls[1]).Text;
-                string strfee = ((DropDownList)row.Cells[4].Controls[1]).SelectedValue;
+                string preparedBy = ((TextBox)row.Cells[4].Controls[1]).Text;
+                string strfee = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
                 decimal? fee = Utils.isNothing(strfee) ? (decimal?)null : Utils.ObjectToDecimal(strfee);
-                bool paid = ((CheckBox)row.Cells[5].Controls[1]).Checked;
-                string paidMemo = ((TextBox)row.Cells[6].Controls[1]).Text;
-                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[7].Controls[1]).Text);
-                string ladderFuel = ((DropDownList)row.Cells[8].Controls[1]).SelectedValue;
-                string noxWeeds = ((DropDownList)row.Cells[9].Controls[1]).SelectedValue;
-                string followUp = ((TextBox)row.Cells[10].Controls[1]).Text;
+                bool paid = ((CheckBox)row.Cells[6].Controls[1]).Checked;
+                string paidMemo = ((TextBox)row.Cells[7].Controls[1]).Text;
+                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
+                string ladderFuel = ((DropDownList)row.Cells[9].Controls[1]).SelectedValue;
+                string noxWeeds = ((DropDownList)row.Cells[10].Controls[1]).SelectedValue;
+                string followUp = ((TextBox)row.Cells[11].Controls[1]).Text;
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
 
@@ -492,6 +493,7 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = noxWeeds;
                 cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = comments;
                 cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = followUp;
+                cmd.Parameters.Add("@scPreparedBy", SqlDbType.NVarChar).Value = preparedBy;
                 SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
@@ -532,6 +534,7 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNew.SelectedValue;
                 cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNew.Text;
                 cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text;
+                cmd.Parameters.Add("@scPreparedBy", SqlDbType.NVarChar).Value = tbPreparedByNew.Text;
                 SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
@@ -549,6 +552,7 @@ namespace SubmittalProposal {
         }
         protected void lblNewInspection_OnClick(object sender, EventArgs args) {
             tbDateNew.Text = "";
+            tbPreparedByNew.Text = "";
             cbPaidNew.Checked = false;
             tbPaidMemoNew.Text = "";
             tbDateClosedNew.Text = "";
