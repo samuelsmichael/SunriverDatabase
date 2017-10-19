@@ -1,3 +1,5 @@
+USE SRSellCheck
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,6 +11,7 @@ GO
 
 --	uspSellCheckRequestUpdate
 -- =============================================
+
 alter PROCEDURE uspSellCheckInspectionUpdate 
 	@scInspectionID int=null,
 	@fkscRequestID int,
@@ -21,6 +24,7 @@ alter PROCEDURE uspSellCheckInspectionUpdate
 	@scNoxWeeds nvarchar(30),
 	@scComments nvarchar(max),
 	@scFollowUp nvarchar(max),
+	@scPreparedBy nvarchar(30),
 	@NewID int out
 AS
 BEGIN	
@@ -37,7 +41,8 @@ BEGIN
 			scLadderFuel=@scLadderFuel,
 			scNoxWeeds=@scNoxWeeds,
 			scComments=@scComments,
-			scFollowUp=@scFollowUp
+			scFollowUp=@scFollowUp,
+			scPreparedBy=@scPreparedBy
 			
 		where scInspectionID=@scInspectionID 
 	end else begin
@@ -52,7 +57,8 @@ BEGIN
 			scLadderFuel,
 			scNoxWeeds,
 			scComments,
-			scFollowUp
+			scFollowUp,
+			scPreparedBy
 		)
 		VALUES
            (
@@ -65,7 +71,8 @@ BEGIN
 			@scLadderFuel,
 			@scNoxWeeds,
 			@scComments,
-			@scFollowUp
+			@scFollowUp,
+			@scPreparedBy
 		   )
 		set @NewID=scope_identity()
 	end
