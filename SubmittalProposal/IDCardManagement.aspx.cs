@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Runtime.Caching;
 using System.Configuration;
 using System.Globalization;
+using System.Drawing;
 
 namespace SubmittalProposal {
     public partial class IDCardManagement : AbstractDatabase, ICanHavePDFs {
@@ -161,6 +162,8 @@ namespace SubmittalProposal {
             }
         }
         private void setResultsContent(String propId, String custId) {
+                            lblGuestPassesUpdateResults.Visible=false;
+
             Session["PropdIdBeingEdited"] = propId;
             Session["CustIdBeingEdited"] = custId;
             SqlCommand cmd = new SqlCommand("uspOwnerGet");
@@ -173,6 +176,8 @@ namespace SubmittalProposal {
                     Utils.ObjectToString(dsOwner.Tables[0].Rows[0]["Region"]) + " " +
                     Utils.ObjectToString(dsOwner.Tables[0].Rows[0]["PostalCode"]);
             lbOwnerPhone.Text = Utils.ObjectToString(dsOwner.Tables[0].Rows[0]["Phone"]);
+            tbGuestPass1NbrUpdate.Text = Utils.ObjectToString(dsOwner.Tables[0].Rows[0]["GuestPass1Nbr"]);
+            tbGuestPass2NbrUpdate.Text = Utils.ObjectToString(dsOwner.Tables[0].Rows[0]["GuestPass2Nbr"]);
             cmd = new SqlCommand("uspAddressGet");
             cmd.Parameters.Add("@PropId", SqlDbType.NVarChar).Value = propId;
             DataSet dsAddress = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
@@ -291,6 +296,7 @@ namespace SubmittalProposal {
         }
 
         protected void btnNewIDCardOk_Click(object sender, EventArgs args) {
+
             if (Page.IsValid) {
                 try {
                     SqlCommand cmd = new SqlCommand("uspCardPut");
@@ -501,9 +507,15 @@ namespace SubmittalProposal {
         }
         protected override void unlockYourUpdateFields() {
             gvCardholders.Columns[0].Visible = true;
+            btnUpdateGuestPasses.Visible = true;
+            tbGuestPass1NbrUpdate.Enabled = true;
+            tbGuestPass2NbrUpdate.Enabled = true;
         }
         protected override void lockYourUpdateFields() {
             gvCardholders.Columns[0].Visible = false;
+            btnUpdateGuestPasses.Visible = false;
+            tbGuestPass1NbrUpdate.Enabled = false;
+            tbGuestPass2NbrUpdate.Enabled = false;
         }
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             throw new NotImplementedException();
@@ -513,7 +525,8 @@ namespace SubmittalProposal {
         }
 
         protected void Edit(object sender, EventArgs e) {
-            
+                            lblGuestPassesUpdateResults.Visible=false;
+
             using (GridViewRow row = (GridViewRow)((LinkButton)sender).Parent.Parent)
             {
                 Session["CardIDBeingUpdated"]=Utils.ObjectToInt(((Label)row.Cells[1].Controls[1]).Text);
@@ -607,6 +620,7 @@ namespace SubmittalProposal {
         }
 
         protected void btnUpdateIDCardOk_Click(object sender, EventArgs e) {
+            lblGuestPassesUpdateResults.Visible=false;
             if (Page.IsValid) {
 
                 try {
@@ -787,6 +801,24 @@ namespace SubmittalProposal {
             string realLaneLot =
                str.Substring(indexoffirstspace).Trim() + " " + str.Substring(0, indexoffirstspace);
             LaneLotForPDFs = realLaneLot;
+        }
+
+        protected void btnUpdateGuestPasses_Click(object sender, EventArgs args) {
+            try {
+                SqlCommand cmd = new SqlCommand("uspOwnerPut");
+                string custId = Utils.ObjectToString(Session["CustIdBeingEdited"]);
+                cmd.Parameters.Add("@CustID", SqlDbType.NVarChar).Value = custId;
+                cmd.Parameters.Add("@GuestPass1Nbr", SqlDbType.NVarChar).Value = tbGuestPass1NbrUpdate.Text;
+                cmd.Parameters.Add("@GuestPass2Nbr", SqlDbType.NVarChar).Value = tbGuestPass2NbrUpdate.Text;
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["IDCardManagementSQLConnectionString"].ConnectionString);
+                lblGuestPassesUpdateResults.Visible = true;
+                lblGuestPassesUpdateResults.ForeColor = Color.Green;
+                lblGuestPassesUpdateResults.Text = "Updated successfully";
+            } catch (Exception e) {
+                lblGuestPassesUpdateResults.Visible = true;
+                lblGuestPassesUpdateResults.ForeColor = Color.Red;
+                lblGuestPassesUpdateResults.Text = "Error: " + e.ToString();
+            }
         }
     }
 }

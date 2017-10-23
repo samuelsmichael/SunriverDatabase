@@ -1,3 +1,5 @@
+use srpropertysql;
+go
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,8 +12,6 @@ GO
 	exec uspRptComplianceHistory @Lane='Sisters', @Lot='6'
 */
 -- =============================================
-use srpropertysql;
-go
 alter PROCEDURE uspRptComplianceHistory 
 	@Lot varchar(100) = null, 
 	@Lane varchar(100) = null

@@ -130,6 +130,60 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label lbOwnerPhone;
         
         /// <summary>
+        /// lblGuestPass1NbrUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGuestPass1NbrUpdate;
+        
+        /// <summary>
+        /// tbGuestPass1NbrUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbGuestPass1NbrUpdate;
+        
+        /// <summary>
+        /// lblGuestPass2NbrUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGuestPass2NbrUpdate;
+        
+        /// <summary>
+        /// tbGuestPass2NbrUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbGuestPass2NbrUpdate;
+        
+        /// <summary>
+        /// btnUpdateGuestPasses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateGuestPasses;
+        
+        /// <summary>
+        /// lblGuestPassesUpdateResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGuestPassesUpdateResults;
+        
+        /// <summary>
         /// gvCardholders control.
         /// </summary>
         /// <remarks>

@@ -1,4 +1,5 @@
 USE [ID-Card_Split_FE]
+GO
 -- ================================================
 SET ANSI_NULLS ON
 GO
@@ -9,7 +10,7 @@ GO
 -- Create date: 06/11/2015
 -- Description:	Gets the Cardholder Address
 /*
-	exec uspAddressGet @PropId='25155'
+	exec uspAddressGet @PropId='01003'
 */
 -- =============================================
 alter PROCEDURE uspAddressGet (

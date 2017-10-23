@@ -125,6 +125,39 @@
     </table>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="FormContent" runat="server">
+    <table cellpadding="4" cellpadding="0" border="0" width="95%">
+        <tr>
+            <td>
+                <asp:Label ID="lblGuestPass1NbrUpdate" runat="server" Text="Guest pass 1: "></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbGuestPass1NbrUpdate" Enabled="false" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Label ID="lblGuestPass2NbrUpdate" runat="server" Text="Guest pass 2: "></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="tbGuestPass2NbrUpdate" Enabled="false" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                <asp:Button ID="btnUpdateGuestPasses" runat="server" 
+                    Text="Update Guest Pass Nbrs" Visible="false" onclick="btnUpdateGuestPasses_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                <asp:Label ID="lblGuestPassesUpdateResults" Font-Bold="true" Visible="false" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div style="width:95%; text-align:center;">
+    </div>
     <asp:GridView Width="100%" ID="gvCardholders" runat="server" AutoGenerateColumns="False" AllowSorting="true"
         CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" 
         OnRowDataBound="gv_RowDataBound" 

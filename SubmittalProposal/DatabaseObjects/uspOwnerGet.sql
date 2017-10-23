@@ -1,3 +1,5 @@
+USE [ID-Card_Split_FE]
+GO
 -- ================================================
 SET ANSI_NULLS ON
 GO
@@ -17,6 +19,6 @@ alter PROCEDURE uspOwnerGet (
 AS
 BEGIN
 	SET NOCOUNT ON;
-	select a.CustName,a.Addr1, a.City, a.Region, a.PostalCode, a.Phone, a.CustID from tblArCust a where a.CustID=@CustId
+	select a.CustName,a.Addr1, a.City, a.Region, a.PostalCode, a.Phone, a.CustID, a.GuestPass1Nbr, a.GuestPass2Nbr from tblArCust a where a.CustID=@CustId
 end
 GO
