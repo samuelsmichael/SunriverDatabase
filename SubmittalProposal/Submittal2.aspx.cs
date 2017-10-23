@@ -314,6 +314,7 @@ namespace SubmittalProposal
             set { Session["CurrentBPermitIdReally"] = value; } }
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
+                Session["LastActiveTabIndex"] = 0;
                 ddlLane.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;
                 ddlLane.DataBind();
                 ddlLaneUpdate.DataSource = ((SiteMaster)Master.Master.Master).dsLotLane;

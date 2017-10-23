@@ -94,7 +94,7 @@
             <asp:BoundField DataField="SubmittalId" HeaderText="Submittal Id" SortExpression="SubmittalId">
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
-            <asp:BoundField DataField="BPermitID" HeaderText="Permit Id" SortExpression="BPermitID">
+            <asp:BoundField DataField="BPermit#" HeaderText="Permit #" SortExpression="BPermit#">
                 <HeaderStyle HorizontalAlign="Left" />
             </asp:BoundField>
         </Columns>
