@@ -14,11 +14,10 @@ namespace SubmittalProposal.Reports {
             get { return System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString; }
         }
         protected override void child_Page_Load(object sender, EventArgs args) {
-            if ( !IsPostBack) {
-                SqlCommand cmd = new SqlCommand("uspComplianceHistoryLotLaneDropdown");
-                DataSet ds = Common.Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-                ddlComplianceHistoryLotLane.DataSource = ds;
-                ddlComplianceHistoryLotLane.DataBind();
+            if (!IsPostBack) {
+                ddlLane.DataSource = ((SiteMaster)Master.Master).dsLotLane;
+                ddlLane.DataBind();
+
             }
         }
         protected override CrystalDecisions.CrystalReports.Engine.ReportDocument getReportDocument() {
@@ -35,9 +34,14 @@ namespace SubmittalProposal.Reports {
         }
         protected override Hashtable getReportParams() {
             Hashtable reportParams = new Hashtable();
-            reportParams.Add("@Lot",deriveLotFromDropdownValue(ddlComplianceHistoryLotLane.SelectedValue));
-            reportParams.Add("@Lane", deriveLaneFromDropdownValue(ddlComplianceHistoryLotLane.SelectedValue));
+            if (Common.Utils.isNothingNot(tbLot.Text)) {
+                reportParams.Add("@Lot", tbLot.Text);
+            }
+            if (Common.Utils.isNothingNot(ddlLane.SelectedValue)) {
+                reportParams.Add("@Lane", ddlLane.SelectedValue);
+            }
             return reportParams;
+            
         }
     }
 }

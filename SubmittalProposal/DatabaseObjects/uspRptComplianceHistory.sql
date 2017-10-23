@@ -7,7 +7,7 @@ GO
 -- Create date: 4/11/2016
 -- Description:	Data for Compliance History report
 /*
-	exec uspRptComplianceHistory @Lot='6', @Lane='Sisters'
+	exec uspRptComplianceHistory @Lane='Sisters', @Lot='6'
 */
 -- =============================================
 use srpropertysql;
@@ -18,7 +18,7 @@ alter PROCEDURE uspRptComplianceHistory
 AS
 BEGIN
 	SET NOCOUNT ON;
-	if @Lot is null begin -- null values for Crystal Reports so that it sets the lengths correctly
+	if @Lot is null and @Lane is null begin -- null values for Crystal Reports so that it sets the lengths correctly
 		SELECT 
 			cast(0 as int) as crReviewId, -- ReviewId
 			cast (getdate() as DateTime) as crDate, -- crDate
@@ -40,7 +40,7 @@ BEGIN
 			CASE WHEN crCloseDate is null then 'OPEN' ELSE 'CLOSED' END as crOpenClosed,
 			@Lot as Lot, @Lane as Lane
 		FROM tblComplianceReview cr
-		WHERE (((cr.crLOT)=@Lot) AND ((cr.crLANE)=@Lane))
+		WHERE (@Lot is null or cr.crLOT=@Lot) AND (@Lane is null or cr.crLANE=@Lane)
 		ORDER BY cr.crReviewID;
 	END
 END
