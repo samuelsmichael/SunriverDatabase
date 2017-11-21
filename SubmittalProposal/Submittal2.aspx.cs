@@ -185,7 +185,7 @@ namespace SubmittalProposal
             if (Utils.isNothingNot(tbBPermitId.Text)) {
                 sb.Append(prepend + "BPermit#: " + tbBPermitId.Text);
                 prepend = "  ";
-                sbFilter.Append(and + " [BPermit#] ='" + tbBPermitId.Text+"'");
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbBPermitId.Text, "[BPermit#]"));
                 and = " and ";
             }
             if (ddlIsCommercial.SelectedValue != "Null") {
@@ -629,6 +629,7 @@ namespace SubmittalProposal
         }
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
             try {
+                doBPermitUpdate();
                 SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitIdReally;
                 int? months = tbBPPaymentMonthsNew.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNew.Text.Trim().Replace("$", "").Replace(",", ""));
@@ -649,6 +650,7 @@ namespace SubmittalProposal
         }
         protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {
             try {
+                doBPermitUpdate();
                 SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = CurrentBPermitIdReally;
                 DateTime? review = tbBPermitReviewDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNew.Text.Trim());

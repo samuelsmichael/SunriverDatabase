@@ -37,7 +37,40 @@ namespace SubmittalProposal {
             DataTable tab = view.ToTable();
             return tab.Rows != null && tab.Rows.Count > 0;
         }
+        private void doBPermitUpdate() {
+            if (thisBPermitNbrAlreadyExistsAndItsNotMe(tbBPermitNbrUpdate.Text)) {
+                throw new Exception("This bPermit# already exists in another BPermit.");
+            }
+            SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
+            cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text;
+            cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameUpdate.Text;
+            cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneUpdate.SelectedValue;
+            cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text;
+            cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorUpdate.Text;
+            cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeUpdate.SelectedValue;
+            int? contractorId = ddlContractorUpdate.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlContractorUpdate.SelectedValue);
+            cmd.Parameters.Add("@fkSRContrRegID", SqlDbType.Int).Value = contractorId;
+            cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectUpdate.Text;
+            cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
+            cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredUpdate.SelectedValue == "Yes" ? true : false;
+            DateTime? issuedDate =
+                tbIssuedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedUpdate.Text);
+            cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
+            DateTime? closeDate =
+                tbClosedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedUpdate.Text);
+            cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
+            cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayUpdate.Text;
+            cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = SubmittalIDBeingEdited;
+            cmd.Parameters.Add("@BPermit#", SqlDbType.NVarChar).Value = tbBPermitNbrUpdate.Text;
+            SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
+            newBPermitId.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(newBPermitId);
+            SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
+            newSubmittalId.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(newSubmittalId);
+            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
 
+        }
         protected void btnBPermitUpdate_Click(object sender, EventArgs e) {
             bool jdPageIsValid=true;
 /* this seems to make it so the Submit button has to be clicked twice            foreach (BaseValidator validator in Page.Validators) {
@@ -52,38 +85,7 @@ namespace SubmittalProposal {
  */
             if (jdPageIsValid) {
                 try {
-                    if (thisBPermitNbrAlreadyExistsAndItsNotMe(tbBPermitNbrUpdate.Text)) {
-                        throw new Exception("This bPermit# already exists in another BPermit.");
-                    }
-                    SqlCommand cmd = new SqlCommand("uspProjectAndSubmittalUpdate");
-                    cmd.Parameters.Add("@Own_Name", SqlDbType.NVarChar).Value = tbOwnersNameUpdate.Text;
-                    cmd.Parameters.Add("@Lot", SqlDbType.NVarChar).Value = tbLotNameUpdate.Text;
-                    cmd.Parameters.Add("@Lane", SqlDbType.NVarChar).Value = ddlLaneUpdate.SelectedValue;
-                    cmd.Parameters.Add("@Applicant", SqlDbType.NVarChar).Value = tbApplicantNameUpdate.Text;
-                    cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar).Value = tbContractorUpdate.Text;
-                    cmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar).Value = ddlProjectTypeUpdate.SelectedValue;
-                    int? contractorId = ddlContractorUpdate.SelectedValue == "0" ? (int?)null : Convert.ToInt32(ddlContractorUpdate.SelectedValue);
-                    cmd.Parameters.Add("@fkSRContrRegID", SqlDbType.Int).Value = contractorId;
-                    cmd.Parameters.Add("@Project", SqlDbType.NVarChar).Value = tbProjectUpdate.Text;
-                    cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
-                    cmd.Parameters.Add("@BPermitReqd", SqlDbType.Bit).Value = rbListPermitRequiredUpdate.SelectedValue == "Yes" ? true : false;
-                    DateTime? issuedDate =
-                        tbIssuedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbIssuedUpdate.Text);
-                    cmd.Parameters.Add("@BPIssueDate", SqlDbType.DateTime).Value = issuedDate;
-                    DateTime? closeDate =
-                        tbClosedUpdate.Text == "" ? (DateTime?)null : Convert.ToDateTime(tbClosedUpdate.Text);
-                    cmd.Parameters.Add("@BPClosed", SqlDbType.DateTime).Value = closeDate;
-                    cmd.Parameters.Add("@BPDelay", SqlDbType.NVarChar).Value = tbDelayUpdate.Text;
-                    cmd.Parameters.Add("@SubmittalId", SqlDbType.Int).Value = SubmittalIDBeingEdited;
-                    cmd.Parameters.Add("@BPermit#", SqlDbType.NVarChar).Value = tbBPermitNbrUpdate.Text;
-                    SqlParameter newBPermitId = new SqlParameter("@NewBPermitID", SqlDbType.Int);
-                    newBPermitId.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(newBPermitId);
-                    SqlParameter newSubmittalId = new SqlParameter("@NewSubmittalID", SqlDbType.Int);
-                    newSubmittalId.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(newSubmittalId);
-                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
-
+                    doBPermitUpdate();
                     performPostUpdateSuccessfulActions("Update successful", BPERMIT_CACHE_KEY, BPERMIT_CACHE_GRID_KEY);
                 } catch (Exception ee) {
                     performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
@@ -296,7 +298,7 @@ namespace SubmittalProposal {
             if (Utils.isNothingNot(tbBPermitNbr.Text)) {
                 sb.Append(prepend + "BPermit#: " + tbBPermitNbr.Text);
                 prepend = "  ";
-                sbFilter.Append(and + " [BPermit#] ='" + tbBPermitNbr.Text+"'");
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbBPermitNbr.Text, "[BPermit#]"));
                 and = " and ";
             }
             if (Utils.isNothingNot(tbDelaySearch.Text)) {
@@ -474,6 +476,7 @@ namespace SubmittalProposal {
         }
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
             try {
+                doBPermitUpdate();
                 SqlCommand cmd = new SqlCommand("uspPaymentsUpdate");
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
                 int? months = tbBPPaymentMonthsNew.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNew.Text.Trim().Replace("$", "").Replace(",", ""));
@@ -491,6 +494,7 @@ namespace SubmittalProposal {
         }
         protected void btnNewBPermitReviewOk_Click(object sender, EventArgs args) {
             try {
+                doBPermitUpdate();
                 SqlCommand cmd = new SqlCommand("uspReviewsUpdate");
                 cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = BPermitIDBeingEdited;
                 DateTime? review = tbBPermitReviewDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNew.Text.Trim());
