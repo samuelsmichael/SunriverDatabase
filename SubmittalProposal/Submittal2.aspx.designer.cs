@@ -1444,6 +1444,222 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.DropDownList ddlContractorNew;
         
         /// <summary>
+        /// Panel15xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel15xx;
+        
+        /// <summary>
+        /// Label40xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label40xx;
+        
+        /// <summary>
+        /// tbBPPaymentFeeNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPPaymentFeeNewNewPermit;
+        
+        /// <summary>
+        /// revtbBPPaymentFeeNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtbBPPaymentFeeNewNewPermit;
+        
+        /// <summary>
+        /// Label41NewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label41NewPermit;
+        
+        /// <summary>
+        /// tbBPPaymentMonthsNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPPaymentMonthsNewNewPermit;
+        
+        /// <summary>
+        /// revBPPaymentMonthsNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBPPaymentMonthsNewNewPermit;
+        
+        /// <summary>
+        /// Panel16rr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel16rr;
+        
+        /// <summary>
+        /// Label42rr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label42rr;
+        
+        /// <summary>
+        /// tbBPermitReviewDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPermitReviewDateNewNewPermit;
+        
+        /// <summary>
+        /// ceBPermitReviewDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceBPermitReviewDateNewNewPermit;
+        
+        /// <summary>
+        /// revBPermitReviewDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBPermitReviewDateNewNewPermit;
+        
+        /// <summary>
+        /// Label43NewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label43NewPermit;
+        
+        /// <summary>
+        /// tbBPermitActionDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPermitActionDateNewNewPermit;
+        
+        /// <summary>
+        /// ceBPermitActionDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceBPermitActionDateNewNewPermit;
+        
+        /// <summary>
+        /// revBPermitActionDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBPermitActionDateNewNewPermit;
+        
+        /// <summary>
+        /// Label44NewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label44NewPermit;
+        
+        /// <summary>
+        /// tbBPermitLetterDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPermitLetterDateNewNewPermit;
+        
+        /// <summary>
+        /// ceBPermitLetterDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender ceBPermitLetterDateNewNewPermit;
+        
+        /// <summary>
+        /// revBPermitLetterDateNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revBPermitLetterDateNewNewPermit;
+        
+        /// <summary>
+        /// Label45NewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label45NewPermit;
+        
+        /// <summary>
+        /// tbBPRLetterRefNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPRLetterRefNewNewPermit;
+        
+        /// <summary>
+        /// Label46NewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label46NewPermit;
+        
+        /// <summary>
+        /// tbBPRCommentsNewNewPermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPRCommentsNewNewPermit;
+        
+        /// <summary>
         /// Panel18 control.
         /// </summary>
         /// <remarks>

@@ -398,6 +398,15 @@ namespace SubmittalProposal {
             ddlLaneNew.SelectedIndex = 0;
             tbOwnersNameNew.Text = "";
             tbApplicantNameNew.Text = "";
+            tbBPPaymentFeeNewNewPermit.Text = "";
+            tbBPPaymentMonthsNewNewPermit.Text = "";
+            tbBPermitReviewDateNewNewPermit.Text = "";
+            tbBPermitActionDateNewNewPermit.Text = "";
+            tbBPermitLetterDateNewNewPermit.Text = "";
+            tbBPRLetterRefNewNewPermit.Text = "";
+            tbBPRCommentsNewNewPermit.Text = ""; ;
+
+
         }
         public static DataTable BPermitsGetGridViewDataTable() {
             return new BPermit().getGridViewDataTable();
@@ -460,6 +469,43 @@ namespace SubmittalProposal {
                     newSubmittalId.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(newSubmittalId);
                     Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                    int newBuildingPermitId = Utils.ObjectToInt(newBPermitId.Value);
+
+
+                    if (newBuildingPermitId != 0) {
+                        if (Utils.isNothingNot(tbBPPaymentFeeNewNewPermit.Text) && Utils.isNothingNot(tbBPPaymentMonthsNewNewPermit.Text)) {
+                            cmd = new SqlCommand("uspPaymentsUpdate");
+                            cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = newBuildingPermitId;
+                            int? months = tbBPPaymentMonthsNewNewPermit.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNewNewPermit.Text.Trim().Replace("$", "").Replace(",", ""));
+                            cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                            decimal? fee = tbBPPaymentFeeNewNewPermit.Text.Trim() == "" ? (decimal?)null : Utils.ObjectToDecimal(tbBPPaymentFeeNewNewPermit.Text.Trim().Replace("$", "").Replace(",", ""));
+                            cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                            SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                            newid.Direction = ParameterDirection.Output;
+                            cmd.Parameters.Add(newid);
+                            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                        }
+                        if (Utils.isNothingNot(tbBPermitReviewDateNewNewPermit.Text)) {
+                            cmd = new SqlCommand("uspReviewsUpdate");
+                            cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = newBuildingPermitId;
+                            DateTime? review = tbBPermitReviewDateNewNewPermit.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNewNewPermit.Text.Trim());
+                            cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
+                            DateTime? action = tbBPermitActionDateNewNewPermit.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitActionDateNewNewPermit.Text.Trim());
+                            cmd.Parameters.Add("@BPRActionDate", SqlDbType.DateTime).Value = action;
+                            DateTime? letter = tbBPermitLetterDateNewNewPermit.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitLetterDateNewNewPermit.Text.Trim());
+                            cmd.Parameters.Add("@BPRLetterDate", SqlDbType.DateTime).Value = letter;
+                            cmd.Parameters.Add("@BPRLetterRef", SqlDbType.NVarChar).Value = tbBPRLetterRefNewNewPermit.Text.Trim();
+                            cmd.Parameters.Add("@BPRComments", SqlDbType.NVarChar).Value = tbBPRCommentsNewNewPermit.Text.Trim();
+                            SqlParameter newid = new SqlParameter("@NewBPReviewID", SqlDbType.Int);
+                            newid.Direction = ParameterDirection.Output;
+                            cmd.Parameters.Add(newid);
+                            Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                        }
+                    }
+
+
+
+
                     performPostNewSuccessfulActions("BPermit added successfully", BPERMIT_CACHE_KEY, BPERMIT_CACHE_GRID_KEY, tbBPermitNbr, tbBPermitNbrNew.Text);
                     mpeNewBPermit.Hide();
                 } catch (Exception e2) {

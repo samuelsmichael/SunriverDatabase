@@ -736,6 +736,123 @@
                         </td>
                     </tr>
                 </table>
+
+
+<table style="width:100%;" cellpadding="0" cellspacing="0" border="0">
+                                        <tr valign="top">
+                                            <td valign="top">
+                                            <asp:Panel runat="server" Style="text-align: center; " ID="Panel15xx" Width="185px" GroupingText="Payment" CssClass="newitemcontent">
+                                                <table>
+                                                    <tr>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label40xx" runat="server" Text="Fee"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <asp:TextBox CssClass="form_field" ID="tbBPPaymentFeeNewNewPermit" Width="5em" runat="server"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator b ID="revtbBPPaymentFeeNewNewPermit" ForeColor="Red" Display="Dynamic"
+                                                                ControlToValidate="tbBPPaymentFeeNewNewPermit" ValidationExpression="^(\$|)([1-9]\d{0,2}(\,\d{3})*|([1-9]\d*))(\.\d{2})?$"
+                                                                runat="server" ErrorMessage="Must be an amount"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label41NewPermit" runat="server" Text="Months"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <asp:TextBox CssClass="form_field" ID="tbBPPaymentMonthsNewNewPermit" Width="3em" runat="server"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="revBPPaymentMonthsNewNewPermit" ForeColor="Red" Display="Dynamic"
+                                                                ControlToValidate="tbBPPaymentMonthsNewNewPermit" ValidationExpression="^[0-9]+$" runat="server"
+                                                                ErrorMessage="Must be numeric"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            </td>
+                                            <td valign="top">
+
+                                            <asp:Panel runat="server" GroupingText="Review" Width="70%" Style="text-align: center;"  ID="Panel16rr" CssClass="newitemcontent">
+                                                <table>
+                                                    <tr>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label42rr" runat="server" Text="Inspection Date"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <asp:TextBox CssClass="form_field" ID="tbBPermitReviewDateNewNewPermit" Width="8em" runat="server"></asp:TextBox>
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <ajaxToolkit:CalendarExtender ID="ceBPermitReviewDateNewNewPermit" runat="server" TargetControlID="tbBPermitReviewDateNewNewPermit"
+                                                                Format="MM/dd/yyyy" />
+                                                            <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitReviewDateNewNewPermit" Display="Dynamic"
+                                                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                                ControlToValidate="tbBPermitReviewDateNewNewPermit" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label43NewPermit" runat="server" Text="Action Date"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <asp:TextBox CssClass="form_field" ID="tbBPermitActionDateNewNewPermit" Width="8em" runat="server"></asp:TextBox>
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <ajaxToolkit:CalendarExtender ID="ceBPermitActionDateNewNewPermit" runat="server" TargetControlID="tbBPermitActionDateNewNewPermit"
+                                                                Format="MM/dd/yyyy" />
+                                                            <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitActionDateNewNewPermit" Display="Dynamic"
+                                                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                                ControlToValidate="tbBPermitActionDateNewNewPermit" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label44NewPermit" runat="server" Text="Letter Date"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <asp:TextBox CssClass="form_field" ID="tbBPermitLetterDateNewNewPermit" Width="8em" runat="server"></asp:TextBox>
+                                                                    </td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <ajaxToolkit:CalendarExtender ID="ceBPermitLetterDateNewNewPermit" runat="server" TargetControlID="tbBPermitLetterDateNewNewPermit"
+                                                                Format="MM/dd/yyyy" />
+                                                            <asp:RegularExpressionValidator ForeColor="Red" ID="revBPermitLetterDateNewNewPermit" Display="Dynamic"
+                                                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                                ControlToValidate="tbBPermitLetterDateNewNewPermit" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label45NewPermit" runat="server" Text="Letter Reference"></asp:Label>
+                                                        </td>
+                                                        <td class="form_field">
+                                                            <asp:TextBox CssClass="form_field" ID="tbBPRLetterRefNewNewPermit" MaxLength="25" Width="8em"
+                                                                runat="server"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="form_field_heading">
+                                                            <asp:Label CssClass="form_field_heading" ID="Label46NewPermit" runat="server" Text="Comments"></asp:Label>
+                                                        </td>
+                                                        <td align="left" class="form_field" colspan="9">
+                                                            <asp:TextBox CssClass="form_field" ID="tbBPRCommentsNewNewPermit" Width="99%" runat="server"
+                                                                TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+
             </asp:Panel>
             <asp:Panel ID="Panel4" GroupingText="Data from Submittal Form" runat="server">
                 <table border="0" cellpadding="2" cellspacing="0" width="100%">

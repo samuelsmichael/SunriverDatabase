@@ -125,6 +125,7 @@
     <Content Include="Reports\BPermitsLaunchManager.aspx" />
     <Content Include="Reports\CitationsLaunchManager.aspx" />
     <Content Include="Reports\CitationsReport_CitationData.aspx" />
+    <Content Include="Reports\ContractorMailingLabelsCSV.aspx" />
     <Content Include="Reports\IDCardsLaunchManager.aspx" />
     <Content Include="Reports\OwnerConcernsLaunchManager.aspx" />
     <Content Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx" />
@@ -303,6 +304,7 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="AbstractQuery2.master" />
+    <Content Include="AbstractCSVPage.master" />
     <None Include="App_Data\ASPNETDB.MDF.orig" />
     <None Include="App_Data\aspnetdb_log.ldf.orig" />
     <None Include="Properties\Settings.settings">
@@ -332,6 +334,13 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AbstractCSVPage.master.cs">
+      <DependentUpon>AbstractCSVPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AbstractCSVPage.master.designer.cs">
+      <DependentUpon>AbstractCSVPage.master</DependentUpon>
     </Compile>
     <Compile Include="AbstractDatabase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -550,6 +559,13 @@
     </Compile>
     <Compile Include="Reports\CitationsReport_CitationData.aspx.designer.cs">
       <DependentUpon>CitationsReport_CitationData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ContractorMailingLabelsCSV.aspx.cs">
+      <DependentUpon>ContractorMailingLabelsCSV.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ContractorMailingLabelsCSV.aspx.designer.cs">
+      <DependentUpon>ContractorMailingLabelsCSV.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\IDCardsLaunchManager.aspx.cs">
       <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>

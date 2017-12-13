@@ -280,11 +280,11 @@ namespace SubmittalProposal
                 ddlProjectDecisionUpdate.Items.Add(new ListItem(Utils.ObjectToString(dr["ProjectDecision"]), Utils.ObjectToString(dr["ProjectDecision"])));
             }
             ddlProjectDecisionUpdate.SelectedValue = Utils.ObjectToString(dr["ProjectDecision"]);
-            if (ddlProjectDecisionUpdate.SelectedValue == "A" || ddlProjectDecisionUpdate.SelectedValue == "AWC") {
+   // v2.09        if (ddlProjectDecisionUpdate.SelectedValue == "A" || ddlProjectDecisionUpdate.SelectedValue == "AWC") {
                 lbGoToPermit.Visible = true;
-            } else {
-                lbGoToPermit.Visible = false;
-            }
+     //       } else {
+       //         lbGoToPermit.Visible = false;
+         //   }
             tbProjectUpdate.Text = Utils.ObjectToString(dr["Project"]);
             tbSubmittalUpdate.Text = Utils.ObjectToString(dr["Submittal"]);
             cbIsCommercialUpdate.Checked=Convert.ToBoolean(dr["IsCommercial"]);
@@ -626,6 +626,37 @@ namespace SubmittalProposal
             newSubmittalId.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(newSubmittalId);
             Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            int newBuildingPermitId = Utils.ObjectToInt(newBPermitId.Value);
+            if (newBuildingPermitId != 0) {
+                if (Utils.isNothingNot(tbBPPaymentFeeNewNewPermit.Text) && Utils.isNothingNot(tbBPPaymentMonthsNewNewPermit.Text)) {
+                    cmd = new SqlCommand("uspPaymentsUpdate");
+                    cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = newBuildingPermitId;
+                    int? months = tbBPPaymentMonthsNewNewPermit.Text.Trim() == "" ? (int?)null : Utils.ObjectToInt(tbBPPaymentMonthsNewNewPermit.Text.Trim().Replace("$", "").Replace(",", ""));
+                    cmd.Parameters.Add("@BPMonths", SqlDbType.Int).Value = months;
+                    decimal? fee = tbBPPaymentFeeNewNewPermit.Text.Trim() == "" ? (decimal?)null : Utils.ObjectToDecimal(tbBPPaymentFeeNewNewPermit.Text.Trim().Replace("$", "").Replace(",", ""));
+                    cmd.Parameters.Add("@BPFee", SqlDbType.Money).Value = fee;
+                    SqlParameter newid = new SqlParameter("@NewBPPaymentID", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                }
+                if(Utils.isNothingNot(tbBPermitReviewDateNewNewPermit.Text)) {
+                    cmd = new SqlCommand("uspReviewsUpdate");
+                    cmd.Parameters.Add("@BPermitId", SqlDbType.Int).Value = newBuildingPermitId;
+                    DateTime? review = tbBPermitReviewDateNewNewPermit.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitReviewDateNewNewPermit.Text.Trim());
+                    cmd.Parameters.Add("@BPReviewDate", SqlDbType.DateTime).Value = review;
+                    DateTime? action = tbBPermitActionDateNewNewPermit.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitActionDateNewNewPermit.Text.Trim());
+                    cmd.Parameters.Add("@BPRActionDate", SqlDbType.DateTime).Value = action;
+                    DateTime? letter = tbBPermitLetterDateNewNewPermit.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbBPermitLetterDateNewNewPermit.Text.Trim());
+                    cmd.Parameters.Add("@BPRLetterDate", SqlDbType.DateTime).Value = letter;
+                    cmd.Parameters.Add("@BPRLetterRef", SqlDbType.NVarChar).Value = tbBPRLetterRefNewNewPermit.Text.Trim();
+                    cmd.Parameters.Add("@BPRComments", SqlDbType.NVarChar).Value = tbBPRCommentsNewNewPermit.Text.Trim();
+                    SqlParameter newid = new SqlParameter("@NewBPReviewID", SqlDbType.Int);
+                    newid.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(newid);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+                }
+            }
         }
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
             try {
@@ -806,6 +837,23 @@ namespace SubmittalProposal
             tbContractorNewBP.Enabled = false;
             tbProjectNewBP.Enabled = false;
             ddlProjectTypeNewBP.Enabled = false;
+
+            tbBPPaymentFeeNewNewPermit.Enabled = false;
+            revtbBPPaymentFeeNewNewPermit.Enabled = false;
+            tbBPPaymentMonthsNewNewPermit.Enabled = false;
+            revBPPaymentMonthsNewNewPermit.Enabled = false;
+            tbBPermitReviewDateNewNewPermit.Enabled = false;
+            ceBPermitReviewDateNewNewPermit.Enabled = false;
+            revBPermitReviewDateNewNewPermit.Enabled = false;
+            tbBPermitActionDateNewNewPermit.Enabled = false;
+            ceBPermitActionDateNewNewPermit.Enabled = false;
+            revBPermitActionDateNewNewPermit.Enabled = false;
+            tbBPermitLetterDateNewNewPermit.Enabled = false;
+            ceBPermitLetterDateNewNewPermit.Enabled = false;
+            revBPermitLetterDateNewNewPermit.Enabled = false;
+            tbBPRLetterRefNewNewPermit.Enabled = false;
+            tbBPRCommentsNewNewPermit.Enabled = false;
+
         }
         private void unlockYourUpdateFieldsBPermit() {
             tbDelayUpdate.Enabled = true;
@@ -842,6 +890,23 @@ namespace SubmittalProposal
             tbContractorNewBP.Enabled = true;
             tbProjectNewBP.Enabled = true;
             ddlProjectTypeNewBP.Enabled = true;
+
+            tbBPPaymentFeeNewNewPermit.Enabled = true;
+            revtbBPPaymentFeeNewNewPermit.Enabled = true;
+            tbBPPaymentMonthsNewNewPermit.Enabled = true;
+            revBPPaymentMonthsNewNewPermit.Enabled = true;
+            tbBPermitReviewDateNewNewPermit.Enabled = true;
+            ceBPermitReviewDateNewNewPermit.Enabled = true;
+            revBPermitReviewDateNewNewPermit.Enabled = true;
+            tbBPermitActionDateNewNewPermit.Enabled = true;
+            ceBPermitActionDateNewNewPermit.Enabled = true;
+            revBPermitActionDateNewNewPermit.Enabled = true;
+            tbBPermitLetterDateNewNewPermit.Enabled = true;
+            ceBPermitLetterDateNewNewPermit.Enabled = true;
+            revBPermitLetterDateNewNewPermit.Enabled = true;
+            tbBPRLetterRefNewNewPermit.Enabled = true;
+            tbBPRCommentsNewNewPermit.Enabled = true;
+
         }
         private void clearAllNewFormInputFieldsBP() {
             tbProjectNewBP.Text = "";
@@ -856,6 +921,14 @@ namespace SubmittalProposal
             rbListPermitRequiredNew.SelectedIndex = -1;
             ddlContractorNew.SelectedIndex = -1;
             tbBPermitNbrNew.Text = "";
+            tbBPPaymentFeeNewNewPermit.Text="";
+            tbBPPaymentMonthsNewNewPermit.Text="";
+            tbBPermitReviewDateNewNewPermit.Text="";
+            tbBPermitActionDateNewNewPermit.Text="";
+            tbBPermitLetterDateNewNewPermit.Text="";
+            tbBPRLetterRefNewNewPermit.Text="";
+            tbBPRCommentsNewNewPermit.Text = ""; ;
+
         }
 
         protected void lbBPermitNewPayment_Click(object sender, EventArgs args) {

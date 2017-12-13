@@ -28,17 +28,15 @@
     </p>    <p>
         Click on one of the tabs in order to open the database.
     </p>
-    <p>
-        2.02.0.1 -- 05/31/17<br />
-        Citations -- <br />
-        New Citations<br />
-        --Changed Tab Order, Created on Focus<br />
-        Reports:<br />
-        --Turned to landacape Citations Open, Citations Closed,Citations Fine Summary, Vegitation, Parking Violation, Design Violation, Design Rules Summary.<br />
-        <br />
+    <p style="font-weight:bold;">
+        2.09 -- 12/2017
     </p>
-    <p>
-        &nbsp;</p>
-    <p>
-        &nbsp;</p>
+        <ul style="font-size:x-small;font-weight:bold;margin-top:-8px;">
+        
+<li>Bug fix: when add a payment or a review to a BPermit, it updates the BPermit information (e.g. – Issue Date), too.</li>
+<li>Bug fix: the user couldn’t include apostrophes in a search.</li>
+<li>Enhancement: You can now add, via the “go to bpermit” link, a BPermit to Deferred or Denied project.</li>
+<li>Bug fix: at the Building Permit tab in the Submittal page, although the New Payment and the New Review buttons are present … clicking them wouldn’t do anything.</li>
+<li>Enhancement: When creating a new BPermit, you can now add a payment and/or a Review at that same screen.  This works at both the Submittal database Building Permits tab, as well as when clicking the “go to bpermit” link, when it’s a question of a new building permit.</li>
+</ul>
 </asp:Content>
