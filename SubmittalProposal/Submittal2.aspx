@@ -200,6 +200,7 @@
                                                 <td>
                                                     <asp:DropDownList Enabled="false" CssClass="form_field" ID="ddlProjectTypeUpdate"
                                                         runat="server">
+                                                        <asp:ListItem Value="">None</asp:ListItem>
                                                         <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                                                         <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                                                         <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
@@ -421,6 +422,7 @@
                                     </td>
                                     <td>
                                         <asp:DropDownList CssClass="form_field" ID="ddlProjectTypeUpdateBP" runat="server">
+                                            <asp:ListItem Value="">None</asp:ListItem>
                                             <asp:ListItem Value="AA">AA - Administrative Approval</asp:ListItem>
                                             <asp:ListItem Value="ALT">ALT - Alteration\Addition</asp:ListItem>
                                             <asp:ListItem Value="CAI">CAI - Common Area Improvement</asp:ListItem>
