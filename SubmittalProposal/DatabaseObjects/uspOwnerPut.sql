@@ -13,7 +13,7 @@ GO
 	exec uspOwnerPut @CustId='065177'
 */
 -- =============================================
-create PROCEDURE uspOwnerPut (
+alter PROCEDURE uspOwnerPut (
 	@CustId nvarchar(10),
 	@GuestPass1Nbr nvarchar(30),
 	@GuestPass2Nbr nvarchar(30)
@@ -21,11 +21,16 @@ create PROCEDURE uspOwnerPut (
 AS
 BEGIN
 	SET NOCOUNT ON;
-	Update tblArCust
-	Set 
-		GuestPass1Nbr = @GuestPass1Nbr,
-		GuestPass2Nbr = @GuestPass2Nbr
-	where
-		CustID=@CustId
+	if exists (select 'a' from tblArCustAddendum where CustId=@CustId) begin
+		Update tblArCustAddendum
+		Set 
+			GuestPass1Nbr = @GuestPass1Nbr,
+			GuestPass2Nbr = @GuestPass2Nbr
+		where
+			CustID=@CustId
+	end else begin
+		Insert into tblArCustAddendum (CustId, GuestPass1Nbr, GuestPass2Nbr)
+		values (@CustId, @GuestPass1Nbr, @GuestPass2Nbr)
+	end
 end
 GO

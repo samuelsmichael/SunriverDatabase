@@ -29,10 +29,11 @@
         Click on one of the tabs in order to open the database.
     </p>
     <p style="font-weight:bold;">
-        2.10 -- 01/2018
+        2.11 -- 02/2018
     </p>
         <ul style="font-size:x-small;font-weight:bold;margin-top:-8px;">
         
-<li>Enhancement: You can work with Submittal records that don't have Project Type.</li>
+<li>Enhancement: </li>
+<li>Bug fix: </li>
 </ul>
 </asp:Content>
