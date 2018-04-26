@@ -29,11 +29,11 @@
         Click on one of the tabs in order to open the database.
     </p>
     <p style="font-weight:bold;">
-        2.11 -- 04/2018
+        2.12 -- 05/2018
     </p>
         <ul style="font-size:x-small;font-weight:bold;margin-top:-8px;">
         
-<li>Enhancement: Modifications to some Citation reports</li>
-<li>Bug fix: </li>
+<li></li>
+<li>Bug fix: When you'd click on New Letter in Compliance Review, it wouldn't do anything. </li>
 </ul>
 </asp:Content>
