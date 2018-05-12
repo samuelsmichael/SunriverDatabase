@@ -8,3 +8,8 @@ C:\Temp\Sunriver\SunriverDatabase\Common\obj\Debug\Common.dll
 C:\Temp\Sunriver\SunriverDatabase\Common\obj\Debug\Common.pdb
 C:\Temp\Sunriver\SunriverDatabase\Common\bin\Debug\AjaxControlToolkit.dll
 C:\Temp\Sunriver\SunriverDatabase\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\Common\bin\Debug\Common.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\Common\bin\Debug\Common.pdb
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\Common\bin\Debug\AjaxControlToolkit.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\Common\obj\Debug\Common.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\Common\obj\Debug\Common.pdb

@@ -98,7 +98,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Address1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressName {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +106,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Address2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressAddress {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,7 +114,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_City {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressCity {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -122,7 +122,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_State {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressState {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -130,7 +130,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Zip {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressZip {
             get {
                 return this.DataDefinition.ParameterFields[5];
             }
@@ -138,7 +138,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressName {
+        public CrystalDecisions.Shared.IParameterField Parameter_Address1 {
             get {
                 return this.DataDefinition.ParameterFields[6];
             }
@@ -146,7 +146,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressAddress {
+        public CrystalDecisions.Shared.IParameterField Parameter_Address2 {
             get {
                 return this.DataDefinition.ParameterFields[7];
             }
@@ -154,7 +154,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressCity {
+        public CrystalDecisions.Shared.IParameterField Parameter_City {
             get {
                 return this.DataDefinition.ParameterFields[8];
             }
@@ -162,7 +162,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressState {
+        public CrystalDecisions.Shared.IParameterField Parameter_State {
             get {
                 return this.DataDefinition.ParameterFields[9];
             }
@@ -170,7 +170,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressZip {
+        public CrystalDecisions.Shared.IParameterField Parameter_Zip {
             get {
                 return this.DataDefinition.ParameterFields[10];
             }

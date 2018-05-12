@@ -11,7 +11,7 @@ GO
 -- =============================================
 use [ID-Card_Split_FE]
 go
-create PROCEDURE uspRptEnvelope 
+alter PROCEDURE uspRptEnvelope 
 	@Name nvarchar(50)=null,
 	@Address1 nvarchar(50)=null,
 	@Address2 nvarchar(50)=null,
