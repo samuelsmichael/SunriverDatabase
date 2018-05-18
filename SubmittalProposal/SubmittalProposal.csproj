@@ -294,6 +294,9 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -754,12 +757,12 @@
     <Compile Include="LRFDVehicleMaintenanceReportsMain.aspx.designer.cs">
       <DependentUpon>LRFDVehicleMaintenanceReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AjaxControlToolkit,.master.cs">
-      <DependentUpon>AjaxControlToolkit,.master</DependentUpon>
+    <Compile Include="MainMasterPage.master.cs">
+      <DependentUpon>MainMasterPage.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AjaxControlToolkit,.master.designer.cs">
-      <DependentUpon>AjaxControlToolkit,.master</DependentUpon>
+    <Compile Include="MainMasterPage.master.designer.cs">
+      <DependentUpon>MainMasterPage.master</DependentUpon>
     </Compile>
     <Compile Include="ObjectShredder.cs" />
     <Compile Include="OwnerConcerns.aspx.cs">
@@ -1685,7 +1688,7 @@
     <None Include="CrystalReport1.mht" />
     <Content Include="Reports\Reports.Master" />
     <Content Include="SubmittalReportsMain.aspx" />
-    <Content Include="AjaxControlToolkit,.master" />
+    <Content Include="MainMasterPage.master" />
     <None Include="Web References\getpageinforeference\GetPageInfo.wsdl" />
   </ItemGroup>
   <ItemGroup>

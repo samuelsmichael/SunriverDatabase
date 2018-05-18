@@ -31,3 +31,5 @@ SubmittalProposal/Web.config
 aspnet_client/
 *.mdf
 *.ldf
+*.MDF
+*.LDF
