@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Common" Label="Common" Category="Project" />
+    <Node Id="AjaxControlToolkit 18.1.0" Label="AjaxControlToolkit 18.1.0" Category="Package" />
+    <Node Id="CsvExport 1.0.1" Label="CsvExport 1.0.1" Category="Package" />
+    <Node Id="SubmittalProposal" Label="SubmittalProposal" Category="Project" />
+    <Node Id="AjaxControlToolkit 18.1.0" Label="AjaxControlToolkit 18.1.0" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="Common" Target="AjaxControlToolkit 18.1.0" Category="Installed Package" />
+    <Link Source="Common" Target="CsvExport 1.0.1" Category="Installed Package" />
+    <Link Source="SubmittalProposal" Target="AjaxControlToolkit 18.1.0" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+  </Styles>
+</DirectedGraph>
