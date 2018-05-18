@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SubmittalProposal.Reports.OwnerProperty {
+namespace SubmittalProposal.Reports.Contractor {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SubmittalProposal.Reports.OwnerProperty {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Envelope : ReportClass {
+    public class contractorSoonExpLicReport : ReportClass {
         
-        public Envelope() {
+        public contractorSoonExpLicReport() {
         }
         
         public override string ResourceName {
             get {
-                return "Envelope.rpt";
+                return "contractorSoonExpLicReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         public override string FullResourceName {
             get {
-                return "SubmittalProposal.Reports.OwnerProperty.Envelope.rpt";
+                return "SubmittalProposal.Reports.Contractor.contractorSoonExpLicReport.rpt";
             }
             set {
                 // Do nothing
@@ -90,97 +90,17 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Name {
+        public CrystalDecisions.Shared.IParameterField Parameter_RegisteredStartDate {
             get {
                 return this.DataDefinition.ParameterFields[0];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressName {
-            get {
-                return this.DataDefinition.ParameterFields[1];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressAddress {
-            get {
-                return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressCity {
-            get {
-                return this.DataDefinition.ParameterFields[3];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressState {
-            get {
-                return this.DataDefinition.ParameterFields[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReturnAddressZip {
-            get {
-                return this.DataDefinition.ParameterFields[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Address1 {
-            get {
-                return this.DataDefinition.ParameterFields[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Address2 {
-            get {
-                return this.DataDefinition.ParameterFields[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_City {
-            get {
-                return this.DataDefinition.ParameterFields[8];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_State {
-            get {
-                return this.DataDefinition.ParameterFields[9];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Zip {
-            get {
-                return this.DataDefinition.ParameterFields[10];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedEnvelope : Component, ICachedReport {
+    public class CachedcontractorSoonExpLicReport : Component, ICachedReport {
         
-        public CachedEnvelope() {
+        public CachedcontractorSoonExpLicReport() {
         }
         
         [Browsable(false)]
@@ -217,7 +137,7 @@ namespace SubmittalProposal.Reports.OwnerProperty {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Envelope rpt = new Envelope();
+            contractorSoonExpLicReport rpt = new contractorSoonExpLicReport();
             rpt.Site = this.Site;
             return rpt;
         }

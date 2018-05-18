@@ -31,6 +31,12 @@
         <asp:LinkButton ID="lbContractorMailingLabels" runat="server" 
             onclick="ContractorMailingLabels_Click">Contractor Mailing Labels</asp:LinkButton>
     </p>
+
+    <p>
+                <asp:LinkButton ID="lbContractorSoonExp" runat="server" 
+            onclick="ContractorSoonExp_Click">Expired Or Soon to Expire License</asp:LinkButton>
+
+    </p>
     <p>
         <center>
             <h2>Contractor CSVs</h2>

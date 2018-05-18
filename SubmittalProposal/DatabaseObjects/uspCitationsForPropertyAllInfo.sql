@@ -8,7 +8,7 @@ GO
 -- Create date: 12/02/2016
 -- Description:	Gets Citation info for Property-all-info
 /*
-	exec uspCitationsForPropertyAllInfo @Lot='3', @Lane='RedWing'
+	exec uspCitationsForPropertyAllInfo @Lot='3', @Lane='Squirrel'
 */
 -- =============================================
 Use srpropertysql

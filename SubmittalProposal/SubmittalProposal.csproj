@@ -80,10 +80,6 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\aspnetdb_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="BallotVerify.aspx" />
     <Content Include="BPermit.aspx" />
     <Content Include="Citations.aspx" />
@@ -105,6 +101,7 @@
     <Content Include="Reports\CitationsLaunchManager.aspx" />
     <Content Include="Reports\CitationsReport_CitationData.aspx" />
     <Content Include="Reports\ContractorMailingLabelsCSV.aspx" />
+    <Content Include="Reports\contractorSoonExp.aspx" />
     <Content Include="Reports\IDCardsLaunchManager.aspx" />
     <Content Include="Reports\OwnerConcernsLaunchManager.aspx" />
     <Content Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx" />
@@ -113,6 +110,8 @@
     <Content Include="Reports\VehicleMaintenanceHistorySROA.aspx" />
     <Content Include="Reports\SROAVehicles.aspx" />
     <Content Include="Reports\SROAInvoices.aspx" />
+    <Content Include="Reports\WebForm1.aspx" />
+    <Content Include="Reports\WebForm2.aspx" />
     <Content Include="SROAVehicleMaintenanceReportsMain.aspx" />
     <Content Include="SROAVehicleMaintenance.aspx" />
     <Content Include="Query_OwnerConcernsQueries.aspx" />
@@ -284,8 +283,6 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="AbstractQuery2.master" />
     <Content Include="AbstractCSVPage.master" />
-    <None Include="App_Data\ASPNETDB.MDF.orig" />
-    <None Include="App_Data\aspnetdb_log.ldf.orig" />
     <Content Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -296,15 +293,6 @@
     <None Include="Web References\getpageinforeference\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -547,6 +535,19 @@
     <Compile Include="Reports\ContractorMailingLabelsCSV.aspx.designer.cs">
       <DependentUpon>ContractorMailingLabelsCSV.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\contractorSoonExp.aspx.cs">
+      <DependentUpon>contractorSoonExp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\contractorSoonExp.aspx.designer.cs">
+      <DependentUpon>contractorSoonExp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Contractor\contractorSoonExpLicReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>contractorSoonExpLicReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\IDCardsLaunchManager.aspx.cs">
       <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -663,6 +664,20 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SROAVehicleMaintenanceReportsMain.aspx.cs">
       <DependentUpon>SROAVehicleMaintenanceReportsMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -739,12 +754,12 @@
     <Compile Include="LRFDVehicleMaintenanceReportsMain.aspx.designer.cs">
       <DependentUpon>LRFDVehicleMaintenanceReportsMain.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MainMasterPage.master.cs">
-      <DependentUpon>MainMasterPage.master</DependentUpon>
+    <Compile Include="AjaxControlToolkit,.master.cs">
+      <DependentUpon>AjaxControlToolkit,.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MainMasterPage.master.designer.cs">
-      <DependentUpon>MainMasterPage.master</DependentUpon>
+    <Compile Include="AjaxControlToolkit,.master.designer.cs">
+      <DependentUpon>AjaxControlToolkit,.master</DependentUpon>
     </Compile>
     <Compile Include="ObjectShredder.cs" />
     <Compile Include="OwnerConcerns.aspx.cs">
@@ -1670,7 +1685,7 @@
     <None Include="CrystalReport1.mht" />
     <Content Include="Reports\Reports.Master" />
     <Content Include="SubmittalReportsMain.aspx" />
-    <Content Include="MainMasterPage.master" />
+    <Content Include="AjaxControlToolkit,.master" />
     <None Include="Web References\getpageinforeference\GetPageInfo.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -1841,6 +1856,10 @@
     <EmbeddedResource Include="Reports\Contractor\ContractorsAllData.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractorsAllData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Contractor\contractorSoonExpLicReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>contractorSoonExpLicReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\LRFDVehicleMaintenance\LapineRFDInvoicesReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2023,7 +2042,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>8013</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

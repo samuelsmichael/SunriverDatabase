@@ -207,3 +207,12 @@ X:\Documents\GIT\databaseFreshInstall2\SubmittalProposal\obj\Debug\SubmittalProp
 X:\Documents\GIT\databaseFreshInstall2\SubmittalProposal\obj\Debug\SubmittalProposal.csproj.ResolveComReference.cache
 X:\Documents\GIT\databaseFreshInstall2\SubmittalProposal\obj\Debug\SubmittalProposal.dll
 X:\Documents\GIT\databaseFreshInstall2\SubmittalProposal\obj\Debug\SubmittalProposal.pdb
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\bin\SubmittalProposal.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\bin\SubmittalProposal.pdb
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\bin\AjaxControlToolkit.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\bin\Common.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\bin\Common.pdb
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.csprojResolveAssemblyReference.cache
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.csproj.ResolveComReference.cache
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.dll
+\\sroagis\c$\Users\administrator.EXCHANGE\Documents\GIT\databaseFreshInstall3\SunriverDatabase\SubmittalProposal\obj\Debug\SubmittalProposal.pdb

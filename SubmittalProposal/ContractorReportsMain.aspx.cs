@@ -28,6 +28,10 @@ namespace SubmittalProposal {
         protected void ContractorMailingLabels_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ContractorMailingLabels.aspx");
         }
+        protected void ContractorSoonExp_Click(object sender, EventArgs args)
+        {
+            Response.Redirect("~/Reports/WebForm2.aspx");
+        }
         protected void ContractorMailingLabelsCSV_Click(object sender, EventArgs args) {
             Response.Redirect("~/Reports/ContractorMailingLabelsCSV.aspx");
         }

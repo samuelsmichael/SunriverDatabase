@@ -7,81 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SubmittalProposal {
+namespace SubmittalProposal.Reports {
     
     
-    public partial class ContractorReportsMain {
+    public partial class WebForm2 {
         
         /// <summary>
-        /// lbContractorsByCategory control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorsByCategory;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// lbContractorsAllData control.
+        /// tbRegDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorsAllData;
+        protected global::System.Web.UI.WebControls.TextBox tbRegDate;
         
         /// <summary>
-        /// lbContractorsList control.
+        /// cetbStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorsList;
+        protected global::AjaxControlToolkit.CalendarExtender cetbStartDate;
         
         /// <summary>
-        /// lbCategoryList control.
+        /// revReviewDateUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbCategoryList;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revReviewDateUpdate;
         
         /// <summary>
-        /// lbContractorEnvelope control.
+        /// rfvDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorEnvelope;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDate;
         
         /// <summary>
-        /// lbContractorMailingLabels control.
+        /// ibtbStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorMailingLabels;
-        
-        /// <summary>
-        /// lbContractorSoonExp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorSoonExp;
-        
-        /// <summary>
-        /// lbContractorMailingLabelsCSV control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbContractorMailingLabelsCSV;
+        protected global::System.Web.UI.WebControls.ImageButton ibtbStartDate;
     }
 }
