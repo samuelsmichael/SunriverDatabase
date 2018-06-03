@@ -1123,6 +1123,12 @@
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <input id="Hidden1a" type="hidden" value="<% = btnTabTriggerApplicant.ClientID %>" />
+    <input id="Hidden2a" type="hidden" value="<% = btnTabTriggerProject.ClientID %>" />
+
+    <asp:Button ID="btnTabTriggerApplicant" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="TabContainer2ActiveTabChange_Applicant" />
+    <asp:Button ID="btnTabTriggerProject" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="TabContainer2ActiveTabChange_Project" />
+
     <script language="javascript" type="text/javascript">
     </script>
     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewSubmittalId">
@@ -1135,7 +1141,20 @@
                 SubmittalId
                 <asp:Label ID="lblAutoSubmittalId" runat="server"></asp:Label>
             </p>
-            <ajaxToolkit:TabContainer Style="text-align: center;" Height="346" ActiveTabIndex="0"
+            <script language="javascript" type="text/javascript">
+                function clientActiveTabChangedNewSubmittal(sender, args) {
+                debugger
+                    if (sender.get_activeTabIndex() == 0) { // BPermit tab clicked
+                        document.getElementById(document.getElementById('Hidden1a').value).click();
+                        //        __doPostBack('btnBPTabTrigger', '');
+                    } else {
+                        if (sender.get_activeTabIndex() == 1) { // BPermit tab clicked
+                            document.getElementById(document.getElementById('Hidden2a').value).click();
+                        }
+                    }
+                }
+            </script>
+            <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChangedNewSubmittal" Style="text-align: center;" Height="346" ActiveTabIndex="0"
                 ID="TabContainer2" runat="server">
                 <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Applicant Information">
                     <ContentTemplate>
@@ -1250,6 +1269,11 @@
                                                                 runat="server" TextMode="SingleLine" Rows="1"></asp:TextBox>
                                                         </td>
                                                     </tr>
+                                                    <tr align="left">
+                                                        <td colspan="2">
+                                                            <img style="margin-left:500px; alt="Click to copy" src="Images/expand_blue.jpg" onclick="javascript:document.getElementById('MainContent_MainContent_NewItemContent_TabContainer2_tabPanel1_tbSubmittalNew').value=document.getElementById('MainContent_MainContent_NewItemContent_TabContainer2_tabPanel1_tbProjectNew').value;" />
+                                                    </tr>
+
                                                     <tr>
                                                         <td>
                                                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Submittal"></asp:Label>

@@ -447,6 +447,7 @@ namespace SubmittalProposal {
             lblAutoRequestId.Text = "" + maxRequestId;
             ddlscRealtorNew.SelectedIndex = 0;
             mpeNewRequest.Show();
+            tbscLotNew.Focus();
         }
         protected void gvInspections_RowEditing(object sender, GridViewEditEventArgs e) {
             //Set the edit index.

@@ -1831,6 +1831,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Label lblSubmitalUpdateResults;
         
         /// <summary>
+        /// btnTabTriggerApplicant control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTabTriggerApplicant;
+        
+        /// <summary>
+        /// btnTabTriggerProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTabTriggerProject;
+        
+        /// <summary>
         /// pnlNewSubmittalId control.
         /// </summary>
         /// <remarks>

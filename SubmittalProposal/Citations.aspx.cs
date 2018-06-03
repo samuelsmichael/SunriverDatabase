@@ -115,6 +115,7 @@ namespace SubmittalProposal {
             tbORSNumberNewNewCit.Text = "";
             cbIssueAsWarningNewNewCit.Checked = false;
             tbViolationNotesNewNewCit.Text = "";
+            ddlCitationsFineStatusNew.SelectedIndex = 1;
         }
         protected override void clearAllSelectionInputFields() {
             tbCitationLastNameLU.Text = "";
@@ -675,6 +676,7 @@ namespace SubmittalProposal {
             isAddCitationOpen = true;
             Session["CitationNewPanelOpen"] = "Y";
             tbCitationsLastNameNew.Focus();
+            ddlCitationsFineStatusNew.SelectedIndex = 1;
             mpeNewCitation.Show();
         }
         protected void btnNewCitationOk_Click(object sender, EventArgs args) {

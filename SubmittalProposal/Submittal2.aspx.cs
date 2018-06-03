@@ -429,6 +429,15 @@ namespace SubmittalProposal
                 }
             }
         }
+
+        protected void TabContainer2ActiveTabChange_Applicant(object obj, EventArgs args) {
+            tbOwnersNameNew.Focus();
+            mpeNewSubmittal.Show();
+        }
+        protected void TabContainer2ActiveTabChange_Project(object obj, EventArgs args) {
+            tbConditionsNew.Focus();
+            mpeNewSubmittal.Show();
+        }
         protected override void clearAllSelectionInputFields() {
             tbOwner.Text = "";
             tbApplicant.Text = "";
@@ -451,6 +460,7 @@ namespace SubmittalProposal
             tbConditionsNew.Text = "";
             tbMeetingDateNew.Text = "";
             clearAllNewFormInputFieldsBP();
+            ddlProjectTypeNew.SelectedIndex = 0;
         }
         protected override void weveComeHereForTheFirstTimeThisSession() {
             expandCPESearch();
@@ -966,6 +976,8 @@ namespace SubmittalProposal
             tbBPermitLetterDateNewNewPermit.Text="";
             tbBPRLetterRefNewNewPermit.Text="";
             tbBPRCommentsNewNewPermit.Text = ""; ;
+            ddlProjectTypeNewBP.SelectedIndex = 0;
+
 
         }
 

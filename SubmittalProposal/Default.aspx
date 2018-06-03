@@ -34,5 +34,8 @@
         <ul style="font-size:x-small;font-weight:bold;margin-top:-8px;">
 
 <li>Ability to add 2nd Building Permit </li>
+<li>Ability to add new Violation in the New Citation screen</li>
+<li>Copy button for copying Project text to Submittal text in New Submittal</li>
+<li>Various cursor positioning and list box default changes</li>
 </ul>
 </asp:Content>
