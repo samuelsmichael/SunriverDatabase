@@ -61,6 +61,9 @@ namespace SubmittalProposal {
             ddlRulesNew.DataSource = dtRules;
             ddlRulesNew.SelectedIndex = -1;
             ddlRulesNew.DataBind();
+            ddlRulesNewNewCit.DataSource = dtRules;
+            ddlRulesNewNewCit.SelectedIndex = -1;
+            ddlRulesNewNewCit.DataBind();
 
 
         }
@@ -107,6 +110,11 @@ namespace SubmittalProposal {
             tbAssessedFineNew.Text = "";
             tbMagistrateNotesNew.Text = "";
             tbCitationNbrNew.Text = "";
+            ddlRulesNewNewCit.SelectedIndex = -1;
+            tbScheduleFineNewNewCit.Text = "";
+            tbORSNumberNewNewCit.Text = "";
+            cbIssueAsWarningNewNewCit.Checked = false;
+            tbViolationNotesNewNewCit.Text = "";
         }
         protected override void clearAllSelectionInputFields() {
             tbCitationLastNameLU.Text = "";
@@ -602,6 +610,20 @@ namespace SubmittalProposal {
             return
                 sb.Length == 0;
         }
+        private bool checkNewViolationsPanelNewCit() {
+            string crnl = "";
+            StringBuilder sb = new StringBuilder();
+            if (Utils.isNothingNot(tbScheduleFineNewNewCit.Text)) {
+                try {
+                    decimal d = Convert.ToDecimal(tbScheduleFineNewNewCit.Text.Replace("$", "").Replace(",", ""));
+                } catch {
+                    sb.Append(crnl + "Fine must be an amount");
+                }
+            }
+            lblCitationNewMessage.Text = sb.ToString();
+            return
+                sb.Length == 0;
+        }
         protected void btnNewViolationOk_Click(object sender, EventArgs args) {
             if (checkNewViolationsPanel()) {
                 try {
@@ -656,6 +678,9 @@ namespace SubmittalProposal {
             mpeNewCitation.Show();
         }
         protected void btnNewCitationOk_Click(object sender, EventArgs args) {
+
+
+
             if (Page.IsValid) {
                 try {
                     SqlCommand cmd = new SqlCommand("uspCitationsUpdate");
@@ -718,7 +743,51 @@ namespace SubmittalProposal {
                     SqlParameter newCitationID = new SqlParameter("@NewCitationID", SqlDbType.Int);
                     newCitationID.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(newCitationID);
-                    Utils.executeNonQuery(cmd, ConnectionString);
+
+
+                    if (ddlRulesNewNewCit.SelectedIndex > 0) {
+
+
+                        if (checkNewViolationsPanelNewCit()) {
+                            Utils.executeNonQuery(cmd, ConnectionString);
+
+
+                            string ruleId = ddlRulesNewNewCit.SelectedValue;
+                            string fine = tbScheduleFineNewNewCit.Text;
+                            bool isWarning = cbIssueAsWarningNewNewCit.Checked;
+                            string violationNotes = tbViolationNotesNewNewCit.Text;
+                            string orsNbr = tbORSNumberNewNewCit.Text;
+                            cmd = new SqlCommand("uspViolationsUpdate");
+                            decimal scheduleFine = Utils.ObjectToDecimal0IfNull(fine);
+
+                            cmd.Parameters.Add("@fkCitationID", SqlDbType.Int).Value = (int)newCitationID.Value;
+                            cmd.Parameters.Add("@fkRuleID", SqlDbType.NVarChar).Value = ruleId;
+                            cmd.Parameters.Add("@ScheduleFine", SqlDbType.Money).Value = scheduleFine;
+                            cmd.Parameters.Add("@IssueAsWarning", SqlDbType.Bit).Value = isWarning;
+                            cmd.Parameters.Add("@ViolationNotes", SqlDbType.NVarChar).Value = violationNotes;
+                            cmd.Parameters.Add("@ORSNumber", SqlDbType.NVarChar).Value = orsNbr;
+                            SqlParameter newid = new SqlParameter("@NewViolationID", SqlDbType.Int);
+                            newid.Direction = ParameterDirection.Output;
+                            cmd.Parameters.Add(newid);
+                            Utils.executeNonQuery(cmd, ConnectionString);
+
+                        } else {
+                            isAddCitationOpen = true;
+                            Session["CitationNewPanelOpen"] = "Y";
+                            mpeNewCitation.Show();
+                            return;
+
+                        }
+
+
+
+                    } else {
+                        Utils.executeNonQuery(cmd, ConnectionString);
+                    }
+
+
+
+
                     performPostNewSuccessfulActions("Update successful", DataSetCacheKey, null, tbCitationIDLU, tbCitationNbrNew.Text);
                 } catch (Exception ee) {
                     performPostNewFailedActions("Update failed. Msg: " + ee.Message);

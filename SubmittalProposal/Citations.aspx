@@ -598,6 +598,61 @@
                 </table>
  
             </asp:Panel>
+            
+            
+            
+<asp:Panel runat="server" Style="text-align: center;" ID="Panel2xx" CssClass="newitemcontent" GroupingText="New Violation (If you don't wish to add a violation at this time, leave the Rule blank.)">
+                <table border="0" cellpadding="3" cellspacing="3">
+                    <tr>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label32xx" runat="server" Text="Rule "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:DropDownList ID="ddlRulesNewNewCit" runat="server" DataTextField="RuleDescription"
+                                DataValueField="RuleID">
+                            </asp:DropDownList>
+                        </td>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label33xx" runat="server" Text="Fine $ "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:TextBox ID="tbScheduleFineNewNewCit" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label34xx" runat="server" Text="ORS #"></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:TextBox ID="tbORSNumberNewNewCit" runat="server"></asp:TextBox>
+                        </td>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label35xx" runat="server" Text="Issued as a Warning "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <asp:CheckBox ID="cbIssueAsWarningNewNewCit" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label39xx" runat="server" Text="Notes"></asp:Label>
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox ID="tbViolationNotesNewNewCit" Width="99%" TextMode="MultiLine" Height="4em"
+                                runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:Label ID="lblNewViolationMessageNewCit" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>            
+            
+            
+            
+            
             <asp:Panel runat="server" ID="pnlCitationsFineNew" GroupingText="Fine Information">
                 <table width="100%">
                     <tr>
