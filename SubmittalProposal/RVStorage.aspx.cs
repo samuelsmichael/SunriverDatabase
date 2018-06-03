@@ -113,7 +113,10 @@ namespace SubmittalProposal {
             PendingSpace = Utils.ObjectToString(dr["tRVDSpace"]);
             #endregion
             #region RV & Space Into tab
-            ddlRVSpaceInfoSpaceSizeReqdUpdate.SelectedValue = Utils.ObjectToString(dr["SpaceSizeReqt"]);
+            try {
+                ddlRVSpaceInfoSpaceSizeReqdUpdate.SelectedValue = Utils.ObjectToString(dr["SpaceSizeReqt"]);
+            } catch { }
+
             ddlRVSpaceInfoElectricalReqdYesNoUpdate.SelectedValue = Utils.ObjectToBool(dr["ElectricReqt"]) ? "Yes" : "No";
             tbVehicleLengthUpdate.Text = Utils.ObjectToString(dr["VehicleLength"]);
             tbRVTypeUpdate.Text= Utils.ObjectToString(dr["RVType"]);

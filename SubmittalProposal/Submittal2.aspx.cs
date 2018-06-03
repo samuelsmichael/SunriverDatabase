@@ -200,6 +200,10 @@ namespace SubmittalProposal
             CurrentSubmittalId = Convert.ToInt32(dr.Cells[6].Text);
             return CurrentSubmittalId.Value;
         }
+        private string getBPermitIdFromGridView(GridViewRow dr) {
+            CurrentBPermitId = dr.Cells[7].Text;
+            return CurrentBPermitId;
+        }
         private string getOwner(DataRow dr) {
             return Utils.ObjectToString(dr["Own_Name"]);
         }
@@ -259,7 +263,12 @@ namespace SubmittalProposal
             DataSet ds = buildDataSet();
             DataTable sourceTable = ds.Tables[0];
             DataView view = new DataView(sourceTable);
-            view.RowFilter = "SubmittalId=" + getSubmittalId(row);
+            string rowFilter = "SubmittalId=" + getSubmittalId(row);
+            string strBPId = getBPermitIdFromGridView(row);
+            if (strBPId!=null && strBPId!="&nbsp;") {
+                rowFilter += (" AND [BPermit#] ='" + strBPId + "'");
+            }
+            view.RowFilter = rowFilter;
             DataTable tblFiltered = view.ToTable();
             DataRow dr = tblFiltered.Rows[0];
             tbConditionsUpdate.Text = Utils.ObjectToString(dr["Conditions"]);
@@ -354,6 +363,13 @@ namespace SubmittalProposal
             return buildDataSet().Tables[0];
         }
 
+        protected void lbNewPermitFromUpdatePermit_OnClick(object sender, EventArgs args) {
+
+            pnlNewBPermitContent.Visible = true;
+            pnlUpdateBPermitContent.Visible = false;
+
+        }
+
         protected void lbSubmittalNew_OnClick(object sender, EventArgs args) {
             SqlCommand cmd = new SqlCommand("uspFindHighestSubmittalId");
             DataSet ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
@@ -366,7 +382,7 @@ namespace SubmittalProposal
 
 
         protected void lbGoToPermit_Click(object sender, EventArgs args) {
-            Session["ShowBPermitID"] = CurrentBPermitId;
+            Session["ShowBPermitID"] = CurrentBPermitIdReally;
             Session["ShowSubmittalID"] = CurrentSubmittalId;
             Response.Redirect("~/BPermit.aspx");
         }
@@ -533,16 +549,36 @@ namespace SubmittalProposal
             gvPayments.DataBind();
         }
 
+        protected void rblListOfPermits_OnSelectedIndexChanged(object sender, EventArgs e) {
+            doBPermitUpdate();
+            ListItem li = rblListOfPermits.SelectedItem;
+            CurrentBPermitId = li.Text;
+            CurrentBPermitIdReally = Convert.ToInt32(li.Value);
+            loadBPermitPage();
+        }
+
+
         private void loadBPermitPage() {
             if (Utils.isNothingNot(CurrentBPermitIdReally)) {
-                bind_gvPayments(Utils.ObjectToInt(CurrentBPermitIdReally));
-
                 DataTable sourceTable = BPermit.BPermitsGetGridViewDataTable();
-
                 DataView view = new DataView(sourceTable);
 
-                view.RowFilter = "BPermitId=" + CurrentBPermitIdReally;
+                // bind rblListOfPermits
+                rblListOfPermits.Items.Clear();
+                view.RowFilter = "SubmittalId=" + CurrentSubmittalId;
                 DataTable tblFiltered = view.ToTable();
+                foreach(DataRow dr2 in tblFiltered.Rows) {
+                    ListItem li=new ListItem((string)dr2["BPermit#"],dr2["BPermitId"].ToString());
+                    if(((string)dr2["BPermit#"])==CurrentBPermitId) {
+                        li.Selected=true;
+                    }
+                    rblListOfPermits.Items.Add(li);
+                }
+
+                bind_gvPayments(Utils.ObjectToInt(CurrentBPermitIdReally));
+
+                view.RowFilter = "BPermitId=" + CurrentBPermitIdReally;
+                tblFiltered = view.ToTable();
                 DataRow dr = tblFiltered.Rows[0];
 
                 tbDelayUpdate.Text = Utils.ObjectToString(dr["BPDelay"]);
@@ -819,6 +855,7 @@ namespace SubmittalProposal
             lbBPermitNewReview2.Enabled = false;
             ddlContractorUpdate.Enabled = false;
             tbBPermitNbrUpdate.Enabled = false;
+            lbNewPermitFromUpdatePermit.Enabled = false;
 
 
 
@@ -890,6 +927,7 @@ namespace SubmittalProposal
             tbContractorNewBP.Enabled = true;
             tbProjectNewBP.Enabled = true;
             ddlProjectTypeNewBP.Enabled = true;
+            lbNewPermitFromUpdatePermit.Enabled = true;
 
             tbBPPaymentFeeNewNewPermit.Enabled = true;
             revtbBPPaymentFeeNewNewPermit.Enabled = true;

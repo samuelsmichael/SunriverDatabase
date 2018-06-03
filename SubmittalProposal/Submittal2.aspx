@@ -285,8 +285,8 @@
                 <asp:UpdatePanel ID="updatePanel5a" runat="server">
                     <ContentTemplate>
                         <asp:Panel ID="pnlUpdateBPermitContent" runat="server">
-                        <asp:Panel ID="Panel5" GroupingText="Building Permit Data" runat="server">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <asp:Panel ID="Panel5" GroupingText="Building Permit Data" runat="server">
+                                                                                                                                                                                                                                                                                                                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label41a" runat="server" Text="BPermit#"></asp:Label>
@@ -372,8 +372,8 @@
                                     </td>
                                 </tr>
                             </table>
-                        </asp:Panel>
-                        <asp:Panel ID="Panel12" GroupingText="Data from Applicant Form" runat="server">
+                            </asp:Panel>
+                                                                                                                                                                                                                                                                                                <asp:Panel ID="Panel12" GroupingText="Data from Applicant Form" runat="server">
                             <table border="0" cellpadding="2" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
@@ -439,7 +439,7 @@
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <table width="100%">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <table width="100%">
                             <tr>
                                 <td width="250px">
                                     <asp:Panel runat="server" ID="pnlPayments" GroupingText="Payments">
@@ -833,7 +833,13 @@
                                 </td>
                             </tr>
                         </table>
-                        </asp:Panel>
+                            <center>
+                <asp:RadioButtonList ID="rblListOfPermits" RepeatDirection="Horizontal" AutoPostBack="true"  OnSelectedIndexChanged="rblListOfPermits_OnSelectedIndexChanged" runat="server">
+                </asp:RadioButtonList>
+
+                                <asp:LinkButton OnClick="lbNewPermitFromUpdatePermit_OnClick" ID="lbNewPermitFromUpdatePermit" runat="server">New Permit</asp:LinkButton>
+                            </center>
+                            </asp:Panel>
 
                         <asp:Panel runat="server" Visible="false" Style="text-align: center;" ID="pnlNewBPermitContent" CssClass="newitemcontent">
                                     <asp:Panel ID="Panel17" GroupingText="Building Permit Data" runat="server">
