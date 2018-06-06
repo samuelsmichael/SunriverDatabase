@@ -1183,6 +1183,114 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbCitationsViolationsLocationNew;
         
         /// <summary>
+        /// Panel2xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2xx;
+        
+        /// <summary>
+        /// Label32xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label32xx;
+        
+        /// <summary>
+        /// ddlRulesNewNewCit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRulesNewNewCit;
+        
+        /// <summary>
+        /// Label33xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label33xx;
+        
+        /// <summary>
+        /// tbScheduleFineNewNewCit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbScheduleFineNewNewCit;
+        
+        /// <summary>
+        /// Label34xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label34xx;
+        
+        /// <summary>
+        /// tbORSNumberNewNewCit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbORSNumberNewNewCit;
+        
+        /// <summary>
+        /// Label35xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label35xx;
+        
+        /// <summary>
+        /// cbIssueAsWarningNewNewCit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbIssueAsWarningNewNewCit;
+        
+        /// <summary>
+        /// Label39xx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label39xx;
+        
+        /// <summary>
+        /// tbViolationNotesNewNewCit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbViolationNotesNewNewCit;
+        
+        /// <summary>
+        /// lblNewViolationMessageNewCit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNewViolationMessageNewCit;
+        
+        /// <summary>
         /// pnlCitationsFineNew control.
         /// </summary>
         /// <remarks>

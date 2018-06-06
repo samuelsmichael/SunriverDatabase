@@ -29,11 +29,13 @@
         Click on one of the tabs in order to open the database.
     </p>
     <p style="font-weight:bold;">
-        2.12 -- 05/2018
+        2.13 -- 06/2018
     </p>
         <ul style="font-size:x-small;font-weight:bold;margin-top:-8px;">
-        
-<li></li>
-<li>Bug fix: When you'd click on New Letter in Compliance Review, it wouldn't do anything. </li>
+
+<li>Ability to add 2nd Building Permit </li>
+<li>Ability to add new Violation in the New Citation screen</li>
+<li>Copy button for copying Project text to Submittal text in New Submittal</li>
+<li>Various cursor positioning and list box default changes</li>
 </ul>
 </asp:Content>

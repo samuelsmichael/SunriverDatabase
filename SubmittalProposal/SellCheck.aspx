@@ -505,7 +505,7 @@
                 <tr>
                     <td>
                         <asp:Label ID="Label17" runat="server" Text="Lot"></asp:Label>
-                        <asp:TextBox ID="tbscLotNew" Width="40"  MaxLength="5" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="tbscLotNew" Width="40"  MaxLength="5" runat="server" ></asp:TextBox>
                         <asp:Label runat="server" ForeColor="Red" ID="lblscLotNewErrorMsg"></asp:Label>
                     </td>
                     <td>

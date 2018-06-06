@@ -1264,6 +1264,24 @@ namespace SubmittalProposal {
         protected global::AjaxControlToolkit.ModalPopupExtender mpeBPermitNewReview;
         
         /// <summary>
+        /// rblListOfPermits control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblListOfPermits;
+        
+        /// <summary>
+        /// lbNewPermitFromUpdatePermit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbNewPermitFromUpdatePermit;
+        
+        /// <summary>
         /// pnlNewBPermitContent control.
         /// </summary>
         /// <remarks>
@@ -1811,6 +1829,24 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSubmitalUpdateResults;
+        
+        /// <summary>
+        /// btnTabTriggerApplicant control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTabTriggerApplicant;
+        
+        /// <summary>
+        /// btnTabTriggerProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTabTriggerProject;
         
         /// <summary>
         /// pnlNewSubmittalId control.

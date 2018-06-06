@@ -295,6 +295,12 @@ namespace SubmittalProposal {
                 and = " and ";
             }
 
+            if (Utils.isNothingNot(tbBPermitId.Text)) {
+                sb.Append(prepend + "BPermitId Id: " + tbBPermitId.Text);
+                prepend = "  ";
+                sbFilter.Append(and + " BPermitId = " + tbBPermitId.Text);
+                and = " and ";
+            }
             if (Utils.isNothingNot(tbBPermitNbr.Text)) {
                 sb.Append(prepend + "BPermit#: " + tbBPermitNbr.Text);
                 prepend = "  ";
@@ -349,7 +355,8 @@ namespace SubmittalProposal {
                 tbSubmittalId.Text = "";
                 ddlLane.SelectedIndex = 0;
                 tbDelaySearch.Text = "";
-                tbBPermitNbr.Text = Utils.ObjectToString(Session["ShowBPermitID"]);
+                
+                tbBPermitId.Text = Utils.ObjectToString(Session["ShowBPermitID"]);
                 Session["ShowBPermitID"] = null;
                 ((Database)Master).doGo();
                 gvResults.SelectRow(0);

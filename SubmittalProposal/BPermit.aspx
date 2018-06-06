@@ -4,19 +4,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>
         <asp:Label ID="Label18" runat="server" Text="Owner"></asp:Label>
-        <asp:TextBox ID="tbOwner" Width="90" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbOwner" Width="59" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label19" runat="server" Text="Applicant"></asp:Label>
-        <asp:TextBox ID="tbApplicant" Width="90" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbApplicant" Width="59" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
-        <asp:TextBox ID="tbLot" Width="40" MaxLength="5" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbLot" Width="22" MaxLength="5" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label21" runat="server" Text="Lane"></asp:Label>
-        <asp:DropDownList ID="ddlLane" runat="server" DataTextField="Lane" DataValueField="Lane">
+        <asp:DropDownList ID="ddlLane" runat="server" DataTextField="Lane" Width="133" DataValueField="Lane">
         </asp:DropDownList>
     </td>
     <td>
@@ -25,11 +25,15 @@
     </td>
     <td>
         <asp:Label ID="Label23" runat="server" Text="BPermit#"></asp:Label>
-        <asp:TextBox ID="tbBPermitNbr" Width="46" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbBPermitNbr" Width="35" runat="server"></asp:TextBox>
+    </td>
+    <td>
+        <asp:Label ID="Label42" runat="server" Text="BPermitId"></asp:Label>
+        <asp:TextBox ID="tbBPermitId" Width="35" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label ID="Label6" runat="server" Text="Delay"></asp:Label>
-        <asp:TextBox ID="tbDelaySearch" Width="20" runat="server"></asp:TextBox>
+        <asp:TextBox ID="tbDelaySearch" Width="10" runat="server"></asp:TextBox>
     </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">

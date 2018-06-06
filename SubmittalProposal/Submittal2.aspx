@@ -285,8 +285,8 @@
                 <asp:UpdatePanel ID="updatePanel5a" runat="server">
                     <ContentTemplate>
                         <asp:Panel ID="pnlUpdateBPermitContent" runat="server">
-                        <asp:Panel ID="Panel5" GroupingText="Building Permit Data" runat="server">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <asp:Panel ID="Panel5" GroupingText="Building Permit Data" runat="server">
+                                                                                                                                                                                                                                                                                                                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label41a" runat="server" Text="BPermit#"></asp:Label>
@@ -372,8 +372,8 @@
                                     </td>
                                 </tr>
                             </table>
-                        </asp:Panel>
-                        <asp:Panel ID="Panel12" GroupingText="Data from Applicant Form" runat="server">
+                            </asp:Panel>
+                                                                                                                                                                                                                                                                                                <asp:Panel ID="Panel12" GroupingText="Data from Applicant Form" runat="server">
                             <table border="0" cellpadding="2" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
@@ -439,7 +439,7 @@
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <table width="100%">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <table width="100%">
                             <tr>
                                 <td width="250px">
                                     <asp:Panel runat="server" ID="pnlPayments" GroupingText="Payments">
@@ -833,7 +833,13 @@
                                 </td>
                             </tr>
                         </table>
-                        </asp:Panel>
+                            <center>
+                <asp:RadioButtonList ID="rblListOfPermits" RepeatDirection="Horizontal" AutoPostBack="true"  OnSelectedIndexChanged="rblListOfPermits_OnSelectedIndexChanged" runat="server">
+                </asp:RadioButtonList>
+
+                                <asp:LinkButton OnClick="lbNewPermitFromUpdatePermit_OnClick" ID="lbNewPermitFromUpdatePermit" runat="server">New Permit</asp:LinkButton>
+                            </center>
+                            </asp:Panel>
 
                         <asp:Panel runat="server" Visible="false" Style="text-align: center;" ID="pnlNewBPermitContent" CssClass="newitemcontent">
                                     <asp:Panel ID="Panel17" GroupingText="Building Permit Data" runat="server">
@@ -1117,6 +1123,12 @@
     </center>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="NewItemContent" runat="server">
+    <input id="Hidden1a" type="hidden" value="<% = btnTabTriggerApplicant.ClientID %>" />
+    <input id="Hidden2a" type="hidden" value="<% = btnTabTriggerProject.ClientID %>" />
+
+    <asp:Button ID="btnTabTriggerApplicant" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="TabContainer2ActiveTabChange_Applicant" />
+    <asp:Button ID="btnTabTriggerProject" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="TabContainer2ActiveTabChange_Project" />
+
     <script language="javascript" type="text/javascript">
     </script>
     <asp:Panel runat="server" CssClass="newitempopup" ID="pnlNewSubmittalId">
@@ -1129,7 +1141,20 @@
                 SubmittalId
                 <asp:Label ID="lblAutoSubmittalId" runat="server"></asp:Label>
             </p>
-            <ajaxToolkit:TabContainer Style="text-align: center;" Height="346" ActiveTabIndex="0"
+            <script language="javascript" type="text/javascript">
+                function clientActiveTabChangedNewSubmittal(sender, args) {
+                debugger
+                    if (sender.get_activeTabIndex() == 0) { // BPermit tab clicked
+                        document.getElementById(document.getElementById('Hidden1a').value).click();
+                        //        __doPostBack('btnBPTabTrigger', '');
+                    } else {
+                        if (sender.get_activeTabIndex() == 1) { // BPermit tab clicked
+                            document.getElementById(document.getElementById('Hidden2a').value).click();
+                        }
+                    }
+                }
+            </script>
+            <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChangedNewSubmittal" Style="text-align: center;" Height="346" ActiveTabIndex="0"
                 ID="TabContainer2" runat="server">
                 <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Applicant Information">
                     <ContentTemplate>
@@ -1244,6 +1269,11 @@
                                                                 runat="server" TextMode="SingleLine" Rows="1"></asp:TextBox>
                                                         </td>
                                                     </tr>
+                                                    <tr align="left">
+                                                        <td colspan="2">
+                                                            <img style="margin-left:500px; alt="Click to copy" src="Images/expand_blue.jpg" onclick="javascript:document.getElementById('MainContent_MainContent_NewItemContent_TabContainer2_tabPanel1_tbSubmittalNew').value=document.getElementById('MainContent_MainContent_NewItemContent_TabContainer2_tabPanel1_tbProjectNew').value;" />
+                                                    </tr>
+
                                                     <tr>
                                                         <td>
                                                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Submittal"></asp:Label>

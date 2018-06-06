@@ -121,6 +121,24 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.TextBox tbBPermitNbr;
         
         /// <summary>
+        /// Label42 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label42;
+        
+        /// <summary>
+        /// tbBPermitId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBPermitId;
+        
+        /// <summary>
         /// Label6 control.
         /// </summary>
         /// <remarks>
