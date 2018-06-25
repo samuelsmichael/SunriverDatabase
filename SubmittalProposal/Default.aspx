@@ -29,13 +29,11 @@
         Click on one of the tabs in order to open the database.
     </p>
     <p style="font-weight:bold;">
-        2.13 -- 06/2018
+        2.14 -- 07/2018
     </p>
         <ul style="font-size:x-small;font-weight:bold;margin-top:-8px;">
 
-<li>Ability to add 2nd Building Permit </li>
-<li>Ability to add new Violation in the New Citation screen</li>
-<li>Copy button for copying Project text to Submittal text in New Submittal</li>
-<li>Various cursor positioning and list box default changes</li>
+<li>RV Storage - the Annual Rent field wasn't being populated. </li>
+<li>RV Storage - Cancelling a lease would not result in the space becoming available</li>
 </ul>
 </asp:Content>
