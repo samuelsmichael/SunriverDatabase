@@ -442,7 +442,8 @@ namespace SubmittalProposal {
 
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
                 clearAllSelectionInputFields();
-                tbCustomerIDSearch.Text = zCustomerID;
+                tbRVLeaseIdSearch.Text = rvLeastIDBeingEdited.ToString();
+// better to search on rvLeaseId                tbCustomerIDSearch.Text = zCustomerID;
                 performPostUpdateSuccessfulActions("Update successful", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Update failed. Msg: " + ee.Message);
@@ -685,7 +686,7 @@ namespace SubmittalProposal {
             DataRow drSpaceInfo = buildDataSet().Tables[1].Rows.Find(space);
             string fmtAnnualRent = "";
             try {
-                String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
+                fmtAnnualRent=String.Format("{0:C}", Utils.ObjectToDecimal0IfNull(Utils.ObjectToString(drSpaceInfo["AnnualRent"])));
             } catch { }
             switch (tcRVStorageUpdate.ActiveTabIndex) {
                 case 1:
@@ -784,9 +785,13 @@ namespace SubmittalProposal {
             }
         }
         protected void lbRVStorageNewCmon_OnClick(object sender, EventArgs args) {
+            zCustomerID = null;
+            Button1X_Add.Enabled = true;
+            btnShowAvailableSpacesAdd.Enabled = true;
             mpeNewRVStorage.Show();
         }
         protected void btnNewRVStorageCancel_Click(object sender, EventArgs args) {
+            zCustomerID = null;
             clearAllSelectionInputFields();
             clearAllNewFormInputFields();
         }
