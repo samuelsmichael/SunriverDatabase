@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true"
-    CodeBehind="Renewables.aspx.cs" Inherits="SubmittalProposal.Renewables" %>
+    CodeBehind="Renewables_MJS.aspx.cs" Inherits="SubmittalProposal.Renewables_MJS" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>

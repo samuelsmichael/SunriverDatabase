@@ -11,7 +11,7 @@ using System.Runtime.Caching;
 using System.Text;
 
 namespace SubmittalProposal {
-    public partial class Renewables : AbstractDatabase {
+    public partial class Renewables_MJS : AbstractDatabase {
         public static string MyMenuName = "Renewables";
 
         private static string ConnectionString {

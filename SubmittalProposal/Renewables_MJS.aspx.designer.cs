@@ -10,7 +10,7 @@
 namespace SubmittalProposal {
     
     
-    public partial class Renewables {
+    public partial class Renewables_MJS {
         
         /// <summary>
         /// Label18 control.

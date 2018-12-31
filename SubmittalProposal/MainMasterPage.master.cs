@@ -36,7 +36,7 @@ namespace SubmittalProposal {
                 MenuItem miComRoster = new MenuItem(ComRoster_Home.MyMenuName, "ComRoster", null, "~/ComRoster_Home.aspx");
                 MenuItem miOwnerConcerns = new MenuItem(OwnerConcerns.MyMenuName, "OwnerConcerns", null, "~/OwnerConcerns.aspx");
                 MenuItem miSROAVehicleMaintenanceConcerns = new MenuItem(SROAVehicleMaintenance.MyMenuName, "SROAVehicle", null, "~/SROAVehicleMaintenance.aspx");
-                MenuItem miRenewables = new MenuItem(Renewables.MyMenuName, "Renewables", null, "~/Renewables.aspx");
+                MenuItem miRenewables = new MenuItem(Renewables_MJS.MyMenuName, "Renewables", null, "~/Renewables_MJS.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewsroavehiclemaintenance")) {
                     NavigationMenu.Items.AddAt(1, miSROAVehicleMaintenanceConcerns);
                 }
