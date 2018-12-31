@@ -97,6 +97,7 @@
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
     <Content Include="Images\PDFImage.png" />
     <Content Include="PDFsPage.aspx" />
+    <Content Include="Renewables.aspx" />
     <Content Include="Reports\BPermitsLaunchManager.aspx" />
     <Content Include="Reports\CitationsLaunchManager.aspx" />
     <Content Include="Reports\CitationsReport_CitationData.aspx" />
@@ -467,6 +468,13 @@
     </Compile>
     <Compile Include="PDFsPage.aspx.designer.cs">
       <DependentUpon>PDFsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Renewables.aspx.cs">
+      <DependentUpon>Renewables.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Renewables.aspx.designer.cs">
+      <DependentUpon>Renewables.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\BallotVerify\BallotVerifyGeneric.cs">
       <DependentUpon>BallotVerifyGeneric.rpt</DependentUpon>

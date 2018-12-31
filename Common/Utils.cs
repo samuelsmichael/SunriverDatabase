@@ -17,6 +17,12 @@ namespace Common {
                 return str.Replace("'", "''");
             }
         }
+        /// <summary>
+        /// This helper method creates the appropriate filter string for a string search where "like" is appropriate.
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <param name="dataFieldName"></param>
+        /// <returns></returns>
         public static string getDataViewQuery(string searchString, string dataFieldName) {
             return searchString.ToLower() == "*blank" ? (" " + "Isnull(" + dataFieldName + ",'')  =''") : " " + dataFieldName + " like '*" + escapeSingleQuoteForSQLQueries(searchString) + "*'";
         }

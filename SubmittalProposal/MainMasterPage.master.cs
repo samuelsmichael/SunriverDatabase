@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,6 +36,7 @@ namespace SubmittalProposal {
                 MenuItem miComRoster = new MenuItem(ComRoster_Home.MyMenuName, "ComRoster", null, "~/ComRoster_Home.aspx");
                 MenuItem miOwnerConcerns = new MenuItem(OwnerConcerns.MyMenuName, "OwnerConcerns", null, "~/OwnerConcerns.aspx");
                 MenuItem miSROAVehicleMaintenanceConcerns = new MenuItem(SROAVehicleMaintenance.MyMenuName, "SROAVehicle", null, "~/SROAVehicleMaintenance.aspx");
+                MenuItem miRenewables = new MenuItem(Renewables.MyMenuName, "Renewables", null, "~/Renewables.aspx");
                 if (HttpContext.Current.User.IsInRole("canviewsroavehiclemaintenance")) {
                     NavigationMenu.Items.AddAt(1, miSROAVehicleMaintenanceConcerns);
                 }
@@ -74,6 +75,9 @@ namespace SubmittalProposal {
                 }
                 if (HttpContext.Current.User.IsInRole("canviewownerproperty")) {
                     NavigationMenu.Items.AddAt(1, miOwnerProperty);
+                }
+                if (HttpContext.Current.User.IsInRole("canviewrenewables")) {
+                    NavigationMenu.Items.AddAt(1, miRenewables);
                 }
                 if (HttpContext.Current.User.IsInRole("itadmin")) {
                     NavigationMenu.Items.AddAt(1, miItAdmin);

@@ -11,10 +11,21 @@ using System.Runtime.Caching;
 
 namespace SubmittalProposal {
     public abstract class AbstractDatabase : System.Web.UI.Page, HasMenuName {
+        /// <summary>
+        /// This method is called by the framework when this database is called the first time in the session.
+        /// I do "expandCPESearch()", which will make sure that the Search accordion panel is opened for the user to
+        /// enter search values inl
+        /// </summary>
+        protected abstract void weveComeHereForTheFirstTimeThisSession();
+        /// <summary>
+        /// The framework is going to ask you to provide it with a DataSet that represents this databases data.
+        /// This is where you do this.
+        /// </summary>
+        /// <returns>A DataSet that consists of all of the tables for this "database"</returns>
+        protected abstract DataSet buildDataSet();
         protected abstract string gvResults_DoSelectedIndexChanged(object sender, EventArgs e);
         protected abstract void performSubmittalButtonClick(out string searchCriteria, out string filterString);
         protected abstract GridView getGridViewResults();
-        protected abstract DataSet buildDataSet();
         protected abstract DataTable getGridViewDataTable();
         protected abstract Label getUpdateResultsLabel();
         protected abstract Label getNewResultsLabel();
@@ -24,10 +35,33 @@ namespace SubmittalProposal {
         protected abstract void clearAllNewFormInputFields();
         protected abstract string childMenuName { get; }
         /// <summary>
-        /// If this database doesn't allow updating, then throw an exception in here
+        /// If this database doesn't allow updating, then throw an exception in here. Otherwise,
+        /// return the role you've created for updating this database.  ALL LOWERCASE!
         /// </summary>
         protected abstract string UpdateRoleName { get; }
-        protected abstract void weveComeHereForTheFirstTimeThisSession();        
+        /// <summary>
+        /// the framework will call this method while it’s in the middle of handling the Page_Load hook.  
+        /// So, do your own database-specific “page load” things.  What do you do in a Page_Load? 
+        /// First of all, always make this method’s structure look like this:
+        /*
+                protected override void childPageLoad(object sender, EventArgs e) {
+                    if (!IsPostBack) {
+                        // Do stuff that you need to do only once when the page is accessed.
+                        // For example:  Initialize static dropdown's.
+                    } else {
+                        // Here is where you do things that you need to do when
+                        // a "postback" occurs.  What's a "postback"?  It's when
+                        // the user has clicked a button, or does something else
+                        // that causes the system to post back to the server.
+                    }
+                    // Do anything here that needs to be done every time the client 
+                    // accesses this page.
+                }
+        */
+
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected abstract void childPageLoad(object sender, EventArgs e);
 
         public string MenuName { get { return childMenuName; } }
