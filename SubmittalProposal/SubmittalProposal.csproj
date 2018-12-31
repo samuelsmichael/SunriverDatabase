@@ -95,6 +95,7 @@
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
+    <Content Include="RenewablesReportsMain.aspx" />
     <Content Include="Images\PDFImage.png" />
     <Content Include="PDFsPage.aspx" />
     <Content Include="Renewables_MJS.aspx" />
@@ -105,6 +106,7 @@
     <Content Include="Reports\contractorSoonExp.aspx" />
     <Content Include="Reports\IDCardsLaunchManager.aspx" />
     <Content Include="Reports\OwnerConcernsLaunchManager.aspx" />
+    <Content Include="Reports\RenewablesReport_ByProject.aspx" />
     <Content Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx" />
     <Content Include="Reports\VehicleMechanicActivitySROA.aspx" />
     <Content Include="Reports\VehicleShopActivitySROA.aspx" />
@@ -461,6 +463,13 @@
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RenewablesReportsMain.aspx.cs">
+      <DependentUpon>RenewablesReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RenewablesReportsMain.aspx.designer.cs">
+      <DependentUpon>RenewablesReportsMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ICanHavePDFs.cs" />
     <Compile Include="PDFFileModel.cs" />
     <Compile Include="PDFsPage.aspx.cs">
@@ -602,6 +611,19 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertyAllInfoOwnerConcerns.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\RenewablesReport_ByProject.aspx.cs">
+      <DependentUpon>RenewablesReport_ByProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RenewablesReport_ByProject.aspx.designer.cs">
+      <DependentUpon>RenewablesReport_ByProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Renewables_MJS\RenewablesByProject1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenewablesByProject.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\SROAVehicleMaintenance\BlankWorkOrderSROA.aspx.cs">
@@ -1928,6 +1950,10 @@
     <EmbeddedResource Include="Reports\OwnerProperty\PropertyAllInfoOwnerConcerns.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PropertyAllInfoOwnerConcerns.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Renewables_MJS\RenewablesByProject.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RenewablesByProject1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RVLease\RptRVBillingInfo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

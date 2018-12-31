@@ -176,6 +176,13 @@ namespace SubmittalProposal {
                                                                                 lbReports.Text = "Reports";
                                                                                 lbReports.Visible = true;
                                                                             }
+                                                                        } else {
+                                                                            if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("renewables")) {
+                                                                                if (HttpContext.Current.User.IsInRole("candoreportsrenewables")) {
+                                                                                    lbReports.Text = "Reports";
+                                                                                    lbReports.Visible = true;
+                                                                                }
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
@@ -235,6 +242,10 @@ namespace SubmittalProposal {
                                                         } else {
                                                             if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("sroavehicle")) {
                                                                 Response.Redirect("~/SROAVehicleMaintenanceReportsMain.aspx");
+                                                            } else {
+                                                                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("renewables")) {
+                                                                    Response.Redirect("~/RenewablesReportsMain.aspx");
+                                                                }
                                                             }
                                                         }
                                                     }
