@@ -182,6 +182,13 @@ namespace SubmittalProposal {
                                                                                     lbReports.Text = "Reports";
                                                                                     lbReports.Visible = true;
                                                                                 }
+                                                                            } else {
+                                                                                if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("property")) {
+                                                                                    if (HttpContext.Current.User.IsInRole("candoreportsownerproperty")) {
+                                                                                        lbReports.Text = "Reports";
+                                                                                        lbReports.Visible = true;
+                                                                                    }
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
@@ -245,6 +252,10 @@ namespace SubmittalProposal {
                                                             } else {
                                                                 if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("renewables")) {
                                                                     Response.Redirect("~/RenewablesReportsMain.aspx");
+                                                                } else {
+                                                                    if (((SiteMaster)Master).HomePageImOnSinceMenuItemClickDoesntWork.ToLower().Contains("property")) {
+                                                                        Response.Redirect("~/OwnerPropertyReportsMain.aspx");
+                                                                    }
                                                                 }
                                                             }
                                                         }

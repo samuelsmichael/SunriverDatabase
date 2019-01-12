@@ -95,6 +95,7 @@
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
+    <Content Include="OwnerPropertyReportsMain.aspx" />
     <Content Include="RenewablesReportsMain.aspx" />
     <Content Include="Images\PDFImage.png" />
     <Content Include="PDFsPage.aspx" />
@@ -104,6 +105,7 @@
     <Content Include="Reports\CitationsReport_CitationData.aspx" />
     <Content Include="Reports\ContractorMailingLabelsCSV.aspx" />
     <Content Include="Reports\contractorSoonExp.aspx" />
+    <Content Include="Reports\OwnerPropertyReport_Envelope.aspx" />
     <Content Include="Reports\IDCardsLaunchManager.aspx" />
     <Content Include="Reports\OwnerConcernsLaunchManager.aspx" />
     <Content Include="Reports\RenewablesReport_ByProject.aspx" />
@@ -463,6 +465,13 @@
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OwnerPropertyReportsMain.aspx.cs">
+      <DependentUpon>OwnerPropertyReportsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OwnerPropertyReportsMain.aspx.designer.cs">
+      <DependentUpon>OwnerPropertyReportsMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RenewablesReportsMain.aspx.cs">
       <DependentUpon>RenewablesReportsMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -568,6 +577,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>contractorSoonExpLicReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerPropertyReport_Envelope.aspx.cs">
+      <DependentUpon>OwnerPropertyReport_Envelope.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\OwnerPropertyReport_Envelope.aspx.designer.cs">
+      <DependentUpon>OwnerPropertyReport_Envelope.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\IDCardsLaunchManager.aspx.cs">
       <DependentUpon>IDCardsLaunchManager.aspx</DependentUpon>

@@ -31,7 +31,7 @@
                             Name:
                         </td>
                         <td>
-                            <asp:TextBox ID="tbReturnAddressName" Width="20em" runat="server" Text="Sunriver Homeowners Assocation"></asp:TextBox>
+                            <asp:TextBox ID="tbReturnAddressName" Width="20em" runat="server" Text="Sunriver Homeowners Association"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
