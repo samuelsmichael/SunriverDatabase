@@ -22,13 +22,31 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.Panel pnlPhotos;
         
         /// <summary>
-        /// RepeaterImages control.
+        /// RepeaterImagesJD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepeaterImages;
+        protected global::System.Web.UI.WebControls.DataList RepeaterImagesJD;
+        
+        /// <summary>
+        /// btnUnlink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUnlink;
+        
+        /// <summary>
+        /// wgaph333 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label wgaph333;
         
         /// <summary>
         /// pnlControl control.

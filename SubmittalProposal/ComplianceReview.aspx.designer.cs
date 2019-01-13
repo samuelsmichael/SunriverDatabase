@@ -679,6 +679,33 @@ namespace SubmittalProposal {
         protected global::AjaxControlToolkit.ModalPopupExtender mpeComplianceReviewNewLetter;
         
         /// <summary>
+        /// tabPanelComplianceReviewPhotos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tabPanelComplianceReviewPhotos;
+        
+        /// <summary>
+        /// updatexxxfumfcanel1y8x432 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatexxxfumfcanel1y8x432;
+        
+        /// <summary>
+        /// PhotoManager2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SubmittalProposal.PhotoManager PhotoManager2;
+        
+        /// <summary>
         /// tabPanelComplianceLetterData control.
         /// </summary>
         /// <remarks>

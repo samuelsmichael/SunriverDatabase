@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true"
     CodeBehind="ComplianceReview.aspx.cs" Inherits="SubmittalProposal.ComplianceReview" %>
-
+<%@ Register src="PhotoManager.ascx" tagname="PhotoManager" tagprefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td width="40">
         <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
@@ -487,6 +487,15 @@
                             </script>
 
                         </asp:Panel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </ContentTemplate>
+        </ajaxToolkit:TabPanel>
+        <ajaxToolkit:TabPanel runat="server" ID="tabPanelComplianceReviewPhotos" HeaderText="Photo">
+            <ContentTemplate>
+                <asp:UpdatePanel ID="updatexxxfumfcanel1y8x432" runat="server">
+                    <ContentTemplate>
+                        <uc1:PhotoManager ID="PhotoManager2" runat="server" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>

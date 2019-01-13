@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Globalization;
 
 namespace SubmittalProposal {
-    public partial class ComplianceReview : AbstractDatabase, ICanHavePDFs {
+    public partial class ComplianceReview : AbstractDatabase, ICanHavePDFs, IHasPhotos {
         public static string DataSetCacheKey = "CRDS";
         private int ReviewIDBeingUpdated {
             get {
@@ -360,10 +360,21 @@ namespace SubmittalProposal {
         private int getReviewId(DataRow dr) {
             return Utils.ObjectToInt(dr["crReviewID"]);
         }
+
+        private int InspectionBeingEdited {
+            get {
+                object obj = Session["ComComplianceReviewInspectionNumberBeingEdited"];
+                return obj == null ? 0 : (int)obj;
+            }
+            set {
+                Session["ComComplianceReviewInspectionNumberBeingEdited"] = value;
+            }
+        }        
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
 
             GridViewRow row = gvResults.SelectedRow;
             int inspectionNbr = getInspectionNumber(row);
+            InspectionBeingEdited = inspectionNbr;
             DataRow dr = getGridViewDataTable().Rows.Find(inspectionNbr);
             DateTime? reviewDate = getReviewDate(dr);
             DateTime? closeDate = getClosingDate(dr);
@@ -683,6 +694,10 @@ namespace SubmittalProposal {
 
         public void SetLaneLotForPDFs(string lanelot) {
             LaneLotForPDFs = lanelot;
+        }
+
+        public string CurrentItemKey {
+            get { return Utils.ObjectToString(InspectionBeingEdited); }
         }
     }
 }
