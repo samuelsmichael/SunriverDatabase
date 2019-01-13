@@ -34,7 +34,9 @@ namespace SubmittalProposal {
             fvComplianceLetter.Enabled = false;
             pnlComplianceLetterRepeater.Enabled = false;
             tbCRLotNameUpdate.Enabled = false;
-            ddlCRLaneUpdate.Enabled = false;            
+            ddlCRLaneUpdate.Enabled = false;
+            btnNewComplianceReview.Enabled = false;
+            btnComplianceReviewNewLetter.Enabled = false;
         }
         protected override void unlockYourUpdateFields() {
             tbReviewDateUpdate.Enabled = true;
@@ -48,6 +50,9 @@ namespace SubmittalProposal {
             pnlComplianceLetterRepeater.Enabled = true;
             tbCRLotNameUpdate.Enabled = true;
             ddlCRLaneUpdate.Enabled = true;
+            btnNewComplianceReview.Enabled = true;
+            btnComplianceReviewNewLetter.Enabled = true;
+
         }
         protected override string UpdateRoleName {
             get { return "canupdatecompliancereviews"; }
@@ -68,7 +73,11 @@ namespace SubmittalProposal {
             }
             return ds;
         }
-
+        private static string ConnectionString {
+            get {
+                return System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString;
+            }
+        }
         protected override Label getUpdateResultsLabel() {
             return lblComplianceReviewUpdateResults;
         }
@@ -365,22 +374,98 @@ namespace SubmittalProposal {
             tbCRLotNameUpdate.Text = getReviewLotName(dr);
             ddlCRLaneUpdate.SelectedValue = getReviewLane(dr);
             SetLaneLotForPDFs(ddlCRLaneUpdate.SelectedValue + " " + tbCRLotNameUpdate.Text);
-
             ReviewIDBeingUpdated = getReviewId(dr);
-            
-            DataView    dvComplianceLetters = CRDataSet().Tables[1].AsDataView();
             Session["currentfkcrReviewID"] = getInspectionNumber(row);
+            bind_gvComplianceLetters();
+
+            return "Inspection Nbr: " + inspectionNbr + "    Lot\\Lane: " + getLotLane(dr) + "    Date: " + (reviewDate.HasValue?reviewDate.Value.ToString("MM/dd/yyyy"):"");
+        }
+
+        private void bind_gvComplianceLetters() {
+            DataView dvComplianceLetters = CRDataSet().Tables[1].AsDataView();
             dvComplianceLetters.RowFilter = "fkcrReviewID=" + Session["currentfkcrReviewID"];
             DataTable dtComplianceLetters = dvComplianceLetters.ToTable();
+
+            gvComplianceLetters.DataSource = dtComplianceLetters;
+            gvComplianceLetters.DataBind();
             fvComplianceLetter.DataSource = dtComplianceLetters;
             fvComplianceLetter.DataBind();
             rptrComplianceLetter.DataSource = dtComplianceLetters;
             rptrComplianceLetter.DataBind();
-
-
-            return "Inspection Nbr: " + inspectionNbr + "    Lot\\Lane: " + getLotLane(dr) + "    Date: " + (reviewDate.HasValue?reviewDate.Value.ToString("MM/dd/yyyy"):"");
         }
-        
+
+
+        protected void gvComplianceLetters_RowEditing(object sender, GridViewEditEventArgs e) {
+            //Set the edit index.
+            gvComplianceLetters.EditIndex = e.NewEditIndex;
+            //Bind data to the GridView control.
+            bind_gvComplianceLetters();
+        }
+
+        protected void gvComplianceLetters_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+            Page.Validate();
+            if (Page.IsValid) {
+                GridViewRow row = gvComplianceLetters.Rows[e.RowIndex];
+                try {
+                    int complianceLetterID = Convert.ToInt32(((Label)row.FindControl("lblfkcrReviewIDEdit")).Text);
+                    SqlCommand cmd2 = new SqlCommand("uspComplianceLetterUpdate");
+                    cmd2.Parameters.Add("@crLTID", SqlDbType.Int).Value = complianceLetterID;
+                    cmd2.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
+                    TextBox tbLTDate = (TextBox)row.FindControl("tbLetterDateEditUpdate");
+                    TextBox tbLTActionDate = (TextBox)row.FindControl("tbActionDeadlineEdit");
+
+
+                    cmd2.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = tbLTDate.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbLTDate.Text);
+                    cmd2.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value =
+                        tbLTActionDate.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbLTActionDate.Text);
+                    SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
+                    crLTIDOut.Direction = ParameterDirection.Output;
+                    cmd2.Parameters.Add(crLTIDOut);
+                    // I put these here, just in case they ever want to put stuff back into the ComplianceLetter
+                    cmd2.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = ""; // tbcrLTRecipientNew.Text;
+                    cmd2.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = ""; // tbcrLTMailAddrNew.Text;
+                    cmd2.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = ""; // tbcrLTMailAddr2New.Text;
+                    cmd2.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = ""; // tbcrLTCityStateZipNew.Text;
+                    cmd2.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = ""; // tbcrLTCCopy1New.Text;
+                    cmd2.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = ""; // tbcrLTCCopy2New.Text;
+                    cmd2.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = ""; // tbcrLTCCopy3New.Text;
+                    cmd2.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = ""; // ddlCRFromSignatureNew.SelectedValue;
+                    cmd2.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = ""; // ddlCRFromTitleNew.SelectedValue;
+                    cmd2.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = ""; // crLTAttachTypeNew.Text;
+                    cmd2.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = ""; // tbcrLTAttachDescriptionNew.Text;
+                    Utils.executeNonQuery(cmd2, ConnectionString);
+                    performPostUpdateSuccessfulActions("Compliance Letter updated", DataSetCacheKey, null);
+                } catch (Exception ee) {
+                    performPostUpdateFailedActions("Compliance Letter not updated. Error msg: " + ee.Message);
+                }
+                //Reset the edit index.
+                gvComplianceLetters.EditIndex = -1;
+
+                //Bind data to the GridView control.
+                bind_gvComplianceLetters();
+            }
+        }
+
+        protected void gvComplianceLetters_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            //Reset the edit index.
+            gvComplianceLetters.EditIndex = -1;
+
+            //Bind data to the GridView control.
+            bind_gvComplianceLetters();
+        }
+
+        private decimal sumFine = 0;
+        private int lastIndex = -1;
+        protected void gvComplianceLetters_RowDataBound(object sender, GridViewRowEventArgs e) {
+            if (e.Row.RowType == DataControlRowType.DataRow) {
+                if (e.Row.RowIndex > lastIndex) { // because after an update, it sweeps through the rows twice.
+                }
+            }
+        }
+
+
+
+
         protected override void performSubmittalButtonClick(out string searchCriteria, out string filterString) {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbFilter = new StringBuilder();
@@ -492,6 +577,34 @@ namespace SubmittalProposal {
             crReviewIDOut.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(crReviewIDOut);
             Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+
+            SqlCommand cmd2 = new SqlCommand("uspComplianceLetterUpdate");
+            cmd2.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = crReviewIDOut.Value;
+            cmd2.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = tbcrLtDateNewNewComplianceReview.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNewNewComplianceReview.Text);
+            cmd2.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value =
+                crLTActionDateNewNewComplianceReview.Text.Trim() == "" ? (
+                tbcrLtDateNewNewComplianceReview.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNewNewComplianceReview.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNewNewComplianceReview.Text);
+            SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
+            crLTIDOut.Direction = ParameterDirection.Output;
+            cmd2.Parameters.Add(crLTIDOut);
+// I put these here, just in case they ever want to put stuff back into the ComplianceLetter
+            cmd2.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = ""; // tbcrLTRecipientNew.Text;
+            cmd2.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = ""; // tbcrLTMailAddrNew.Text;
+            cmd2.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = ""; // tbcrLTMailAddr2New.Text;
+            cmd2.Parameters.Add("@crLTCityStateZip", SqlDbType.NVarChar).Value = ""; // tbcrLTCityStateZipNew.Text;
+            cmd2.Parameters.Add("@crLTCCopy1", SqlDbType.NVarChar).Value = ""; // tbcrLTCCopy1New.Text;
+            cmd2.Parameters.Add("@crLTCCopy2", SqlDbType.NVarChar).Value = ""; // tbcrLTCCopy2New.Text;
+            cmd2.Parameters.Add("@crLTCCopy3", SqlDbType.NVarChar).Value = ""; // tbcrLTCCopy3New.Text;
+            cmd2.Parameters.Add("@crLTSigner", SqlDbType.NVarChar).Value = ""; // ddlCRFromSignatureNew.SelectedValue;
+            cmd2.Parameters.Add("@crLTSignerTitle", SqlDbType.NVarChar).Value = ""; // ddlCRFromTitleNew.SelectedValue;
+            cmd2.Parameters.Add("@crLTAttachType", SqlDbType.NVarChar).Value = ""; // crLTAttachTypeNew.Text;
+            cmd2.Parameters.Add("@crLTAttachDescription", SqlDbType.NVarChar).Value = ""; // tbcrLTAttachDescriptionNew.Text;
+            
+
+            Utils.executeNonQuery(cmd2, System.Configuration.ConfigurationManager.ConnectionStrings["SRPropertySQLConnectionString"].ConnectionString);
+            tbcrLtDateNewNewComplianceReview.Text = "";
+            crLTActionDateNewNewComplianceReview.Text = "";
+
             performPostNewSuccessfulActions("Review added", "CRDS", null, tbReviewId,(int)crReviewIDOut.Value);
 
         }
@@ -509,7 +622,9 @@ namespace SubmittalProposal {
             SqlCommand cmd = new SqlCommand("uspComplianceLetterUpdate");
             cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
             cmd.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = tbcrLtDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text);
-            cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = crLTActionDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(crLTActionDateNew.Text);
+            cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = 
+                crLTActionDateNew.Text.Trim() == "" ? (
+                tbcrLtDateNew.Text.Trim() == ""? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNew.Text);
             cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = tbcrLTRecipientNew.Text;
             cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = tbcrLTMailAddrNew.Text;
             cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = tbcrLTMailAddr2New.Text;

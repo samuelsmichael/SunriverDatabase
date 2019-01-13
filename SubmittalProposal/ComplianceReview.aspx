@@ -73,8 +73,8 @@
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3aa" runat="server">
                     <ContentTemplate>
-                        <asp:Panel ID="crPropertyUpdate" GroupingText="Property" runat="server">
-                            <table cellpadding="4" cellspacing="4" border="0">
+                        <asp:Panel ID="crPropertyUpdate" GroupingText="Property" runat="server" CssClass="form_field_panel_squished">
+                            <table cellpadding="1" cellspacing="1" border="0">
                                 <tr>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Lot"></asp:Label>
@@ -94,8 +94,8 @@
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <asp:Panel ID="Panel1" GroupingText="Review" runat="server">
-                            <table width="100%" cellpadding="4" cellspacing="4" border="0">
+                        <asp:Panel ID="Panel1" GroupingText="Review" runat="server" CssClass="form_field_panel_squished">
+                            <table width="100%" cellpadding="1" cellspacing="1" border="0">
                                 <tr valign="middle">
                                     <td align="right">
                                         <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Review date:"></asp:Label>
@@ -143,15 +143,15 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label4" runat="server" Text="Comments:"></asp:Label>
                                     </td>
                                     <td width="100%">
-                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbCommentsFormUpdate"
+                                        <asp:TextBox CssClass="form_field_mediumtextbox" Width="100%" ID="tbCommentsFormUpdate"
                                             runat="server" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
                         </asp:Panel>
-                        <asp:Panel CssClass="form_field_panel" ID="Panel2" GroupingText="Other comments"
+                        <asp:Panel ID="Panel2" GroupingText="Other comments" CssClass="form_field_panel_squished"
                             runat="server">
-                            <table width="100%" cellpadding="4" cellspacing="4" border="0">
+                            <table width="100%" cellpadding="1" cellspacing="1" border="0">
                                 <tr valign="middle">
                                     <td align="right">
                                         <asp:Label CssClass="form_field_heading" ID="Label5" runat="server" Text="Design rule:"></asp:Label>
@@ -163,24 +163,335 @@
                                         <asp:Label CssClass="form_field_heading" ID="Label6" runat="server" Text="Req'd Action:"></asp:Label>
                                     </td>
                                     <td width="60%">
-                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbRequiredActionUpdate"
+                                        <asp:TextBox CssClass="form_field_mediumtextbox" Width="100%" ID="tbRequiredActionUpdate"
                                             runat="server" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Label CssClass="form_field_heading" ID="Label8" runat="server" Text="Follow up:"></asp:Label>
                                     </td>
                                     <td width="40%">
-                                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbFollowUpUpdate"
+                                        <asp:TextBox CssClass="form_field_mediumtextbox" Width="100%" ID="tbFollowUpUpdate"
                                             runat="server" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
                         </asp:Panel>
+                        <asp:Panel ID="Panel11" GroupingText="Compliance Letters" CssClass="form_field_panel_squished"
+                            runat="server">
+
+
+                            <div style="height: 8em; width: 900px; overflow: auto;">
+                                <asp:GridView ID="gvComplianceLetters" Style="width: 100%; white-space: nowrap;" runat="server"
+                                    AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None"
+                                    OnRowEditing="gvComplianceLetters_RowEditing" OnRowUpdating="gvComplianceLetters_RowUpdating"
+                                    OnRowCancelingEdit="gvComplianceLetters_RowCancelingEdit" ShowFooter="True" OnRowDataBound="gvComplianceLetters_RowDataBound">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                                    <EmptyDataTemplate>
+                                        <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
+                                    </EmptyDataTemplate>
+                                    <Columns>
+                                        <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true"
+                                            ShowCancelButton="true" />
+                                        <asp:TemplateField HeaderText="Letter Date" SortExpression="crLTDate">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblLetterDateUpdate" runat="server" Text='<%# Bind("crLTDate", "{0:M-dd-yyyy}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:TextBox ID="tbLetterDateEditUpdate" runat="server" Text='<%# Eval("crLTDate", "{0:M-dd-yyyy}") %>'></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                ID="ibLetterDateEditUpdate" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <ajaxToolkit:CalendarExtender ID="cvLetterDateEditUpdate" runat="server" TargetControlID="tbLetterDateEditUpdate"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibLetterDateEditUpdate" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvcvLetterDateEditUpdate" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbLetterDateEditUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Action Deadline" SortExpression="crLTActionDate">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActionDeadlineItem" runat="server" Text='<%# Bind("crLTActionDate", "{0:M-dd-yyyy}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:TextBox ID="tbActionDeadlineEdit" runat="server" Text='<%# Eval("crLTActionDate", "{0:M-dd-yyyy}") %>'></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                ID="ibActionDeadlineEdit" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <ajaxToolkit:CalendarExtender ID="cvActionDeadlineEdit" runat="server" TargetControlID="tbActionDeadlineEdit"
+                                                    Format="MM/dd/yyyy" PopupButtonID="ibActionDeadlineEdit" />
+                                                <asp:RegularExpressionValidator ForeColor="Red" ID="rvcvActionDeadlineEdit" Display="Dynamic"
+                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                    ControlToValidate="tbActionDeadlineEdit" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+
+
+
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Letter Id" SortExpression="fkcrReviewID">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblfkcrReviewIDItem" runat="server" Text='<%# Bind("crLTID") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:Label ID="lblfkcrReviewIDEdit" runat="server" Text='<%# Bind("crLTID") %>'></asp:Label>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <EditRowStyle BackColor="#999999" />
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                                </asp:GridView>
+                            </div>
+
+
+                            <br />
+                            <center><asp:Button runat="server" ID="btnComplianceReviewNewLetter" CausesValidation="false" CommandName="New" Text="New Letter" /></center>
+                            <asp:Panel runat="server" CssClass="newitempopup" ID="pnlComplianceReviewNewLetter">
+                                <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlComplianceReviewNewLetterTitle">
+                                    <span>New Letter</span>
+                                </asp:Panel>
+                                <asp:Panel runat="server" Style="text-align: center;" ID="Panel6" CssClass="newitemcontent">
+                                    <asp:Panel CssClass="form_field_panel_squished" ID="Panel4" GroupingText="Dates"
+                                        runat="server">
+                                        <table width="100%" cellpadding="4" cellspacing="4" border="0">
+                                            <tr valign="middle">
+                                                <td class="form_field_heading" align="right">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label1x36" runat="server" Text="Letter date:"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateNew" runat="server"
+                                                                    Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                    ID="ibcrLtDateNew" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <ajaxToolkit:CalendarExtender ID="cecrLtDateNew" runat="server" TargetControlID="tbcrLtDateNew"
+                                                        Format="MM/dd/yyyy" PopupButtonID="ibcrLtDateNew" />
+                                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLtDateNew" Display="Dynamic"
+                                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                        ControlToValidate="tbcrLtDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                </td>
+                                                <td class="form_field_heading" align="right">
+                                                    <asp:Label CssClass="form_field_heading" ID="Label1xx7" runat="server" Text="Action deadline:"></asp:Label><br />
+                                                    <asp:Label ID="Labelxx416" runat="server" Text="(leave blank to default to 30 days after Letter Date)" style="font-size:smaller;"></asp:Label> 
+                                                </td>
+                                                <td class="form_field">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
+                                                                    Width="9em" ID="crLTActionDateNew" runat="server"></asp:TextBox>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                                    ID="ibcrLTActionDateNew" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <ajaxToolkit:CalendarExtender ID="cecrLTActionDateNew" runat="server" TargetControlID="crLTActionDateNew"
+                                                        Format="MM/dd/yyyy" PopupButtonID="ibcrLTActionDateNew" />
+                                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLTActionDateNew" Display="Dynamic"
+                                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                                        ControlToValidate="crLTActionDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                                </td>
+                                                <td class="form_field_heading" align="right">
+                                                    &nbsp;
+                                                </td>
+                                                <td class="form_field">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                    <asp:Panel Visible="false" CssClass="form_field_panel_squished" runat="server" GroupingText="To"
+                                        ID="Panelxx97">
+                                        <table width="100%">
+                                            <tr>
+                                                <td valign="top">
+                                                    <table width="100%">
+                                                        <tr>
+                                                            <td class="form_field_heading" align="right">
+                                                                Owner name:
+                                                            </td>
+                                                            <td class="form_field_address">
+                                                                <asp:TextBox runat="server" ID="tbcrLTRecipientNew" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="form_field_heading" align="right">
+                                                                Address:
+                                                            </td>
+                                                            <td class="form_field_address">
+                                                                <asp:TextBox ID="tbcrLTMailAddrNew" runat="server" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                            </td>
+                                                            <td class="form_field_address">
+                                                                <asp:TextBox ID="tbcrLTMailAddr2New" runat="server" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                            </td>
+                                                            <td class="form_field_address">
+                                                                <asp:TextBox ID="tbcrLTCityStateZipNew" runat="server" CssClass="form_field_address"
+                                                                    Text='<%# Eval("crLTCity+State+Zip") %>'></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td valign="top">
+                                                    <table>
+                                                        <tr>
+                                                            <td class="form_field_heading" align="right">
+                                                                cc:
+                                                            </td>
+                                                            <td class="form_field_address">
+                                                                <asp:TextBox ID="tbcrLTCCopy1New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy1") %>'></asp:TextBox>
+                                                            </td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td class="form_field_address">
+                                                    <asp:TextBox ID="tbcrLTCCopy2New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy2") %>'></asp:TextBox>
+                                                </td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td class="form_field_address">
+                                                    <asp:TextBox ID="tbcrLTCCopy3New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy3") %>'></asp:TextBox>
+                                                </td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </td> </tr> </table>
+                                    </asp:Panel>
+                                    <asp:Panel Visible="false" CssClass="form_field_panel_squished" runat="server" GroupingText="From"
+                                        ID="Panelxx48">
+                                        <table cellpadding="4" cellspacing="4">
+                                            <tr>
+                                                <td class="form_field_heading" align="right">
+                                                    Signature:
+                                                </td>
+                                                <td class="form_field">
+                                                    <asp:DropDownList ID="ddlCRFromSignatureNew" runat="server">
+                                                        <asp:ListItem Value="" Text=""></asp:ListItem>
+                                                        <asp:ListItem Value="Hugh Palcic" Text="Hugh Palcic"></asp:ListItem>
+                                                        <asp:ListItem Value="Bill Peck" Text="Bill Peck"></asp:ListItem>
+                                                        <asp:ListItem Value="Shane Hostbjor" Text="Shane Hostbjor"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                                <td class="form_field_heading" align="right">
+                                                    Title:
+                                                    <asp:DropDownList ID="ddlCRFromTitleNew" runat="server">
+                                                        <asp:ListItem Value="" Text=""></asp:ListItem>
+                                                        <asp:ListItem Value="Director of Community Development" Text="Director of Community Development"></asp:ListItem>
+                                                        <asp:ListItem Value="Compliance Inspector" Text="Compliance Inspector"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                    <asp:Panel Visible="false" CssClass="form_field_panel_squished" runat="server" GroupingText="Letter Attachment"
+                                        ID="Panesl9">
+                                        <table>
+                                            <tr>
+                                                <td class="form_field_heading" align="right">
+                                                    Type:
+                                                </td>
+                                                <td class="form_field_address">
+                                                    <asp:TextBox ID="crLTAttachTypeNew" runat="server" CssClass="form_field_address"
+                                                        Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
+                                                </td>
+                                                <td class="form_field_heading" align="right">
+                                                    Description:
+                                                </td>
+                                                <td class="form_field_address">
+                                                    <asp:TextBox ID="tbcrLTAttachDescriptionNew" runat="server" CssClass="form_field_address"
+                                                        Text='<%# Eval("crLTAttachDescription") %>'></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </asp:Panel>
+                                <center>
+                                    <table cellpadding="3">
+                                        <tr>
+                                            <td>
+                                                <asp:Button ID="btnNewComplianceReviewLetterOk" OnClientClick="javascript: return true;" OnClick="btnNewComplianceReviewLetterOk_Click"
+                                                    CausesValidation="true" runat="server" Text="Okay" />
+                                            </td>
+                                            <td>
+                                                <asp:Button ID="btnNewComplianceReviewLetterCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
+                                                    runat="server" Text="Abort" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </asp:Panel>
+                            <ajaxToolkit:ModalPopupExtender ID="mpeComplianceReviewNewLetter" runat="server"
+                                TargetControlID="btnComplianceReviewNewLetter" PopupControlID="pnlComplianceReviewNewLetter"
+                                BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlComplianceReviewNewLetterTitle"
+                                BehaviorID="jdpopupcompliancereviewnewletter" />
+                            <script language="javascript" type="text/javascript">
+                                function shown() {
+                                    var tb = document.getElementById('<% =tbcrLtDateNew.ClientID %>');
+                                    tb.focus();
+
+                                }
+                                function pageLoad() {
+                                    var dddp = $find('jdpopupcompliancereviewnewletter');
+                                    dddp.add_shown(shown);
+                                }
+
+                                function OnKeyPress(args) {
+                                    if (args.keyCode == Sys.UI.Key.esc) {
+                                        // I don't know about this                $find("jdpopup").hide();
+                                    }
+                                }
+                            </script>
+
+                        </asp:Panel>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
-        <ajaxToolkit:TabPanel runat="server" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter">
+        <ajaxToolkit:TabPanel runat="server" Visible="false" ID="tabPanelComplianceLetterData" HeaderText="Compliance Letter">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel1aa" runat="server">
                     <ContentTemplate>
@@ -379,226 +690,8 @@
                             </ItemTemplate>
                         </asp:FormView>
                         <center>
-                            <asp:LinkButton ID="lbComplianceReviewNewLetter" runat="server" CausesValidation="False"
+                            <asp:LinkButton ID="btnComplianceReviewNewLetterOld" runat="server" CausesValidation="False"
                                 CommandName="New" Text="New Letter" /></center>
-                        <asp:Panel runat="server" CssClass="newitempopup" ID="pnlComplianceReviewNewLetter">
-                            <asp:Panel runat="server" CssClass="newitemtitle" ID="pnlComplianceReviewNewLetterTitle">
-                                <span>New Letter</span>
-                            </asp:Panel>
-                            <asp:Panel runat="server" Style="text-align: center;" ID="Panel6" CssClass="newitemcontent">
-                                <asp:Panel CssClass="form_field_panel_squished" ID="Panel4" GroupingText="Dates"
-                                    runat="server">
-                                    <table width="100%" cellpadding="4" cellspacing="4" border="0">
-                                        <tr valign="middle">
-                                            <td class="form_field_heading" align="right">
-                                                <asp:Label CssClass="form_field_heading" ID="Label16" runat="server" Text="Letter date:"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateNew" runat="server"
-                                                                Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
-                                                        </td>
-                                                        <td>
-                                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                                ID="ibcrLtDateNew" runat="server" />
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <ajaxToolkit:CalendarExtender ID="cecrLtDateNew" runat="server" TargetControlID="tbcrLtDateNew"
-                                                    Format="MM/dd/yyyy" PopupButtonID="ibcrLtDateNew" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLtDateNew" Display="Dynamic"
-                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                                                    ControlToValidate="tbcrLtDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                            </td>
-                                            <td class="form_field_heading" align="right">
-                                                <asp:Label CssClass="form_field_heading" ID="Label17" runat="server" Text="Action deadline:"></asp:Label>
-                                            </td>
-                                            <td class="form_field">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
-                                                                Width="9em" ID="crLTActionDateNew" runat="server"></asp:TextBox>
-                                                        </td>
-                                                        <td>
-                                                            <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                                ID="ibcrLTActionDateNew" runat="server" />
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <ajaxToolkit:CalendarExtender ID="cecrLTActionDateNew" runat="server" TargetControlID="crLTActionDateNew"
-                                                    Format="MM/dd/yyyy" PopupButtonID="ibcrLTActionDateNew" />
-                                                <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLTActionDateNew" Display="Dynamic"
-                                                    ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                                                    ControlToValidate="crLTActionDateNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
-                                            </td>
-                                            <td class="form_field_heading" align="right">
-                                                &nbsp;
-                                            </td>
-                                            <td class="form_field">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </asp:Panel>
-                                <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="To"
-                                    ID="Panel7">
-                                    <table width="100%">
-                                        <tr>
-                                            <td valign="top">
-                                                <table width="100%">
-                                                    <tr>
-                                                        <td class="form_field_heading" align="right">
-                                                            Owner name:
-                                                        </td>
-                                                        <td class="form_field_address">
-                                                            <asp:TextBox runat="server" ID="tbcrLTRecipientNew" CssClass="form_field_address"
-                                                                Text='<%# Eval("crLTRecipient") %>'></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="form_field_heading" align="right">
-                                                            Address:
-                                                        </td>
-                                                        <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTMailAddrNew" runat="server" CssClass="form_field_address"
-                                                                Text='<%# Eval("crLTMailAddr") %>'></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                        </td>
-                                                        <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTMailAddr2New" runat="server" CssClass="form_field_address"
-                                                                Text='<%# Eval("crLTMailAddr2") %>'></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                        </td>
-                                                        <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTCityStateZipNew" runat="server" CssClass="form_field_address"
-                                                                Text='<%# Eval("crLTCity+State+Zip") %>'></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                            <td valign="top">
-                                                <table>
-                                                    <tr>
-                                                        <td class="form_field_heading" align="right">
-                                                            cc:
-                                                        </td>
-                                                        <td class="form_field_address">
-                                                            <asp:TextBox ID="tbcrLTCCopy1New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy1") %>'></asp:TextBox>
-                                                        </td>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            </td>
-                                            <td class="form_field_address">
-                                                <asp:TextBox ID="tbcrLTCCopy2New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy2") %>'></asp:TextBox>
-                                            </td>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            </td>
-                                            <td class="form_field_address">
-                                                <asp:TextBox ID="tbcrLTCCopy3New" runat="server" CssClass="form_field_address" Text='<%# Eval("crLTCCopy3") %>'></asp:TextBox>
-                                            </td>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    </td> </tr> </table>
-                                </asp:Panel>
-                                <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="From"
-                                    ID="Panel8">
-                                    <table cellpadding="4" cellspacing="4">
-                                        <tr>
-                                            <td class="form_field_heading" align="right">
-                                                Signature:
-                                            </td>
-                                            <td class="form_field">
-                                                <asp:DropDownList ID="ddlCRFromSignatureNew" runat="server">
-                                                    <asp:ListItem Value="" Text=""></asp:ListItem>
-                                                    <asp:ListItem Value="Hugh Palcic" Text="Hugh Palcic"></asp:ListItem>
-                                                    <asp:ListItem Value="Bill Peck" Text="Bill Peck"></asp:ListItem>
-                                                    <asp:ListItem Value="Shane Hostbjor" Text="Shane Hostbjor"></asp:ListItem>
-                                                </asp:DropDownList>
-                                            </td>
-                                            <td class="form_field_heading" align="right">
-                                                Title:
-                                                <asp:DropDownList ID="ddlCRFromTitleNew" runat="server">
-                                                    <asp:ListItem Value="" Text=""></asp:ListItem>
-                                                    <asp:ListItem Value="Director of Community Development" Text="Director of Community Development"></asp:ListItem>
-                                                    <asp:ListItem Value="Compliance Inspector" Text="Compliance Inspector"></asp:ListItem>
-                                                </asp:DropDownList>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </asp:Panel>
-                                <asp:Panel CssClass="form_field_panel_squished" runat="server" GroupingText="Letter Attachment"
-                                    ID="Panel9">
-                                    <table>
-                                        <tr>
-                                            <td class="form_field_heading" align="right">
-                                                Type:
-                                            </td>
-                                            <td class="form_field_address">
-                                                <asp:TextBox ID="crLTAttachTypeNew" runat="server" CssClass="form_field_address"
-                                                    Text='<%# Eval("crLTAttachType") %>'></asp:TextBox>
-                                            </td>
-                                            <td class="form_field_heading" align="right">
-                                                Description:
-                                            </td>
-                                            <td class="form_field_address">
-                                                <asp:TextBox ID="tbcrLTAttachDescriptionNew" runat="server" CssClass="form_field_address"
-                                                    Text='<%# Eval("crLTAttachDescription") %>'></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </asp:Panel>
-                            </asp:Panel>
-                            <center>
-                                <table cellpadding="3">
-                                    <tr>
-                                        <td>
-                                            <asp:Button ID="btnNewComplianceReviewLetterOk" OnClientClick="javascript: return true;" OnClick="btnNewComplianceReviewLetterOk_Click"
-                                                CausesValidation="true" runat="server" Text="Okay" />
-                                        </td>
-                                        <td>
-                                            <asp:Button ID="btnNewComplianceReviewLetterCancel" OnClientClick="javascript: if (confirm('Are you sure that you wish to abort?')) {return true;} else {return false;}"
-                                                runat="server" Text="Abort" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </center>
-                        </asp:Panel>
-                        <ajaxToolkit:ModalPopupExtender ID="mpeComplianceReviewNewLetter" runat="server"
-                            TargetControlID="lbComplianceReviewNewLetter" PopupControlID="pnlComplianceReviewNewLetter"
-                            BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlComplianceReviewNewLetterTitle"
-                            BehaviorID="jdpopupcompliancereviewnewletter" />
-                        <script language="javascript" type="text/javascript">
-                            function shown() {
-                                var tb = document.getElementById('<% =tbcrLtDateNew.ClientID %>');
-                                tb.focus();
-
-                            }
-                            function pageLoad() {
-                                var dddp = $find('jdpopupcompliancereviewnewletter');
-                                dddp.add_shown(shown);
-                            }
-
-                            function OnKeyPress(args) {
-                                if (args.keyCode == Sys.UI.Key.esc) {
-                                    // I don't know about this                $find("jdpopup").hide();
-                                }
-                            }
-                        </script>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </ContentTemplate>
@@ -898,7 +991,7 @@
                         <asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Comments:"></asp:Label>
                     </td>
                     <td width="100%">
-                        <asp:TextBox CssClass="form_field_bigtextbox" Width="100%" ID="tbCommentsFormNew"
+                        <asp:TextBox CssClass="form_field_mediumtextbox" Width="100%" ID="tbCommentsFormNew"
                             runat="server" TextMode="MultiLine"></asp:TextBox>
                     </td>
                 </tr>
@@ -930,29 +1023,90 @@
                     </td>
                 </tr>
             </table>
-            <center>
-                <table cellpadding="2" cellspacing="2">
-                    <tr>
-                        <td>
-                            <asp:Button ID="btnNewComplianceOk" CausesValidation="true" runat="server" Text="Okay"
-                                OnClick="btnNewComplianceReviewOk_Click" />
-                        </td>
-                        <td>
-                            <asp:Button ID="btnComplianceOkayUpdate" OnClientClick="return onNewComplianceReviewCancel()"
-                                runat="server" Text="Abort" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Label ID="lblComplianceReviewNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
-                        </td>
-                    </tr>
-                </table>
-            </center>
         </asp:Panel>
+        <asp:Panel CssClass="form_field_panel" ID="Panel7te33" GroupingText="Compliance Letter"
+            runat="server">
+            <table width="100%" cellpadding="4" cellspacing="4" border="0">
+                <tr valign="middle">
+                    <td class="form_field_heading" align="right">
+                        <asp:Label CssClass="form_field_heading" ID="Label1x3600" runat="server" Text="Letter date:"></asp:Label>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbcrLtDateNewNewComplianceReview" runat="server"
+                                        Text='<%# Eval("crLTDate","{0:MM/dd/yyyy}") %>'></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                        ID="ibcrLtDateNewNewComplianceReview" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                        <ajaxToolkit:CalendarExtender ID="cecrLtDateNewNewComplianceReview" runat="server" TargetControlID="tbcrLtDateNewNewComplianceReview"
+                            Format="MM/dd/yyyy" PopupButtonID="ibcrLtDateNewNewComplianceReview" />
+                        <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLtDateNewNewComplianceReview" Display="Dynamic"
+                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                            ControlToValidate="tbcrLtDateNewNewComplianceReview" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                    </td>
+                    <td class="form_field_heading" align="right">
+                        <asp:Label CssClass="form_field_heading" ID="Label1xx7xxx3" runat="server" Text="Action deadline:"></asp:Label><br />
+                        <asp:Label ID="Labelxx41c36" runat="server" Text="(leave blank to default to 30 days after Letter Date)" style="font-size:smaller;"></asp:Label> 
+                    </td>
+                    <td class="form_field">
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:TextBox CssClass="form_field_date" Text='<%# Eval("crLTActionDate","{0:MM/dd/yyyy}") %>'
+                                        Width="9em" ID="crLTActionDateNewNewComplianceReview" runat="server"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                        ID="ibcrLTActionDateNewNewComplianceReview" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                        <ajaxToolkit:CalendarExtender ID="cecrLTActionDateNewNewComplianceReview" runat="server" TargetControlID="crLTActionDateNewNewComplianceReview"
+                            Format="MM/dd/yyyy" PopupButtonID="ibcrLTActionDateNewNewComplianceReview" />
+                        <asp:RegularExpressionValidator ForeColor="Red" ID="revcrLTActionDateNewNewComplianceReview" Display="Dynamic"
+                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                            ControlToValidate="crLTActionDateNewNewComplianceReview" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                    </td>
+                    <td class="form_field_heading" align="right">
+                        &nbsp;
+                    </td>
+                    <td class="form_field">
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+
+        </asp:Panel>
+        <center>
+            <table cellpadding="2" cellspacing="2">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnNewComplianceOk" CausesValidation="true" runat="server" Text="Okay"
+                            OnClick="btnNewComplianceReviewOk_Click" />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnComplianceOkayUpdate" OnClientClick="return onNewComplianceReviewCancel()"
+                            runat="server" Text="Abort" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblComplianceReviewNewResults" Font-Bold="true" runat="server" Text=""></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </center>
+
+
     </asp:Panel>
-    <asp:LinkButton ID="lbNewComplianceReview" runat="server">New Compliance Review</asp:LinkButton>
-    <ajaxToolkit:ModalPopupExtender ID="mpeNewComplianceReview" runat="server" TargetControlID="lbNewComplianceReview"
+    <asp:Button ID="btnNewComplianceReview" runat="server" Text="New Compliance Review" />
+    <ajaxToolkit:ModalPopupExtender ID="mpeNewComplianceReview" runat="server" TargetControlID="btnNewComplianceReview"
         PopupControlID="pnlNewComplianceReviewId" BackgroundCssClass="modalBackground"
         PopupDragHandleControlID="pnlNewComplianceReviewTitleId" BehaviorID="jdpopupnewcompliancereview" />
     <script language="javascript" type="text/javascript">
