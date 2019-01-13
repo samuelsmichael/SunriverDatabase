@@ -1,11 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.master" AutoEventWireup="true" CodeBehind="SellCheck.aspx.cs" Inherits="SubmittalProposal.SellCheck" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>
-        <asp:Label ID="Label18" runat="server" Text="Requestor"></asp:Label>
-        <asp:TextBox ID="tbRecipient" Width="80" runat="server"></asp:TextBox>
-    </td>
-
-    <td>
         <asp:Label ID="Label20" runat="server" Text="Lot"></asp:Label>
         <asp:TextBox ID="tbLot" Width="40" MaxLength="5" runat="server"></asp:TextBox>
     </td>
@@ -14,6 +9,11 @@
         <asp:DropDownList ID="ddlLane" Width="100" runat="server" DataTextField="Lane" DataValueField="Lane">
         </asp:DropDownList>
     </td>
+    <td>
+        <asp:Label ID="Label18" runat="server" Text="Requestor"></asp:Label>
+        <asp:TextBox ID="tbRecipient" Width="80" runat="server"></asp:TextBox>
+    </td>
+
     <td>
         <asp:Label ID="Label3" runat="server" Text="Copy 1"></asp:Label>
         <asp:TextBox ID="tbscLTCCopy1" Width="80" runat="server"></asp:TextBox>
@@ -108,15 +108,15 @@
                 </td>
             </tr>
             <tr valign="top">
-                <td valign="top"><asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Realtor "></asp:Label></td>
+                <td valign="top"><!--<asp:Label CssClass="form_field_heading" ID="Label12" runat="server" Text="Realtor "></asp:Label>--></td>
                 <td valign="top">
-                    <asp:DropDownList ID="ddlscRealtorUpdate" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>
+                    <!--<asp:DropDownList ID="ddlscRealtorUpdate" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>-->
                 </td>
                 <td valign="top">
-                        <asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Address "></asp:Label>
+                        <!--<asp:Label CssClass="form_field_heading" ID="Label7" runat="server" Text="Address "></asp:Label>-->
                 </td>
                 <td valign="top">
-                    <table border="0" cellpadding="1" cellspacing="1">
+                    <!--<table border="0" cellpadding="1" cellspacing="1">
                         <tr>
                             <td>
                                  <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr1Update" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
@@ -134,7 +134,7 @@
                                  <asp:TextBox CssClass="form_field" ID="tbscLTZipUpdate" Width="7em" MaxLength="10" runat="server"></asp:TextBox>
                             </td>
                         </tr>
-                    </table>
+                    </table>-->
                 </td>
                 <td colspan="2" valign="top">
                     <table border="0" cellpadding="1" cellspacing="1">
@@ -240,90 +240,27 @@
                         <asp:TextBox ID="tbPreparedByUpdatge" runat="server" Width="8em" Text='<%# Bind("scPreparedBy") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Fee">
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="ddlFeeUpdate" runat="server" 
-                            DataTextField="InspectionFee" DataValueField="InspectionFee" 
-                            OnDataBound="ddlFeeUpdate_DataBound" Width="8em">
-                        </asp:DropDownList>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Paid">
-                    <ItemTemplate>
-                        <asp:Label ID="Label1b" runat="server" Text='<%# Eval("scFee","{0:c}") %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:CheckBox ID="cbscPaidUpdate" runat="server" 
-                            Checked='<%#Eval("scPaid").ToString().Equals("True") %>' />
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Right" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Paid Memo">
-                    <ItemTemplate>
-                        <asp:Label ID="Label4s" runat="server" Text='<%# Bind("scPaid") %>' 
-                            Enabled="false"></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="cbscPaidMemoUpdate" runat="server" MaxLength="10" 
-                            Text='<%# Bind("scPaidMemo") %>' Width="8em"></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Date Closed">
-                    <EditItemTemplate>
-                        <table border="0" cellpadding="1" cellspacing="1">
-                            <tr>
-                                <td>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <asp:TextBox ID="tbDateClosedUpdate" runat="server" CssClass="form_field" 
-                                                    Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>' Width="8em"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:ImageButton ID="ibDateClosedUpdate" runat="server" ImageAlign="AbsMiddle" 
-                                                    ImageUrl="~/Images/Calendar_scheduleHS.png" 
-                                                    ToolTip="Click to show date selector" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <ajaxToolkit:CalendarExtender ID="ceDateClosedUpdate" runat="server" 
-                                        Format="MM/dd/yyyy" PopupButtonID="ibDateClosedUpdate" 
-                                        TargetControlID="tbDateClosedUpdate" />
-                                    <asp:RegularExpressionValidator ID="revtbDateClosedUpdate" runat="server" 
-                                        ControlToValidate="tbDateClosedUpdate" Display="Dynamic" 
-                                        ErrorMessage="Please enter a valid date" ForeColor="Red" 
-                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"></asp:RegularExpressionValidator>
-                                </td>
-                            </tr>
-                        </table>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label4t" runat="server" Text='<%# Bind("scPaidMemo") %>'></asp:Label>
-                    </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
-                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Ladder Fuel">
                     <ItemTemplate>
                         <asp:Label ID="Label1c" runat="server" 
-                            Text='<%# Bind("scDateClosed", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                            Text='<%# Bind("scLadderFuel") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" 
-                            DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                            DataTextField="scLadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Right" />
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Nox Weeds">
                     <ItemTemplate>
-                        <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scLadderFuel") %>'></asp:Label>
+                        <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddlNoxWeedsUpdate" runat="server" 
-                            DataTextField="LadderFuel" DataValueField="LadderFuel" Width="8em">
+                            DataTextField="scNoxWeeds" DataValueField="scNoxWeeds" Width="8em">
                         </asp:DropDownList>
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
 
 
@@ -376,20 +313,20 @@
                                 ControlToValidate="tbDateNew" runat="server" 
                                 ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
                         </td>
-                        <td>
+                        <!--<td>
                             <asp:Label CssClass="form_field_heading" ID="Label24" runat="server" Text="Fee "></asp:Label>
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlFeeNew"  Width="8em" runat="server" 
                                 DataTextField="InspectionFee" DataValueField="InspectionFee"                                  
                                 OnDataBound="ddlFeeNew_DataBound"></asp:DropDownList>
-                        </td>
+                        </td>-->
                         <td class="form_field_heading">Prepared By</td>
                         <td>
                             <asp:TextBox ID="tbPreparedByNew" Width="8em" runat="server"></asp:TextBox>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td><asp:Label CssClass="form_field_heading" ID="Label25" runat="server" Text="Paid "></asp:Label></td>
                         <td>
                             <asp:CheckBox runat="server" ID="cbPaidNew" />
@@ -417,7 +354,7 @@
                                 ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
 
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label28" runat="server" Text="Ladder Fuel "></asp:Label>
@@ -431,14 +368,14 @@
                         <td>
                             <asp:DropDownList ID="ddlNoxWeedsNew" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <!--<td></td>
+                        <td></td>-->
                     </tr>
                     <tr>
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label30" runat="server" Text="Comments "></asp:Label>
                         </td>
-                        <td colspan="5">
+                        <td colspan="3">
                             <asp:TextBox Height="8em" TextMode="MultiLine"  Font-Size="Medium" ID="tbCommentsNew" runat="server" width="40em"></asp:TextBox>
                         </td>
                     </tr>
@@ -446,7 +383,7 @@
                         <td>
                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Follow Up "></asp:Label>
                         </td>
-                        <td colspan="5">
+                        <td colspan="3">
                             <asp:TextBox Height="8em" TextMode="MultiLine"  Font-Size="Medium" ID="tbFollowUpNew" runat="server" width="40em"></asp:TextBox>
                         </td>
                     </tr>
@@ -520,7 +457,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr valign="top">
                         <td valign="top" colspan="2">
-                            <table border="0" cellpadding="1" cellspacing="1">
+                            <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td><asp:Label CssClass="form_field_heading" ID="Label4s" runat="server" Text="Date "></asp:Label></td>
                                     <td>                    
@@ -558,15 +495,15 @@
                         </td>
                     </tr>
                     <tr valign="top">
-                        <td valign="top"><asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Realtor "></asp:Label></td>
+                        <td valign="top"><!--<asp:Label CssClass="form_field_heading" ID="Label13" runat="server" Text="Realtor "></asp:Label>--></td>
                         <td valign="top">
-                            <asp:DropDownList ID="ddlscRealtorNew"  Width="10em" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>
+                            <!--<asp:DropDownList ID="ddlscRealtorNew"  Width="10em" DataTextField="RealtyCo" DataValueField="RealtyCo" runat="server"></asp:DropDownList>-->
                         </td>
                         <td valign="top">
-                                <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Address "></asp:Label>
+                                <!-- <asp:Label CssClass="form_field_heading" ID="Label14" runat="server" Text="Address "></asp:Label>-->
                         </td>
                         <td valign="top">
-                            <table border="0" cellpadding="1" cellspacing="1">
+                            <!--<table border="0" cellpadding="1" cellspacing="1">
                                 <tr>
                                     <td>
                                          1: <asp:TextBox CssClass="form_field" ID="tbscLTMailAddr1New" Width="15em" MaxLength="30" runat="server"></asp:TextBox>
@@ -584,7 +521,7 @@
                                          Z: <asp:TextBox CssClass="form_field" ID="tbscLTZipNew" Width="7em" MaxLength="10" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
-                            </table>
+                            </table>-->
                         </td>
                         <td colspan="2" valign="top">
                             <table border="0" cellpadding="1" cellspacing="1">
@@ -609,6 +546,69 @@
                     </tr>
                 </table>
             </asp:Panel>   
+         <asp:Panel ID="Panel33x991" GroupingText="Inspection" runat="server">
+           <asp:Panel runat="server" Style="text-align: center;" ID="Panel4" CssClass="newitemcontent">
+                <table border="0" cellpadding="3" cellspacing="3">
+                    <tr>
+                        <td class="form_field_heading">
+                            <asp:Label CssClass="form_field_heading" ID="Label22zz3" runat="server" Text="Date "></asp:Label>
+                        </td>
+                        <td class="form_field">
+                            <table><tr><td>
+                            <asp:TextBox CssClass="form_field_date" ID="tbDateNewNewRequest" runat="server" width="60"></asp:TextBox>
+                            </td><td><asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
+                                        ImageUrl="~/Images/Calendar_scheduleHS.png" ID="ibDateNewNewRequest" 
+                                        runat="server" /></td></tr></table>
+                            <ajaxToolkit:CalendarExtender ID="cescDateNewNewRequest" runat="server"
+                                TargetControlID="tbDateNewNewRequest"
+                                Format="MM/dd/yyyy"
+                                PopupButtonID="ibDateNewNewRequest" />
+                            <asp:RegularExpressionValidator ForeColor="Red" 
+                                ID="revDateNewNewRequest"  Display="Dynamic" 
+                                ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                ControlToValidate="tbDateNewNewRequest" runat="server" 
+                                ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                        </td>
+                        <td class="form_field_heading">Prepared By</td>
+                        <td>
+                            <asp:TextBox ID="tbPreparedByNewNewRequest" Width="8em" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label28NewRequest" runat="server" Text="Ladder Fuel "></asp:Label>
+                        </td>
+                        <td>
+                           <asp:DropDownList ID="ddlLadderFuelNewNewRequest" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label29NewRequest" runat="server" Text="Nox Weeds "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlNoxWeedsNewNewRequest" Width="8em" runat="server" DataTextField="LadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label30NewRequest" runat="server" Text="Comments "></asp:Label>
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox Height="8em" TextMode="MultiLine"  Font-Size="Medium" ID="tbCommentsNewNewRequest" runat="server" width="40em"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label CssClass="form_field_heading" ID="Label31NewRequest" runat="server" Text="Follow Up "></asp:Label>
+                        </td>
+                        <td colspan="3">
+                            <asp:TextBox Height="8em" TextMode="MultiLine"  Font-Size="Medium" ID="tbFollowUpNewNewRequest" runat="server" width="40em"></asp:TextBox>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </asp:Panel>
+         </asp:Panel>
         </asp:Panel>
         <script  language="javascript" type="text/javascript" >
             function doOk() {

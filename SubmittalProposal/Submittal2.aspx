@@ -28,14 +28,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>
-        <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Owner"></asp:Label>
-        <asp:TextBox CssClass="form_field" ID="tbOwner" Width="85" runat="server"></asp:TextBox>
-    </td>
-    <td>
-        <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Applicant"></asp:Label>
-        <asp:TextBox CssClass="form_field" ID="tbApplicant" Width="85" runat="server"></asp:TextBox>
-    </td>
-    <td>
         <asp:Label CssClass="form_field_heading" ID="Label20" runat="server" Text="Lot"></asp:Label>
         <asp:TextBox CssClass="form_field" ID="tbLot" Width="30" runat="server"></asp:TextBox>
     </td>
@@ -44,6 +36,10 @@
         <asp:DropDownList ID="ddlLane" CssClass="form_field" runat="server" DataTextField="Lane"
             DataValueField="Lane">
         </asp:DropDownList>
+    </td>
+    <td>
+        <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Owner"></asp:Label>
+        <asp:TextBox CssClass="form_field" ID="tbOwner" Width="85" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label CssClass="form_field_heading" ID="Label22" runat="server" Text="Submittal Id"></asp:Label>
@@ -122,7 +118,7 @@
     <input id="Hidden2" type="hidden" value="<% = btnMainTabTrigger.ClientID %>" />
     <input id="Hidden3" type="hidden" value="<% = btnProjectConditionsTrigger.ClientID %>" />
     <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChanged" ActiveTabIndex="0" ID="TabContainer1" runat="server">
-        <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Applicant Infromation">
+        <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Application Infromation">
             <ContentTemplate>
                 <asp:UpdatePanel ID="updatePanel3" runat="server">
                     <ContentTemplate>
@@ -373,7 +369,7 @@
                                 </tr>
                             </table>
                             </asp:Panel>
-                                                                                                                                                                                                                                                                                                <asp:Panel ID="Panel12" GroupingText="Data from Applicant Form" runat="server">
+                            <asp:Panel ID="Panel12" GroupingText="Data from Applicant Form" runat="server">
                             <table border="0" cellpadding="2" cellspacing="0" width="100%">
                                 <tr>
                                     <td>
@@ -1156,7 +1152,7 @@
             </script>
             <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChangedNewSubmittal" Style="text-align: center;" Height="346" ActiveTabIndex="0"
                 ID="TabContainer2" runat="server">
-                <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Applicant Information">
+                <ajaxToolkit:TabPanel Width="900px" runat="server" ID="tabPanel1" HeaderText="Application Information">
                     <ContentTemplate>
                         <asp:UpdatePanel ID="updatePanel1" runat="server">
                             <ContentTemplate>

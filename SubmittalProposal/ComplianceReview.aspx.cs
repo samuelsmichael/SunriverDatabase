@@ -37,6 +37,7 @@ namespace SubmittalProposal {
             ddlCRLaneUpdate.Enabled = false;
             btnNewComplianceReview.Enabled = false;
             btnComplianceReviewNewLetter.Enabled = false;
+            gvComplianceLetters.Enabled = false;
         }
         protected override void unlockYourUpdateFields() {
             tbReviewDateUpdate.Enabled = true;
@@ -52,6 +53,7 @@ namespace SubmittalProposal {
             ddlCRLaneUpdate.Enabled = true;
             btnNewComplianceReview.Enabled = true;
             btnComplianceReviewNewLetter.Enabled = true;
+            gvComplianceLetters.Enabled = true;
 
         }
         protected override string UpdateRoleName {
@@ -583,7 +585,7 @@ namespace SubmittalProposal {
             cmd2.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = tbcrLtDateNewNewComplianceReview.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNewNewComplianceReview.Text);
             cmd2.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value =
                 crLTActionDateNewNewComplianceReview.Text.Trim() == "" ? (
-                tbcrLtDateNewNewComplianceReview.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNewNewComplianceReview.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNewNewComplianceReview.Text);
+                tbcrLtDateNewNewComplianceReview.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNewNewComplianceReview.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNewNewComplianceReview.Text)==new DateTime(1900,1,1)?(DateTime?)null:Utils.ObjectToDateTime(crLTActionDateNewNewComplianceReview.Text);
             SqlParameter crLTIDOut = new SqlParameter("@crLTIDOut", SqlDbType.Int);
             crLTIDOut.Direction = ParameterDirection.Output;
             cmd2.Parameters.Add(crLTIDOut);
@@ -622,9 +624,14 @@ namespace SubmittalProposal {
             SqlCommand cmd = new SqlCommand("uspComplianceLetterUpdate");
             cmd.Parameters.Add("@fkcrReviewID", SqlDbType.Int).Value = ReviewIDBeingUpdated;
             cmd.Parameters.Add("@crLTDate", SqlDbType.DateTime).Value = tbcrLtDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text);
-            cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value = 
+
+
+            cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value =
                 crLTActionDateNew.Text.Trim() == "" ? (
-                tbcrLtDateNew.Text.Trim() == ""? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNew.Text);
+                tbcrLtDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNew.Text) == new DateTime(1900, 1, 1) ? (DateTime?)null : Utils.ObjectToDateTime(crLTActionDateNewNewComplianceReview.Text);
+
+
+
             cmd.Parameters.Add("@crLTRecipient", SqlDbType.NVarChar).Value = tbcrLTRecipientNew.Text;
             cmd.Parameters.Add("@crLTMailAddr", SqlDbType.NVarChar).Value = tbcrLTMailAddrNew.Text;
             cmd.Parameters.Add("@crLTMailAddr2", SqlDbType.NVarChar).Value = tbcrLTMailAddr2New.Text;

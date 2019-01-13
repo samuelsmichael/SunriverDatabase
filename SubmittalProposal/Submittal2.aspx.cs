@@ -158,12 +158,6 @@ namespace SubmittalProposal
                 sbFilter.Append(and + Common.Utils.getDataViewQuery(tbOwner.Text,"Own_Name"));
                 and = " and ";
             }
-            if (Utils.isNothingNot(tbApplicant.Text)) {
-                sb.Append(prepend + "Applicant: " + tbApplicant.Text);
-                prepend = "  ";
-                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbApplicant.Text,"Applicant"));
-                and = " and ";
-            }
             if(Utils.isNothingNot(tbLot.Text)) {
                 sb.Append(prepend + "Lot: " + tbLot.Text);
                 prepend = "  ";
@@ -389,6 +383,7 @@ namespace SubmittalProposal
 
         protected void btnNewSubmittalCancel_Click(object sender, EventArgs args) {
             clearAllSelectionInputFields();
+            clearAllNewFormInputFields();
         }
 
         protected void btnNewSubmittalOk_Click(object sender, EventArgs args) {
@@ -440,7 +435,6 @@ namespace SubmittalProposal
         }
         protected override void clearAllSelectionInputFields() {
             tbOwner.Text = "";
-            tbApplicant.Text = "";
             tbLot.Text = "";
             ddlLane.SelectedIndex = 0;
             tbSubmittalId.Text = "";

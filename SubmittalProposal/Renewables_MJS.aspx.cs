@@ -198,6 +198,7 @@ namespace SubmittalProposal {
         }
         protected void btnNewRenewablesCancel_Click(object sender, EventArgs args) {
             mpeNewRenewable.Hide();
+            clearAllNewFormInputFields();
         }
 
         protected void btnNewRenewablesOk_Click(object sender, EventArgs args) {

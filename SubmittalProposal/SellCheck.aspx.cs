@@ -333,17 +333,17 @@ namespace SubmittalProposal {
                 SqlCommand cmd = new SqlCommand("uspSellCheckRequestUpdate");
 
                 cmd.Parameters.Add("@scRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
-                cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ddlscRealtorUpdate.SelectedValue;
+                cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ""/*ddlscRealtorUpdate.SelectedValue*/;
                 DateTime? date = Utils.ObjectToDateTimeNullable(tbLTDateUpdate.Text);
                 if (date.HasValue) {
                     cmd.Parameters.Add("@scLTDate", SqlDbType.DateTime).Value = date;
                 }
                 cmd.Parameters.Add("@scLTRecipient", SqlDbType.NVarChar).Value = tbscLTRecipientUpdate.Text;
-                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = tbscLTMailAddr1Update.Text;
-                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = tbscLTMailAddr2Update.Text;
-                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = tbscLTCityUpdate.Text;
-                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = tbscLTStateUpdate.Text;
-                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = tbscLTZipUpdate.Text;
+                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = "";// tbscLTMailAddr1Update.Text;
+                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = "";// tbscLTMailAddr2Update.Text;
+                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = "";// tbscLTCityUpdate.Text;
+                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = "";// tbscLTStateUpdate.Text;
+                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = "";// tbscLTZipUpdate.Text;
                 cmd.Parameters.Add("@scLTCCopy1", SqlDbType.NVarChar).Value = tbscLTCCopy1Update.Text;
                 cmd.Parameters.Add("@scLTCCopy2", SqlDbType.NVarChar).Value = tbscLTCCopy2Update.Text;
                 cmd.Parameters.Add("@scLTCCopy3", SqlDbType.NVarChar).Value = tbscLTCCopy3Update.Text;
@@ -406,17 +406,23 @@ namespace SubmittalProposal {
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckRequestUpdate");
 
-                cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ddlscRealtorNew.SelectedValue;
+                /* cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = ddlscRealtorNew.SelectedValue;*/  cmd.Parameters.Add("@scRealtor", SqlDbType.NVarChar).Value = "";
+
                 DateTime? date = Utils.ObjectToDateTimeNullable(tbLTDateNew.Text);
                 if (date.HasValue) {
                     cmd.Parameters.Add("@scLTDate", SqlDbType.DateTime).Value = date;
                 }
-                cmd.Parameters.Add("@scLTRecipient", SqlDbType.NVarChar).Value = tbscLTRecipientNew.Text;
-                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = tbscLTMailAddr1New.Text;
-                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = tbscLTMailAddr2New.Text;
-                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = tbscLTCityNew.Text;
-                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = tbscLTStateNew.Text;
-                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = tbscLTZipNew.Text;
+                cmd.Parameters.Add("@scLTRecipient", SqlDbType.NVarChar).Value = tbscLTRecipientNew.Text; 
+                /*                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = tbscLTMailAddr1New.Text;*/
+                cmd.Parameters.Add("@scLTMailAddr1", SqlDbType.NVarChar).Value = "";
+                /*                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = tbscLTMailAddr2New.Text;*/
+                cmd.Parameters.Add("@scLTMailAddr2", SqlDbType.NVarChar).Value = "";
+                /*                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = tbscLTCityNew.Text;*/
+                cmd.Parameters.Add("@scLTCity", SqlDbType.NVarChar).Value = "";
+                /*                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = tbscLTStateNew.Text;*/
+                cmd.Parameters.Add("@scLTState", SqlDbType.NVarChar).Value = "";
+                /*                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = tbscLTZipNew.Text;*/
+                cmd.Parameters.Add("@scLTZip", SqlDbType.NVarChar).Value = "";
                 cmd.Parameters.Add("@scLTCCopy1", SqlDbType.NVarChar).Value = tbscLTCCopy1New.Text;
                 cmd.Parameters.Add("@scLTCCopy2", SqlDbType.NVarChar).Value = tbscLTCCopy2New.Text;
                 cmd.Parameters.Add("@scLTCCopy3", SqlDbType.NVarChar).Value = tbscLTCCopy3New.Text;
@@ -430,9 +436,34 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add(newscRequestID);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
 
+
+                cmd = new SqlCommand("uspSellCheckInspectionUpdate");
+
+                cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = Utils.ObjectToInt(newscRequestID.Value);
+                DateTime? dateInspect = Utils.ObjectToDateTimeNullable(tbDateNewNewRequest.Text);
+                cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = dateInspect.HasValue ? dateInspect.Value : (DateTime?)null;
+                decimal? fee = null;// Utils.isNothing(ddlFeeNew.SelectedValue) ? (decimal?)null : Utils.ObjectToDecimal(ddlFeeNew.SelectedValue);
+                cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
+                cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = false;// cbPaidNew.Checked;
+                cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = "";// tbPaidMemoNew.Text;
+                DateTime? dateClosed = null;// Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
+                cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
+                cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNewNewRequest.SelectedValue;
+                cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNewNewRequest.SelectedValue;
+                cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNewNewRequest.Text;
+                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNewNewRequest.Text;
+                cmd.Parameters.Add("@scPreparedBy", SqlDbType.NVarChar).Value = tbPreparedByNewNewRequest.Text;
+                SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
+                newid.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(newid);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+
+
+
                 performPostNewSuccessfulActions("SellCheck Request added", DataSetCacheKey, null, tbRequestId, (int)newscRequestID.Value);
             } catch (Exception e2) {
-                performPostNewFailedActions("BPermit not added. Msg: " + e2.Message);
+                mpeNewRequest.Show();
+                performPostNewFailedActions("Request not added. Msg: " + e2.Message);
             }
         }
         protected void lbRequestNewCmon_OnClick(object sender, EventArgs args) {
@@ -446,6 +477,13 @@ namespace SubmittalProposal {
             lblscLotNewErrorMsg.Text = "";
             lblAutoRequestId.Text = "" + maxRequestId;
             ddlscRealtorNew.SelectedIndex = 0;
+            ddlLadderFuelNewNewRequest.DataSource = getLadderFuelDataSet();
+            ddlLadderFuelNewNewRequest.DataBind();
+            ddlLadderFuelNewNewRequest.SelectedIndex = -1;
+            ddlNoxWeedsNewNewRequest.DataSource = getLadderFuelDataSet();
+            ddlNoxWeedsNewNewRequest.DataBind();
+            ddlNoxWeedsNewNewRequest.SelectedIndex = -1;
+
             mpeNewRequest.Show();
             tbscLotNew.Focus();
         }
@@ -472,14 +510,14 @@ namespace SubmittalProposal {
                 DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
                 string comments = ((TextBox)row.Cells[3].Controls[1]).Text;
                 string preparedBy = ((TextBox)row.Cells[4].Controls[1]).Text;
-                string strfee = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
+                string strfee = null;// ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
                 decimal? fee = Utils.isNothing(strfee) ? (decimal?)null : Utils.ObjectToDecimal(strfee);
-                bool paid = ((CheckBox)row.Cells[6].Controls[1]).Checked;
-                string paidMemo = ((TextBox)row.Cells[7].Controls[1]).Text;
-                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
-                string ladderFuel = ((DropDownList)row.Cells[9].Controls[1]).SelectedValue;
-                string noxWeeds = ((DropDownList)row.Cells[10].Controls[1]).SelectedValue;
-                string followUp = ((TextBox)row.Cells[11].Controls[1]).Text;
+                bool paid = false;// ((CheckBox)row.Cells[6].Controls[1]).Checked;
+                string paidMemo = "";// ((TextBox)row.Cells[7].Controls[1]).Text;
+                DateTime? dateClosed = null;// Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
+                string ladderFuel = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
+                string noxWeeds = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
+                string followUp = ((TextBox)row.Cells[7].Controls[1]).Text;
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
 
@@ -525,11 +563,11 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scRequestIDBeingEdited;
                 DateTime? date = Utils.ObjectToDateTimeNullable(tbDateNew.Text);
                 cmd.Parameters.Add("@scDate", SqlDbType.DateTime).Value = date.HasValue ? date.Value : (DateTime?)null;
-                decimal? fee = Utils.isNothing(ddlFeeNew.SelectedValue) ? (decimal?)null : Utils.ObjectToDecimal(ddlFeeNew.SelectedValue);
+                decimal? fee = null;// Utils.isNothing(ddlFeeNew.SelectedValue) ? (decimal?)null : Utils.ObjectToDecimal(ddlFeeNew.SelectedValue);
                 cmd.Parameters.Add("@scFee", SqlDbType.Money).Value = fee;
-                cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = cbPaidNew.Checked;
-                cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = tbPaidMemoNew.Text;
-                DateTime? dateClosed = Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
+                cmd.Parameters.Add("@scPaid", SqlDbType.Bit).Value = false;// cbPaidNew.Checked;
+                cmd.Parameters.Add("@scPaidMemo", SqlDbType.NVarChar).Value = "";// tbPaidMemoNew.Text;
+                DateTime? dateClosed = null;// Utils.ObjectToDateTimeNullable(tbDateClosedNew.Text);
                 cmd.Parameters.Add("@scDateClosed", SqlDbType.DateTime).Value = (dateClosed.HasValue ? dateClosed.Value : (DateTime?)null);
                 cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNew.SelectedValue;
                 cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNew.SelectedValue;
@@ -564,9 +602,9 @@ namespace SubmittalProposal {
             ddlNoxWeedsNew.DataBind();
             ddlNoxWeedsNew.SelectedIndex = -1;
 
-            ddlFeeNew.DataSource = getFeesDataSet();
+      /*      ddlFeeNew.DataSource = getFeesDataSet();
             ddlFeeNew.DataBind();
-            ddlFeeNew.SelectedIndex = -1;
+            ddlFeeNew.SelectedIndex = -1;*/
 
             
             tbCommentsNew.Text = "";

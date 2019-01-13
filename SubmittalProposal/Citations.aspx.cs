@@ -659,7 +659,7 @@ namespace SubmittalProposal {
         }
         protected void btnNewViolationCancel_Click(object sender, EventArgs args) {
             mpeNewViolation.Hide();
-
+            clearAllNewFormInputFields();
         }
         protected void lbNewViolation_OnClick(object sender, EventArgs args) {
             ddlRulesNew.SelectedIndex = -1;
@@ -811,6 +811,7 @@ namespace SubmittalProposal {
             isAddCitationOpen = false;
             Session["CitationNewPanelOpen"] = "N";
             mpeNewCitation.Hide();
+            clearAllNewFormInputFields();
         }
         public static string MyMenuName = "Citations";
         protected override string childMenuName {

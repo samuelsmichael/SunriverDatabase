@@ -597,6 +597,7 @@ namespace SubmittalProposal {
         protected void btnNewOwnerConcernsCancel_Click(object sender, EventArgs args) {
             isAddNewMemberOpen = false;
             mpeNewOwnerConcerns.Hide();
+            clearAllNewFormInputFields();
         }
         protected void lbNewOwnerConcerns_OnClick(object sender, EventArgs args) {
             isAddNewMemberOpen = true;

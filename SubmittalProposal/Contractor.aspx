@@ -133,7 +133,7 @@
                                     <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbLic_X_DateUpdate" runat="server"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    <asp:ImageButton ImageAlign="AbsMiddle" Visible="false" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                         ID="ibLic_X_DateUpdate" runat="server" />
                                 </td>
                             </tr>
@@ -212,7 +212,7 @@
                                     <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReg_DateUpdate" runat="server"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    <asp:ImageButton Visible="false" ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                         ID="ibReg_DateUpdate" runat="server" />
                                 </td>
                             </tr>
@@ -338,7 +338,7 @@
                                     <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbLic_X_DateNew" runat="server"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    <asp:ImageButton ImageAlign="AbsMiddle" Visible="false" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                         ID="ibLic_X_DateNew" runat="server" />
                                 </td>
                             </tr>
@@ -414,7 +414,7 @@
                                     <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbReg_DateNew" runat="server"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                    <asp:ImageButton Visible="false" ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
                                         ID="ibReg_DateNew" runat="server" />
                                 </td>
                             </tr>

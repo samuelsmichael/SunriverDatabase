@@ -299,7 +299,7 @@
                                                 </td>
                                                 <td class="form_field_heading" align="right">
                                                     <asp:Label CssClass="form_field_heading" ID="Label1xx7" runat="server" Text="Action deadline:"></asp:Label><br />
-                                                    <asp:Label ID="Labelxx416" runat="server" Text="(leave blank to default to 30 days after Letter Date)" style="font-size:smaller;"></asp:Label> 
+                                                    <asp:Label ID="Labelxx416" runat="server" Text="(Note: leave blank to default to 30 days after Letter Date.<br> If you actually want this to be blank, key in 1/1/1900.)" style="font-size:smaller;"></asp:Label> 
                                                 </td>
                                                 <td class="form_field">
                                                     <table>

@@ -526,6 +526,7 @@ namespace SubmittalProposal {
             hfAutoShowPopupNew.Value = "n";
             mpeBPermitNewPayment.Hide();
             clearAllSelectionInputFields();
+            clearAllNewFormInputFields();
         }
         protected void btnNewBPermitPaymentOk_Click(object sender, EventArgs e) {
             try {
