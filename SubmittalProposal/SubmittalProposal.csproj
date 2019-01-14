@@ -96,6 +96,11 @@
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
     <Content Include="FileManager.ascx" />
+    <Content Include="Images\acrobatpdf.jpg" />
+    <Content Include="Images\excel.jpg" />
+    <Content Include="Images\rtf.jpg" />
+    <Content Include="Images\txt.jpg" />
+    <Content Include="Images\word.png" />
     <Content Include="OwnerPropertyReportsMain.aspx" />
     <Content Include="RenewablesReportsMain.aspx" />
     <Content Include="Images\PDFImage.png" />

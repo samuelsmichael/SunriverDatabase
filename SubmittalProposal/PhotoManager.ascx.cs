@@ -54,8 +54,24 @@ namespace SubmittalProposal {
                         RepeaterImagesJD.DataBind();
                     }
                 }
+                if (leaveStatusLabelShowing) {
+                    leaveStatusLabelShowing = false;
+                } else {
+                    StatusLabel.Text = "";
+                }
             }
         }
+
+        private bool leaveStatusLabelShowing {
+            get {
+                object obj = Session["leaveStatusLabelShowingPhotos"];
+                return obj == null ? true : (bool)obj;
+            }
+            set {
+                Session["leaveStatusLabelShowingPhotos"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e) {
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
             Database database = (Database)Page.Master;
@@ -85,6 +101,8 @@ namespace SubmittalProposal {
                 }
             }
             btnUnlink.Visible = true;
+            leaveStatusLabelShowing = true;
+
         }
 
         private bool WereUnlocked {

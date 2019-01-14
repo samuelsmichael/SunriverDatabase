@@ -2,18 +2,18 @@
     Inherits="SubmittalProposal.FileManager" %>    
     
     <asp:Panel ID="pnlPhotos" runat="server" Width="100%" style="height:244px; overflow:auto; padding-bottom: 1em;">
-        <asp:DataList ID="RepeaterImagesJD" RepeatDirection="Horizontal" runat="server" onitemcommand="RepeaterImagesJD_ItemCommand1" 
+        <asp:DataList ID="RepeaterImagesJD" RepeatDirection="Horizontal" runat="server" onitemdatabound="RepeaterImagesJD_ItemDataBound" 
             >
             <ItemTemplate>
                 <asp:Panel runat="server" style="border:1 thin black;" ID="jdidpanel">
                     <table>
                         <tr>
-                            <td align="center"><asp:Image style="padding:5px;" ID="Image" runat="server" ImageUrl='<%# Container.DataItem %>' Height="200"  />
+                            <td align="center"><asp:Image style="padding:5px;" ID="Image" runat="server" ImageUrl= Height="125"  />
                             </td>
                         </tr>
                         <tr>
                             <td align="center">   
-                                <asp:Label ID="lbName" Text='<%# jdGetFileName((string)Container.DataItem) %>' runat="server" ></asp:Label>
+                                <asp:Label ID="lbName"  runat="server" ></asp:Label>
                             </td>                            
                         </tr>
                         <tr>

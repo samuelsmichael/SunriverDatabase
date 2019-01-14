@@ -37,6 +37,7 @@ namespace SubmittalProposal {
             FileUploadControl.Attributes["onchange"] = scriptText;
             //         string scriptText2 = FileUploadControl.ClientID + ".click();";
             //         btnChooseAFile.Attributes["onclick"] = scriptText2;
+
             if (Page is IHasPhotos) {
                 if (((IHasPhotos)Page).CurrentItemKey != "0") {
                     string databaseDirectory = Page.GetType().Name.Replace("_aspx", "");
@@ -45,12 +46,15 @@ namespace SubmittalProposal {
                     if (Directory.Exists(localDirectory)) {
                         IEnumerable<string> files;
                         files = Directory.EnumerateFiles(localDirectory, "*.*", SearchOption.TopDirectoryOnly)
-                                .Where(s => s.EndsWith(".png") || s.EndsWith(".jpg") || s.EndsWith(".gif") || s.EndsWith(".pdf") || s.EndsWith(".doc") || 
-                                    s.EndsWith(".docx") || s.EndsWith("rtf") || s.EndsWith(".txt") || s.EndsWith("xls") || s.EndsWith("xlsx"));
+                                .Where(s => s.EndsWith(".png") || s.EndsWith(".jpg") || s.EndsWith(".gif") || s.EndsWith(".pdf") || 
+                                    s.EndsWith(".doc") || 
+                                    s.EndsWith(".docx") || s.EndsWith("rtf") || s.EndsWith(".txt") || s.EndsWith("xls") || 
+                                    s.EndsWith("xlsx"));
                         List<String> images = new List<string>(files.Count());
                         foreach (string item in files) {
                             images.Add(String.Format(fileUri + "/{0}", System.IO.Path.GetFileName(item)));
                         }
+                                
                         RepeaterImagesJD.DataSource = images;
                         RepeaterImagesJD.DataBind();
                     }
@@ -58,6 +62,12 @@ namespace SubmittalProposal {
                         btnOpen.Visible = true;
                     }
                 }
+                if (leaveStatusLabelShowing) {
+                    leaveStatusLabelShowing = false;
+                } else {
+                    StatusLabel.Text = "";
+                }
+
             }
         }
         protected void Page_Load(object sender, EventArgs e) {
@@ -91,8 +101,17 @@ namespace SubmittalProposal {
                 } catch (Exception ex) {
                     StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
                 }
+                leaveStatusLabelShowing = true;
             }
             btnUnlink.Visible = true;
+        }
+        private bool leaveStatusLabelShowing {
+            get {
+                object obj=Session["leaveStatusLabelShowing"];
+                return obj==null?true:(bool)obj;
+            } set {
+                Session["leaveStatusLabelShowing"]=value;
+            }
         }
 
         private bool WereUnlocked {
@@ -106,10 +125,8 @@ namespace SubmittalProposal {
         }
         void database_UnlockCheckboxChecked(bool isUnlocked) {
             if (isUnlocked) {
+                pnlControl.Visible = true;
                 WereUnlocked = true;
-                if (RepeaterImagesJD.Items.Count == 0) {
-                    pnlControl.Visible = true;
-                }
                 if (RepeaterImagesJD.Items.Count > 0) {
                     btnUnlink.Visible = true;
                     btnOpen.Visible = true;
@@ -118,8 +135,8 @@ namespace SubmittalProposal {
                     btnOpen.Visible = false;
                 }
             } else {
-                WereUnlocked = false;
                 pnlControl.Visible = false;
+                WereUnlocked = false;
                 btnUnlink.Visible = false;
                 if (RepeaterImagesJD.Items.Count > 0) {
                     btnOpen.Visible = true;
@@ -135,24 +152,22 @@ namespace SubmittalProposal {
             }
         }
         
-        protected void RepeaterImagesJD_ItemCommand1(object source, DataListCommandEventArgs e) {
-            int x = 3;
-            int y = x;
-        }
         protected void btnOpen_Click(object sender, EventArgs args) {
             wgaph333.Visible = false;
             StatusLabel.Text = "";
             string url = HttpContext.Current.Request.Url.ToString();
             int index = url.LastIndexOf("/");
             string preUrl = url.Substring(0, index);
+            int cnt = 0;
             foreach (DataListItem dli in RepeaterImagesJD.Items) {
                 CheckBox cb = (CheckBox)dli.FindControl("cbSelect");
                 if (cb.Checked) {
+                    cnt++;
                     string uri = cb.CssClass;
                     string fileSpec = Server.MapPath(uri);
                     try {
                         string cmd="window.open('"+preUrl+uri.Replace("~","")+"', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400');";
-                        ScriptManager.RegisterStartupScript(this,GetType(), "jdOpenDocument", cmd, true);
+                        ScriptManager.RegisterStartupScript(this,GetType(), "jdOpenDocument"+cnt, cmd, true);
    /*                     WebClient client = new WebClient();
                         Byte[] buffer = client.DownloadData(fileSpec);
                         Response.ContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -214,6 +229,43 @@ namespace SubmittalProposal {
             if (RepeaterImagesJD.Items.Count == cnt) {
                 btnOpen.Visible = false;
                 btnUnlink.Visible = false;
+            }
+        }
+
+        protected void RepeaterImagesJD_ItemDataBound(object sender, DataListItemEventArgs e) {
+            DataListItem dli = e.Item;
+            if (dli.ItemType == ListItemType.Item || dli.ItemType==ListItemType.AlternatingItem) {
+                Image imageControl = (Image)dli.FindControl("Image");
+                string item = (string)dli.DataItem;
+
+
+                if (item.ToLower().IndexOf(".pdf") != -1) {
+                    imageControl.ImageUrl="~/Images/acrobatpdf.jpg";
+                } else {
+                    if (item.ToLower().IndexOf(".xls") != -1) {
+                        imageControl.ImageUrl="~/Images/excel.jpg";
+                    } else {
+                        if (item.ToLower().IndexOf(".doc") != -1) {
+                            imageControl.ImageUrl="~/Images/word.png";
+                        } else {
+                            if (item.ToLower().IndexOf(".rtf") != -1) {
+                                imageControl.ImageUrl="~/Images/rtf.jpg";
+                            } else {
+                                if (item.ToLower().IndexOf(".rtf") != -1) {
+                                    imageControl.ImageUrl="~/Images/rtf.jpg";
+                                } else {
+                                    if (item.ToLower().IndexOf(".txt") != -1) {
+                                        imageControl.ImageUrl="~/Images/txt.jpg";
+                                    } else {
+                                        imageControl.ImageUrl = (String.Format(fileUri + "/{0}", System.IO.Path.GetFileName(item)));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Label name = (Label)dli.FindControl("lbName");
+                name.Text = System.IO.Path.GetFileName(item);
             }
         }
     }
