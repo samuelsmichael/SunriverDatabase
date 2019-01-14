@@ -1795,6 +1795,33 @@ namespace SubmittalProposal {
         protected global::System.Web.UI.WebControls.DropDownList ddlProjectTypeNewBP;
         
         /// <summary>
+        /// tabPanelSubmittalPhotos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tabPanelSubmittalPhotos;
+        
+        /// <summary>
+        /// updatexxxfumfxcanel1y8x432 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatexxxfumfxcanel1y8x432;
+        
+        /// <summary>
+        /// FileManager4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SubmittalProposal.FileManager FileManager4;
+        
+        /// <summary>
         /// btnSubmitalUpdate control.
         /// </summary>
         /// <remarks>

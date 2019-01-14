@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace SubmittalProposal {
-    
-    
+
+
     public partial class PhotoManager {
-        
+
         /// <summary>
         /// pnlPhotos control.
         /// </summary>
@@ -20,7 +20,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlPhotos;
-        
+
         /// <summary>
         /// RepeaterImagesJD control.
         /// </summary>
@@ -29,7 +29,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList RepeaterImagesJD;
-        
+
         /// <summary>
         /// btnUnlink control.
         /// </summary>
@@ -38,7 +38,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUnlink;
-        
+
         /// <summary>
         /// wgaph333 control.
         /// </summary>
@@ -47,7 +47,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label wgaph333;
-        
+
         /// <summary>
         /// pnlControl control.
         /// </summary>
@@ -56,7 +56,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlControl;
-        
+
         /// <summary>
         /// photomanagerupdatePanel control.
         /// </summary>
@@ -65,7 +65,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel photomanagerupdatePanel;
-        
+
         /// <summary>
         /// FileUploadControl control.
         /// </summary>
@@ -74,7 +74,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
-        
+
         /// <summary>
         /// StatusLabel control.
         /// </summary>
@@ -83,7 +83,7 @@ namespace SubmittalProposal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label StatusLabel;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>

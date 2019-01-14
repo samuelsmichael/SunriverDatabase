@@ -13,18 +13,18 @@ namespace SubmittalProposal {
         bool WEREONLYALLOWING1PHOTOWITHCOMPLIANCEREVIEW = true;
         private string fileUri {
             get {
-                return  Utils.ObjectToString(Session[Page.GetType().Name+"fileUri"]);
+                return Utils.ObjectToString(Session[Page.GetType().Name + "fileUri"]);
             }
             set {
-                Session[Page.GetType().Name+"fileUri"] = value;
+                Session[Page.GetType().Name + "fileUri"] = value;
             }
         }
         private string localDirectory {
             get {
-                return Utils.ObjectToString(Session[Page.GetType().Name+"localDirectory"]);
+                return Utils.ObjectToString(Session[Page.GetType().Name + "localDirectory"]);
             }
             set {
-                Session[Page.GetType().Name+"localDirectory"] = value;
+                Session[Page.GetType().Name + "localDirectory"] = value;
             }
         }
 
@@ -39,7 +39,7 @@ namespace SubmittalProposal {
             if (Page is IHasPhotos) {
                 if (((IHasPhotos)Page).CurrentItemKey != "0") {
                     string databaseDirectory = Page.GetType().Name.Replace("_aspx", "");
-                    fileUri = "~/Images/" + databaseDirectory + "/" + ((IHasPhotos)Page).CurrentItemKey;
+                    fileUri = "~/DocumentUploads/" + databaseDirectory + "/" + ((IHasPhotos)Page).CurrentItemKey;
                     localDirectory = Server.MapPath(fileUri);
                     if (Directory.Exists(localDirectory)) {
 
@@ -57,9 +57,9 @@ namespace SubmittalProposal {
             }
         }
         protected void Page_Load(object sender, EventArgs e) {
-            Page.Form.Attributes.Add("enctype", "multipart/form-data"); 
+            Page.Form.Attributes.Add("enctype", "multipart/form-data");
             Database database = (Database)Page.Master;
-            database.UnlockCheckboxChecked +=new Database.UnlockCheckboxCheckedHandler(database_UnlockCheckboxChecked);
+            database.UnlockCheckboxChecked += new Database.UnlockCheckboxCheckedHandler(database_UnlockCheckboxChecked);
         }
 
         protected void UploadButton_Click(object sender, EventArgs e) {
@@ -71,7 +71,7 @@ namespace SubmittalProposal {
                 try {
                     if (FileUploadControl.PostedFile.ContentType == "image/jpeg" || FileUploadControl.PostedFile.ContentType == "image/gif" || FileUploadControl.PostedFile.ContentType == "image/png") {
                         string filename = Path.GetFileName(FileUploadControl.FileName);
-                        FileUploadControl.SaveAs(localDirectory + @"\"+ filename);
+                        FileUploadControl.SaveAs(localDirectory + @"\" + filename);
                         StatusLabel.Text = "Upload status: File uploaded!";
                     } else
                         StatusLabel.Text = "Upload status: Only JPEG, PNG, and GIF files are accepted!";
@@ -80,7 +80,7 @@ namespace SubmittalProposal {
                 }
             }
             if (WEREONLYALLOWING1PHOTOWITHCOMPLIANCEREVIEW && Page.GetType().FullName.ToLower().IndexOf("compliancereview") != -1) { // if compliance review, and we just added a photo (had 0) then turn off ability to upload
-                if (RepeaterImagesJD.Items.Count==0) {
+                if (RepeaterImagesJD.Items.Count == 0) {
                     pnlControl.Visible = false;
                 }
             }
@@ -117,7 +117,7 @@ namespace SubmittalProposal {
                 return WereUnlocked;
             }
         }
-        
+
         protected void RepeaterImagesJD_ItemCommand1(object source, DataListCommandEventArgs e) {
             int x = 3;
             int y = x;
@@ -128,32 +128,35 @@ namespace SubmittalProposal {
             StatusLabel.Text = "";
 
             int cnt = 0;
-            string newFileSpecPath="";
+            string newFileSpecPath = "";
             foreach (DataListItem dli in RepeaterImagesJD.Items) {
                 CheckBox cb = (CheckBox)dli.FindControl("cbSelect");
                 if (cb.Checked) {
                     string uri = cb.CssClass;
                     string fileSpec = Server.MapPath(uri);
-                    string path= Path.GetDirectoryName(fileSpec);
-                    if(!Directory.Exists(path+"\\Unlinked")) {
-                        Directory.CreateDirectory(path+"\\Unlinked");
+                    string path = Path.GetDirectoryName(fileSpec);
+                    if (!Directory.Exists(path + "\\Unlinked")) {
+                        Directory.CreateDirectory(path + "\\Unlinked");
                     }
-                    string fileName=Path.GetFileName(fileSpec);
-                    newFileSpecPath=path+"\\Unlinked\\";
-                    string newFileSpec=newFileSpecPath+fileName;
+                    string fileName = Path.GetFileName(fileSpec);
+                    newFileSpecPath = path + "\\Unlinked\\";
+                    string newFileSpec = newFileSpecPath + fileName;
                     if (File.Exists(newFileSpec)) {
                         File.Delete(newFileSpec);
                     }
-                    File.Move(fileSpec,newFileSpec);
+                    File.Move(fileSpec, newFileSpec);
                     cnt++;
                 }
             }
             if (cnt > 0) {
                 wgaph333.Visible = true;
-                wgaph333.Text=(cnt>1?"Files have been moved to ":"Item has been moved to ") + newFileSpecPath;
+                wgaph333.Text = (cnt > 1 ? "Files have been moved to " : "Item has been moved to ") + newFileSpecPath;
             }
-            if (!WEREONLYALLOWING1PHOTOWITHCOMPLIANCEREVIEW || (Page.GetType().FullName.ToLower().IndexOf("compliancereview") != -1 && RepeaterImagesJD.Items.Count == 1)) { // if compliance review, and we just deleted a photo (had 1) then turn on ability to upload
+            if ((!WEREONLYALLOWING1PHOTOWITHCOMPLIANCEREVIEW || (Page.GetType().FullName.ToLower().IndexOf("compliancereview") != -1) && RepeaterImagesJD.Items.Count == cnt)) { // if compliance review, and we just deleted a photo (had 1) then turn on ability to upload
                 pnlControl.Visible = true;
+            }
+            if (RepeaterImagesJD.Items.Count == cnt) {
+                btnUnlink.Visible = false;
             }
         }
     }

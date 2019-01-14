@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Database.Master" AutoEventWireup="true"
     CodeBehind="Submittal2.aspx.cs" Inherits="SubmittalProposal.Submittal2" %>
-
+    
+<%@ Register src="PhotoManager.ascx" tagname="PhotoManager" tagprefix="uc1" %>
+<%@ Register src="FileManager.ascx" tagname="FileManager" tagprefix="uc2" %>
+    
 <asp:Content ID="Content5xyz" ContentPlaceHolderID="HeadContent" runat="server">
 <script language="javascript" type="text/javascript">
     function clientActiveTabChanged(sender, args) {
@@ -1111,6 +1114,17 @@
                 </asp:UpdatePanel>
             </ContentTemplate>
         </ajaxToolkit:TabPanel>
+    
+        <ajaxToolkit:TabPanel runat="server" ID="tabPanelSubmittalPhotos" HeaderText="Documents">
+            <ContentTemplate>
+                <asp:UpdatePanel ID="updatexxxfumfxcanel1y8x432" runat="server">
+                    <ContentTemplate>
+                        <uc2:FileManager ID="FileManager4" runat="server" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </ContentTemplate>
+        </ajaxToolkit:TabPanel>
+    
     </ajaxToolkit:TabContainer>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" Enabled="false" CausesValidation="true"
@@ -1354,7 +1368,6 @@
         PopupControlID="pnlNewSubmittalId" BackgroundCssClass="modalBackground" PopupDragHandleControlID="pnlNewSubmittalTitleId"
         BehaviorID="jdpopupsubmittal" />
     <script language="javascript" type="text/javascript">
-
         function shown() {
             var tb = document.getElementById('<% =tbOwnersNameNew.ClientID %>');
             tb.focus();

@@ -95,6 +95,7 @@
     <Content Include="ContractorReportsMain.aspx" />
     <Content Include="BallotVerifyReportsMain.aspx" />
     <Content Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx" />
+    <Content Include="FileManager.ascx" />
     <Content Include="OwnerPropertyReportsMain.aspx" />
     <Content Include="RenewablesReportsMain.aspx" />
     <Content Include="Images\PDFImage.png" />
@@ -464,6 +465,13 @@
     </Compile>
     <Compile Include="BallotVerify_CBBlockVotes_SRResort_Query.aspx.designer.cs">
       <DependentUpon>BallotVerify_CBBlockVotes_SRResort_Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FileManager.ascx.cs">
+      <DependentUpon>FileManager.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FileManager.ascx.designer.cs">
+      <DependentUpon>FileManager.ascx</DependentUpon>
     </Compile>
     <Compile Include="OwnerPropertyReportsMain.aspx.cs">
       <DependentUpon>OwnerPropertyReportsMain.aspx</DependentUpon>

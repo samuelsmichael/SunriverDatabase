@@ -12,7 +12,7 @@ using System.Runtime.Caching;
 
 namespace SubmittalProposal
 {
-    public partial class Submittal2 : AbstractDatabase, ICanHavePDFs
+    public partial class Submittal2 : AbstractDatabase, ICanHavePDFs, IHasPhotos
     {
         public static string SUBMITTAL_CACHE_KEY = "SubmittalDS";
 
@@ -1077,6 +1077,10 @@ namespace SubmittalProposal
             TabContainer1.ActiveTabIndex = 0;
             Session["LastActiveTabIndex"] = 0;
         }
-        
+
+
+        public string CurrentItemKey {
+            get { return CurrentSubmittalId.ToString(); }
+        }
     }
 }
