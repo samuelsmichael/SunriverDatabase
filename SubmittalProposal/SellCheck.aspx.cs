@@ -451,13 +451,12 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNewNewRequest.SelectedValue;
                 cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNewNewRequest.SelectedValue;
                 cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNewNewRequest.Text;
-                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNewNewRequest.Text;
                 cmd.Parameters.Add("@scPreparedBy", SqlDbType.NVarChar).Value = tbPreparedByNewNewRequest.Text;
                 SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-
+                cleanUpFollowUpsAndUpdateDB(tbFollowUpNewNewRequest.Text,null);
 
 
                 performPostNewSuccessfulActions("SellCheck Request added", DataSetCacheKey, null, tbRequestId, (int)newscRequestID.Value);
@@ -518,6 +517,7 @@ namespace SubmittalProposal {
                 string ladderFuel = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
                 string noxWeeds = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
                 string followUp = ((TextBox)row.Cells[7].Controls[1]).Text;
+                string followUpIDs = ((TextBox)row.Cells[8].Controls[1]).Text;
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
 
@@ -531,13 +531,12 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ladderFuel;
                 cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = noxWeeds;
                 cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = comments;
-                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = followUp;
                 cmd.Parameters.Add("@scPreparedBy", SqlDbType.NVarChar).Value = preparedBy;
                 SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-
+                cleanUpFollowUpsAndUpdateDB(followUp, followUpIDs);
                 performPostUpdateSuccessfulActions("Inspection updated", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
@@ -547,6 +546,52 @@ namespace SubmittalProposal {
 
             //Bind data to the GridView control.
             bind_gvInspections(scRequestIDBeingEdited);
+        }
+        /// <summary>
+        /// We're using the technique of separating follow-ups with dashes. Now we have to remove them and update the corresponding database records.
+        /// </summary>
+        /// <param name="followUpInput"></param>
+        private void cleanUpFollowUpsAndUpdateDB(string followUpInput, string followUpIDs) {
+            List<int> listfollowUpIDs = new List<int>();
+            List<string> listFollowUpDescriptions=new List<string>();
+            if(followUpIDs!=null) {
+                string[] arrayfollowUpIDs=followUpIDs.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                foreach(string str in arrayfollowUpIDs) {
+                    listfollowUpIDs.Add(Utils.ObjectToInt(str));
+                }
+            }
+            int mostDashes = 0;
+            do {
+                mostDashes = 0;
+                StringBuilder sb = new StringBuilder();
+                int countDashes = 0;
+                foreach (char c in followUpInput) {
+                    if (c == '-') {
+                        countDashes++;
+                    } else {
+                        if (countDashes > 2) {
+                            if (countDashes > mostDashes) {
+                                mostDashes = countDashes;
+                            }
+                        }
+                        countDashes = 0;
+                    }
+                }
+                if (mostDashes > 2) {
+                    int cnt = mostDashes;
+                    StringBuilder sb2 = new StringBuilder();
+                    while (cnt > 0) {
+                        sb2.Append("-");
+                        cnt--;
+                    }
+                    followUpInput = followUpInput.Replace(sb2.ToString(), "|");
+                }
+            } while (mostDashes > 2);
+
+            string[] followUpDescriptions = followUpInput.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string followUpDescription in followUpDescriptions) {
+                listFollowUpDescriptions.Add(followUpDescription.Trim());
+            }
         }
         private void bind_gvInspections(int scRequestID) {
             DataTable sourceTableInspections = SCDataSet().Tables[1];
@@ -572,13 +617,12 @@ namespace SubmittalProposal {
                 cmd.Parameters.Add("@scLadderFuel", SqlDbType.NVarChar).Value = ddlLadderFuelNew.SelectedValue;
                 cmd.Parameters.Add("@scNoxWeeds", SqlDbType.NVarChar).Value = ddlNoxWeedsNew.SelectedValue;
                 cmd.Parameters.Add("@scComments", SqlDbType.NVarChar).Value = tbCommentsNew.Text;
-                cmd.Parameters.Add("@scFollowUp", SqlDbType.NVarChar).Value = tbFollowUpNew.Text;
                 cmd.Parameters.Add("@scPreparedBy", SqlDbType.NVarChar).Value = tbPreparedByNew.Text;
                 SqlParameter newid = new SqlParameter("@NewID", SqlDbType.Int);
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-
+                cleanUpFollowUpsAndUpdateDB(tbFollowUpNew.Text,null);
                 performPostUpdateSuccessfulActions("Inspection added", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
@@ -611,12 +655,26 @@ namespace SubmittalProposal {
             tbFollowUpNew.Text = "";
             mpeNewInspection.Show();
         }
+        public string getCRLFsInsteadOfBars(object str) {
+            if (Utils.isNothing(str)) {
+                return "";
+            }
+            string strOfstr = (string)str;
+            return strOfstr.Replace("|", "\r\n---\r\n");
+        }
         public string getBRsInsteadOfCRLFs(object str) {
             if (Utils.isNothing(str)) {
                 return "";
             }
             string strOfstr = (string)str;
             return strOfstr.Replace("\r\n", "<br />").Replace("\n", "<br />").Replace("\r", "<br />");
+        }
+        public string getBRsInsteadOfBars(object str) {
+            if (Utils.isNothing(str)) {
+                return "";
+            }
+            string strOfstr = (string)str;
+            return strOfstr.Replace("|", "<br />---<br />");
         }
 
         protected void gvInspections_RowDataBound(object sender, GridViewRowEventArgs e) {
