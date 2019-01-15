@@ -660,7 +660,7 @@ namespace SubmittalProposal {
                 return "";
             }
             string strOfstr = (string)str;
-            return strOfstr.Replace("|", "\r\n---\r\n");
+            return strOfstr.Replace("|", "\r\n***\r\n");
         }
         public string getBRsInsteadOfCRLFs(object str) {
             if (Utils.isNothing(str)) {
@@ -674,7 +674,7 @@ namespace SubmittalProposal {
                 return "";
             }
             string strOfstr = (string)str;
-            return strOfstr.Replace("|", "<br />---<br />");
+            return strOfstr.Replace("|", "<br />***<br />");
         }
 
         protected void gvInspections_RowDataBound(object sender, GridViewRowEventArgs e) {

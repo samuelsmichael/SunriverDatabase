@@ -42,6 +42,6 @@ BEGIN
 			v.IssueAsWarning=0
 	) vio ON vio.fkCitationID = cit.CitationID
 
-	ORDER BY CitationID, ViolationID ;
+	ORDER BY Citation#, ViolationID ;
 END
 GO

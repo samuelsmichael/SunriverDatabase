@@ -23,7 +23,6 @@ alter PROCEDURE uspSellCheckInspectionUpdate
 	@scLadderFuel nvarchar(30),
 	@scNoxWeeds nvarchar(30),
 	@scComments nvarchar(max),
-	@scFollowUp nvarchar(max),
 	@scPreparedBy nvarchar(30),
 	@NewID int out
 AS
@@ -41,7 +40,6 @@ BEGIN
 			scLadderFuel=@scLadderFuel,
 			scNoxWeeds=@scNoxWeeds,
 			scComments=@scComments,
-			scFollowUp=@scFollowUp,
 			scPreparedBy=@scPreparedBy
 			
 		where scInspectionID=@scInspectionID 
@@ -57,7 +55,6 @@ BEGIN
 			scLadderFuel,
 			scNoxWeeds,
 			scComments,
-			scFollowUp,
 			scPreparedBy
 		)
 		VALUES
@@ -71,7 +68,6 @@ BEGIN
 			@scLadderFuel,
 			@scNoxWeeds,
 			@scComments,
-			@scFollowUp,
 			@scPreparedBy
 		   )
 		set @NewID=scope_identity()

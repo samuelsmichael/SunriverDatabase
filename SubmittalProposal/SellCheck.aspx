@@ -266,12 +266,12 @@
 
                 <asp:TemplateField HeaderText="Follow-up">
                     <ItemTemplate>
-                        <asp:Label ID="Label5aa" runat="server" Enabled="false" Height="2em" 
+                        <asp:Label ID="lbFollowUpDescriptions" runat="server" Enabled="false" Height="2em" 
                             Text='<%# getBRsInsteadOfBars(Eval("FollowUpDescriptions")) %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <asp:TextBox ID="tbscFollowUpUpdate" runat="server" Height="10em" 
-                            Text='<%# getCRLFsInsteadOfBars(Eval("FollowUpDescriptions")) %>' ToolTip="Distinguish different Follow-Up records by three dashes (---)" TextMode="MultiLine" Width="35em"></asp:TextBox>
+                            Text='<%# getCRLFsInsteadOfBars(Eval("FollowUpDescriptions")) %>' ToolTip="Distinguish different Follow-Up records by three stars (***)" TextMode="MultiLine" Width="35em"></asp:TextBox>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" />
@@ -393,7 +393,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label31" runat="server" Text="Follow Up "></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:TextBox Height="8em" TextMode="MultiLine"  ToolTip="Distinguish different Follow-Up records by three dashes (---)"  Font-Size="Medium" ID="tbFollowUpNew" runat="server" width="40em"></asp:TextBox>
+                            <asp:TextBox Height="8em" TextMode="MultiLine"  ToolTip="Distinguish different Follow-Up records by three stars (***)"  Font-Size="Medium" ID="tbFollowUpNew" runat="server" width="40em"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -610,7 +610,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label31NewRequest" runat="server" Text="Follow Up "></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:TextBox Height="8em" TextMode="MultiLine" ToolTip="Distinguish different Follow-Up records by three dashes (---)"  Font-Size="Medium" ID="tbFollowUpNewNewRequest" runat="server" width="40em"></asp:TextBox>
+                            <asp:TextBox Height="8em" TextMode="MultiLine" ToolTip="Distinguish different Follow-Up records by three stars (***)"  Font-Size="Medium" ID="tbFollowUpNewNewRequest" runat="server" width="40em"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
