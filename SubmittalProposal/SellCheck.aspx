@@ -222,50 +222,10 @@
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Comments">
-                    <ItemTemplate>
-                        <asp:Label ID="Label4x3a" runat="server" Enabled="false" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" TextMode="MultiLine" Height="10em" Text='<%# Bind("scComments") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Prepared By">
-                    <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Width="6em" Text='<%# Bind("scPreparedBy") %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="tbPreparedByUpdatge" runat="server" Width="8em" Text='<%# Bind("scPreparedBy") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Ladder Fuel">
-                    <ItemTemplate>
-                        <asp:Label ID="Label1c" runat="server" 
-                            Text='<%# Bind("scLadderFuel") %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" 
-                            DataTextField="scLadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Nox Weeds">
-                    <ItemTemplate>
-                        <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="ddlNoxWeedsUpdate" runat="server" 
-                            DataTextField="scNoxWeeds" DataValueField="scNoxWeeds" Width="8em">
-                        </asp:DropDownList>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
-                </asp:TemplateField>
 
 
                 <asp:TemplateField HeaderText="Follow Ups">
-                    <ItemTemplate><asp:Label runat="server" ID="lblTesting" Text='<%# getBRsInsteadOfBars(Eval("FollowUpDescriptions")) %>'></asp:Label></ItemTemplate>
+                    <ItemTemplate><asp:Label runat="server" ID="lblTesting" Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("FollowUpDescriptions"))) %>'></asp:Label></ItemTemplate>
                     <EditItemTemplate>
                         <asp:GridView ID="gvFollowUpEditing" runat="server" 
                             AutoGenerateColumns="False"  ShowFooter="true"
@@ -306,7 +266,7 @@
 
                                 <asp:TemplateField HeaderText="Description" SortExpression="Description">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label33dc" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
+                                        <asp:Label ID="Label33dc" runat="server" Height="2em" Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("Description")))%>'></asp:Label>
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:TextBox ID="tbscFollowUpDescriptionUpdate333" runat="server" Height="10em" 
@@ -322,6 +282,49 @@
                         </asp:GridView>
                 
                     </EditItemTemplate>
+                </asp:TemplateField>
+
+               
+               
+                <asp:TemplateField HeaderText="Comments">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4x3a" runat="server" Enabled="false" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" TextMode="MultiLine" Height="10em" Text='<%# Bind("scComments") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Left" />
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Prepared By">
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Width="6em" Text='<%# Bind("scPreparedBy") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="tbPreparedByUpdatge" runat="server" Width="8em" Text='<%# Bind("scPreparedBy") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Ladder Fuel">
+                    <ItemTemplate>
+                        <asp:Label ID="Label1c" runat="server" 
+                            Text='<%# Bind("scLadderFuel") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" 
+                            DataTextField="scLadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Nox Weeds">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddlNoxWeedsUpdate" runat="server" 
+                            DataTextField="scNoxWeeds" DataValueField="scNoxWeeds" Width="8em">
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
 
 

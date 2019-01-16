@@ -517,15 +517,15 @@ namespace SubmittalProposal {
             try {
                 int inspectionId = Convert.ToInt32(((Label)row.Cells[1].Controls[1]).Text);
                 DateTime? date = Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[2].Controls[1]).Text);
-                string comments = ((TextBox)row.Cells[3].Controls[1]).Text;
-                string preparedBy = ((TextBox)row.Cells[4].Controls[1]).Text;
+                string comments = ((TextBox)row.Cells[4].Controls[1]).Text;
+                string preparedBy = ((TextBox)row.Cells[5].Controls[1]).Text;
                 string strfee = null;// ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
                 decimal? fee = Utils.isNothing(strfee) ? (decimal?)null : Utils.ObjectToDecimal(strfee);
                 bool paid = false;// ((CheckBox)row.Cells[6].Controls[1]).Checked;
                 string paidMemo = "";// ((TextBox)row.Cells[7].Controls[1]).Text;
                 DateTime? dateClosed = null;// Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
-                string ladderFuel = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
-                string noxWeeds = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
+                string ladderFuel = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
+                string noxWeeds = ((DropDownList)row.Cells[7].Controls[1]).SelectedValue;
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
 
@@ -800,7 +800,8 @@ namespace SubmittalProposal {
             gv.DataSource = dt;
             Session["gvFollowUpsTable"] = dt;
             gv.DataBind();
-            
+            cleanUpFollowUpsAndUpdateDB(null, -1);
+
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e) {
@@ -827,6 +828,7 @@ namespace SubmittalProposal {
             Session["gvFollowUpsTable"] = dt;
             gv.DataSource = dt;
             gv.DataBind();
+            cleanUpFollowUpsAndUpdateDB(null, -1);
 
         }
 
@@ -844,6 +846,8 @@ namespace SubmittalProposal {
                 gv.DataSource = dt;
                 Session["gvFollowUpsTable"]=dt;
                 gv.DataBind();
+                cleanUpFollowUpsAndUpdateDB(null, -1);
+
             }
         }
     }
