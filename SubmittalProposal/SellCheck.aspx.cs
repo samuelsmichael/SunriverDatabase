@@ -12,6 +12,15 @@ using System.Text;
 
 namespace SubmittalProposal {
     public partial class SellCheck : AbstractDatabase, ICanHavePDFs {
+        private int scInspectionIdBeingEdited {
+            get {
+                object obj = Session["scInspectionIDBeingEdited"];
+                return obj == null ? 0 : (int)obj;
+            }
+            set {
+                Session["scInspectionIDBeingEdited"] = value;
+            }
+        }
         private int scRequestIDBeingEdited {
             get {
                 object obj = ViewState["scRequestIDBeingEdited"];
@@ -55,6 +64,7 @@ namespace SubmittalProposal {
                 ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
                 ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["scRequestID"] };
                 ds.Tables[1].PrimaryKey = new DataColumn[] { ds.Tables[1].Columns["scInspectionID"] };
+                //ds.Tables[2].PrimaryKey = new DataColumn[] { ds.Tables[2].Columns["SellCheckFollupId"] };
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, ds, policy);
@@ -456,9 +466,8 @@ namespace SubmittalProposal {
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-                cleanUpFollowUpsAndUpdateDB(tbFollowUpNewNewRequest.Text,null);
-
-
+                cleanUpFollowUpsAndUpdateDB(tbFollowUpNewNewRequest.Text, (int)newid.Value);
+                
                 performPostNewSuccessfulActions("SellCheck Request added", DataSetCacheKey, null, tbRequestId, (int)newscRequestID.Value);
             } catch (Exception e2) {
                 mpeNewRequest.Show();
@@ -489,6 +498,7 @@ namespace SubmittalProposal {
         protected void gvInspections_RowEditing(object sender, GridViewEditEventArgs e) {
             //Set the edit index.
             gvInspections.EditIndex = e.NewEditIndex;
+            scInspectionIdBeingEdited = (int) gvInspections.DataKeys[0].Value;// (int)SCDataSet().Tables[1].Rows[e.NewEditIndex]["scInspectionID"];
             //Bind data to the GridView control.
             bind_gvInspections(scRequestIDBeingEdited);
         }
@@ -516,8 +526,6 @@ namespace SubmittalProposal {
                 DateTime? dateClosed = null;// Utils.ObjectToDateTimeNullable(((TextBox)row.Cells[8].Controls[1]).Text);
                 string ladderFuel = ((DropDownList)row.Cells[5].Controls[1]).SelectedValue;
                 string noxWeeds = ((DropDownList)row.Cells[6].Controls[1]).SelectedValue;
-                string followUp = ((TextBox)row.Cells[7].Controls[1]).Text;
-                string followUpIDs = ((TextBox)row.Cells[8].Controls[1]).Text;
 
                 SqlCommand cmd = new SqlCommand("uspSellCheckInspectionUpdate");
 
@@ -536,7 +544,7 @@ namespace SubmittalProposal {
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-                cleanUpFollowUpsAndUpdateDB(followUp, followUpIDs);
+                cleanUpFollowUpsAndUpdateDB(null,-1);
                 performPostUpdateSuccessfulActions("Inspection updated", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
@@ -547,51 +555,66 @@ namespace SubmittalProposal {
             //Bind data to the GridView control.
             bind_gvInspections(scRequestIDBeingEdited);
         }
-        /// <summary>
-        /// We're using the technique of separating follow-ups with dashes. Now we have to remove them and update the corresponding database records.
-        /// </summary>
-        /// <param name="followUpInput"></param>
-        private void cleanUpFollowUpsAndUpdateDB(string followUpInput, string followUpIDs) {
-            List<int> listfollowUpIDs = new List<int>();
-            List<string> listFollowUpDescriptions=new List<string>();
-            if(followUpIDs!=null) {
-                string[] arrayfollowUpIDs=followUpIDs.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
-                foreach(string str in arrayfollowUpIDs) {
-                    listfollowUpIDs.Add(Utils.ObjectToInt(str));
+        private void cleanUpFollowUpsAndUpdateDB(string newSingleSellCheck, int theNewRequestsId) {
+            SqlCommand cmd = null;
+            if (newSingleSellCheck == null) {
+                DataTable dtOldOnes = SCDataSet().Tables[2];
+                DataView view = new DataView(dtOldOnes);
+                view.RowFilter = "fk_scInspectionID=" + scInspectionIdBeingEdited;
+                DataTable tblOldOnesFiltered = view.ToTable();
+                List<int> oldInts = new List<int>();
+                foreach (DataRow dr in tblOldOnesFiltered.Rows) {
+                    oldInts.Add((int)dr["SellCheckFollowUpId"]);
                 }
-            }
-            int mostDashes = 0;
-            do {
-                mostDashes = 0;
-                StringBuilder sb = new StringBuilder();
-                int countDashes = 0;
-                foreach (char c in followUpInput) {
-                    if (c == '-') {
-                        countDashes++;
+                DataTable dt = (DataTable)Session["gvFollowUpsTable"];
+                foreach (DataRow dr2 in dt.Rows) {
+                    cmd = new SqlCommand("uspSellCheckFollowUpUpdate");
+                    SqlParameter dummy = new SqlParameter("NewSellCheckFollowUpId", SqlDbType.Int);
+                    dummy.Direction = ParameterDirection.Output;
+                    if (Common.Utils.isNothing(dr2["SellCheckFollowUpId"])) {
+                        // do an add here
+                        cmd.Parameters.Add("@SellCheckFollowUpId", SqlDbType.Int).Value = null;
+                        cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scInspectionIdBeingEdited;
+                        cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Utils.ObjectToString(dr2["Description"]);
+                        cmd.Parameters.Add(dummy);
+                        Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
                     } else {
-                        if (countDashes > 2) {
-                            if (countDashes > mostDashes) {
-                                mostDashes = countDashes;
-                            }
-                        }
-                        countDashes = 0;
+                        // do an update here
+                        cmd.Parameters.Add("@SellCheckFollowUpId", SqlDbType.Int).Value = Utils.ObjectToInt(dr2["SellCheckFollowUpId"]);
+                        cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = scInspectionIdBeingEdited;
+                        cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Utils.ObjectToString(dr2["Description"]);
+                        cmd.Parameters.Add(dummy);
+                        Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
+                        oldInts.Remove((int)dr2["SellCheckFollowUpId"]);
                     }
                 }
-                if (mostDashes > 2) {
-                    int cnt = mostDashes;
-                    StringBuilder sb2 = new StringBuilder();
-                    while (cnt > 0) {
-                        sb2.Append("-");
-                        cnt--;
-                    }
-                    followUpInput = followUpInput.Replace(sb2.ToString(), "|");
+                foreach (int id in oldInts) {
+                    // delete the rest
+                    SqlParameter dummy = new SqlParameter("NewSellCheckFollowUpId", SqlDbType.Int);
+                    dummy.Direction = ParameterDirection.Output;
+                    cmd = new SqlCommand("uspSellCheckFollowUpUpdate");
+                    cmd.Parameters.Add("@SellCheckFollowUpId", SqlDbType.Int).Value = id;
+                    cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = theNewRequestsId;
+                    cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = null;
+                    cmd.Parameters.Add(dummy);
+                    Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
                 }
-            } while (mostDashes > 2);
-
-            string[] followUpDescriptions = followUpInput.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string followUpDescription in followUpDescriptions) {
-                listFollowUpDescriptions.Add(followUpDescription.Trim());
+            } else {
+                cmd = new SqlCommand("uspSellCheckFollowUpUpdate"); 
+                SqlParameter dummy = new SqlParameter("NewSellCheckFollowUpId", SqlDbType.Int);
+                dummy.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@fkscRequestID", SqlDbType.Int).Value = theNewRequestsId;
+                cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = newSingleSellCheck;
+                cmd.Parameters.Add(dummy);
+                Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
             }
+            /*
+             uspSellCheckFollowUpUpdate (
+	@SellCheckFollowUpId int = null,
+	@fkscRequestID int=null,
+	@Description nvarchar(max) = null,
+	@NewSellCheckFollowUpId int out
+            */
         }
         private void bind_gvInspections(int scRequestID) {
             DataTable sourceTableInspections = SCDataSet().Tables[1];
@@ -622,7 +645,8 @@ namespace SubmittalProposal {
                 newid.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(newid);
                 Utils.executeNonQuery(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["SRSellCheckSQLConnectionString"].ConnectionString);
-                cleanUpFollowUpsAndUpdateDB(tbFollowUpNew.Text,null);
+                cleanUpFollowUpsAndUpdateDB(tbFollowUpNew.Text, (int)newid.Value );
+
                 performPostUpdateSuccessfulActions("Inspection added", DataSetCacheKey, null);
             } catch (Exception ee) {
                 performPostUpdateFailedActions("Inspection not updated. Error msg: " + ee.Message);
@@ -674,7 +698,7 @@ namespace SubmittalProposal {
                 return "";
             }
             string strOfstr = (string)str;
-            return strOfstr.Replace("|", "<br />***<br />");
+            return strOfstr.Replace("|", "<br />******<br />");
         }
 
         protected void gvInspections_RowDataBound(object sender, GridViewRowEventArgs e) {
@@ -713,6 +737,16 @@ namespace SubmittalProposal {
                         DataRowView dr = e.Row.DataItem as DataRowView;
                         ddList3.SelectedValue = dr["scFee"].ToString();
                     }
+                    GridView gvFollowUpEditing = (GridView)e.Row.FindControl("gvFollowUpEditing");
+                    if (gvFollowUpEditing != null) {
+                        DataTable dt = SCDataSet().Tables[2];
+                        DataView view = new DataView(dt);
+                        view.RowFilter = "fk_scInspectionID=" + scInspectionIdBeingEdited;
+                        DataTable tblFiltered = view.ToTable();
+                        Session["gvFollowUpsTable"] = tblFiltered;
+                        gvFollowUpEditing.DataSource = tblFiltered;
+                        gvFollowUpEditing.DataBind();
+                    }
                 }
             }
         }
@@ -744,6 +778,73 @@ namespace SubmittalProposal {
 
         public void SetLaneLotForPDFs(string lanelot) {
             LaneLotForPDFs = lanelot;
+        }
+
+        protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e) {
+            GridView gv = (GridView)sender;
+            gv.EditIndex = -1;
+            gv.DataSource=Session["gvFollowUpsTable"];
+            gv.DataBind();
+            //Bind data to the GridView control.
+        }
+
+        protected void GridView1_RowDeleted(object sender, GridViewDeletedEventArgs e) {
+
+        }
+
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e) {
+            DataTable dt=(DataTable)Session["gvFollowUpsTable"];
+            dt.Rows.RemoveAt(e.RowIndex);
+            Session["gvFollowUpsTable"]=dt;
+            GridView gv = (GridView)sender;
+            gv.DataSource = dt;
+            Session["gvFollowUpsTable"] = dt;
+            gv.DataBind();
+            
+        }
+
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e) {
+            GridView gv = (GridView)sender;
+            gv.EditIndex = e.NewEditIndex;
+            DataTable dt = (DataTable)Session["gvFollowUpsTable"];
+            gv.DataSource=dt;
+            gv.DataBind();
+
+        }
+
+        protected void GridView1_RowUpdated(object sender, GridViewUpdatedEventArgs e) {
+
+        }
+
+        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e) {
+            GridView gv = (GridView)sender;
+            gv.EditIndex = -1;
+            DataTable dt = (DataTable)Session["gvFollowUpsTable"];
+            GridViewRow dvr = gv.Rows[e.RowIndex];
+            TextBox tb=(TextBox)dvr.FindControl("tbscFollowUpDescriptionUpdate333");
+            DataRow dr = dt.Rows[e.RowIndex];
+            dr["Description"]=tb.Text;
+            Session["gvFollowUpsTable"] = dt;
+            gv.DataSource = dt;
+            gv.DataBind();
+
+        }
+
+        protected void gvFollowUpEditing_RowCommand(object sender, GridViewCommandEventArgs e) {
+            if (e.CommandName == "Insert") {
+                GridView gv = (GridView)sender;
+                TextBox tb = (TextBox)gv.FooterRow.FindControl("tbscFollowUpDescriptionUpdateFooter");
+                string newFollowUpDescription = tb.Text;
+                DataTable dt = (DataTable)Session["gvFollowUpsTable"];
+                DataRow dr = dt.NewRow();
+                dr["fk_scInspectionID"] = scInspectionIdBeingEdited;
+                dr["Description"] = newFollowUpDescription;
+                dr["DateRecordCreated"] = DateTime.Now;
+                dt.Rows.Add(dr);
+                gv.DataSource = dt;
+                Session["gvFollowUpsTable"]=dt;
+                gv.DataBind();
+            }
         }
     }
 }

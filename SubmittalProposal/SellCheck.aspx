@@ -264,29 +264,64 @@
                 </asp:TemplateField>
 
 
-                <asp:TemplateField HeaderText="Follow-up">
-                    <ItemTemplate>
-                        <asp:Label ID="lbFollowUpDescriptions" runat="server" Enabled="false" Height="2em" 
-                            Text='<%# getBRsInsteadOfBars(Eval("FollowUpDescriptions")) %>'></asp:Label>
-                    </ItemTemplate>
+                <asp:TemplateField HeaderText="Follow Ups">
+                    <ItemTemplate><asp:Label runat="server" ID="lblTesting" Text='<%# getBRsInsteadOfBars(Eval("FollowUpDescriptions")) %>'></asp:Label></ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="tbscFollowUpUpdate" runat="server" Height="10em" 
-                            Text='<%# getCRLFsInsteadOfBars(Eval("FollowUpDescriptions")) %>' ToolTip="Distinguish different Follow-Up records by three stars (***)" TextMode="MultiLine" Width="35em"></asp:TextBox>
+                        <asp:GridView ID="gvFollowUpEditing" runat="server" 
+                            AutoGenerateColumns="False"  ShowFooter="true"
+                            onrowcancelingedit="GridView1_RowCancelingEdit" 
+                            onrowdeleting="GridView1_RowDeleting" 
+                            onrowediting="GridView1_RowEditing" 
+                            onrowupdated="GridView1_RowUpdated" 
+                            onrowupdating="GridView1_RowUpdating" 
+                         
+                            onrowcommand="gvFollowUpEditing_RowCommand">
+                            <Columns>
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1xx3xxx3gasd6664asdfasdfasdfasdfsfasfasfafa33zfx" ForeColor="Black" runat="server" CausesValidation="False" 
+                                            CommandName="Edit" Text="Edit"></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1xxx33xeasdfasdfasdft" ForeColor="Black" OnClientClick="javascript: return true;" runat="server" CausesValidation="False" 
+                                            CommandName="Update" Text="Update"></asp:LinkButton>
+                                        &nbsp;<asp:LinkButton ID="LinkButton2xyz" ForeColor="Black" runat="server" CausesValidation="False" 
+                                            CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton2v3he" OnClientClick="javascript: return confirm('Are you sure?')" ForeColor="Black" runat="server" CausesValidation="False" 
+                                            CommandName="Delete" Text="Delete"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Id" SortExpression="SellCheckFollowUpId">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label33dcx103" runat="server" Text='<%# Bind("SellCheckFollowUpId") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Button CommandName="Insert" ID="btnAddFollowUp" runat="server" Text="Add" />
+                                    </FooterTemplate>
+                                </asp:TemplateField >
+
+                                <asp:TemplateField HeaderText="Description" SortExpression="Description">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label33dc" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="tbscFollowUpDescriptionUpdate333" runat="server" Height="10em" 
+                                            Text='<%# Bind("Description") %>' TextMode="MultiLine" Width="35em"></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:TextBox ID="tbscFollowUpDescriptionUpdateFooter" runat="server" Height="10em" 
+                                            TextMode="MultiLine" Width="35em"></asp:TextBox>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                
+                            </Columns>
+                        </asp:GridView>
+                
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Follow-up IDs">
-                    <ItemTemplate>
-                        <asp:Label ID="Label5aax3" runat="server" Enabled="false" Height="2em" 
-                            Text='<%# getBRsInsteadOfBars(Eval("FollowUpIDs")) %>'></asp:Label>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:TextBox ID="tbscFollowUpIDsUpdate" runat="server" Height="10em" 
-                            Text='<%# Eval("FollowUpIDs") %>' TextMode="MultiLine" Width="35em"></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
 
 
@@ -610,7 +645,7 @@
                             <asp:Label CssClass="form_field_heading" ID="Label31NewRequest" runat="server" Text="Follow Up "></asp:Label>
                         </td>
                         <td colspan="3">
-                            <asp:TextBox Height="8em" TextMode="MultiLine" ToolTip="Distinguish different Follow-Up records by three stars (***)"  Font-Size="Medium" ID="tbFollowUpNewNewRequest" runat="server" width="40em"></asp:TextBox>
+                            <asp:TextBox Height="8em" TextMode="MultiLine" Font-Size="Medium" ID="tbFollowUpNewNewRequest" runat="server" width="40em"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
