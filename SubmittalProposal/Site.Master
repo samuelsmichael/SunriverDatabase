@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SubmittalProposal.SiteMaster" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SubmittalProposal.SiteMaster" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -86,7 +86,7 @@
                   <a href="http://sroadw:2413/"> SROA Databases </a>
                 </h1>
                 <span style="margin-left: 50px; font-size: xx-small; display: block; float: left;
-                    color: #f9f9f9; margin-top: 22px;">(Version 3.00 January 2019)</span>
+                    color: #f9f9f9; margin-top: 22px;">(Version 3.01 January 2019)</span>
                
             </div>
             <div class="loginDisplay">
