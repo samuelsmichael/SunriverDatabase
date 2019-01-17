@@ -162,9 +162,11 @@
     <asp:Panel ID="Panel2" GroupingText="Inspection Data" runat="server">
 
            <asp:GridView Width="100%" ID="gvInspections" runat="server" AutoGenerateColumns="False"
-            CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" OnRowCancelingEdit="gvInspections_RowCancelingEdit"
+            CellPadding="4" ForeColor="#333333" GridLines="None" ShowFooter="True" 
+            OnRowCancelingEdit="gvInspections_RowCancelingEdit"
             OnRowEditing="gvInspections_RowEditing" 
-            OnRowUpdating="gvInspections_RowUpdating" DataKeyNames="scInspectionId" 
+            OnRowUpdating="gvInspections_RowUpdating" 
+            DataKeyNames="scInspectionId" 
             onrowdatabound="gvInspections_RowDataBound">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />
@@ -181,141 +183,167 @@
                 <asp:Label ID="lblEmptyTxt" runat="server" Text="No rows found"></asp:Label>
             </EmptyDataTemplate>
             <Columns>
-                <asp:CommandField ButtonType="Link" CausesValidation="false" ShowEditButton="true" ShowCancelButton="true" />
-                <asp:TemplateField HeaderText="Insp ID">
+                <asp:TemplateField ShowHeader="False">
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("scInspectionID") %>'></asp:Label>
+                        <asp:LinkButton ID="LinkddButton1" runat="server" CausesValidation="False" 
+                            CommandName="Edit" Text="Edit"></asp:LinkButton>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:Label ID="fts" runat="server" Width="5em" Text='<%# Bind("scInspectionID") %>'></asp:Label>
+                        <asp:LinkButton ID="LinkdddwwButton3" runat="server" OnClientClick="javascript: return true;" CausesValidation="False" 
+                            CommandName="Update" Text="Update"></asp:LinkButton>
+                        &nbsp;<asp:LinkButton ID="LinkButton4333xe" OnClientClick="javacript: return confirm('Are you sure?  Your updates will not occur!');" runat="server" CausesValidation="False" 
+                            CommandName="Cancel" Text="Cancel"></asp:LinkButton>
                     </EditItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Insp ID">
+                    <EditItemTemplate>
+                        <asp:Label ID="fts" runat="server" Text='<%# Bind("scInspectionID") %>' 
+                            Width="5em"></asp:Label>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
+
                 <asp:TemplateField HeaderText="Date">
                     <EditItemTemplate>
                         <table border="0" cellpadding="1" cellspacing="1">
                             <tr>
-                                <td>                    
+                                <td>
                                     <table>
                                         <tr>
                                             <td>
-                                                <asp:TextBox Width="8em" Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>' CssClass="form_field" 
-                                                    ID="tbDateUpdate" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="tbDateUpdate" runat="server" CssClass="form_field" 
+                                                    Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>' Width="8em"></asp:TextBox>
                                             </td>
                                             <td>
-                                                <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" 
-                                                    ImageUrl="~/Images/Calendar_scheduleHS.png"
-                                                    ID="ibtbDateUpdate" runat="server" />
+                                                <asp:ImageButton ID="ibtbDateUpdate" runat="server" ImageAlign="AbsMiddle" 
+                                                    ImageUrl="~/Images/Calendar_scheduleHS.png" 
+                                                    ToolTip="Click to show date selector" />
                                             </td>
                                         </tr>
                                     </table>
-                                    <ajaxToolkit:CalendarExtender ID="cetbDateUpdate" runat="server" TargetControlID="tbDateUpdate"
-                                        Format="MM/dd/yyyy" PopupButtonID="ibtbDateUpdate" />
-                                    <asp:RegularExpressionValidator ForeColor="Red" ID="revtbDateUpdate" Display="Dynamic"
-                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
-                                        ControlToValidate="tbDateUpdate" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    <ajaxToolkit:CalendarExtender ID="cetbDateUpdate" runat="server" 
+                                        Format="MM/dd/yyyy" PopupButtonID="ibtbDateUpdate" 
+                                        TargetControlID="tbDateUpdate" />
+                                    <asp:RegularExpressionValidator ID="revtbDateUpdate" runat="server" 
+                                        ControlToValidate="tbDateUpdate" Display="Dynamic" 
+                                        ErrorMessage="Please enter a valid date" ForeColor="Red" 
+                                        ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"></asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                         </table>
+                
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1a" runat="server" Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("scInspectionID") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
 
-
+               
+               
                 <asp:TemplateField HeaderText="Follow Ups">
-                    <ItemTemplate><asp:Label runat="server" ID="lblTesting" Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("FollowUpDescriptions"))) %>'></asp:Label></ItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1afsqd" runat="server" 
+                            Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                    </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:GridView ID="gvFollowUpEditing" runat="server" 
-                            AutoGenerateColumns="False"  ShowFooter="true"
+                        <asp:GridView ID="gvFollowUpEditing" runat="server" AutoGenerateColumns="False" 
                             onrowcancelingedit="GridView1_RowCancelingEdit" 
-                            onrowdeleting="GridView1_RowDeleting" 
-                            onrowediting="GridView1_RowEditing" 
-                            onrowupdated="GridView1_RowUpdated" 
-                            onrowupdating="GridView1_RowUpdating" 
-                         
-                            onrowcommand="gvFollowUpEditing_RowCommand">
+                            onrowcommand="gvFollowUpEditing_RowCommand" 
+                            onrowdeleting="GridView1_RowDeleting" onrowediting="GridView1_RowEditing" 
+                            onrowupdated="GridView1_RowUpdated" onrowupdating="GridView1_RowUpdating" 
+                             ShowHeaderWhenEmpty="true" 
+                            ShowFooter="true">
                             <Columns>
                                 <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1xx3xxx3gasd6664asdfasdfasdfasdfsfasfasfafa33zfx" ForeColor="Black" runat="server" CausesValidation="False" 
-                                            CommandName="Edit" Text="Edit"></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1xx3xxx3gasd6664asdfasdfasdfasdfsfasfasfafa33zfx" 
+                                            runat="server" CausesValidation="False" CommandName="Edit" ForeColor="Black" 
+                                            Text="Edit"></asp:LinkButton>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1xxx33xeasdfasdfasdft" ForeColor="Black" OnClientClick="javascript: return true;" runat="server" CausesValidation="False" 
-                                            CommandName="Update" Text="Update"></asp:LinkButton>
-                                        &nbsp;<asp:LinkButton ID="LinkButton2xyz" ForeColor="Black" runat="server" CausesValidation="False" 
-                                            CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1xxx33xeasdfasdfasdft" runat="server" 
+                                            CausesValidation="False" CommandName="Update" ForeColor="Black" 
+                                            OnClientClick="javascript: return true;" Text="Update"></asp:LinkButton>
+                                        &nbsp;<asp:LinkButton ID="LinkButton2xyz" runat="server" CausesValidation="False" 
+                                            CommandName="Cancel" ForeColor="Black" Text="Cancel"></asp:LinkButton>
                                     </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton2v3he" OnClientClick="javascript: return confirm('Are you sure?')" ForeColor="Black" runat="server" CausesValidation="False" 
-                                            CommandName="Delete" Text="Delete"></asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton2v3he" runat="server" CausesValidation="False" 
+                                            CommandName="Delete" ForeColor="Black" 
+                                            OnClientClick="javascript: return confirm('Are you sure?')" Text="Delete"></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Id" SortExpression="SellCheckFollowUpId">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label33dcx103" runat="server" Text='<%# Bind("SellCheckFollowUpId") %>'></asp:Label>
+                                        <asp:Label ID="Label33dcx103" runat="server" 
+                                            Text='<%# Bind("SellCheckFollowUpId") %>'></asp:Label>
                                     </ItemTemplate>
                                     <FooterTemplate>
-                                        <asp:Button CommandName="Insert" ID="btnAddFollowUp" runat="server" Text="Add" />
+                                        <asp:Button ID="btnAddFollowUp" runat="server" CommandName="Insert" 
+                                            Text="Add" />
                                     </FooterTemplate>
-                                </asp:TemplateField >
-
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Description" SortExpression="Description">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label33dc" runat="server" Height="2em" Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("Description")))%>'></asp:Label>
+                                        <asp:Label ID="Label33dc" runat="server" Height="2em" 
+                                            Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("Description")))%>'></asp:Label>
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:TextBox ID="tbscFollowUpDescriptionUpdate333" runat="server" Height="10em" 
                                             Text='<%# Bind("Description") %>' TextMode="MultiLine" Width="35em"></asp:TextBox>
                                     </EditItemTemplate>
                                     <FooterTemplate>
-                                        <asp:TextBox ID="tbscFollowUpDescriptionUpdateFooter" runat="server" Height="10em" 
-                                            TextMode="MultiLine" Width="35em"></asp:TextBox>
+                                        <asp:TextBox ID="tbscFollowUpDescriptionUpdateFooter" runat="server" 
+                                            Height="10em" TextMode="MultiLine" Width="35em"></asp:TextBox>
                                     </FooterTemplate>
                                 </asp:TemplateField>
-                                
                             </Columns>
                         </asp:GridView>
-                
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-               
-               
                 <asp:TemplateField HeaderText="Comments">
                     <ItemTemplate>
-                        <asp:Label ID="Label4x3a" runat="server" Enabled="false" Height="2em" Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>'></asp:Label>
+                        <asp:Label ID="lblTesting" runat="server" 
+                            Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("FollowUpDescriptions"))) %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" TextMode="MultiLine" Height="10em" Text='<%# Bind("scComments") %>'></asp:TextBox>
+                        <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" 
+                            Text='<%# Bind("scComments") %>' Height="10em" TextMode="MultiLine"></asp:TextBox>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
-
                 <asp:TemplateField HeaderText="Prepared By">
                     <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Width="6em" Text='<%# Bind("scPreparedBy") %>'></asp:Label>
+                        <asp:Label ID="Label4x3a" runat="server" 
+                            Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>' Enabled="false" 
+                            Height="2em"></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="tbPreparedByUpdatge" runat="server" Width="8em" Text='<%# Bind("scPreparedBy") %>'></asp:TextBox>
+                        <asp:TextBox ID="tbPreparedByUpdatge" runat="server" 
+                            Text='<%# Bind("scPreparedBy") %>' Width="8em"></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Ladder Fuel">
                     <ItemTemplate>
-                        <asp:Label ID="Label1c" runat="server" 
-                            Text='<%# Bind("scLadderFuel") %>'></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("scPreparedBy") %>' 
+                            Width="6em"></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:DropDownList ID="dllscLadderFuelUpdate" Width="8em" runat="server" 
-                            DataTextField="scLadderFuel" DataValueField="LadderFuel"></asp:DropDownList>
+                        <asp:DropDownList ID="dllscLadderFuelUpdate" runat="server" 
+                            DataTextField="scLadderFuel" DataValueField="LadderFuel" Width="8em">
+                        </asp:DropDownList>
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
+
+
                 <asp:TemplateField HeaderText="Nox Weeds">
+                    <ItemTemplate>
+                        <asp:Label ID="Label1c" runat="server" Text='<%# Bind("scLadderFuel") %>'></asp:Label>
+                    </ItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
                     </ItemTemplate>
@@ -324,6 +352,7 @@
                             DataTextField="scNoxWeeds" DataValueField="scNoxWeeds" Width="8em">
                         </asp:DropDownList>
                     </EditItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
 

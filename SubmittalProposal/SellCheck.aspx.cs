@@ -560,7 +560,7 @@ namespace SubmittalProposal {
             if (newSingleSellCheck == null) {
                 DataTable dtOldOnes = SCDataSet().Tables[2];
                 DataView view = new DataView(dtOldOnes);
-                view.RowFilter = "fk_scInspectionID=" + scInspectionIdBeingEdited;
+                view.RowFilter = "fk_scInspectionID=" + Session["InspectionsKeyWhoseFollowUpsImEditing"];
                 DataTable tblOldOnesFiltered = view.ToTable();
                 List<int> oldInts = new List<int>();
                 foreach (DataRow dr in tblOldOnesFiltered.Rows) {
@@ -741,11 +741,24 @@ namespace SubmittalProposal {
                     if (gvFollowUpEditing != null) {
                         DataTable dt = SCDataSet().Tables[2];
                         DataView view = new DataView(dt);
-                        view.RowFilter = "fk_scInspectionID=" + scInspectionIdBeingEdited;
+                        Session["InspectionsKeyWhoseFollowUpsImEditing"] = gvInspections.DataKeys[e.Row.RowIndex].Value;
+                        view.RowFilter = "fk_scInspectionID=" + gvInspections.DataKeys[e.Row.RowIndex].Value; // dt.Rows[e.Row.RowIndex]["fk_scInspectionID"];
                         DataTable tblFiltered = view.ToTable();
                         Session["gvFollowUpsTable"] = tblFiltered;
-                        gvFollowUpEditing.DataSource = tblFiltered;
+                        bool hideFirstRow = false;
+                        if (tblFiltered.Rows.Count == 0) {
+                            DataTable tblFilteredDuplicated = tblFiltered.Clone();
+                            DataRow dr = tblFilteredDuplicated.NewRow();
+                            tblFilteredDuplicated.Rows.Add(dr);
+                            gvFollowUpEditing.DataSource = tblFilteredDuplicated;
+                            hideFirstRow = true;
+                        } else {
+                            gvFollowUpEditing.DataSource = tblFiltered;
+                        }
                         gvFollowUpEditing.DataBind();
+                        if (hideFirstRow) {
+                            gvFollowUpEditing.Rows[0].Visible = false;
+                        }
                     }
                 }
             }
@@ -793,14 +806,28 @@ namespace SubmittalProposal {
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e) {
-            DataTable dt=(DataTable)Session["gvFollowUpsTable"];
-            dt.Rows.RemoveAt(e.RowIndex);
-            Session["gvFollowUpsTable"]=dt;
-            GridView gv = (GridView)sender;
-            gv.DataSource = dt;
+            DataTable dt = (DataTable)Session["gvFollowUpsTable"];
+            if (dt.Rows.Count > 0) {
+                dt.Rows.RemoveAt(e.RowIndex);
+            }
             Session["gvFollowUpsTable"] = dt;
-            gv.DataBind();
-            cleanUpFollowUpsAndUpdateDB(null, -1);
+            GridView gv = (GridView)sender;
+            Session["gvFollowUpsTable"] = dt;
+            bool hideFirstRow = false;
+            if (dt.Rows.Count == 0) {
+                DataTable dtDuplicated = dt.Clone();
+                DataRow dr = dtDuplicated.NewRow();
+                dtDuplicated.Rows.Add(dr);
+                gv.DataSource = dtDuplicated;
+                hideFirstRow = true;
+            } else {
+                gv.DataSource = dt;
+            }
+            if (hideFirstRow) {
+                gv.Rows[0].Visible = false;
+            }
+
+            //           cleanUpFollowUpsAndUpdateDB(null, -1);
 
         }
 
@@ -828,7 +855,7 @@ namespace SubmittalProposal {
             Session["gvFollowUpsTable"] = dt;
             gv.DataSource = dt;
             gv.DataBind();
-            cleanUpFollowUpsAndUpdateDB(null, -1);
+ //           cleanUpFollowUpsAndUpdateDB(null, -1);
 
         }
 
@@ -846,7 +873,7 @@ namespace SubmittalProposal {
                 gv.DataSource = dt;
                 Session["gvFollowUpsTable"]=dt;
                 gv.DataBind();
-                cleanUpFollowUpsAndUpdateDB(null, -1);
+//                cleanUpFollowUpsAndUpdateDB(null, -1);
 
             }
         }

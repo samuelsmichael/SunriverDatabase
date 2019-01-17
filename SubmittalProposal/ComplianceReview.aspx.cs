@@ -639,7 +639,7 @@ namespace SubmittalProposal {
 
             cmd.Parameters.Add("@crLTActionDate", SqlDbType.DateTime).Value =
                 crLTActionDateNew.Text.Trim() == "" ? (
-                tbcrLtDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNew.Text) == new DateTime(1900, 1, 1) ? (DateTime?)null : Utils.ObjectToDateTime(crLTActionDateNewNewComplianceReview.Text);
+                tbcrLtDateNew.Text.Trim() == "" ? (DateTime?)null : Utils.ObjectToDateTime(tbcrLtDateNew.Text).AddDays(30)) : Utils.ObjectToDateTime(crLTActionDateNew.Text) == new DateTime(1900, 1, 1) ? (DateTime?)null : Utils.ObjectToDateTime(crLTActionDateNew.Text);
 
 
 
