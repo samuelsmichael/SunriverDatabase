@@ -153,6 +153,20 @@ namespace SubmittalProposal {
             if (!IsPostBack) {
                 // Do stuff that you need to do only once when the page is accessed.
                 // For example:  Initialize static dropdown's.
+                DataTable dt1 = getRenewablesDataSet().Tables[0].Copy();
+                DataRow dr1 = dt1.NewRow();
+                dr1["Department"] = "";
+                dr1["EmailContactName1"] = "";
+                dt1.Rows.InsertAt(dr1, 0);
+                ddlDepartmentSearch.DataSource = dt1;
+                ddlDepartmentSearch.DataBind();
+                DataSet ds=Common.Utils.getDataSetFromQuery("SELECT DISTINCT EmailContactName1 FROM OwnerConcerns.dbo.[tblDepartment{LU}] WHERE EmailContactName1 IS NOT NULL",ConnectionString);
+                DataTable dt2 = ds.Tables[0];
+                DataRow dr2 = dt2.NewRow();
+                dr2["EmailContactName1"] = "";
+                dt2.Rows.InsertAt(dr2, 0);
+                ddlDepartmentContactSearch.DataSource = dt2;
+                ddlDepartmentContactSearch.DataBind();
             } else {
                 // Here is where you do things that you need to do when
                 // a "postback" occurs.  What's a "postback"?  It's when

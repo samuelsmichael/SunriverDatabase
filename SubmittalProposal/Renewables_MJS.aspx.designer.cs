@@ -13,6 +13,42 @@ namespace SubmittalProposal {
     public partial class Renewables_MJS {
         
         /// <summary>
+        /// Label4xx3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4xx3;
+        
+        /// <summary>
+        /// ddlDepartmentSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartmentSearch;
+        
+        /// <summary>
+        /// Label5ee3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5ee3;
+        
+        /// <summary>
+        /// ddlDepartmentContactSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartmentContactSearch;
+        
+        /// <summary>
         /// Label18 control.
         /// </summary>
         /// <remarks>

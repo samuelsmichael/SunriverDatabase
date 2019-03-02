@@ -3,16 +3,24 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SearchContent" runat="server">
     <td>
-        <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Project Name"></asp:Label>
-        <asp:TextBox CssClass="form_field" ID="tbProjectName" Width="85" runat="server"></asp:TextBox>
+        <asp:Label CssClass="form_field_heading" ID="Label4xx3" runat="server" Text="SROA Department"></asp:Label>
+        <asp:DropDownList ID="ddlDepartmentSearch" runat="server" DataTextField="Department" DataValueField="Department"></asp:DropDownList>
+    </td>
+    <td>
+        <asp:Label CssClass="form_field_heading" ID="Label5ee3" runat="server" Text="SROA Department Contact"></asp:Label>
+        <asp:DropDownList ID="ddlDepartmentContactSearch" runat="server" DataTextField="EmailContactName1" DataValueField="EmailContactName1"></asp:DropDownList>
+    </td>
+    <td>
+        <asp:Label CssClass="form_field_heading" ID="Label18" runat="server" Text="Project"></asp:Label>
+        <asp:TextBox CssClass="form_field" ID="tbProjectName" Width="60" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label CssClass="form_field_heading" ID="Label19" runat="server" Text="Business"></asp:Label>
-        <asp:TextBox CssClass="form_field" ID="tbBusinessName" Width="85" runat="server"></asp:TextBox>
+        <asp:TextBox CssClass="form_field" ID="tbBusinessName" Width="60" runat="server"></asp:TextBox>
     </td>
     <td>
         <asp:Label CssClass="form_field_heading" ID="Label3" runat="server" Text="RenewableID"></asp:Label>
-        <asp:TextBox CssClass="form_field" ID="tbRenewableID" Width="35" runat="server"></asp:TextBox>
+        <asp:TextBox CssClass="form_field" ID="tbRenewableID" Width="25" runat="server"></asp:TextBox>
     </td>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ResultsContent" runat="server">
@@ -26,7 +34,14 @@
         <Columns>
             <asp:CommandField ButtonType="Link" SelectText="Select" ShowSelectButton="true" />
             <asp:BoundField DataField="ProjectName" HeaderText="Project Name" SortExpression="ProjectName" />
-            <asp:BoundField DataField="Business" HeaderText="Business Name" SortExpression="Business" />
+            <asp:BoundField DataField="Business" HeaderText="Business" 
+                SortExpression="Business" />
+            <asp:BoundField DataField="TermOfRenewable" HeaderText="Terms of Renewal" 
+                SortExpression="TermOfRenewable" />
+            <asp:BoundField DataField="TermCost" HeaderText="Term Cost" 
+                SortExpression="TermCost" />
+            <asp:BoundField DataField="RenewableEndDate" HeaderText="Renewable End Date"  DataFormatString="{0:MM/dd/yyyy}" 
+                SortExpression="RenewableEndDate" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

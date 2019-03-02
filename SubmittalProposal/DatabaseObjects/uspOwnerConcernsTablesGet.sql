@@ -21,6 +21,6 @@ BEGIN
 		(select top 1 SRLotLane from [ID-Card_Split_FE]..tblLotLane_Master ll where st.Region=ll.SRPropID ) ll
 	ORDER BY OCCase#
 	Select * FROM [tblCategory{LU}]
-	select * from [tblDepartment{LU}]
+	select * from [tblDepartment{LU}] where IsInOwnerConcernList=1
 END
 GO
