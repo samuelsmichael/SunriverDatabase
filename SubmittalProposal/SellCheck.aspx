@@ -191,15 +191,18 @@
                     <EditItemTemplate>
                         <asp:LinkButton ID="LinkdddwwButton3" runat="server" OnClientClick="javascript: return true;" CausesValidation="False" 
                             CommandName="Update" Text="Update"></asp:LinkButton>
-                        &nbsp;<asp:LinkButton ID="LinkButton4333xe" OnClientClick="javacript: return confirm('Are you sure?  Your updates will not occur!');" runat="server" CausesValidation="False" 
+                        <asp:LinkButton ID="LinkButton4333xe" OnClientClick="javacript: return confirm('Are you sure?  Your updates will not occur!');" runat="server" CausesValidation="False" 
                             CommandName="Cancel" Text="Cancel"></asp:LinkButton>
                     </EditItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Insp ID">
                     <EditItemTemplate>
-                        <asp:Label ID="fts" runat="server" Text='<%# Bind("scInspectionID") %>' 
+                        <asp:Label ID="fts11s" runat="server" Text='<%# Bind("scInspectionID") %>' 
                             Width="5em"></asp:Label>
                     </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="itFts" runat="server" Text='<%# Bind("scInspectionID") %>'> </asp:Label>
+                    </ItemTemplate>
                 </asp:TemplateField>
 
 
@@ -234,18 +237,14 @@
                 
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("scInspectionID") %>'></asp:Label>
+                        <asp:Label ID="Label1afsqd" runat="server" 
+                            Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
                     </ItemTemplate>
-                    <ItemStyle HorizontalAlign="Right" />
                 </asp:TemplateField>
 
                
                
                 <asp:TemplateField HeaderText="Follow Ups">
-                    <ItemTemplate>
-                        <asp:Label ID="Label1afsqd" runat="server" 
-                            Text='<%# Bind("scDate", "{0:MM/dd/yyyy}") %>'></asp:Label>
-                    </ItemTemplate>
                     <EditItemTemplate>
                         <asp:GridView ID="gvFollowUpEditing" runat="server" AutoGenerateColumns="False" 
                             onrowcancelingedit="GridView1_RowCancelingEdit" 
@@ -303,47 +302,51 @@
                             </Columns>
                         </asp:GridView>
                     </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblTestingxxx" runat="server" 
+                            Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("FollowUpDescriptions"))) %>'></asp:Label>
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Comments">
-                    <ItemTemplate>
-                        <asp:Label ID="lblTesting" runat="server" 
-                            Text='<%# getBRsInsteadOfCRLFs(getBRsInsteadOfBars(Eval("FollowUpDescriptions"))) %>'></asp:Label>
-                    </ItemTemplate>
                     <EditItemTemplate>
                         <asp:TextBox ID="tbscCommentsUpdate" runat="server" Width="35em" 
                             Text='<%# Bind("scComments") %>' Height="10em" TextMode="MultiLine"></asp:TextBox>
                     </EditItemTemplate>
                     <ItemStyle HorizontalAlign="Left" />
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Prepared By">
                     <ItemTemplate>
                         <asp:Label ID="Label4x3a" runat="server" 
                             Text='<%# getBRsInsteadOfCRLFs(Eval("scComments")) %>' Enabled="false" 
                             Height="2em"></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Prepared By">
                     <EditItemTemplate>
                         <asp:TextBox ID="tbPreparedByUpdatge" runat="server" 
                             Text='<%# Bind("scPreparedBy") %>' Width="8em"></asp:TextBox>
                     </EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Ladder Fuel">
                     <ItemTemplate>
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("scPreparedBy") %>' 
                             Width="6em"></asp:Label>
                     </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Ladder Fuel">
                     <EditItemTemplate>
                         <asp:DropDownList ID="dllscLadderFuelUpdate" runat="server" 
                             DataTextField="scLadderFuel" DataValueField="LadderFuel" Width="8em">
                         </asp:DropDownList>
                     </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1c" runat="server" Text='<%# Bind("scLadderFuel") %>'></asp:Label>
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
 
 
                 <asp:TemplateField HeaderText="Nox Weeds">
-                    <ItemTemplate>
-                        <asp:Label ID="Label1c" runat="server" Text='<%# Bind("scLadderFuel") %>'></asp:Label>
-                    </ItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label4u" runat="server" Text='<%# Bind("scNoxWeeds") %>'></asp:Label>
                     </ItemTemplate>
@@ -352,7 +355,6 @@
                             DataTextField="scNoxWeeds" DataValueField="scNoxWeeds" Width="8em">
                         </asp:DropDownList>
                     </EditItemTemplate>
-                    <ItemStyle HorizontalAlign="Center" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
 
