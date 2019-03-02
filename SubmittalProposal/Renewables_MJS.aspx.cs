@@ -61,7 +61,7 @@ namespace SubmittalProposal {
                 tbRenewablesBusinessNameUpdate.Text = Utils.ObjectToString(dr["Business"]);
                 tbRenewablesProjectNameUpdate.Text = Utils.ObjectToString(dr["ProjectName"]);
                 // The framework expects some identifying verbiage to show the user what record is being viewed.
-                return "Business Name: " + Utils.ObjectToString(dr["Business"]) + "nbsp;nbsp;nbsp;Project Name: " + Utils.ObjectToString(dr["ProjectName"]) + "     renewID: " + RenewablesIDBeingEdited;
+                return "Business Name: " + Utils.ObjectToString(dr["Business"]) + "  Project Name: " + Utils.ObjectToString(dr["ProjectName"]) + "     renewID: " + RenewablesIDBeingEdited;
             } catch {
                 return "";
             }
