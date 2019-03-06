@@ -988,6 +988,49 @@ namespace SubmittalProposal
             tbBPRCommentsNew.Text = "";
             mpeBPermitNewReview.Show();
         }
+        protected void btnProjectDocumentsTrigger_Click(object sender, EventArgs args) {
+            if (Utils.isNothing(Session["LastActiveTabIndex"])) {
+                Session["LastActiveTabIndex"] = 0;
+            }
+            if (((int)Session["LastActiveTabIndex"]) == 2) {
+                if (pnlNewBPermitContent.Visible) {
+                    tbContractorUpdate.Text = tbContractorNewBP.Text;
+                    tbApplicantNameUpdate.Text = tbApplicantNameNewBP.Text;
+                    tbOwnersNameUpdate.Text = tbOwnersNameNewBP.Text;
+                    tbLotNameUpdate.Text = tbLotNameNewBP.Text;
+                    ddlLaneUpdate.SelectedIndex = ddlLaneNewBP.SelectedIndex;
+                    ddlProjectTypeUpdate.SelectedIndex = ddlProjectTypeNewBP.SelectedIndex;
+                    tbProjectUpdate.Text = tbProjectNewBP.Text;
+                } else {
+                    tbContractorUpdate.Text = tbContractorUpdateBP.Text;
+                    tbApplicantNameUpdate.Text = tbApplicantNameUpdateBP.Text;
+                    tbOwnersNameUpdate.Text = tbOwnersNameUpdateBP.Text;
+                    tbLotNameUpdate.Text = tbLotNameUpdateBP.Text;
+                    ddlLaneUpdate.SelectedIndex = ddlLaneUpdateBP.SelectedIndex;
+                    ddlProjectTypeUpdate.SelectedIndex = ddlProjectTypeUpdateBP.SelectedIndex;
+                    tbProjectUpdate.Text = tbProjectUpdateBP.Text;
+                }
+            } else {
+                if (((int)Session["LastActiveTabIndex"]) == 0) {
+                    tbContractorUpdateBP.Text = tbContractorUpdate.Text;
+                    tbApplicantNameUpdateBP.Text = tbApplicantNameUpdate.Text;
+                    tbOwnersNameUpdateBP.Text = tbOwnersNameUpdate.Text;
+                    tbLotNameUpdateBP.Text = tbLotNameUpdate.Text;
+                    ddlLaneUpdateBP.SelectedIndex = ddlLaneUpdate.SelectedIndex;
+                    ddlProjectTypeUpdateBP.SelectedIndex = ddlProjectTypeUpdate.SelectedIndex;
+                    tbProjectUpdateBP.Text = tbProjectUpdate.Text;
+                    tbContractorNewBP.Text = tbContractorUpdate.Text;
+                    tbApplicantNameNewBP.Text = tbApplicantNameUpdate.Text;
+                    tbOwnersNameNewBP.Text = tbOwnersNameUpdate.Text;
+                    tbLotNameNewBP.Text = tbLotNameUpdate.Text;
+                    ddlLaneNewBP.SelectedIndex = ddlLaneUpdate.SelectedIndex;
+                    ddlProjectTypeNewBP.SelectedIndex = ddlProjectTypeUpdate.SelectedIndex;
+                    tbProjectNewBP.Text = tbProjectUpdate.Text;
+                }
+            }
+
+            Session["LastActiveTabIndex"] = 3;
+        }
         protected void btnProjectConditionsTrigger_Click(object sender, EventArgs args) {
             if (Utils.isNothing(Session["LastActiveTabIndex"])) {
                 Session["LastActiveTabIndex"] = 0;
@@ -1029,6 +1072,8 @@ namespace SubmittalProposal
                 }
             }
             TabContainer1.ActiveTabIndex = 1;
+            Session["LastActiveTabIndex"] = 1;
+
         }
         protected void btnBPTabTrigger_Click(object sender, EventArgs args) {
             tbContractorUpdateBP.Text = tbContractorUpdate.Text;

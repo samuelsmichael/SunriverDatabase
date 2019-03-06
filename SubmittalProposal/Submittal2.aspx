@@ -16,10 +16,17 @@
             document.getElementById(document.getElementById('Hidden2').value).click();
             //        __doPostBack('btnBPTabTrigger', '');
         } else {
-            if (sender.get_activeTabIndex() == 1) { // Main tab clicked
-                document.getElementById(document.getElementById('Hidden3').value).click();
+        if (sender.get_activeTabIndex() == 1) { // Project Conditions tab clicked
+            document.getElementById(document.getElementById('Hidden3').value).click();
+            //        __doPostBack('btnBPTabTrigger', '');
+        } else {
+            //alert('marre3')
+            if (sender.get_activeTabIndex() == 3) { // Project Conditions tab clicked
+                ///alert('marre3a')
+                document.getElementById(document.getElementById('Hidden4').value).click();
                 //        __doPostBack('btnBPTabTrigger', '');
             }
+        }
         }
         }
 //    alert('tab clicked: ' + sender.get_activeTabIndex());
@@ -116,10 +123,13 @@
     <asp:Button ID="btnBPTabTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnBPTabTrigger_Click" />
     <asp:Button ID="btnMainTabTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnMainTabTrigger_Click" />
     <asp:Button ID="btnProjectConditionsTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnProjectConditionsTrigger_Click" />
+    <asp:Button ID="btnDocumentsTrigger" style="display:none;" runat="server" Text="..-...u-.-.-.-" OnClick="btnProjectDocumentsTrigger_Click" />
     </ContentTemplate></asp:UpdatePanel>
     <input id="Hidden1" type="hidden" value="<% = btnBPTabTrigger.ClientID %>" />
     <input id="Hidden2" type="hidden" value="<% = btnMainTabTrigger.ClientID %>" />
     <input id="Hidden3" type="hidden" value="<% = btnProjectConditionsTrigger.ClientID %>" />
+    <input id="Hidden4" type="hidden" value="<% = btnDocumentsTrigger.ClientID %>" />
+
     <ajaxToolkit:TabContainer OnClientActiveTabChanged="clientActiveTabChanged" ActiveTabIndex="0" ID="TabContainer1" runat="server">
         <ajaxToolkit:TabPanel runat="server" ID="tabPanelApplicantInformation" HeaderText="Application Infromation">
             <ContentTemplate>
