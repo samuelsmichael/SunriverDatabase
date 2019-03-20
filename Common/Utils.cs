@@ -17,6 +17,26 @@ namespace Common {
                 return str.Replace("'", "''");
             }
         }
+        public static object returnTheValueOfFieldXInTableWhoseFieldYEqualsZ(string fieldX, DataTable dt, string fieldY, object fieldZ) {
+            object retValue = null;
+            try {
+                foreach (DataRow dr in dt.Rows) {
+                    if (Utils.ObjectToString(dr[fieldY]).Equals(ObjectToString(fieldZ))) {
+                        retValue = dr[fieldX];
+                        break;
+                    }
+                }
+            } catch { }
+            return retValue;
+        }
+        public static string formatForTextBoxWithDate(object adate) {
+            DateTime? date = ObjectToDateTimeNullable(adate);
+            if (date.HasValue) {
+                return date.Value.ToString("MM/dd/yyyy");
+            } else {
+                return "";
+            }
+        }
         /// <summary>
         /// This helper method creates the appropriate filter string for a string search where "like" is appropriate.
         /// </summary>
@@ -25,6 +45,11 @@ namespace Common {
         /// <returns></returns>
         public static string getDataViewQuery(string searchString, string dataFieldName) {
             return searchString.ToLower() == "*blank" ? (" " + "Isnull(" + dataFieldName + ",'')  =''") : " " + dataFieldName + " like '*" + escapeSingleQuoteForSQLQueries(searchString) + "*'";
+        }
+        public static string getDataViewQuery(string searchString, string dataFieldName1, string dataFieldName2) {
+            
+            return dataFieldName1 + " like '*" + escapeSingleQuoteForSQLQueries(searchString) + "*' OR " + 
+                            dataFieldName2 + " like '*" + escapeSingleQuoteForSQLQueries(searchString) + "*'";
         }
         public static void jsonSerializeStep2(MemoryStream ms, HttpResponse Response) {
             ms.Flush();

@@ -148,7 +148,7 @@ namespace SubmittalProposal {
             }
         }
         protected override string gvResults_DoSelectedIndexChanged(object sender, EventArgs e) {
-            try {
+            
                 GridViewRow row = gvResults.SelectedRow;
                 CitationsIDBeingEdited = Convert.ToInt32(gvResults.DataKeys[row.RowIndex].Value);
                 DataTable sourceTable = getGridViewDataTable();
@@ -192,9 +192,7 @@ namespace SubmittalProposal {
                     lblDatePrinted.Text = dateFormPrinted.ToString();
                 }
                 return "Last name: " + Utils.ObjectToString(dr["VLastName"]) + "nbsp;nbsp;nbsp;First name: " + Utils.ObjectToString(dr["VFirstName"]) + "     Citation#: " + citationNbr;
-            } catch {
-                return "";
-            }
+            
         }
 
         private DataTable CurrentViolationsTable {
