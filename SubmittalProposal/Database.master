@@ -136,6 +136,8 @@
                 <div style="overflow: auto; width: 920px;">
                     <asp:ContentPlaceHolder ID="ResultsContent" runat="server">
                     </asp:ContentPlaceHolder>
+                    <asp:Label ID="lblErrorMsgIfFetchError" runat="server" Font-Bold="true" Visible="false" ForeColor="Red"></asp:Label>
+
                 </div>
             </asp:Panel>
             <ajaxToolkit:CollapsiblePanelExtender ID="CPEDataGrid" runat="server" TargetControlID="PnlDataGridContent"

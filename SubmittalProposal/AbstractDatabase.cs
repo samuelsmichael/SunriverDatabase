@@ -168,8 +168,16 @@ namespace SubmittalProposal {
 
 
         protected void gvResults_SelectedIndexChanged(object sender, EventArgs e) {
+            ((Database)Master).getFetchErrorMessageControl().Visible = false;
             ((Database)Master).clearUnlockRecordCheckbox();
-            string expandedText = gvResults_DoSelectedIndexChanged(sender, e);
+            string expandedText = null;
+            try {
+                expandedText = gvResults_DoSelectedIndexChanged(sender, e);
+            } catch (Exception ee) {
+                ((Database)Master).getFetchErrorMessageControl().Text="Problems fetching the data. The data on the Form screen is probably incorrect.  Msg: '"+ee.Message;
+                ((Database)Master).getFetchErrorMessageControl().Visible = true;
+                return;
+            }
             ((Database)Master).getCPEForm.ExpandedText = expandedText;
             ((Database)Master).getCPEForm.CollapsedText = expandedText;
             ((Database)Master).getCPEForm.Collapsed = false;

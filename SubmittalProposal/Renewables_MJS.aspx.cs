@@ -58,12 +58,44 @@ namespace SubmittalProposal {
                 // and lastly, isolate the DataRow that represents our item.
                 DataRow dr = tblFiltered.Rows[0];
                 // Now we simply format the appropriate Text fields.
+                
                 tbRenewablesBusinessNameUpdate.Text = Utils.ObjectToString(dr["Business"]);
                 tbRenewablesProjectNameUpdate.Text = Utils.ObjectToString(dr["ProjectName"]);
+                tbRenewablesBusinessAddressUpdate.Text = Utils.ObjectToString(dr["BusinessAddress"]);
+                tbRenewablesBusinessPhoneUpdate.Text = Utils.ObjectToString(dr["BusinessPhone"]);
+                tbRenewablesBusinessContactNameUpdate.Text = Utils.ObjectToString(dr["BusinessContactName"]);
+                tbRenewableDateEndUpdate.Text=Utils.formatForTextBoxWithDate(dr["RenewableEndDate"]);
+                tbRenewableDateReviewUpdate.Text = Utils.formatForTextBoxWithDate(dr["RenewableReviewDate"]);
+                tbRenewableDateStartUpdate.Text = Utils.formatForTextBoxWithDate(dr["RenewableStartDate"]);
+                tbRenewableDateTermUpdate.Text = Utils.formatForTextBoxWithDate(dr["RenewableTermDate"]);
+                tbNotesUpdate.Text = Utils.ObjectToString(dr["Notes"]);
+                tbPaymentTypeUpdate.Text = Utils.ObjectToString(dr["PaymentType"]);
+                string ddlTypeUpdateSelectedValue=Utils.ObjectToString(Utils.returnTheValueOfFieldXInTableWhoseFieldYEqualsZ("ID",
+                    getRenewablesDataSet().Tables[1],"DocName",Utils.ObjectToString(dr["RenewableType"])));
+                if (Utils.isNothing(ddlTypeUpdateSelectedValue)) {
+                    ddlTypeUpdate.SelectedIndex = 0;
+                } else {
+                    ddlTypeUpdate.SelectedValue = ddlTypeUpdateSelectedValue;
+                }
+                ddlDepartmentUpdate.SelectedValue = Utils.ObjectToString(dr["SROADepartment"]);
+                string ddlTermUpdateSelectedValue = Utils.ObjectToString(Utils.returnTheValueOfFieldXInTableWhoseFieldYEqualsZ("ID",
+                    getRenewablesDataSet().Tables[3], "TermOfRenewable", Utils.ObjectToString(dr["TermOfRenewable"])));
+                if (Utils.isNothing(ddlTermUpdateSelectedValue)) {
+                    ddlTermUpdate.SelectedIndex = 0;
+                } else {
+                    ddlTermUpdate.SelectedValue = ddlTermUpdateSelectedValue;
+                }
+                ddlAutoRenewalUpdate.SelectedValue = Utils.isNothing(dr["AutoRenewal"])?"": Utils.ObjectToBool(dr["AutoRenewal"]) ? "Yes" : "No";
+                tbCostUpdate.Text = Utils.ObjectToString(dr["TermCost"]);
                 // The framework expects some identifying verbiage to show the user what record is being viewed.
-                return "Business Name: " + Utils.ObjectToString(dr["Business"]) + "nbsp;nbsp;nbsp;Project Name: " + Utils.ObjectToString(dr["ProjectName"]) + "     renewID: " + RenewablesIDBeingEdited;
-            } catch {
-                return "";
+                return "Business Name: " + Utils.ObjectToString(dr["Business"]) + "  Project Name: " + Utils.ObjectToString(dr["ProjectName"]) + "     renewID: " + RenewablesIDBeingEdited;
+            } catch (Exception exc) {
+/* this didn't work, so throw an exception, and I modified AbstractDatabase.cs to display a message.
+ *              string mf = "alert('Problems fetching the data from RenewID: " + RenewablesIDBeingEdited + ". The data on the screen is probably incorrect.  Msg: " + exc.Message.Replace("'","") + "');";
+                ScriptManager.RegisterClientScriptBlock(ddlDepartmentUpdate, ddlDepartmentUpdate.GetType(), "myScriptName", mf, true);
+*/
+                throw exc;
+
             }
         }
 
@@ -76,7 +108,7 @@ namespace SubmittalProposal {
             if (Utils.isNothingNot(tbProjectName.Text)) {
                 sb.Append(prepend + "Project name: " + tbProjectName.Text);
                 prepend = "  ";
-                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbProjectName.Text, "Project"));
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(tbProjectName.Text, "ProjectName"));
                 and = " and ";
             }
             if (Utils.isNothingNot(tbBusinessName.Text)) {
@@ -90,6 +122,17 @@ namespace SubmittalProposal {
                 prepend = "  ";
                 sbFilter.Append(and + "RenewID="+tbRenewableID.Text);
                 and = " and ";
+            }
+            if(ddlDepartmentContactSearch.SelectedIndex>0) {
+                sb.Append(prepend + "Contact: " + ddlDepartmentContactSearch.SelectedValue);
+                prepend=" ";
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(ddlDepartmentContactSearch.SelectedValue,"EmailContactName1","EmailContactName2"));
+            }
+            
+            if (ddlDepartmentSearch.SelectedIndex > 0) {
+                sb.Append(prepend + "Department: " + ddlDepartmentSearch.SelectedValue);
+                prepend = " ";
+                sbFilter.Append(and + Common.Utils.getDataViewQuery(ddlDepartmentSearch.SelectedValue, "Department"));
             }
 
             searchCriteria = sb.ToString();
@@ -119,22 +162,77 @@ namespace SubmittalProposal {
         protected override void unlockYourUpdateFields() {
             tbRenewablesProjectNameUpdate.Enabled = true;
             tbRenewablesBusinessNameUpdate.Enabled = true;
+            tbRenewablesBusinessAddressUpdate.Enabled = true;
+            tbRenewablesBusinessPhoneUpdate.Enabled = true;
+            tbRenewablesBusinessContactNameUpdate.Enabled = true;
+            tbRenewableDateEndUpdate.Enabled = true;
+            tbRenewableDateReviewUpdate.Enabled = true;
+            tbRenewableDateStartUpdate.Enabled = true;
+            tbRenewableDateTermUpdate.Enabled = true;
+            ddlDepartmentUpdate.Enabled = true;
+            tbNotesUpdate.Enabled = true;
+            ddlTypeUpdate.Enabled = true;
+            ddlDepartmentUpdate.Enabled = true;
+            btnRenewablesUpdate.Enabled = true;
+            btnNewRenewable.Enabled = true;
+            ddlTermUpdate.Enabled = true;
+            ddlAutoRenewalUpdate.Enabled = true;
+            tbPaymentTypeUpdate.Enabled = true;
+            tbCostUpdate.Enabled = true;
         }
 
         protected override void lockYourUpdateFields() {
             tbRenewablesProjectNameUpdate.Enabled = false;
             tbRenewablesBusinessNameUpdate.Enabled = false;
+            tbRenewablesBusinessAddressUpdate.Enabled = false;
+            tbRenewablesBusinessPhoneUpdate.Enabled = false;
+            tbRenewablesBusinessContactNameUpdate.Enabled = false;
+            tbRenewableDateEndUpdate.Enabled = false;
+            tbRenewableDateReviewUpdate.Enabled = false;
+            tbRenewableDateStartUpdate.Enabled = false;
+            tbRenewableDateTermUpdate.Enabled = false;
+            ddlDepartmentUpdate.Enabled = false;
+            tbNotesUpdate.Enabled = false;
+            ddlTypeUpdate.Enabled = false;
+            ddlDepartmentUpdate.Enabled = false;
+            btnNewRenewable.Enabled = false;
+            ddlTermUpdate.Enabled = false;
+            ddlAutoRenewalUpdate.Enabled = false;
+            btnRenewablesUpdate.Enabled = false;
+            tbPaymentTypeUpdate.Enabled = false;
+            tbCostUpdate.Enabled = false;
         }
 
         protected override void clearAllSelectionInputFields() {
             tbBusinessName.Text = "";
             tbProjectName.Text = "";
             tbRenewableID.Text = "";
+            ddlDepartmentSearch.SelectedIndex = 0;
+            ddlDepartmentContactSearch.SelectedIndex = 0;
         }
 
         protected override void clearAllNewFormInputFields() {
             tbRenewablesBusinessNameNew.Text = "";
             tbRenewablesProjectNameNew.Text = "";
+
+            tbRenewablesBusinessAddressNew.Text="";
+            tbRenewablesBusinessPhoneNew.Text = "";
+            tbRenewablesBusinessContactNameNew.Text = "";
+            ddlTermNew.SelectedIndex=0;
+            ddlTypeNew.SelectedIndex=0;
+            ddlDepartmentNew.SelectedIndex=0;
+            tbNotesNew.Text = "";
+            tbPaymentTypeNew.Text = "";
+            bool? bnAutoRenewNew = null;
+            ddlAutoRenewalNew.SelectedIndex = -1;
+            tbRenewableDateReviewNew.Text = "";
+            tbRenewableDateStartNew.Text = "";
+            tbRenewableDateEndNew.Text = "";
+            tbRenewableDateTermNew.Text = "";
+            tbCostNew.Text = "";
+
+
+
         }
 
         protected override string childMenuName {
@@ -149,13 +247,54 @@ namespace SubmittalProposal {
             expandCPESearch();
         }
 
+
         protected override void childPageLoad(object sender, EventArgs e) {
             if (!IsPostBack) {
                 // Do stuff that you need to do only once when the page is accessed.
                 // For example:  Initialize static dropdown's.
+                DataTable dt1 = getRenewablesDataSet().Tables[0].Copy();
+                DataRow dr1 = dt1.NewRow();
+                dr1["Department"] = "";
+                dr1["EmailContactName1"] = "";
+                dt1.Rows.InsertAt(dr1, 0);
+                ddlDepartmentSearch.DataSource = dt1;
+                ddlDepartmentSearch.DataBind();
+                ddlDepartmentUpdate.DataSource = dt1;
+                ddlDepartmentUpdate.DataBind();
+                ddlDepartmentNew.DataSource = dt1;
+                ddlDepartmentNew.DataBind();
+
+                DataSet ds = Common.Utils.getDataSetFromQuery("SELECT DISTINCT EmailContactName1 FROM OwnerConcerns.dbo.[tblDepartment{LU}] WHERE EmailContactName1 IS NOT NULL order by EmailContactName1 ", ConnectionString);
+                DataTable dt2 = ds.Tables[0];
+                DataRow dr2 = dt2.NewRow();
+                dr2["EmailContactName1"] = "";
+                dt2.Rows.InsertAt(dr2, 0);
+                ddlDepartmentContactSearch.DataSource = dt2;
+                ddlDepartmentContactSearch.DataBind();
+
+
+                DataTable dtType = getRenewablesDataSet().Tables[1].Copy();
+                DataRow drType = dtType.NewRow();
+                drType["ID"] = -1;
+                drType["DocName"] = "";
+                dtType.Rows.InsertAt(drType, 0);
+                ddlTypeUpdate.DataSource = dtType;
+                ddlTypeUpdate.DataBind();
+                ddlTypeNew.DataSource = dtType;
+                ddlTypeNew.DataBind();
+
+                DataTable dtTerm = getRenewablesDataSet().Tables[3].Copy();
+                DataRow drTerm = dtTerm.NewRow();
+                drTerm["ID"] = -1;
+                drTerm["TermOfRenewable"] = "";
+                dtTerm.Rows.InsertAt(drTerm, 0);
+                ddlTermUpdate.DataSource = dtTerm;
+                ddlTermUpdate.DataBind();
+                ddlTermNew.DataSource = dtTerm;
+                ddlTermNew.DataBind();
             } else {
                 // Here is where you do things that you need to do when
-                // a "postback" occurs.  What's a "postback"?  It's when
+                // a "postback" occurs.  What's a "postback"?  It's whenF
                 // the user has clicked a button, or does something else
                 // that causes the system to post back to the server.
             }
@@ -163,7 +302,7 @@ namespace SubmittalProposal {
             // accesses this page.
         }
 
-        protected void btnRenewablesUpdateOkay_Click(object sender, EventArgs args) {
+        protected void btnRenewablesUpdateSubmit_Click(object sender, EventArgs args) {
             try {
                 if (Page.IsValid) {
 
@@ -171,7 +310,38 @@ namespace SubmittalProposal {
                     SqlCommand cmd = new SqlCommand("uspRenewablesUpdate");
                     cmd.Parameters.Add("@renewID", SqlDbType.Int).Value = RenewablesIDBeingEdited;
                     cmd.Parameters.Add("@BusinessName", SqlDbType.NVarChar).Value = tbRenewablesBusinessNameUpdate.Text;
-                    cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar).Value = tbRenewablesProjectNameUpdate.Text;
+                    cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar).Value = tbRenewablesProjectNameUpdate.Text; 
+                    cmd.Parameters.Add("@BusinessAddress", SqlDbType.NVarChar).Value = tbRenewablesBusinessAddressUpdate.Text;
+                    cmd.Parameters.Add("@BusinessPhone", SqlDbType.NVarChar).Value = tbRenewablesBusinessPhoneUpdate.Text;
+                    cmd.Parameters.Add("@BusinessContactName", SqlDbType.NVarChar).Value = tbRenewablesBusinessContactNameUpdate.Text;
+                    cmd.Parameters.Add("@TermofRenewable", SqlDbType.NVarChar).Value = ddlTermUpdate.SelectedItem.ToString();
+                    cmd.Parameters.Add("@RenewableType", SqlDbType.NVarChar).Value = ddlTypeUpdate.SelectedItem.ToString();
+                    cmd.Parameters.Add("@SROADepartment", SqlDbType.NVarChar).Value = ddlDepartmentUpdate.SelectedItem.ToString();
+                    cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = tbNotesUpdate.Text;
+                    cmd.Parameters.Add("@PaymentType", SqlDbType.NVarChar).Value = tbPaymentTypeUpdate.Text;
+                    bool? bnAutoRenewUpdate = null;
+                    if (Utils.isNothingNot(ddlAutoRenewalUpdate.SelectedValue)) {
+                        bnAutoRenewUpdate = Utils.ObjectToBool(ddlAutoRenewalUpdate.SelectedValue);
+                        cmd.Parameters.Add("@AutoRenewal", SqlDbType.Bit).Value = bnAutoRenewUpdate.Value;
+                    }
+                    DateTime? aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateReviewUpdate.Text);
+                    if (aDate.HasValue) {
+                        cmd.Parameters.Add("@RenewableReviewDate", SqlDbType.DateTime).Value = aDate;
+                    }
+                    aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateStartUpdate.Text);
+                    if (aDate.HasValue) {
+                        cmd.Parameters.Add("@RenewableStartDate", SqlDbType.DateTime).Value = aDate;
+                    }
+                    aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateEndUpdate.Text);
+                    if (aDate.HasValue) {
+                        cmd.Parameters.Add("@RenewableEndDate", SqlDbType.DateTime).Value = aDate;
+                    }
+                    aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateTermUpdate.Text);
+                    if (aDate.HasValue) {
+                        cmd.Parameters.Add("@RenewableTermDate", SqlDbType.DateTime).Value = aDate;
+                    }
+                    cmd.Parameters.Add("@TermCost", SqlDbType.NVarChar).Value = tbCostUpdate.Text;
+
                     SqlParameter renewIDOut = new SqlParameter("@renewIDOut", SqlDbType.Int);
                     renewIDOut.Direction = ParameterDirection.Output;
                     cmd.Parameters.Add(renewIDOut);
@@ -193,7 +363,7 @@ namespace SubmittalProposal {
                 Session["RenewablesIDBeingEdited"] = value;
             }
         }
-        protected void lbNewRenewable_OnClick(object sender, EventArgs args) {
+        protected void btnNewRenewable_OnClick(object sender, EventArgs args) {
             mpeNewRenewable.Show();
         }
         protected void btnNewRenewablesCancel_Click(object sender, EventArgs args) {
@@ -207,18 +377,50 @@ namespace SubmittalProposal {
                 SqlCommand cmd = new SqlCommand("uspRenewablesUpdate");
                 cmd.Parameters.Add("@BusinessName", SqlDbType.NVarChar, 50).Value = tbRenewablesBusinessNameNew.Text;
                 cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 100).Value = tbRenewablesProjectNameNew.Text;
-                    // add an "out" parameter which will return the new renewid;
-                SqlParameter newRenewID = new SqlParameter("@renewIDOut", SqlDbType.Int);
-                newRenewID.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(newRenewID);
+                cmd.Parameters.Add("@BusinessAddress", SqlDbType.NVarChar).Value = tbRenewablesBusinessAddressNew.Text;
+                cmd.Parameters.Add("@BusinessPhone", SqlDbType.NVarChar).Value = tbRenewablesBusinessPhoneNew.Text;
+                cmd.Parameters.Add("@BusinessContactName", SqlDbType.NVarChar).Value = tbRenewablesBusinessContactNameNew.Text;
+                cmd.Parameters.Add("@TermofRenewable", SqlDbType.NVarChar).Value = ddlTermNew.SelectedItem.ToString();
+                cmd.Parameters.Add("@RenewableType", SqlDbType.NVarChar).Value = ddlTypeNew.SelectedItem.ToString();
+                cmd.Parameters.Add("@SROADepartment", SqlDbType.NVarChar).Value = ddlDepartmentNew.SelectedItem.ToString();
+                cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = tbNotesNew.Text;
+                cmd.Parameters.Add("@PaymentType", SqlDbType.NVarChar).Value = tbPaymentTypeNew.Text;
+                bool? bnAutoRenewNew = null;
+                if (Utils.isNothingNot(ddlAutoRenewalNew.SelectedValue)) {
+                    bnAutoRenewNew = Utils.ObjectToBool(ddlAutoRenewalNew.SelectedValue);
+                    cmd.Parameters.Add("@AutoRenewal", SqlDbType.Bit).Value = bnAutoRenewNew.Value;
+                }
+                DateTime? aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateReviewNew.Text);
+                if (aDate.HasValue) {
+                    cmd.Parameters.Add("@RenewableReviewDate", SqlDbType.DateTime).Value = aDate;
+                }
+                aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateStartNew.Text);
+                if (aDate.HasValue) {
+                    cmd.Parameters.Add("@RenewableStartDate", SqlDbType.DateTime).Value = aDate;
+                }
+                aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateEndNew.Text);
+                if (aDate.HasValue) {
+                    cmd.Parameters.Add("@RenewableEndDate", SqlDbType.DateTime).Value = aDate;
+                }
+                aDate = Utils.ObjectToDateTimeNullable(tbRenewableDateTermNew.Text);
+                if (aDate.HasValue) {
+                    cmd.Parameters.Add("@RenewableTermDate", SqlDbType.DateTime).Value = aDate;
+                }
+                cmd.Parameters.Add("@TermCost", SqlDbType.NVarChar).Value = tbCostNew.Text;
+
+                // add an "out" parameter which will return the new renewid;
+                SqlParameter renewIDOut = new SqlParameter("@renewIDOut", SqlDbType.Int);
+                renewIDOut.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(renewIDOut);
+
                 Utils.executeNonQuery(cmd, ConnectionString);
 
                 /*
                  * The framework needs the cache key(s) here, as well as the search textbox for the RenewableID, and the id (RenewID) of the new Renewable.
                 */
-                performPostNewSuccessfulActions("Update successful", DataSetCacheKey, null, tbRenewableID, newRenewID.Value);
+                performPostNewSuccessfulActions("Addition successful", DataSetCacheKey, null, tbRenewableID, renewIDOut.Value);
             } catch (Exception ee) {
-                    performPostNewFailedActions("Update failed. Msg: " + ee.Message);
+                    performPostNewFailedActions("Addition failed. Msg: " + ee.Message);
                     mpeNewRenewable.Show();
                     return;
             }

@@ -25,7 +25,10 @@ namespace SubmittalProposal {
                 resultTable = null;
             }
         }
-        
+
+        public Label getFetchErrorMessageControl() {
+            return lblErrorMsgIfFetchError;
+        }
 
         protected virtual void OnUnlockCheckboxChecked(bool isUnlocked) {
             UnlockCheckboxCheckedHandler handler = UnlockCheckboxChecked;
