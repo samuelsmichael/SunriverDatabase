@@ -23,8 +23,8 @@
     <table cellpadding="6" cellspacing="6">
         <tr>
             <td>
-                <asp:LinkButton ID="lbByProjectName" runat="server" 
-                    onclick="lbByProjectName_Click">By Project</asp:LinkButton>
+                <!--<asp:LinkButton ID="lbByProjectName" runat="server" 
+                    onclick="lbByProjectName_Click">By Project</asp:LinkButton> -->&nbsp;
             </td>
         </tr>
      </table>

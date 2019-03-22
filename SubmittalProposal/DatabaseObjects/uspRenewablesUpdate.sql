@@ -1,4 +1,6 @@
 USE [Renewables]
+GO
+/****** Object:  StoredProcedure [dbo].[uspRenewablesUpdate]    Script Date: 3/21/2019 3:39:27 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,7 +10,7 @@ GO
 -- Create date: 11/30/2018
 -- Description:	Update Renewables
 -- =============================================
-alter PROCEDURE uspRenewablesUpdate (
+ALTER PROCEDURE [dbo].[uspRenewablesUpdate] (
 	@renewID int = null,
 	@ProjectName nvarchar(100),
 	@BusinessName nvarchar (50),
@@ -57,15 +59,40 @@ BEGIN
 		INSERT INTO [dbo].[tblRenewables]
 				   ([ProjectName]
 				   ,[Business]
-				   -- other fields
+				   ,BusinessAddress
+				   ,BusinessPhone
+					,BusinessContactName
+					,TermofRenewable
+					,RenewableReviewDate
+					,RenewableStartDate
+					,RenewableEndDate
+					,RenewableTermDate
+					,AutoRenewal
+					,TermCost
+					,PaymentType
+					,SROADepartment
+					,Notes
+					,RenewableType
 				)
 			 VALUES
 				   (@ProjectName
 				   ,@BusinessName
-				   -- other fields
+					,@BusinessAddress
+					,@BusinessPhone
+					,@BusinessContactName
+					,@TermOfRenewable
+					,@RenewableReviewDate
+					,@RenewableStartDate
+					,@RenewableEndDate
+					,@RenewableTermDate
+					,@AutoRenewal
+					,@TermCost
+					,@PaymentType
+					,@SROADepartment
+					,@Notes
+					,@RenewableType
 				)
 		set @renewIDOut=scope_identity()
 	end
 
 END
-GO

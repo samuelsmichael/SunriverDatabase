@@ -82,7 +82,7 @@
                                 <asp:Label CssClass="form_field_heading" ID="Label4xx33xUpdate" runat="server" Text="SROA Dept"></asp:Label>
                             </td>
                             <td>
-                                <asp:DropDownList  CssClass="form_field" ID="ddlDepartmentUpdate" runat="server" DataTextField="Department"
+                                <asp:DropDownList CssClass="form_field" ID="ddlDepartmentUpdate" runat="server" DataTextField="Department"
                                     DataValueField="Department">
                                 </asp:DropDownList>
                             </td>
@@ -90,7 +90,7 @@
                                 <asp:Label CssClass="form_field_heading" ID="Label43x4ghgupdate" runat="server" Text="Term"></asp:Label>
                             </td>
                             <td>
-                                <asp:DropDownList  CssClass="form_field" ID="ddlTermUpdate" runat="server" DataTextField="TermOfRenewable"
+                                <asp:DropDownList CssClass="form_field" ID="ddlTermUpdate" runat="server" DataTextField="TermOfRenewable"
                                     DataValueField="ID">
                                 </asp:DropDownList>
                             </td>
@@ -103,14 +103,12 @@
                                     <asp:ListItem>Yes</asp:ListItem>
                                     <asp:ListItem>No</asp:ListItem>
                                 </asp:DropDownList>
-                                
                             </td>
                             <td>
                                 <asp:Label CssClass="form_field_heading" ID="Label4update" runat="server" Text="Cost"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox CssClass="form_field" Width="7em" ID="tbCostUpdate" MaxLength="50"
-                                    runat="server"></asp:TextBox>
+                                <asp:TextBox CssClass="form_field" Width="7em" ID="tbCostUpdate" MaxLength="50" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -118,8 +116,8 @@
                                 <asp:Label CssClass="form_field_heading" ID="Label5cc3Update" runat="server" Text="Payment Type"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox CssClass="form_field" ID="tbPaymentTypeUpdate" MaxLength="100"
-                                    Width="14em" runat="server"></asp:TextBox>
+                                <asp:TextBox CssClass="form_field" ID="tbPaymentTypeUpdate" MaxLength="100" Width="14em"
+                                    runat="server"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -128,7 +126,8 @@
         </tr>
         <tr valign="top">
             <td colspan="2">
-                <asp:Panel ID="pnlRenewablesBusinessUpdate" GroupingText="Business" runat="server" CssClass="form_field_panel_squished">
+                <asp:Panel ID="pnlRenewablesBusinessUpdate" GroupingText="Business" runat="server"
+                    CssClass="form_field_panel_squished">
                     <table cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td>
@@ -262,21 +261,19 @@
                 </asp:Panel>
             </td>
         </tr>
-
         <tr valign="top">
             <td colspan="2">
                 <asp:Panel ID="Panel3x322Update" GroupingText="Notes" runat="server" CssClass="form_field_panel_squished">
                     <table cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td align="right">
-                                <asp:TextBox Width="790" ID="tbNotesUpdate" TextMode="MultiLine" runat="server" Rows="3"></asp:TextBox> 
+                                <asp:TextBox Width="790" ID="tbNotesUpdate" TextMode="MultiLine" runat="server" Rows="3"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
                 </asp:Panel>
             </td>
         </tr>
-
     </table>
     <center>
         <asp:Button Style="margin-bottom: 14px; margin-top: 14px;" CausesValidation="true"
@@ -296,21 +293,221 @@
         </asp:Panel>
         <asp:Panel runat="server" Style="text-align: center;" ID="pnlNewRenewableContent"
             CssClass="newitemcontent">
-            <table border="0" cellpadding="0" cellspacing="2">
+            <table border="0" cellpadding="0" cellspacing="0">
                 <tr valign="top">
-                    <td valign="top">
-                        <asp:Label CssClass="form_field_heading" ID="Label1" runat="server" Text="Project Name"></asp:Label>
+                    <td colspan="2">
+                        <asp:Panel ID="Panel1New" GroupingText="Project" runat="server" CssClass="form_field_panel_squished">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label7xaaNew" runat="server" Text="Name"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbRenewablesProjectNameNew" MaxLength="100"
+                                            Width="14em" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label11x3New" runat="server" Text="Type"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList CssClass="form_field" ID="ddlTypeNew" runat="server" DataTextField="DocName"
+                                            DataValueField="ID">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label4xx33xNew" runat="server" Text="SROA Dept"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList CssClass="form_field" ID="ddlDepartmentNew" runat="server" DataTextField="Department"
+                                            DataValueField="Department">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label43x4ghgNew" runat="server" Text="Term"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList CssClass="form_field" ID="ddlTermNew" runat="server" DataTextField="TermOfRenewable"
+                                            DataValueField="ID">
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label43xehNew" runat="server" Text="Auto Renew"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:DropDownList ID="ddlAutoRenewalNew" runat="server">
+                                            <asp:ListItem></asp:ListItem>
+                                            <asp:ListItem>Yes</asp:ListItem>
+                                            <asp:ListItem>No</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label4New" runat="server" Text="Cost"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" Width="7em" ID="tbCostNew" MaxLength="50" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label5cc3New" runat="server" Text="Payment Type"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbPaymentTypeNew" MaxLength="100" Width="14em"
+                                            runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
                     </td>
-                    <td>
-                        <asp:TextBox ID="tbRenewablesProjectNameNew" MaxLength="100" Width="15em" runat="server"></asp:TextBox>
+                </tr>
+                <tr valign="top">
+                    <td colspan="2">
+                        <asp:Panel ID="pnlRenewablesBusinessNew" GroupingText="Business" runat="server"
+                            CssClass="form_field_panel_squished">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label7sxx2sNew" runat="server" Text="Name"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbRenewablesBusinessNameNew" MaxLength="50"
+                                            Width="15em" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label422c0New" runat="server" Text="Address"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbRenewablesBusinessAddressNew" MaxLength="100"
+                                            Width="15em" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label5xx9New" runat="server" Text="Phone"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbRenewablesBusinessPhoneNew" MaxLength="50"
+                                            Width="9em" runat="server"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label6pp0New" runat="server" Text="Contact Name"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox CssClass="form_field" ID="tbRenewablesBusinessContactNameNew" MaxLength="50"
+                                            Width="9em" runat="server"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
                     </td>
-                    <td>
-                        <asp:Label CssClass="form_field_heading" ID="Label2" runat="server" Text="Business Name"></asp:Label>
+                </tr>
+                <tr valign="top">
+                    <td colspan="2">
+                        <asp:Panel ID="Panel2New" GroupingText="Dates" runat="server" CssClass="form_field_panel_squished">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="right">
+                                        <asp:Label CssClass="form_field_heading" ID="Label7New" runat="server" Text="Start:"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbRenewableDateStartNew"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibRenewableDateStartNew" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceRenewableDateStartNew" runat="server" TargetControlID="tbRenewableDateStartNew"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibRenewableDateStartNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revRenewableDateStartNew"
+                                            Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbRenewableDateStartNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    </td>
+                                    <td align="right">
+                                        <asp:Label CssClass="form_field_heading" ID="Label8New" runat="server" Text="End:"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbRenewableDateEndNew"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibRenewableDateEndNew" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceRenewableDateEndNew" runat="server" TargetControlID="tbRenewableDateEndNew"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibRenewableDateEndNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revRenewableDateEndNew" Display="Dynamic"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbRenewableDateEndNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label9New" runat="server" Text="Review:"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbRenewableDateReviewNew"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibRenewableDateReviewNew" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceRenewableDateReviewNew" runat="server" TargetControlID="tbRenewableDateReviewNew"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibRenewableDateReviewNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revRenewableDateReviewNew"
+                                            Display="Dynamic" ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbRenewableDateReviewNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    </td>
+                                    <td>
+                                        <asp:Label CssClass="form_field_heading" ID="Label10New" runat="server" Text="Term:"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox CssClass="form_field_date" Width="9em" ID="tbRenewableDateTermNew"
+                                                        runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:ImageButton ImageAlign="AbsMiddle" ToolTip="Click to show date selector" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                                                        ID="ibRenewableDateTermNew" runat="server" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <ajaxToolkit:CalendarExtender ID="ceRenewableDateTermNew" runat="server" TargetControlID="tbRenewableDateTermNew"
+                                            Format="MM/dd/yyyy" PopupButtonID="ibRenewableDateTermNew" />
+                                        <asp:RegularExpressionValidator ForeColor="Red" ID="revRenewableDateTermNew" Display="Dynamic"
+                                            ValidationExpression="^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|(((0[469])|([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$"
+                                            ControlToValidate="tbRenewableDateTermNew" runat="server" ErrorMessage="Please enter a valid date"></asp:RegularExpressionValidator>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
                     </td>
-                    <td colspan="1">
-                        <td>
-                            <asp:TextBox ID="tbRenewablesBusinessNameNew" MaxLength="50" Width="15em" runat="server"></asp:TextBox>
-                        </td>
+                </tr>
+                <tr valign="top">
+                    <td colspan="2">
+                        <asp:Panel ID="Panel3x322New" GroupingText="Notes" runat="server" CssClass="form_field_panel_squished">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="right">
+                                        <asp:TextBox Width="790" ID="tbNotesNew" TextMode="MultiLine" runat="server" Rows="3"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
                     </td>
                 </tr>
             </table>
