@@ -26,9 +26,11 @@ SELECT
 	c.JudicialFine, c.WriteOff, c.FineBalToAcctg, c.MagistrateNotes, c.CitingOfficer, [r].RuleIndex,
 	isnull(c.VFirstName,'') + case when isnull(c.VFirstName,'')='' then '' else ' ' end + isnull(c.VLastName,'') as vFullName,
 	((case when FineStatus='Dismissed' then 0 else AssessedFine end) + (case when FineStatus='Dismissed' THEN 0 else case when FineStatus='PrePay Amount - Paid' then ScheduleFine/2 else 0 end end)) as TotalFine,
-	@EndDate as EndDate, @StartDate as StartDate, c.Citation#
+	@EndDate as EndDate, @StartDate as StartDate, c.Citation#,
+	case when FineStatus='Assessed Fine - Paid' then AssessedFine else case when FineStatus='PrePay Amount - Paid' then PrePayAmount else 0 end end as FinePaid
+
 FROM 
-	[tblRuleType{LU}] r RIGHT JOIN (tblCitations c LEFT JOIN tblViolations v ON c.CitationID = v.fkCitationID) ON [r].RuleID = v.fkRuleID
+	[tblRuleType{LU}] r RIGHT JOIN (qryTotalCitationFine f RIGHT JOIN tblCitations c ON f.fkCitationID = c.CitationID LEFT JOIN tblViolations v ON c.CitationID = v.fkCitationID) ON [r].RuleID = v.fkRuleID
 WHERE v.fkRuleID Like 'D%' AND v.IssueAsWarning=0 AND c.OffenseDate Between @StartDate And @EndDate
 ORDER BY r.RuleIndex, c.Citation#;
 
