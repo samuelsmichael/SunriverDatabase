@@ -149,11 +149,11 @@ namespace SubmittalProposal.Reports {
             Hashtable ht = new Hashtable();
             DataTable tblFiltered = (DataTable)Session["OwnerPropertyReport_Envelope_FilteredData"];
             ht["@Name"] = Utils.ObjectToString(tblFiltered.Rows[0]["PrimaryOwner"]);
-            ht["@Address1"] = Utils.ObjectToString(tblFiltered.Rows[0]["DC_Address"]);
-            ht["@Address2"] = "";
-            ht["@City"] = "Sunriver";
-            ht["@State"] = "OR";
-            ht["@Zip"] = "97707";
+            ht["@Address1"] = Utils.ObjectToString(tblFiltered.Rows[0]["Addr1"]);
+            ht["@Address2"] = Utils.ObjectToString(tblFiltered.Rows[0]["Addr2"]);
+            ht["@City"] = Utils.ObjectToString(tblFiltered.Rows[0]["City"]);
+            ht["@State"] = Utils.ObjectToString(tblFiltered.Rows[0]["Region"]);
+            ht["@Zip"] = Utils.ObjectToString(tblFiltered.Rows[0]["PostalCode"]);
             ht["@ReturnAddressName"] = tbReturnAddressName.Text;
             ht["@ReturnAddressAddress"] = tbReturnAddressAddress.Text;
             ht["@ReturnAddressCity"] = tbReturnAddressCity.Text;

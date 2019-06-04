@@ -7,7 +7,7 @@ GO
 -- Create date: 5/20/2016
 -- Description:	Violator History
 /*
-	exec [uspCitationsQry-DesignViolations] @StartDate='1/1/2005', @EndDate='1/21/2016'
+	exec [uspCitationsQry-DesignViolations] @StartDate='1/1/2015', @EndDate='2/21/2016'
 */
 -- =============================================
 use srcitations;
