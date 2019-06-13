@@ -22,7 +22,8 @@ alter PROCEDURE uspRptEnvelope
 	@ReturnAddressAddress nvarchar(50)=null,
 	@ReturnAddressCity nvarchar(50)=null,
 	@ReturnAddressState nvarchar(2)=null,
-	@ReturnAddressZip nvarchar(10)=null
+	@ReturnAddressZip nvarchar(10)=null,
+	@SunriverAddress nvarchar(50)=null
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -38,7 +39,8 @@ BEGIN
 			cast ('' as varchar(50)) as ReturnAddressAddress,
 			cast ('' as varchar(50)) as ReturnAddressCity,
 			cast ('' as varchar(2)) as ReturnAddressState,
-			cast ('' as varchar(10)) as ReturnAddressZip
+			cast ('' as varchar(10)) as ReturnAddressZip,
+			cast ('' as varchar(50)) as SunriverAddress
 	end else begin
 		select 
 			@Name as Name,
@@ -51,7 +53,8 @@ BEGIN
 			@ReturnAddressAddress as ReturnAddressAddress,
 			@ReturnAddressCity as ReturnAddressCity,
 			@ReturnAddressState as ReturnAddressState,
-			@ReturnAddressZip as ReturnAddressZip
+			@ReturnAddressZip as ReturnAddressZip,
+			@SunriverAddress as SunriverAddress
 	END
 END
 GO

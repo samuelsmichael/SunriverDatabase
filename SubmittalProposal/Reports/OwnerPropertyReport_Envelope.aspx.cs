@@ -26,7 +26,7 @@ namespace SubmittalProposal.Reports {
             }
         }
         protected override CrystalDecisions.CrystalReports.Engine.ReportDocument getReportDocument() {
-            return new OwnerProperty.Envelope();
+            return new SubmittalProposal.Reports.OwnerProperty.Envelope();
         }
         protected override bool getIgnoreSubreportsWhenBuildingParameters() {
             return true;
@@ -159,6 +159,7 @@ namespace SubmittalProposal.Reports {
             ht["@ReturnAddressCity"] = tbReturnAddressCity.Text;
             ht["@ReturnAddressState"] = tbReturnAddressState.Text;
             ht["@ReturnAddressZip"] = tbReturnAddressZip.Text;
+            ht["@SunriverAddress"] = Utils.ObjectToString(tblFiltered.Rows[0]["SRLot"]) + " " + Utils.ObjectToString(tblFiltered.Rows[0]["SRLane"]);
             ((Reports)Master).getCrystalReportView().Visible = true;
             return ht;
         }
