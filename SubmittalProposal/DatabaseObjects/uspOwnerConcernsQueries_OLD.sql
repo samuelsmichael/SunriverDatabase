@@ -114,13 +114,10 @@ SELECT
 	ROW_NUMBER() OVER(PARTITION BY OCCase# ORDER BY OCCase# ASC) 
 		AS Row#,uri,
 	c.[OCCase#], c.DeptReferred1,  c.SubmitDate, c.ResolutionDate, c.FirstName, c.LastName, case when c.ResolutionDate is null then 'Yes' else 'No' end as [Open],
-		m.AddressLine5 AS SRLane, 
-	c.Category, c.[Description], c.Resolution, c.CloseFormBy, c.DeptReferred2, 
+	 a.Addr1 AS SRLane, c.Category, c.[Description], c.Resolution, c.CloseFormBy, c.DeptReferred2, 
 	 @StartDate as StartDate, @EndDate as EndDate, @ReportTitle as ReportTitle,@ConcernsOpen222 as ConcernsOpen222,
 	 @JustDoingCategorySummary as JustDoingCategorySummary
-FROM 
-	[ID-Card_Split_FE]..Member m INNER JOIN 
-	tblOCData c ON m.[Member Code] = c.[OwnerID#]
+FROM [ID-Card_Split_FE]..tblArShipTo a INNER JOIN tblOCData c ON a.CustId = c.[OwnerID#]
 	Left Outer Join @photos p ON p.OCCase#Photos=c.OCCase#
 WHERE 
 	(@DeptReferred is null or c.DeptReferred1=@DeptReferred) 
@@ -131,7 +128,7 @@ WHERE
 		((@ConcernsOpen222=1 and ResolutionDate is null) or
 		(@ConcernsOpen222=0 and ResolutionDate is not null))	
 	))                                                                   
-	AND (@SRLotLane is null or m.AddressLine5 like @SRLotLane + '%')
+	AND (@SRLotLane is null or a.Addr1 like @SRLotLane + '%')
 ORDER BY 
 	CASE WHEN @ForceSortByCategory is not null and  @ForceSortByCategory=1 then c.Category end,
 	CASE WHEN @DeptReferred is null and @ForceSortByCategory is null then c.DeptReferred1 end,

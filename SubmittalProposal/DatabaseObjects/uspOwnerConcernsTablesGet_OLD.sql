@@ -13,11 +13,11 @@ alter PROCEDURE uspOwnerConcernsTablesGet
 AS
 BEGIN
 	SET NOCOUNT ON;
-	select oc.*,ll.SRLotLane, ar.AddressLine1 as MailAddr1, ar.AddressLine2 as MailAddr2, ar.city as MailCity, ar.[State] as MailState, ar.PostalCode as MailZip, ar.PhoneNumber as CustPhone
+	select oc.*,ll.SRLotLane, ar.Addr1 as MailAddr1, ar.Addr2 as MailAddr2, ar.city as MailCity, ar.Region as MailState, ar.PostalCode as MailZip, ar.Phone as CustPhone
 	FROM 
 		tblOCData oc Left Outer JOIN
-		 [ID-Card_Split_FE]..Member ar on oc.OwnerID#=ar.[Member Code] outer apply  
-		(select top 1 [Member Code] as Custid, [State] as Region from [ID-Card_Split_FE]..Member st where st.[Member Code]=oc.OwnerID#) st outer apply
+		 [ID-Card_Split_FE]..tblArCust ar on oc.OwnerID#=ar.CustId outer apply  
+		(select top 1 Custid, Region from [ID-Card_Split_FE]..tblArShipTo st where st.Custid=oc.OwnerID#) st outer apply
 		(select top 1 SRLotLane from [ID-Card_Split_FE]..tblLotLane_Master ll where st.Region=ll.SRPropID ) ll
 	ORDER BY OCCase#
 	Select * FROM [tblCategory{LU}]
