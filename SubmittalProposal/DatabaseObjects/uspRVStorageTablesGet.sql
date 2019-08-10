@@ -16,7 +16,7 @@ BEGIN
 	SELECT r.*,
 			c.[Member Code] as CustId,
 			c.GroupCode,
-			c.FamilarName as CustName,
+			c.FamiliarName as CustName,
 			c.AddressLine1 as Addr1,
 			c.AddressLine2 as Addr2,
 			c.City,
@@ -27,7 +27,7 @@ BEGIN
 			c.EmailAddress as Email 
  
 	FROM tblRVData r LEFT OUTER JOIN
-		[ID-Card_Split_FE]..tblArCust c ON r.CustomerID = c.CustId
+		[ID-Card_Split_FE]..Member c ON r.CustomerID = c.[Member Code]
 	order by RVLeaseID
 	SELECT * FROM vFindRent v order by tSISpace
 	SELECT * FROM [tblSpaceRent{LU}]

@@ -10,14 +10,14 @@ GO
 -- Description:	Get Client Info  
 -- =============================================
 ALTER PROCEDURE [dbo].[uspRVOwnersPropertyGet] 
-	@ClientID nvarchar(1)
+	@ClientID nvarchar(10)
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT q.SRPropID,q.LotLane,q.SRAddress,q.SRLot,q.SRLane,q.CustId as OwnerID,q.PrimaryOwner,
 			c.[Member Code] as CustId,
 			c.GroupCode,
-			c.FamilarName as CustName,
+			c.FamiliarName as CustName,
 			c.AddressLine1 as Addr1,
 			c.AddressLine2 as Addr2,
 			c.City,
@@ -28,5 +28,6 @@ BEGIN
 			c.EmailAddress as Email 
 	FROM [ID-Card_Split_FE].[dbo].[qryLotLaneWithOwners_Master] q LEFT OUTER JOIN
 		[ID-Card_Split_FE]..Member c ON c.[Member Code] = q.CustId
+	WHERE @ClientID=c.[Member Code]
 	END
 GO
