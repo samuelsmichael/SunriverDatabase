@@ -1,3 +1,5 @@
+Use SRSellCheck
+go
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +20,7 @@ alter PROCEDURE uspRptSellCheckHistory
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT sc.*, @Lot as Lot, @Lane as Lane
+	SELECT sc.*, @Lot as Lot, @Lane as Lane, @Lot as scLot, @Lane as scLane
 	FROM [SRSellCheck].[dbo].tblsellcheck sc inner join tblRequest r on r.scRequestId=sc.fkscRequestId where scLot=@lot and scLane=@lane
 END
 GO

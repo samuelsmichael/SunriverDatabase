@@ -95,7 +95,7 @@ namespace SubmittalProposal {
             if (ds == null) {
                 SqlCommand cmd = new SqlCommand("uspRVOwnersPropertyGet");
                 ds = Utils.getDataSet(cmd, System.Configuration.ConfigurationManager.ConnectionStrings["RVStorageQLConnectionString"].ConnectionString);
-                ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["SRPropID"] };
+       // 8/9/2019         ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns["SRPropID"] };
                 CacheItemPolicy policy = new CacheItemPolicy();
                 policy.SlidingExpiration = new TimeSpan(0, 60, 0);
                 cache.Add(key, ds, policy);

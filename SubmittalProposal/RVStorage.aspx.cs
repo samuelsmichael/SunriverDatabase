@@ -691,9 +691,11 @@ namespace SubmittalProposal {
             switch (tcRVStorageUpdate.ActiveTabIndex) {
                 case 1:
                     #region RV & Space Into tab
-                    tbSpaceSizeRVTabUpdate.Text = Utils.ObjectToString(drSpaceInfo["tSISpaceSize"]);
-                    tbElectricalServiceRVTabUpdate.Text = Utils.ObjectToBool(drSpaceInfo["tSIElectServ"]) ? "Yes" : "No";
-                    tbRVSpaceInfoSpaceLeasedProtectedUpdate.Text = Utils.ObjectToBool(drSpaceInfo["SpaceLeased"]) ? "Yes" : "No";
+                    if (drSpaceInfo != null) {
+                        tbSpaceSizeRVTabUpdate.Text = Utils.ObjectToString(drSpaceInfo["tSISpaceSize"]);
+                        tbElectricalServiceRVTabUpdate.Text = Utils.ObjectToBool(drSpaceInfo["tSIElectServ"]) ? "Yes" : "No";
+                        tbRVSpaceInfoSpaceLeasedProtectedUpdate.Text = Utils.ObjectToBool(drSpaceInfo["SpaceLeased"]) ? "Yes" : "No";
+                    }
                     tbAnnualRentRVTabUpdate.Text = fmtAnnualRent;
                     #endregion
                     break;

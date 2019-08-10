@@ -10,18 +10,18 @@ GO
 -- Create date: 06/11/2015
 -- Description:	Gets the data to populate the Find by Cardholder Name dropdown
 /*
-	exec uspOwnerGet @CustId='000939'
+	exec uspOwnerGet_Old @CustId='007773'
 */
 -- =============================================
-alter PROCEDURE uspOwnerGet (
+create PROCEDURE uspOwnerGet_Old (
 	@CustId nvarchar(10)
 )
 AS
 BEGIN
 	SET NOCOUNT ON;
-	select FamilarName as CustName,AddressLine4 as Addr1, City, [State] as Region, PostalCode, PhoneNumber as Phone, [Member Code] as CustID, ad.GuestPass1Nbr, ad.GuestPass2Nbr 
-	from Member a LEFT OUTER JOIN
-		 tblArCustAddendum ad ON a.[Member Code]=ad.CustID
-	where [Member Code]=@CustId
+	select a.CustName,a.Addr1, a.City, a.Region, a.PostalCode, a.Phone, a.CustID, ad.GuestPass1Nbr, ad.GuestPass2Nbr 
+	from tblArCust a LEFT OUTER JOIN
+		 tblArCustAddendum ad ON a.CustID=ad.CustID
+	where a.CustID=@CustId
 end
 GO

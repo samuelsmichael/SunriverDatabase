@@ -514,6 +514,7 @@ namespace SubmittalProposal {
 
 
                     performPostNewSuccessfulActions("BPermit added successfully", BPERMIT_CACHE_KEY, BPERMIT_CACHE_GRID_KEY, tbBPermitNbr, tbBPermitNbrNew.Text);
+                    MemoryCache.Default.Remove(Submittal2.SUBMITTAL_CACHE_KEY);
                     mpeNewBPermit.Hide();
                 } catch (Exception e2) {
                     performPostNewFailedActions("BPermit not added. Msg: " + e2.Message);
