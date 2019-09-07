@@ -19,9 +19,9 @@ alter PROCEDURE uspOwnerGet (
 AS
 BEGIN
 	SET NOCOUNT ON;
-	select FamilarName as CustName,AddressLine4 as Addr1, City, [State] as Region, PostalCode, PhoneNumber as Phone, [Member Code] as CustID, ad.GuestPass1Nbr, ad.GuestPass2Nbr 
-	from Member a LEFT OUTER JOIN
-		 tblArCustAddendum ad ON a.[Member Code]=ad.CustID
-	where [Member Code]=@CustId
+	select FamiliarName as CustName,AddressLine4 as Addr1, City, [State] as Region, PostalCode, PhoneNumber as Phone, [Member Code2] as CustID, ad.GuestPass1Nbr, ad.GuestPass2Nbr 
+	from sunowa_Club_Member_qryMember a LEFT OUTER JOIN
+		 tblArCustAddendum ad ON a.[Member Code2]=ad.CustID
+	where [Member Code2]=@CustId
 end
 GO

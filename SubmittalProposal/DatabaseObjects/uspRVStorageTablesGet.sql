@@ -14,7 +14,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT r.*,
-			c.[Member Code] as CustId,
+			c.[Member Code2] as CustId,
 			c.GroupCode,
 			c.FamiliarName as CustName,
 			c.AddressLine1 as Addr1,
@@ -27,7 +27,7 @@ BEGIN
 			c.EmailAddress as Email 
  
 	FROM tblRVData r LEFT OUTER JOIN
-		[ID-Card_Split_FE]..Member c ON r.CustomerID = c.[Member Code]
+		[ID-Card_Split_FE]..sunowa_Club_Member_qryMember c ON r.CustomerID = c.[Member Code2]
 	order by RVLeaseID
 	SELECT * FROM vFindRent v order by tSISpace
 	SELECT * FROM [tblSpaceRent{LU}]

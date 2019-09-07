@@ -10,8 +10,8 @@ GO
 
 ALTER VIEW [dbo].[qrytblBallotVerify_MakeNew]
 AS
-SELECT DISTINCT m.GroupCode, m.[Member Code] as CustId, m.[PropID] AS PropID, m.AddressLine1 as Addr1, m.Voted, m.PostalCode, m.FamiliarName AS OwnerName, null as Contact, m.AddressLine1 AS CustAddr1, m.AddressLine2 AS CustAddr2
-FROM            [ID-Card_Split_FE].dbo.Member AS m
+SELECT DISTINCT m.GroupCode, m.[Member Code2] as CustId, m.[PropID] AS PropID, m.AddressLine1 as Addr1, m.Voted, m.PostalCode, m.FamiliarName AS OwnerName, null as Contact, m.AddressLine1 AS CustAddr1, m.AddressLine2 AS CustAddr2
+FROM            [ID-Card_Split_FE].dbo.sunowa_Club_Member_qryMember AS m
 WHERE        (m.GroupCode BETWEEN '1' AND '9') AND (m.PropID > '0')
 
 GO

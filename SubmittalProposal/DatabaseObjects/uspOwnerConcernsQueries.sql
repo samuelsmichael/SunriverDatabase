@@ -119,8 +119,8 @@ SELECT
 	 @StartDate as StartDate, @EndDate as EndDate, @ReportTitle as ReportTitle,@ConcernsOpen222 as ConcernsOpen222,
 	 @JustDoingCategorySummary as JustDoingCategorySummary
 FROM 
-	[ID-Card_Split_FE]..Member m INNER JOIN 
-	tblOCData c ON m.[Member Code] = c.[OwnerID#]
+	[ID-Card_Split_FE]..sunowa_Club_Member_qryMember m INNER JOIN 
+	tblOCData c ON m.[Member Code2] = c.[OwnerID#]
 	Left Outer Join @photos p ON p.OCCase#Photos=c.OCCase#
 WHERE 
 	(@DeptReferred is null or c.DeptReferred1=@DeptReferred) 
